@@ -27,24 +27,28 @@ public class OmttCompiler {
 		return new OmttCompilationTask(this, sources, target, classPath);
 	}
 
-	public OmttCompilationTask getTask(URI source, URI target, List<URI> classPath) {
+	public OmttCompilationTask getTask(URI source, URI target,
+			List<URI> classPath) {
 		ArrayList<URI> sources = new ArrayList<URI>();
 		sources.add(source);
 		return getTask(sources, target, classPath);
 	}
 
-	JavaCompiler getJavaCompiler () {
+	JavaCompiler getJavaCompiler() {
 		return ToolProvider.getSystemJavaCompiler();
 	}
-	
+
 	protected List<String> getJavaCompilerOptions(URI target,
 			List<URI> classPath) {
 		List<String> options = new ArrayList<String>();
 		options.add("-d");
 		options.add(target.getSchemeSpecificPart());
-		for (URI cp : classPath) {
+		if (classPath.size() > 0) {
 			options.add("-classpath");
-			options.add(cp.getSchemeSpecificPart());
+			StringBuffer buf = new StringBuffer();
+			for (URI cp : classPath)
+				buf.append(cp.getSchemeSpecificPart()).append(":");
+			options.add(buf.toString());
 		}
 		return options;
 	}
