@@ -88,13 +88,14 @@ public class OmttProjectModel {
 
 		URI target;
 		List<URI> classPath = new ArrayList<URI>();
-		final String baseURI = fProject.getWorkspace().getRoot()
+		final String basePath = fProject.getWorkspace().getRoot()
 				.getLocationURI().toString();
 		try {
-			target = new URI(baseURI
-					+ jproject.getOutputLocation().toFile().toURI()
-							.getRawSchemeSpecificPart());
-			classPath.add(target);
+			String targetRelativeDir = jproject.getOutputLocation().toFile()
+					.toURI().getRawSchemeSpecificPart();
+			if (!targetRelativeDir.endsWith("/"))
+				targetRelativeDir += "/";
+			target = new URI(basePath + targetRelativeDir);
 			for (IClasspathEntry cpentry : jproject.getRawClasspath())
 				if (cpentry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 					classPath.add(cpentry.getPath().toFile().toURI());
