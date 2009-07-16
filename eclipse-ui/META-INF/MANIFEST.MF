@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OMTT Eclipse UI
+Bundle-SymbolicName: pl.omtt.eclipse.ui;singleton:=true
+Bundle-Version: 2009
+Bundle-Activator: pl.omtt.eclipse.ui.OmttUI
+Bundle-Vendor: Andrzej Chodor
+Require-Bundle: pl.omtt.eclipse.core,
+ pl.omtt.lang,
+ org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide,
+ org.eclipse.jface.text
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.core.expressions,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.ui,
+ org.eclipse.jdt.ui.text,
+ org.eclipse.ui.views.contentoutline
+Bundle-ClassPath: ./src

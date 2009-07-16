@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<!-- Default preference store -->
+	<extension
+		point="org.eclipse.core.runtime.preferences">
+		<initializer
+			class="pl.omtt.eclipse.ui.OmttUIPreferenceInitializer">
+		</initializer>
+	</extension>
+
+	<!-- Editor -->
+	<extension point="org.eclipse.ui.editors">
+      <editor
+            class="pl.omtt.eclipse.ui.editor.OmttEditor"
+            icon="icons/editor.gif"
+            id="pl.omtt.eclipse.ui.editor"
+            name="OMTT Editor">
+            <contentTypeBinding contentTypeId="pl.omtt.eclipse.content-type"/>
+      </editor>
+	</extension>
+
+	<!-- Markers and annotations -->
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type
+			name="pl.omtt.eclipse.markers.error"
+			super="org.eclipse.ui.workbench.texteditor.error"
+			markerType="pl.omtt.eclipse.markers.problem"
+			markerSeverity="2">
+		</type>
+		<type
+			name="pl.omtt.eclipse.markers.warning"
+			super="org.eclipse.ui.workbench.texteditor.warning"
+			markerType="pl.omtt.eclipse.markers.problem"
+			markerSeverity="1">
+		</type>
+		<type
+			name="pl.omtt.eclipse.markers.info"
+			super="org.eclipse.ui.workbench.texteditor.info"
+			markerType="pl.omtt.eclipse.markers.problem"
+			markerSeverity="0">
+		</type>
+	</extension>
+
+	<extension
+		point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification
+			annotationType="pl.omtt.eclipse.markers.error"
+			annotationImageProvider="pl.omtt.eclipse.ui.decoration.OmttAnnotationImageProvider">
+		</specification>
+	</extension>
+
+	<!-- Pop-up actions -->
+	<extension point="org.eclipse.ui.commands">
+		<command
+			description="Add OMTT support"
+			id="pl.omtt.eclipse.command.add-support"
+			name="Add OMTT support">
+		</command>
+		<command
+			description="Remove OMTT support"
+			id="pl.omtt.eclipse.command.remove-support"
+			name="Remove OMTT support">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="pl.omtt.eclipse.ui.commands.ToggleNatureHandler"
+			commandId="pl.omtt.eclipse.command.add-support">
+		</handler>
+		<handler
+			class="pl.omtt.eclipse.ui.commands.ToggleNatureHandler"
+			commandId="pl.omtt.eclipse.command.remove-support">
+		</handler>
+	</extension>
+
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:org.eclipse.ui.projectConfigure?before=additions">
+			<command
+				commandId="pl.omtt.eclipse.command.add-support"
+				style="push">
+				<visibleWhen>
+				<and>
+					<count value="1"/>
+					<with variable="activeMenuSelection">
+					<iterate ifEmpty="false" operator="and">
+						<adapt type="org.eclipse.core.resources.IResource">
+						<not>
+						<test
+							property="org.eclipse.core.resources.projectNature"
+							value="pl.omtt.eclipse.nature"/>
+						</not>
+						</adapt>
+					</iterate>
+					</with>
+				</and>
+				</visibleWhen>
+			</command>
+			<command
+				commandId="pl.omtt.eclipse.command.remove-support"
+				style="push">
+				<visibleWhen>
+				<and>
+					<count value="1"/>
+					<with variable="activeMenuSelection">
+					<iterate ifEmpty="false" operator="and">
+						<adapt type="org.eclipse.core.resources.IResource">
+						<test
+							property="org.eclipse.core.resources.projectNature"
+							value="pl.omtt.eclipse.nature"/>
+						</adapt>
+					</iterate>
+					</with>
+				</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+ <extension
+       point="org.eclipse.ui.newWizards">
+    <wizard
+          canFinishEarly="true"
+          category="org.eclipse.ui.Web"
+          class="pl.omtt.eclipse.ui.wizards.ModuleWizard"
+          descriptionImage="icons/editor.gif"
+          finalPerspective="org.eclipse.jdt.ui.JavaPerspective"
+          hasPages="false"
+          icon="icons/editor.gif"
+          id="pl.omtt.eclipse.ui.modulewizard"
+          name="Object Templates Module"
+          preferredPerspectives="org.eclipse.jdt.ui.JavaPerspective"
+          project="false">
+       <description>
+          Create single Object Templates module.
+       </description>
+       <selection
+             class="org.eclipse.core.resources.IResource">
+       </selection>
+    </wizard>
+ </extension>
+</plugin>
