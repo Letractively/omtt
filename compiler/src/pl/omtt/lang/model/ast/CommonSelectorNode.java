@@ -1,4 +1,4 @@
-package pl.omtt.lang.model.nodes;
+package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;

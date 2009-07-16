@@ -3,6 +3,8 @@ package pl.omtt.lang.model.types;
 import java.util.HashMap;
 import java.util.Map;
 
+import pl.omtt.lang.model.types.FunctionType.Argument;
+
 public class TypeUnifier {
 	public static void unifyEq(IType typeA, IType typeB) throws TypeException {
 		unify(typeA, typeB, false);
@@ -89,7 +91,7 @@ public class TypeUnifier {
 				throw new TypeException("unimplemented [2]");
 			FunctionType funtype = new FunctionType();
 			for (int i = 0; i < funA.getArguments().size(); i++)
-				funtype.putArgument(null, new FlexibleType());
+				funtype.putArgument(null, new FlexibleType(), false);
 			unifyAtom(funtype, typeB);
 		}
 		FunctionType funB = (FunctionType) typeB.getEffective();
@@ -101,55 +103,72 @@ public class TypeUnifier {
 			freeVarsMap = new HashMap<Integer, IType>();
 		}
 
-		unifyArgument(funA.getReturnType(), funB.getReturnType(), le,
-				freeVarsMap, false);
+		unifyReturnType(funA.getReturnType(), funB.getReturnType(), le,
+				freeVarsMap);
 		for (int i = 0; i < funA.fArguments.size(); i++) {
-			IType argA = funA.fArguments.get(i).fType;
-			IType argB = funB.fArguments.get(i).fType;
-			unifyArgument(argA, argB, le, freeVarsMap, true);
+			Argument argA = funA.fArguments.get(i);
+			Argument argB = funB.fArguments.get(i);
+			unifyArgument(argA, argB, le, freeVarsMap);
 		}
 		System.out.println("[fu] after: " + typeA + " ~ " + typeB);
 	}
 
-	private static void unifyArgument(IType argA, IType argB, boolean le,
-			Map<Integer, IType> freeVarsMap, boolean argument)
+	private static void unifyArgument(Argument argA, Argument argB, boolean le,
+			Map<Integer, IType> freeVarsMap) throws TypeException {
+		if ((!le && argA.fOptional ^ argB.fOptional)
+				|| (le && !argA.fOptional && argB.fOptional))
+			throw new TypeException("cannot use "
+					+ (argA.fOptional ? "optional" : "obligatory")
+					+ " argument as an "
+					+ (argB.fOptional ? "optional" : "obligatory") + " one");
+
+		unifyArgumentType(argA.getType(), argB.getType(), le, freeVarsMap, true);
+	}
+
+	private static void unifyReturnType(IType typeA, IType typeB, boolean le,
+			Map<Integer, IType> freeVarsMap) throws TypeException {
+		unifyArgumentType(typeA, typeB, le, freeVarsMap, false);
+	}
+
+	private static void unifyArgumentType(IType typeA, IType typeB, boolean le,
+			Map<Integer, IType> freeVarsMap, boolean isArgument)
 			throws TypeException {
-		if ((argA.isGeneral() && argA.isFrozen())
-				|| (argB.isGeneral() && argB.isFrozen())) {
-			if (argA.isGeneral() && argA.isFrozen()) {
-				if (freeVarsMap.containsKey(iid(argA))) {
-					IType match = freeVarsMap.get(iid(argA));
+		if ((typeA.isGeneral() && typeA.isFrozen())
+				|| (typeB.isGeneral() && typeB.isFrozen())) {
+			if (typeA.isGeneral() && typeA.isFrozen()) {
+				if (freeVarsMap.containsKey(iid(typeA))) {
+					IType match = freeVarsMap.get(iid(typeA));
 					// TODO: what if reverse?
 					if (match.isFrozen()) {
-						unify(match, argB, le);
+						unify(match, typeB, le);
 					} else {
-						unifyEq(match, argB);
+						unifyEq(match, typeB);
 					}
 				} else {
-					freeVarsMap.put(iid(argA), argB);
+					freeVarsMap.put(iid(typeA), typeB);
 				}
 			}
-			if (argB.isGeneral() && argB.isFrozen()) {
-				if (freeVarsMap.containsKey(iid(argB))) {
-					IType match = freeVarsMap.get(iid(argB));
+			if (typeB.isGeneral() && typeB.isFrozen()) {
+				if (freeVarsMap.containsKey(iid(typeB))) {
+					IType match = freeVarsMap.get(iid(typeB));
 					// TODO: what if reverse?
 					if (match.isFrozen()) {
-						unify(argA, match, le);
+						unify(typeA, match, le);
 					} else {
-						unifyEq(argA, match);
+						unifyEq(typeA, match);
 					}
 				} else {
-					freeVarsMap.put(iid(argB), argB);
+					freeVarsMap.put(iid(typeB), typeB);
 				}
 			}
 		} else {
-			if (argA.isFunction()) {
-				unifyFunctions(argB, argA, le, freeVarsMap);
+			if (typeA.isFunction()) {
+				unifyFunctions(typeB, typeA, le, freeVarsMap);
 			} else {
-				if (argument || !argB.isFrozen())
-					unify(argA, argB, le);
+				if (isArgument || !typeB.isFrozen())
+					unify(typeA, typeB, le);
 				else
-					unify(argB, argA, le);
+					unify(typeB, typeA, le);
 			}
 		}
 	}

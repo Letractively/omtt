@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-import pl.omtt.lang.model.nodes.IExpression;
+import pl.omtt.lang.model.ast.IExpression;
 
 public class CodeBuffer {
 	JavaTypesAdapter fTypeAdapter;

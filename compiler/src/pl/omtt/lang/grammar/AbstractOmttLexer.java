@@ -18,12 +18,13 @@ public abstract class AbstractOmttLexer extends Lexer {
 	private IAntlrProblemCollector fProblems;
 	private IEnrichedStream fStream;
 
+	int DEBUG = 0;
+
 	public AbstractOmttLexer() {
 		super();
 	}
 
-	public AbstractOmttLexer(CharStream input,
-			RecognizerSharedState state) {
+	public AbstractOmttLexer(CharStream input, RecognizerSharedState state) {
 		super(input, state);
 
 		if (input instanceof IEnrichedStream)
@@ -187,10 +188,16 @@ public abstract class AbstractOmttLexer extends Lexer {
 	}
 
 	protected void pushBracket(char bracket) {
+		if (DEBUG > 0)
+			System.out.println("push: " + bracket + " ("
+					+ (brackets.size() + 1) + ")");
 		brackets.push(bracket);
 	}
 
 	protected void popBracket() throws UnmatchedBracketException {
+		if (DEBUG > 0)
+			System.out.println("pop: " + brackets.peek() + " ("
+					+ (brackets.size() - 1) + ")");
 		if (brackets.empty())
 			throw new UnmatchedBracketException(input, (char) input.LA(1));
 		brackets.pop();
@@ -209,6 +216,6 @@ public abstract class AbstractOmttLexer extends Lexer {
 			throw new UnmatchedBracketException(input, bracket == 'a' ? '}'
 					: bracket);
 		}
-		brackets.pop();
+		popBracket();
 	}
 }

@@ -1,4 +1,4 @@
-package pl.omtt.lang.model.nodes;
+package pl.omtt.lang.model.ast;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

@@ -7,7 +7,7 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.graphics.Point;
 
-import pl.omtt.lang.model.nodes.Ident;
+import pl.omtt.lang.model.ast.Ident;
 
 public class OmttTextHover implements ITextHover {
 	OmttEditor fEditor;

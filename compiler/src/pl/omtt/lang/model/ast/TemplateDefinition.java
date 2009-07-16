@@ -1,4 +1,4 @@
-package pl.omtt.lang.model.nodes;
+package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
@@ -86,7 +86,8 @@ public class TemplateDefinition extends CommonNode implements
 			FunctionType type = new FunctionType();
 			for (int i = 0; i < args.getChildCount(); i++) {
 				TemplateArgument arg = (TemplateArgument) args.getChild(i);
-				type.putArgument(arg.getArgumentName(), arg.getArgumentType());
+				type.putArgument(arg.getArgumentName(), arg.getArgumentType(),
+						arg.isArgumentOptional());
 			}
 			type.setReturnType(returnType);
 			fType = type;

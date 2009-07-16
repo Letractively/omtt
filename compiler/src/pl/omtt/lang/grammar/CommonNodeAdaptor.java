@@ -3,7 +3,7 @@ package pl.omtt.lang.grammar;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.CommonTreeAdaptor;
 
-import pl.omtt.lang.model.nodes.CommonNode;
+import pl.omtt.lang.model.ast.CommonNode;
 
 public class CommonNodeAdaptor extends CommonTreeAdaptor {
 	public CommonNodeAdaptor() {

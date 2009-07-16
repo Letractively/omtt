@@ -28,7 +28,7 @@ import pl.omtt.lang.code.OmttJavaSource;
 import pl.omtt.lang.code.SymbolTableCreator;
 import pl.omtt.lang.grammar.OmttLexer;
 import pl.omtt.lang.grammar.OmttParser;
-import pl.omtt.lang.model.nodes.Program;
+import pl.omtt.lang.model.ast.Program;
 import pl.omtt.util.stream.FileEnrichedStream;
 
 public class OmttCompilationTask {

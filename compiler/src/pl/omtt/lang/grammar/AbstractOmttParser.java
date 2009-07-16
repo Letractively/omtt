@@ -9,8 +9,8 @@ import org.antlr.runtime.tree.TreeAdaptor;
 import org.antlr.runtime.tree.TreeIterator;
 
 import pl.omtt.compiler.reporting.IAntlrProblemCollector;
-import pl.omtt.lang.model.nodes.CommonNode;
-import pl.omtt.lang.model.nodes.Program;
+import pl.omtt.lang.model.ast.CommonNode;
+import pl.omtt.lang.model.ast.Program;
 
 public abstract class AbstractOmttParser extends Parser {
 

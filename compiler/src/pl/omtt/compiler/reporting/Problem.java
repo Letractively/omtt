@@ -5,7 +5,7 @@ import java.net.URI;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.RecognitionException;
 
-import pl.omtt.lang.model.nodes.CommonNode;
+import pl.omtt.lang.model.ast.CommonNode;
 import pl.omtt.lang.model.types.TypeException;
 
 public class Problem implements Comparable<Problem> {
