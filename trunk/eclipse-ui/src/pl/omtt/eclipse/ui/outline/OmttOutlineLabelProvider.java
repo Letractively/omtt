@@ -8,7 +8,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 
 import pl.omtt.lang.grammar.OmttLexer;
-import pl.omtt.lang.model.nodes.ModuleDeclaration;
+import pl.omtt.lang.model.ast.ModuleDeclaration;
 
 public class OmttOutlineLabelProvider implements ILabelProvider {
 

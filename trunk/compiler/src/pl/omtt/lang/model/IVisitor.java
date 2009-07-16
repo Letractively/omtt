@@ -1,6 +1,6 @@
 package pl.omtt.lang.model;
 
-import pl.omtt.lang.model.nodes.*;
+import pl.omtt.lang.model.ast.*;
 
 public interface IVisitor {
 	public void visit (Program node);
@@ -26,6 +26,7 @@ public interface IVisitor {
 	public void visit (Sequence node);
 	public void visit (Ident node);
 	public void visit (Literal node);
+	public void visit (Range range);
 	public void visit (AtomSelect atomSelect);
 	public void visit (PropertySelect node);
 

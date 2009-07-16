@@ -46,6 +46,9 @@ tokens {
 
   IT;
   ITEM;
+  
+  INT_NUMBER;
+  REAL_NUMBER;
 }
 
 @header {
@@ -89,11 +92,9 @@ TAG_START
     ( (WS* INNER_TAG_KEYWORD NOT_NAME) =>
         {popBracket(); dataOnNewline = 'd';}
     | /* standard opening tag */
-        {dataOnNewline = 'd';}
+        {pushBracket('\%'); dataOnNewline = 'd';}
     )
-    { endOnNewline = true;
-      pushBracket('\%');
-    }
+    { endOnNewline = true; }
   | '%%'
     { $type = TAG_START;
       dataOnNewline = null;
@@ -207,6 +208,7 @@ COLON
 
 SEMICOLON : ';';
 DOT : '.';
+DOUBLE_DOT : '..';
 COMA : ',';
 SLASH : '/';
 TILDE : '~';
@@ -256,16 +258,13 @@ CLASS_ID
   : BIG_LETTER NAMECHAR*
   ;
 
-
 INT_OR_REAL_NUMBER
   : DIGIT+
-    ( '.' DIGIT+  {$type = REAL_NUMBER;}
-    |             {$type = INT_NUMBER;}
+    ( ('.' DIGIT)=> '.' DIGIT+
+    	{$type = REAL_NUMBER;}
+    | {$type = INT_NUMBER;}
     )
   ;
-
-fragment INT_NUMBER : DIGIT+;
-fragment REAL_NUMBER : DIGIT+ '.' DIGIT+;
 
 fragment DIGIT
   : '0' .. '9'

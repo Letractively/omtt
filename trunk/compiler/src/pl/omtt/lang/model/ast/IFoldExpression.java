@@ -1,4 +1,4 @@
-package pl.omtt.lang.model.nodes;
+package pl.omtt.lang.model.ast;
 
 public interface IFoldExpression extends IExpression {
 	boolean isItemSequence();

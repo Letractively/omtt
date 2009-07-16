@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import pl.omtt.lang.model.nodes.Literal;
+import pl.omtt.lang.model.ast.Literal;
 import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.IType;
 

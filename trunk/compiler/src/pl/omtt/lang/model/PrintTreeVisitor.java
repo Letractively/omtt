@@ -2,7 +2,7 @@ package pl.omtt.lang.model;
 
 import org.antlr.runtime.tree.Tree;
 
-import pl.omtt.lang.model.nodes.Program;
+import pl.omtt.lang.model.ast.Program;
 
 public class PrintTreeVisitor extends AbstractTreeVisitor {
 

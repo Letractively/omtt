@@ -24,16 +24,30 @@ public class FunctionType extends CommonType implements IType {
 		return fArguments;
 	}
 
-	public void putArgument(String name, IType type) {
+	public Argument getArgument(int i) {
+		return fArguments.get(i);
+	}
+
+	public void putArgument(String name, IType type, boolean optional) {
 		Argument a = new Argument();
 		a.fName = name;
 		a.fType = type;
+		a.fOptional = optional;
 		fArguments.add(a);
+	}
+
+	public int getArgumentPosition(String targetName) {
+		int i;
+		for (i = 0; i < fArguments.size(); i++)
+			if (targetName.equals(fArguments.get(i).fName))
+				return i;
+		return -1;
 	}
 
 	public class Argument {
 		String fName;
 		IType fType;
+		boolean fOptional = false;
 
 		public String getName() {
 			return fName;
@@ -41,6 +55,10 @@ public class FunctionType extends CommonType implements IType {
 
 		public IType getType() {
 			return fType;
+		}
+		
+		public boolean isOptional () {
+			return fOptional;
 		}
 	}
 
@@ -131,6 +149,8 @@ public class FunctionType extends CommonType implements IType {
 		StringBuffer buf = new StringBuffer();
 		buf.append("(");
 		for (Argument a : fArguments) {
+			if (a.fOptional)
+				buf.append("~");
 			buf.append(a.fType).append(" ");
 		}
 		buf.append("-> ").append(fReturnType);

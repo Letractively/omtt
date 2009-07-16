@@ -7,7 +7,7 @@ import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.lang.model.AbstractTreeWalker;
-import pl.omtt.lang.model.nodes.*;
+import pl.omtt.lang.model.ast.*;
 import pl.omtt.lang.model.types.TypeException;
 
 public class SymbolTableCreator extends AbstractTreeWalker {

@@ -8,7 +8,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 import pl.omtt.lang.grammar.OmttLexer;
-import pl.omtt.lang.model.nodes.ModuleDeclaration;
+import pl.omtt.lang.model.ast.ModuleDeclaration;
 
 public class OmttOutlineContentProvider implements ITreeContentProvider {
 

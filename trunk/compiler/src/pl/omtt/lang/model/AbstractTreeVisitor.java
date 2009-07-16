@@ -4,7 +4,7 @@ import java.util.Stack;
 
 import org.antlr.runtime.tree.Tree;
 
-import pl.omtt.lang.model.nodes.*;
+import pl.omtt.lang.model.ast.*;
 
 public class AbstractTreeVisitor implements IVisitor {
 	protected Stack<Tree> fStack = new Stack<Tree>();
@@ -134,6 +134,11 @@ public class AbstractTreeVisitor implements IVisitor {
 
 	@Override
 	public void visit(Ident node) {
+		defaultVisit(node);
+	}
+
+	@Override
+	public void visit(Range node) {
 		defaultVisit(node);
 	}
 

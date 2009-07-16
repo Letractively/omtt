@@ -1,7 +1,7 @@
 package pl.omtt.lang.code;
 
 
-import pl.omtt.lang.model.nodes.IExpression;
+import pl.omtt.lang.model.ast.IExpression;
 import pl.omtt.lang.model.types.IType;
 
 public class FoldCodeFragment {

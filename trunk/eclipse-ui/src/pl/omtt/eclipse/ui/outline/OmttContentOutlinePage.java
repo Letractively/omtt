@@ -12,7 +12,7 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import pl.omtt.eclipse.model.IDocumentModelListener;
 import pl.omtt.eclipse.model.OmttDocumentModel;
 import pl.omtt.eclipse.ui.editor.OmttEditor;
-import pl.omtt.lang.model.nodes.TemplateDefinition;
+import pl.omtt.lang.model.ast.TemplateDefinition;
 
 public class OmttContentOutlinePage extends ContentOutlinePage implements
 		ISelectionChangedListener, IDocumentModelListener {

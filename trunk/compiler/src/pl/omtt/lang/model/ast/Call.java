@@ -1,4 +1,7 @@
-package pl.omtt.lang.model.nodes;
+package pl.omtt.lang.model.ast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.antlr.runtime.CommonToken;
 
@@ -9,6 +12,7 @@ import pl.omtt.lang.model.types.ErrorType;
 import pl.omtt.lang.model.types.FlexibleType;
 import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.IType;
+import pl.omtt.lang.model.types.NullType;
 import pl.omtt.lang.model.types.TypeException;
 import pl.omtt.lang.model.types.TypeUnifier;
 
@@ -16,6 +20,7 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 	IType fType;
 	FunctionType fCallingType;
 	boolean fIterateSequence;
+	List<FunctionArgument> fArguments;
 
 	public Call(int token, boolean iterateSequence) {
 		super(new CommonToken(token, "call"));
@@ -40,32 +45,32 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 	}
 
 	public int getArgumentLength() {
-		return getChildCount() - 1;
+		return fArguments.size();
 	}
 
 	public FunctionArgument getArgument(int i) {
-		return (FunctionArgument) getChild(i + 1);
+		return fArguments.get(i);
 	}
 
 	@Override
 	public void setExpressionType(SymbolTable symbolArray) throws TypeException {
-		IType callType = getCallingNode().getExpressionType();
+		FunctionType declaredType;
 
-		FunctionType declaredType = new FunctionType();
-		for (int i = 0; i < getArgumentLength(); i++) {
-			FunctionArgument arg = getArgument(i);
-			IType type = arg.getExpressionType().dup();
-			declaredType.putArgument(arg.getTargetName(), type);
-		}
-		if (callType.getEffective() instanceof FunctionType) {
+		IType callType = getCallingNode().getExpressionType();
+		if (callType.isFunction()) {
 			fCallingType = (FunctionType) callType.getEffective();
+			declaredType = buildType(fCallingType);
+
 			if (isIterateSequence()) {
-				if (fCallingType.getArguments().get(0).getType().isSequence())
+				if (fCallingType.getArgument(0).getType().isSequence())
 					fIterateSequence = false;
 				else
-					declaredType.getArguments().get(0).getType()
-							.unsetSequence();
+					declaredType.getArgument(0).getType().unsetSequence();
 			}
+		} else {
+			declaredType = buildType();
+			if (isIterateSequence())
+				declaredType.getArgument(0).getType().unsetSequence();
 		}
 
 		try {
@@ -95,6 +100,67 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 				&& (!isIterateSequence() || getArgument(0).getExpressionType()
 						.isNotNull()))
 			fType.setNotNull();
+	}
+
+	private FunctionType buildType() throws TypeException {
+		FunctionType funtype = new FunctionType();
+		fArguments = new ArrayList<FunctionArgument>(getChildCount() - 1);
+		for (int i = 0; i < getArgumentLength(); i++) {
+			FunctionArgument arg = getArgument(i);
+			IType type = arg.getExpressionType().dup();
+			if (arg.getTargetName() != null)
+				throw new TypeException(arg, "unknown parameter "
+						+ arg.getTargetName());
+			fArguments.add(arg);
+			funtype.putArgument(null, type, false);
+		}
+		return funtype;
+	}
+
+	private FunctionType buildType(FunctionType calltype) throws TypeException {
+		FunctionType funtype = new FunctionType();
+		final int callArgCount = calltype.getArguments().size();
+
+		fArguments = new ArrayList<FunctionArgument>(callArgCount);
+		for (int i = 0; i < callArgCount; i++)
+			fArguments.add(null);
+
+		for (int i = 1; i < getChildCount(); i++) {
+			FunctionArgument arg = (FunctionArgument) getChild(i);
+			int pos;
+			if (arg.getTargetName() == null)
+				pos = firstFreeArgumentPosition();
+			else
+				pos = calltype.getArgumentPosition(arg.getTargetName());
+			if (pos < 0)
+				throw new TypeException(arg, "unknown parameter "
+						+ arg.getTargetName());
+			else if (i < fArguments.size() && fArguments.get(i) != null)
+				throw new TypeException(arg, "parameter " + arg.getTargetName()
+						+ " was set yet");
+			fArguments.set(pos, arg);
+		}
+
+		for (int i = 0; i < callArgCount; i++) {
+			final FunctionArgument arg = fArguments.get(i);
+			if (arg == null) {
+				funtype.putArgument(null, new NullType(), true);
+				if (!calltype.getArgument(i).isOptional())
+					throw new TypeException(this, "argument " + (i + 1)
+							+ " of called function is obligatory");
+			} else {
+				funtype.putArgument(null, arg.getExpressionType(), false);
+			}
+		}
+		return funtype;
+	}
+
+	private int firstFreeArgumentPosition() {
+		int i;
+		for (i = 0; i < fArguments.size(); i++)
+			if (fArguments.get(i) == null)
+				return i;
+		return i;
 	}
 
 	private boolean sequenceOnOutput() {

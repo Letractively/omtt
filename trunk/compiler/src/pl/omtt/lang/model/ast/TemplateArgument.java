@@ -1,4 +1,4 @@
-package pl.omtt.lang.model.nodes;
+package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.CommonToken;
 
@@ -27,6 +27,10 @@ public class TemplateArgument extends CommonNode implements
 
 	public IType getArgumentType() {
 		return fArgumentType;
+	}
+
+	public boolean isArgumentOptional() {
+		return getFirstChildWithType(OmttParser.TILDE) != null;
 	}
 
 	private void setArgumentType(SymbolTable ST) throws TypeException {

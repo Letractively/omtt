@@ -60,7 +60,8 @@ public abstract class AbstractProblemCollector implements IProblemCollector {
 	public void reportError(String path, RecognitionException e, String message) {
 		URI uri = null;
 		try {
-			uri = new URI(path);
+			// TODO: do it properly
+			uri = new URI (path.replaceAll(" ", "%20"));
 		} catch (URISyntaxException urie) {
 			urie.printStackTrace();
 			return;

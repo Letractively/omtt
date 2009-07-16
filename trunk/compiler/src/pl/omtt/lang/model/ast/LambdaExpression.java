@@ -1,4 +1,4 @@
-package pl.omtt.lang.model.nodes;
+package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
@@ -45,10 +45,12 @@ public class LambdaExpression extends CommonNode implements IExpression,
 		Tree args = getArgumentsNode();
 		for (int i = 0; i < args.getChildCount(); i++) {
 			TemplateArgument arg = (TemplateArgument) args.getChild(i);
-			ftype.putArgument(arg.getArgumentName(), arg.getArgumentType());
+			ftype.putArgument(arg.getArgumentName(), arg.getArgumentType(), arg
+					.isArgumentOptional());
 		}
-		TypeUnifier.unifyEq(ftype.getReturnType(), getBodyNode().getExpressionType());
-		
+		TypeUnifier.unifyEq(ftype.getReturnType(), getBodyNode()
+				.getExpressionType());
+
 		fType = ftype;
 		fType.freeze();
 	}
@@ -57,9 +59,9 @@ public class LambdaExpression extends CommonNode implements IExpression,
 	public void accept(IVisitor visitor) {
 		visitor.visit(this);
 	}
-	
+
 	@Override
-	public String toString () {
+	public String toString() {
 		return "lambda of " + fType;
 	}
 }

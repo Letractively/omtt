@@ -9,7 +9,7 @@ options {
 @header {
 package pl.omtt.lang.grammar;
 
-import pl.omtt.lang.model.nodes.*;
+import pl.omtt.lang.model.ast.*;
 }
 
 // START: program
@@ -196,14 +196,19 @@ if_expression
     -> ^(IF_ELSE<IfElse> $condition $part_if $part_else)
   ;
 if_tag
-  : TAG_START IF condition=boolean_expression
-    part_if=tag_content
-    ( TAG_START ELSE
-      part_else=tag_content
-    )?
-    TAG_END
-    -> ^(IF_ELSE<IfElse> $condition $part_if $part_else?)
+  : TAG_START!
+  	if_subtag
+    TAG_END!
   ;
+fragment if_subtag
+	: ( IF condition=boolean_expression
+		  part_if=tag_content
+		)
+		( TAG_START ELSE
+			(part_else=tag_content | subtag=if_subtag)
+		)?
+		-> ^(IF_ELSE<IfElse> $condition $part_if $part_else? $subtag?)
+	;
 
 map_expression
   : MAP iter=boolean_expression COLON
@@ -325,21 +330,21 @@ fragment function_argument
 
 // START: atoms
 atom_expression
-	: (atom=atom_with_properties -> $atom)
+	: (a=atom_with_properties -> $a)
 	  ((COMA atom_with_properties)+ -> ^(SEQUENCE<Sequence> atom_with_properties+))?
   ;
 
 atom_with_properties
-  : (atom=atom_with_selectors -> $atom)
+  : (a=atom_with_selectors -> $a)
   	( ps=property_selector
   	  -> ^(PROPERTY_SELECT<PropertySelect> $atom_with_properties $ps)
   	)*
   ;
 fragment atom_with_selectors
-	: selectable_atom
+	: atom
 		( sequence_selectors
-			-> ^(ATOM_SELECT<AtomSelect> selectable_atom sequence_selectors?)
-		| -> selectable_atom
+			-> ^(ATOM_SELECT<AtomSelect> atom sequence_selectors?)
+		| -> atom
 		)
 	;
 fragment property_selector
@@ -368,7 +373,12 @@ data_expression
     -> ^(DATA_START<Data> data_body_atom*)
   ;
 
-fragment selectable_atom
+atom
+	: selectable_atom
+		(DOUBLE_DOT<Range>^ selectable_atom)?
+	;
+
+selectable_atom
   : object_atom
   | data_expression
   | namespace_id

@@ -11,7 +11,7 @@ import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.core.Constants;
 import pl.omtt.lang.model.AbstractTreeWalker;
-import pl.omtt.lang.model.nodes.*;
+import pl.omtt.lang.model.ast.*;
 import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.NullType;
@@ -419,6 +419,44 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		fBuffer.putSafeExpression(literal, fTypeAdapter.getLiteral(literal));
 	}
 
+	public void visit(Range range) {
+		apply();
+		final IType type = range.getExpressionType();
+		fBuffer.putExpression(range, "%s", fTypeAdapter.getInstance(type));
+
+		final IType lefttype = range.getLeftNode().getExpressionType();
+		final IType righttype = range.getRightNode().getExpressionType();
+		final String leftvar = fBuffer.getSafeReference(range.getLeftNode());
+		final String rightvar = fBuffer.getSafeReference(range.getRightNode());
+
+		String nullcheck = "";
+		if (!lefttype.isNotNull())
+			nullcheck += leftvar + " != null";
+		if (!righttype.isNotNull())
+			nullcheck += (!lefttype.isNotNull() ? " || " : "") + rightvar
+					+ " != null";
+		if (nullcheck.length() > 0) {
+			fBuffer.putl("if (%s) {", nullcheck);
+			fBuffer.incIndentitation();
+		}
+
+		final String ivar = fBuffer.getTemporaryVariable();
+		fBuffer.putl("if (%s > %s)", leftvar, rightvar);
+		fBuffer.putl("\tfor (int %s = %s; %s >= %s; %s--)", ivar, leftvar,
+				ivar, rightvar, ivar);
+		fBuffer.putl("\t\t%s.add(%s);", fBuffer.getReference(range), ivar);
+
+		fBuffer.putl("else", leftvar, rightvar);
+		fBuffer.putl("\tfor (int %s = %s; %s <= %s; %s++)", ivar, leftvar,
+				ivar, rightvar, ivar);
+		fBuffer.putl("\t\t%s.add(%s);", fBuffer.getReference(range), ivar);
+
+		if (nullcheck.length() > 0) {
+			fBuffer.subIndentitation();
+			fBuffer.putl("}");
+		}
+	}
+
 	public void visit(ArithmeticExpression expr) {
 		char op = '?';
 		switch (expr.getOperation()) {
@@ -568,10 +606,12 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	}
 
 	private String callArgument(Call call, int i) {
-		final FunctionType ctype = call.getCallingType();
-		if (i >= ctype.getArguments().size())
-			return null;
-		return cast(call.getArgument(i), ctype.getArguments().get(i).getType());
+		FunctionArgument farg = call.getArgument(i);
+		if (farg == null)
+			return "null";
+		final IType neededType = call.getCallingType().getArguments().get(i)
+				.getType();
+		return cast(farg, neededType);
 	}
 
 	public void visit(final Transformation transform) {
