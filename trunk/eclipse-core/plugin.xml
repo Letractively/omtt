@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<!-- Core -->
+	<extension
+		point="org.eclipse.core.contenttype.contentTypes">
+		<file-association
+			content-type="pl.omtt.eclipse.content-type"
+			file-extensions="omtt"
+			file-names="Object Templates">
+		</file-association>
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			default-charset="utf-8"
+			file-extensions="omtt"
+			id="pl.omtt.eclipse.content-type"
+			name="Object Templates"
+			priority="normal">
+		</content-type>
+	</extension>
+
+	<!-- Nature -->
+	<extension
+		id="pl.omtt.eclipse.builder"
+		name="OMTT Project Builder"
+		point="org.eclipse.core.resources.builders">
+		<builder hasNature="true">
+			<run class="pl.omtt.eclipse.builder.OmttBuilder"/>
+		</builder>
+	</extension>
+
+	<extension
+		id="pl.omtt.eclipse.nature"
+		name="OMTT Project Nature"
+		point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="pl.omtt.eclipse.builder.OmttNature"/>
+		</runtime>
+		<builder id="pl.omtt.eclipse.builder"/>
+	</extension>
+
+	<!-- Markers -->
+	<extension
+		id="pl.omtt.eclipse.markers.problem"
+		point="org.eclipse.core.resources.markers"
+		name="OMTT Problem">
+		<super type="org.eclipse.core.resources.problemmarker"/>
+		<super type="org.eclipse.core.resources.textmarker"/>
+		<persistent value="true" />
+	</extension>
+</plugin>
