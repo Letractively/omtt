@@ -365,11 +365,8 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	}
 
 	private void visitVariable(TemplateDefinition def, IType type) {
-		IExpression body = def.getBodyNode();
-		apply(body);
-
 		fBuffer.putl("final %s %s = %s;", jtype(type), def.getTemplateName(),
-				fBuffer.getReference(body));
+				exprapply(def.getBodyNode()));
 	}
 
 	public void visit(TemplateDefinition def) {

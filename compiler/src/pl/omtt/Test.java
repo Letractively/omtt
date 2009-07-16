@@ -31,7 +31,7 @@ public class Test {
 		List<URI> classpath = new ArrayList<URI>();
 		try {
 			source = new URI("file:" + FILE);
-			target = new URI("file:bin/");
+			target = new URI("file:" + DIR + "/bin/");
 			corejar = new URI("file:lib/omtt-core.jar");
 			classpath.add(corejar);
 			
