@@ -120,19 +120,19 @@
  <extension
        point="org.eclipse.ui.newWizards">
     <wizard
-          canFinishEarly="true"
+          canFinishEarly="false"
           category="org.eclipse.ui.Web"
-          class="pl.omtt.eclipse.ui.wizards.ModuleWizard"
+          class="pl.omtt.eclipse.ui.wizards.ModuleCreationWizard"
           descriptionImage="icons/editor.gif"
           finalPerspective="org.eclipse.jdt.ui.JavaPerspective"
-          hasPages="false"
+          hasPages="true"
           icon="icons/editor.gif"
           id="pl.omtt.eclipse.ui.modulewizard"
-          name="Object Templates Module"
+          name="OMTT Module"
           preferredPerspectives="org.eclipse.jdt.ui.JavaPerspective"
           project="false">
        <description>
-          Create single Object Templates module.
+          Create single OMTT module
        </description>
        <selection
              class="org.eclipse.core.resources.IResource">

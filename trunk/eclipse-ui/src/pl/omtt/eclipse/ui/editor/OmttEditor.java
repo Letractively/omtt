@@ -153,4 +153,6 @@ public class OmttEditor extends TextEditor {
 		fColorProvider.dispose();
 		super.dispose();
 	}
+
+	public static final String EDITOR_ID = "pl.omtt.eclipse.ui.editor";
 }
