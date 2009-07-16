@@ -1,0 +1,69 @@
+package pl.omtt.lang.model.nodes;
+
+import org.antlr.runtime.Token;
+
+import pl.omtt.lang.code.ClassResolver;
+import pl.omtt.lang.code.ISymbolTableParticipant;
+import pl.omtt.lang.code.SymbolTable;
+import pl.omtt.lang.model.IVisitable;
+import pl.omtt.lang.model.IVisitor;
+import pl.omtt.lang.model.types.TypeException;
+
+public class ImportDeclaration extends CommonNode implements
+		ISymbolTableParticipant, IVisitable {
+	public ImportDeclaration(int token_type, Token token) {
+		super(token);
+	}
+
+	public boolean isImportingPackage() {
+		return "*".equals(getChild(this.getChildCount() - 1).getText());
+	}
+
+	public String getPackageName() {
+		String packageName = "";
+		for (int i = 0; i < getChildCount() - 1; i++) {
+			packageName += getChild(i).getText();
+			if (i < getChildCount() - 2)
+				packageName += ".";
+		}
+		return packageName;
+	}
+
+	public String getClassName() {
+		String last = getChild(this.getChildCount() - 1).getText();
+		if ("*".equals(last))
+			return null;
+		else
+			return last;
+	}
+
+	public void addToClassResolver(ClassResolver classResolver)
+			throws ClassNotFoundException {
+		if (isImportingPackage())
+			classResolver.putPackage(getPackageName());
+		else
+			classResolver.putClass(getPackageName() + "." + getClassName());
+	}
+
+	public String getImportingClasses() {
+		return getPackageName() + "."
+				+ (isImportingPackage() ? "*" : getClassName());
+	}
+
+	@Override
+	public void takeSymbolTable(SymbolTable symbolTable) throws TypeException {
+		try {
+			addToClassResolver(symbolTable.getBase().getClassResolver());
+		} catch (ClassNotFoundException e) {
+			throw new TypeException(this, "class " + e.getMessage() + " not found");
+		}
+	}
+
+	public String toString() {
+		return getImportingClasses();
+	}
+
+	public void accept(IVisitor visitor) {
+		visitor.visit(this);
+	}
+}

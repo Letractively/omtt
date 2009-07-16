@@ -1,0 +1,50 @@
+package pl.omtt.lang.model.nodes;
+
+import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.tree.Tree;
+
+import pl.omtt.lang.code.BaseSymbolTable;
+import pl.omtt.lang.code.ISymbolTableParticipant;
+import pl.omtt.lang.code.SymbolTable;
+import pl.omtt.lang.grammar.OmttParser;
+import pl.omtt.lang.model.IVisitable;
+import pl.omtt.lang.model.IVisitor;
+import pl.omtt.lang.model.types.TypeException;
+
+public class Program extends CommonNode implements IVisitable,
+		ISymbolTableParticipant {
+	BaseSymbolTable fSymbolTable;
+
+	public Program(int token) {
+		super(new CommonToken(token, "program"));
+	}
+
+	public ModuleDeclaration getModuleDeclaration() {
+		if (getChild(0) instanceof ModuleDeclaration)
+			return (ModuleDeclaration) getChild(0);
+		else
+			return null;
+	}
+
+	public Tree getUsesNode() {
+		return getFirstChildWithType(OmttParser.USES);
+	}
+
+	public Tree getImportsNode() {
+		return getFirstChildWithType(OmttParser.IMPORTS);
+	}
+
+	@Override
+	public void takeSymbolTable(SymbolTable symbolTable) throws TypeException {
+		fSymbolTable = (BaseSymbolTable) symbolTable;
+	}
+
+	public BaseSymbolTable getSymbolTable () {
+		return fSymbolTable;
+	}
+	
+	@Override
+	public void accept(IVisitor visitor) {
+		visitor.visit(this);
+	}
+}
