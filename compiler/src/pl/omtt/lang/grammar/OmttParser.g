@@ -50,7 +50,7 @@ use_declaration
   ;
 
 fragment external_class_name
-  : (VAR_ID DOT!)* (CLASS_ID | OP_MULTIPLY)
+  : (VAR_ID DOT!)* (CLASS_ID | OP_GENERAL)
   ;
 fragment module_id
   : (VAR_ID DOT!)* VAR_ID

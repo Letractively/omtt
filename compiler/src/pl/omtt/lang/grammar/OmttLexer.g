@@ -123,10 +123,6 @@ ACTION_ON_NEWLINE
     }
   ;
 
-OP_DATA_IS_RAW
-  : ('$' NEWLINE) => '$'
-  ;
-
 STRING_PARENS
   : {!insideData()}?
     '"'
@@ -243,13 +239,15 @@ OP_ASSIGN
 
 OP_AND : '&' | '&&';
 OP_OR  : 'or' | '||';
-OP_XOR : 'xor';
 OP_NOT : 'not';
 
 OP_CONTEXT : '|';
 OP_EXPRESSION_CONTEXT : '!';
 OP_VIEW : '::';
 OP_CONCAT : '^';
+
+OP_GENERAL : '_';
+OP_DATA    : '$';
 
 VAR_ID
   : (SMALL_LETTER | '_') NAMECHAR*

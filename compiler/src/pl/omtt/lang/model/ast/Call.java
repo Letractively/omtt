@@ -132,10 +132,11 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 				pos = firstFreeArgumentPosition();
 			else
 				pos = calltype.getArgumentPosition(arg.getTargetName());
+
 			if (pos < 0)
 				throw new TypeException(arg, "unknown parameter "
 						+ arg.getTargetName());
-			else if (i < fArguments.size() && fArguments.get(i) != null)
+			else if (pos < fArguments.size() && fArguments.get(pos) != null)
 				throw new TypeException(arg, "parameter " + arg.getTargetName()
 						+ " was set yet");
 			fArguments.set(pos, arg);
