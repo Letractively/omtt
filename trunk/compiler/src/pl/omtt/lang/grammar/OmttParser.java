@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-07-16 21:37:22
+// $ANTLR 3.1.2 /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-07-17 03:21:25
 
 package pl.omtt.lang.grammar;
 
@@ -15,112 +15,113 @@ import org.antlr.runtime.tree.*;
 
 public class OmttParser extends AbstractOmttParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "CLASS", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "OP_DATA_IS_RAW", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "AND", "IN", "IF", "THEN", "ELSE", "MATCH", "CASE", "DEFAULT", "AS", "IS", "MAP", "TO", "NULL", "LAMBDA", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FUNCTION_DEFINITION", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMA", "SLASH", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_XOR", "OP_NOT", "OP_CONTEXT", "OP_EXPRESSION_CONTEXT", "OP_VIEW", "OP_CONCAT", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "CLASS", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "AND", "IN", "IF", "THEN", "ELSE", "MATCH", "CASE", "DEFAULT", "AS", "IS", "MAP", "TO", "NULL", "LAMBDA", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FUNCTION_DEFINITION", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMA", "SLASH", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_NOT", "OP_CONTEXT", "OP_EXPRESSION_CONTEXT", "OP_VIEW", "OP_CONCAT", "OP_GENERAL", "OP_DATA", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME", "OP_XOR"
     };
     public static final int CAST=23;
-    public static final int OP_LE=86;
+    public static final int OP_LE=85;
     public static final int INT_NUMBER=26;
-    public static final int OP_AND=90;
+    public static final int OP_AND=89;
     public static final int INT_OR_REAL_NUMBER=104;
     public static final int LETTER=105;
-    public static final int OP_GEQ=87;
-    public static final int CASE=55;
-    public static final int OP_GE=88;
+    public static final int OP_GEQ=86;
+    public static final int CASE=54;
+    public static final int OP_GE=87;
     public static final int EOF=-1;
-    public static final int DOUBLE_DOT=71;
+    public static final int DOUBLE_DOT=70;
     public static final int IMPORT=8;
     public static final int STRING_LITERAL=25;
-    public static final int MODE_LEFT_PAREN=45;
-    public static final int OP_MINUS=80;
-    public static final int OP_NOT_EQUAL=84;
+    public static final int MODE_LEFT_PAREN=44;
+    public static final int OP_MINUS=79;
+    public static final int OP_NOT_EQUAL=83;
     public static final int SEQUENCE_SELECT=15;
-    public static final int OP_EXPRESSION_CONTEXT=95;
+    public static final int OP_EXPRESSION_CONTEXT=93;
     public static final int VAR_ID=100;
     public static final int ARGUMENTS=17;
-    public static final int NULL=61;
-    public static final int ELSE=53;
-    public static final int MATCH=54;
-    public static final int SEMICOLON=69;
-    public static final int SINGLE_TAG_KEYWORD=66;
-    public static final int MODE_RIGHT_PAREN=46;
+    public static final int NULL=60;
+    public static final int ELSE=52;
+    public static final int MATCH=53;
+    public static final int SEMICOLON=68;
+    public static final int SINGLE_TAG_KEYWORD=65;
+    public static final int MODE_RIGHT_PAREN=45;
     public static final int CONTENT=28;
-    public static final int OP_FUNCTION_DEFINITION=67;
+    public static final int OP_FUNCTION_DEFINITION=66;
     public static final int DATA_START=31;
     public static final int EXPRESSION_START=33;
     public static final int NAMECHAR=99;
     public static final int SEQUENCE=24;
-    public static final int INNER_TAG_KEYWORD=65;
+    public static final int INNER_TAG_KEYWORD=64;
     public static final int WS=40;
+    public static final int OP_DATA=97;
     public static final int USES=7;
     public static final int REAL_NUMBER=27;
-    public static final int LEFT_PAREN=75;
-    public static final int OP_EQUAL=83;
+    public static final int LEFT_PAREN=74;
+    public static final int OP_EQUAL=82;
     public static final int IMPORTS=9;
     public static final int CALL=22;
     public static final int OP_DATA_IS_EXPRESSION=35;
     public static final int USE=6;
-    public static final int FALSE=64;
-    public static final int STRING_PARENS=44;
+    public static final int FALSE=63;
+    public static final int STRING_PARENS=43;
     public static final int COMMENT_SINGLE_LINE=38;
     public static final int CLASS_ID=102;
-    public static final int OP_CONCAT=97;
+    public static final int OP_CONCAT=95;
     public static final int SMALL_LETTER=98;
     public static final int CLASS=10;
-    public static final int DEF=48;
-    public static final int OP_ASSIGN=89;
+    public static final int DEF=47;
+    public static final int OP_ASSIGN=88;
     public static final int EXPRESSION_END=34;
-    public static final int OP_OR=91;
+    public static final int OP_OR=90;
     public static final int TYPE_SELECT=14;
-    public static final int AND=49;
+    public static final int AND=48;
     public static final int DATA_END=32;
     public static final int IF_ELSE=21;
-    public static final int IF=51;
+    public static final int IF=50;
     public static final int COMMENT_MULTI_LINE=39;
-    public static final int AS=57;
-    public static final int RIGHT_PAREN=76;
+    public static final int AS=56;
+    public static final int RIGHT_PAREN=75;
     public static final int BIG_LETTER=101;
-    public static final int SLASH=73;
-    public static final int IN=50;
-    public static final int THEN=52;
-    public static final int LEFT_SQUARE_PAREN=77;
-    public static final int IS=58;
+    public static final int SLASH=72;
+    public static final int IN=49;
+    public static final int THEN=51;
+    public static final int LEFT_SQUARE_PAREN=76;
+    public static final int IS=57;
     public static final int IT=36;
     public static final int TAG_START=29;
     public static final int ARGUMENT=18;
-    public static final int RIGHT_SQUARE_PAREN=78;
-    public static final int TILDE=74;
+    public static final int RIGHT_SQUARE_PAREN=77;
+    public static final int TILDE=73;
+    public static final int OP_GENERAL=96;
     public static final int IDENT=11;
-    public static final int OP_NOT=93;
+    public static final int OP_NOT=91;
     public static final int DIGIT=103;
-    public static final int LAMBDA=62;
+    public static final int LAMBDA=61;
     public static final int HEADER=5;
-    public static final int DOT=70;
+    public static final int DOT=69;
     public static final int NOT_NAME=106;
-    public static final int OP_MULTIPLY=81;
+    public static final int OP_MULTIPLY=80;
     public static final int RETURNS=19;
     public static final int ITEM=37;
-    public static final int OP_PLUS=79;
-    public static final int TO=60;
-    public static final int DEFAULT=56;
+    public static final int OP_PLUS=78;
+    public static final int TO=59;
+    public static final int DEFAULT=55;
     public static final int ATOM_SELECT=12;
-    public static final int MODULE=47;
-    public static final int COMA=72;
-    public static final int TRUE=63;
-    public static final int OP_VIEW=96;
-    public static final int OP_MODULO=82;
-    public static final int COLON=68;
-    public static final int OP_DATA_IS_RAW=43;
+    public static final int MODULE=46;
+    public static final int COMA=71;
+    public static final int TRUE=62;
+    public static final int OP_VIEW=94;
+    public static final int OP_MODULO=81;
+    public static final int COLON=67;
     public static final int ITERATE=16;
     public static final int TAG_END=30;
     public static final int NEWLINE=41;
     public static final int BLOCK=20;
-    public static final int MAP=59;
+    public static final int MAP=58;
     public static final int PROPERTY_SELECT=13;
-    public static final int OP_XOR=92;
-    public static final int OP_CONTEXT=94;
+    public static final int OP_XOR=107;
+    public static final int OP_CONTEXT=92;
     public static final int ACTION_ON_NEWLINE=42;
     public static final int PROGRAM=4;
-    public static final int OP_LEQ=85;
+    public static final int OP_LEQ=84;
 
     // delegates
     // delegators
@@ -400,7 +401,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: MODULE, module_id
+            // elements: module_id, MODULE
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -803,7 +804,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: IMPORT, ec
+            // elements: ec, IMPORT
             // token labels: 
             // rule labels: retval, ec
             // token list labels: 
@@ -897,7 +898,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: USE, module_id
+            // elements: module_id, USE
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -948,7 +949,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "external_class_name"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:52:10: fragment external_class_name : ( VAR_ID DOT )* ( CLASS_ID | OP_MULTIPLY ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:52:10: fragment external_class_name : ( VAR_ID DOT )* ( CLASS_ID | OP_GENERAL ) ;
     public final OmttParser.external_class_name_return external_class_name() throws RecognitionException {
         OmttParser.external_class_name_return retval = new OmttParser.external_class_name_return();
         retval.start = input.LT(1);
@@ -964,8 +965,8 @@ public class OmttParser extends AbstractOmttParser {
         Object set24_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:53:3: ( ( VAR_ID DOT )* ( CLASS_ID | OP_MULTIPLY ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:53:5: ( VAR_ID DOT )* ( CLASS_ID | OP_MULTIPLY )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:53:3: ( ( VAR_ID DOT )* ( CLASS_ID | OP_GENERAL ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:53:5: ( VAR_ID DOT )* ( CLASS_ID | OP_GENERAL )
             {
             root_0 = (Object)adaptor.nil();
 
@@ -999,7 +1000,7 @@ public class OmttParser extends AbstractOmttParser {
             } while (true);
 
             set24=(Token)input.LT(1);
-            if ( input.LA(1)==OP_MULTIPLY||input.LA(1)==CLASS_ID ) {
+            if ( input.LA(1)==OP_GENERAL||input.LA(1)==CLASS_ID ) {
                 input.consume();
                 adaptor.addChild(root_0, (Object)adaptor.create(set24));
                 state.errorRecovery=false;
@@ -1277,7 +1278,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definition_signature, DEF, content
+            // elements: definition_signature, content, DEF
             // token labels: 
             // rule labels: content, retval
             // token list labels: 
@@ -1492,7 +1493,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: VAR_ID, DEFAULT, ret_type, definition_argument, it
+            // elements: DEFAULT, definition_argument, ret_type, it, VAR_ID
             // token labels: 
             // rule labels: retval, it, ret_type
             // token list labels: 
@@ -1673,7 +1674,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: OP_MULTIPLY, type, TILDE
+            // elements: TILDE, OP_MULTIPLY, type
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1830,7 +1831,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: data_body_atom, CONTENT
+                    // elements: CONTENT, data_body_atom
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2565,7 +2566,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: expression, definition_signature
+                    // elements: definition_signature, expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3374,7 +3375,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: definition_argument, atom_expression, LAMBDA
+                    // elements: LAMBDA, definition_argument, atom_expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3572,7 +3573,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: CLASS_ID, OP_MULTIPLY
+            // elements: OP_MULTIPLY, CLASS_ID
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -3806,7 +3807,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: OP_CONCAT, expr
+                    // elements: expr, OP_CONCAT
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -4307,7 +4308,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: part_else, part_if, subtag, condition
+            // elements: condition, subtag, part_if, part_else
             // token labels: 
             // rule labels: subtag, retval, part_else, condition, part_if
             // token list labels: 
@@ -4420,7 +4421,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: expr, MAP, iter
+            // elements: iter, MAP, expr
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -4525,7 +4526,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: expr, iter, MAP
+            // elements: expr, MAP, iter
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -4662,7 +4663,7 @@ public class OmttParser extends AbstractOmttParser {
                 int alt40=2;
                 int LA40_0 = input.LA(1);
 
-                if ( ((LA40_0>=OP_AND && LA40_0<=OP_XOR)) ) {
+                if ( ((LA40_0>=OP_AND && LA40_0<=OP_OR)||LA40_0==OP_XOR) ) {
                     alt40=1;
                 }
 
@@ -5537,7 +5538,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: context_expression, OP_MINUS
+                    // elements: OP_MINUS, context_expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -5997,7 +5998,7 @@ public class OmttParser extends AbstractOmttParser {
             if ( ((LA52_0>=STRING_LITERAL && LA52_0<=REAL_NUMBER)||LA52_0==DATA_START||LA52_0==NULL||(LA52_0>=TRUE && LA52_0<=FALSE)||(LA52_0>=TILDE && LA52_0<=LEFT_PAREN)||LA52_0==VAR_ID) ) {
                 alt52=1;
             }
-            else if ( ((LA52_0>=CONTENT && LA52_0<=TAG_END)||(LA52_0>=EXPRESSION_END && LA52_0<=OP_DATA_IS_EXPRESSION)||(LA52_0>=AND && LA52_0<=IN)||LA52_0==ELSE||LA52_0==COLON||LA52_0==SLASH||LA52_0==RIGHT_PAREN||(LA52_0>=RIGHT_SQUARE_PAREN && LA52_0<=OP_GE)||(LA52_0>=OP_AND && LA52_0<=OP_XOR)||(LA52_0>=OP_CONTEXT && LA52_0<=OP_EXPRESSION_CONTEXT)||LA52_0==OP_CONCAT) ) {
+            else if ( ((LA52_0>=CONTENT && LA52_0<=TAG_END)||(LA52_0>=EXPRESSION_END && LA52_0<=OP_DATA_IS_EXPRESSION)||(LA52_0>=AND && LA52_0<=IN)||LA52_0==ELSE||LA52_0==COLON||LA52_0==SLASH||LA52_0==RIGHT_PAREN||(LA52_0>=RIGHT_SQUARE_PAREN && LA52_0<=OP_GE)||(LA52_0>=OP_AND && LA52_0<=OP_OR)||(LA52_0>=OP_CONTEXT && LA52_0<=OP_EXPRESSION_CONTEXT)||LA52_0==OP_CONCAT||LA52_0==OP_XOR) ) {
                 alt52=2;
             }
             else {
@@ -6216,7 +6217,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: ident, content, function_arguments
+            // elements: content, function_arguments, ident
             // token labels: 
             // rule labels: content, retval, ident
             // token list labels: 
@@ -6420,7 +6421,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: VAR_ID, atom_expression
+            // elements: atom_expression, VAR_ID
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -6719,7 +6720,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: atom_with_properties, ps
+            	    // elements: ps, atom_with_properties
             	    // token labels: 
             	    // rule labels: retval, ps
             	    // token list labels: 
@@ -6812,7 +6813,7 @@ public class OmttParser extends AbstractOmttParser {
             if ( (LA59_0==AS||LA59_0==LEFT_SQUARE_PAREN) ) {
                 alt59=1;
             }
-            else if ( ((LA59_0>=STRING_LITERAL && LA59_0<=DATA_START)||(LA59_0>=EXPRESSION_END && LA59_0<=OP_DATA_IS_EXPRESSION)||(LA59_0>=AND && LA59_0<=IN)||LA59_0==ELSE||LA59_0==NULL||(LA59_0>=TRUE && LA59_0<=FALSE)||LA59_0==COLON||LA59_0==DOT||(LA59_0>=COMA && LA59_0<=RIGHT_PAREN)||(LA59_0>=RIGHT_SQUARE_PAREN && LA59_0<=OP_GE)||(LA59_0>=OP_AND && LA59_0<=OP_XOR)||(LA59_0>=OP_CONTEXT && LA59_0<=OP_EXPRESSION_CONTEXT)||LA59_0==OP_CONCAT||LA59_0==VAR_ID) ) {
+            else if ( ((LA59_0>=STRING_LITERAL && LA59_0<=DATA_START)||(LA59_0>=EXPRESSION_END && LA59_0<=OP_DATA_IS_EXPRESSION)||(LA59_0>=AND && LA59_0<=IN)||LA59_0==ELSE||LA59_0==NULL||(LA59_0>=TRUE && LA59_0<=FALSE)||LA59_0==COLON||LA59_0==DOT||(LA59_0>=COMA && LA59_0<=RIGHT_PAREN)||(LA59_0>=RIGHT_SQUARE_PAREN && LA59_0<=OP_GE)||(LA59_0>=OP_AND && LA59_0<=OP_OR)||(LA59_0>=OP_CONTEXT && LA59_0<=OP_EXPRESSION_CONTEXT)||LA59_0==OP_CONCAT||LA59_0==VAR_ID||LA59_0==OP_XOR) ) {
                 alt59=2;
             }
             else {
@@ -6834,7 +6835,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: atom, sequence_selectors
+                    // elements: sequence_selectors, atom
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -8181,47 +8182,47 @@ public class OmttParser extends AbstractOmttParser {
     static final String DFA20_minS =
         "\1\31\1\uffff\2\31\2\uffff\11\31";
     static final String DFA20_maxS =
-        "\1\144\1\uffff\2\144\2\uffff\3\144\1\146\4\144\1\146";
+        "\1\144\1\uffff\2\153\2\uffff\2\153\1\144\1\146\4\153\1\146";
     static final String DFA20_acceptS =
         "\1\uffff\1\1\2\uffff\1\2\1\3\11\uffff";
     static final String DFA20_specialS =
         "\17\uffff}>";
     static final String[] DFA20_transitionS = {
-            "\3\5\3\uffff\1\5\20\uffff\1\4\2\uffff\1\5\7\uffff\1\5\1\uffff"+
-            "\1\5\1\1\2\5\2\uffff\1\1\6\uffff\1\2\1\5\4\uffff\1\5\14\uffff"+
-            "\1\5\6\uffff\1\3",
+            "\3\5\3\uffff\1\5\17\uffff\1\4\2\uffff\1\5\7\uffff\1\5\1\uffff"+
+            "\1\5\1\1\2\5\2\uffff\1\1\6\uffff\1\2\1\5\4\uffff\1\5\13\uffff"+
+            "\1\5\10\uffff\1\3",
             "",
-            "\7\5\2\uffff\2\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
-            "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\3\5\1\uffff\2\5\1\uffff"+
-            "\1\5\2\uffff\1\6",
-            "\7\5\2\uffff\2\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\2\5\1\uffff\2\5\1\uffff"+
+            "\1\5\4\uffff\1\6\6\uffff\1\5",
+            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\2\uffff\1\1\2\uffff\4\5\1\7\3\5\1\uffff\2\5\1\10\7\5\1"+
-            "\1\3\5\1\uffff\4\5\2\uffff\1\6",
+            "\1\2\5\1\uffff\4\5\4\uffff\1\6\6\uffff\1\5",
             "",
             "",
-            "\7\5\2\uffff\2\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\2\uffff\1\1\2\uffff\4\5\1\7\3\5\1\uffff\2\5\1\10\7\5\1"+
-            "\11\3\5\1\uffff\4\5\2\uffff\1\6",
-            "\7\5\2\uffff\2\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
-            "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\3\5\1\uffff\2\5\1\uffff"+
-            "\1\5\2\uffff\1\6",
-            "\3\5\3\uffff\1\5\35\uffff\1\5\1\uffff\2\5\2\uffff\1\1\6\uffff"+
-            "\1\12\1\5\4\uffff\1\5\23\uffff\1\13",
-            "\3\5\3\uffff\1\5\35\uffff\1\5\1\uffff\2\5\11\uffff\2\5\30\uffff"+
+            "\11\2\5\1\uffff\4\5\4\uffff\1\6\6\uffff\1\5",
+            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\2\5\1\uffff\2\5\1\uffff"+
+            "\1\5\4\uffff\1\6\6\uffff\1\5",
+            "\3\5\3\uffff\1\5\34\uffff\1\5\1\uffff\2\5\2\uffff\1\1\6\uffff"+
+            "\1\12\1\5\4\uffff\1\5\24\uffff\1\13",
+            "\3\5\3\uffff\1\5\34\uffff\1\5\1\uffff\2\5\11\uffff\2\5\31\uffff"+
             "\1\5\1\uffff\1\1",
-            "\7\5\2\uffff\2\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
-            "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\3\5\1\uffff\2\5\1\uffff"+
-            "\1\5\2\uffff\1\14",
-            "\7\5\2\uffff\2\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\2\5\1\uffff\2\5\1\uffff"+
+            "\1\5\4\uffff\1\14\6\uffff\1\5",
+            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\2\uffff\1\1\2\uffff\4\5\1\15\3\5\1\uffff\2\5\1\10\7\5\1"+
-            "\1\3\5\1\uffff\4\5\2\uffff\1\14",
-            "\7\5\2\uffff\2\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\1\2\5\1\uffff\4\5\4\uffff\1\14\6\uffff\1\5",
+            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\2\uffff\1\1\2\uffff\4\5\1\15\3\5\1\uffff\2\5\1\10\7\5\1"+
-            "\16\3\5\1\uffff\4\5\2\uffff\1\14",
-            "\7\5\2\uffff\2\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
-            "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\3\5\1\uffff\2\5\1\uffff"+
-            "\1\5\2\uffff\1\14",
-            "\3\5\3\uffff\1\5\35\uffff\1\5\1\uffff\2\5\11\uffff\2\5\30\uffff"+
+            "\16\2\5\1\uffff\4\5\4\uffff\1\14\6\uffff\1\5",
+            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\2\5\1\uffff\2\5\1\uffff"+
+            "\1\5\4\uffff\1\14\6\uffff\1\5",
+            "\3\5\3\uffff\1\5\34\uffff\1\5\1\uffff\2\5\11\uffff\2\5\31\uffff"+
             "\1\5\1\uffff\1\1"
     };
 
@@ -8265,52 +8266,57 @@ public class OmttParser extends AbstractOmttParser {
     static final String DFA50_minS =
         "\1\34\1\uffff\1\31\2\uffff\2\31\2\uffff\11\31";
     static final String DFA50_maxS =
-        "\1\141\1\uffff\1\146\2\uffff\2\144\2\uffff\3\144\1\146\4\144\1\146";
+        "\1\153\1\uffff\1\146\2\uffff\2\153\2\uffff\2\153\1\144\1\146\4\153"+
+        "\1\146";
     static final String DFA50_acceptS =
         "\1\uffff\1\5\1\uffff\1\4\1\2\2\uffff\1\3\1\1\11\uffff";
     static final String DFA50_specialS =
         "\22\uffff}>";
     static final String[] DFA50_transitionS = {
-            "\3\1\3\uffff\2\1\15\uffff\2\1\2\uffff\1\1\16\uffff\1\1\4\uffff"+
-            "\1\1\2\uffff\1\1\1\uffff\13\1\1\uffff\3\1\1\uffff\1\2\1\3\1"+
-            "\uffff\1\1",
+            "\3\1\3\uffff\2\1\14\uffff\2\1\2\uffff\1\1\16\uffff\1\1\4\uffff"+
+            "\1\1\2\uffff\1\1\1\uffff\13\1\1\uffff\2\1\1\uffff\1\2\1\3\1"+
+            "\uffff\1\1\13\uffff\1\1",
             "",
-            "\3\10\3\uffff\1\10\35\uffff\1\10\1\4\2\10\2\uffff\1\4\6\uffff"+
-            "\1\5\1\10\30\uffff\1\6\1\uffff\1\7",
+            "\3\10\3\uffff\1\10\34\uffff\1\10\1\4\2\10\2\uffff\1\4\6\uffff"+
+            "\1\5\1\10\31\uffff\1\6\1\uffff\1\7",
             "",
             "",
-            "\7\10\2\uffff\2\10\15\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
+            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
             "\3\uffff\1\10\1\uffff\2\10\3\uffff\1\10\1\uffff\23\10\1\uffff"+
-            "\3\10\1\uffff\2\10\1\uffff\1\10\2\uffff\1\11",
-            "\7\10\2\uffff\2\10\15\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
+            "\2\10\1\uffff\2\10\1\uffff\1\10\4\uffff\1\11\6\uffff\1\10",
+            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
             "\3\uffff\1\10\1\uffff\2\10\2\uffff\1\4\1\10\1\uffff\4\10\1\12"+
-            "\6\10\1\13\7\10\1\4\3\10\1\uffff\4\10\2\uffff\1\11",
+            "\6\10\1\13\7\10\1\4\2\10\1\uffff\4\10\4\uffff\1\11\6\uffff\1"+
+            "\10",
             "",
             "",
-            "\7\10\2\uffff\2\10\15\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
+            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
             "\3\uffff\1\10\1\uffff\2\10\2\uffff\1\4\1\10\1\uffff\4\10\1\12"+
-            "\6\10\1\13\7\10\1\14\3\10\1\uffff\4\10\2\uffff\1\11",
-            "\7\10\2\uffff\2\10\15\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
+            "\6\10\1\13\7\10\1\14\2\10\1\uffff\4\10\4\uffff\1\11\6\uffff"+
+            "\1\10",
+            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
             "\3\uffff\1\10\1\uffff\2\10\3\uffff\1\10\1\uffff\23\10\1\uffff"+
-            "\3\10\1\uffff\2\10\1\uffff\1\10\2\uffff\1\11",
-            "\3\10\3\uffff\1\10\35\uffff\1\10\1\uffff\2\10\2\uffff\1\4\6"+
-            "\uffff\1\15\1\10\4\uffff\1\10\23\uffff\1\16",
-            "\3\10\3\uffff\1\10\35\uffff\1\10\1\uffff\2\10\11\uffff\2\10"+
-            "\30\uffff\1\10\1\uffff\1\4",
-            "\7\10\2\uffff\2\10\15\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
+            "\2\10\1\uffff\2\10\1\uffff\1\10\4\uffff\1\11\6\uffff\1\10",
+            "\3\10\3\uffff\1\10\34\uffff\1\10\1\uffff\2\10\2\uffff\1\4\6"+
+            "\uffff\1\15\1\10\4\uffff\1\10\24\uffff\1\16",
+            "\3\10\3\uffff\1\10\34\uffff\1\10\1\uffff\2\10\11\uffff\2\10"+
+            "\31\uffff\1\10\1\uffff\1\4",
+            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
             "\3\uffff\1\10\1\uffff\2\10\3\uffff\1\10\1\uffff\23\10\1\uffff"+
-            "\3\10\1\uffff\2\10\1\uffff\1\10\2\uffff\1\17",
-            "\7\10\2\uffff\2\10\15\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
+            "\2\10\1\uffff\2\10\1\uffff\1\10\4\uffff\1\17\6\uffff\1\10",
+            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
             "\3\uffff\1\10\1\uffff\2\10\2\uffff\1\4\1\10\1\uffff\4\10\1\20"+
-            "\6\10\1\13\7\10\1\4\3\10\1\uffff\4\10\2\uffff\1\17",
-            "\7\10\2\uffff\2\10\15\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
+            "\6\10\1\13\7\10\1\4\2\10\1\uffff\4\10\4\uffff\1\17\6\uffff\1"+
+            "\10",
+            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
             "\3\uffff\1\10\1\uffff\2\10\2\uffff\1\4\1\10\1\uffff\4\10\1\20"+
-            "\6\10\1\13\7\10\1\21\3\10\1\uffff\4\10\2\uffff\1\17",
-            "\7\10\2\uffff\2\10\15\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
+            "\6\10\1\13\7\10\1\21\2\10\1\uffff\4\10\4\uffff\1\17\6\uffff"+
+            "\1\10",
+            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
             "\3\uffff\1\10\1\uffff\2\10\3\uffff\1\10\1\uffff\23\10\1\uffff"+
-            "\3\10\1\uffff\2\10\1\uffff\1\10\2\uffff\1\17",
-            "\3\10\3\uffff\1\10\35\uffff\1\10\1\uffff\2\10\11\uffff\2\10"+
-            "\30\uffff\1\10\1\uffff\1\4"
+            "\2\10\1\uffff\2\10\1\uffff\1\10\4\uffff\1\17\6\uffff\1\10",
+            "\3\10\3\uffff\1\10\34\uffff\1\10\1\uffff\2\10\11\uffff\2\10"+
+            "\31\uffff\1\10\1\uffff\1\4"
     };
 
     static final short[] DFA50_eot = DFA.unpackEncodedString(DFA50_eotS);
@@ -8354,7 +8360,7 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_module_declaration_in_header93 = new BitSet(new long[]{0x0000000020000000L});
     public static final BitSet FOLLOW_use_declarations_in_header100 = new BitSet(new long[]{0x0000000020000000L});
     public static final BitSet FOLLOW_import_declarations_in_header106 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_START_in_module_declaration119 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_TAG_START_in_module_declaration119 = new BitSet(new long[]{0x0000400000000000L});
     public static final BitSet FOLLOW_MODULE_in_module_declaration121 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_module_id_in_module_declaration123 = new BitSet(new long[]{0x0000000040000000L});
     public static final BitSet FOLLOW_TAG_END_in_module_declaration125 = new BitSet(new long[]{0x0000000000000002L});
@@ -8364,46 +8370,46 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_TAG_START_in_import_declarations193 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_import_declaration_in_import_declarations196 = new BitSet(new long[]{0x0000000040000000L});
     public static final BitSet FOLLOW_TAG_END_in_import_declarations199 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_IMPORT_in_import_declaration231 = new BitSet(new long[]{0x0000000000000000L,0x0000005000020000L});
+    public static final BitSet FOLLOW_IMPORT_in_import_declaration231 = new BitSet(new long[]{0x0000000000000000L,0x0000005100000000L});
     public static final BitSet FOLLOW_external_class_name_in_import_declaration235 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_USE_in_use_declaration264 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_module_id_in_use_declaration266 = new BitSet(new long[]{0x0200000000000000L});
+    public static final BitSet FOLLOW_module_id_in_use_declaration266 = new BitSet(new long[]{0x0100000000000000L});
     public static final BitSet FOLLOW_AS_in_use_declaration268 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_VAR_ID_in_use_declaration270 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_external_class_name302 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_DOT_in_external_class_name304 = new BitSet(new long[]{0x0000000000000000L,0x0000005000020000L});
+    public static final BitSet FOLLOW_VAR_ID_in_external_class_name302 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
+    public static final BitSet FOLLOW_DOT_in_external_class_name304 = new BitSet(new long[]{0x0000000000000000L,0x0000005100000000L});
     public static final BitSet FOLLOW_set_in_external_class_name309 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_module_id330 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000040L});
+    public static final BitSet FOLLOW_VAR_ID_in_module_id330 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
     public static final BitSet FOLLOW_DOT_in_module_id332 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_VAR_ID_in_module_id337 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_tag_definition_in_definitions353 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_TAG_START_in_tag_definition376 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_DEF_in_tag_definition378 = new BitSet(new long[]{0x0100000000000000L,0x0000001000000000L});
+    public static final BitSet FOLLOW_TAG_START_in_tag_definition376 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_DEF_in_tag_definition378 = new BitSet(new long[]{0x0080000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_definition_signature_in_tag_definition380 = new BitSet(new long[]{0x0000000810000000L});
     public static final BitSet FOLLOW_tag_content_in_tag_definition386 = new BitSet(new long[]{0x0000000040000000L});
     public static final BitSet FOLLOW_TAG_END_in_tag_definition390 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_definition_signature422 = new BitSet(new long[]{0x0000000000000002L,0x0000001000400408L});
-    public static final BitSet FOLLOW_DEFAULT_in_definition_signature424 = new BitSet(new long[]{0x0000000000000002L,0x0000001000400408L});
+    public static final BitSet FOLLOW_VAR_ID_in_definition_signature422 = new BitSet(new long[]{0x0000000000000002L,0x0000001000200204L});
+    public static final BitSet FOLLOW_DEFAULT_in_definition_signature424 = new BitSet(new long[]{0x0000000000000002L,0x0000001000200204L});
     public static final BitSet FOLLOW_OP_LE_in_definition_signature428 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_single_type_in_definition_signature432 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_OP_GE_in_definition_signature434 = new BitSet(new long[]{0x0000000000000002L,0x0000001000000408L});
-    public static final BitSet FOLLOW_definition_argument_in_definition_signature438 = new BitSet(new long[]{0x0000000000000002L,0x0000001000000408L});
+    public static final BitSet FOLLOW_single_type_in_definition_signature432 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
+    public static final BitSet FOLLOW_OP_GE_in_definition_signature434 = new BitSet(new long[]{0x0000000000000002L,0x0000001000000204L});
+    public static final BitSet FOLLOW_definition_argument_in_definition_signature438 = new BitSet(new long[]{0x0000000000000002L,0x0000001000000204L});
     public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_definition_signature442 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
     public static final BitSet FOLLOW_type_in_definition_signature446 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_TILDE_in_definition_argument500 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_VAR_ID_in_definition_argument505 = new BitSet(new long[]{0x0000000000000002L,0x0000000002020000L});
+    public static final BitSet FOLLOW_VAR_ID_in_definition_argument505 = new BitSet(new long[]{0x0000000000000002L,0x0000000001010000L});
     public static final BitSet FOLLOW_OP_ASSIGN_in_definition_argument508 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
     public static final BitSet FOLLOW_type_in_definition_argument510 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_MULTIPLY_in_definition_argument514 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_CONTENT_in_tag_content560 = new BitSet(new long[]{0x0000000222000002L});
     public static final BitSet FOLLOW_data_body_atom_in_tag_content566 = new BitSet(new long[]{0x0000000222000002L});
     public static final BitSet FOLLOW_OP_DATA_IS_EXPRESSION_in_tag_content589 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_CONTENT_in_tag_content591 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_CONTENT_in_tag_content591 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_expression_in_tag_content597 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_STRING_LITERAL_in_data_body_atom618 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_expression_inside_data_in_data_body_atom628 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_tag_inside_data_in_data_body_atom634 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_EXPRESSION_START_in_expression_inside_data649 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_EXPRESSION_START_in_expression_inside_data649 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_expression_in_expression_inside_data652 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_EXPRESSION_END_in_expression_inside_data654 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_def_in_tag_in_tag_inside_data670 = new BitSet(new long[]{0x0000000000000002L});
@@ -8413,176 +8419,176 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_lambda_expression_in_expression704 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_def_in_expression_in_expression710 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_concatence_expression_in_expression716 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DEF_in_def_in_expression731 = new BitSet(new long[]{0x0100000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression735 = new BitSet(new long[]{0x0006000000000000L});
-    public static final BitSet FOLLOW_AND_in_def_in_expression742 = new BitSet(new long[]{0x0100000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression746 = new BitSet(new long[]{0x0006000000000000L});
-    public static final BitSet FOLLOW_IN_in_def_in_expression754 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C19L});
-    public static final BitSet FOLLOW_COLON_in_def_in_expression756 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_DEF_in_def_in_expression731 = new BitSet(new long[]{0x0080000000000000L,0x0000001000000000L});
+    public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression735 = new BitSet(new long[]{0x0003000000000000L});
+    public static final BitSet FOLLOW_AND_in_def_in_expression742 = new BitSet(new long[]{0x0080000000000000L,0x0000001000000000L});
+    public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression746 = new BitSet(new long[]{0x0003000000000000L});
+    public static final BitSet FOLLOW_IN_in_def_in_expression754 = new BitSet(new long[]{0xF40480008E000000L,0x000000100800860CL});
+    public static final BitSet FOLLOW_COLON_in_def_in_expression756 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_expression_in_def_in_expression761 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_definition_signature_in_definition_inside_expression793 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_COLON_in_definition_inside_expression795 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_definition_signature_in_definition_inside_expression793 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_COLON_in_definition_inside_expression795 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_expression_in_definition_inside_expression801 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_definition_inside_expression824 = new BitSet(new long[]{0x0000000000000000L,0x0000000002000000L});
-    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_expression826 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_VAR_ID_in_definition_inside_expression824 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_expression826 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_expression_in_definition_inside_expression831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_START_in_def_in_tag864 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_DEF_in_def_in_tag866 = new BitSet(new long[]{0x0100000000000000L,0x0000001000000000L});
+    public static final BitSet FOLLOW_TAG_START_in_def_in_tag864 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_DEF_in_def_in_tag866 = new BitSet(new long[]{0x0080000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_definition_inside_tag_in_def_in_tag870 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_TAG_START_in_def_in_tag877 = new BitSet(new long[]{0x0002000000000000L});
-    public static final BitSet FOLLOW_AND_in_def_in_tag879 = new BitSet(new long[]{0x0100000000000000L,0x0000001000000000L});
+    public static final BitSet FOLLOW_TAG_START_in_def_in_tag877 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_AND_in_def_in_tag879 = new BitSet(new long[]{0x0080000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_definition_inside_tag_in_def_in_tag883 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_TAG_START_in_def_in_tag891 = new BitSet(new long[]{0x0004000000000000L});
+    public static final BitSet FOLLOW_TAG_START_in_def_in_tag891 = new BitSet(new long[]{0x0002000000000000L});
     public static final BitSet FOLLOW_IN_in_def_in_tag893 = new BitSet(new long[]{0x0000000810000000L});
     public static final BitSet FOLLOW_tag_content_in_def_in_tag897 = new BitSet(new long[]{0x0000000040000000L});
     public static final BitSet FOLLOW_TAG_END_in_def_in_tag903 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_definition_signature_in_definition_inside_tag935 = new BitSet(new long[]{0x0000000810000000L});
     public static final BitSet FOLLOW_tag_content_in_definition_inside_tag939 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_definition_inside_tag963 = new BitSet(new long[]{0x0000000000000000L,0x0000000002000000L});
-    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_tag965 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_VAR_ID_in_definition_inside_tag963 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_tag965 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_expression_in_definition_inside_tag967 = new BitSet(new long[]{0x0000000010000002L});
     public static final BitSet FOLLOW_CONTENT_in_definition_inside_tag970 = new BitSet(new long[]{0x0000000002000002L});
     public static final BitSet FOLLOW_STRING_LITERAL_in_definition_inside_tag972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LAMBDA_in_lambda_expression1011 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000410L});
-    public static final BitSet FOLLOW_definition_argument_in_lambda_expression1013 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000410L});
-    public static final BitSet FOLLOW_COLON_in_lambda_expression1016 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_LAMBDA_in_lambda_expression1011 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000208L});
+    public static final BitSet FOLLOW_definition_argument_in_lambda_expression1013 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000208L});
+    public static final BitSet FOLLOW_COLON_in_lambda_expression1016 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_expression_in_lambda_expression1018 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_definition_argument_in_lambda_expression1046 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000408L});
-    public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression1049 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_definition_argument_in_lambda_expression1046 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000204L});
+    public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression1049 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_expression_in_lambda_expression1051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LAMBDA_in_lambda_expression_no_context1084 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000400L});
-    public static final BitSet FOLLOW_definition_argument_in_lambda_expression_no_context1086 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_COLON_in_lambda_expression_no_context1088 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_LAMBDA_in_lambda_expression_no_context1084 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000200L});
+    public static final BitSet FOLLOW_definition_argument_in_lambda_expression_no_context1086 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_COLON_in_lambda_expression_no_context1088 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_atom_expression_in_lambda_expression_no_context1090 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_definition_argument_in_lambda_expression_no_context1117 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000408L});
-    public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression_no_context1120 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_definition_argument_in_lambda_expression_no_context1117 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000204L});
+    public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression_no_context1120 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_atom_expression_in_lambda_expression_no_context1122 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CLASS_ID_in_type1158 = new BitSet(new long[]{0x0000000000000002L,0x0000000000020000L});
+    public static final BitSet FOLLOW_CLASS_ID_in_type1158 = new BitSet(new long[]{0x0000000000000002L,0x0000000000010000L});
     public static final BitSet FOLLOW_OP_MULTIPLY_in_type1160 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_CLASS_ID_in_single_type1190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_control_expression_in_concatence_expression1219 = new BitSet(new long[]{0x0000000000000002L,0x0000000200000000L});
-    public static final BitSet FOLLOW_OP_CONCAT_in_concatence_expression1233 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_control_expression_in_concatence_expression1237 = new BitSet(new long[]{0x0000000000000002L,0x0000000200000000L});
+    public static final BitSet FOLLOW_control_expression_in_concatence_expression1219 = new BitSet(new long[]{0x0000000000000002L,0x0000000080000000L});
+    public static final BitSet FOLLOW_OP_CONCAT_in_concatence_expression1233 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_control_expression_in_concatence_expression1237 = new BitSet(new long[]{0x0000000000000002L,0x0000000080000000L});
     public static final BitSet FOLLOW_if_expression_in_control_expression1267 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_map_expression_in_control_expression1273 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_boolean_expression_in_control_expression1279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_if_expression1292 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_boolean_expression_in_if_expression1296 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_COLON_in_if_expression1298 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_control_expression_in_if_expression1306 = new BitSet(new long[]{0x0020000000000000L});
-    public static final BitSet FOLLOW_ELSE_in_if_expression1312 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C19L});
-    public static final BitSet FOLLOW_COLON_in_if_expression1314 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_IF_in_if_expression1292 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_boolean_expression_in_if_expression1296 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_COLON_in_if_expression1298 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_control_expression_in_if_expression1306 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_ELSE_in_if_expression1312 = new BitSet(new long[]{0xF40480008E000000L,0x000000100800860CL});
+    public static final BitSet FOLLOW_COLON_in_if_expression1314 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_control_expression_in_if_expression1323 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_START_in_if_tag1357 = new BitSet(new long[]{0x0008000000000000L});
+    public static final BitSet FOLLOW_TAG_START_in_if_tag1357 = new BitSet(new long[]{0x0004000000000000L});
     public static final BitSet FOLLOW_if_subtag_in_if_tag1363 = new BitSet(new long[]{0x0000000040000000L});
     public static final BitSet FOLLOW_TAG_END_in_if_tag1369 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_if_subtag1385 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_IF_in_if_subtag1385 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_boolean_expression_in_if_subtag1389 = new BitSet(new long[]{0x0000000810000000L});
     public static final BitSet FOLLOW_tag_content_in_if_subtag1397 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_TAG_START_in_if_subtag1407 = new BitSet(new long[]{0x0020000000000000L});
-    public static final BitSet FOLLOW_ELSE_in_if_subtag1409 = new BitSet(new long[]{0x0008000810000000L});
+    public static final BitSet FOLLOW_TAG_START_in_if_subtag1407 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_ELSE_in_if_subtag1409 = new BitSet(new long[]{0x0004000810000000L});
     public static final BitSet FOLLOW_tag_content_in_if_subtag1417 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_if_subtag_in_if_subtag1423 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MAP_in_map_expression1466 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_boolean_expression_in_map_expression1470 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_COLON_in_map_expression1472 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_MAP_in_map_expression1466 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_boolean_expression_in_map_expression1470 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_COLON_in_map_expression1472 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_control_expression_in_map_expression1480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_START_in_map_tag1511 = new BitSet(new long[]{0x0800000000000000L});
-    public static final BitSet FOLLOW_MAP_in_map_tag1513 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_TAG_START_in_map_tag1511 = new BitSet(new long[]{0x0400000000000000L});
+    public static final BitSet FOLLOW_MAP_in_map_tag1513 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_expression_in_map_tag1517 = new BitSet(new long[]{0x0000000810000000L});
     public static final BitSet FOLLOW_tag_content_in_map_tag1525 = new BitSet(new long[]{0x0000000040000000L});
     public static final BitSet FOLLOW_TAG_END_in_map_tag1531 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_boolean_binary_expression_in_boolean_expression1563 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression1576 = new BitSet(new long[]{0x0000000000000002L,0x000000001C000000L});
-    public static final BitSet FOLLOW_boolean_binary_operator_in_boolean_binary_expression1579 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression1582 = new BitSet(new long[]{0x0000000000000002L,0x000000001C000000L});
-    public static final BitSet FOLLOW_boolean_unary_operator_in_boolean_unary_expression1598 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression1576 = new BitSet(new long[]{0x0000000000000002L,0x0000080006000000L});
+    public static final BitSet FOLLOW_boolean_binary_operator_in_boolean_binary_expression1579 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression1582 = new BitSet(new long[]{0x0000000000000002L,0x0000080006000000L});
+    public static final BitSet FOLLOW_boolean_unary_operator_in_boolean_unary_expression1598 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1601 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1607 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_AND_in_boolean_binary_operator1622 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_OR_in_boolean_binary_operator1632 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_XOR_in_boolean_binary_operator1642 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_NOT_in_boolean_unary_operator1660 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression1677 = new BitSet(new long[]{0x0000000000000002L,0x0000000001F80000L});
-    public static final BitSet FOLLOW_boolean_comparsion_operator_in_boolean_comparsion_expression1680 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression1683 = new BitSet(new long[]{0x0000000000000002L,0x0000000001F80000L});
+    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression1677 = new BitSet(new long[]{0x0000000000000002L,0x0000000000FC0000L});
+    public static final BitSet FOLLOW_boolean_comparsion_operator_in_boolean_comparsion_expression1680 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression1683 = new BitSet(new long[]{0x0000000000000002L,0x0000000000FC0000L});
     public static final BitSet FOLLOW_OP_EQUAL_in_boolean_comparsion_operator1699 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_NOT_EQUAL_in_boolean_comparsion_operator1709 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_LE_in_boolean_comparsion_operator1719 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_LEQ_in_boolean_comparsion_operator1729 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_GE_in_boolean_comparsion_operator1739 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_GEQ_in_boolean_comparsion_operator1749 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression1769 = new BitSet(new long[]{0x0000000000000002L,0x0000000000018000L});
-    public static final BitSet FOLLOW_OP_PLUS_in_additive_expression1785 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_OP_MINUS_in_additive_expression1799 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression1819 = new BitSet(new long[]{0x0000000000000002L,0x0000000000018000L});
-    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression1839 = new BitSet(new long[]{0x0000000000000002L,0x0000000000060200L});
-    public static final BitSet FOLLOW_OP_MULTIPLY_in_multiplicative_expression1849 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_SLASH_in_multiplicative_expression1863 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_OP_MODULO_in_multiplicative_expression1877 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression1897 = new BitSet(new long[]{0x0000000000000002L,0x0000000000060200L});
-    public static final BitSet FOLLOW_OP_MINUS_in_negative_expression1916 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression1769 = new BitSet(new long[]{0x0000000000000002L,0x000000000000C000L});
+    public static final BitSet FOLLOW_OP_PLUS_in_additive_expression1785 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_OP_MINUS_in_additive_expression1799 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression1819 = new BitSet(new long[]{0x0000000000000002L,0x000000000000C000L});
+    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression1839 = new BitSet(new long[]{0x0000000000000002L,0x0000000000030100L});
+    public static final BitSet FOLLOW_OP_MULTIPLY_in_multiplicative_expression1849 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_SLASH_in_multiplicative_expression1863 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_OP_MODULO_in_multiplicative_expression1877 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression1897 = new BitSet(new long[]{0x0000000000000002L,0x0000000000030100L});
+    public static final BitSet FOLLOW_OP_MINUS_in_negative_expression1916 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_context_expression_in_negative_expression1918 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_context_expression_in_negative_expression1936 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_functional_expression_in_context_expression1953 = new BitSet(new long[]{0x0000000000000002L,0x00000000C0000000L});
-    public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression1967 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_atom_expression_in_context_expression1969 = new BitSet(new long[]{0xE80900008E000000L,0x00000010E0010C09L});
-    public static final BitSet FOLLOW_function_arguments_in_context_expression1973 = new BitSet(new long[]{0x0000000000000002L,0x00000000C0000000L});
-    public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression2013 = new BitSet(new long[]{0x4000000000000000L,0x0000001000000408L});
-    public static final BitSet FOLLOW_lambda_expression_no_context_in_context_expression2015 = new BitSet(new long[]{0x0000000000000002L,0x00000000C0000000L});
+    public static final BitSet FOLLOW_functional_expression_in_context_expression1953 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
+    public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression1967 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_atom_expression_in_context_expression1969 = new BitSet(new long[]{0xF40480008E000000L,0x0000001038008604L});
+    public static final BitSet FOLLOW_function_arguments_in_context_expression1973 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
+    public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression2013 = new BitSet(new long[]{0x2000000000000000L,0x0000001000000204L});
+    public static final BitSet FOLLOW_lambda_expression_no_context_in_context_expression2015 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
     public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression2051 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_single_type_in_context_expression2053 = new BitSet(new long[]{0x0000000000000002L,0x00000000C0000000L});
-    public static final BitSet FOLLOW_OP_EXPRESSION_CONTEXT_in_context_expression2081 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_functional_expression_in_context_expression2085 = new BitSet(new long[]{0x0000000000000002L,0x00000000C0000000L});
+    public static final BitSet FOLLOW_single_type_in_context_expression2053 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
+    public static final BitSet FOLLOW_OP_EXPRESSION_CONTEXT_in_context_expression2081 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_functional_expression_in_context_expression2085 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
     public static final BitSet FOLLOW_call_expression_in_functional_expression2127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_atom_expression_in_call_expression2140 = new BitSet(new long[]{0xE80900008E000002L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_function_argument_in_call_expression2148 = new BitSet(new long[]{0xE80900008E000002L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_atom_expression_in_call_expression2140 = new BitSet(new long[]{0xF40480008E000002L,0x0000001008008604L});
+    public static final BitSet FOLLOW_function_argument_in_call_expression2148 = new BitSet(new long[]{0xF40480008E000002L,0x0000001008008604L});
     public static final BitSet FOLLOW_TAG_START_in_call_tag2208 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_namespace_id_in_call_tag2212 = new BitSet(new long[]{0xE8090008DE000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_namespace_id_in_call_tag2212 = new BitSet(new long[]{0xF4048008DE000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_function_arguments_in_call_tag2214 = new BitSet(new long[]{0x0000000850000000L});
     public static final BitSet FOLLOW_tag_content_in_call_tag2223 = new BitSet(new long[]{0x0000000040000000L});
     public static final BitSet FOLLOW_TAG_END_in_call_tag2231 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_function_argument_in_function_arguments2276 = new BitSet(new long[]{0xE80900008E000002L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_VAR_ID_in_function_argument2292 = new BitSet(new long[]{0x0000000000000000L,0x0000000002000000L});
-    public static final BitSet FOLLOW_OP_ASSIGN_in_function_argument2294 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_function_argument_in_function_arguments2276 = new BitSet(new long[]{0xF40480008E000002L,0x0000001008008604L});
+    public static final BitSet FOLLOW_VAR_ID_in_function_argument2292 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_OP_ASSIGN_in_function_argument2294 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_atom_expression_in_function_argument2298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_atom_with_properties_in_atom_expression2333 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000100L});
-    public static final BitSet FOLLOW_COMA_in_atom_expression2346 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_atom_with_properties_in_atom_expression2348 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000100L});
-    public static final BitSet FOLLOW_atom_with_selectors_in_atom_with_properties2380 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000040L});
-    public static final BitSet FOLLOW_property_selector_in_atom_with_properties2395 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000040L});
-    public static final BitSet FOLLOW_atom_in_atom_with_selectors2434 = new BitSet(new long[]{0x0200000000000002L,0x0000000000002000L});
+    public static final BitSet FOLLOW_atom_with_properties_in_atom_expression2333 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000080L});
+    public static final BitSet FOLLOW_COMA_in_atom_expression2346 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_atom_with_properties_in_atom_expression2348 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000080L});
+    public static final BitSet FOLLOW_atom_with_selectors_in_atom_with_properties2380 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
+    public static final BitSet FOLLOW_property_selector_in_atom_with_properties2395 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
+    public static final BitSet FOLLOW_atom_in_atom_with_selectors2434 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
     public static final BitSet FOLLOW_sequence_selectors_in_atom_with_selectors2440 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_DOT_in_property_selector2482 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_VAR_ID_in_property_selector2485 = new BitSet(new long[]{0x0200000000000002L,0x0000000000002000L});
+    public static final BitSet FOLLOW_VAR_ID_in_property_selector2485 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
     public static final BitSet FOLLOW_sequence_selectors_in_property_selector2487 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_selector_in_sequence_selectors2501 = new BitSet(new long[]{0x0200000000000002L,0x0000000000002000L});
-    public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors2503 = new BitSet(new long[]{0x0200000000000002L,0x0000000000002000L});
+    public static final BitSet FOLLOW_type_selector_in_sequence_selectors2501 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors2503 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
     public static final BitSet FOLLOW_alias_in_sequence_selectors2506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors2512 = new BitSet(new long[]{0x0200000000000002L,0x0000000000002000L});
+    public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors2512 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
     public static final BitSet FOLLOW_alias_in_sequence_selectors2514 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_alias_in_sequence_selectors2520 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_type_selector2533 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_type_in_type_selector2535 = new BitSet(new long[]{0x0000000000000000L,0x0000000000004000L});
+    public static final BitSet FOLLOW_type_in_type_selector2535 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
     public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_type_selector2537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_sequence_selector2562 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_boolean_expression_in_sequence_selector2564 = new BitSet(new long[]{0x0000000000000000L,0x0000000000004000L});
+    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_sequence_selector2562 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_boolean_expression_in_sequence_selector2564 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
     public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_sequence_selector2566 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_AS_in_alias2590 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_VAR_ID_in_alias2592 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_DATA_START_in_data_expression2614 = new BitSet(new long[]{0x0000000322000000L});
     public static final BitSet FOLLOW_data_body_atom_in_data_expression2616 = new BitSet(new long[]{0x0000000322000000L});
     public static final BitSet FOLLOW_DATA_END_in_data_expression2619 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_selectable_atom_in_atom2647 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000080L});
-    public static final BitSet FOLLOW_DOUBLE_DOT_in_atom2652 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
+    public static final BitSet FOLLOW_selectable_atom_in_atom2647 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000040L});
+    public static final BitSet FOLLOW_DOUBLE_DOT_in_atom2652 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
     public static final BitSet FOLLOW_selectable_atom_in_atom2658 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_object_atom_in_selectable_atom2672 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_data_expression_in_selectable_atom2678 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_namespace_id_in_selectable_atom2684 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_PAREN_in_selectable_atom2690 = new BitSet(new long[]{0xE80900008E000000L,0x0000001020010C09L});
-    public static final BitSet FOLLOW_expression_in_selectable_atom2693 = new BitSet(new long[]{0x0000000000000000L,0x0000000000001000L});
+    public static final BitSet FOLLOW_LEFT_PAREN_in_selectable_atom2690 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_expression_in_selectable_atom2693 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
     public static final BitSet FOLLOW_RIGHT_PAREN_in_selectable_atom2695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_namespace_id2713 = new BitSet(new long[]{0x0000000000000000L,0x0000000100000000L});
+    public static final BitSet FOLLOW_VAR_ID_in_namespace_id2713 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
     public static final BitSet FOLLOW_OP_VIEW_in_namespace_id2715 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_VAR_ID_in_namespace_id2721 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_number_atom_in_object_atom2753 = new BitSet(new long[]{0x0000000000000002L});

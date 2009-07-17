@@ -28,12 +28,26 @@ public class FunctionType extends CommonType implements IType {
 		return fArguments.get(i);
 	}
 
-	public void putArgument(String name, IType type, boolean optional) {
+	public void putArgument(String name, IType type, boolean optional)
+			throws TypeException {
+		if (fArguments.isEmpty() && optional)
+			throw new TypeException("first argument cannot be optional");
+		if (!optional && existsOptionalArgument())
+			throw new TypeException(
+					"optional arguments must follow obligatory ones");
+
 		Argument a = new Argument();
 		a.fName = name;
 		a.fType = type;
 		a.fOptional = optional;
 		fArguments.add(a);
+	}
+
+	private boolean existsOptionalArgument() {
+		for (Argument a : fArguments)
+			if (a.isOptional())
+				return true;
+		return false;
 	}
 
 	public int getArgumentPosition(String targetName) {
@@ -56,8 +70,8 @@ public class FunctionType extends CommonType implements IType {
 		public IType getType() {
 			return fType;
 		}
-		
-		public boolean isOptional () {
+
+		public boolean isOptional() {
 			return fOptional;
 		}
 	}
