@@ -25,6 +25,7 @@ public interface IType {
 	boolean isNull();
 
 	boolean isFunction();
+	boolean isGeneric();
 	
 	Class<?> getAssociatedClass ();
 	
@@ -32,4 +33,7 @@ public interface IType {
 
 	String singleToString();
 	String toDiagnosticString();
+	String toEssentialString();
+
+	IType getEffectiveLowerBound();
 }

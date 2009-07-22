@@ -106,7 +106,6 @@ public class BooleanExpression extends CommonNode implements IExpression,
 		switch (getOperator()) {
 		case OP_AND:
 		case OP_OR:
-		case OP_XOR:
 			return TYPE_BINARY_OP;
 
 		case OP_NOT:
@@ -177,7 +176,6 @@ public class BooleanExpression extends CommonNode implements IExpression,
 	// boolean operators
 	public final static int OP_AND = OmttParser.OP_AND;
 	public final static int OP_OR = OmttParser.OP_OR;
-	public final static int OP_XOR = OmttParser.OP_XOR;
 	public final static int OP_NOT = OmttParser.OP_NOT;
 
 	// compare operators

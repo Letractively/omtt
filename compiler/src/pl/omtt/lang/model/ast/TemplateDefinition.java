@@ -12,11 +12,12 @@ import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
-import pl.omtt.lang.model.types.FlexibleType;
 import pl.omtt.lang.model.types.FunctionType;
+import pl.omtt.lang.model.types.GenericType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.StringDataType;
 import pl.omtt.lang.model.types.TypeException;
+import pl.omtt.lang.model.types.TypePointer;
 import pl.omtt.lang.model.types.TypeUnifier;
 
 public class TemplateDefinition extends CommonNode implements
@@ -74,7 +75,7 @@ public class TemplateDefinition extends CommonNode implements
 		} else if (getBodyNode() instanceof Data) {
 			returnType = new StringDataType();
 		} else {
-			returnType = new FlexibleType();
+			returnType = new TypePointer(new GenericType());
 			if (fForceSequenceReturn)
 				returnType.setSequence();
 		}
@@ -140,13 +141,18 @@ public class TemplateDefinition extends CommonNode implements
 			throw new ForceSymbolTableRecalculatingException();
 		}
 
-		if (returnType.isFrozen())
-			TypeUnifier.unifyLe(returnType, bodyType);
-		else
-			TypeUnifier.unifyEq(returnType, bodyType);
-
-		if (getParent() instanceof Program)
-			fType.freeze();
+		try {
+			if (returnType.isFrozen())
+				TypeUnifier.unifyLe(returnType, bodyType);
+			else
+				TypeUnifier.unifyEq(returnType, bodyType);
+		} catch (TypeException e) {
+			e.setCauseObject(getBodyNode());
+			throw e;
+		} finally {
+			if (getParent() instanceof Program)
+				fType.freeze();
+		}
 	}
 
 	public void accept(IVisitor visitor) {

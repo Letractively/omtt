@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-07-17 03:21:25
+// $ANTLR 3.1.2 /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-07-18 03:38:42
 
 package pl.omtt.lang.grammar;
 
@@ -15,7 +15,7 @@ import org.antlr.runtime.tree.*;
 
 public class OmttParser extends AbstractOmttParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "CLASS", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "AND", "IN", "IF", "THEN", "ELSE", "MATCH", "CASE", "DEFAULT", "AS", "IS", "MAP", "TO", "NULL", "LAMBDA", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FUNCTION_DEFINITION", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMA", "SLASH", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_NOT", "OP_CONTEXT", "OP_EXPRESSION_CONTEXT", "OP_VIEW", "OP_CONCAT", "OP_GENERAL", "OP_DATA", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME", "OP_XOR"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "CLASS", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "AND", "IN", "IF", "THEN", "ELSE", "MATCH", "CASE", "DEFAULT", "AS", "IS", "MAP", "TO", "NULL", "LAMBDA", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FUNCTION_DEFINITION", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMA", "SLASH", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_NOT", "OP_CONTEXT", "OP_EXPRESSION_CONTEXT", "OP_VIEW", "OP_CONCAT", "OP_GENERAL", "OP_DATA", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME"
     };
     public static final int CAST=23;
     public static final int OP_LE=85;
@@ -117,7 +117,6 @@ public class OmttParser extends AbstractOmttParser {
     public static final int BLOCK=20;
     public static final int MAP=58;
     public static final int PROPERTY_SELECT=13;
-    public static final int OP_XOR=107;
     public static final int OP_CONTEXT=92;
     public static final int ACTION_ON_NEWLINE=42;
     public static final int PROGRAM=4;
@@ -210,7 +209,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definitions, header
+            // elements: header, definitions
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -401,7 +400,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: module_id, MODULE
+            // elements: MODULE, module_id
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -898,7 +897,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: module_id, USE
+            // elements: USE, module_id
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1278,7 +1277,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definition_signature, content, DEF
+            // elements: DEF, content, definition_signature
             // token labels: 
             // rule labels: content, retval
             // token list labels: 
@@ -1493,7 +1492,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: DEFAULT, definition_argument, ret_type, it, VAR_ID
+            // elements: ret_type, it, definition_argument, DEFAULT, VAR_ID
             // token labels: 
             // rule labels: retval, it, ret_type
             // token list labels: 
@@ -1674,7 +1673,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: TILDE, OP_MULTIPLY, type
+            // elements: OP_MULTIPLY, TILDE, type
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1798,7 +1797,7 @@ public class OmttParser extends AbstractOmttParser {
                         if ( (LA16_0==TAG_START) ) {
                             int LA16_2 = input.LA(2);
 
-                            if ( (LA16_2==DEF||LA16_2==IF||LA16_2==MAP||LA16_2==VAR_ID) ) {
+                            if ( (LA16_2==DEF||LA16_2==IF||LA16_2==MAP||LA16_2==OP_GENERAL||LA16_2==VAR_ID) ) {
                                 alt16=1;
                             }
 
@@ -1831,7 +1830,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: CONTENT, data_body_atom
+                    // elements: data_body_atom, CONTENT
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2124,14 +2123,15 @@ public class OmttParser extends AbstractOmttParser {
                     alt19=4;
                     }
                     break;
-                case VAR_ID:
-                    {
-                    alt19=3;
-                    }
-                    break;
                 case IF:
                     {
                     alt19=2;
+                    }
+                    break;
+                case OP_GENERAL:
+                case VAR_ID:
+                    {
+                    alt19=3;
                     }
                     break;
                 default:
@@ -2566,7 +2566,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: definition_signature, expression
+                    // elements: expression, definition_signature
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2919,7 +2919,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: content, definition_signature
+                    // elements: definition_signature, content
                     // token labels: 
                     // rule labels: content, retval
                     // token list labels: 
@@ -3006,7 +3006,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: expression, VAR_ID
+                    // elements: VAR_ID, expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3060,7 +3060,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "lambda_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:156:1: lambda_expression : ( LAMBDA ( definition_argument )* COLON expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | ( definition_argument )* OP_FUNCTION_DEFINITION expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:156:1: lambda_expression : ( LAMBDA ( definition_argument )* COLON expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | ( definition_argument )* OP_FUNCTION_DEFINITION expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | lambda_match_expression );
     public final OmttParser.lambda_expression_return lambda_expression() throws RecognitionException {
         OmttParser.lambda_expression_return retval = new OmttParser.lambda_expression_return();
         retval.start = input.LT(1);
@@ -3078,6 +3078,8 @@ public class OmttParser extends AbstractOmttParser {
 
         OmttParser.expression_return expression90 = null;
 
+        OmttParser.lambda_match_expression_return lambda_match_expression91 = null;
+
 
         Object LAMBDA84_tree=null;
         Object COLON86_tree=null;
@@ -3088,22 +3090,33 @@ public class OmttParser extends AbstractOmttParser {
         RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
         RewriteRuleSubtreeStream stream_definition_argument=new RewriteRuleSubtreeStream(adaptor,"rule definition_argument");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:157:3: ( LAMBDA ( definition_argument )* COLON expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | ( definition_argument )* OP_FUNCTION_DEFINITION expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) )
-            int alt30=2;
-            int LA30_0 = input.LA(1);
-
-            if ( (LA30_0==LAMBDA) ) {
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:157:3: ( LAMBDA ( definition_argument )* COLON expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | ( definition_argument )* OP_FUNCTION_DEFINITION expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | lambda_match_expression )
+            int alt30=3;
+            switch ( input.LA(1) ) {
+            case LAMBDA:
+                {
                 alt30=1;
-            }
-            else if ( (LA30_0==OP_FUNCTION_DEFINITION||LA30_0==TILDE||LA30_0==VAR_ID) ) {
+                }
+                break;
+            case OP_FUNCTION_DEFINITION:
+            case TILDE:
+            case VAR_ID:
+                {
                 alt30=2;
-            }
-            else {
+                }
+                break;
+            case CLASS_ID:
+                {
+                alt30=3;
+                }
+                break;
+            default:
                 NoViableAltException nvae =
                     new NoViableAltException("", 30, 0, input);
 
                 throw nvae;
             }
+
             switch (alt30) {
                 case 1 :
                     // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:157:5: LAMBDA ( definition_argument )* COLON expression
@@ -3153,7 +3166,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: LAMBDA, definition_argument, expression
+                    // elements: definition_argument, LAMBDA, expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3239,7 +3252,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: definition_argument, expression
+                    // elements: expression, definition_argument
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3280,6 +3293,20 @@ public class OmttParser extends AbstractOmttParser {
                     retval.tree = root_0;
                     }
                     break;
+                case 3 :
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:161:5: lambda_match_expression
+                    {
+                    root_0 = (Object)adaptor.nil();
+
+                    pushFollow(FOLLOW_lambda_match_expression_in_lambda_expression1078);
+                    lambda_match_expression91=lambda_match_expression();
+
+                    state._fsp--;
+
+                    adaptor.addChild(root_0, lambda_match_expression91.getTree());
+
+                    }
+                    break;
 
             }
             retval.stop = input.LT(-1);
@@ -3300,82 +3327,234 @@ public class OmttParser extends AbstractOmttParser {
     }
     // $ANTLR end "lambda_expression"
 
+    public static class lambda_match_expression_return extends ParserRuleReturnScope {
+        Object tree;
+        public Object getTree() { return tree; }
+    };
+
+    // $ANTLR start "lambda_match_expression"
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:163:10: fragment lambda_match_expression : single_lambda_match ( SEMICOLON single_lambda_match )* ;
+    public final OmttParser.lambda_match_expression_return lambda_match_expression() throws RecognitionException {
+        OmttParser.lambda_match_expression_return retval = new OmttParser.lambda_match_expression_return();
+        retval.start = input.LT(1);
+
+        Object root_0 = null;
+
+        Token SEMICOLON93=null;
+        OmttParser.single_lambda_match_return single_lambda_match92 = null;
+
+        OmttParser.single_lambda_match_return single_lambda_match94 = null;
+
+
+        Object SEMICOLON93_tree=null;
+
+        try {
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:164:2: ( single_lambda_match ( SEMICOLON single_lambda_match )* )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:164:4: single_lambda_match ( SEMICOLON single_lambda_match )*
+            {
+            root_0 = (Object)adaptor.nil();
+
+            pushFollow(FOLLOW_single_lambda_match_in_lambda_match_expression1091);
+            single_lambda_match92=single_lambda_match();
+
+            state._fsp--;
+
+            adaptor.addChild(root_0, single_lambda_match92.getTree());
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:164:24: ( SEMICOLON single_lambda_match )*
+            loop31:
+            do {
+                int alt31=2;
+                int LA31_0 = input.LA(1);
+
+                if ( (LA31_0==SEMICOLON) ) {
+                    alt31=1;
+                }
+
+
+                switch (alt31) {
+            	case 1 :
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:164:25: SEMICOLON single_lambda_match
+            	    {
+            	    SEMICOLON93=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_lambda_match_expression1094); 
+            	    SEMICOLON93_tree = (Object)adaptor.create(SEMICOLON93);
+            	    adaptor.addChild(root_0, SEMICOLON93_tree);
+
+            	    pushFollow(FOLLOW_single_lambda_match_in_lambda_match_expression1096);
+            	    single_lambda_match94=single_lambda_match();
+
+            	    state._fsp--;
+
+            	    adaptor.addChild(root_0, single_lambda_match94.getTree());
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop31;
+                }
+            } while (true);
+
+
+            }
+
+            retval.stop = input.LT(-1);
+
+            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+        finally {
+        }
+        return retval;
+    }
+    // $ANTLR end "lambda_match_expression"
+
+    public static class single_lambda_match_return extends ParserRuleReturnScope {
+        Object tree;
+        public Object getTree() { return tree; }
+    };
+
+    // $ANTLR start "single_lambda_match"
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:166:10: fragment single_lambda_match : type OP_FUNCTION_DEFINITION concatence_expression ;
+    public final OmttParser.single_lambda_match_return single_lambda_match() throws RecognitionException {
+        OmttParser.single_lambda_match_return retval = new OmttParser.single_lambda_match_return();
+        retval.start = input.LT(1);
+
+        Object root_0 = null;
+
+        Token OP_FUNCTION_DEFINITION96=null;
+        OmttParser.type_return type95 = null;
+
+        OmttParser.concatence_expression_return concatence_expression97 = null;
+
+
+        Object OP_FUNCTION_DEFINITION96_tree=null;
+
+        try {
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:167:2: ( type OP_FUNCTION_DEFINITION concatence_expression )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:167:4: type OP_FUNCTION_DEFINITION concatence_expression
+            {
+            root_0 = (Object)adaptor.nil();
+
+            pushFollow(FOLLOW_type_in_single_lambda_match1110);
+            type95=type();
+
+            state._fsp--;
+
+            adaptor.addChild(root_0, type95.getTree());
+            OP_FUNCTION_DEFINITION96=(Token)match(input,OP_FUNCTION_DEFINITION,FOLLOW_OP_FUNCTION_DEFINITION_in_single_lambda_match1112); 
+            OP_FUNCTION_DEFINITION96_tree = (Object)adaptor.create(OP_FUNCTION_DEFINITION96);
+            adaptor.addChild(root_0, OP_FUNCTION_DEFINITION96_tree);
+
+            pushFollow(FOLLOW_concatence_expression_in_single_lambda_match1114);
+            concatence_expression97=concatence_expression();
+
+            state._fsp--;
+
+            adaptor.addChild(root_0, concatence_expression97.getTree());
+
+            }
+
+            retval.stop = input.LT(-1);
+
+            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+        finally {
+        }
+        return retval;
+    }
+    // $ANTLR end "single_lambda_match"
+
     public static class lambda_expression_no_context_return extends ParserRuleReturnScope {
         Object tree;
         public Object getTree() { return tree; }
     };
 
     // $ANTLR start "lambda_expression_no_context"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:162:1: lambda_expression_no_context : ( LAMBDA definition_argument COLON atom_expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression ) | ( definition_argument )* OP_FUNCTION_DEFINITION atom_expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression ) );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:169:1: lambda_expression_no_context : ( LAMBDA definition_argument COLON atom_expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression ) | ( definition_argument )* OP_FUNCTION_DEFINITION atom_expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression ) );
     public final OmttParser.lambda_expression_no_context_return lambda_expression_no_context() throws RecognitionException {
         OmttParser.lambda_expression_no_context_return retval = new OmttParser.lambda_expression_no_context_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token LAMBDA91=null;
-        Token COLON93=null;
-        Token OP_FUNCTION_DEFINITION96=null;
-        OmttParser.definition_argument_return definition_argument92 = null;
+        Token LAMBDA98=null;
+        Token COLON100=null;
+        Token OP_FUNCTION_DEFINITION103=null;
+        OmttParser.definition_argument_return definition_argument99 = null;
 
-        OmttParser.atom_expression_return atom_expression94 = null;
+        OmttParser.atom_expression_return atom_expression101 = null;
 
-        OmttParser.definition_argument_return definition_argument95 = null;
+        OmttParser.definition_argument_return definition_argument102 = null;
 
-        OmttParser.atom_expression_return atom_expression97 = null;
+        OmttParser.atom_expression_return atom_expression104 = null;
 
 
-        Object LAMBDA91_tree=null;
-        Object COLON93_tree=null;
-        Object OP_FUNCTION_DEFINITION96_tree=null;
+        Object LAMBDA98_tree=null;
+        Object COLON100_tree=null;
+        Object OP_FUNCTION_DEFINITION103_tree=null;
         RewriteRuleTokenStream stream_COLON=new RewriteRuleTokenStream(adaptor,"token COLON");
         RewriteRuleTokenStream stream_LAMBDA=new RewriteRuleTokenStream(adaptor,"token LAMBDA");
         RewriteRuleTokenStream stream_OP_FUNCTION_DEFINITION=new RewriteRuleTokenStream(adaptor,"token OP_FUNCTION_DEFINITION");
         RewriteRuleSubtreeStream stream_atom_expression=new RewriteRuleSubtreeStream(adaptor,"rule atom_expression");
         RewriteRuleSubtreeStream stream_definition_argument=new RewriteRuleSubtreeStream(adaptor,"rule definition_argument");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:163:3: ( LAMBDA definition_argument COLON atom_expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression ) | ( definition_argument )* OP_FUNCTION_DEFINITION atom_expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression ) )
-            int alt32=2;
-            int LA32_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:170:3: ( LAMBDA definition_argument COLON atom_expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression ) | ( definition_argument )* OP_FUNCTION_DEFINITION atom_expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression ) )
+            int alt33=2;
+            int LA33_0 = input.LA(1);
 
-            if ( (LA32_0==LAMBDA) ) {
-                alt32=1;
+            if ( (LA33_0==LAMBDA) ) {
+                alt33=1;
             }
-            else if ( (LA32_0==OP_FUNCTION_DEFINITION||LA32_0==TILDE||LA32_0==VAR_ID) ) {
-                alt32=2;
+            else if ( (LA33_0==OP_FUNCTION_DEFINITION||LA33_0==TILDE||LA33_0==VAR_ID) ) {
+                alt33=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 32, 0, input);
+                    new NoViableAltException("", 33, 0, input);
 
                 throw nvae;
             }
-            switch (alt32) {
+            switch (alt33) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:163:5: LAMBDA definition_argument COLON atom_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:170:5: LAMBDA definition_argument COLON atom_expression
                     {
-                    LAMBDA91=(Token)match(input,LAMBDA,FOLLOW_LAMBDA_in_lambda_expression_no_context1084);  
-                    stream_LAMBDA.add(LAMBDA91);
+                    LAMBDA98=(Token)match(input,LAMBDA,FOLLOW_LAMBDA_in_lambda_expression_no_context1125);  
+                    stream_LAMBDA.add(LAMBDA98);
 
-                    pushFollow(FOLLOW_definition_argument_in_lambda_expression_no_context1086);
-                    definition_argument92=definition_argument();
-
-                    state._fsp--;
-
-                    stream_definition_argument.add(definition_argument92.getTree());
-                    COLON93=(Token)match(input,COLON,FOLLOW_COLON_in_lambda_expression_no_context1088);  
-                    stream_COLON.add(COLON93);
-
-                    pushFollow(FOLLOW_atom_expression_in_lambda_expression_no_context1090);
-                    atom_expression94=atom_expression();
+                    pushFollow(FOLLOW_definition_argument_in_lambda_expression_no_context1127);
+                    definition_argument99=definition_argument();
 
                     state._fsp--;
 
-                    stream_atom_expression.add(atom_expression94.getTree());
+                    stream_definition_argument.add(definition_argument99.getTree());
+                    COLON100=(Token)match(input,COLON,FOLLOW_COLON_in_lambda_expression_no_context1129);  
+                    stream_COLON.add(COLON100);
+
+                    pushFollow(FOLLOW_atom_expression_in_lambda_expression_no_context1131);
+                    atom_expression101=atom_expression();
+
+                    state._fsp--;
+
+                    stream_atom_expression.add(atom_expression101.getTree());
 
 
                     // AST REWRITE
-                    // elements: LAMBDA, definition_argument, atom_expression
+                    // elements: definition_argument, LAMBDA, atom_expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3385,19 +3564,19 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 164:4: -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression )
+                    // 171:4: -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression )
                     {
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:164:7: ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:171:7: ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression )
                         {
                         Object root_1 = (Object)adaptor.nil();
                         root_1 = (Object)adaptor.becomeRoot(new LambdaExpression(stream_LAMBDA.nextToken()), root_1);
 
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:164:34: ^( ARGUMENTS ( definition_argument )* )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:171:34: ^( ARGUMENTS ( definition_argument )* )
                         {
                         Object root_2 = (Object)adaptor.nil();
                         root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(ARGUMENTS, "ARGUMENTS"), root_2);
 
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:164:46: ( definition_argument )*
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:171:46: ( definition_argument )*
                         while ( stream_definition_argument.hasNext() ) {
                             adaptor.addChild(root_2, stream_definition_argument.nextTree());
 
@@ -3417,51 +3596,51 @@ public class OmttParser extends AbstractOmttParser {
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:165:5: ( definition_argument )* OP_FUNCTION_DEFINITION atom_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:172:5: ( definition_argument )* OP_FUNCTION_DEFINITION atom_expression
                     {
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:165:5: ( definition_argument )*
-                    loop31:
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:172:5: ( definition_argument )*
+                    loop32:
                     do {
-                        int alt31=2;
-                        int LA31_0 = input.LA(1);
+                        int alt32=2;
+                        int LA32_0 = input.LA(1);
 
-                        if ( (LA31_0==TILDE||LA31_0==VAR_ID) ) {
-                            alt31=1;
+                        if ( (LA32_0==TILDE||LA32_0==VAR_ID) ) {
+                            alt32=1;
                         }
 
 
-                        switch (alt31) {
+                        switch (alt32) {
                     	case 1 :
-                    	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:165:5: definition_argument
+                    	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:172:5: definition_argument
                     	    {
-                    	    pushFollow(FOLLOW_definition_argument_in_lambda_expression_no_context1117);
-                    	    definition_argument95=definition_argument();
+                    	    pushFollow(FOLLOW_definition_argument_in_lambda_expression_no_context1158);
+                    	    definition_argument102=definition_argument();
 
                     	    state._fsp--;
 
-                    	    stream_definition_argument.add(definition_argument95.getTree());
+                    	    stream_definition_argument.add(definition_argument102.getTree());
 
                     	    }
                     	    break;
 
                     	default :
-                    	    break loop31;
+                    	    break loop32;
                         }
                     } while (true);
 
-                    OP_FUNCTION_DEFINITION96=(Token)match(input,OP_FUNCTION_DEFINITION,FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression_no_context1120);  
-                    stream_OP_FUNCTION_DEFINITION.add(OP_FUNCTION_DEFINITION96);
+                    OP_FUNCTION_DEFINITION103=(Token)match(input,OP_FUNCTION_DEFINITION,FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression_no_context1161);  
+                    stream_OP_FUNCTION_DEFINITION.add(OP_FUNCTION_DEFINITION103);
 
-                    pushFollow(FOLLOW_atom_expression_in_lambda_expression_no_context1122);
-                    atom_expression97=atom_expression();
+                    pushFollow(FOLLOW_atom_expression_in_lambda_expression_no_context1163);
+                    atom_expression104=atom_expression();
 
                     state._fsp--;
 
-                    stream_atom_expression.add(atom_expression97.getTree());
+                    stream_atom_expression.add(atom_expression104.getTree());
 
 
                     // AST REWRITE
-                    // elements: definition_argument, atom_expression
+                    // elements: atom_expression, definition_argument
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3471,19 +3650,19 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 166:4: -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression )
+                    // 173:4: -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression )
                     {
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:166:7: ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:173:7: ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) atom_expression )
                         {
                         Object root_1 = (Object)adaptor.nil();
                         root_1 = (Object)adaptor.becomeRoot(new LambdaExpression(LAMBDA), root_1);
 
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:166:34: ^( ARGUMENTS ( definition_argument )* )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:173:34: ^( ARGUMENTS ( definition_argument )* )
                         {
                         Object root_2 = (Object)adaptor.nil();
                         root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(ARGUMENTS, "ARGUMENTS"), root_2);
 
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:166:46: ( definition_argument )*
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:173:46: ( definition_argument )*
                         while ( stream_definition_argument.hasNext() ) {
                             adaptor.addChild(root_2, stream_definition_argument.nextTree());
 
@@ -3528,41 +3707,41 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "type"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:169:10: fragment type : CLASS_ID ( OP_MULTIPLY )? -> ^( CLASS_ID ( OP_MULTIPLY )? ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:176:10: fragment type : CLASS_ID ( OP_MULTIPLY )? -> ^( CLASS_ID ( OP_MULTIPLY )? ) ;
     public final OmttParser.type_return type() throws RecognitionException {
         OmttParser.type_return retval = new OmttParser.type_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token CLASS_ID98=null;
-        Token OP_MULTIPLY99=null;
+        Token CLASS_ID105=null;
+        Token OP_MULTIPLY106=null;
 
-        Object CLASS_ID98_tree=null;
-        Object OP_MULTIPLY99_tree=null;
+        Object CLASS_ID105_tree=null;
+        Object OP_MULTIPLY106_tree=null;
         RewriteRuleTokenStream stream_OP_MULTIPLY=new RewriteRuleTokenStream(adaptor,"token OP_MULTIPLY");
         RewriteRuleTokenStream stream_CLASS_ID=new RewriteRuleTokenStream(adaptor,"token CLASS_ID");
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:170:3: ( CLASS_ID ( OP_MULTIPLY )? -> ^( CLASS_ID ( OP_MULTIPLY )? ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:170:5: CLASS_ID ( OP_MULTIPLY )?
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:177:3: ( CLASS_ID ( OP_MULTIPLY )? -> ^( CLASS_ID ( OP_MULTIPLY )? ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:177:5: CLASS_ID ( OP_MULTIPLY )?
             {
-            CLASS_ID98=(Token)match(input,CLASS_ID,FOLLOW_CLASS_ID_in_type1158);  
-            stream_CLASS_ID.add(CLASS_ID98);
+            CLASS_ID105=(Token)match(input,CLASS_ID,FOLLOW_CLASS_ID_in_type1199);  
+            stream_CLASS_ID.add(CLASS_ID105);
 
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:170:14: ( OP_MULTIPLY )?
-            int alt33=2;
-            int LA33_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:177:14: ( OP_MULTIPLY )?
+            int alt34=2;
+            int LA34_0 = input.LA(1);
 
-            if ( (LA33_0==OP_MULTIPLY) ) {
-                alt33=1;
+            if ( (LA34_0==OP_MULTIPLY) ) {
+                alt34=1;
             }
-            switch (alt33) {
+            switch (alt34) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:170:14: OP_MULTIPLY
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:177:14: OP_MULTIPLY
                     {
-                    OP_MULTIPLY99=(Token)match(input,OP_MULTIPLY,FOLLOW_OP_MULTIPLY_in_type1160);  
-                    stream_OP_MULTIPLY.add(OP_MULTIPLY99);
+                    OP_MULTIPLY106=(Token)match(input,OP_MULTIPLY,FOLLOW_OP_MULTIPLY_in_type1201);  
+                    stream_OP_MULTIPLY.add(OP_MULTIPLY106);
 
 
                     }
@@ -3573,7 +3752,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: OP_MULTIPLY, CLASS_ID
+            // elements: CLASS_ID, OP_MULTIPLY
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -3583,14 +3762,14 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 171:4: -> ^( CLASS_ID ( OP_MULTIPLY )? )
+            // 178:4: -> ^( CLASS_ID ( OP_MULTIPLY )? )
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:171:7: ^( CLASS_ID ( OP_MULTIPLY )? )
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:178:7: ^( CLASS_ID ( OP_MULTIPLY )? )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new TypeReference(stream_CLASS_ID.nextToken()), root_1);
 
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:171:33: ( OP_MULTIPLY )?
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:178:33: ( OP_MULTIPLY )?
                 if ( stream_OP_MULTIPLY.hasNext() ) {
                     adaptor.addChild(root_1, stream_OP_MULTIPLY.nextNode());
 
@@ -3629,24 +3808,24 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "single_type"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:173:10: fragment single_type : CLASS_ID -> ^( CLASS_ID ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:180:10: fragment single_type : CLASS_ID -> ^( CLASS_ID ) ;
     public final OmttParser.single_type_return single_type() throws RecognitionException {
         OmttParser.single_type_return retval = new OmttParser.single_type_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token CLASS_ID100=null;
+        Token CLASS_ID107=null;
 
-        Object CLASS_ID100_tree=null;
+        Object CLASS_ID107_tree=null;
         RewriteRuleTokenStream stream_CLASS_ID=new RewriteRuleTokenStream(adaptor,"token CLASS_ID");
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:174:3: ( CLASS_ID -> ^( CLASS_ID ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:174:5: CLASS_ID
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:181:3: ( CLASS_ID -> ^( CLASS_ID ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:181:5: CLASS_ID
             {
-            CLASS_ID100=(Token)match(input,CLASS_ID,FOLLOW_CLASS_ID_in_single_type1190);  
-            stream_CLASS_ID.add(CLASS_ID100);
+            CLASS_ID107=(Token)match(input,CLASS_ID,FOLLOW_CLASS_ID_in_single_type1231);  
+            stream_CLASS_ID.add(CLASS_ID107);
 
 
 
@@ -3661,9 +3840,9 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 175:4: -> ^( CLASS_ID )
+            // 182:4: -> ^( CLASS_ID )
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:175:7: ^( CLASS_ID )
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:7: ^( CLASS_ID )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new TypeReference(stream_CLASS_ID.nextToken()), root_1);
@@ -3700,28 +3879,28 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "concatence_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:180:1: concatence_expression : (expr+= control_expression -> $expr) ( ( OP_CONCAT expr+= control_expression )+ -> ^( OP_CONCAT ( $expr)+ ) )? ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:187:1: concatence_expression : (expr+= control_expression -> $expr) ( ( OP_CONCAT expr+= control_expression )+ -> ^( OP_CONCAT ( $expr)+ ) )? ;
     public final OmttParser.concatence_expression_return concatence_expression() throws RecognitionException {
         OmttParser.concatence_expression_return retval = new OmttParser.concatence_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token OP_CONCAT101=null;
+        Token OP_CONCAT108=null;
         List list_expr=null;
         OmttParser.control_expression_return expr = null;
          expr = null;
-        Object OP_CONCAT101_tree=null;
+        Object OP_CONCAT108_tree=null;
         RewriteRuleTokenStream stream_OP_CONCAT=new RewriteRuleTokenStream(adaptor,"token OP_CONCAT");
         RewriteRuleSubtreeStream stream_control_expression=new RewriteRuleSubtreeStream(adaptor,"rule control_expression");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:181:3: ( (expr+= control_expression -> $expr) ( ( OP_CONCAT expr+= control_expression )+ -> ^( OP_CONCAT ( $expr)+ ) )? )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:181:5: (expr+= control_expression -> $expr) ( ( OP_CONCAT expr+= control_expression )+ -> ^( OP_CONCAT ( $expr)+ ) )?
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:188:3: ( (expr+= control_expression -> $expr) ( ( OP_CONCAT expr+= control_expression )+ -> ^( OP_CONCAT ( $expr)+ ) )? )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:188:5: (expr+= control_expression -> $expr) ( ( OP_CONCAT expr+= control_expression )+ -> ^( OP_CONCAT ( $expr)+ ) )?
             {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:181:5: (expr+= control_expression -> $expr)
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:181:6: expr+= control_expression
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:188:5: (expr+= control_expression -> $expr)
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:188:6: expr+= control_expression
             {
-            pushFollow(FOLLOW_control_expression_in_concatence_expression1219);
+            pushFollow(FOLLOW_control_expression_in_concatence_expression1260);
             expr=control_expression();
 
             state._fsp--;
@@ -3743,7 +3922,7 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
             RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(adaptor,"token expr",list_expr);
             root_0 = (Object)adaptor.nil();
-            // 181:31: -> $expr
+            // 188:31: -> $expr
             {
                 adaptor.addChild(root_0, stream_expr.nextTree());
 
@@ -3752,37 +3931,37 @@ public class OmttParser extends AbstractOmttParser {
             retval.tree = root_0;
             }
 
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:5: ( ( OP_CONCAT expr+= control_expression )+ -> ^( OP_CONCAT ( $expr)+ ) )?
-            int alt35=2;
-            int LA35_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:189:5: ( ( OP_CONCAT expr+= control_expression )+ -> ^( OP_CONCAT ( $expr)+ ) )?
+            int alt36=2;
+            int LA36_0 = input.LA(1);
 
-            if ( (LA35_0==OP_CONCAT) ) {
-                alt35=1;
+            if ( (LA36_0==OP_CONCAT) ) {
+                alt36=1;
             }
-            switch (alt35) {
+            switch (alt36) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:6: ( OP_CONCAT expr+= control_expression )+
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:189:6: ( OP_CONCAT expr+= control_expression )+
                     {
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:6: ( OP_CONCAT expr+= control_expression )+
-                    int cnt34=0;
-                    loop34:
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:189:6: ( OP_CONCAT expr+= control_expression )+
+                    int cnt35=0;
+                    loop35:
                     do {
-                        int alt34=2;
-                        int LA34_0 = input.LA(1);
+                        int alt35=2;
+                        int LA35_0 = input.LA(1);
 
-                        if ( (LA34_0==OP_CONCAT) ) {
-                            alt34=1;
+                        if ( (LA35_0==OP_CONCAT) ) {
+                            alt35=1;
                         }
 
 
-                        switch (alt34) {
+                        switch (alt35) {
                     	case 1 :
-                    	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:7: OP_CONCAT expr+= control_expression
+                    	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:189:7: OP_CONCAT expr+= control_expression
                     	    {
-                    	    OP_CONCAT101=(Token)match(input,OP_CONCAT,FOLLOW_OP_CONCAT_in_concatence_expression1233);  
-                    	    stream_OP_CONCAT.add(OP_CONCAT101);
+                    	    OP_CONCAT108=(Token)match(input,OP_CONCAT,FOLLOW_OP_CONCAT_in_concatence_expression1274);  
+                    	    stream_OP_CONCAT.add(OP_CONCAT108);
 
-                    	    pushFollow(FOLLOW_control_expression_in_concatence_expression1237);
+                    	    pushFollow(FOLLOW_control_expression_in_concatence_expression1278);
                     	    expr=control_expression();
 
                     	    state._fsp--;
@@ -3796,12 +3975,12 @@ public class OmttParser extends AbstractOmttParser {
                     	    break;
 
                     	default :
-                    	    if ( cnt34 >= 1 ) break loop34;
+                    	    if ( cnt35 >= 1 ) break loop35;
                                 EarlyExitException eee =
-                                    new EarlyExitException(34, input);
+                                    new EarlyExitException(35, input);
                                 throw eee;
                         }
-                        cnt34++;
+                        cnt35++;
                     } while (true);
 
 
@@ -3817,9 +3996,9 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
                     RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(adaptor,"token expr",list_expr);
                     root_0 = (Object)adaptor.nil();
-                    // 182:44: -> ^( OP_CONCAT ( $expr)+ )
+                    // 189:44: -> ^( OP_CONCAT ( $expr)+ )
                     {
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:47: ^( OP_CONCAT ( $expr)+ )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:189:47: ^( OP_CONCAT ( $expr)+ )
                         {
                         Object root_1 = (Object)adaptor.nil();
                         root_1 = (Object)adaptor.becomeRoot(new Data(stream_OP_CONCAT.nextToken()), root_1);
@@ -3871,33 +4050,33 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "control_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:185:1: control_expression : ( if_expression | map_expression | boolean_expression );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:192:1: control_expression : ( if_expression | map_expression | context_expression );
     public final OmttParser.control_expression_return control_expression() throws RecognitionException {
         OmttParser.control_expression_return retval = new OmttParser.control_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.if_expression_return if_expression102 = null;
+        OmttParser.if_expression_return if_expression109 = null;
 
-        OmttParser.map_expression_return map_expression103 = null;
+        OmttParser.map_expression_return map_expression110 = null;
 
-        OmttParser.boolean_expression_return boolean_expression104 = null;
+        OmttParser.context_expression_return context_expression111 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:186:3: ( if_expression | map_expression | boolean_expression )
-            int alt36=3;
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:193:3: ( if_expression | map_expression | context_expression )
+            int alt37=3;
             switch ( input.LA(1) ) {
             case IF:
                 {
-                alt36=1;
+                alt37=1;
                 }
                 break;
             case MAP:
                 {
-                alt36=2;
+                alt37=2;
                 }
                 break;
             case STRING_LITERAL:
@@ -3911,58 +4090,59 @@ public class OmttParser extends AbstractOmttParser {
             case LEFT_PAREN:
             case OP_MINUS:
             case OP_NOT:
+            case OP_GENERAL:
             case VAR_ID:
                 {
-                alt36=3;
+                alt37=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 36, 0, input);
+                    new NoViableAltException("", 37, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt36) {
+            switch (alt37) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:186:5: if_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:193:5: if_expression
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_if_expression_in_control_expression1267);
-                    if_expression102=if_expression();
+                    pushFollow(FOLLOW_if_expression_in_control_expression1308);
+                    if_expression109=if_expression();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, if_expression102.getTree());
+                    adaptor.addChild(root_0, if_expression109.getTree());
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:187:5: map_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:194:5: map_expression
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_map_expression_in_control_expression1273);
-                    map_expression103=map_expression();
+                    pushFollow(FOLLOW_map_expression_in_control_expression1314);
+                    map_expression110=map_expression();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, map_expression103.getTree());
+                    adaptor.addChild(root_0, map_expression110.getTree());
 
                     }
                     break;
                 case 3 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:188:5: boolean_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:195:5: context_expression
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_boolean_expression_in_control_expression1279);
-                    boolean_expression104=boolean_expression();
+                    pushFollow(FOLLOW_context_expression_in_control_expression1320);
+                    context_expression111=context_expression();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, boolean_expression104.getTree());
+                    adaptor.addChild(root_0, context_expression111.getTree());
 
                     }
                     break;
@@ -3992,71 +4172,71 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "if_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:191:1: if_expression : IF condition= boolean_expression COLON part_if= control_expression ELSE ( COLON )? part_else= control_expression -> ^( IF_ELSE $condition $part_if $part_else) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:198:1: if_expression : IF condition= context_expression COLON part_if= control_expression ELSE ( COLON )? part_else= control_expression -> ^( IF_ELSE $condition $part_if $part_else) ;
     public final OmttParser.if_expression_return if_expression() throws RecognitionException {
         OmttParser.if_expression_return retval = new OmttParser.if_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token IF105=null;
-        Token COLON106=null;
-        Token ELSE107=null;
-        Token COLON108=null;
-        OmttParser.boolean_expression_return condition = null;
+        Token IF112=null;
+        Token COLON113=null;
+        Token ELSE114=null;
+        Token COLON115=null;
+        OmttParser.context_expression_return condition = null;
 
         OmttParser.control_expression_return part_if = null;
 
         OmttParser.control_expression_return part_else = null;
 
 
-        Object IF105_tree=null;
-        Object COLON106_tree=null;
-        Object ELSE107_tree=null;
-        Object COLON108_tree=null;
+        Object IF112_tree=null;
+        Object COLON113_tree=null;
+        Object ELSE114_tree=null;
+        Object COLON115_tree=null;
         RewriteRuleTokenStream stream_COLON=new RewriteRuleTokenStream(adaptor,"token COLON");
         RewriteRuleTokenStream stream_IF=new RewriteRuleTokenStream(adaptor,"token IF");
         RewriteRuleTokenStream stream_ELSE=new RewriteRuleTokenStream(adaptor,"token ELSE");
         RewriteRuleSubtreeStream stream_control_expression=new RewriteRuleSubtreeStream(adaptor,"rule control_expression");
-        RewriteRuleSubtreeStream stream_boolean_expression=new RewriteRuleSubtreeStream(adaptor,"rule boolean_expression");
+        RewriteRuleSubtreeStream stream_context_expression=new RewriteRuleSubtreeStream(adaptor,"rule context_expression");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:192:3: ( IF condition= boolean_expression COLON part_if= control_expression ELSE ( COLON )? part_else= control_expression -> ^( IF_ELSE $condition $part_if $part_else) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:192:5: IF condition= boolean_expression COLON part_if= control_expression ELSE ( COLON )? part_else= control_expression
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:199:3: ( IF condition= context_expression COLON part_if= control_expression ELSE ( COLON )? part_else= control_expression -> ^( IF_ELSE $condition $part_if $part_else) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:199:5: IF condition= context_expression COLON part_if= control_expression ELSE ( COLON )? part_else= control_expression
             {
-            IF105=(Token)match(input,IF,FOLLOW_IF_in_if_expression1292);  
-            stream_IF.add(IF105);
+            IF112=(Token)match(input,IF,FOLLOW_IF_in_if_expression1333);  
+            stream_IF.add(IF112);
 
-            pushFollow(FOLLOW_boolean_expression_in_if_expression1296);
-            condition=boolean_expression();
+            pushFollow(FOLLOW_context_expression_in_if_expression1337);
+            condition=context_expression();
 
             state._fsp--;
 
-            stream_boolean_expression.add(condition.getTree());
-            COLON106=(Token)match(input,COLON,FOLLOW_COLON_in_if_expression1298);  
-            stream_COLON.add(COLON106);
+            stream_context_expression.add(condition.getTree());
+            COLON113=(Token)match(input,COLON,FOLLOW_COLON_in_if_expression1339);  
+            stream_COLON.add(COLON113);
 
-            pushFollow(FOLLOW_control_expression_in_if_expression1306);
+            pushFollow(FOLLOW_control_expression_in_if_expression1347);
             part_if=control_expression();
 
             state._fsp--;
 
             stream_control_expression.add(part_if.getTree());
-            ELSE107=(Token)match(input,ELSE,FOLLOW_ELSE_in_if_expression1312);  
-            stream_ELSE.add(ELSE107);
+            ELSE114=(Token)match(input,ELSE,FOLLOW_ELSE_in_if_expression1353);  
+            stream_ELSE.add(ELSE114);
 
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:194:10: ( COLON )?
-            int alt37=2;
-            int LA37_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:201:10: ( COLON )?
+            int alt38=2;
+            int LA38_0 = input.LA(1);
 
-            if ( (LA37_0==COLON) ) {
-                alt37=1;
+            if ( (LA38_0==COLON) ) {
+                alt38=1;
             }
-            switch (alt37) {
+            switch (alt38) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:194:10: COLON
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:201:10: COLON
                     {
-                    COLON108=(Token)match(input,COLON,FOLLOW_COLON_in_if_expression1314);  
-                    stream_COLON.add(COLON108);
+                    COLON115=(Token)match(input,COLON,FOLLOW_COLON_in_if_expression1355);  
+                    stream_COLON.add(COLON115);
 
 
                     }
@@ -4064,7 +4244,7 @@ public class OmttParser extends AbstractOmttParser {
 
             }
 
-            pushFollow(FOLLOW_control_expression_in_if_expression1323);
+            pushFollow(FOLLOW_control_expression_in_if_expression1364);
             part_else=control_expression();
 
             state._fsp--;
@@ -4073,7 +4253,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: part_if, part_else, condition
+            // elements: condition, part_else, part_if
             // token labels: 
             // rule labels: retval, part_else, condition, part_if
             // token list labels: 
@@ -4086,9 +4266,9 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_part_if=new RewriteRuleSubtreeStream(adaptor,"rule part_if",part_if!=null?part_if.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 196:5: -> ^( IF_ELSE $condition $part_if $part_else)
+            // 203:5: -> ^( IF_ELSE $condition $part_if $part_else)
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:196:8: ^( IF_ELSE $condition $part_if $part_else)
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:203:8: ^( IF_ELSE $condition $part_if $part_else)
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new IfElse(IF_ELSE), root_1);
@@ -4129,35 +4309,35 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "if_tag"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:198:1: if_tag : TAG_START if_subtag TAG_END ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:205:1: if_tag : TAG_START if_subtag TAG_END ;
     public final OmttParser.if_tag_return if_tag() throws RecognitionException {
         OmttParser.if_tag_return retval = new OmttParser.if_tag_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token TAG_START109=null;
-        Token TAG_END111=null;
-        OmttParser.if_subtag_return if_subtag110 = null;
+        Token TAG_START116=null;
+        Token TAG_END118=null;
+        OmttParser.if_subtag_return if_subtag117 = null;
 
 
-        Object TAG_START109_tree=null;
-        Object TAG_END111_tree=null;
+        Object TAG_START116_tree=null;
+        Object TAG_END118_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:199:3: ( TAG_START if_subtag TAG_END )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:199:5: TAG_START if_subtag TAG_END
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:206:3: ( TAG_START if_subtag TAG_END )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:206:5: TAG_START if_subtag TAG_END
             {
             root_0 = (Object)adaptor.nil();
 
-            TAG_START109=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_if_tag1357); 
-            pushFollow(FOLLOW_if_subtag_in_if_tag1363);
-            if_subtag110=if_subtag();
+            TAG_START116=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_if_tag1398); 
+            pushFollow(FOLLOW_if_subtag_in_if_tag1404);
+            if_subtag117=if_subtag();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, if_subtag110.getTree());
-            TAG_END111=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_if_tag1369); 
+            adaptor.addChild(root_0, if_subtag117.getTree());
+            TAG_END118=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_if_tag1410); 
 
             }
 
@@ -4185,17 +4365,17 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "if_subtag"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:203:10: fragment if_subtag : ( IF condition= boolean_expression part_if= tag_content ) ( TAG_START ELSE (part_else= tag_content | subtag= if_subtag ) )? -> ^( IF_ELSE $condition $part_if ( $part_else)? ( $subtag)? ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:210:10: fragment if_subtag : ( IF condition= context_expression part_if= tag_content ) ( TAG_START ELSE (part_else= tag_content | subtag= if_subtag ) )? -> ^( IF_ELSE $condition $part_if ( $part_else)? ( $subtag)? ) ;
     public final OmttParser.if_subtag_return if_subtag() throws RecognitionException {
         OmttParser.if_subtag_return retval = new OmttParser.if_subtag_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token IF112=null;
-        Token TAG_START113=null;
-        Token ELSE114=null;
-        OmttParser.boolean_expression_return condition = null;
+        Token IF119=null;
+        Token TAG_START120=null;
+        Token ELSE121=null;
+        OmttParser.context_expression_return condition = null;
 
         OmttParser.tag_content_return part_if = null;
 
@@ -4204,32 +4384,32 @@ public class OmttParser extends AbstractOmttParser {
         OmttParser.if_subtag_return subtag = null;
 
 
-        Object IF112_tree=null;
-        Object TAG_START113_tree=null;
-        Object ELSE114_tree=null;
+        Object IF119_tree=null;
+        Object TAG_START120_tree=null;
+        Object ELSE121_tree=null;
         RewriteRuleTokenStream stream_TAG_START=new RewriteRuleTokenStream(adaptor,"token TAG_START");
         RewriteRuleTokenStream stream_IF=new RewriteRuleTokenStream(adaptor,"token IF");
         RewriteRuleTokenStream stream_ELSE=new RewriteRuleTokenStream(adaptor,"token ELSE");
         RewriteRuleSubtreeStream stream_if_subtag=new RewriteRuleSubtreeStream(adaptor,"rule if_subtag");
-        RewriteRuleSubtreeStream stream_boolean_expression=new RewriteRuleSubtreeStream(adaptor,"rule boolean_expression");
+        RewriteRuleSubtreeStream stream_context_expression=new RewriteRuleSubtreeStream(adaptor,"rule context_expression");
         RewriteRuleSubtreeStream stream_tag_content=new RewriteRuleSubtreeStream(adaptor,"rule tag_content");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:204:2: ( ( IF condition= boolean_expression part_if= tag_content ) ( TAG_START ELSE (part_else= tag_content | subtag= if_subtag ) )? -> ^( IF_ELSE $condition $part_if ( $part_else)? ( $subtag)? ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:204:4: ( IF condition= boolean_expression part_if= tag_content ) ( TAG_START ELSE (part_else= tag_content | subtag= if_subtag ) )?
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:211:2: ( ( IF condition= context_expression part_if= tag_content ) ( TAG_START ELSE (part_else= tag_content | subtag= if_subtag ) )? -> ^( IF_ELSE $condition $part_if ( $part_else)? ( $subtag)? ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:211:4: ( IF condition= context_expression part_if= tag_content ) ( TAG_START ELSE (part_else= tag_content | subtag= if_subtag ) )?
             {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:204:4: ( IF condition= boolean_expression part_if= tag_content )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:204:6: IF condition= boolean_expression part_if= tag_content
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:211:4: ( IF condition= context_expression part_if= tag_content )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:211:6: IF condition= context_expression part_if= tag_content
             {
-            IF112=(Token)match(input,IF,FOLLOW_IF_in_if_subtag1385);  
-            stream_IF.add(IF112);
+            IF119=(Token)match(input,IF,FOLLOW_IF_in_if_subtag1426);  
+            stream_IF.add(IF119);
 
-            pushFollow(FOLLOW_boolean_expression_in_if_subtag1389);
-            condition=boolean_expression();
+            pushFollow(FOLLOW_context_expression_in_if_subtag1430);
+            condition=context_expression();
 
             state._fsp--;
 
-            stream_boolean_expression.add(condition.getTree());
-            pushFollow(FOLLOW_tag_content_in_if_subtag1397);
+            stream_context_expression.add(condition.getTree());
+            pushFollow(FOLLOW_tag_content_in_if_subtag1438);
             part_if=tag_content();
 
             state._fsp--;
@@ -4238,44 +4418,44 @@ public class OmttParser extends AbstractOmttParser {
 
             }
 
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:207:3: ( TAG_START ELSE (part_else= tag_content | subtag= if_subtag ) )?
-            int alt39=2;
-            int LA39_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:214:3: ( TAG_START ELSE (part_else= tag_content | subtag= if_subtag ) )?
+            int alt40=2;
+            int LA40_0 = input.LA(1);
 
-            if ( (LA39_0==TAG_START) ) {
-                alt39=1;
+            if ( (LA40_0==TAG_START) ) {
+                alt40=1;
             }
-            switch (alt39) {
+            switch (alt40) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:207:5: TAG_START ELSE (part_else= tag_content | subtag= if_subtag )
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:214:5: TAG_START ELSE (part_else= tag_content | subtag= if_subtag )
                     {
-                    TAG_START113=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_if_subtag1407);  
-                    stream_TAG_START.add(TAG_START113);
+                    TAG_START120=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_if_subtag1448);  
+                    stream_TAG_START.add(TAG_START120);
 
-                    ELSE114=(Token)match(input,ELSE,FOLLOW_ELSE_in_if_subtag1409);  
-                    stream_ELSE.add(ELSE114);
+                    ELSE121=(Token)match(input,ELSE,FOLLOW_ELSE_in_if_subtag1450);  
+                    stream_ELSE.add(ELSE121);
 
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:208:4: (part_else= tag_content | subtag= if_subtag )
-                    int alt38=2;
-                    int LA38_0 = input.LA(1);
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:215:4: (part_else= tag_content | subtag= if_subtag )
+                    int alt39=2;
+                    int LA39_0 = input.LA(1);
 
-                    if ( (LA38_0==CONTENT||LA38_0==OP_DATA_IS_EXPRESSION) ) {
-                        alt38=1;
+                    if ( (LA39_0==CONTENT||LA39_0==OP_DATA_IS_EXPRESSION) ) {
+                        alt39=1;
                     }
-                    else if ( (LA38_0==IF) ) {
-                        alt38=2;
+                    else if ( (LA39_0==IF) ) {
+                        alt39=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 38, 0, input);
+                            new NoViableAltException("", 39, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt38) {
+                    switch (alt39) {
                         case 1 :
-                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:208:5: part_else= tag_content
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:215:5: part_else= tag_content
                             {
-                            pushFollow(FOLLOW_tag_content_in_if_subtag1417);
+                            pushFollow(FOLLOW_tag_content_in_if_subtag1458);
                             part_else=tag_content();
 
                             state._fsp--;
@@ -4285,9 +4465,9 @@ public class OmttParser extends AbstractOmttParser {
                             }
                             break;
                         case 2 :
-                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:208:29: subtag= if_subtag
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:215:29: subtag= if_subtag
                             {
-                            pushFollow(FOLLOW_if_subtag_in_if_subtag1423);
+                            pushFollow(FOLLOW_if_subtag_in_if_subtag1464);
                             subtag=if_subtag();
 
                             state._fsp--;
@@ -4308,7 +4488,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: condition, subtag, part_if, part_else
+            // elements: part_else, condition, subtag, part_if
             // token labels: 
             // rule labels: subtag, retval, part_else, condition, part_if
             // token list labels: 
@@ -4322,22 +4502,22 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_part_if=new RewriteRuleSubtreeStream(adaptor,"rule part_if",part_if!=null?part_if.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 210:3: -> ^( IF_ELSE $condition $part_if ( $part_else)? ( $subtag)? )
+            // 217:3: -> ^( IF_ELSE $condition $part_if ( $part_else)? ( $subtag)? )
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:210:6: ^( IF_ELSE $condition $part_if ( $part_else)? ( $subtag)? )
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:217:6: ^( IF_ELSE $condition $part_if ( $part_else)? ( $subtag)? )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new IfElse(IF_ELSE), root_1);
 
                 adaptor.addChild(root_1, stream_condition.nextTree());
                 adaptor.addChild(root_1, stream_part_if.nextTree());
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:210:44: ( $part_else)?
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:217:44: ( $part_else)?
                 if ( stream_part_else.hasNext() ) {
                     adaptor.addChild(root_1, stream_part_else.nextTree());
 
                 }
                 stream_part_else.reset();
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:210:56: ( $subtag)?
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:217:56: ( $subtag)?
                 if ( stream_subtag.hasNext() ) {
                     adaptor.addChild(root_1, stream_subtag.nextTree());
 
@@ -4376,43 +4556,43 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "map_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:213:1: map_expression : MAP iter= boolean_expression COLON expr= control_expression -> ^( MAP $iter $expr) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:220:1: map_expression : MAP iter= context_expression COLON expr= control_expression -> ^( MAP $iter $expr) ;
     public final OmttParser.map_expression_return map_expression() throws RecognitionException {
         OmttParser.map_expression_return retval = new OmttParser.map_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token MAP115=null;
-        Token COLON116=null;
-        OmttParser.boolean_expression_return iter = null;
+        Token MAP122=null;
+        Token COLON123=null;
+        OmttParser.context_expression_return iter = null;
 
         OmttParser.control_expression_return expr = null;
 
 
-        Object MAP115_tree=null;
-        Object COLON116_tree=null;
+        Object MAP122_tree=null;
+        Object COLON123_tree=null;
         RewriteRuleTokenStream stream_COLON=new RewriteRuleTokenStream(adaptor,"token COLON");
         RewriteRuleTokenStream stream_MAP=new RewriteRuleTokenStream(adaptor,"token MAP");
         RewriteRuleSubtreeStream stream_control_expression=new RewriteRuleSubtreeStream(adaptor,"rule control_expression");
-        RewriteRuleSubtreeStream stream_boolean_expression=new RewriteRuleSubtreeStream(adaptor,"rule boolean_expression");
+        RewriteRuleSubtreeStream stream_context_expression=new RewriteRuleSubtreeStream(adaptor,"rule context_expression");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:214:3: ( MAP iter= boolean_expression COLON expr= control_expression -> ^( MAP $iter $expr) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:214:5: MAP iter= boolean_expression COLON expr= control_expression
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:221:3: ( MAP iter= context_expression COLON expr= control_expression -> ^( MAP $iter $expr) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:221:5: MAP iter= context_expression COLON expr= control_expression
             {
-            MAP115=(Token)match(input,MAP,FOLLOW_MAP_in_map_expression1466);  
-            stream_MAP.add(MAP115);
+            MAP122=(Token)match(input,MAP,FOLLOW_MAP_in_map_expression1507);  
+            stream_MAP.add(MAP122);
 
-            pushFollow(FOLLOW_boolean_expression_in_map_expression1470);
-            iter=boolean_expression();
+            pushFollow(FOLLOW_context_expression_in_map_expression1511);
+            iter=context_expression();
 
             state._fsp--;
 
-            stream_boolean_expression.add(iter.getTree());
-            COLON116=(Token)match(input,COLON,FOLLOW_COLON_in_map_expression1472);  
-            stream_COLON.add(COLON116);
+            stream_context_expression.add(iter.getTree());
+            COLON123=(Token)match(input,COLON,FOLLOW_COLON_in_map_expression1513);  
+            stream_COLON.add(COLON123);
 
-            pushFollow(FOLLOW_control_expression_in_map_expression1480);
+            pushFollow(FOLLOW_control_expression_in_map_expression1521);
             expr=control_expression();
 
             state._fsp--;
@@ -4421,7 +4601,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: iter, MAP, expr
+            // elements: MAP, iter, expr
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -4433,9 +4613,9 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_iter=new RewriteRuleSubtreeStream(adaptor,"rule iter",iter!=null?iter.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 216:5: -> ^( MAP $iter $expr)
+            // 223:5: -> ^( MAP $iter $expr)
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:216:8: ^( MAP $iter $expr)
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:223:8: ^( MAP $iter $expr)
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new Transformation(stream_MAP.nextToken()), root_1);
@@ -4475,58 +4655,58 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "map_tag"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:218:1: map_tag : TAG_START MAP iter= expression expr= tag_content TAG_END -> ^( MAP $iter $expr) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:225:1: map_tag : TAG_START MAP iter= context_expression expr= tag_content TAG_END -> ^( MAP $iter $expr) ;
     public final OmttParser.map_tag_return map_tag() throws RecognitionException {
         OmttParser.map_tag_return retval = new OmttParser.map_tag_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token TAG_START117=null;
-        Token MAP118=null;
-        Token TAG_END119=null;
-        OmttParser.expression_return iter = null;
+        Token TAG_START124=null;
+        Token MAP125=null;
+        Token TAG_END126=null;
+        OmttParser.context_expression_return iter = null;
 
         OmttParser.tag_content_return expr = null;
 
 
-        Object TAG_START117_tree=null;
-        Object MAP118_tree=null;
-        Object TAG_END119_tree=null;
+        Object TAG_START124_tree=null;
+        Object MAP125_tree=null;
+        Object TAG_END126_tree=null;
         RewriteRuleTokenStream stream_TAG_END=new RewriteRuleTokenStream(adaptor,"token TAG_END");
         RewriteRuleTokenStream stream_TAG_START=new RewriteRuleTokenStream(adaptor,"token TAG_START");
         RewriteRuleTokenStream stream_MAP=new RewriteRuleTokenStream(adaptor,"token MAP");
-        RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
+        RewriteRuleSubtreeStream stream_context_expression=new RewriteRuleSubtreeStream(adaptor,"rule context_expression");
         RewriteRuleSubtreeStream stream_tag_content=new RewriteRuleSubtreeStream(adaptor,"rule tag_content");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:3: ( TAG_START MAP iter= expression expr= tag_content TAG_END -> ^( MAP $iter $expr) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:5: TAG_START MAP iter= expression expr= tag_content TAG_END
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:226:3: ( TAG_START MAP iter= context_expression expr= tag_content TAG_END -> ^( MAP $iter $expr) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:226:5: TAG_START MAP iter= context_expression expr= tag_content TAG_END
             {
-            TAG_START117=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_map_tag1511);  
-            stream_TAG_START.add(TAG_START117);
+            TAG_START124=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_map_tag1552);  
+            stream_TAG_START.add(TAG_START124);
 
-            MAP118=(Token)match(input,MAP,FOLLOW_MAP_in_map_tag1513);  
-            stream_MAP.add(MAP118);
+            MAP125=(Token)match(input,MAP,FOLLOW_MAP_in_map_tag1554);  
+            stream_MAP.add(MAP125);
 
-            pushFollow(FOLLOW_expression_in_map_tag1517);
-            iter=expression();
+            pushFollow(FOLLOW_context_expression_in_map_tag1558);
+            iter=context_expression();
 
             state._fsp--;
 
-            stream_expression.add(iter.getTree());
-            pushFollow(FOLLOW_tag_content_in_map_tag1525);
+            stream_context_expression.add(iter.getTree());
+            pushFollow(FOLLOW_tag_content_in_map_tag1566);
             expr=tag_content();
 
             state._fsp--;
 
             stream_tag_content.add(expr.getTree());
-            TAG_END119=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_map_tag1531);  
-            stream_TAG_END.add(TAG_END119);
+            TAG_END126=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_map_tag1572);  
+            stream_TAG_END.add(TAG_END126);
 
 
 
             // AST REWRITE
-            // elements: expr, MAP, iter
+            // elements: expr, iter, MAP
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -4538,9 +4718,9 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_iter=new RewriteRuleSubtreeStream(adaptor,"rule iter",iter!=null?iter.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 222:5: -> ^( MAP $iter $expr)
+            // 229:5: -> ^( MAP $iter $expr)
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:222:8: ^( MAP $iter $expr)
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:229:8: ^( MAP $iter $expr)
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new Transformation(stream_MAP.nextToken()), root_1);
@@ -4574,35 +4754,300 @@ public class OmttParser extends AbstractOmttParser {
     }
     // $ANTLR end "map_tag"
 
+    public static class context_expression_return extends ParserRuleReturnScope {
+        Object tree;
+        public Object getTree() { return tree; }
+    };
+
+    // $ANTLR start "context_expression"
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:233:1: context_expression : (fe= boolean_expression -> $fe) ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )* ;
+    public final OmttParser.context_expression_return context_expression() throws RecognitionException {
+        OmttParser.context_expression_return retval = new OmttParser.context_expression_return();
+        retval.start = input.LT(1);
+
+        Object root_0 = null;
+
+        Token OP_CONTEXT127=null;
+        Token OP_CONTEXT129=null;
+        Token OP_EXPRESSION_CONTEXT131=null;
+        OmttParser.boolean_expression_return fe = null;
+
+        OmttParser.function_arguments_return arguments = null;
+
+        OmttParser.functional_expression_return ce = null;
+
+        OmttParser.atom_expression_return atom_expression128 = null;
+
+        OmttParser.lambda_expression_no_context_return lambda_expression_no_context130 = null;
+
+
+        Object OP_CONTEXT127_tree=null;
+        Object OP_CONTEXT129_tree=null;
+        Object OP_EXPRESSION_CONTEXT131_tree=null;
+        RewriteRuleTokenStream stream_OP_CONTEXT=new RewriteRuleTokenStream(adaptor,"token OP_CONTEXT");
+        RewriteRuleTokenStream stream_OP_EXPRESSION_CONTEXT=new RewriteRuleTokenStream(adaptor,"token OP_EXPRESSION_CONTEXT");
+        RewriteRuleSubtreeStream stream_atom_expression=new RewriteRuleSubtreeStream(adaptor,"rule atom_expression");
+        RewriteRuleSubtreeStream stream_lambda_expression_no_context=new RewriteRuleSubtreeStream(adaptor,"rule lambda_expression_no_context");
+        RewriteRuleSubtreeStream stream_functional_expression=new RewriteRuleSubtreeStream(adaptor,"rule functional_expression");
+        RewriteRuleSubtreeStream stream_boolean_expression=new RewriteRuleSubtreeStream(adaptor,"rule boolean_expression");
+        RewriteRuleSubtreeStream stream_function_arguments=new RewriteRuleSubtreeStream(adaptor,"rule function_arguments");
+        try {
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:234:3: ( (fe= boolean_expression -> $fe) ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )* )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:234:5: (fe= boolean_expression -> $fe) ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )*
+            {
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:234:5: (fe= boolean_expression -> $fe)
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:234:6: fe= boolean_expression
+            {
+            pushFollow(FOLLOW_boolean_expression_in_context_expression1608);
+            fe=boolean_expression();
+
+            state._fsp--;
+
+            stream_boolean_expression.add(fe.getTree());
+
+
+            // AST REWRITE
+            // elements: fe
+            // token labels: 
+            // rule labels: retval, fe
+            // token list labels: 
+            // rule list labels: 
+            // wildcard labels: 
+            retval.tree = root_0;
+            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+            RewriteRuleSubtreeStream stream_fe=new RewriteRuleSubtreeStream(adaptor,"rule fe",fe!=null?fe.tree:null);
+
+            root_0 = (Object)adaptor.nil();
+            // 234:28: -> $fe
+            {
+                adaptor.addChild(root_0, stream_fe.nextTree());
+
+            }
+
+            retval.tree = root_0;
+            }
+
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:235:5: ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )*
+            loop41:
+            do {
+                int alt41=4;
+                alt41 = dfa41.predict(input);
+                switch (alt41) {
+            	case 1 :
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:235:7: OP_CONTEXT atom_expression arguments= function_arguments
+            	    {
+            	    OP_CONTEXT127=(Token)match(input,OP_CONTEXT,FOLLOW_OP_CONTEXT_in_context_expression1622);  
+            	    stream_OP_CONTEXT.add(OP_CONTEXT127);
+
+            	    pushFollow(FOLLOW_atom_expression_in_context_expression1624);
+            	    atom_expression128=atom_expression();
+
+            	    state._fsp--;
+
+            	    stream_atom_expression.add(atom_expression128.getTree());
+            	    pushFollow(FOLLOW_function_arguments_in_context_expression1628);
+            	    arguments=function_arguments();
+
+            	    state._fsp--;
+
+            	    stream_function_arguments.add(arguments.getTree());
+
+
+            	    // AST REWRITE
+            	    // elements: arguments, context_expression, atom_expression
+            	    // token labels: 
+            	    // rule labels: retval, arguments
+            	    // token list labels: 
+            	    // rule list labels: 
+            	    // wildcard labels: 
+            	    retval.tree = root_0;
+            	    RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+            	    RewriteRuleSubtreeStream stream_arguments=new RewriteRuleSubtreeStream(adaptor,"rule arguments",arguments!=null?arguments.tree:null);
+
+            	    root_0 = (Object)adaptor.nil();
+            	    // 236:7: -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? )
+            	    {
+            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:236:10: ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? )
+            	        {
+            	        Object root_1 = (Object)adaptor.nil();
+            	        root_1 = (Object)adaptor.becomeRoot(new Call(CALL, true), root_1);
+
+            	        adaptor.addChild(root_1, stream_atom_expression.nextTree());
+            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:236:45: ^( ARGUMENT $context_expression)
+            	        {
+            	        Object root_2 = (Object)adaptor.nil();
+            	        root_2 = (Object)adaptor.becomeRoot(new FunctionArgument(ARGUMENT), root_2);
+
+            	        adaptor.addChild(root_2, stream_retval.nextTree());
+
+            	        adaptor.addChild(root_1, root_2);
+            	        }
+            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:236:95: ( $arguments)?
+            	        if ( stream_arguments.hasNext() ) {
+            	            adaptor.addChild(root_1, stream_arguments.nextTree());
+
+            	        }
+            	        stream_arguments.reset();
+
+            	        adaptor.addChild(root_0, root_1);
+            	        }
+
+            	    }
+
+            	    retval.tree = root_0;
+            	    }
+            	    break;
+            	case 2 :
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:237:7: OP_CONTEXT lambda_expression_no_context
+            	    {
+            	    OP_CONTEXT129=(Token)match(input,OP_CONTEXT,FOLLOW_OP_CONTEXT_in_context_expression1668);  
+            	    stream_OP_CONTEXT.add(OP_CONTEXT129);
+
+            	    pushFollow(FOLLOW_lambda_expression_no_context_in_context_expression1670);
+            	    lambda_expression_no_context130=lambda_expression_no_context();
+
+            	    state._fsp--;
+
+            	    stream_lambda_expression_no_context.add(lambda_expression_no_context130.getTree());
+
+
+            	    // AST REWRITE
+            	    // elements: context_expression, lambda_expression_no_context
+            	    // token labels: 
+            	    // rule labels: retval
+            	    // token list labels: 
+            	    // rule list labels: 
+            	    // wildcard labels: 
+            	    retval.tree = root_0;
+            	    RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+
+            	    root_0 = (Object)adaptor.nil();
+            	    // 238:7: -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) )
+            	    {
+            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:238:10: ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) )
+            	        {
+            	        Object root_1 = (Object)adaptor.nil();
+            	        root_1 = (Object)adaptor.becomeRoot(new Call(CALL, true), root_1);
+
+            	        adaptor.addChild(root_1, stream_lambda_expression_no_context.nextTree());
+            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:238:58: ^( ARGUMENT $context_expression)
+            	        {
+            	        Object root_2 = (Object)adaptor.nil();
+            	        root_2 = (Object)adaptor.becomeRoot(new FunctionArgument(ARGUMENT), root_2);
+
+            	        adaptor.addChild(root_2, stream_retval.nextTree());
+
+            	        adaptor.addChild(root_1, root_2);
+            	        }
+
+            	        adaptor.addChild(root_0, root_1);
+            	        }
+
+            	    }
+
+            	    retval.tree = root_0;
+            	    }
+            	    break;
+            	case 3 :
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:239:7: OP_EXPRESSION_CONTEXT ce= functional_expression
+            	    {
+            	    OP_EXPRESSION_CONTEXT131=(Token)match(input,OP_EXPRESSION_CONTEXT,FOLLOW_OP_EXPRESSION_CONTEXT_in_context_expression1706);  
+            	    stream_OP_EXPRESSION_CONTEXT.add(OP_EXPRESSION_CONTEXT131);
+
+            	    pushFollow(FOLLOW_functional_expression_in_context_expression1710);
+            	    ce=functional_expression();
+
+            	    state._fsp--;
+
+            	    stream_functional_expression.add(ce.getTree());
+
+
+            	    // AST REWRITE
+            	    // elements: ce, context_expression, OP_EXPRESSION_CONTEXT
+            	    // token labels: 
+            	    // rule labels: retval, ce
+            	    // token list labels: 
+            	    // rule list labels: 
+            	    // wildcard labels: 
+            	    retval.tree = root_0;
+            	    RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+            	    RewriteRuleSubtreeStream stream_ce=new RewriteRuleSubtreeStream(adaptor,"rule ce",ce!=null?ce.tree:null);
+
+            	    root_0 = (Object)adaptor.nil();
+            	    // 240:6: -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce)
+            	    {
+            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:240:9: ^( OP_EXPRESSION_CONTEXT $context_expression $ce)
+            	        {
+            	        Object root_1 = (Object)adaptor.nil();
+            	        root_1 = (Object)adaptor.becomeRoot(new Transformation(stream_OP_EXPRESSION_CONTEXT.nextToken()), root_1);
+
+            	        adaptor.addChild(root_1, stream_retval.nextTree());
+            	        adaptor.addChild(root_1, stream_ce.nextTree());
+
+            	        adaptor.addChild(root_0, root_1);
+            	        }
+
+            	    }
+
+            	    retval.tree = root_0;
+            	    }
+            	    break;
+
+            	default :
+            	    break loop41;
+                }
+            } while (true);
+
+
+            }
+
+            retval.stop = input.LT(-1);
+
+            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+        finally {
+        }
+        return retval;
+    }
+    // $ANTLR end "context_expression"
+
     public static class boolean_expression_return extends ParserRuleReturnScope {
         Object tree;
         public Object getTree() { return tree; }
     };
 
     // $ANTLR start "boolean_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:226:1: boolean_expression : boolean_binary_expression ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:246:1: boolean_expression : boolean_binary_expression ;
     public final OmttParser.boolean_expression_return boolean_expression() throws RecognitionException {
         OmttParser.boolean_expression_return retval = new OmttParser.boolean_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.boolean_binary_expression_return boolean_binary_expression120 = null;
+        OmttParser.boolean_binary_expression_return boolean_binary_expression132 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:227:2: ( boolean_binary_expression )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:227:4: boolean_binary_expression
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:247:2: ( boolean_binary_expression )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:247:4: boolean_binary_expression
             {
             root_0 = (Object)adaptor.nil();
 
-            pushFollow(FOLLOW_boolean_binary_expression_in_boolean_expression1563);
-            boolean_binary_expression120=boolean_binary_expression();
+            pushFollow(FOLLOW_boolean_binary_expression_in_boolean_expression1751);
+            boolean_binary_expression132=boolean_binary_expression();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, boolean_binary_expression120.getTree());
+            adaptor.addChild(root_0, boolean_binary_expression132.getTree());
 
             }
 
@@ -4630,66 +5075,66 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "boolean_binary_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:229:10: fragment boolean_binary_expression : boolean_unary_expression ( boolean_binary_operator boolean_unary_expression )* ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:249:10: fragment boolean_binary_expression : boolean_unary_expression ( boolean_binary_operator boolean_unary_expression )* ;
     public final OmttParser.boolean_binary_expression_return boolean_binary_expression() throws RecognitionException {
         OmttParser.boolean_binary_expression_return retval = new OmttParser.boolean_binary_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.boolean_unary_expression_return boolean_unary_expression121 = null;
+        OmttParser.boolean_unary_expression_return boolean_unary_expression133 = null;
 
-        OmttParser.boolean_binary_operator_return boolean_binary_operator122 = null;
+        OmttParser.boolean_binary_operator_return boolean_binary_operator134 = null;
 
-        OmttParser.boolean_unary_expression_return boolean_unary_expression123 = null;
+        OmttParser.boolean_unary_expression_return boolean_unary_expression135 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:230:3: ( boolean_unary_expression ( boolean_binary_operator boolean_unary_expression )* )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:230:5: boolean_unary_expression ( boolean_binary_operator boolean_unary_expression )*
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:250:3: ( boolean_unary_expression ( boolean_binary_operator boolean_unary_expression )* )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:250:5: boolean_unary_expression ( boolean_binary_operator boolean_unary_expression )*
             {
             root_0 = (Object)adaptor.nil();
 
-            pushFollow(FOLLOW_boolean_unary_expression_in_boolean_binary_expression1576);
-            boolean_unary_expression121=boolean_unary_expression();
+            pushFollow(FOLLOW_boolean_unary_expression_in_boolean_binary_expression1764);
+            boolean_unary_expression133=boolean_unary_expression();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, boolean_unary_expression121.getTree());
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:230:30: ( boolean_binary_operator boolean_unary_expression )*
-            loop40:
+            adaptor.addChild(root_0, boolean_unary_expression133.getTree());
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:250:30: ( boolean_binary_operator boolean_unary_expression )*
+            loop42:
             do {
-                int alt40=2;
-                int LA40_0 = input.LA(1);
+                int alt42=2;
+                int LA42_0 = input.LA(1);
 
-                if ( ((LA40_0>=OP_AND && LA40_0<=OP_OR)||LA40_0==OP_XOR) ) {
-                    alt40=1;
+                if ( ((LA42_0>=OP_AND && LA42_0<=OP_OR)) ) {
+                    alt42=1;
                 }
 
 
-                switch (alt40) {
+                switch (alt42) {
             	case 1 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:230:31: boolean_binary_operator boolean_unary_expression
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:250:31: boolean_binary_operator boolean_unary_expression
             	    {
-            	    pushFollow(FOLLOW_boolean_binary_operator_in_boolean_binary_expression1579);
-            	    boolean_binary_operator122=boolean_binary_operator();
+            	    pushFollow(FOLLOW_boolean_binary_operator_in_boolean_binary_expression1767);
+            	    boolean_binary_operator134=boolean_binary_operator();
 
             	    state._fsp--;
 
-            	    root_0 = (Object)adaptor.becomeRoot(boolean_binary_operator122.getTree(), root_0);
-            	    pushFollow(FOLLOW_boolean_unary_expression_in_boolean_binary_expression1582);
-            	    boolean_unary_expression123=boolean_unary_expression();
+            	    root_0 = (Object)adaptor.becomeRoot(boolean_binary_operator134.getTree(), root_0);
+            	    pushFollow(FOLLOW_boolean_unary_expression_in_boolean_binary_expression1770);
+            	    boolean_unary_expression135=boolean_unary_expression();
 
             	    state._fsp--;
 
-            	    adaptor.addChild(root_0, boolean_unary_expression123.getTree());
+            	    adaptor.addChild(root_0, boolean_unary_expression135.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop40;
+            	    break loop42;
                 }
             } while (true);
 
@@ -4720,70 +5165,70 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "boolean_unary_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:232:10: fragment boolean_unary_expression : ( boolean_unary_operator boolean_comparsion_expression | boolean_comparsion_expression );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:252:10: fragment boolean_unary_expression : ( boolean_unary_operator boolean_comparsion_expression | boolean_comparsion_expression );
     public final OmttParser.boolean_unary_expression_return boolean_unary_expression() throws RecognitionException {
         OmttParser.boolean_unary_expression_return retval = new OmttParser.boolean_unary_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.boolean_unary_operator_return boolean_unary_operator124 = null;
+        OmttParser.boolean_unary_operator_return boolean_unary_operator136 = null;
 
-        OmttParser.boolean_comparsion_expression_return boolean_comparsion_expression125 = null;
+        OmttParser.boolean_comparsion_expression_return boolean_comparsion_expression137 = null;
 
-        OmttParser.boolean_comparsion_expression_return boolean_comparsion_expression126 = null;
+        OmttParser.boolean_comparsion_expression_return boolean_comparsion_expression138 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:233:3: ( boolean_unary_operator boolean_comparsion_expression | boolean_comparsion_expression )
-            int alt41=2;
-            int LA41_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:253:3: ( boolean_unary_operator boolean_comparsion_expression | boolean_comparsion_expression )
+            int alt43=2;
+            int LA43_0 = input.LA(1);
 
-            if ( (LA41_0==OP_NOT) ) {
-                alt41=1;
+            if ( (LA43_0==OP_NOT) ) {
+                alt43=1;
             }
-            else if ( ((LA41_0>=STRING_LITERAL && LA41_0<=REAL_NUMBER)||LA41_0==DATA_START||LA41_0==NULL||(LA41_0>=TRUE && LA41_0<=FALSE)||(LA41_0>=TILDE && LA41_0<=LEFT_PAREN)||LA41_0==OP_MINUS||LA41_0==VAR_ID) ) {
-                alt41=2;
+            else if ( ((LA43_0>=STRING_LITERAL && LA43_0<=REAL_NUMBER)||LA43_0==DATA_START||LA43_0==NULL||(LA43_0>=TRUE && LA43_0<=FALSE)||(LA43_0>=TILDE && LA43_0<=LEFT_PAREN)||LA43_0==OP_MINUS||LA43_0==OP_GENERAL||LA43_0==VAR_ID) ) {
+                alt43=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 41, 0, input);
+                    new NoViableAltException("", 43, 0, input);
 
                 throw nvae;
             }
-            switch (alt41) {
+            switch (alt43) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:233:5: boolean_unary_operator boolean_comparsion_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:253:5: boolean_unary_operator boolean_comparsion_expression
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_boolean_unary_operator_in_boolean_unary_expression1598);
-                    boolean_unary_operator124=boolean_unary_operator();
+                    pushFollow(FOLLOW_boolean_unary_operator_in_boolean_unary_expression1786);
+                    boolean_unary_operator136=boolean_unary_operator();
 
                     state._fsp--;
 
-                    root_0 = (Object)adaptor.becomeRoot(boolean_unary_operator124.getTree(), root_0);
-                    pushFollow(FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1601);
-                    boolean_comparsion_expression125=boolean_comparsion_expression();
+                    root_0 = (Object)adaptor.becomeRoot(boolean_unary_operator136.getTree(), root_0);
+                    pushFollow(FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1789);
+                    boolean_comparsion_expression137=boolean_comparsion_expression();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, boolean_comparsion_expression125.getTree());
+                    adaptor.addChild(root_0, boolean_comparsion_expression137.getTree());
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:234:5: boolean_comparsion_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:254:5: boolean_comparsion_expression
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1607);
-                    boolean_comparsion_expression126=boolean_comparsion_expression();
+                    pushFollow(FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1795);
+                    boolean_comparsion_expression138=boolean_comparsion_expression();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, boolean_comparsion_expression126.getTree());
+                    adaptor.addChild(root_0, boolean_comparsion_expression138.getTree());
 
                     }
                     break;
@@ -4813,80 +5258,57 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "boolean_binary_operator"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:237:10: fragment boolean_binary_operator : ( OP_AND | OP_OR | OP_XOR );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:257:10: fragment boolean_binary_operator : ( OP_AND | OP_OR );
     public final OmttParser.boolean_binary_operator_return boolean_binary_operator() throws RecognitionException {
         OmttParser.boolean_binary_operator_return retval = new OmttParser.boolean_binary_operator_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token OP_AND127=null;
-        Token OP_OR128=null;
-        Token OP_XOR129=null;
+        Token OP_AND139=null;
+        Token OP_OR140=null;
 
-        Object OP_AND127_tree=null;
-        Object OP_OR128_tree=null;
-        Object OP_XOR129_tree=null;
+        Object OP_AND139_tree=null;
+        Object OP_OR140_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:238:3: ( OP_AND | OP_OR | OP_XOR )
-            int alt42=3;
-            switch ( input.LA(1) ) {
-            case OP_AND:
-                {
-                alt42=1;
-                }
-                break;
-            case OP_OR:
-                {
-                alt42=2;
-                }
-                break;
-            case OP_XOR:
-                {
-                alt42=3;
-                }
-                break;
-            default:
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:258:3: ( OP_AND | OP_OR )
+            int alt44=2;
+            int LA44_0 = input.LA(1);
+
+            if ( (LA44_0==OP_AND) ) {
+                alt44=1;
+            }
+            else if ( (LA44_0==OP_OR) ) {
+                alt44=2;
+            }
+            else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 42, 0, input);
+                    new NoViableAltException("", 44, 0, input);
 
                 throw nvae;
             }
-
-            switch (alt42) {
+            switch (alt44) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:238:5: OP_AND
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:258:5: OP_AND
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    OP_AND127=(Token)match(input,OP_AND,FOLLOW_OP_AND_in_boolean_binary_operator1622); 
-                    OP_AND127_tree = new BooleanExpression(OP_AND127) ;
-                    root_0 = (Object)adaptor.becomeRoot(OP_AND127_tree, root_0);
+                    OP_AND139=(Token)match(input,OP_AND,FOLLOW_OP_AND_in_boolean_binary_operator1810); 
+                    OP_AND139_tree = new BooleanExpression(OP_AND139) ;
+                    root_0 = (Object)adaptor.becomeRoot(OP_AND139_tree, root_0);
 
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:239:5: OP_OR
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:259:5: OP_OR
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    OP_OR128=(Token)match(input,OP_OR,FOLLOW_OP_OR_in_boolean_binary_operator1632); 
-                    OP_OR128_tree = new BooleanExpression(OP_OR128) ;
-                    root_0 = (Object)adaptor.becomeRoot(OP_OR128_tree, root_0);
-
-
-                    }
-                    break;
-                case 3 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:240:5: OP_XOR
-                    {
-                    root_0 = (Object)adaptor.nil();
-
-                    OP_XOR129=(Token)match(input,OP_XOR,FOLLOW_OP_XOR_in_boolean_binary_operator1642); 
-                    OP_XOR129_tree = new BooleanExpression(OP_XOR129) ;
-                    root_0 = (Object)adaptor.becomeRoot(OP_XOR129_tree, root_0);
+                    OP_OR140=(Token)match(input,OP_OR,FOLLOW_OP_OR_in_boolean_binary_operator1820); 
+                    OP_OR140_tree = new BooleanExpression(OP_OR140) ;
+                    root_0 = (Object)adaptor.becomeRoot(OP_OR140_tree, root_0);
 
 
                     }
@@ -4917,26 +5339,26 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "boolean_unary_operator"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:242:10: fragment boolean_unary_operator : OP_NOT ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:261:10: fragment boolean_unary_operator : OP_NOT ;
     public final OmttParser.boolean_unary_operator_return boolean_unary_operator() throws RecognitionException {
         OmttParser.boolean_unary_operator_return retval = new OmttParser.boolean_unary_operator_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token OP_NOT130=null;
+        Token OP_NOT141=null;
 
-        Object OP_NOT130_tree=null;
+        Object OP_NOT141_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:243:3: ( OP_NOT )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:243:5: OP_NOT
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:262:3: ( OP_NOT )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:262:5: OP_NOT
             {
             root_0 = (Object)adaptor.nil();
 
-            OP_NOT130=(Token)match(input,OP_NOT,FOLLOW_OP_NOT_in_boolean_unary_operator1660); 
-            OP_NOT130_tree = new BooleanExpression(OP_NOT130) ;
-            root_0 = (Object)adaptor.becomeRoot(OP_NOT130_tree, root_0);
+            OP_NOT141=(Token)match(input,OP_NOT,FOLLOW_OP_NOT_in_boolean_unary_operator1838); 
+            OP_NOT141_tree = new BooleanExpression(OP_NOT141) ;
+            root_0 = (Object)adaptor.becomeRoot(OP_NOT141_tree, root_0);
 
 
             }
@@ -4965,66 +5387,66 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "boolean_comparsion_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:246:1: boolean_comparsion_expression : additive_expression ( boolean_comparsion_operator additive_expression )* ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:265:1: boolean_comparsion_expression : additive_expression ( boolean_comparsion_operator additive_expression )* ;
     public final OmttParser.boolean_comparsion_expression_return boolean_comparsion_expression() throws RecognitionException {
         OmttParser.boolean_comparsion_expression_return retval = new OmttParser.boolean_comparsion_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.additive_expression_return additive_expression131 = null;
+        OmttParser.additive_expression_return additive_expression142 = null;
 
-        OmttParser.boolean_comparsion_operator_return boolean_comparsion_operator132 = null;
+        OmttParser.boolean_comparsion_operator_return boolean_comparsion_operator143 = null;
 
-        OmttParser.additive_expression_return additive_expression133 = null;
+        OmttParser.additive_expression_return additive_expression144 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:247:3: ( additive_expression ( boolean_comparsion_operator additive_expression )* )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:247:5: additive_expression ( boolean_comparsion_operator additive_expression )*
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:266:3: ( additive_expression ( boolean_comparsion_operator additive_expression )* )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:266:5: additive_expression ( boolean_comparsion_operator additive_expression )*
             {
             root_0 = (Object)adaptor.nil();
 
-            pushFollow(FOLLOW_additive_expression_in_boolean_comparsion_expression1677);
-            additive_expression131=additive_expression();
+            pushFollow(FOLLOW_additive_expression_in_boolean_comparsion_expression1855);
+            additive_expression142=additive_expression();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, additive_expression131.getTree());
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:247:25: ( boolean_comparsion_operator additive_expression )*
-            loop43:
+            adaptor.addChild(root_0, additive_expression142.getTree());
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:266:25: ( boolean_comparsion_operator additive_expression )*
+            loop45:
             do {
-                int alt43=2;
-                int LA43_0 = input.LA(1);
+                int alt45=2;
+                int LA45_0 = input.LA(1);
 
-                if ( ((LA43_0>=OP_EQUAL && LA43_0<=OP_GE)) ) {
-                    alt43=1;
+                if ( ((LA45_0>=OP_EQUAL && LA45_0<=OP_GE)) ) {
+                    alt45=1;
                 }
 
 
-                switch (alt43) {
+                switch (alt45) {
             	case 1 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:247:26: boolean_comparsion_operator additive_expression
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:266:26: boolean_comparsion_operator additive_expression
             	    {
-            	    pushFollow(FOLLOW_boolean_comparsion_operator_in_boolean_comparsion_expression1680);
-            	    boolean_comparsion_operator132=boolean_comparsion_operator();
+            	    pushFollow(FOLLOW_boolean_comparsion_operator_in_boolean_comparsion_expression1858);
+            	    boolean_comparsion_operator143=boolean_comparsion_operator();
 
             	    state._fsp--;
 
-            	    root_0 = (Object)adaptor.becomeRoot(boolean_comparsion_operator132.getTree(), root_0);
-            	    pushFollow(FOLLOW_additive_expression_in_boolean_comparsion_expression1683);
-            	    additive_expression133=additive_expression();
+            	    root_0 = (Object)adaptor.becomeRoot(boolean_comparsion_operator143.getTree(), root_0);
+            	    pushFollow(FOLLOW_additive_expression_in_boolean_comparsion_expression1861);
+            	    additive_expression144=additive_expression();
 
             	    state._fsp--;
 
-            	    adaptor.addChild(root_0, additive_expression133.getTree());
+            	    adaptor.addChild(root_0, additive_expression144.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop43;
+            	    break loop45;
                 }
             } while (true);
 
@@ -5055,137 +5477,137 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "boolean_comparsion_operator"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:249:10: fragment boolean_comparsion_operator : ( OP_EQUAL | OP_NOT_EQUAL | OP_LE | OP_LEQ | OP_GE | OP_GEQ );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:268:10: fragment boolean_comparsion_operator : ( OP_EQUAL | OP_NOT_EQUAL | OP_LE | OP_LEQ | OP_GE | OP_GEQ );
     public final OmttParser.boolean_comparsion_operator_return boolean_comparsion_operator() throws RecognitionException {
         OmttParser.boolean_comparsion_operator_return retval = new OmttParser.boolean_comparsion_operator_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token OP_EQUAL134=null;
-        Token OP_NOT_EQUAL135=null;
-        Token OP_LE136=null;
-        Token OP_LEQ137=null;
-        Token OP_GE138=null;
-        Token OP_GEQ139=null;
+        Token OP_EQUAL145=null;
+        Token OP_NOT_EQUAL146=null;
+        Token OP_LE147=null;
+        Token OP_LEQ148=null;
+        Token OP_GE149=null;
+        Token OP_GEQ150=null;
 
-        Object OP_EQUAL134_tree=null;
-        Object OP_NOT_EQUAL135_tree=null;
-        Object OP_LE136_tree=null;
-        Object OP_LEQ137_tree=null;
-        Object OP_GE138_tree=null;
-        Object OP_GEQ139_tree=null;
+        Object OP_EQUAL145_tree=null;
+        Object OP_NOT_EQUAL146_tree=null;
+        Object OP_LE147_tree=null;
+        Object OP_LEQ148_tree=null;
+        Object OP_GE149_tree=null;
+        Object OP_GEQ150_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:250:3: ( OP_EQUAL | OP_NOT_EQUAL | OP_LE | OP_LEQ | OP_GE | OP_GEQ )
-            int alt44=6;
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:269:3: ( OP_EQUAL | OP_NOT_EQUAL | OP_LE | OP_LEQ | OP_GE | OP_GEQ )
+            int alt46=6;
             switch ( input.LA(1) ) {
             case OP_EQUAL:
                 {
-                alt44=1;
+                alt46=1;
                 }
                 break;
             case OP_NOT_EQUAL:
                 {
-                alt44=2;
+                alt46=2;
                 }
                 break;
             case OP_LE:
                 {
-                alt44=3;
+                alt46=3;
                 }
                 break;
             case OP_LEQ:
                 {
-                alt44=4;
+                alt46=4;
                 }
                 break;
             case OP_GE:
                 {
-                alt44=5;
+                alt46=5;
                 }
                 break;
             case OP_GEQ:
                 {
-                alt44=6;
+                alt46=6;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 44, 0, input);
+                    new NoViableAltException("", 46, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt44) {
+            switch (alt46) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:250:5: OP_EQUAL
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:269:5: OP_EQUAL
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    OP_EQUAL134=(Token)match(input,OP_EQUAL,FOLLOW_OP_EQUAL_in_boolean_comparsion_operator1699); 
-                    OP_EQUAL134_tree = new BooleanExpression(OP_EQUAL134) ;
-                    root_0 = (Object)adaptor.becomeRoot(OP_EQUAL134_tree, root_0);
+                    OP_EQUAL145=(Token)match(input,OP_EQUAL,FOLLOW_OP_EQUAL_in_boolean_comparsion_operator1877); 
+                    OP_EQUAL145_tree = new BooleanExpression(OP_EQUAL145) ;
+                    root_0 = (Object)adaptor.becomeRoot(OP_EQUAL145_tree, root_0);
 
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:251:5: OP_NOT_EQUAL
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:270:5: OP_NOT_EQUAL
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    OP_NOT_EQUAL135=(Token)match(input,OP_NOT_EQUAL,FOLLOW_OP_NOT_EQUAL_in_boolean_comparsion_operator1709); 
-                    OP_NOT_EQUAL135_tree = new BooleanExpression(OP_NOT_EQUAL135) ;
-                    root_0 = (Object)adaptor.becomeRoot(OP_NOT_EQUAL135_tree, root_0);
+                    OP_NOT_EQUAL146=(Token)match(input,OP_NOT_EQUAL,FOLLOW_OP_NOT_EQUAL_in_boolean_comparsion_operator1887); 
+                    OP_NOT_EQUAL146_tree = new BooleanExpression(OP_NOT_EQUAL146) ;
+                    root_0 = (Object)adaptor.becomeRoot(OP_NOT_EQUAL146_tree, root_0);
 
 
                     }
                     break;
                 case 3 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:252:5: OP_LE
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:271:5: OP_LE
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    OP_LE136=(Token)match(input,OP_LE,FOLLOW_OP_LE_in_boolean_comparsion_operator1719); 
-                    OP_LE136_tree = new BooleanExpression(OP_LE136) ;
-                    root_0 = (Object)adaptor.becomeRoot(OP_LE136_tree, root_0);
+                    OP_LE147=(Token)match(input,OP_LE,FOLLOW_OP_LE_in_boolean_comparsion_operator1897); 
+                    OP_LE147_tree = new BooleanExpression(OP_LE147) ;
+                    root_0 = (Object)adaptor.becomeRoot(OP_LE147_tree, root_0);
 
 
                     }
                     break;
                 case 4 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:253:5: OP_LEQ
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:272:5: OP_LEQ
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    OP_LEQ137=(Token)match(input,OP_LEQ,FOLLOW_OP_LEQ_in_boolean_comparsion_operator1729); 
-                    OP_LEQ137_tree = new BooleanExpression(OP_LEQ137) ;
-                    root_0 = (Object)adaptor.becomeRoot(OP_LEQ137_tree, root_0);
+                    OP_LEQ148=(Token)match(input,OP_LEQ,FOLLOW_OP_LEQ_in_boolean_comparsion_operator1907); 
+                    OP_LEQ148_tree = new BooleanExpression(OP_LEQ148) ;
+                    root_0 = (Object)adaptor.becomeRoot(OP_LEQ148_tree, root_0);
 
 
                     }
                     break;
                 case 5 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:254:5: OP_GE
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:273:5: OP_GE
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    OP_GE138=(Token)match(input,OP_GE,FOLLOW_OP_GE_in_boolean_comparsion_operator1739); 
-                    OP_GE138_tree = new BooleanExpression(OP_GE138) ;
-                    root_0 = (Object)adaptor.becomeRoot(OP_GE138_tree, root_0);
+                    OP_GE149=(Token)match(input,OP_GE,FOLLOW_OP_GE_in_boolean_comparsion_operator1917); 
+                    OP_GE149_tree = new BooleanExpression(OP_GE149) ;
+                    root_0 = (Object)adaptor.becomeRoot(OP_GE149_tree, root_0);
 
 
                     }
                     break;
                 case 6 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:255:5: OP_GEQ
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:274:5: OP_GEQ
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    OP_GEQ139=(Token)match(input,OP_GEQ,FOLLOW_OP_GEQ_in_boolean_comparsion_operator1749); 
-                    OP_GEQ139_tree = new BooleanExpression(OP_GEQ139) ;
-                    root_0 = (Object)adaptor.becomeRoot(OP_GEQ139_tree, root_0);
+                    OP_GEQ150=(Token)match(input,OP_GEQ,FOLLOW_OP_GEQ_in_boolean_comparsion_operator1927); 
+                    OP_GEQ150_tree = new BooleanExpression(OP_GEQ150) ;
+                    root_0 = (Object)adaptor.becomeRoot(OP_GEQ150_tree, root_0);
 
 
                     }
@@ -5216,83 +5638,83 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "additive_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:261:1: additive_expression : multiplicative_expression ( ( OP_PLUS | OP_MINUS ) multiplicative_expression )* ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:280:1: additive_expression : multiplicative_expression ( ( OP_PLUS | OP_MINUS ) multiplicative_expression )* ;
     public final OmttParser.additive_expression_return additive_expression() throws RecognitionException {
         OmttParser.additive_expression_return retval = new OmttParser.additive_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token OP_PLUS141=null;
-        Token OP_MINUS142=null;
-        OmttParser.multiplicative_expression_return multiplicative_expression140 = null;
+        Token OP_PLUS152=null;
+        Token OP_MINUS153=null;
+        OmttParser.multiplicative_expression_return multiplicative_expression151 = null;
 
-        OmttParser.multiplicative_expression_return multiplicative_expression143 = null;
+        OmttParser.multiplicative_expression_return multiplicative_expression154 = null;
 
 
-        Object OP_PLUS141_tree=null;
-        Object OP_MINUS142_tree=null;
+        Object OP_PLUS152_tree=null;
+        Object OP_MINUS153_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:262:3: ( multiplicative_expression ( ( OP_PLUS | OP_MINUS ) multiplicative_expression )* )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:262:5: multiplicative_expression ( ( OP_PLUS | OP_MINUS ) multiplicative_expression )*
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:281:3: ( multiplicative_expression ( ( OP_PLUS | OP_MINUS ) multiplicative_expression )* )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:281:5: multiplicative_expression ( ( OP_PLUS | OP_MINUS ) multiplicative_expression )*
             {
             root_0 = (Object)adaptor.nil();
 
-            pushFollow(FOLLOW_multiplicative_expression_in_additive_expression1769);
-            multiplicative_expression140=multiplicative_expression();
+            pushFollow(FOLLOW_multiplicative_expression_in_additive_expression1947);
+            multiplicative_expression151=multiplicative_expression();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, multiplicative_expression140.getTree());
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:263:5: ( ( OP_PLUS | OP_MINUS ) multiplicative_expression )*
-            loop46:
+            adaptor.addChild(root_0, multiplicative_expression151.getTree());
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:282:5: ( ( OP_PLUS | OP_MINUS ) multiplicative_expression )*
+            loop48:
             do {
-                int alt46=2;
-                int LA46_0 = input.LA(1);
+                int alt48=2;
+                int LA48_0 = input.LA(1);
 
-                if ( ((LA46_0>=OP_PLUS && LA46_0<=OP_MINUS)) ) {
-                    alt46=1;
+                if ( ((LA48_0>=OP_PLUS && LA48_0<=OP_MINUS)) ) {
+                    alt48=1;
                 }
 
 
-                switch (alt46) {
+                switch (alt48) {
             	case 1 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:264:7: ( OP_PLUS | OP_MINUS ) multiplicative_expression
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:283:7: ( OP_PLUS | OP_MINUS ) multiplicative_expression
             	    {
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:264:7: ( OP_PLUS | OP_MINUS )
-            	    int alt45=2;
-            	    int LA45_0 = input.LA(1);
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:283:7: ( OP_PLUS | OP_MINUS )
+            	    int alt47=2;
+            	    int LA47_0 = input.LA(1);
 
-            	    if ( (LA45_0==OP_PLUS) ) {
-            	        alt45=1;
+            	    if ( (LA47_0==OP_PLUS) ) {
+            	        alt47=1;
             	    }
-            	    else if ( (LA45_0==OP_MINUS) ) {
-            	        alt45=2;
+            	    else if ( (LA47_0==OP_MINUS) ) {
+            	        alt47=2;
             	    }
             	    else {
             	        NoViableAltException nvae =
-            	            new NoViableAltException("", 45, 0, input);
+            	            new NoViableAltException("", 47, 0, input);
 
             	        throw nvae;
             	    }
-            	    switch (alt45) {
+            	    switch (alt47) {
             	        case 1 :
-            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:264:9: OP_PLUS
+            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:283:9: OP_PLUS
             	            {
-            	            OP_PLUS141=(Token)match(input,OP_PLUS,FOLLOW_OP_PLUS_in_additive_expression1785); 
-            	            OP_PLUS141_tree = new ArithmeticExpression(OP_PLUS141) ;
-            	            root_0 = (Object)adaptor.becomeRoot(OP_PLUS141_tree, root_0);
+            	            OP_PLUS152=(Token)match(input,OP_PLUS,FOLLOW_OP_PLUS_in_additive_expression1963); 
+            	            OP_PLUS152_tree = new ArithmeticExpression(OP_PLUS152) ;
+            	            root_0 = (Object)adaptor.becomeRoot(OP_PLUS152_tree, root_0);
 
 
             	            }
             	            break;
             	        case 2 :
-            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:265:9: OP_MINUS
+            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:284:9: OP_MINUS
             	            {
-            	            OP_MINUS142=(Token)match(input,OP_MINUS,FOLLOW_OP_MINUS_in_additive_expression1799); 
-            	            OP_MINUS142_tree = new ArithmeticExpression(OP_MINUS142) ;
-            	            root_0 = (Object)adaptor.becomeRoot(OP_MINUS142_tree, root_0);
+            	            OP_MINUS153=(Token)match(input,OP_MINUS,FOLLOW_OP_MINUS_in_additive_expression1977); 
+            	            OP_MINUS153_tree = new ArithmeticExpression(OP_MINUS153) ;
+            	            root_0 = (Object)adaptor.becomeRoot(OP_MINUS153_tree, root_0);
 
 
             	            }
@@ -5300,18 +5722,18 @@ public class OmttParser extends AbstractOmttParser {
 
             	    }
 
-            	    pushFollow(FOLLOW_multiplicative_expression_in_additive_expression1819);
-            	    multiplicative_expression143=multiplicative_expression();
+            	    pushFollow(FOLLOW_multiplicative_expression_in_additive_expression1997);
+            	    multiplicative_expression154=multiplicative_expression();
 
             	    state._fsp--;
 
-            	    adaptor.addChild(root_0, multiplicative_expression143.getTree());
+            	    adaptor.addChild(root_0, multiplicative_expression154.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop46;
+            	    break loop48;
                 }
             } while (true);
 
@@ -5342,104 +5764,104 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "multiplicative_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:271:1: multiplicative_expression : negative_expression ( ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression )* ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:290:1: multiplicative_expression : negative_expression ( ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression )* ;
     public final OmttParser.multiplicative_expression_return multiplicative_expression() throws RecognitionException {
         OmttParser.multiplicative_expression_return retval = new OmttParser.multiplicative_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token OP_MULTIPLY145=null;
-        Token SLASH146=null;
-        Token OP_MODULO147=null;
-        OmttParser.negative_expression_return negative_expression144 = null;
+        Token OP_MULTIPLY156=null;
+        Token SLASH157=null;
+        Token OP_MODULO158=null;
+        OmttParser.negative_expression_return negative_expression155 = null;
 
-        OmttParser.negative_expression_return negative_expression148 = null;
+        OmttParser.negative_expression_return negative_expression159 = null;
 
 
-        Object OP_MULTIPLY145_tree=null;
-        Object SLASH146_tree=null;
-        Object OP_MODULO147_tree=null;
+        Object OP_MULTIPLY156_tree=null;
+        Object SLASH157_tree=null;
+        Object OP_MODULO158_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:272:3: ( negative_expression ( ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression )* )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:272:5: negative_expression ( ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression )*
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:291:3: ( negative_expression ( ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression )* )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:291:5: negative_expression ( ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression )*
             {
             root_0 = (Object)adaptor.nil();
 
-            pushFollow(FOLLOW_negative_expression_in_multiplicative_expression1839);
-            negative_expression144=negative_expression();
+            pushFollow(FOLLOW_negative_expression_in_multiplicative_expression2017);
+            negative_expression155=negative_expression();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, negative_expression144.getTree());
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:273:5: ( ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression )*
-            loop48:
+            adaptor.addChild(root_0, negative_expression155.getTree());
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:292:5: ( ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression )*
+            loop50:
             do {
-                int alt48=2;
-                int LA48_0 = input.LA(1);
+                int alt50=2;
+                int LA50_0 = input.LA(1);
 
-                if ( (LA48_0==SLASH||(LA48_0>=OP_MULTIPLY && LA48_0<=OP_MODULO)) ) {
-                    alt48=1;
+                if ( (LA50_0==SLASH||(LA50_0>=OP_MULTIPLY && LA50_0<=OP_MODULO)) ) {
+                    alt50=1;
                 }
 
 
-                switch (alt48) {
+                switch (alt50) {
             	case 1 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:273:7: ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:292:7: ( OP_MULTIPLY | SLASH | OP_MODULO ) negative_expression
             	    {
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:273:7: ( OP_MULTIPLY | SLASH | OP_MODULO )
-            	    int alt47=3;
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:292:7: ( OP_MULTIPLY | SLASH | OP_MODULO )
+            	    int alt49=3;
             	    switch ( input.LA(1) ) {
             	    case OP_MULTIPLY:
             	        {
-            	        alt47=1;
+            	        alt49=1;
             	        }
             	        break;
             	    case SLASH:
             	        {
-            	        alt47=2;
+            	        alt49=2;
             	        }
             	        break;
             	    case OP_MODULO:
             	        {
-            	        alt47=3;
+            	        alt49=3;
             	        }
             	        break;
             	    default:
             	        NoViableAltException nvae =
-            	            new NoViableAltException("", 47, 0, input);
+            	            new NoViableAltException("", 49, 0, input);
 
             	        throw nvae;
             	    }
 
-            	    switch (alt47) {
+            	    switch (alt49) {
             	        case 1 :
-            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:273:9: OP_MULTIPLY
+            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:292:9: OP_MULTIPLY
             	            {
-            	            OP_MULTIPLY145=(Token)match(input,OP_MULTIPLY,FOLLOW_OP_MULTIPLY_in_multiplicative_expression1849); 
-            	            OP_MULTIPLY145_tree = new ArithmeticExpression(OP_MULTIPLY145) ;
-            	            root_0 = (Object)adaptor.becomeRoot(OP_MULTIPLY145_tree, root_0);
+            	            OP_MULTIPLY156=(Token)match(input,OP_MULTIPLY,FOLLOW_OP_MULTIPLY_in_multiplicative_expression2027); 
+            	            OP_MULTIPLY156_tree = new ArithmeticExpression(OP_MULTIPLY156) ;
+            	            root_0 = (Object)adaptor.becomeRoot(OP_MULTIPLY156_tree, root_0);
 
 
             	            }
             	            break;
             	        case 2 :
-            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:274:9: SLASH
+            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:293:9: SLASH
             	            {
-            	            SLASH146=(Token)match(input,SLASH,FOLLOW_SLASH_in_multiplicative_expression1863); 
-            	            SLASH146_tree = new ArithmeticExpression(SLASH146) ;
-            	            root_0 = (Object)adaptor.becomeRoot(SLASH146_tree, root_0);
+            	            SLASH157=(Token)match(input,SLASH,FOLLOW_SLASH_in_multiplicative_expression2041); 
+            	            SLASH157_tree = new ArithmeticExpression(SLASH157) ;
+            	            root_0 = (Object)adaptor.becomeRoot(SLASH157_tree, root_0);
 
 
             	            }
             	            break;
             	        case 3 :
-            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:275:9: OP_MODULO
+            	            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:294:9: OP_MODULO
             	            {
-            	            OP_MODULO147=(Token)match(input,OP_MODULO,FOLLOW_OP_MODULO_in_multiplicative_expression1877); 
-            	            OP_MODULO147_tree = new ArithmeticExpression(OP_MODULO147) ;
-            	            root_0 = (Object)adaptor.becomeRoot(OP_MODULO147_tree, root_0);
+            	            OP_MODULO158=(Token)match(input,OP_MODULO,FOLLOW_OP_MODULO_in_multiplicative_expression2055); 
+            	            OP_MODULO158_tree = new ArithmeticExpression(OP_MODULO158) ;
+            	            root_0 = (Object)adaptor.becomeRoot(OP_MODULO158_tree, root_0);
 
 
             	            }
@@ -5447,18 +5869,18 @@ public class OmttParser extends AbstractOmttParser {
 
             	    }
 
-            	    pushFollow(FOLLOW_negative_expression_in_multiplicative_expression1897);
-            	    negative_expression148=negative_expression();
+            	    pushFollow(FOLLOW_negative_expression_in_multiplicative_expression2075);
+            	    negative_expression159=negative_expression();
 
             	    state._fsp--;
 
-            	    adaptor.addChild(root_0, negative_expression148.getTree());
+            	    adaptor.addChild(root_0, negative_expression159.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop48;
+            	    break loop50;
                 }
             } while (true);
 
@@ -5489,56 +5911,56 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "negative_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:281:1: negative_expression : ( OP_MINUS context_expression -> ^( OP_MINUS context_expression ) | context_expression );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:300:1: negative_expression : ( OP_MINUS functional_expression -> ^( OP_MINUS functional_expression ) | functional_expression );
     public final OmttParser.negative_expression_return negative_expression() throws RecognitionException {
         OmttParser.negative_expression_return retval = new OmttParser.negative_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token OP_MINUS149=null;
-        OmttParser.context_expression_return context_expression150 = null;
+        Token OP_MINUS160=null;
+        OmttParser.functional_expression_return functional_expression161 = null;
 
-        OmttParser.context_expression_return context_expression151 = null;
+        OmttParser.functional_expression_return functional_expression162 = null;
 
 
-        Object OP_MINUS149_tree=null;
+        Object OP_MINUS160_tree=null;
         RewriteRuleTokenStream stream_OP_MINUS=new RewriteRuleTokenStream(adaptor,"token OP_MINUS");
-        RewriteRuleSubtreeStream stream_context_expression=new RewriteRuleSubtreeStream(adaptor,"rule context_expression");
+        RewriteRuleSubtreeStream stream_functional_expression=new RewriteRuleSubtreeStream(adaptor,"rule functional_expression");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:282:2: ( OP_MINUS context_expression -> ^( OP_MINUS context_expression ) | context_expression )
-            int alt49=2;
-            int LA49_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:301:2: ( OP_MINUS functional_expression -> ^( OP_MINUS functional_expression ) | functional_expression )
+            int alt51=2;
+            int LA51_0 = input.LA(1);
 
-            if ( (LA49_0==OP_MINUS) ) {
-                alt49=1;
+            if ( (LA51_0==OP_MINUS) ) {
+                alt51=1;
             }
-            else if ( ((LA49_0>=STRING_LITERAL && LA49_0<=REAL_NUMBER)||LA49_0==DATA_START||LA49_0==NULL||(LA49_0>=TRUE && LA49_0<=FALSE)||(LA49_0>=TILDE && LA49_0<=LEFT_PAREN)||LA49_0==VAR_ID) ) {
-                alt49=2;
+            else if ( ((LA51_0>=STRING_LITERAL && LA51_0<=REAL_NUMBER)||LA51_0==DATA_START||LA51_0==NULL||(LA51_0>=TRUE && LA51_0<=FALSE)||(LA51_0>=TILDE && LA51_0<=LEFT_PAREN)||LA51_0==OP_GENERAL||LA51_0==VAR_ID) ) {
+                alt51=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 49, 0, input);
+                    new NoViableAltException("", 51, 0, input);
 
                 throw nvae;
             }
-            switch (alt49) {
+            switch (alt51) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:282:4: OP_MINUS context_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:301:4: OP_MINUS functional_expression
                     {
-                    OP_MINUS149=(Token)match(input,OP_MINUS,FOLLOW_OP_MINUS_in_negative_expression1916);  
-                    stream_OP_MINUS.add(OP_MINUS149);
+                    OP_MINUS160=(Token)match(input,OP_MINUS,FOLLOW_OP_MINUS_in_negative_expression2094);  
+                    stream_OP_MINUS.add(OP_MINUS160);
 
-                    pushFollow(FOLLOW_context_expression_in_negative_expression1918);
-                    context_expression150=context_expression();
+                    pushFollow(FOLLOW_functional_expression_in_negative_expression2096);
+                    functional_expression161=functional_expression();
 
                     state._fsp--;
 
-                    stream_context_expression.add(context_expression150.getTree());
+                    stream_functional_expression.add(functional_expression161.getTree());
 
 
                     // AST REWRITE
-                    // elements: OP_MINUS, context_expression
+                    // elements: functional_expression, OP_MINUS
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -5548,14 +5970,14 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 283:3: -> ^( OP_MINUS context_expression )
+                    // 302:3: -> ^( OP_MINUS functional_expression )
                     {
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:283:6: ^( OP_MINUS context_expression )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:302:6: ^( OP_MINUS functional_expression )
                         {
                         Object root_1 = (Object)adaptor.nil();
                         root_1 = (Object)adaptor.becomeRoot(new ArithmeticMinus(stream_OP_MINUS.nextToken()), root_1);
 
-                        adaptor.addChild(root_1, stream_context_expression.nextTree());
+                        adaptor.addChild(root_1, stream_functional_expression.nextTree());
 
                         adaptor.addChild(root_0, root_1);
                         }
@@ -5566,16 +5988,16 @@ public class OmttParser extends AbstractOmttParser {
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:284:4: context_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:303:4: functional_expression
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_context_expression_in_negative_expression1936);
-                    context_expression151=context_expression();
+                    pushFollow(FOLLOW_functional_expression_in_negative_expression2114);
+                    functional_expression162=functional_expression();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, context_expression151.getTree());
+                    adaptor.addChild(root_0, functional_expression162.getTree());
 
                     }
                     break;
@@ -5599,347 +6021,35 @@ public class OmttParser extends AbstractOmttParser {
     }
     // $ANTLR end "negative_expression"
 
-    public static class context_expression_return extends ParserRuleReturnScope {
-        Object tree;
-        public Object getTree() { return tree; }
-    };
-
-    // $ANTLR start "context_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:289:1: context_expression : (fe= functional_expression -> $fe) ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_CONTEXT single_type -> ^( CAST single_type $context_expression) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )* ;
-    public final OmttParser.context_expression_return context_expression() throws RecognitionException {
-        OmttParser.context_expression_return retval = new OmttParser.context_expression_return();
-        retval.start = input.LT(1);
-
-        Object root_0 = null;
-
-        Token OP_CONTEXT152=null;
-        Token OP_CONTEXT154=null;
-        Token OP_CONTEXT156=null;
-        Token OP_EXPRESSION_CONTEXT158=null;
-        OmttParser.functional_expression_return fe = null;
-
-        OmttParser.function_arguments_return arguments = null;
-
-        OmttParser.functional_expression_return ce = null;
-
-        OmttParser.atom_expression_return atom_expression153 = null;
-
-        OmttParser.lambda_expression_no_context_return lambda_expression_no_context155 = null;
-
-        OmttParser.single_type_return single_type157 = null;
-
-
-        Object OP_CONTEXT152_tree=null;
-        Object OP_CONTEXT154_tree=null;
-        Object OP_CONTEXT156_tree=null;
-        Object OP_EXPRESSION_CONTEXT158_tree=null;
-        RewriteRuleTokenStream stream_OP_CONTEXT=new RewriteRuleTokenStream(adaptor,"token OP_CONTEXT");
-        RewriteRuleTokenStream stream_OP_EXPRESSION_CONTEXT=new RewriteRuleTokenStream(adaptor,"token OP_EXPRESSION_CONTEXT");
-        RewriteRuleSubtreeStream stream_atom_expression=new RewriteRuleSubtreeStream(adaptor,"rule atom_expression");
-        RewriteRuleSubtreeStream stream_lambda_expression_no_context=new RewriteRuleSubtreeStream(adaptor,"rule lambda_expression_no_context");
-        RewriteRuleSubtreeStream stream_functional_expression=new RewriteRuleSubtreeStream(adaptor,"rule functional_expression");
-        RewriteRuleSubtreeStream stream_single_type=new RewriteRuleSubtreeStream(adaptor,"rule single_type");
-        RewriteRuleSubtreeStream stream_function_arguments=new RewriteRuleSubtreeStream(adaptor,"rule function_arguments");
-        try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:290:3: ( (fe= functional_expression -> $fe) ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_CONTEXT single_type -> ^( CAST single_type $context_expression) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )* )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:290:5: (fe= functional_expression -> $fe) ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_CONTEXT single_type -> ^( CAST single_type $context_expression) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )*
-            {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:290:5: (fe= functional_expression -> $fe)
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:290:6: fe= functional_expression
-            {
-            pushFollow(FOLLOW_functional_expression_in_context_expression1953);
-            fe=functional_expression();
-
-            state._fsp--;
-
-            stream_functional_expression.add(fe.getTree());
-
-
-            // AST REWRITE
-            // elements: fe
-            // token labels: 
-            // rule labels: retval, fe
-            // token list labels: 
-            // rule list labels: 
-            // wildcard labels: 
-            retval.tree = root_0;
-            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-            RewriteRuleSubtreeStream stream_fe=new RewriteRuleSubtreeStream(adaptor,"rule fe",fe!=null?fe.tree:null);
-
-            root_0 = (Object)adaptor.nil();
-            // 290:31: -> $fe
-            {
-                adaptor.addChild(root_0, stream_fe.nextTree());
-
-            }
-
-            retval.tree = root_0;
-            }
-
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:291:5: ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_CONTEXT single_type -> ^( CAST single_type $context_expression) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )*
-            loop50:
-            do {
-                int alt50=5;
-                alt50 = dfa50.predict(input);
-                switch (alt50) {
-            	case 1 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:291:7: OP_CONTEXT atom_expression arguments= function_arguments
-            	    {
-            	    OP_CONTEXT152=(Token)match(input,OP_CONTEXT,FOLLOW_OP_CONTEXT_in_context_expression1967);  
-            	    stream_OP_CONTEXT.add(OP_CONTEXT152);
-
-            	    pushFollow(FOLLOW_atom_expression_in_context_expression1969);
-            	    atom_expression153=atom_expression();
-
-            	    state._fsp--;
-
-            	    stream_atom_expression.add(atom_expression153.getTree());
-            	    pushFollow(FOLLOW_function_arguments_in_context_expression1973);
-            	    arguments=function_arguments();
-
-            	    state._fsp--;
-
-            	    stream_function_arguments.add(arguments.getTree());
-
-
-            	    // AST REWRITE
-            	    // elements: atom_expression, arguments, context_expression
-            	    // token labels: 
-            	    // rule labels: retval, arguments
-            	    // token list labels: 
-            	    // rule list labels: 
-            	    // wildcard labels: 
-            	    retval.tree = root_0;
-            	    RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-            	    RewriteRuleSubtreeStream stream_arguments=new RewriteRuleSubtreeStream(adaptor,"rule arguments",arguments!=null?arguments.tree:null);
-
-            	    root_0 = (Object)adaptor.nil();
-            	    // 292:7: -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? )
-            	    {
-            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:292:10: ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? )
-            	        {
-            	        Object root_1 = (Object)adaptor.nil();
-            	        root_1 = (Object)adaptor.becomeRoot(new Call(CALL, true), root_1);
-
-            	        adaptor.addChild(root_1, stream_atom_expression.nextTree());
-            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:292:45: ^( ARGUMENT $context_expression)
-            	        {
-            	        Object root_2 = (Object)adaptor.nil();
-            	        root_2 = (Object)adaptor.becomeRoot(new FunctionArgument(ARGUMENT), root_2);
-
-            	        adaptor.addChild(root_2, stream_retval.nextTree());
-
-            	        adaptor.addChild(root_1, root_2);
-            	        }
-            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:292:95: ( $arguments)?
-            	        if ( stream_arguments.hasNext() ) {
-            	            adaptor.addChild(root_1, stream_arguments.nextTree());
-
-            	        }
-            	        stream_arguments.reset();
-
-            	        adaptor.addChild(root_0, root_1);
-            	        }
-
-            	    }
-
-            	    retval.tree = root_0;
-            	    }
-            	    break;
-            	case 2 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:293:7: OP_CONTEXT lambda_expression_no_context
-            	    {
-            	    OP_CONTEXT154=(Token)match(input,OP_CONTEXT,FOLLOW_OP_CONTEXT_in_context_expression2013);  
-            	    stream_OP_CONTEXT.add(OP_CONTEXT154);
-
-            	    pushFollow(FOLLOW_lambda_expression_no_context_in_context_expression2015);
-            	    lambda_expression_no_context155=lambda_expression_no_context();
-
-            	    state._fsp--;
-
-            	    stream_lambda_expression_no_context.add(lambda_expression_no_context155.getTree());
-
-
-            	    // AST REWRITE
-            	    // elements: context_expression, lambda_expression_no_context
-            	    // token labels: 
-            	    // rule labels: retval
-            	    // token list labels: 
-            	    // rule list labels: 
-            	    // wildcard labels: 
-            	    retval.tree = root_0;
-            	    RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-
-            	    root_0 = (Object)adaptor.nil();
-            	    // 294:7: -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) )
-            	    {
-            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:294:10: ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) )
-            	        {
-            	        Object root_1 = (Object)adaptor.nil();
-            	        root_1 = (Object)adaptor.becomeRoot(new Call(CALL, true), root_1);
-
-            	        adaptor.addChild(root_1, stream_lambda_expression_no_context.nextTree());
-            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:294:58: ^( ARGUMENT $context_expression)
-            	        {
-            	        Object root_2 = (Object)adaptor.nil();
-            	        root_2 = (Object)adaptor.becomeRoot(new FunctionArgument(ARGUMENT), root_2);
-
-            	        adaptor.addChild(root_2, stream_retval.nextTree());
-
-            	        adaptor.addChild(root_1, root_2);
-            	        }
-
-            	        adaptor.addChild(root_0, root_1);
-            	        }
-
-            	    }
-
-            	    retval.tree = root_0;
-            	    }
-            	    break;
-            	case 3 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:295:7: OP_CONTEXT single_type
-            	    {
-            	    OP_CONTEXT156=(Token)match(input,OP_CONTEXT,FOLLOW_OP_CONTEXT_in_context_expression2051);  
-            	    stream_OP_CONTEXT.add(OP_CONTEXT156);
-
-            	    pushFollow(FOLLOW_single_type_in_context_expression2053);
-            	    single_type157=single_type();
-
-            	    state._fsp--;
-
-            	    stream_single_type.add(single_type157.getTree());
-
-
-            	    // AST REWRITE
-            	    // elements: context_expression, single_type
-            	    // token labels: 
-            	    // rule labels: retval
-            	    // token list labels: 
-            	    // rule list labels: 
-            	    // wildcard labels: 
-            	    retval.tree = root_0;
-            	    RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-
-            	    root_0 = (Object)adaptor.nil();
-            	    // 296:7: -> ^( CAST single_type $context_expression)
-            	    {
-            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:296:10: ^( CAST single_type $context_expression)
-            	        {
-            	        Object root_1 = (Object)adaptor.nil();
-            	        root_1 = (Object)adaptor.becomeRoot(new Cast(CAST), root_1);
-
-            	        adaptor.addChild(root_1, stream_single_type.nextTree());
-            	        adaptor.addChild(root_1, stream_retval.nextTree());
-
-            	        adaptor.addChild(root_0, root_1);
-            	        }
-
-            	    }
-
-            	    retval.tree = root_0;
-            	    }
-            	    break;
-            	case 4 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:297:7: OP_EXPRESSION_CONTEXT ce= functional_expression
-            	    {
-            	    OP_EXPRESSION_CONTEXT158=(Token)match(input,OP_EXPRESSION_CONTEXT,FOLLOW_OP_EXPRESSION_CONTEXT_in_context_expression2081);  
-            	    stream_OP_EXPRESSION_CONTEXT.add(OP_EXPRESSION_CONTEXT158);
-
-            	    pushFollow(FOLLOW_functional_expression_in_context_expression2085);
-            	    ce=functional_expression();
-
-            	    state._fsp--;
-
-            	    stream_functional_expression.add(ce.getTree());
-
-
-            	    // AST REWRITE
-            	    // elements: context_expression, OP_EXPRESSION_CONTEXT, ce
-            	    // token labels: 
-            	    // rule labels: retval, ce
-            	    // token list labels: 
-            	    // rule list labels: 
-            	    // wildcard labels: 
-            	    retval.tree = root_0;
-            	    RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-            	    RewriteRuleSubtreeStream stream_ce=new RewriteRuleSubtreeStream(adaptor,"rule ce",ce!=null?ce.tree:null);
-
-            	    root_0 = (Object)adaptor.nil();
-            	    // 298:6: -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce)
-            	    {
-            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:298:9: ^( OP_EXPRESSION_CONTEXT $context_expression $ce)
-            	        {
-            	        Object root_1 = (Object)adaptor.nil();
-            	        root_1 = (Object)adaptor.becomeRoot(new Transformation(stream_OP_EXPRESSION_CONTEXT.nextToken()), root_1);
-
-            	        adaptor.addChild(root_1, stream_retval.nextTree());
-            	        adaptor.addChild(root_1, stream_ce.nextTree());
-
-            	        adaptor.addChild(root_0, root_1);
-            	        }
-
-            	    }
-
-            	    retval.tree = root_0;
-            	    }
-            	    break;
-
-            	default :
-            	    break loop50;
-                }
-            } while (true);
-
-
-            }
-
-            retval.stop = input.LT(-1);
-
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
-            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
-
-        }
-        finally {
-        }
-        return retval;
-    }
-    // $ANTLR end "context_expression"
-
     public static class functional_expression_return extends ParserRuleReturnScope {
         Object tree;
         public Object getTree() { return tree; }
     };
 
     // $ANTLR start "functional_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:304:1: functional_expression : call_expression ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:308:1: functional_expression : call_expression ;
     public final OmttParser.functional_expression_return functional_expression() throws RecognitionException {
         OmttParser.functional_expression_return retval = new OmttParser.functional_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.call_expression_return call_expression159 = null;
+        OmttParser.call_expression_return call_expression163 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:305:3: ( call_expression )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:305:5: call_expression
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:309:3: ( call_expression )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:309:5: call_expression
             {
             root_0 = (Object)adaptor.nil();
 
-            pushFollow(FOLLOW_call_expression_in_functional_expression2127);
-            call_expression159=call_expression();
+            pushFollow(FOLLOW_call_expression_in_functional_expression2128);
+            call_expression163=call_expression();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, call_expression159.getTree());
+            adaptor.addChild(root_0, call_expression163.getTree());
 
             }
 
@@ -5967,83 +6077,83 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "call_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:308:1: call_expression : atom_expression ( ( function_argument )+ -> ^( CALL[false] atom_expression ( function_argument )+ ) | -> ^( atom_expression ) ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:312:1: call_expression : atom_expression ( ( function_argument )+ -> ^( CALL[false] atom_expression ( function_argument )+ ) | -> ^( atom_expression ) ) ;
     public final OmttParser.call_expression_return call_expression() throws RecognitionException {
         OmttParser.call_expression_return retval = new OmttParser.call_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.atom_expression_return atom_expression160 = null;
+        OmttParser.atom_expression_return atom_expression164 = null;
 
-        OmttParser.function_argument_return function_argument161 = null;
+        OmttParser.function_argument_return function_argument165 = null;
 
 
         RewriteRuleSubtreeStream stream_atom_expression=new RewriteRuleSubtreeStream(adaptor,"rule atom_expression");
         RewriteRuleSubtreeStream stream_function_argument=new RewriteRuleSubtreeStream(adaptor,"rule function_argument");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:309:3: ( atom_expression ( ( function_argument )+ -> ^( CALL[false] atom_expression ( function_argument )+ ) | -> ^( atom_expression ) ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:309:5: atom_expression ( ( function_argument )+ -> ^( CALL[false] atom_expression ( function_argument )+ ) | -> ^( atom_expression ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:313:3: ( atom_expression ( ( function_argument )+ -> ^( CALL[false] atom_expression ( function_argument )+ ) | -> ^( atom_expression ) ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:313:5: atom_expression ( ( function_argument )+ -> ^( CALL[false] atom_expression ( function_argument )+ ) | -> ^( atom_expression ) )
             {
-            pushFollow(FOLLOW_atom_expression_in_call_expression2140);
-            atom_expression160=atom_expression();
+            pushFollow(FOLLOW_atom_expression_in_call_expression2141);
+            atom_expression164=atom_expression();
 
             state._fsp--;
 
-            stream_atom_expression.add(atom_expression160.getTree());
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:310:5: ( ( function_argument )+ -> ^( CALL[false] atom_expression ( function_argument )+ ) | -> ^( atom_expression ) )
-            int alt52=2;
-            int LA52_0 = input.LA(1);
+            stream_atom_expression.add(atom_expression164.getTree());
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:314:5: ( ( function_argument )+ -> ^( CALL[false] atom_expression ( function_argument )+ ) | -> ^( atom_expression ) )
+            int alt53=2;
+            int LA53_0 = input.LA(1);
 
-            if ( ((LA52_0>=STRING_LITERAL && LA52_0<=REAL_NUMBER)||LA52_0==DATA_START||LA52_0==NULL||(LA52_0>=TRUE && LA52_0<=FALSE)||(LA52_0>=TILDE && LA52_0<=LEFT_PAREN)||LA52_0==VAR_ID) ) {
-                alt52=1;
+            if ( ((LA53_0>=STRING_LITERAL && LA53_0<=REAL_NUMBER)||LA53_0==DATA_START||LA53_0==NULL||(LA53_0>=TRUE && LA53_0<=FALSE)||(LA53_0>=TILDE && LA53_0<=LEFT_PAREN)||LA53_0==OP_GENERAL||LA53_0==VAR_ID) ) {
+                alt53=1;
             }
-            else if ( ((LA52_0>=CONTENT && LA52_0<=TAG_END)||(LA52_0>=EXPRESSION_END && LA52_0<=OP_DATA_IS_EXPRESSION)||(LA52_0>=AND && LA52_0<=IN)||LA52_0==ELSE||LA52_0==COLON||LA52_0==SLASH||LA52_0==RIGHT_PAREN||(LA52_0>=RIGHT_SQUARE_PAREN && LA52_0<=OP_GE)||(LA52_0>=OP_AND && LA52_0<=OP_OR)||(LA52_0>=OP_CONTEXT && LA52_0<=OP_EXPRESSION_CONTEXT)||LA52_0==OP_CONCAT||LA52_0==OP_XOR) ) {
-                alt52=2;
+            else if ( ((LA53_0>=CONTENT && LA53_0<=TAG_END)||(LA53_0>=EXPRESSION_END && LA53_0<=OP_DATA_IS_EXPRESSION)||(LA53_0>=AND && LA53_0<=IN)||LA53_0==ELSE||(LA53_0>=COLON && LA53_0<=SEMICOLON)||LA53_0==SLASH||LA53_0==RIGHT_PAREN||(LA53_0>=RIGHT_SQUARE_PAREN && LA53_0<=OP_GE)||(LA53_0>=OP_AND && LA53_0<=OP_OR)||(LA53_0>=OP_CONTEXT && LA53_0<=OP_EXPRESSION_CONTEXT)||LA53_0==OP_CONCAT) ) {
+                alt53=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 52, 0, input);
+                    new NoViableAltException("", 53, 0, input);
 
                 throw nvae;
             }
-            switch (alt52) {
+            switch (alt53) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:310:7: ( function_argument )+
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:314:7: ( function_argument )+
                     {
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:310:7: ( function_argument )+
-                    int cnt51=0;
-                    loop51:
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:314:7: ( function_argument )+
+                    int cnt52=0;
+                    loop52:
                     do {
-                        int alt51=2;
-                        int LA51_0 = input.LA(1);
+                        int alt52=2;
+                        int LA52_0 = input.LA(1);
 
-                        if ( ((LA51_0>=STRING_LITERAL && LA51_0<=REAL_NUMBER)||LA51_0==DATA_START||LA51_0==NULL||(LA51_0>=TRUE && LA51_0<=FALSE)||(LA51_0>=TILDE && LA51_0<=LEFT_PAREN)||LA51_0==VAR_ID) ) {
-                            alt51=1;
+                        if ( ((LA52_0>=STRING_LITERAL && LA52_0<=REAL_NUMBER)||LA52_0==DATA_START||LA52_0==NULL||(LA52_0>=TRUE && LA52_0<=FALSE)||(LA52_0>=TILDE && LA52_0<=LEFT_PAREN)||LA52_0==OP_GENERAL||LA52_0==VAR_ID) ) {
+                            alt52=1;
                         }
 
 
-                        switch (alt51) {
+                        switch (alt52) {
                     	case 1 :
-                    	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:310:7: function_argument
+                    	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:314:7: function_argument
                     	    {
-                    	    pushFollow(FOLLOW_function_argument_in_call_expression2148);
-                    	    function_argument161=function_argument();
+                    	    pushFollow(FOLLOW_function_argument_in_call_expression2149);
+                    	    function_argument165=function_argument();
 
                     	    state._fsp--;
 
-                    	    stream_function_argument.add(function_argument161.getTree());
+                    	    stream_function_argument.add(function_argument165.getTree());
 
                     	    }
                     	    break;
 
                     	default :
-                    	    if ( cnt51 >= 1 ) break loop51;
+                    	    if ( cnt52 >= 1 ) break loop52;
                                 EarlyExitException eee =
-                                    new EarlyExitException(51, input);
+                                    new EarlyExitException(52, input);
                                 throw eee;
                         }
-                        cnt51++;
+                        cnt52++;
                     } while (true);
 
 
@@ -6059,9 +6169,9 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 311:7: -> ^( CALL[false] atom_expression ( function_argument )+ )
+                    // 315:7: -> ^( CALL[false] atom_expression ( function_argument )+ )
                     {
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:311:10: ^( CALL[false] atom_expression ( function_argument )+ )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:315:10: ^( CALL[false] atom_expression ( function_argument )+ )
                         {
                         Object root_1 = (Object)adaptor.nil();
                         root_1 = (Object)adaptor.becomeRoot(new Call(CALL, false), root_1);
@@ -6085,7 +6195,7 @@ public class OmttParser extends AbstractOmttParser {
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:312:7: 
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:316:7: 
                     {
                     /* no arguments */
 
@@ -6101,9 +6211,9 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 313:7: -> ^( atom_expression )
+                    // 317:7: -> ^( atom_expression )
                     {
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:313:10: ^( atom_expression )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:317:10: ^( atom_expression )
                         {
                         Object root_1 = (Object)adaptor.nil();
                         root_1 = (Object)adaptor.becomeRoot(stream_atom_expression.nextNode(), root_1);
@@ -6146,60 +6256,60 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "call_tag"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:316:1: call_tag : TAG_START ident= namespace_id function_arguments (content= tag_content )? TAG_END -> ^( CALL[false] $ident ( ^( ARGUMENT $content) )? ( function_arguments )? ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:320:1: call_tag : TAG_START ident= namespace_id function_arguments (content= tag_content )? TAG_END -> ^( CALL[false] $ident ( ^( ARGUMENT $content) )? ( function_arguments )? ) ;
     public final OmttParser.call_tag_return call_tag() throws RecognitionException {
         OmttParser.call_tag_return retval = new OmttParser.call_tag_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token TAG_START162=null;
-        Token TAG_END164=null;
+        Token TAG_START166=null;
+        Token TAG_END168=null;
         OmttParser.namespace_id_return ident = null;
 
         OmttParser.tag_content_return content = null;
 
-        OmttParser.function_arguments_return function_arguments163 = null;
+        OmttParser.function_arguments_return function_arguments167 = null;
 
 
-        Object TAG_START162_tree=null;
-        Object TAG_END164_tree=null;
+        Object TAG_START166_tree=null;
+        Object TAG_END168_tree=null;
         RewriteRuleTokenStream stream_TAG_END=new RewriteRuleTokenStream(adaptor,"token TAG_END");
         RewriteRuleTokenStream stream_TAG_START=new RewriteRuleTokenStream(adaptor,"token TAG_START");
         RewriteRuleSubtreeStream stream_namespace_id=new RewriteRuleSubtreeStream(adaptor,"rule namespace_id");
         RewriteRuleSubtreeStream stream_function_arguments=new RewriteRuleSubtreeStream(adaptor,"rule function_arguments");
         RewriteRuleSubtreeStream stream_tag_content=new RewriteRuleSubtreeStream(adaptor,"rule tag_content");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:317:3: ( TAG_START ident= namespace_id function_arguments (content= tag_content )? TAG_END -> ^( CALL[false] $ident ( ^( ARGUMENT $content) )? ( function_arguments )? ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:317:5: TAG_START ident= namespace_id function_arguments (content= tag_content )? TAG_END
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:321:3: ( TAG_START ident= namespace_id function_arguments (content= tag_content )? TAG_END -> ^( CALL[false] $ident ( ^( ARGUMENT $content) )? ( function_arguments )? ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:321:5: TAG_START ident= namespace_id function_arguments (content= tag_content )? TAG_END
             {
-            TAG_START162=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_call_tag2208);  
-            stream_TAG_START.add(TAG_START162);
+            TAG_START166=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_call_tag2209);  
+            stream_TAG_START.add(TAG_START166);
 
-            pushFollow(FOLLOW_namespace_id_in_call_tag2212);
+            pushFollow(FOLLOW_namespace_id_in_call_tag2213);
             ident=namespace_id();
 
             state._fsp--;
 
             stream_namespace_id.add(ident.getTree());
-            pushFollow(FOLLOW_function_arguments_in_call_tag2214);
-            function_arguments163=function_arguments();
+            pushFollow(FOLLOW_function_arguments_in_call_tag2215);
+            function_arguments167=function_arguments();
 
             state._fsp--;
 
-            stream_function_arguments.add(function_arguments163.getTree());
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:318:5: (content= tag_content )?
-            int alt53=2;
-            int LA53_0 = input.LA(1);
+            stream_function_arguments.add(function_arguments167.getTree());
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:322:5: (content= tag_content )?
+            int alt54=2;
+            int LA54_0 = input.LA(1);
 
-            if ( (LA53_0==CONTENT||LA53_0==OP_DATA_IS_EXPRESSION) ) {
-                alt53=1;
+            if ( (LA54_0==CONTENT||LA54_0==OP_DATA_IS_EXPRESSION) ) {
+                alt54=1;
             }
-            switch (alt53) {
+            switch (alt54) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:318:6: content= tag_content
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:322:6: content= tag_content
                     {
-                    pushFollow(FOLLOW_tag_content_in_call_tag2223);
+                    pushFollow(FOLLOW_tag_content_in_call_tag2224);
                     content=tag_content();
 
                     state._fsp--;
@@ -6211,13 +6321,13 @@ public class OmttParser extends AbstractOmttParser {
 
             }
 
-            TAG_END164=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_call_tag2231);  
-            stream_TAG_END.add(TAG_END164);
+            TAG_END168=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_call_tag2232);  
+            stream_TAG_END.add(TAG_END168);
 
 
 
             // AST REWRITE
-            // elements: content, function_arguments, ident
+            // elements: ident, content, function_arguments
             // token labels: 
             // rule labels: content, retval, ident
             // token list labels: 
@@ -6229,17 +6339,17 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_ident=new RewriteRuleSubtreeStream(adaptor,"rule ident",ident!=null?ident.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 320:5: -> ^( CALL[false] $ident ( ^( ARGUMENT $content) )? ( function_arguments )? )
+            // 324:5: -> ^( CALL[false] $ident ( ^( ARGUMENT $content) )? ( function_arguments )? )
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:320:8: ^( CALL[false] $ident ( ^( ARGUMENT $content) )? ( function_arguments )? )
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:324:8: ^( CALL[false] $ident ( ^( ARGUMENT $content) )? ( function_arguments )? )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new Call(CALL, false), root_1);
 
                 adaptor.addChild(root_1, stream_ident.nextTree());
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:320:35: ( ^( ARGUMENT $content) )?
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:324:35: ( ^( ARGUMENT $content) )?
                 if ( stream_content.hasNext() ) {
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:320:35: ^( ARGUMENT $content)
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:324:35: ^( ARGUMENT $content)
                     {
                     Object root_2 = (Object)adaptor.nil();
                     root_2 = (Object)adaptor.becomeRoot(new FunctionArgument(ARGUMENT), root_2);
@@ -6251,7 +6361,7 @@ public class OmttParser extends AbstractOmttParser {
 
                 }
                 stream_content.reset();
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:320:75: ( function_arguments )?
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:324:75: ( function_arguments )?
                 if ( stream_function_arguments.hasNext() ) {
                     adaptor.addChild(root_1, stream_function_arguments.nextTree());
 
@@ -6290,50 +6400,50 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "function_arguments"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:322:10: fragment function_arguments : ( function_argument )* ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:326:10: fragment function_arguments : ( function_argument )* ;
     public final OmttParser.function_arguments_return function_arguments() throws RecognitionException {
         OmttParser.function_arguments_return retval = new OmttParser.function_arguments_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.function_argument_return function_argument165 = null;
+        OmttParser.function_argument_return function_argument169 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:323:3: ( ( function_argument )* )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:323:5: ( function_argument )*
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:327:3: ( ( function_argument )* )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:327:5: ( function_argument )*
             {
             root_0 = (Object)adaptor.nil();
 
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:323:5: ( function_argument )*
-            loop54:
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:327:5: ( function_argument )*
+            loop55:
             do {
-                int alt54=2;
-                int LA54_0 = input.LA(1);
+                int alt55=2;
+                int LA55_0 = input.LA(1);
 
-                if ( ((LA54_0>=STRING_LITERAL && LA54_0<=REAL_NUMBER)||LA54_0==DATA_START||LA54_0==NULL||(LA54_0>=TRUE && LA54_0<=FALSE)||(LA54_0>=TILDE && LA54_0<=LEFT_PAREN)||LA54_0==VAR_ID) ) {
-                    alt54=1;
+                if ( ((LA55_0>=STRING_LITERAL && LA55_0<=REAL_NUMBER)||LA55_0==DATA_START||LA55_0==NULL||(LA55_0>=TRUE && LA55_0<=FALSE)||(LA55_0>=TILDE && LA55_0<=LEFT_PAREN)||LA55_0==OP_GENERAL||LA55_0==VAR_ID) ) {
+                    alt55=1;
                 }
 
 
-                switch (alt54) {
+                switch (alt55) {
             	case 1 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:323:5: function_argument
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:327:5: function_argument
             	    {
-            	    pushFollow(FOLLOW_function_argument_in_function_arguments2276);
-            	    function_argument165=function_argument();
+            	    pushFollow(FOLLOW_function_argument_in_function_arguments2277);
+            	    function_argument169=function_argument();
 
             	    state._fsp--;
 
-            	    adaptor.addChild(root_0, function_argument165.getTree());
+            	    adaptor.addChild(root_0, function_argument169.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop54;
+            	    break loop55;
                 }
             } while (true);
 
@@ -6364,47 +6474,47 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "function_argument"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:325:10: fragment function_argument : ( VAR_ID OP_ASSIGN )? atom_expression -> ^( ARGUMENT atom_expression ( VAR_ID )? ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:329:10: fragment function_argument : ( VAR_ID OP_ASSIGN )? atom_expression -> ^( ARGUMENT atom_expression ( VAR_ID )? ) ;
     public final OmttParser.function_argument_return function_argument() throws RecognitionException {
         OmttParser.function_argument_return retval = new OmttParser.function_argument_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token VAR_ID166=null;
-        Token OP_ASSIGN167=null;
-        OmttParser.atom_expression_return atom_expression168 = null;
+        Token VAR_ID170=null;
+        Token OP_ASSIGN171=null;
+        OmttParser.atom_expression_return atom_expression172 = null;
 
 
-        Object VAR_ID166_tree=null;
-        Object OP_ASSIGN167_tree=null;
+        Object VAR_ID170_tree=null;
+        Object OP_ASSIGN171_tree=null;
         RewriteRuleTokenStream stream_VAR_ID=new RewriteRuleTokenStream(adaptor,"token VAR_ID");
         RewriteRuleTokenStream stream_OP_ASSIGN=new RewriteRuleTokenStream(adaptor,"token OP_ASSIGN");
         RewriteRuleSubtreeStream stream_atom_expression=new RewriteRuleSubtreeStream(adaptor,"rule atom_expression");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:326:3: ( ( VAR_ID OP_ASSIGN )? atom_expression -> ^( ARGUMENT atom_expression ( VAR_ID )? ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:326:5: ( VAR_ID OP_ASSIGN )? atom_expression
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:330:3: ( ( VAR_ID OP_ASSIGN )? atom_expression -> ^( ARGUMENT atom_expression ( VAR_ID )? ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:330:5: ( VAR_ID OP_ASSIGN )? atom_expression
             {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:326:5: ( VAR_ID OP_ASSIGN )?
-            int alt55=2;
-            int LA55_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:330:5: ( VAR_ID OP_ASSIGN )?
+            int alt56=2;
+            int LA56_0 = input.LA(1);
 
-            if ( (LA55_0==VAR_ID) ) {
-                int LA55_1 = input.LA(2);
+            if ( (LA56_0==VAR_ID) ) {
+                int LA56_1 = input.LA(2);
 
-                if ( (LA55_1==OP_ASSIGN) ) {
-                    alt55=1;
+                if ( (LA56_1==OP_ASSIGN) ) {
+                    alt56=1;
                 }
             }
-            switch (alt55) {
+            switch (alt56) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:326:6: VAR_ID OP_ASSIGN
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:330:6: VAR_ID OP_ASSIGN
                     {
-                    VAR_ID166=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_function_argument2292);  
-                    stream_VAR_ID.add(VAR_ID166);
+                    VAR_ID170=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_function_argument2293);  
+                    stream_VAR_ID.add(VAR_ID170);
 
-                    OP_ASSIGN167=(Token)match(input,OP_ASSIGN,FOLLOW_OP_ASSIGN_in_function_argument2294);  
-                    stream_OP_ASSIGN.add(OP_ASSIGN167);
+                    OP_ASSIGN171=(Token)match(input,OP_ASSIGN,FOLLOW_OP_ASSIGN_in_function_argument2295);  
+                    stream_OP_ASSIGN.add(OP_ASSIGN171);
 
 
                     }
@@ -6412,16 +6522,16 @@ public class OmttParser extends AbstractOmttParser {
 
             }
 
-            pushFollow(FOLLOW_atom_expression_in_function_argument2298);
-            atom_expression168=atom_expression();
+            pushFollow(FOLLOW_atom_expression_in_function_argument2299);
+            atom_expression172=atom_expression();
 
             state._fsp--;
 
-            stream_atom_expression.add(atom_expression168.getTree());
+            stream_atom_expression.add(atom_expression172.getTree());
 
 
             // AST REWRITE
-            // elements: atom_expression, VAR_ID
+            // elements: VAR_ID, atom_expression
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -6431,15 +6541,15 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 327:5: -> ^( ARGUMENT atom_expression ( VAR_ID )? )
+            // 331:5: -> ^( ARGUMENT atom_expression ( VAR_ID )? )
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:327:8: ^( ARGUMENT atom_expression ( VAR_ID )? )
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:331:8: ^( ARGUMENT atom_expression ( VAR_ID )? )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new FunctionArgument(ARGUMENT), root_1);
 
                 adaptor.addChild(root_1, stream_atom_expression.nextTree());
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:327:53: ( VAR_ID )?
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:331:53: ( VAR_ID )?
                 if ( stream_VAR_ID.hasNext() ) {
                     adaptor.addChild(root_1, stream_VAR_ID.nextNode());
 
@@ -6478,30 +6588,30 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "atom_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:332:1: atom_expression : (a= atom_with_properties -> $a) ( ( COMA atom_with_properties )+ -> ^( SEQUENCE ( atom_with_properties )+ ) )? ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:336:1: atom_expression : (a= atom_with_properties -> $a) ( ( COMA atom_with_properties )+ -> ^( SEQUENCE ( atom_with_properties )+ ) )? ;
     public final OmttParser.atom_expression_return atom_expression() throws RecognitionException {
         OmttParser.atom_expression_return retval = new OmttParser.atom_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token COMA169=null;
+        Token COMA173=null;
         OmttParser.atom_with_properties_return a = null;
 
-        OmttParser.atom_with_properties_return atom_with_properties170 = null;
+        OmttParser.atom_with_properties_return atom_with_properties174 = null;
 
 
-        Object COMA169_tree=null;
+        Object COMA173_tree=null;
         RewriteRuleTokenStream stream_COMA=new RewriteRuleTokenStream(adaptor,"token COMA");
         RewriteRuleSubtreeStream stream_atom_with_properties=new RewriteRuleSubtreeStream(adaptor,"rule atom_with_properties");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:333:2: ( (a= atom_with_properties -> $a) ( ( COMA atom_with_properties )+ -> ^( SEQUENCE ( atom_with_properties )+ ) )? )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:333:4: (a= atom_with_properties -> $a) ( ( COMA atom_with_properties )+ -> ^( SEQUENCE ( atom_with_properties )+ ) )?
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:337:2: ( (a= atom_with_properties -> $a) ( ( COMA atom_with_properties )+ -> ^( SEQUENCE ( atom_with_properties )+ ) )? )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:337:4: (a= atom_with_properties -> $a) ( ( COMA atom_with_properties )+ -> ^( SEQUENCE ( atom_with_properties )+ ) )?
             {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:333:4: (a= atom_with_properties -> $a)
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:333:5: a= atom_with_properties
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:337:4: (a= atom_with_properties -> $a)
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:337:5: a= atom_with_properties
             {
-            pushFollow(FOLLOW_atom_with_properties_in_atom_expression2333);
+            pushFollow(FOLLOW_atom_with_properties_in_atom_expression2334);
             a=atom_with_properties();
 
             state._fsp--;
@@ -6521,7 +6631,7 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_a=new RewriteRuleSubtreeStream(adaptor,"rule a",a!=null?a.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 333:28: -> $a
+            // 337:28: -> $a
             {
                 adaptor.addChild(root_0, stream_a.nextTree());
 
@@ -6530,53 +6640,53 @@ public class OmttParser extends AbstractOmttParser {
             retval.tree = root_0;
             }
 
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:334:4: ( ( COMA atom_with_properties )+ -> ^( SEQUENCE ( atom_with_properties )+ ) )?
-            int alt57=2;
-            int LA57_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:338:4: ( ( COMA atom_with_properties )+ -> ^( SEQUENCE ( atom_with_properties )+ ) )?
+            int alt58=2;
+            int LA58_0 = input.LA(1);
 
-            if ( (LA57_0==COMA) ) {
-                alt57=1;
+            if ( (LA58_0==COMA) ) {
+                alt58=1;
             }
-            switch (alt57) {
+            switch (alt58) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:334:5: ( COMA atom_with_properties )+
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:338:5: ( COMA atom_with_properties )+
                     {
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:334:5: ( COMA atom_with_properties )+
-                    int cnt56=0;
-                    loop56:
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:338:5: ( COMA atom_with_properties )+
+                    int cnt57=0;
+                    loop57:
                     do {
-                        int alt56=2;
-                        int LA56_0 = input.LA(1);
+                        int alt57=2;
+                        int LA57_0 = input.LA(1);
 
-                        if ( (LA56_0==COMA) ) {
-                            alt56=1;
+                        if ( (LA57_0==COMA) ) {
+                            alt57=1;
                         }
 
 
-                        switch (alt56) {
+                        switch (alt57) {
                     	case 1 :
-                    	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:334:6: COMA atom_with_properties
+                    	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:338:6: COMA atom_with_properties
                     	    {
-                    	    COMA169=(Token)match(input,COMA,FOLLOW_COMA_in_atom_expression2346);  
-                    	    stream_COMA.add(COMA169);
+                    	    COMA173=(Token)match(input,COMA,FOLLOW_COMA_in_atom_expression2347);  
+                    	    stream_COMA.add(COMA173);
 
-                    	    pushFollow(FOLLOW_atom_with_properties_in_atom_expression2348);
-                    	    atom_with_properties170=atom_with_properties();
+                    	    pushFollow(FOLLOW_atom_with_properties_in_atom_expression2349);
+                    	    atom_with_properties174=atom_with_properties();
 
                     	    state._fsp--;
 
-                    	    stream_atom_with_properties.add(atom_with_properties170.getTree());
+                    	    stream_atom_with_properties.add(atom_with_properties174.getTree());
 
                     	    }
                     	    break;
 
                     	default :
-                    	    if ( cnt56 >= 1 ) break loop56;
+                    	    if ( cnt57 >= 1 ) break loop57;
                                 EarlyExitException eee =
-                                    new EarlyExitException(56, input);
+                                    new EarlyExitException(57, input);
                                 throw eee;
                         }
-                        cnt56++;
+                        cnt57++;
                     } while (true);
 
 
@@ -6592,9 +6702,9 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 334:34: -> ^( SEQUENCE ( atom_with_properties )+ )
+                    // 338:34: -> ^( SEQUENCE ( atom_with_properties )+ )
                     {
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:334:37: ^( SEQUENCE ( atom_with_properties )+ )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:338:37: ^( SEQUENCE ( atom_with_properties )+ )
                         {
                         Object root_1 = (Object)adaptor.nil();
                         root_1 = (Object)adaptor.becomeRoot(new Sequence(SEQUENCE), root_1);
@@ -6646,7 +6756,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "atom_with_properties"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:337:1: atom_with_properties : (a= atom_with_selectors -> $a) (ps= property_selector -> ^( PROPERTY_SELECT $atom_with_properties $ps) )* ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:341:1: atom_with_properties : (a= atom_with_selectors -> $a) (ps= property_selector -> ^( PROPERTY_SELECT $atom_with_properties $ps) )* ;
     public final OmttParser.atom_with_properties_return atom_with_properties() throws RecognitionException {
         OmttParser.atom_with_properties_return retval = new OmttParser.atom_with_properties_return();
         retval.start = input.LT(1);
@@ -6661,13 +6771,13 @@ public class OmttParser extends AbstractOmttParser {
         RewriteRuleSubtreeStream stream_atom_with_selectors=new RewriteRuleSubtreeStream(adaptor,"rule atom_with_selectors");
         RewriteRuleSubtreeStream stream_property_selector=new RewriteRuleSubtreeStream(adaptor,"rule property_selector");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:338:3: ( (a= atom_with_selectors -> $a) (ps= property_selector -> ^( PROPERTY_SELECT $atom_with_properties $ps) )* )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:338:5: (a= atom_with_selectors -> $a) (ps= property_selector -> ^( PROPERTY_SELECT $atom_with_properties $ps) )*
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:342:3: ( (a= atom_with_selectors -> $a) (ps= property_selector -> ^( PROPERTY_SELECT $atom_with_properties $ps) )* )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:342:5: (a= atom_with_selectors -> $a) (ps= property_selector -> ^( PROPERTY_SELECT $atom_with_properties $ps) )*
             {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:338:5: (a= atom_with_selectors -> $a)
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:338:6: a= atom_with_selectors
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:342:5: (a= atom_with_selectors -> $a)
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:342:6: a= atom_with_selectors
             {
-            pushFollow(FOLLOW_atom_with_selectors_in_atom_with_properties2380);
+            pushFollow(FOLLOW_atom_with_selectors_in_atom_with_properties2381);
             a=atom_with_selectors();
 
             state._fsp--;
@@ -6687,7 +6797,7 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_a=new RewriteRuleSubtreeStream(adaptor,"rule a",a!=null?a.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 338:28: -> $a
+            // 342:28: -> $a
             {
                 adaptor.addChild(root_0, stream_a.nextTree());
 
@@ -6696,22 +6806,22 @@ public class OmttParser extends AbstractOmttParser {
             retval.tree = root_0;
             }
 
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:339:4: (ps= property_selector -> ^( PROPERTY_SELECT $atom_with_properties $ps) )*
-            loop58:
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:343:4: (ps= property_selector -> ^( PROPERTY_SELECT $atom_with_properties $ps) )*
+            loop59:
             do {
-                int alt58=2;
-                int LA58_0 = input.LA(1);
+                int alt59=2;
+                int LA59_0 = input.LA(1);
 
-                if ( (LA58_0==DOT) ) {
-                    alt58=1;
+                if ( (LA59_0==DOT) ) {
+                    alt59=1;
                 }
 
 
-                switch (alt58) {
+                switch (alt59) {
             	case 1 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:339:6: ps= property_selector
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:343:6: ps= property_selector
             	    {
-            	    pushFollow(FOLLOW_property_selector_in_atom_with_properties2395);
+            	    pushFollow(FOLLOW_property_selector_in_atom_with_properties2396);
             	    ps=property_selector();
 
             	    state._fsp--;
@@ -6720,7 +6830,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: ps, atom_with_properties
+            	    // elements: atom_with_properties, ps
             	    // token labels: 
             	    // rule labels: retval, ps
             	    // token list labels: 
@@ -6731,9 +6841,9 @@ public class OmttParser extends AbstractOmttParser {
             	    RewriteRuleSubtreeStream stream_ps=new RewriteRuleSubtreeStream(adaptor,"rule ps",ps!=null?ps.tree:null);
 
             	    root_0 = (Object)adaptor.nil();
-            	    // 340:6: -> ^( PROPERTY_SELECT $atom_with_properties $ps)
+            	    // 344:6: -> ^( PROPERTY_SELECT $atom_with_properties $ps)
             	    {
-            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:340:9: ^( PROPERTY_SELECT $atom_with_properties $ps)
+            	        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:344:9: ^( PROPERTY_SELECT $atom_with_properties $ps)
             	        {
             	        Object root_1 = (Object)adaptor.nil();
             	        root_1 = (Object)adaptor.becomeRoot(new PropertySelect(PROPERTY_SELECT), root_1);
@@ -6751,7 +6861,7 @@ public class OmttParser extends AbstractOmttParser {
             	    break;
 
             	default :
-            	    break loop58;
+            	    break loop59;
                 }
             } while (true);
 
@@ -6782,56 +6892,56 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "atom_with_selectors"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:343:10: fragment atom_with_selectors : atom ( sequence_selectors -> ^( ATOM_SELECT atom ( sequence_selectors )? ) | -> atom ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:347:10: fragment atom_with_selectors : atom ( sequence_selectors -> ^( ATOM_SELECT atom ( sequence_selectors )? ) | -> atom ) ;
     public final OmttParser.atom_with_selectors_return atom_with_selectors() throws RecognitionException {
         OmttParser.atom_with_selectors_return retval = new OmttParser.atom_with_selectors_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.atom_return atom171 = null;
+        OmttParser.atom_return atom175 = null;
 
-        OmttParser.sequence_selectors_return sequence_selectors172 = null;
+        OmttParser.sequence_selectors_return sequence_selectors176 = null;
 
 
         RewriteRuleSubtreeStream stream_atom=new RewriteRuleSubtreeStream(adaptor,"rule atom");
         RewriteRuleSubtreeStream stream_sequence_selectors=new RewriteRuleSubtreeStream(adaptor,"rule sequence_selectors");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:344:2: ( atom ( sequence_selectors -> ^( ATOM_SELECT atom ( sequence_selectors )? ) | -> atom ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:344:4: atom ( sequence_selectors -> ^( ATOM_SELECT atom ( sequence_selectors )? ) | -> atom )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:348:2: ( atom ( sequence_selectors -> ^( ATOM_SELECT atom ( sequence_selectors )? ) | -> atom ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:348:4: atom ( sequence_selectors -> ^( ATOM_SELECT atom ( sequence_selectors )? ) | -> atom )
             {
-            pushFollow(FOLLOW_atom_in_atom_with_selectors2434);
-            atom171=atom();
+            pushFollow(FOLLOW_atom_in_atom_with_selectors2435);
+            atom175=atom();
 
             state._fsp--;
 
-            stream_atom.add(atom171.getTree());
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:345:3: ( sequence_selectors -> ^( ATOM_SELECT atom ( sequence_selectors )? ) | -> atom )
-            int alt59=2;
-            int LA59_0 = input.LA(1);
+            stream_atom.add(atom175.getTree());
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:349:3: ( sequence_selectors -> ^( ATOM_SELECT atom ( sequence_selectors )? ) | -> atom )
+            int alt60=2;
+            int LA60_0 = input.LA(1);
 
-            if ( (LA59_0==AS||LA59_0==LEFT_SQUARE_PAREN) ) {
-                alt59=1;
+            if ( (LA60_0==AS||LA60_0==LEFT_SQUARE_PAREN) ) {
+                alt60=1;
             }
-            else if ( ((LA59_0>=STRING_LITERAL && LA59_0<=DATA_START)||(LA59_0>=EXPRESSION_END && LA59_0<=OP_DATA_IS_EXPRESSION)||(LA59_0>=AND && LA59_0<=IN)||LA59_0==ELSE||LA59_0==NULL||(LA59_0>=TRUE && LA59_0<=FALSE)||LA59_0==COLON||LA59_0==DOT||(LA59_0>=COMA && LA59_0<=RIGHT_PAREN)||(LA59_0>=RIGHT_SQUARE_PAREN && LA59_0<=OP_GE)||(LA59_0>=OP_AND && LA59_0<=OP_OR)||(LA59_0>=OP_CONTEXT && LA59_0<=OP_EXPRESSION_CONTEXT)||LA59_0==OP_CONCAT||LA59_0==VAR_ID||LA59_0==OP_XOR) ) {
-                alt59=2;
+            else if ( ((LA60_0>=STRING_LITERAL && LA60_0<=DATA_START)||(LA60_0>=EXPRESSION_END && LA60_0<=OP_DATA_IS_EXPRESSION)||(LA60_0>=AND && LA60_0<=IN)||LA60_0==ELSE||LA60_0==NULL||(LA60_0>=TRUE && LA60_0<=FALSE)||(LA60_0>=COLON && LA60_0<=DOT)||(LA60_0>=COMA && LA60_0<=RIGHT_PAREN)||(LA60_0>=RIGHT_SQUARE_PAREN && LA60_0<=OP_GE)||(LA60_0>=OP_AND && LA60_0<=OP_OR)||(LA60_0>=OP_CONTEXT && LA60_0<=OP_EXPRESSION_CONTEXT)||(LA60_0>=OP_CONCAT && LA60_0<=OP_GENERAL)||LA60_0==VAR_ID) ) {
+                alt60=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 59, 0, input);
+                    new NoViableAltException("", 60, 0, input);
 
                 throw nvae;
             }
-            switch (alt59) {
+            switch (alt60) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:345:5: sequence_selectors
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:349:5: sequence_selectors
                     {
-                    pushFollow(FOLLOW_sequence_selectors_in_atom_with_selectors2440);
-                    sequence_selectors172=sequence_selectors();
+                    pushFollow(FOLLOW_sequence_selectors_in_atom_with_selectors2441);
+                    sequence_selectors176=sequence_selectors();
 
                     state._fsp--;
 
-                    stream_sequence_selectors.add(sequence_selectors172.getTree());
+                    stream_sequence_selectors.add(sequence_selectors176.getTree());
 
 
                     // AST REWRITE
@@ -6845,15 +6955,15 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 346:4: -> ^( ATOM_SELECT atom ( sequence_selectors )? )
+                    // 350:4: -> ^( ATOM_SELECT atom ( sequence_selectors )? )
                     {
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:346:7: ^( ATOM_SELECT atom ( sequence_selectors )? )
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:350:7: ^( ATOM_SELECT atom ( sequence_selectors )? )
                         {
                         Object root_1 = (Object)adaptor.nil();
                         root_1 = (Object)adaptor.becomeRoot(new AtomSelect(ATOM_SELECT), root_1);
 
                         adaptor.addChild(root_1, stream_atom.nextTree());
-                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:346:38: ( sequence_selectors )?
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:350:38: ( sequence_selectors )?
                         if ( stream_sequence_selectors.hasNext() ) {
                             adaptor.addChild(root_1, stream_sequence_selectors.nextTree());
 
@@ -6869,7 +6979,7 @@ public class OmttParser extends AbstractOmttParser {
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:347:5: 
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:351:5: 
                     {
 
                     // AST REWRITE
@@ -6883,7 +6993,7 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 347:5: -> atom
+                    // 351:5: -> atom
                     {
                         adaptor.addChild(root_0, stream_atom.nextTree());
 
@@ -6922,49 +7032,49 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "property_selector"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:350:10: fragment property_selector : DOT VAR_ID ( sequence_selectors )? ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:354:10: fragment property_selector : DOT VAR_ID ( sequence_selectors )? ;
     public final OmttParser.property_selector_return property_selector() throws RecognitionException {
         OmttParser.property_selector_return retval = new OmttParser.property_selector_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token DOT173=null;
-        Token VAR_ID174=null;
-        OmttParser.sequence_selectors_return sequence_selectors175 = null;
+        Token DOT177=null;
+        Token VAR_ID178=null;
+        OmttParser.sequence_selectors_return sequence_selectors179 = null;
 
 
-        Object DOT173_tree=null;
-        Object VAR_ID174_tree=null;
+        Object DOT177_tree=null;
+        Object VAR_ID178_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:351:3: ( DOT VAR_ID ( sequence_selectors )? )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:351:5: DOT VAR_ID ( sequence_selectors )?
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:355:3: ( DOT VAR_ID ( sequence_selectors )? )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:355:5: DOT VAR_ID ( sequence_selectors )?
             {
             root_0 = (Object)adaptor.nil();
 
-            DOT173=(Token)match(input,DOT,FOLLOW_DOT_in_property_selector2482); 
-            VAR_ID174=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_property_selector2485); 
-            VAR_ID174_tree = (Object)adaptor.create(VAR_ID174);
-            adaptor.addChild(root_0, VAR_ID174_tree);
+            DOT177=(Token)match(input,DOT,FOLLOW_DOT_in_property_selector2483); 
+            VAR_ID178=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_property_selector2486); 
+            VAR_ID178_tree = (Object)adaptor.create(VAR_ID178);
+            adaptor.addChild(root_0, VAR_ID178_tree);
 
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:351:17: ( sequence_selectors )?
-            int alt60=2;
-            int LA60_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:355:17: ( sequence_selectors )?
+            int alt61=2;
+            int LA61_0 = input.LA(1);
 
-            if ( (LA60_0==AS||LA60_0==LEFT_SQUARE_PAREN) ) {
-                alt60=1;
+            if ( (LA61_0==AS||LA61_0==LEFT_SQUARE_PAREN) ) {
+                alt61=1;
             }
-            switch (alt60) {
+            switch (alt61) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:351:17: sequence_selectors
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:355:17: sequence_selectors
                     {
-                    pushFollow(FOLLOW_sequence_selectors_in_property_selector2487);
-                    sequence_selectors175=sequence_selectors();
+                    pushFollow(FOLLOW_sequence_selectors_in_property_selector2488);
+                    sequence_selectors179=sequence_selectors();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, sequence_selectors175.getTree());
+                    adaptor.addChild(root_0, sequence_selectors179.getTree());
 
                     }
                     break;
@@ -6998,109 +7108,109 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "sequence_selectors"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:353:10: fragment sequence_selectors : ( type_selector ( sequence_selector )? ( alias )? | sequence_selector ( alias )? | alias );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:357:10: fragment sequence_selectors : ( type_selector ( sequence_selector )? ( alias )? | sequence_selector ( alias )? | alias );
     public final OmttParser.sequence_selectors_return sequence_selectors() throws RecognitionException {
         OmttParser.sequence_selectors_return retval = new OmttParser.sequence_selectors_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        OmttParser.type_selector_return type_selector176 = null;
+        OmttParser.type_selector_return type_selector180 = null;
 
-        OmttParser.sequence_selector_return sequence_selector177 = null;
+        OmttParser.sequence_selector_return sequence_selector181 = null;
 
-        OmttParser.alias_return alias178 = null;
+        OmttParser.alias_return alias182 = null;
 
-        OmttParser.sequence_selector_return sequence_selector179 = null;
+        OmttParser.sequence_selector_return sequence_selector183 = null;
 
-        OmttParser.alias_return alias180 = null;
+        OmttParser.alias_return alias184 = null;
 
-        OmttParser.alias_return alias181 = null;
+        OmttParser.alias_return alias185 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:354:2: ( type_selector ( sequence_selector )? ( alias )? | sequence_selector ( alias )? | alias )
-            int alt64=3;
-            int LA64_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:358:2: ( type_selector ( sequence_selector )? ( alias )? | sequence_selector ( alias )? | alias )
+            int alt65=3;
+            int LA65_0 = input.LA(1);
 
-            if ( (LA64_0==LEFT_SQUARE_PAREN) ) {
-                int LA64_1 = input.LA(2);
+            if ( (LA65_0==LEFT_SQUARE_PAREN) ) {
+                int LA65_1 = input.LA(2);
 
-                if ( (LA64_1==CLASS_ID) ) {
-                    alt64=1;
+                if ( ((LA65_1>=STRING_LITERAL && LA65_1<=REAL_NUMBER)||LA65_1==DATA_START||LA65_1==NULL||(LA65_1>=TRUE && LA65_1<=FALSE)||(LA65_1>=TILDE && LA65_1<=LEFT_PAREN)||LA65_1==OP_MINUS||LA65_1==OP_NOT||LA65_1==OP_GENERAL||LA65_1==VAR_ID) ) {
+                    alt65=2;
                 }
-                else if ( ((LA64_1>=STRING_LITERAL && LA64_1<=REAL_NUMBER)||LA64_1==DATA_START||LA64_1==NULL||(LA64_1>=TRUE && LA64_1<=FALSE)||(LA64_1>=TILDE && LA64_1<=LEFT_PAREN)||LA64_1==OP_MINUS||LA64_1==OP_NOT||LA64_1==VAR_ID) ) {
-                    alt64=2;
+                else if ( (LA65_1==CLASS_ID) ) {
+                    alt65=1;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 64, 1, input);
+                        new NoViableAltException("", 65, 1, input);
 
                     throw nvae;
                 }
             }
-            else if ( (LA64_0==AS) ) {
-                alt64=3;
+            else if ( (LA65_0==AS) ) {
+                alt65=3;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 64, 0, input);
+                    new NoViableAltException("", 65, 0, input);
 
                 throw nvae;
             }
-            switch (alt64) {
+            switch (alt65) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:354:4: type_selector ( sequence_selector )? ( alias )?
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:358:4: type_selector ( sequence_selector )? ( alias )?
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_type_selector_in_sequence_selectors2501);
-                    type_selector176=type_selector();
+                    pushFollow(FOLLOW_type_selector_in_sequence_selectors2502);
+                    type_selector180=type_selector();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, type_selector176.getTree());
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:354:18: ( sequence_selector )?
-                    int alt61=2;
-                    int LA61_0 = input.LA(1);
+                    adaptor.addChild(root_0, type_selector180.getTree());
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:358:18: ( sequence_selector )?
+                    int alt62=2;
+                    int LA62_0 = input.LA(1);
 
-                    if ( (LA61_0==LEFT_SQUARE_PAREN) ) {
-                        alt61=1;
+                    if ( (LA62_0==LEFT_SQUARE_PAREN) ) {
+                        alt62=1;
                     }
-                    switch (alt61) {
+                    switch (alt62) {
                         case 1 :
-                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:354:18: sequence_selector
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:358:18: sequence_selector
                             {
-                            pushFollow(FOLLOW_sequence_selector_in_sequence_selectors2503);
-                            sequence_selector177=sequence_selector();
+                            pushFollow(FOLLOW_sequence_selector_in_sequence_selectors2504);
+                            sequence_selector181=sequence_selector();
 
                             state._fsp--;
 
-                            adaptor.addChild(root_0, sequence_selector177.getTree());
+                            adaptor.addChild(root_0, sequence_selector181.getTree());
 
                             }
                             break;
 
                     }
 
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:354:37: ( alias )?
-                    int alt62=2;
-                    int LA62_0 = input.LA(1);
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:358:37: ( alias )?
+                    int alt63=2;
+                    int LA63_0 = input.LA(1);
 
-                    if ( (LA62_0==AS) ) {
-                        alt62=1;
+                    if ( (LA63_0==AS) ) {
+                        alt63=1;
                     }
-                    switch (alt62) {
+                    switch (alt63) {
                         case 1 :
-                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:354:37: alias
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:358:37: alias
                             {
-                            pushFollow(FOLLOW_alias_in_sequence_selectors2506);
-                            alias178=alias();
+                            pushFollow(FOLLOW_alias_in_sequence_selectors2507);
+                            alias182=alias();
 
                             state._fsp--;
 
-                            adaptor.addChild(root_0, alias178.getTree());
+                            adaptor.addChild(root_0, alias182.getTree());
 
                             }
                             break;
@@ -7111,33 +7221,33 @@ public class OmttParser extends AbstractOmttParser {
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:355:4: sequence_selector ( alias )?
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:359:4: sequence_selector ( alias )?
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_sequence_selector_in_sequence_selectors2512);
-                    sequence_selector179=sequence_selector();
+                    pushFollow(FOLLOW_sequence_selector_in_sequence_selectors2513);
+                    sequence_selector183=sequence_selector();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, sequence_selector179.getTree());
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:355:22: ( alias )?
-                    int alt63=2;
-                    int LA63_0 = input.LA(1);
+                    adaptor.addChild(root_0, sequence_selector183.getTree());
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:359:22: ( alias )?
+                    int alt64=2;
+                    int LA64_0 = input.LA(1);
 
-                    if ( (LA63_0==AS) ) {
-                        alt63=1;
+                    if ( (LA64_0==AS) ) {
+                        alt64=1;
                     }
-                    switch (alt63) {
+                    switch (alt64) {
                         case 1 :
-                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:355:22: alias
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:359:22: alias
                             {
-                            pushFollow(FOLLOW_alias_in_sequence_selectors2514);
-                            alias180=alias();
+                            pushFollow(FOLLOW_alias_in_sequence_selectors2515);
+                            alias184=alias();
 
                             state._fsp--;
 
-                            adaptor.addChild(root_0, alias180.getTree());
+                            adaptor.addChild(root_0, alias184.getTree());
 
                             }
                             break;
@@ -7148,16 +7258,16 @@ public class OmttParser extends AbstractOmttParser {
                     }
                     break;
                 case 3 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:356:4: alias
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:360:4: alias
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_alias_in_sequence_selectors2520);
-                    alias181=alias();
+                    pushFollow(FOLLOW_alias_in_sequence_selectors2521);
+                    alias185=alias();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, alias181.getTree());
+                    adaptor.addChild(root_0, alias185.getTree());
 
                     }
                     break;
@@ -7187,38 +7297,38 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "type_selector"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:358:10: fragment type_selector : LEFT_SQUARE_PAREN type RIGHT_SQUARE_PAREN -> ^( TYPE_SELECT type ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:362:10: fragment type_selector : LEFT_SQUARE_PAREN type RIGHT_SQUARE_PAREN -> ^( TYPE_SELECT type ) ;
     public final OmttParser.type_selector_return type_selector() throws RecognitionException {
         OmttParser.type_selector_return retval = new OmttParser.type_selector_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token LEFT_SQUARE_PAREN182=null;
-        Token RIGHT_SQUARE_PAREN184=null;
-        OmttParser.type_return type183 = null;
+        Token LEFT_SQUARE_PAREN186=null;
+        Token RIGHT_SQUARE_PAREN188=null;
+        OmttParser.type_return type187 = null;
 
 
-        Object LEFT_SQUARE_PAREN182_tree=null;
-        Object RIGHT_SQUARE_PAREN184_tree=null;
+        Object LEFT_SQUARE_PAREN186_tree=null;
+        Object RIGHT_SQUARE_PAREN188_tree=null;
         RewriteRuleTokenStream stream_LEFT_SQUARE_PAREN=new RewriteRuleTokenStream(adaptor,"token LEFT_SQUARE_PAREN");
         RewriteRuleTokenStream stream_RIGHT_SQUARE_PAREN=new RewriteRuleTokenStream(adaptor,"token RIGHT_SQUARE_PAREN");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:359:3: ( LEFT_SQUARE_PAREN type RIGHT_SQUARE_PAREN -> ^( TYPE_SELECT type ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:359:5: LEFT_SQUARE_PAREN type RIGHT_SQUARE_PAREN
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:363:3: ( LEFT_SQUARE_PAREN type RIGHT_SQUARE_PAREN -> ^( TYPE_SELECT type ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:363:5: LEFT_SQUARE_PAREN type RIGHT_SQUARE_PAREN
             {
-            LEFT_SQUARE_PAREN182=(Token)match(input,LEFT_SQUARE_PAREN,FOLLOW_LEFT_SQUARE_PAREN_in_type_selector2533);  
-            stream_LEFT_SQUARE_PAREN.add(LEFT_SQUARE_PAREN182);
+            LEFT_SQUARE_PAREN186=(Token)match(input,LEFT_SQUARE_PAREN,FOLLOW_LEFT_SQUARE_PAREN_in_type_selector2534);  
+            stream_LEFT_SQUARE_PAREN.add(LEFT_SQUARE_PAREN186);
 
-            pushFollow(FOLLOW_type_in_type_selector2535);
-            type183=type();
+            pushFollow(FOLLOW_type_in_type_selector2536);
+            type187=type();
 
             state._fsp--;
 
-            stream_type.add(type183.getTree());
-            RIGHT_SQUARE_PAREN184=(Token)match(input,RIGHT_SQUARE_PAREN,FOLLOW_RIGHT_SQUARE_PAREN_in_type_selector2537);  
-            stream_RIGHT_SQUARE_PAREN.add(RIGHT_SQUARE_PAREN184);
+            stream_type.add(type187.getTree());
+            RIGHT_SQUARE_PAREN188=(Token)match(input,RIGHT_SQUARE_PAREN,FOLLOW_RIGHT_SQUARE_PAREN_in_type_selector2538);  
+            stream_RIGHT_SQUARE_PAREN.add(RIGHT_SQUARE_PAREN188);
 
 
 
@@ -7233,9 +7343,9 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 360:4: -> ^( TYPE_SELECT type )
+            // 364:4: -> ^( TYPE_SELECT type )
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:360:7: ^( TYPE_SELECT type )
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:364:7: ^( TYPE_SELECT type )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(TYPE_SELECT, "TYPE_SELECT"), root_1);
@@ -7274,38 +7384,38 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "sequence_selector"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:362:10: fragment sequence_selector : LEFT_SQUARE_PAREN boolean_expression RIGHT_SQUARE_PAREN -> ^( SEQUENCE_SELECT boolean_expression ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:366:10: fragment sequence_selector : LEFT_SQUARE_PAREN boolean_expression RIGHT_SQUARE_PAREN -> ^( SEQUENCE_SELECT boolean_expression ) ;
     public final OmttParser.sequence_selector_return sequence_selector() throws RecognitionException {
         OmttParser.sequence_selector_return retval = new OmttParser.sequence_selector_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token LEFT_SQUARE_PAREN185=null;
-        Token RIGHT_SQUARE_PAREN187=null;
-        OmttParser.boolean_expression_return boolean_expression186 = null;
+        Token LEFT_SQUARE_PAREN189=null;
+        Token RIGHT_SQUARE_PAREN191=null;
+        OmttParser.boolean_expression_return boolean_expression190 = null;
 
 
-        Object LEFT_SQUARE_PAREN185_tree=null;
-        Object RIGHT_SQUARE_PAREN187_tree=null;
+        Object LEFT_SQUARE_PAREN189_tree=null;
+        Object RIGHT_SQUARE_PAREN191_tree=null;
         RewriteRuleTokenStream stream_LEFT_SQUARE_PAREN=new RewriteRuleTokenStream(adaptor,"token LEFT_SQUARE_PAREN");
         RewriteRuleTokenStream stream_RIGHT_SQUARE_PAREN=new RewriteRuleTokenStream(adaptor,"token RIGHT_SQUARE_PAREN");
         RewriteRuleSubtreeStream stream_boolean_expression=new RewriteRuleSubtreeStream(adaptor,"rule boolean_expression");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:363:3: ( LEFT_SQUARE_PAREN boolean_expression RIGHT_SQUARE_PAREN -> ^( SEQUENCE_SELECT boolean_expression ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:363:5: LEFT_SQUARE_PAREN boolean_expression RIGHT_SQUARE_PAREN
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:367:3: ( LEFT_SQUARE_PAREN boolean_expression RIGHT_SQUARE_PAREN -> ^( SEQUENCE_SELECT boolean_expression ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:367:5: LEFT_SQUARE_PAREN boolean_expression RIGHT_SQUARE_PAREN
             {
-            LEFT_SQUARE_PAREN185=(Token)match(input,LEFT_SQUARE_PAREN,FOLLOW_LEFT_SQUARE_PAREN_in_sequence_selector2562);  
-            stream_LEFT_SQUARE_PAREN.add(LEFT_SQUARE_PAREN185);
+            LEFT_SQUARE_PAREN189=(Token)match(input,LEFT_SQUARE_PAREN,FOLLOW_LEFT_SQUARE_PAREN_in_sequence_selector2563);  
+            stream_LEFT_SQUARE_PAREN.add(LEFT_SQUARE_PAREN189);
 
-            pushFollow(FOLLOW_boolean_expression_in_sequence_selector2564);
-            boolean_expression186=boolean_expression();
+            pushFollow(FOLLOW_boolean_expression_in_sequence_selector2565);
+            boolean_expression190=boolean_expression();
 
             state._fsp--;
 
-            stream_boolean_expression.add(boolean_expression186.getTree());
-            RIGHT_SQUARE_PAREN187=(Token)match(input,RIGHT_SQUARE_PAREN,FOLLOW_RIGHT_SQUARE_PAREN_in_sequence_selector2566);  
-            stream_RIGHT_SQUARE_PAREN.add(RIGHT_SQUARE_PAREN187);
+            stream_boolean_expression.add(boolean_expression190.getTree());
+            RIGHT_SQUARE_PAREN191=(Token)match(input,RIGHT_SQUARE_PAREN,FOLLOW_RIGHT_SQUARE_PAREN_in_sequence_selector2567);  
+            stream_RIGHT_SQUARE_PAREN.add(RIGHT_SQUARE_PAREN191);
 
 
 
@@ -7320,9 +7430,9 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 364:4: -> ^( SEQUENCE_SELECT boolean_expression )
+            // 368:4: -> ^( SEQUENCE_SELECT boolean_expression )
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:364:7: ^( SEQUENCE_SELECT boolean_expression )
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:368:7: ^( SEQUENCE_SELECT boolean_expression )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(SEQUENCE_SELECT, "SEQUENCE_SELECT"), root_1);
@@ -7361,35 +7471,35 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "alias"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:366:10: fragment alias : AS VAR_ID -> ^( AS VAR_ID ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:370:10: fragment alias : AS VAR_ID -> ^( AS VAR_ID ) ;
     public final OmttParser.alias_return alias() throws RecognitionException {
         OmttParser.alias_return retval = new OmttParser.alias_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token AS188=null;
-        Token VAR_ID189=null;
+        Token AS192=null;
+        Token VAR_ID193=null;
 
-        Object AS188_tree=null;
-        Object VAR_ID189_tree=null;
+        Object AS192_tree=null;
+        Object VAR_ID193_tree=null;
         RewriteRuleTokenStream stream_AS=new RewriteRuleTokenStream(adaptor,"token AS");
         RewriteRuleTokenStream stream_VAR_ID=new RewriteRuleTokenStream(adaptor,"token VAR_ID");
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:367:2: ( AS VAR_ID -> ^( AS VAR_ID ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:367:4: AS VAR_ID
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:371:2: ( AS VAR_ID -> ^( AS VAR_ID ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:371:4: AS VAR_ID
             {
-            AS188=(Token)match(input,AS,FOLLOW_AS_in_alias2590);  
-            stream_AS.add(AS188);
+            AS192=(Token)match(input,AS,FOLLOW_AS_in_alias2591);  
+            stream_AS.add(AS192);
 
-            VAR_ID189=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_alias2592);  
-            stream_VAR_ID.add(VAR_ID189);
+            VAR_ID193=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_alias2593);  
+            stream_VAR_ID.add(VAR_ID193);
 
 
 
             // AST REWRITE
-            // elements: VAR_ID, AS
+            // elements: AS, VAR_ID
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -7399,9 +7509,9 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 368:3: -> ^( AS VAR_ID )
+            // 372:3: -> ^( AS VAR_ID )
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:368:6: ^( AS VAR_ID )
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:372:6: ^( AS VAR_ID )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(stream_AS.nextNode(), root_1);
@@ -7440,67 +7550,67 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "data_expression"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:371:1: data_expression : DATA_START ( data_body_atom )* DATA_END -> ^( DATA_START ( data_body_atom )* ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:375:1: data_expression : DATA_START ( data_body_atom )* DATA_END -> ^( DATA_START ( data_body_atom )* ) ;
     public final OmttParser.data_expression_return data_expression() throws RecognitionException {
         OmttParser.data_expression_return retval = new OmttParser.data_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token DATA_START190=null;
-        Token DATA_END192=null;
-        OmttParser.data_body_atom_return data_body_atom191 = null;
+        Token DATA_START194=null;
+        Token DATA_END196=null;
+        OmttParser.data_body_atom_return data_body_atom195 = null;
 
 
-        Object DATA_START190_tree=null;
-        Object DATA_END192_tree=null;
+        Object DATA_START194_tree=null;
+        Object DATA_END196_tree=null;
         RewriteRuleTokenStream stream_DATA_END=new RewriteRuleTokenStream(adaptor,"token DATA_END");
         RewriteRuleTokenStream stream_DATA_START=new RewriteRuleTokenStream(adaptor,"token DATA_START");
         RewriteRuleSubtreeStream stream_data_body_atom=new RewriteRuleSubtreeStream(adaptor,"rule data_body_atom");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:372:3: ( DATA_START ( data_body_atom )* DATA_END -> ^( DATA_START ( data_body_atom )* ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:372:5: DATA_START ( data_body_atom )* DATA_END
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:376:3: ( DATA_START ( data_body_atom )* DATA_END -> ^( DATA_START ( data_body_atom )* ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:376:5: DATA_START ( data_body_atom )* DATA_END
             {
-            DATA_START190=(Token)match(input,DATA_START,FOLLOW_DATA_START_in_data_expression2614);  
-            stream_DATA_START.add(DATA_START190);
+            DATA_START194=(Token)match(input,DATA_START,FOLLOW_DATA_START_in_data_expression2615);  
+            stream_DATA_START.add(DATA_START194);
 
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:372:16: ( data_body_atom )*
-            loop65:
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:376:16: ( data_body_atom )*
+            loop66:
             do {
-                int alt65=2;
-                int LA65_0 = input.LA(1);
+                int alt66=2;
+                int LA66_0 = input.LA(1);
 
-                if ( (LA65_0==STRING_LITERAL||LA65_0==TAG_START||LA65_0==EXPRESSION_START) ) {
-                    alt65=1;
+                if ( (LA66_0==STRING_LITERAL||LA66_0==TAG_START||LA66_0==EXPRESSION_START) ) {
+                    alt66=1;
                 }
 
 
-                switch (alt65) {
+                switch (alt66) {
             	case 1 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:372:16: data_body_atom
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:376:16: data_body_atom
             	    {
-            	    pushFollow(FOLLOW_data_body_atom_in_data_expression2616);
-            	    data_body_atom191=data_body_atom();
+            	    pushFollow(FOLLOW_data_body_atom_in_data_expression2617);
+            	    data_body_atom195=data_body_atom();
 
             	    state._fsp--;
 
-            	    stream_data_body_atom.add(data_body_atom191.getTree());
+            	    stream_data_body_atom.add(data_body_atom195.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop65;
+            	    break loop66;
                 }
             } while (true);
 
-            DATA_END192=(Token)match(input,DATA_END,FOLLOW_DATA_END_in_data_expression2619);  
-            stream_DATA_END.add(DATA_END192);
+            DATA_END196=(Token)match(input,DATA_END,FOLLOW_DATA_END_in_data_expression2620);  
+            stream_DATA_END.add(DATA_END196);
 
 
 
             // AST REWRITE
-            // elements: data_body_atom, DATA_START
+            // elements: DATA_START, data_body_atom
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -7510,14 +7620,14 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 373:5: -> ^( DATA_START ( data_body_atom )* )
+            // 377:5: -> ^( DATA_START ( data_body_atom )* )
             {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:373:8: ^( DATA_START ( data_body_atom )* )
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:377:8: ^( DATA_START ( data_body_atom )* )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new Data(stream_DATA_START.nextToken()), root_1);
 
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:373:27: ( data_body_atom )*
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:377:27: ( data_body_atom )*
                 while ( stream_data_body_atom.hasNext() ) {
                     adaptor.addChild(root_1, stream_data_body_atom.nextTree());
 
@@ -7556,54 +7666,54 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "atom"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:376:1: atom : selectable_atom ( DOUBLE_DOT selectable_atom )? ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:380:1: atom : selectable_atom ( DOUBLE_DOT selectable_atom )? ;
     public final OmttParser.atom_return atom() throws RecognitionException {
         OmttParser.atom_return retval = new OmttParser.atom_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token DOUBLE_DOT194=null;
-        OmttParser.selectable_atom_return selectable_atom193 = null;
+        Token DOUBLE_DOT198=null;
+        OmttParser.selectable_atom_return selectable_atom197 = null;
 
-        OmttParser.selectable_atom_return selectable_atom195 = null;
+        OmttParser.selectable_atom_return selectable_atom199 = null;
 
 
-        Object DOUBLE_DOT194_tree=null;
+        Object DOUBLE_DOT198_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:377:2: ( selectable_atom ( DOUBLE_DOT selectable_atom )? )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:377:4: selectable_atom ( DOUBLE_DOT selectable_atom )?
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:381:2: ( selectable_atom ( DOUBLE_DOT selectable_atom )? )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:381:4: selectable_atom ( DOUBLE_DOT selectable_atom )?
             {
             root_0 = (Object)adaptor.nil();
 
-            pushFollow(FOLLOW_selectable_atom_in_atom2647);
-            selectable_atom193=selectable_atom();
+            pushFollow(FOLLOW_selectable_atom_in_atom2648);
+            selectable_atom197=selectable_atom();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, selectable_atom193.getTree());
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:378:3: ( DOUBLE_DOT selectable_atom )?
-            int alt66=2;
-            int LA66_0 = input.LA(1);
+            adaptor.addChild(root_0, selectable_atom197.getTree());
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:382:3: ( DOUBLE_DOT selectable_atom )?
+            int alt67=2;
+            int LA67_0 = input.LA(1);
 
-            if ( (LA66_0==DOUBLE_DOT) ) {
-                alt66=1;
+            if ( (LA67_0==DOUBLE_DOT) ) {
+                alt67=1;
             }
-            switch (alt66) {
+            switch (alt67) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:378:4: DOUBLE_DOT selectable_atom
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:382:4: DOUBLE_DOT selectable_atom
                     {
-                    DOUBLE_DOT194=(Token)match(input,DOUBLE_DOT,FOLLOW_DOUBLE_DOT_in_atom2652); 
-                    DOUBLE_DOT194_tree = new Range(DOUBLE_DOT194) ;
-                    root_0 = (Object)adaptor.becomeRoot(DOUBLE_DOT194_tree, root_0);
+                    DOUBLE_DOT198=(Token)match(input,DOUBLE_DOT,FOLLOW_DOUBLE_DOT_in_atom2653); 
+                    DOUBLE_DOT198_tree = new Range(DOUBLE_DOT198) ;
+                    root_0 = (Object)adaptor.becomeRoot(DOUBLE_DOT198_tree, root_0);
 
-                    pushFollow(FOLLOW_selectable_atom_in_atom2658);
-                    selectable_atom195=selectable_atom();
+                    pushFollow(FOLLOW_selectable_atom_in_atom2659);
+                    selectable_atom199=selectable_atom();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, selectable_atom195.getTree());
+                    adaptor.addChild(root_0, selectable_atom199.getTree());
 
                     }
                     break;
@@ -7637,30 +7747,30 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "selectable_atom"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:381:1: selectable_atom : ( object_atom | data_expression | namespace_id | LEFT_PAREN expression RIGHT_PAREN );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:385:1: selectable_atom : ( object_atom | data_expression | namespace_id | LEFT_PAREN expression RIGHT_PAREN );
     public final OmttParser.selectable_atom_return selectable_atom() throws RecognitionException {
         OmttParser.selectable_atom_return retval = new OmttParser.selectable_atom_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token LEFT_PAREN199=null;
-        Token RIGHT_PAREN201=null;
-        OmttParser.object_atom_return object_atom196 = null;
+        Token LEFT_PAREN203=null;
+        Token RIGHT_PAREN205=null;
+        OmttParser.object_atom_return object_atom200 = null;
 
-        OmttParser.data_expression_return data_expression197 = null;
+        OmttParser.data_expression_return data_expression201 = null;
 
-        OmttParser.namespace_id_return namespace_id198 = null;
+        OmttParser.namespace_id_return namespace_id202 = null;
 
-        OmttParser.expression_return expression200 = null;
+        OmttParser.expression_return expression204 = null;
 
 
-        Object LEFT_PAREN199_tree=null;
-        Object RIGHT_PAREN201_tree=null;
+        Object LEFT_PAREN203_tree=null;
+        Object RIGHT_PAREN205_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:382:3: ( object_atom | data_expression | namespace_id | LEFT_PAREN expression RIGHT_PAREN )
-            int alt67=4;
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:386:3: ( object_atom | data_expression | namespace_id | LEFT_PAREN expression RIGHT_PAREN )
+            int alt68=4;
             switch ( input.LA(1) ) {
             case STRING_LITERAL:
             case INT_NUMBER:
@@ -7670,87 +7780,88 @@ public class OmttParser extends AbstractOmttParser {
             case FALSE:
             case TILDE:
                 {
-                alt67=1;
+                alt68=1;
                 }
                 break;
             case DATA_START:
                 {
-                alt67=2;
+                alt68=2;
                 }
                 break;
+            case OP_GENERAL:
             case VAR_ID:
                 {
-                alt67=3;
+                alt68=3;
                 }
                 break;
             case LEFT_PAREN:
                 {
-                alt67=4;
+                alt68=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 67, 0, input);
+                    new NoViableAltException("", 68, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt67) {
+            switch (alt68) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:382:5: object_atom
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:386:5: object_atom
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_object_atom_in_selectable_atom2672);
-                    object_atom196=object_atom();
+                    pushFollow(FOLLOW_object_atom_in_selectable_atom2673);
+                    object_atom200=object_atom();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, object_atom196.getTree());
+                    adaptor.addChild(root_0, object_atom200.getTree());
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:383:5: data_expression
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:387:5: data_expression
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_data_expression_in_selectable_atom2678);
-                    data_expression197=data_expression();
+                    pushFollow(FOLLOW_data_expression_in_selectable_atom2679);
+                    data_expression201=data_expression();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, data_expression197.getTree());
+                    adaptor.addChild(root_0, data_expression201.getTree());
 
                     }
                     break;
                 case 3 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:384:5: namespace_id
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:388:5: namespace_id
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_namespace_id_in_selectable_atom2684);
-                    namespace_id198=namespace_id();
+                    pushFollow(FOLLOW_namespace_id_in_selectable_atom2685);
+                    namespace_id202=namespace_id();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, namespace_id198.getTree());
+                    adaptor.addChild(root_0, namespace_id202.getTree());
 
                     }
                     break;
                 case 4 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:385:5: LEFT_PAREN expression RIGHT_PAREN
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:389:5: LEFT_PAREN expression RIGHT_PAREN
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    LEFT_PAREN199=(Token)match(input,LEFT_PAREN,FOLLOW_LEFT_PAREN_in_selectable_atom2690); 
-                    pushFollow(FOLLOW_expression_in_selectable_atom2693);
-                    expression200=expression();
+                    LEFT_PAREN203=(Token)match(input,LEFT_PAREN,FOLLOW_LEFT_PAREN_in_selectable_atom2691); 
+                    pushFollow(FOLLOW_expression_in_selectable_atom2694);
+                    expression204=expression();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, expression200.getTree());
-                    RIGHT_PAREN201=(Token)match(input,RIGHT_PAREN,FOLLOW_RIGHT_PAREN_in_selectable_atom2695); 
+                    adaptor.addChild(root_0, expression204.getTree());
+                    RIGHT_PAREN205=(Token)match(input,RIGHT_PAREN,FOLLOW_RIGHT_PAREN_in_selectable_atom2696); 
 
                     }
                     break;
@@ -7780,7 +7891,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "namespace_id"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:387:10: fragment namespace_id : (ns= VAR_ID OP_VIEW )? id= VAR_ID -> ^( IDENT[$id] ( $ns)? ) ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:391:10: fragment namespace_id : ( (ns= VAR_ID OP_VIEW )? id= VAR_ID -> ^( IDENT[$id] ( $ns)? ) | id= OP_GENERAL -> ^( IDENT[$id] ) );
     public final OmttParser.namespace_id_return namespace_id() throws RecognitionException {
         OmttParser.namespace_id_return retval = new OmttParser.namespace_id_return();
         retval.start = input.LT(1);
@@ -7789,84 +7900,138 @@ public class OmttParser extends AbstractOmttParser {
 
         Token ns=null;
         Token id=null;
-        Token OP_VIEW202=null;
+        Token OP_VIEW206=null;
 
         Object ns_tree=null;
         Object id_tree=null;
-        Object OP_VIEW202_tree=null;
+        Object OP_VIEW206_tree=null;
+        RewriteRuleTokenStream stream_OP_GENERAL=new RewriteRuleTokenStream(adaptor,"token OP_GENERAL");
         RewriteRuleTokenStream stream_VAR_ID=new RewriteRuleTokenStream(adaptor,"token VAR_ID");
         RewriteRuleTokenStream stream_OP_VIEW=new RewriteRuleTokenStream(adaptor,"token OP_VIEW");
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:388:3: ( (ns= VAR_ID OP_VIEW )? id= VAR_ID -> ^( IDENT[$id] ( $ns)? ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:388:5: (ns= VAR_ID OP_VIEW )? id= VAR_ID
-            {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:388:5: (ns= VAR_ID OP_VIEW )?
-            int alt68=2;
-            int LA68_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:392:3: ( (ns= VAR_ID OP_VIEW )? id= VAR_ID -> ^( IDENT[$id] ( $ns)? ) | id= OP_GENERAL -> ^( IDENT[$id] ) )
+            int alt70=2;
+            int LA70_0 = input.LA(1);
 
-            if ( (LA68_0==VAR_ID) ) {
-                int LA68_1 = input.LA(2);
-
-                if ( (LA68_1==OP_VIEW) ) {
-                    alt68=1;
-                }
+            if ( (LA70_0==VAR_ID) ) {
+                alt70=1;
             }
-            switch (alt68) {
+            else if ( (LA70_0==OP_GENERAL) ) {
+                alt70=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 70, 0, input);
+
+                throw nvae;
+            }
+            switch (alt70) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:388:6: ns= VAR_ID OP_VIEW
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:392:5: (ns= VAR_ID OP_VIEW )? id= VAR_ID
                     {
-                    ns=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_namespace_id2713);  
-                    stream_VAR_ID.add(ns);
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:392:5: (ns= VAR_ID OP_VIEW )?
+                    int alt69=2;
+                    int LA69_0 = input.LA(1);
 
-                    OP_VIEW202=(Token)match(input,OP_VIEW,FOLLOW_OP_VIEW_in_namespace_id2715);  
-                    stream_OP_VIEW.add(OP_VIEW202);
+                    if ( (LA69_0==VAR_ID) ) {
+                        int LA69_1 = input.LA(2);
+
+                        if ( (LA69_1==OP_VIEW) ) {
+                            alt69=1;
+                        }
+                    }
+                    switch (alt69) {
+                        case 1 :
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:392:6: ns= VAR_ID OP_VIEW
+                            {
+                            ns=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_namespace_id2714);  
+                            stream_VAR_ID.add(ns);
+
+                            OP_VIEW206=(Token)match(input,OP_VIEW,FOLLOW_OP_VIEW_in_namespace_id2716);  
+                            stream_OP_VIEW.add(OP_VIEW206);
 
 
+                            }
+                            break;
+
+                    }
+
+                    id=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_namespace_id2722);  
+                    stream_VAR_ID.add(id);
+
+
+
+                    // AST REWRITE
+                    // elements: ns
+                    // token labels: ns
+                    // rule labels: retval
+                    // token list labels: 
+                    // rule list labels: 
+                    // wildcard labels: 
+                    retval.tree = root_0;
+                    RewriteRuleTokenStream stream_ns=new RewriteRuleTokenStream(adaptor,"token ns",ns);
+                    RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+
+                    root_0 = (Object)adaptor.nil();
+                    // 393:5: -> ^( IDENT[$id] ( $ns)? )
+                    {
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:393:8: ^( IDENT[$id] ( $ns)? )
+                        {
+                        Object root_1 = (Object)adaptor.nil();
+                        root_1 = (Object)adaptor.becomeRoot(new Ident(IDENT, id), root_1);
+
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:393:28: ( $ns)?
+                        if ( stream_ns.hasNext() ) {
+                            adaptor.addChild(root_1, stream_ns.nextNode());
+
+                        }
+                        stream_ns.reset();
+
+                        adaptor.addChild(root_0, root_1);
+                        }
+
+                    }
+
+                    retval.tree = root_0;
+                    }
+                    break;
+                case 2 :
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:394:5: id= OP_GENERAL
+                    {
+                    id=(Token)match(input,OP_GENERAL,FOLLOW_OP_GENERAL_in_namespace_id2748);  
+                    stream_OP_GENERAL.add(id);
+
+
+
+                    // AST REWRITE
+                    // elements: 
+                    // token labels: 
+                    // rule labels: retval
+                    // token list labels: 
+                    // rule list labels: 
+                    // wildcard labels: 
+                    retval.tree = root_0;
+                    RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+
+                    root_0 = (Object)adaptor.nil();
+                    // 395:4: -> ^( IDENT[$id] )
+                    {
+                        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:395:7: ^( IDENT[$id] )
+                        {
+                        Object root_1 = (Object)adaptor.nil();
+                        root_1 = (Object)adaptor.becomeRoot(new Ident(IDENT, id), root_1);
+
+                        adaptor.addChild(root_0, root_1);
+                        }
+
+                    }
+
+                    retval.tree = root_0;
                     }
                     break;
 
             }
-
-            id=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_namespace_id2721);  
-            stream_VAR_ID.add(id);
-
-
-
-            // AST REWRITE
-            // elements: ns
-            // token labels: ns
-            // rule labels: retval
-            // token list labels: 
-            // rule list labels: 
-            // wildcard labels: 
-            retval.tree = root_0;
-            RewriteRuleTokenStream stream_ns=new RewriteRuleTokenStream(adaptor,"token ns",ns);
-            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-
-            root_0 = (Object)adaptor.nil();
-            // 389:5: -> ^( IDENT[$id] ( $ns)? )
-            {
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:389:8: ^( IDENT[$id] ( $ns)? )
-                {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(new Ident(IDENT, id), root_1);
-
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:389:28: ( $ns)?
-                if ( stream_ns.hasNext() ) {
-                    adaptor.addChild(root_1, stream_ns.nextNode());
-
-                }
-                stream_ns.reset();
-
-                adaptor.addChild(root_0, root_1);
-                }
-
-            }
-
-            retval.tree = root_0;
-            }
-
             retval.stop = input.LT(-1);
 
             retval.tree = (Object)adaptor.rulePostProcessing(root_0);
@@ -7891,126 +8056,126 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "object_atom"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:393:1: object_atom : ( number_atom | STRING_LITERAL | ( NULL | TILDE ) | ( TRUE | FALSE ) );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:399:1: object_atom : ( number_atom | STRING_LITERAL | ( NULL | TILDE ) | ( TRUE | FALSE ) );
     public final OmttParser.object_atom_return object_atom() throws RecognitionException {
         OmttParser.object_atom_return retval = new OmttParser.object_atom_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token STRING_LITERAL204=null;
-        Token NULL205=null;
-        Token TILDE206=null;
-        Token TRUE207=null;
-        Token FALSE208=null;
-        OmttParser.number_atom_return number_atom203 = null;
+        Token STRING_LITERAL208=null;
+        Token NULL209=null;
+        Token TILDE210=null;
+        Token TRUE211=null;
+        Token FALSE212=null;
+        OmttParser.number_atom_return number_atom207 = null;
 
 
-        Object STRING_LITERAL204_tree=null;
-        Object NULL205_tree=null;
-        Object TILDE206_tree=null;
-        Object TRUE207_tree=null;
-        Object FALSE208_tree=null;
+        Object STRING_LITERAL208_tree=null;
+        Object NULL209_tree=null;
+        Object TILDE210_tree=null;
+        Object TRUE211_tree=null;
+        Object FALSE212_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:394:3: ( number_atom | STRING_LITERAL | ( NULL | TILDE ) | ( TRUE | FALSE ) )
-            int alt71=4;
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:400:3: ( number_atom | STRING_LITERAL | ( NULL | TILDE ) | ( TRUE | FALSE ) )
+            int alt73=4;
             switch ( input.LA(1) ) {
             case INT_NUMBER:
             case REAL_NUMBER:
                 {
-                alt71=1;
+                alt73=1;
                 }
                 break;
             case STRING_LITERAL:
                 {
-                alt71=2;
+                alt73=2;
                 }
                 break;
             case NULL:
             case TILDE:
                 {
-                alt71=3;
+                alt73=3;
                 }
                 break;
             case TRUE:
             case FALSE:
                 {
-                alt71=4;
+                alt73=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 71, 0, input);
+                    new NoViableAltException("", 73, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt71) {
+            switch (alt73) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:394:5: number_atom
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:400:5: number_atom
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_number_atom_in_object_atom2753);
-                    number_atom203=number_atom();
+                    pushFollow(FOLLOW_number_atom_in_object_atom2775);
+                    number_atom207=number_atom();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, number_atom203.getTree());
+                    adaptor.addChild(root_0, number_atom207.getTree());
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:395:5: STRING_LITERAL
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:401:5: STRING_LITERAL
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    STRING_LITERAL204=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_object_atom2759); 
-                    STRING_LITERAL204_tree = new Literal(STRING_LITERAL204) ;
-                    root_0 = (Object)adaptor.becomeRoot(STRING_LITERAL204_tree, root_0);
+                    STRING_LITERAL208=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_object_atom2781); 
+                    STRING_LITERAL208_tree = new Literal(STRING_LITERAL208) ;
+                    root_0 = (Object)adaptor.becomeRoot(STRING_LITERAL208_tree, root_0);
 
 
                     }
                     break;
                 case 3 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:396:5: ( NULL | TILDE )
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:402:5: ( NULL | TILDE )
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:396:5: ( NULL | TILDE )
-                    int alt69=2;
-                    int LA69_0 = input.LA(1);
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:402:5: ( NULL | TILDE )
+                    int alt71=2;
+                    int LA71_0 = input.LA(1);
 
-                    if ( (LA69_0==NULL) ) {
-                        alt69=1;
+                    if ( (LA71_0==NULL) ) {
+                        alt71=1;
                     }
-                    else if ( (LA69_0==TILDE) ) {
-                        alt69=2;
+                    else if ( (LA71_0==TILDE) ) {
+                        alt71=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 69, 0, input);
+                            new NoViableAltException("", 71, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt69) {
+                    switch (alt71) {
                         case 1 :
-                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:396:6: NULL
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:402:6: NULL
                             {
-                            NULL205=(Token)match(input,NULL,FOLLOW_NULL_in_object_atom2770); 
-                            NULL205_tree = new Literal(NULL205) ;
-                            root_0 = (Object)adaptor.becomeRoot(NULL205_tree, root_0);
+                            NULL209=(Token)match(input,NULL,FOLLOW_NULL_in_object_atom2792); 
+                            NULL209_tree = new Literal(NULL209) ;
+                            root_0 = (Object)adaptor.becomeRoot(NULL209_tree, root_0);
 
 
                             }
                             break;
                         case 2 :
-                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:396:23: TILDE
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:402:23: TILDE
                             {
-                            TILDE206=(Token)match(input,TILDE,FOLLOW_TILDE_in_object_atom2778); 
-                            TILDE206_tree = new Literal(TILDE206) ;
-                            root_0 = (Object)adaptor.becomeRoot(TILDE206_tree, root_0);
+                            TILDE210=(Token)match(input,TILDE,FOLLOW_TILDE_in_object_atom2800); 
+                            TILDE210_tree = new Literal(TILDE210) ;
+                            root_0 = (Object)adaptor.becomeRoot(TILDE210_tree, root_0);
 
 
                             }
@@ -8022,43 +8187,43 @@ public class OmttParser extends AbstractOmttParser {
                     }
                     break;
                 case 4 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:397:5: ( TRUE | FALSE )
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:403:5: ( TRUE | FALSE )
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:397:5: ( TRUE | FALSE )
-                    int alt70=2;
-                    int LA70_0 = input.LA(1);
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:403:5: ( TRUE | FALSE )
+                    int alt72=2;
+                    int LA72_0 = input.LA(1);
 
-                    if ( (LA70_0==TRUE) ) {
-                        alt70=1;
+                    if ( (LA72_0==TRUE) ) {
+                        alt72=1;
                     }
-                    else if ( (LA70_0==FALSE) ) {
-                        alt70=2;
+                    else if ( (LA72_0==FALSE) ) {
+                        alt72=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 70, 0, input);
+                            new NoViableAltException("", 72, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt70) {
+                    switch (alt72) {
                         case 1 :
-                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:397:6: TRUE
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:403:6: TRUE
                             {
-                            TRUE207=(Token)match(input,TRUE,FOLLOW_TRUE_in_object_atom2791); 
-                            TRUE207_tree = new Literal(TRUE207) ;
-                            root_0 = (Object)adaptor.becomeRoot(TRUE207_tree, root_0);
+                            TRUE211=(Token)match(input,TRUE,FOLLOW_TRUE_in_object_atom2813); 
+                            TRUE211_tree = new Literal(TRUE211) ;
+                            root_0 = (Object)adaptor.becomeRoot(TRUE211_tree, root_0);
 
 
                             }
                             break;
                         case 2 :
-                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:397:23: FALSE
+                            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:403:23: FALSE
                             {
-                            FALSE208=(Token)match(input,FALSE,FOLLOW_FALSE_in_object_atom2799); 
-                            FALSE208_tree = new Literal(FALSE208) ;
-                            root_0 = (Object)adaptor.becomeRoot(FALSE208_tree, root_0);
+                            FALSE212=(Token)match(input,FALSE,FOLLOW_FALSE_in_object_atom2821); 
+                            FALSE212_tree = new Literal(FALSE212) ;
+                            root_0 = (Object)adaptor.becomeRoot(FALSE212_tree, root_0);
 
 
                             }
@@ -8095,57 +8260,57 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "number_atom"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:400:1: number_atom : ( INT_NUMBER | REAL_NUMBER );
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:406:1: number_atom : ( INT_NUMBER | REAL_NUMBER );
     public final OmttParser.number_atom_return number_atom() throws RecognitionException {
         OmttParser.number_atom_return retval = new OmttParser.number_atom_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token INT_NUMBER209=null;
-        Token REAL_NUMBER210=null;
+        Token INT_NUMBER213=null;
+        Token REAL_NUMBER214=null;
 
-        Object INT_NUMBER209_tree=null;
-        Object REAL_NUMBER210_tree=null;
+        Object INT_NUMBER213_tree=null;
+        Object REAL_NUMBER214_tree=null;
 
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:401:3: ( INT_NUMBER | REAL_NUMBER )
-            int alt72=2;
-            int LA72_0 = input.LA(1);
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:407:3: ( INT_NUMBER | REAL_NUMBER )
+            int alt74=2;
+            int LA74_0 = input.LA(1);
 
-            if ( (LA72_0==INT_NUMBER) ) {
-                alt72=1;
+            if ( (LA74_0==INT_NUMBER) ) {
+                alt74=1;
             }
-            else if ( (LA72_0==REAL_NUMBER) ) {
-                alt72=2;
+            else if ( (LA74_0==REAL_NUMBER) ) {
+                alt74=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 72, 0, input);
+                    new NoViableAltException("", 74, 0, input);
 
                 throw nvae;
             }
-            switch (alt72) {
+            switch (alt74) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:401:5: INT_NUMBER
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:407:5: INT_NUMBER
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    INT_NUMBER209=(Token)match(input,INT_NUMBER,FOLLOW_INT_NUMBER_in_number_atom2817); 
-                    INT_NUMBER209_tree = new Literal(INT_NUMBER209) ;
-                    root_0 = (Object)adaptor.becomeRoot(INT_NUMBER209_tree, root_0);
+                    INT_NUMBER213=(Token)match(input,INT_NUMBER,FOLLOW_INT_NUMBER_in_number_atom2839); 
+                    INT_NUMBER213_tree = new Literal(INT_NUMBER213) ;
+                    root_0 = (Object)adaptor.becomeRoot(INT_NUMBER213_tree, root_0);
 
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:402:5: REAL_NUMBER
+                    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/grammar/OmttParser.g:408:5: REAL_NUMBER
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    REAL_NUMBER210=(Token)match(input,REAL_NUMBER,FOLLOW_REAL_NUMBER_in_number_atom2827); 
-                    REAL_NUMBER210_tree = new Literal(REAL_NUMBER210) ;
-                    root_0 = (Object)adaptor.becomeRoot(REAL_NUMBER210_tree, root_0);
+                    REAL_NUMBER214=(Token)match(input,REAL_NUMBER,FOLLOW_REAL_NUMBER_in_number_atom2849); 
+                    REAL_NUMBER214_tree = new Literal(REAL_NUMBER214) ;
+                    root_0 = (Object)adaptor.becomeRoot(REAL_NUMBER214_tree, root_0);
 
 
                     }
@@ -8174,7 +8339,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
     protected DFA20 dfa20 = new DFA20(this);
-    protected DFA50 dfa50 = new DFA50(this);
+    protected DFA41 dfa41 = new DFA41(this);
     static final String DFA20_eotS =
         "\17\uffff";
     static final String DFA20_eofS =
@@ -8182,7 +8347,7 @@ public class OmttParser extends AbstractOmttParser {
     static final String DFA20_minS =
         "\1\31\1\uffff\2\31\2\uffff\11\31";
     static final String DFA20_maxS =
-        "\1\144\1\uffff\2\153\2\uffff\2\153\1\144\1\146\4\153\1\146";
+        "\1\146\1\uffff\2\144\2\uffff\3\144\1\146\4\144\1\146";
     static final String DFA20_acceptS =
         "\1\uffff\1\1\2\uffff\1\2\1\3\11\uffff";
     static final String DFA20_specialS =
@@ -8190,40 +8355,40 @@ public class OmttParser extends AbstractOmttParser {
     static final String[] DFA20_transitionS = {
             "\3\5\3\uffff\1\5\17\uffff\1\4\2\uffff\1\5\7\uffff\1\5\1\uffff"+
             "\1\5\1\1\2\5\2\uffff\1\1\6\uffff\1\2\1\5\4\uffff\1\5\13\uffff"+
-            "\1\5\10\uffff\1\3",
+            "\1\5\4\uffff\1\5\3\uffff\1\3\1\uffff\1\1",
             "",
-            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\7\5\2\uffff\1\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\2\5\1\uffff\2\5\1\uffff"+
-            "\1\5\4\uffff\1\6\6\uffff\1\5",
-            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\2\5\3\uffff\1\6",
+            "\7\5\2\uffff\1\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\2\uffff\1\1\2\uffff\4\5\1\7\3\5\1\uffff\2\5\1\10\7\5\1"+
-            "\1\2\5\1\uffff\4\5\4\uffff\1\6\6\uffff\1\5",
+            "\1\2\5\1\uffff\5\5\3\uffff\1\6",
             "",
             "",
-            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\7\5\2\uffff\1\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\2\uffff\1\1\2\uffff\4\5\1\7\3\5\1\uffff\2\5\1\10\7\5\1"+
-            "\11\2\5\1\uffff\4\5\4\uffff\1\6\6\uffff\1\5",
-            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\11\2\5\1\uffff\5\5\3\uffff\1\6",
+            "\7\5\2\uffff\1\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\2\5\1\uffff\2\5\1\uffff"+
-            "\1\5\4\uffff\1\6\6\uffff\1\5",
+            "\2\5\3\uffff\1\6",
             "\3\5\3\uffff\1\5\34\uffff\1\5\1\uffff\2\5\2\uffff\1\1\6\uffff"+
-            "\1\12\1\5\4\uffff\1\5\24\uffff\1\13",
-            "\3\5\3\uffff\1\5\34\uffff\1\5\1\uffff\2\5\11\uffff\2\5\31\uffff"+
-            "\1\5\1\uffff\1\1",
-            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\1\12\1\5\4\uffff\1\5\20\uffff\1\5\3\uffff\1\13",
+            "\3\5\3\uffff\1\5\34\uffff\1\5\1\uffff\2\5\11\uffff\2\5\25\uffff"+
+            "\1\5\3\uffff\1\5\1\uffff\1\1",
+            "\7\5\2\uffff\1\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\2\5\1\uffff\2\5\1\uffff"+
-            "\1\5\4\uffff\1\14\6\uffff\1\5",
-            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\2\5\3\uffff\1\14",
+            "\7\5\2\uffff\1\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\2\uffff\1\1\2\uffff\4\5\1\15\3\5\1\uffff\2\5\1\10\7\5\1"+
-            "\1\2\5\1\uffff\4\5\4\uffff\1\14\6\uffff\1\5",
-            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\1\2\5\1\uffff\5\5\3\uffff\1\14",
+            "\7\5\2\uffff\1\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\2\uffff\1\1\2\uffff\4\5\1\15\3\5\1\uffff\2\5\1\10\7\5\1"+
-            "\16\2\5\1\uffff\4\5\4\uffff\1\14\6\uffff\1\5",
-            "\7\5\2\uffff\2\5\14\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
+            "\16\2\5\1\uffff\5\5\3\uffff\1\14",
+            "\7\5\2\uffff\1\5\15\uffff\2\5\6\uffff\1\5\3\uffff\1\5\1\uffff"+
             "\2\5\5\uffff\10\5\1\uffff\12\5\1\uffff\2\5\1\uffff\2\5\1\uffff"+
-            "\1\5\4\uffff\1\14\6\uffff\1\5",
-            "\3\5\3\uffff\1\5\34\uffff\1\5\1\uffff\2\5\11\uffff\2\5\31\uffff"+
-            "\1\5\1\uffff\1\1"
+            "\2\5\3\uffff\1\14",
+            "\3\5\3\uffff\1\5\34\uffff\1\5\1\uffff\2\5\11\uffff\2\5\25\uffff"+
+            "\1\5\3\uffff\1\5\1\uffff\1\1"
     };
 
     static final short[] DFA20_eot = DFA.unpackEncodedString(DFA20_eotS);
@@ -8259,97 +8424,74 @@ public class OmttParser extends AbstractOmttParser {
             return "116:1: expression : ( lambda_expression | def_in_expression | concatence_expression );";
         }
     }
-    static final String DFA50_eotS =
-        "\22\uffff";
-    static final String DFA50_eofS =
-        "\22\uffff";
-    static final String DFA50_minS =
-        "\1\34\1\uffff\1\31\2\uffff\2\31\2\uffff\11\31";
-    static final String DFA50_maxS =
-        "\1\153\1\uffff\1\146\2\uffff\2\153\2\uffff\2\153\1\144\1\146\4\153"+
-        "\1\146";
-    static final String DFA50_acceptS =
-        "\1\uffff\1\5\1\uffff\1\4\1\2\2\uffff\1\3\1\1\11\uffff";
-    static final String DFA50_specialS =
-        "\22\uffff}>";
-    static final String[] DFA50_transitionS = {
-            "\3\1\3\uffff\2\1\14\uffff\2\1\2\uffff\1\1\16\uffff\1\1\4\uffff"+
-            "\1\1\2\uffff\1\1\1\uffff\13\1\1\uffff\2\1\1\uffff\1\2\1\3\1"+
-            "\uffff\1\1\13\uffff\1\1",
+    static final String DFA41_eotS =
+        "\13\uffff";
+    static final String DFA41_eofS =
+        "\13\uffff";
+    static final String DFA41_minS =
+        "\1\34\1\uffff\1\31\2\uffff\2\31\1\uffff\3\31";
+    static final String DFA41_maxS =
+        "\1\137\1\uffff\1\144\2\uffff\2\144\1\uffff\2\144\1\146";
+    static final String DFA41_acceptS =
+        "\1\uffff\1\4\1\uffff\1\3\1\2\2\uffff\1\1\3\uffff";
+    static final String DFA41_specialS =
+        "\13\uffff}>";
+    static final String[] DFA41_transitionS = {
+            "\3\1\3\uffff\2\1\14\uffff\2\1\2\uffff\1\1\16\uffff\2\1\6\uffff"+
+            "\1\1\20\uffff\1\2\1\3\1\uffff\1\1",
             "",
-            "\3\10\3\uffff\1\10\34\uffff\1\10\1\4\2\10\2\uffff\1\4\6\uffff"+
-            "\1\5\1\10\31\uffff\1\6\1\uffff\1\7",
+            "\3\7\3\uffff\1\7\34\uffff\1\7\1\4\2\7\2\uffff\1\4\6\uffff\1"+
+            "\5\1\7\25\uffff\1\7\3\uffff\1\6",
             "",
             "",
-            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
-            "\3\uffff\1\10\1\uffff\2\10\3\uffff\1\10\1\uffff\23\10\1\uffff"+
-            "\2\10\1\uffff\2\10\1\uffff\1\10\4\uffff\1\11\6\uffff\1\10",
-            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
-            "\3\uffff\1\10\1\uffff\2\10\2\uffff\1\4\1\10\1\uffff\4\10\1\12"+
-            "\6\10\1\13\7\10\1\4\2\10\1\uffff\4\10\4\uffff\1\11\6\uffff\1"+
-            "\10",
+            "\7\7\2\uffff\2\7\14\uffff\2\7\2\uffff\1\7\3\uffff\1\7\3\uffff"+
+            "\1\7\1\uffff\2\7\3\uffff\5\7\1\uffff\4\7\17\uffff\2\7\1\uffff"+
+            "\2\7\3\uffff\1\10",
+            "\7\7\2\uffff\2\7\14\uffff\2\7\2\uffff\1\7\3\uffff\1\7\3\uffff"+
+            "\1\7\1\uffff\2\7\2\uffff\1\4\5\7\1\uffff\1\11\3\7\3\uffff\1"+
+            "\4\7\uffff\1\4\3\uffff\5\7\3\uffff\1\10",
             "",
-            "",
-            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
-            "\3\uffff\1\10\1\uffff\2\10\2\uffff\1\4\1\10\1\uffff\4\10\1\12"+
-            "\6\10\1\13\7\10\1\14\2\10\1\uffff\4\10\4\uffff\1\11\6\uffff"+
-            "\1\10",
-            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
-            "\3\uffff\1\10\1\uffff\2\10\3\uffff\1\10\1\uffff\23\10\1\uffff"+
-            "\2\10\1\uffff\2\10\1\uffff\1\10\4\uffff\1\11\6\uffff\1\10",
-            "\3\10\3\uffff\1\10\34\uffff\1\10\1\uffff\2\10\2\uffff\1\4\6"+
-            "\uffff\1\15\1\10\4\uffff\1\10\24\uffff\1\16",
-            "\3\10\3\uffff\1\10\34\uffff\1\10\1\uffff\2\10\11\uffff\2\10"+
-            "\31\uffff\1\10\1\uffff\1\4",
-            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
-            "\3\uffff\1\10\1\uffff\2\10\3\uffff\1\10\1\uffff\23\10\1\uffff"+
-            "\2\10\1\uffff\2\10\1\uffff\1\10\4\uffff\1\17\6\uffff\1\10",
-            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
-            "\3\uffff\1\10\1\uffff\2\10\2\uffff\1\4\1\10\1\uffff\4\10\1\20"+
-            "\6\10\1\13\7\10\1\4\2\10\1\uffff\4\10\4\uffff\1\17\6\uffff\1"+
-            "\10",
-            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
-            "\3\uffff\1\10\1\uffff\2\10\2\uffff\1\4\1\10\1\uffff\4\10\1\20"+
-            "\6\10\1\13\7\10\1\21\2\10\1\uffff\4\10\4\uffff\1\17\6\uffff"+
-            "\1\10",
-            "\7\10\2\uffff\2\10\14\uffff\2\10\2\uffff\1\10\3\uffff\1\10"+
-            "\3\uffff\1\10\1\uffff\2\10\3\uffff\1\10\1\uffff\23\10\1\uffff"+
-            "\2\10\1\uffff\2\10\1\uffff\1\10\4\uffff\1\17\6\uffff\1\10",
-            "\3\10\3\uffff\1\10\34\uffff\1\10\1\uffff\2\10\11\uffff\2\10"+
-            "\31\uffff\1\10\1\uffff\1\4"
+            "\7\7\2\uffff\2\7\14\uffff\2\7\2\uffff\1\7\3\uffff\1\7\3\uffff"+
+            "\1\7\1\uffff\2\7\2\uffff\1\4\5\7\1\uffff\1\11\3\7\3\uffff\1"+
+            "\4\7\uffff\1\12\3\uffff\5\7\3\uffff\1\10",
+            "\7\7\2\uffff\2\7\14\uffff\2\7\2\uffff\1\7\3\uffff\1\7\3\uffff"+
+            "\1\7\1\uffff\2\7\3\uffff\5\7\1\uffff\4\7\17\uffff\2\7\1\uffff"+
+            "\2\7\3\uffff\1\10",
+            "\3\7\3\uffff\1\7\34\uffff\1\7\1\uffff\2\7\11\uffff\2\7\25\uffff"+
+            "\1\7\3\uffff\1\7\1\uffff\1\4"
     };
 
-    static final short[] DFA50_eot = DFA.unpackEncodedString(DFA50_eotS);
-    static final short[] DFA50_eof = DFA.unpackEncodedString(DFA50_eofS);
-    static final char[] DFA50_min = DFA.unpackEncodedStringToUnsignedChars(DFA50_minS);
-    static final char[] DFA50_max = DFA.unpackEncodedStringToUnsignedChars(DFA50_maxS);
-    static final short[] DFA50_accept = DFA.unpackEncodedString(DFA50_acceptS);
-    static final short[] DFA50_special = DFA.unpackEncodedString(DFA50_specialS);
-    static final short[][] DFA50_transition;
+    static final short[] DFA41_eot = DFA.unpackEncodedString(DFA41_eotS);
+    static final short[] DFA41_eof = DFA.unpackEncodedString(DFA41_eofS);
+    static final char[] DFA41_min = DFA.unpackEncodedStringToUnsignedChars(DFA41_minS);
+    static final char[] DFA41_max = DFA.unpackEncodedStringToUnsignedChars(DFA41_maxS);
+    static final short[] DFA41_accept = DFA.unpackEncodedString(DFA41_acceptS);
+    static final short[] DFA41_special = DFA.unpackEncodedString(DFA41_specialS);
+    static final short[][] DFA41_transition;
 
     static {
-        int numStates = DFA50_transitionS.length;
-        DFA50_transition = new short[numStates][];
+        int numStates = DFA41_transitionS.length;
+        DFA41_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA50_transition[i] = DFA.unpackEncodedString(DFA50_transitionS[i]);
+            DFA41_transition[i] = DFA.unpackEncodedString(DFA41_transitionS[i]);
         }
     }
 
-    class DFA50 extends DFA {
+    class DFA41 extends DFA {
 
-        public DFA50(BaseRecognizer recognizer) {
+        public DFA41(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 50;
-            this.eot = DFA50_eot;
-            this.eof = DFA50_eof;
-            this.min = DFA50_min;
-            this.max = DFA50_max;
-            this.accept = DFA50_accept;
-            this.special = DFA50_special;
-            this.transition = DFA50_transition;
+            this.decisionNumber = 41;
+            this.eot = DFA41_eot;
+            this.eof = DFA41_eof;
+            this.min = DFA41_min;
+            this.max = DFA41_max;
+            this.accept = DFA41_accept;
+            this.special = DFA41_special;
+            this.transition = DFA41_transition;
         }
         public String getDescription() {
-            return "()* loopback of 291:5: ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_CONTEXT single_type -> ^( CAST single_type $context_expression) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )*";
+            return "()* loopback of 235:5: ( OP_CONTEXT atom_expression arguments= function_arguments -> ^( CALL[true] atom_expression ^( ARGUMENT $context_expression) ( $arguments)? ) | OP_CONTEXT lambda_expression_no_context -> ^( CALL[true] lambda_expression_no_context ^( ARGUMENT $context_expression) ) | OP_EXPRESSION_CONTEXT ce= functional_expression -> ^( OP_EXPRESSION_CONTEXT $context_expression $ce) )*";
         }
     }
  
@@ -8404,12 +8546,12 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_CONTENT_in_tag_content560 = new BitSet(new long[]{0x0000000222000002L});
     public static final BitSet FOLLOW_data_body_atom_in_tag_content566 = new BitSet(new long[]{0x0000000222000002L});
     public static final BitSet FOLLOW_OP_DATA_IS_EXPRESSION_in_tag_content589 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_CONTENT_in_tag_content591 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_CONTENT_in_tag_content591 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
     public static final BitSet FOLLOW_expression_in_tag_content597 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_STRING_LITERAL_in_data_body_atom618 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_expression_inside_data_in_data_body_atom628 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_tag_inside_data_in_data_body_atom634 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_EXPRESSION_START_in_expression_inside_data649 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_EXPRESSION_START_in_expression_inside_data649 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
     public static final BitSet FOLLOW_expression_in_expression_inside_data652 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_EXPRESSION_END_in_expression_inside_data654 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_def_in_tag_in_tag_inside_data670 = new BitSet(new long[]{0x0000000000000002L});
@@ -8423,14 +8565,14 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression735 = new BitSet(new long[]{0x0003000000000000L});
     public static final BitSet FOLLOW_AND_in_def_in_expression742 = new BitSet(new long[]{0x0080000000000000L,0x0000001000000000L});
     public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression746 = new BitSet(new long[]{0x0003000000000000L});
-    public static final BitSet FOLLOW_IN_in_def_in_expression754 = new BitSet(new long[]{0xF40480008E000000L,0x000000100800860CL});
-    public static final BitSet FOLLOW_COLON_in_def_in_expression756 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_IN_in_def_in_expression754 = new BitSet(new long[]{0xF40480008E000000L,0x000000510800860CL});
+    public static final BitSet FOLLOW_COLON_in_def_in_expression756 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
     public static final BitSet FOLLOW_expression_in_def_in_expression761 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_definition_signature_in_definition_inside_expression793 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_COLON_in_definition_inside_expression795 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_COLON_in_definition_inside_expression795 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
     public static final BitSet FOLLOW_expression_in_definition_inside_expression801 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_VAR_ID_in_definition_inside_expression824 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_expression826 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_expression826 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
     public static final BitSet FOLLOW_expression_in_definition_inside_expression831 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_TAG_START_in_def_in_tag864 = new BitSet(new long[]{0x0000800000000000L});
     public static final BitSet FOLLOW_DEF_in_def_in_tag866 = new BitSet(new long[]{0x0080000000000000L,0x0000001000000000L});
@@ -8445,159 +8587,164 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_definition_signature_in_definition_inside_tag935 = new BitSet(new long[]{0x0000000810000000L});
     public static final BitSet FOLLOW_tag_content_in_definition_inside_tag939 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_VAR_ID_in_definition_inside_tag963 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_tag965 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_tag965 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
     public static final BitSet FOLLOW_expression_in_definition_inside_tag967 = new BitSet(new long[]{0x0000000010000002L});
     public static final BitSet FOLLOW_CONTENT_in_definition_inside_tag970 = new BitSet(new long[]{0x0000000002000002L});
     public static final BitSet FOLLOW_STRING_LITERAL_in_definition_inside_tag972 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_LAMBDA_in_lambda_expression1011 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000208L});
     public static final BitSet FOLLOW_definition_argument_in_lambda_expression1013 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000208L});
-    public static final BitSet FOLLOW_COLON_in_lambda_expression1016 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_COLON_in_lambda_expression1016 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
     public static final BitSet FOLLOW_expression_in_lambda_expression1018 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_definition_argument_in_lambda_expression1046 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000204L});
-    public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression1049 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
+    public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression1049 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
     public static final BitSet FOLLOW_expression_in_lambda_expression1051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LAMBDA_in_lambda_expression_no_context1084 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000200L});
-    public static final BitSet FOLLOW_definition_argument_in_lambda_expression_no_context1086 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_COLON_in_lambda_expression_no_context1088 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_atom_expression_in_lambda_expression_no_context1090 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_definition_argument_in_lambda_expression_no_context1117 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000204L});
-    public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression_no_context1120 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_atom_expression_in_lambda_expression_no_context1122 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CLASS_ID_in_type1158 = new BitSet(new long[]{0x0000000000000002L,0x0000000000010000L});
-    public static final BitSet FOLLOW_OP_MULTIPLY_in_type1160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CLASS_ID_in_single_type1190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_control_expression_in_concatence_expression1219 = new BitSet(new long[]{0x0000000000000002L,0x0000000080000000L});
-    public static final BitSet FOLLOW_OP_CONCAT_in_concatence_expression1233 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_control_expression_in_concatence_expression1237 = new BitSet(new long[]{0x0000000000000002L,0x0000000080000000L});
-    public static final BitSet FOLLOW_if_expression_in_control_expression1267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_map_expression_in_control_expression1273 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_boolean_expression_in_control_expression1279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_if_expression1292 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_boolean_expression_in_if_expression1296 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_COLON_in_if_expression1298 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_control_expression_in_if_expression1306 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_ELSE_in_if_expression1312 = new BitSet(new long[]{0xF40480008E000000L,0x000000100800860CL});
-    public static final BitSet FOLLOW_COLON_in_if_expression1314 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_control_expression_in_if_expression1323 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_START_in_if_tag1357 = new BitSet(new long[]{0x0004000000000000L});
-    public static final BitSet FOLLOW_if_subtag_in_if_tag1363 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_TAG_END_in_if_tag1369 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_if_subtag1385 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_boolean_expression_in_if_subtag1389 = new BitSet(new long[]{0x0000000810000000L});
-    public static final BitSet FOLLOW_tag_content_in_if_subtag1397 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_TAG_START_in_if_subtag1407 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_ELSE_in_if_subtag1409 = new BitSet(new long[]{0x0004000810000000L});
-    public static final BitSet FOLLOW_tag_content_in_if_subtag1417 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_if_subtag_in_if_subtag1423 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MAP_in_map_expression1466 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_boolean_expression_in_map_expression1470 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_COLON_in_map_expression1472 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_control_expression_in_map_expression1480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_START_in_map_tag1511 = new BitSet(new long[]{0x0400000000000000L});
-    public static final BitSet FOLLOW_MAP_in_map_tag1513 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_expression_in_map_tag1517 = new BitSet(new long[]{0x0000000810000000L});
-    public static final BitSet FOLLOW_tag_content_in_map_tag1525 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_TAG_END_in_map_tag1531 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_boolean_binary_expression_in_boolean_expression1563 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression1576 = new BitSet(new long[]{0x0000000000000002L,0x0000080006000000L});
-    public static final BitSet FOLLOW_boolean_binary_operator_in_boolean_binary_expression1579 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression1582 = new BitSet(new long[]{0x0000000000000002L,0x0000080006000000L});
-    public static final BitSet FOLLOW_boolean_unary_operator_in_boolean_unary_expression1598 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1601 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OP_AND_in_boolean_binary_operator1622 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OP_OR_in_boolean_binary_operator1632 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OP_XOR_in_boolean_binary_operator1642 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OP_NOT_in_boolean_unary_operator1660 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression1677 = new BitSet(new long[]{0x0000000000000002L,0x0000000000FC0000L});
-    public static final BitSet FOLLOW_boolean_comparsion_operator_in_boolean_comparsion_expression1680 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression1683 = new BitSet(new long[]{0x0000000000000002L,0x0000000000FC0000L});
-    public static final BitSet FOLLOW_OP_EQUAL_in_boolean_comparsion_operator1699 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OP_NOT_EQUAL_in_boolean_comparsion_operator1709 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OP_LE_in_boolean_comparsion_operator1719 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OP_LEQ_in_boolean_comparsion_operator1729 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OP_GE_in_boolean_comparsion_operator1739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OP_GEQ_in_boolean_comparsion_operator1749 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression1769 = new BitSet(new long[]{0x0000000000000002L,0x000000000000C000L});
-    public static final BitSet FOLLOW_OP_PLUS_in_additive_expression1785 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_OP_MINUS_in_additive_expression1799 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression1819 = new BitSet(new long[]{0x0000000000000002L,0x000000000000C000L});
-    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression1839 = new BitSet(new long[]{0x0000000000000002L,0x0000000000030100L});
-    public static final BitSet FOLLOW_OP_MULTIPLY_in_multiplicative_expression1849 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_SLASH_in_multiplicative_expression1863 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_OP_MODULO_in_multiplicative_expression1877 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression1897 = new BitSet(new long[]{0x0000000000000002L,0x0000000000030100L});
-    public static final BitSet FOLLOW_OP_MINUS_in_negative_expression1916 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_context_expression_in_negative_expression1918 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_context_expression_in_negative_expression1936 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_functional_expression_in_context_expression1953 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
-    public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression1967 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_atom_expression_in_context_expression1969 = new BitSet(new long[]{0xF40480008E000000L,0x0000001038008604L});
-    public static final BitSet FOLLOW_function_arguments_in_context_expression1973 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
-    public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression2013 = new BitSet(new long[]{0x2000000000000000L,0x0000001000000204L});
-    public static final BitSet FOLLOW_lambda_expression_no_context_in_context_expression2015 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
-    public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression2051 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_single_type_in_context_expression2053 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
-    public static final BitSet FOLLOW_OP_EXPRESSION_CONTEXT_in_context_expression2081 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_functional_expression_in_context_expression2085 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
-    public static final BitSet FOLLOW_call_expression_in_functional_expression2127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_atom_expression_in_call_expression2140 = new BitSet(new long[]{0xF40480008E000002L,0x0000001008008604L});
-    public static final BitSet FOLLOW_function_argument_in_call_expression2148 = new BitSet(new long[]{0xF40480008E000002L,0x0000001008008604L});
-    public static final BitSet FOLLOW_TAG_START_in_call_tag2208 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_namespace_id_in_call_tag2212 = new BitSet(new long[]{0xF4048008DE000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_function_arguments_in_call_tag2214 = new BitSet(new long[]{0x0000000850000000L});
-    public static final BitSet FOLLOW_tag_content_in_call_tag2223 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_TAG_END_in_call_tag2231 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_function_argument_in_function_arguments2276 = new BitSet(new long[]{0xF40480008E000002L,0x0000001008008604L});
-    public static final BitSet FOLLOW_VAR_ID_in_function_argument2292 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_OP_ASSIGN_in_function_argument2294 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_atom_expression_in_function_argument2298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_atom_with_properties_in_atom_expression2333 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000080L});
-    public static final BitSet FOLLOW_COMA_in_atom_expression2346 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_atom_with_properties_in_atom_expression2348 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000080L});
-    public static final BitSet FOLLOW_atom_with_selectors_in_atom_with_properties2380 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
-    public static final BitSet FOLLOW_property_selector_in_atom_with_properties2395 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
-    public static final BitSet FOLLOW_atom_in_atom_with_selectors2434 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_sequence_selectors_in_atom_with_selectors2440 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DOT_in_property_selector2482 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_VAR_ID_in_property_selector2485 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_sequence_selectors_in_property_selector2487 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_selector_in_sequence_selectors2501 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors2503 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_alias_in_sequence_selectors2506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors2512 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_alias_in_sequence_selectors2514 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_alias_in_sequence_selectors2520 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_type_selector2533 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_type_in_type_selector2535 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
-    public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_type_selector2537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_sequence_selector2562 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_boolean_expression_in_sequence_selector2564 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
-    public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_sequence_selector2566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_AS_in_alias2590 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_VAR_ID_in_alias2592 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DATA_START_in_data_expression2614 = new BitSet(new long[]{0x0000000322000000L});
-    public static final BitSet FOLLOW_data_body_atom_in_data_expression2616 = new BitSet(new long[]{0x0000000322000000L});
-    public static final BitSet FOLLOW_DATA_END_in_data_expression2619 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_selectable_atom_in_atom2647 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000040L});
-    public static final BitSet FOLLOW_DOUBLE_DOT_in_atom2652 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_selectable_atom_in_atom2658 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_object_atom_in_selectable_atom2672 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_data_expression_in_selectable_atom2678 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_namespace_id_in_selectable_atom2684 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_PAREN_in_selectable_atom2690 = new BitSet(new long[]{0xF40480008E000000L,0x0000001008008604L});
-    public static final BitSet FOLLOW_expression_in_selectable_atom2693 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
-    public static final BitSet FOLLOW_RIGHT_PAREN_in_selectable_atom2695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_namespace_id2713 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_OP_VIEW_in_namespace_id2715 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_VAR_ID_in_namespace_id2721 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_number_atom_in_object_atom2753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_LITERAL_in_object_atom2759 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NULL_in_object_atom2770 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TILDE_in_object_atom2778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TRUE_in_object_atom2791 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FALSE_in_object_atom2799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INT_NUMBER_in_number_atom2817 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_REAL_NUMBER_in_number_atom2827 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_lambda_match_expression_in_lambda_expression1078 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_single_lambda_match_in_lambda_match_expression1091 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000010L});
+    public static final BitSet FOLLOW_SEMICOLON_in_lambda_match_expression1094 = new BitSet(new long[]{0x2000000000000000L,0x0000005000000204L});
+    public static final BitSet FOLLOW_single_lambda_match_in_lambda_match_expression1096 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000010L});
+    public static final BitSet FOLLOW_type_in_single_lambda_match1110 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
+    public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_single_lambda_match1112 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_concatence_expression_in_single_lambda_match1114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LAMBDA_in_lambda_expression_no_context1125 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000200L});
+    public static final BitSet FOLLOW_definition_argument_in_lambda_expression_no_context1127 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_COLON_in_lambda_expression_no_context1129 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_atom_expression_in_lambda_expression_no_context1131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_definition_argument_in_lambda_expression_no_context1158 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000204L});
+    public static final BitSet FOLLOW_OP_FUNCTION_DEFINITION_in_lambda_expression_no_context1161 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_atom_expression_in_lambda_expression_no_context1163 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CLASS_ID_in_type1199 = new BitSet(new long[]{0x0000000000000002L,0x0000000000010000L});
+    public static final BitSet FOLLOW_OP_MULTIPLY_in_type1201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CLASS_ID_in_single_type1231 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_control_expression_in_concatence_expression1260 = new BitSet(new long[]{0x0000000000000002L,0x0000000080000000L});
+    public static final BitSet FOLLOW_OP_CONCAT_in_concatence_expression1274 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_control_expression_in_concatence_expression1278 = new BitSet(new long[]{0x0000000000000002L,0x0000000080000000L});
+    public static final BitSet FOLLOW_if_expression_in_control_expression1308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_map_expression_in_control_expression1314 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_context_expression_in_control_expression1320 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IF_in_if_expression1333 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_context_expression_in_if_expression1337 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_COLON_in_if_expression1339 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_control_expression_in_if_expression1347 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_ELSE_in_if_expression1353 = new BitSet(new long[]{0xF40480008E000000L,0x000000510800860CL});
+    public static final BitSet FOLLOW_COLON_in_if_expression1355 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_control_expression_in_if_expression1364 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TAG_START_in_if_tag1398 = new BitSet(new long[]{0x0004000000000000L});
+    public static final BitSet FOLLOW_if_subtag_in_if_tag1404 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_TAG_END_in_if_tag1410 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IF_in_if_subtag1426 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_context_expression_in_if_subtag1430 = new BitSet(new long[]{0x0000000810000000L});
+    public static final BitSet FOLLOW_tag_content_in_if_subtag1438 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_TAG_START_in_if_subtag1448 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_ELSE_in_if_subtag1450 = new BitSet(new long[]{0x0004000810000000L});
+    public static final BitSet FOLLOW_tag_content_in_if_subtag1458 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_if_subtag_in_if_subtag1464 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_MAP_in_map_expression1507 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_context_expression_in_map_expression1511 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_COLON_in_map_expression1513 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_control_expression_in_map_expression1521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TAG_START_in_map_tag1552 = new BitSet(new long[]{0x0400000000000000L});
+    public static final BitSet FOLLOW_MAP_in_map_tag1554 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_context_expression_in_map_tag1558 = new BitSet(new long[]{0x0000000810000000L});
+    public static final BitSet FOLLOW_tag_content_in_map_tag1566 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_TAG_END_in_map_tag1572 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_boolean_expression_in_context_expression1608 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
+    public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression1622 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_atom_expression_in_context_expression1624 = new BitSet(new long[]{0xF40480008E000000L,0x0000005138008604L});
+    public static final BitSet FOLLOW_function_arguments_in_context_expression1628 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
+    public static final BitSet FOLLOW_OP_CONTEXT_in_context_expression1668 = new BitSet(new long[]{0x2000000000000000L,0x0000001000000204L});
+    public static final BitSet FOLLOW_lambda_expression_no_context_in_context_expression1670 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
+    public static final BitSet FOLLOW_OP_EXPRESSION_CONTEXT_in_context_expression1706 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_functional_expression_in_context_expression1710 = new BitSet(new long[]{0x0000000000000002L,0x0000000030000000L});
+    public static final BitSet FOLLOW_boolean_binary_expression_in_boolean_expression1751 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression1764 = new BitSet(new long[]{0x0000000000000002L,0x0000000006000000L});
+    public static final BitSet FOLLOW_boolean_binary_operator_in_boolean_binary_expression1767 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression1770 = new BitSet(new long[]{0x0000000000000002L,0x0000000006000000L});
+    public static final BitSet FOLLOW_boolean_unary_operator_in_boolean_unary_expression1786 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1789 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression1795 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OP_AND_in_boolean_binary_operator1810 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OP_OR_in_boolean_binary_operator1820 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OP_NOT_in_boolean_unary_operator1838 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression1855 = new BitSet(new long[]{0x0000000000000002L,0x0000000000FC0000L});
+    public static final BitSet FOLLOW_boolean_comparsion_operator_in_boolean_comparsion_expression1858 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression1861 = new BitSet(new long[]{0x0000000000000002L,0x0000000000FC0000L});
+    public static final BitSet FOLLOW_OP_EQUAL_in_boolean_comparsion_operator1877 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OP_NOT_EQUAL_in_boolean_comparsion_operator1887 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OP_LE_in_boolean_comparsion_operator1897 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OP_LEQ_in_boolean_comparsion_operator1907 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OP_GE_in_boolean_comparsion_operator1917 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OP_GEQ_in_boolean_comparsion_operator1927 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression1947 = new BitSet(new long[]{0x0000000000000002L,0x000000000000C000L});
+    public static final BitSet FOLLOW_OP_PLUS_in_additive_expression1963 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_OP_MINUS_in_additive_expression1977 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression1997 = new BitSet(new long[]{0x0000000000000002L,0x000000000000C000L});
+    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression2017 = new BitSet(new long[]{0x0000000000000002L,0x0000000000030100L});
+    public static final BitSet FOLLOW_OP_MULTIPLY_in_multiplicative_expression2027 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_SLASH_in_multiplicative_expression2041 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_OP_MODULO_in_multiplicative_expression2055 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression2075 = new BitSet(new long[]{0x0000000000000002L,0x0000000000030100L});
+    public static final BitSet FOLLOW_OP_MINUS_in_negative_expression2094 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_functional_expression_in_negative_expression2096 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_functional_expression_in_negative_expression2114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_call_expression_in_functional_expression2128 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_atom_expression_in_call_expression2141 = new BitSet(new long[]{0xF40480008E000002L,0x0000005108008604L});
+    public static final BitSet FOLLOW_function_argument_in_call_expression2149 = new BitSet(new long[]{0xF40480008E000002L,0x0000005108008604L});
+    public static final BitSet FOLLOW_TAG_START_in_call_tag2209 = new BitSet(new long[]{0x0000000000000000L,0x0000001100000000L});
+    public static final BitSet FOLLOW_namespace_id_in_call_tag2213 = new BitSet(new long[]{0xF4048008DE000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_function_arguments_in_call_tag2215 = new BitSet(new long[]{0x0000000850000000L});
+    public static final BitSet FOLLOW_tag_content_in_call_tag2224 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_TAG_END_in_call_tag2232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_function_argument_in_function_arguments2277 = new BitSet(new long[]{0xF40480008E000002L,0x0000005108008604L});
+    public static final BitSet FOLLOW_VAR_ID_in_function_argument2293 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_OP_ASSIGN_in_function_argument2295 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_atom_expression_in_function_argument2299 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_atom_with_properties_in_atom_expression2334 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000080L});
+    public static final BitSet FOLLOW_COMA_in_atom_expression2347 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_atom_with_properties_in_atom_expression2349 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000080L});
+    public static final BitSet FOLLOW_atom_with_selectors_in_atom_with_properties2381 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
+    public static final BitSet FOLLOW_property_selector_in_atom_with_properties2396 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
+    public static final BitSet FOLLOW_atom_in_atom_with_selectors2435 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_sequence_selectors_in_atom_with_selectors2441 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DOT_in_property_selector2483 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
+    public static final BitSet FOLLOW_VAR_ID_in_property_selector2486 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_sequence_selectors_in_property_selector2488 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_type_selector_in_sequence_selectors2502 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors2504 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_alias_in_sequence_selectors2507 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors2513 = new BitSet(new long[]{0x0100000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_alias_in_sequence_selectors2515 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_alias_in_sequence_selectors2521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_type_selector2534 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_type_in_type_selector2536 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
+    public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_type_selector2538 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_sequence_selector2563 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_boolean_expression_in_sequence_selector2565 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
+    public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_sequence_selector2567 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_AS_in_alias2591 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
+    public static final BitSet FOLLOW_VAR_ID_in_alias2593 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DATA_START_in_data_expression2615 = new BitSet(new long[]{0x0000000322000000L});
+    public static final BitSet FOLLOW_data_body_atom_in_data_expression2617 = new BitSet(new long[]{0x0000000322000000L});
+    public static final BitSet FOLLOW_DATA_END_in_data_expression2620 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_selectable_atom_in_atom2648 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000040L});
+    public static final BitSet FOLLOW_DOUBLE_DOT_in_atom2653 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_selectable_atom_in_atom2659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_object_atom_in_selectable_atom2673 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_data_expression_in_selectable_atom2679 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_namespace_id_in_selectable_atom2685 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LEFT_PAREN_in_selectable_atom2691 = new BitSet(new long[]{0xF40480008E000000L,0x0000005108008604L});
+    public static final BitSet FOLLOW_expression_in_selectable_atom2694 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
+    public static final BitSet FOLLOW_RIGHT_PAREN_in_selectable_atom2696 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_VAR_ID_in_namespace_id2714 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_OP_VIEW_in_namespace_id2716 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
+    public static final BitSet FOLLOW_VAR_ID_in_namespace_id2722 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OP_GENERAL_in_namespace_id2748 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_number_atom_in_object_atom2775 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_LITERAL_in_object_atom2781 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NULL_in_object_atom2792 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TILDE_in_object_atom2800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TRUE_in_object_atom2813 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FALSE_in_object_atom2821 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INT_NUMBER_in_number_atom2839 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_REAL_NUMBER_in_number_atom2849 = new BitSet(new long[]{0x0000000000000002L});
 
 }

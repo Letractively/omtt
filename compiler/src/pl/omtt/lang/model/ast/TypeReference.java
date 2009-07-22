@@ -7,7 +7,7 @@ import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
-import pl.omtt.lang.model.types.GeneralType;
+import pl.omtt.lang.model.types.AnyType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.NumericType;
 import pl.omtt.lang.model.types.ScalarType;
@@ -25,10 +25,14 @@ public class TypeReference extends CommonNode implements IVisitable {
 		case OmttParser.CLASS_ID:
 			ClassResolver cr = ST.getBase().getClassResolver();
 			try {
-				if ("Integer".equals(name))
+				if ("Any".equals(name))
+					type = new AnyType();
+				else if ("Int".equals(name))
 					type = NumericType.integerInstance();
 				else if ("Real".equals(name))
 					type = NumericType.realInstance();
+				else if ("Char".equals(name))
+					type = ScalarType.charInstance();
 				else {
 					Class<?> cls = cr.get(name);
 					if (Number.class.isAssignableFrom(cls))
@@ -41,7 +45,7 @@ public class TypeReference extends CommonNode implements IVisitable {
 			}
 			break;
 		default:
-			type = new GeneralType();
+			type = new AnyType();
 			break;
 		}
 		if (getFirstChildWithType(OmttParser.OP_MULTIPLY) != null)

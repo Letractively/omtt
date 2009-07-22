@@ -50,6 +50,8 @@ public class LambdaExpression extends CommonNode implements IExpression,
 		}
 		TypeUnifier.unifyEq(ftype.getReturnType(), getBodyNode()
 				.getExpressionType());
+		TypeUnifier.preserveAttributes(ftype.getReturnType(), getBodyNode()
+				.getExpressionType());
 
 		fType = ftype;
 		fType.freeze();

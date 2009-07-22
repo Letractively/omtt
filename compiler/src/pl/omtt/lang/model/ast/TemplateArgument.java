@@ -9,9 +9,10 @@ import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.ErrorType;
-import pl.omtt.lang.model.types.FlexibleType;
+import pl.omtt.lang.model.types.GenericType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.TypeException;
+import pl.omtt.lang.model.types.TypePointer;
 
 public class TemplateArgument extends CommonNode implements
 		ISymbolTableParticipant, IVisitable {
@@ -37,8 +38,8 @@ public class TemplateArgument extends CommonNode implements
 		if (getTypeNode() != null) {
 			fArgumentType = ((TypeReference) getTypeNode()).get(ST);
 		}
-		else { 
-			fArgumentType = new FlexibleType();
+		else {
+			fArgumentType = new TypePointer(new GenericType());
 			if (getFirstChildWithType(OmttParser.OP_MULTIPLY) != null)
 				fArgumentType.setSequence();
 		}
