@@ -69,9 +69,8 @@ public class TemplateDefinition extends CommonNode implements
 	@Override
 	public void takeSymbolTable(SymbolTable ST) throws TypeException {
 		IType returnType;
-		Tree retNode = getReturnsNode();
-		if (retNode != null && retNode.getChildCount() > 0) {
-			returnType = ((TypeReference) retNode.getChild(0)).get(ST);
+		if (getReturnsTypeNode() != null) {
+			returnType = getReturnsTypeNode().get(ST);
 		} else if (getBodyNode() instanceof Data) {
 			returnType = new StringDataType();
 		} else {
@@ -111,8 +110,12 @@ public class TemplateDefinition extends CommonNode implements
 		return getFirstChildWithType(OmttParser.ARGUMENTS);
 	}
 
-	public Tree getReturnsNode() {
-		return getFirstChildWithType(OmttParser.RETURNS);
+	public TypeReference getReturnsTypeNode() {
+		Tree returnsNode = getFirstChildWithType(OmttParser.RETURNS);
+		if (returnsNode == null)
+			return null;
+		else
+			return (TypeReference) returnsNode.getChild(0);
 	}
 
 	public IExpression getBodyNode() {
@@ -136,7 +139,8 @@ public class TemplateDefinition extends CommonNode implements
 		else
 			returnType = fType;
 
-		if (bodyType.isSequence() && !returnType.isSequence()) {
+		if (bodyType.isSequence() && !returnType.isSequence()
+				&& getReturnsTypeNode() == null) {
 			fForceSequenceReturn = true;
 			throw new ForceSymbolTableRecalculatingException();
 		}

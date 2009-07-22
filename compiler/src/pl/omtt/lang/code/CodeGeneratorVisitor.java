@@ -51,7 +51,9 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		if (!type.isNotNull())
 			buf.append(var).append(" != null && ");
 
-		if (type.isBoolean())
+		if (type.isSequence())
+			buf.append("!").append(var).append(".isEmpty()");
+		else if (type.isBoolean())
 			buf.append(var);
 		else
 			buf.append("!").append(var).append(".equals(false)");
