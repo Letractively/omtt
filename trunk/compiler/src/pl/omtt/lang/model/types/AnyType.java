@@ -1,16 +1,6 @@
 package pl.omtt.lang.model.types;
 
-public class GeneralType extends CommonType implements IType {
-	int fInstanceId;
-	
-	public GeneralType () {
-		fInstanceId = objectHashCode();
-	}
-
-	public int getInstanceId () {
-		return fInstanceId;
-	}
-	
+public class AnyType extends CommonType implements IType {
 	@Override
 	public void freeze() {
 	}
@@ -32,7 +22,8 @@ public class GeneralType extends CommonType implements IType {
 
 	@Override
 	public boolean isSubtypeOf(IType type) {
-		return type.getEffective() instanceof GeneralType;
+		type = type.getEffectiveLowerBound();
+		return type instanceof AnyType;
 	}
 
 	@Override
@@ -57,6 +48,11 @@ public class GeneralType extends CommonType implements IType {
 	
 	@Override
 	public String singleToString () {
+		return "_";
+	}
+
+	@Override
+	String singleToEssentialString() {
 		return "_";
 	}
 }

@@ -4,6 +4,7 @@ import org.antlr.runtime.Token;
 
 import pl.omtt.lang.code.Symbol;
 import pl.omtt.lang.code.SymbolTable;
+import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.ErrorType;
@@ -23,7 +24,10 @@ public class Ident extends CommonNode implements IExpression, IVisitable {
 	}
 
 	public String getName() {
-		return getText();
+		if (getType() == OmttParser.OP_GENERAL)
+			return "it";
+		else
+			return getText();
 	}
 
 	public String getNamespace() {
@@ -46,8 +50,9 @@ public class Ident extends CommonNode implements IExpression, IVisitable {
 	public void setExpressionType(SymbolTable symbolTable) throws TypeException {
 		fSymbol = symbolTable.find(getName());
 		if (fSymbol == null) {
-			fType = new ErrorType ();
-			throw new TypeException(getToken(), "symbol " + getName() + " not found");
+			fType = new ErrorType();
+			throw new TypeException(getToken(), "symbol " + getName()
+					+ " not found");
 		}
 
 		fType = fSymbol.getType();

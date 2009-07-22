@@ -158,7 +158,14 @@ lambda_expression
     -> ^(LAMBDA<LambdaExpression> ^(ARGUMENTS definition_argument*) expression)
   | definition_argument* OP_FUNCTION_DEFINITION expression
   	-> ^(LAMBDA<LambdaExpression> ^(ARGUMENTS definition_argument*) expression)
+  | lambda_match_expression
   ;
+fragment lambda_match_expression
+	: single_lambda_match (SEMICOLON single_lambda_match)*
+	;
+fragment single_lambda_match
+	: type OP_FUNCTION_DEFINITION concatence_expression
+	;
 lambda_expression_no_context
   : LAMBDA definition_argument COLON atom_expression
   	-> ^(LAMBDA<LambdaExpression> ^(ARGUMENTS definition_argument*) atom_expression)
@@ -185,11 +192,11 @@ concatence_expression
 control_expression
   : if_expression
   | map_expression
-  | boolean_expression
+  | context_expression
   ;
 
 if_expression
-  : IF condition=boolean_expression COLON
+  : IF condition=context_expression COLON
     part_if=control_expression
     ELSE COLON?
     part_else=control_expression
@@ -201,7 +208,7 @@ if_tag
     TAG_END!
   ;
 fragment if_subtag
-	: ( IF condition=boolean_expression
+	: ( IF condition=context_expression
 		  part_if=tag_content
 		)
 		( TAG_START ELSE
@@ -211,16 +218,29 @@ fragment if_subtag
 	;
 
 map_expression
-  : MAP iter=boolean_expression COLON
+  : MAP iter=context_expression COLON
     expr=control_expression
     -> ^(MAP<Transformation> $iter $expr)
   ;
 map_tag
-  : TAG_START MAP iter=expression
+  : TAG_START MAP iter=context_expression
     expr=tag_content
     TAG_END
     -> ^(MAP<Transformation> $iter $expr)
   ;
+
+// START: transformation expressions
+context_expression
+  : (fe=boolean_expression -> $fe)
+    ( OP_CONTEXT atom_expression arguments=function_arguments
+      -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> $context_expression) $arguments?)
+    | OP_CONTEXT lambda_expression_no_context
+      -> ^(CALL<Call>[true] lambda_expression_no_context ^(ARGUMENT<FunctionArgument> $context_expression))
+    | OP_EXPRESSION_CONTEXT ce=functional_expression
+    	-> ^(OP_EXPRESSION_CONTEXT<Transformation> $context_expression $ce)
+    )*
+  ;
+// END: transformation expressions
 
 // BEGIN: boolean expressions
 boolean_expression
@@ -237,7 +257,6 @@ fragment boolean_unary_expression
 fragment boolean_binary_operator
   : OP_AND<BooleanExpression>^
   | OP_OR<BooleanExpression>^
-  | OP_XOR<BooleanExpression>^
   ;
 fragment boolean_unary_operator
   : OP_NOT<BooleanExpression>^
@@ -279,26 +298,11 @@ multiplicative_expression
   ;
 
 negative_expression
-	: OP_MINUS context_expression
-		-> ^(OP_MINUS<ArithmeticMinus> context_expression)
-	| context_expression
+	: OP_MINUS functional_expression
+		-> ^(OP_MINUS<ArithmeticMinus> functional_expression)
+	| functional_expression
 	;
 // END: arithmetic expressions
-
-// START: transformation expressions
-context_expression
-  : (fe=functional_expression -> $fe)
-    ( OP_CONTEXT atom_expression arguments=function_arguments
-      -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> $context_expression) $arguments?)
-    | OP_CONTEXT lambda_expression_no_context
-      -> ^(CALL<Call>[true] lambda_expression_no_context ^(ARGUMENT<FunctionArgument> $context_expression))
-    | OP_CONTEXT single_type
-      -> ^(CAST<Cast> single_type $context_expression)
-    | OP_EXPRESSION_CONTEXT ce=functional_expression
-    	-> ^(OP_EXPRESSION_CONTEXT<Transformation> $context_expression $ce)
-    )*
-  ;
-// END: transformation expressions
 
 // START: functional expressions
 functional_expression
@@ -387,6 +391,8 @@ selectable_atom
 fragment namespace_id
   : (ns=VAR_ID OP_VIEW)? id=VAR_ID
     -> ^(IDENT<Ident>[$id] $ns?)
+  | id=OP_GENERAL
+  	-> ^(IDENT<Ident>[$id])
   ;
 
 // START: atom objects

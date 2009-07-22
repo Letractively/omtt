@@ -8,8 +8,6 @@ import org.antlr.runtime.CommonToken;
 import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
-import pl.omtt.lang.model.types.ErrorType;
-import pl.omtt.lang.model.types.FlexibleType;
 import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.NullType;
@@ -19,6 +17,8 @@ import pl.omtt.lang.model.types.TypeUnifier;
 public class Call extends CommonNode implements IFoldExpression, IVisitable {
 	IType fType;
 	FunctionType fCallingType;
+	FunctionType fEffectiveType;
+
 	boolean fIterateSequence;
 	List<FunctionArgument> fArguments;
 
@@ -54,49 +54,32 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 
 	@Override
 	public void setExpressionType(SymbolTable symbolArray) throws TypeException {
-		FunctionType declaredType;
+		IType callingType = getCallingNode().getExpressionType();
+		if (!callingType.isFunction()) {
+			fCallingType = buildType();
+			if (isIterateSequence())
+				fCallingType.getArgument(0).getType().unsetSequence();
+			fEffectiveType = fCallingType;
+			TypeUnifier.unifyEq(fEffectiveType, callingType);
+		} else {
+			fCallingType = (FunctionType)(callingType.getEffective());
+			fEffectiveType = fCallingType.createTemplate();
 
-		IType callType = getCallingNode().getExpressionType();
-		if (callType.isFunction()) {
-			fCallingType = (FunctionType) callType.getEffective();
-			declaredType = buildType(fCallingType);
-
+			FunctionType requestedType = buildType(fEffectiveType).createTemplate(); 
 			if (isIterateSequence()) {
 				if (fCallingType.getArgument(0).getType().isSequence())
 					fIterateSequence = false;
 				else
-					declaredType.getArgument(0).getType().unsetSequence();
+					requestedType.getArgument(0).getType().unsetSequence();
 			}
-		} else {
-			declaredType = buildType();
-			if (isIterateSequence())
-				declaredType.getArgument(0).getType().unsetSequence();
-		}
 
-		try {
-			if (callType.isFrozen())
-				TypeUnifier.unifyLe(callType, declaredType);
-			else
-				TypeUnifier.unifyEq(callType, declaredType);
-			fCallingType = (FunctionType) callType.getEffective();
-		} catch (TypeException e) {
-			if (fCallingType != null) {
-				IType returnType = fCallingType.getReturnType();
-				fType = new FlexibleType();
-				TypeUnifier.unifyEq(fType, returnType);
-				if (sequenceOnOutput())
-					fType.setSequence();
-			} else {
-				fType = new ErrorType();
-			}
-			e.setCauseObject(fIterateSequence ? getCallingNode() : this);
-			throw e;
-		}
+			TypeUnifier.unifyLe(requestedType, fEffectiveType);
+		}		
 
-		fType = declaredType.getReturnType();
+		fType = fEffectiveType.getReturnType().dup();
 		if (sequenceOnOutput())
 			fType.setSequence();
-		if (fCallingType.getReturnType().isNotNull()
+		if (fEffectiveType.getReturnType().isNotNull()
 				&& (!isIterateSequence() || getArgument(0).getExpressionType()
 						.isNotNull()))
 			fType.setNotNull();
@@ -105,8 +88,8 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 	private FunctionType buildType() throws TypeException {
 		FunctionType funtype = new FunctionType();
 		fArguments = new ArrayList<FunctionArgument>(getChildCount() - 1);
-		for (int i = 0; i < getArgumentLength(); i++) {
-			FunctionArgument arg = getArgument(i);
+		for (int i = 1; i < getChildCount(); i++) {
+			FunctionArgument arg = (FunctionArgument) getChild(i);
 			IType type = arg.getExpressionType().dup();
 			if (arg.getTargetName() != null)
 				throw new TypeException(arg, "unknown parameter "
@@ -139,6 +122,11 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 			else if (pos < fArguments.size() && fArguments.get(pos) != null)
 				throw new TypeException(arg, "parameter " + arg.getTargetName()
 						+ " was set yet");
+			if (pos >= fArguments.size())
+				throw new TypeException(arg,
+						"excessive argument - called function has only "
+								+ fArguments.size() + " argument"
+								+ (fArguments.size() == 1 ? "" : "s"));
 			fArguments.set(pos, arg);
 		}
 

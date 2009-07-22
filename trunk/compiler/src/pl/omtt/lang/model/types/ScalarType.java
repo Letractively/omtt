@@ -103,8 +103,8 @@ public class ScalarType extends CommonType implements IType {
 
 	@Override
 	public boolean isSubtypeOf(IType type) {
-		type = type.getEffective();
-		if (type instanceof GeneralType)
+		type = type.getEffectiveLowerBound();
+		if (type instanceof AnyType)
 			return true;
 
 		Class<?> cls;
@@ -146,9 +146,20 @@ public class ScalarType extends CommonType implements IType {
 
 	@Override
 	public String singleToString() {
-		if (fTypeClass != null)
-			return fTypeClass.getSimpleName();
-		else
+		if (fTypeClass == null)
 			return "<unknown type>";
+		else if (Character.class.equals(fTypeClass))
+			return "Char";
+		else
+			return fTypeClass.getSimpleName();
+	}
+
+	@Override
+	String singleToEssentialString() {
+		return "$";
+	}
+	
+	public static IType charInstance() {
+		return new ScalarType(Character.class);
 	}
 }

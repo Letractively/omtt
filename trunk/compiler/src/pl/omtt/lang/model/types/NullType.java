@@ -3,7 +3,7 @@ package pl.omtt.lang.model.types;
 public class NullType extends CommonType implements IType {
 	@Override
 	public String singleToString () {
-		return "<null>";
+		return "Null";
 	}
 
 	@Override
@@ -16,16 +16,6 @@ public class NullType extends CommonType implements IType {
 	}
 
 	@Override
-	public boolean isFrozen() {
-		return true;
-	}
-
-	@Override
-	public boolean isGeneral() {
-		return false;
-	}
-
-	@Override
 	public boolean isSubtypeOf(IType type) {
 		return true;
 	}
@@ -33,6 +23,16 @@ public class NullType extends CommonType implements IType {
 	@Override
 	public Class<?> getAssociatedClass() {
 		return null;
+	}
+
+	@Override
+	public boolean isFrozen() {
+		return true;
+	}
+
+	@Override
+	public boolean isGeneral() {
+		return false;
 	}
 
 	@Override
@@ -53,5 +53,10 @@ public class NullType extends CommonType implements IType {
 	@Override
 	public boolean isNull() {
 		return true;
+	}
+
+	@Override
+	String singleToEssentialString() {
+		return "~";
 	}
 }

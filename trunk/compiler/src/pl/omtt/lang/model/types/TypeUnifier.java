@@ -21,20 +21,20 @@ public class TypeUnifier {
 		if (typeA == null || typeB == null)
 			return;
 
-		if (le && !typeA.isFrozen()) {
+		if (typeA.isFunction() && typeB.isFunction()) {
+			unifyFunctions(typeA, typeB, le);
+		} else if (le && !typeA.isFrozen()) {
 			throw new TypeException(
 					"le-unification of flexible types is not supported");
-		} else if (le && typeB.isSubtypeOf(typeA) && !typeB.isFunction()) {
+		} else if (le && typeB.isSubtypeOf(typeA)) {
 			// everything is done:)
 		} else if (!typeA.isFrozen() && !typeB.isFrozen()) {
-			if (typeA.isFunction() && typeB.isFunction()) {
-				unifyFunctions(typeA, typeB, false, null);
+			// le == false
+			if (typeB.isSubtypeOf(typeA)) {
+				unifyAtom(typeB, typeA, false);
 				return;
-			} else if (typeB.getEffective().isSubtypeOf(typeA.getEffective())) {
-				unifyAtom(typeB, typeA);
-				return;
-			} else if (typeA.getEffective().isSubtypeOf(typeB.getEffective())) {
-				unifyAtom(typeA, typeB);
+			} else if (typeA.isSubtypeOf(typeB)) {
+				unifyAtom(typeA, typeB, false);
 				return;
 			}
 			throw new TypeException("using " + typeB + " as " + typeA + " [1]");
@@ -44,13 +44,9 @@ public class TypeUnifier {
 							typeB.getEffective()))
 				throw new TypeException("using " + typeB + " as " + typeA
 						+ " [2]");
-			else if (le
-					&& !typeB.getEffective().isSubtypeOf(typeA.getEffective()))
+			else if (le && !typeB.isSubtypeOf(typeA))
 				throw new TypeException("using " + typeB + " as " + typeA
 						+ " [3]");
-			else if (typeA.getEffective() instanceof FunctionType) {
-				unifyFunctions(typeA, typeB, le, null);
-			}
 		} else {
 			if (typeB.isFrozen()) {
 				// swap types, can appear only when le==false
@@ -59,62 +55,98 @@ public class TypeUnifier {
 				typeB = temp;
 			}
 
-			if (typeA.getEffective() instanceof FunctionType) {
-				unifyFunctions(typeA, typeB, le, null);
+			if (typeA.isSubtypeOf(typeB)) {
+				unifyAtom(typeA, typeB, le);
 			} else {
-				if (typeA.isSubtypeOf(typeB.getEffective()))
-					unifyAtom(typeA, typeB);
-				else
-					throw new TypeException("using " + typeB + " as " + typeA
-							+ " [6]");
+				throw new TypeException("using " + typeB + " as " + typeA
+						+ " [6]");
 			}
-
-			if (!le)
+			if (!le) {
 				typeB.freeze();
+			}
 		}
 	}
 
-	private static void unifyFunctions(IType typeA, IType typeB, boolean le,
-			Map<Integer, IType> freeVarsMap) throws TypeException {
-		if (le && !typeB.isFunction()
-				&& !(typeB.isGeneral() && typeB instanceof FlexibleType))
-			throw new TypeException("using " + typeB + " as " + typeA + " [5]");
-		else if (!typeA.isFunction()) {
-			// TODO
-			throw new TypeException("unimplemented [1]");
-		}
+	private static void unifyFunctions(IType typeA, IType typeB, boolean le)
+			throws TypeException {
 		System.out.println("[fu] " + typeA + " ~ " + typeB);
+
+		if (!typeA.isFunction() || !typeB.isFunction())
+			throw new TypeException("unimplemented [1]");
+
+		FunctionType funA = (FunctionType) typeA.getEffective();
+		FunctionType funB = (FunctionType) typeB.getEffective();
+
+		for (int i = 0; i < funA.fArguments.size(); i++) {
+			unifyFree(funB.getArgument(i).getType(), funA.getArgument(i)
+					.getType(), le);
+		}
+		unifyFree(funA.getReturnType(), funB.getReturnType(), le);
+
+		System.out.println("[fu] after: " + typeA + " ~ " + typeB);
+	}
+
+	private static void unifyFree(IType typeA, IType typeB, boolean le)
+			throws TypeException {
+		System.out.println("[ua] " + typeA + " ~ " + typeB);
+
+		if (!le || typeA.isGeneric())
+			unifyEq(typeA, typeB);
+		else
+			unifyLe(typeA, typeB);
+	}
+
+	@SuppressWarnings("unused")
+	private static void _unifyFunctions(IType typeA, IType typeB, boolean le,
+			Map<Integer, IType> genericMap) throws TypeException {
+		System.out.println("[fu] " + typeA + " ~ " + typeB);
+		if (le && !typeB.isFunction()
+				&& !(typeB.isGeneric() && typeB instanceof GenericType))
+			throw new TypeException("using " + typeA + " as " + typeB + " [5]");
+		else if (!typeA.isFunction()) {
+			if (typeB.isSubtypeOf(typeA)) {
+				if (le)
+					return;
+				else {
+					System.out.println("unimplemented [1]");
+					throw new TypeException("unimplemented [1]");
+				}
+			} else
+				throw new TypeException("using " + typeA + " as " + typeB
+						+ " [7]");
+		}
+
 		FunctionType funA = (FunctionType) typeA.getEffective();
 		if (!typeB.isFunction()) {
-			if (!(typeB instanceof FlexibleType) || !typeB.isGeneral()
+			if (!(typeB instanceof GenericType) || !typeB.isGeneric()
 					|| typeB.isFrozen())
 				throw new TypeException("unimplemented [2]");
 			FunctionType funtype = new FunctionType();
 			for (int i = 0; i < funA.getArguments().size(); i++)
-				funtype.putArgument(null, new FlexibleType(), false);
-			unifyAtom(funtype, typeB);
+				funtype.putArgument(null, new GenericType(), false);
+			unifyAtom(funtype, typeB, le);
 		}
 		FunctionType funB = (FunctionType) typeB.getEffective();
 
 		if (funA.fArguments.size() != funB.fArguments.size())
 			throw new TypeException("using " + funA + " as " + funB + " [4]");
 
-		if (freeVarsMap == null) {
-			freeVarsMap = new HashMap<Integer, IType>();
+		if (genericMap == null) {
+			genericMap = new HashMap<Integer, IType>();
 		}
 
-		unifyReturnType(funA.getReturnType(), funB.getReturnType(), le,
-				freeVarsMap);
 		for (int i = 0; i < funA.fArguments.size(); i++) {
 			Argument argA = funA.fArguments.get(i);
 			Argument argB = funB.fArguments.get(i);
-			unifyArgument(argA, argB, le, freeVarsMap);
+			unifyArgument(argA, argB, le, genericMap);
 		}
+		unifyReturnType(funA.getReturnType(), funB.getReturnType(), le,
+				genericMap);
 		System.out.println("[fu] after: " + typeA + " ~ " + typeB);
 	}
 
 	private static void unifyArgument(Argument argA, Argument argB, boolean le,
-			Map<Integer, IType> freeVarsMap) throws TypeException {
+			Map<Integer, IType> genericMap) throws TypeException {
 		if ((!le && argA.fOptional ^ argB.fOptional)
 				|| (le && !argA.fOptional && argB.fOptional))
 			throw new TypeException("cannot use "
@@ -122,67 +154,60 @@ public class TypeUnifier {
 					+ " argument as an "
 					+ (argB.fOptional ? "optional" : "obligatory") + " one");
 
-		unifyArgumentType(argA.getType(), argB.getType(), le, freeVarsMap, true);
+		unifyArgumentType(argB.getType(), argA.getType(), le, genericMap);
+	}
+
+	private static void updategenericMap(IType typeA, IType typeB,
+			Map<Integer, IType> genericMap) {
+		if (typeB.isGeneric()) {
+			System.out.println("- " + iid(typeB) + " --> " + typeA);
+			int iid = ((GenericType) typeB.getEffective()).getInstanceId();
+			if (genericMap.containsKey(typeB)) {
+				IType match = genericMap.get(typeB);
+			}
+
+		}
+		if (typeA.isGeneric()) {
+			System.out.println("+ " + iid(typeA) + " --> " + typeB);
+			int iid = ((GenericType) typeA.getEffective()).getInstanceId();
+
+		}
 	}
 
 	private static void unifyReturnType(IType typeA, IType typeB, boolean le,
-			Map<Integer, IType> freeVarsMap) throws TypeException {
-		unifyArgumentType(typeA, typeB, le, freeVarsMap, false);
+			Map<Integer, IType> genericMap) throws TypeException {
+		unifyArgumentType(typeA, typeB, le, genericMap);
 	}
 
 	private static void unifyArgumentType(IType typeA, IType typeB, boolean le,
-			Map<Integer, IType> freeVarsMap, boolean isArgument)
-			throws TypeException {
-		if ((typeA.isGeneral() && typeA.isFrozen())
-				|| (typeB.isGeneral() && typeB.isFrozen())) {
-			if (typeA.isGeneral() && typeA.isFrozen()) {
-				if (freeVarsMap.containsKey(iid(typeA))) {
-					IType match = freeVarsMap.get(iid(typeA));
-					// TODO: what if reverse?
-					if (match.isFrozen()) {
-						unify(match, typeB, le);
-					} else {
-						unifyEq(match, typeB);
-					}
-				} else {
-					freeVarsMap.put(iid(typeA), typeB);
-				}
-			}
-			if (typeB.isGeneral() && typeB.isFrozen()) {
-				if (freeVarsMap.containsKey(iid(typeB))) {
-					IType match = freeVarsMap.get(iid(typeB));
-					// TODO: what if reverse?
-					if (match.isFrozen()) {
-						unify(typeA, match, le);
-					} else {
-						unifyEq(typeA, match);
-					}
-				} else {
-					freeVarsMap.put(iid(typeB), typeB);
-				}
-			}
+			Map<Integer, IType> genericMap) throws TypeException {
+		updategenericMap(typeA, typeB, genericMap);
+		if (!typeA.isFrozen()) {
+			if (typeB.isFunction())
+				_unifyFunctions(typeA, typeB, false, genericMap);
+			else
+				unifyEq(typeA, typeB);
 		} else {
-			if (typeA.isFunction()) {
-				unifyFunctions(typeB, typeA, le, freeVarsMap);
-			} else {
-				if (isArgument || !typeB.isFrozen())
-					unify(typeA, typeB, le);
-				else
-					unify(typeB, typeA, le);
-			}
+			if (typeB.isFunction())
+				_unifyFunctions(typeA, typeB, le, genericMap);
+			else
+				unify(typeA, typeB, le);
 		}
 	}
 
 	private static int iid(IType type) {
-		return ((GeneralType) type.getEffective()).getInstanceId();
+		return ((GenericType) type.getEffective()).getInstanceId();
 	}
 
-	private static void unifyAtom(IType base, IType toUnify) {
-		if (toUnify instanceof FlexibleType) {
-			FlexibleType root = (FlexibleType) toUnify;
-			while (root.fInnerType instanceof FlexibleType)
-				root = (FlexibleType) root.fInnerType;
-			root.fInnerType = base;
+	private static void unifyAtom(IType base, IType toUnify, boolean le) {
+		if (toUnify instanceof TypePointer) {
+			TypePointer root = (TypePointer) toUnify;
+			while (root.fPointer instanceof TypePointer)
+				root = (TypePointer) root.fPointer;
+			if (le && !base.isGeneric())
+				root.fPointer = new GenericType(base);
+			else
+				root.fPointer = base;
 		}
 	}
 
@@ -208,13 +233,13 @@ public class TypeUnifier {
 					break;
 
 			if (cls.equals(Object.class))
-				return preserveAttributes(new GeneralType(), typeA, typeB);
+				return preserveAttributes(new AnyType(), typeA, typeB);
 			else
 				return preserveAttributes(ScalarType.fromClass(cls), typeA,
 						typeB);
 		}
 
-		return preserveAttributes(new GeneralType(), typeA, typeB);
+		return preserveAttributes(new AnyType(), typeA, typeB);
 	}
 
 	public static IType preserveAttributes(IType target, IType srcA, IType srcB) {

@@ -71,7 +71,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	 *         <code>sourceType</code> to <code>targetType</code>
 	 */
 	protected String cast(String var, IType sourceType, IType targetType) {
-		if (sourceType.getEffective() instanceof NullType) {
+		if (sourceType.getEffectiveLowerBound() instanceof NullType) {
 			return "null";
 		}
 
@@ -89,8 +89,10 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 			// TODO: extract single from sequence
 			throw new CodeGenerationError("[1] unimplemented cast");
 		} else if (targetType.isSequence() && sourceType.isSequence()) {
-			if (sourceType.isFunction() || targetType.isFunction())
-				throw new CodeGenerationError();
+			if (targetType.isFunction()) {
+				throw new CodeGenerationError("[2] unimplemented cast: "
+						+ sourceType + " ~~> " + targetType);
+			}
 			if (sourceType.essentiallyEquals(targetType))
 				return var;
 
@@ -111,17 +113,20 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 						fTypeAdapter.get(targetType)))
 					return var;
 				return instantiateFunction(var + ".run", sourceType, targetType);
-			} else if (sourceType.essentiallyEquals(targetType.getEffective())) {
+			} else if (sourceType.getEffectiveLowerBound().essentiallyEquals(
+					targetType.getEffectiveLowerBound())) {
 				return var;
 			} else if (String.class.equals(targetType.getAssociatedClass())) {
 				buf.append(var).append(".toString()");
 			} else if (targetType.isNumeric() && sourceType.isNumeric()) {
 				buf.append("new ").append(fTypeAdapter.get(targetType));
 				buf.append("(").append(var).append(")");
-			} else if (sourceType.isSubtypeOf(targetType.getEffective())) {
+			} else if (sourceType.isSubtypeOf(targetType
+					.getEffectiveLowerBound())) {
 				return var;
 			} else if (targetType.isNumeric()) {
-				if (((NumericType) targetType.getEffective()).isReal())
+				if (((NumericType) targetType.getEffectiveLowerBound())
+						.isReal())
 					return String.format(
 							"new Double(((Number)%s).doubleValue())", var);
 				else
@@ -143,10 +148,12 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 	protected String instantiateFunction(String call, IType sourceType,
 			IType targetType) {
-		FunctionType sourcef = (FunctionType) sourceType.getEffective();
-		FunctionType targetf = (FunctionType) targetType.getEffective();
+		FunctionType sourcef = (FunctionType) sourceType
+				.getEffectiveLowerBound();
+		FunctionType targetf = (FunctionType) targetType
+				.getEffectiveLowerBound();
 
-		final String targetJType = fTypeAdapter.get(targetType);
+		final String targetJType = jtype(targetType);
 
 		final String instvar = fBuffer.getTemporaryVariable();
 		fBuffer.putl("final %s %s = new %s () {", targetJType, instvar,
@@ -158,18 +165,24 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 		StringBuffer buf = new StringBuffer();
 		buf.append(call).append("(");
+		if (targetf.getReturnType().isSingleData())
+			buf.append(fBuffer.getCurrentBuffer()).append(", ");
 		for (int i = 0; i < targetf.getArguments().size(); i++) {
 			Argument sourcearg = sourcef.getArguments().get(i);
 			Argument targetarg = targetf.getArguments().get(i);
 			String argname = targetarg.getName();
 			if (argname == null)
 				argname = "arg" + i;
-
 			buf.append(cast(argname, targetarg.getType(), sourcearg.getType()));
+			if (i < targetf.getArguments().size() - 1)
+				buf.append(", ");
 		}
 		buf.append(")");
-		fBuffer.putl("return %s;", cast(buf.toString(),
-				sourcef.getReturnType(), targetf.getReturnType()));
+		if (targetf.getReturnType().isSingleData())
+			fBuffer.putl("%s;", buf.toString());
+		else
+			fBuffer.putl("return %s;", cast(buf.toString(), sourcef
+					.getReturnType(), targetf.getReturnType()));
 
 		fBuffer.subIndentitation();
 		fBuffer.putl("}");
@@ -185,8 +198,8 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 	protected String collection(IType type) {
 		final String var = fBuffer.getTemporaryVariable();
-		fBuffer.putl("List<%s> %s = new ArrayList<%s>();", fTypeAdapter
-				.getSingle(type), var, fTypeAdapter.getSingle(type));
+		fBuffer.putl("final List<%s> %s = new ArrayList<%s>();",
+				jtype(single(type)), var, jtype(single(type)));
 		return var;
 	}
 
@@ -220,7 +233,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 	protected String jtype(IType type) {
 		if (type.isFunction()) {
-			FunctionType funtype = (FunctionType) type.getEffective();
+			FunctionType funtype = (FunctionType) type.getEffectiveLowerBound();
 			if (!fTypeAdapter.containsFunction(funtype))
 				signatureTemplate(funtype);
 		}
@@ -371,7 +384,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 	public void visit(TemplateDefinition def) {
 		IType type = def.getExpressionType();
-		IType efftype = type.getEffective();
+		IType efftype = type.getEffectiveLowerBound();
 
 		if (efftype instanceof FunctionType && !type.isSequence()) {
 			visitFunction(def, (FunctionType) efftype);
@@ -529,7 +542,6 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		}
 		final String argsep = argbuf.length() == 0 ? "" : ", ";
 
-		// TODO: implement calling of non-method functions
 		String callstr = null;
 		if (callingNode instanceof Ident) {
 			Symbol symbol = ((Ident) callingNode).getSymbol();
@@ -626,7 +638,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 	public void visit(Sequence seq) {
 		final IType type = seq.getExpressionType();
-		if (type.getEffective() instanceof NullType) {
+		if (type.getEffectiveLowerBound() instanceof NullType) {
 			fBuffer.putSafeExpression(seq, "null");
 			return;
 		} else if (!type.isSequence()) {
@@ -1095,14 +1107,20 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 				if (etype.isSequence())
 					fBuffer.putExpression(e, fTypeAdapter.getInstance(etype));
 				else
-					fBuffer.putExpression(e, "null");
-				declareAlias(e);
+					fBuffer.initExpression(e);
 				final String accvar = fBuffer.getReference(e);
+				declareAlias(e);
 				fBuffer.putl("if (%s) {", checkNotNull(basevar, basetype));
 				fBuffer.incIndentitation();
-				retrieve(fragment, basevar, accvar, false);
+				retrieve(fragment, basevar, accvar, etype.isSequence());
 				fBuffer.subIndentitation();
 				fBuffer.putl("}");
+				if (!etype.isSequence()) {
+					fBuffer.putl("else {");
+					fBuffer.putl("\t%s = null;", accvar);
+					fBuffer.putl("}");
+				}
+				fBuffer.putSafeExpression(e, accvar);
 			}
 		}
 	}

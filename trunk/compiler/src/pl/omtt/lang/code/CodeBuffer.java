@@ -63,14 +63,16 @@ public class CodeBuffer {
 	private String putTemporaryVariable(IExpression node) {
 		final String var = getTemporaryVariable();
 		fExpressionVariable.put(node, var);
-		fSpace.fBuffer.append(fTypeAdapter.get(node.getExpressionType())).append(' ').append(var);
+		fSpace.fBuffer.append("final ").append(
+				fTypeAdapter.get(node.getExpressionType())).append(' ').append(
+				var);
 		return var;
 	}
 
-	public String getTemporaryVariable () {
+	public String getTemporaryVariable() {
 		return getTemporaryVariable(fTemporaryCount++);
 	}
-	
+
 	public CodeBuffer putExpression(IExpression node, String format,
 			Object... args) {
 		putIndentitation();
@@ -150,7 +152,7 @@ public class CodeBuffer {
 		if (fExpressionCode.containsKey(node)) {
 			putExpression(node, "%s", fExpressionCode.get(node));
 			fExpressionCode.remove(node);
-		}		
+		}
 		return getTemporaryVariable(node);
 	}
 

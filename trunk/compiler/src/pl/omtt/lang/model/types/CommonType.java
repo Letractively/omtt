@@ -22,10 +22,6 @@ public abstract class CommonType implements IType, Cloneable {
 		return fNotNull;
 	}
 
-	public boolean isNull() {
-		return false;
-	}
-
 	public IType setNotNull() {
 		fNotNull = true;
 		return this;
@@ -34,6 +30,15 @@ public abstract class CommonType implements IType, Cloneable {
 	public IType unsetNotNull() {
 		fNotNull = false;
 		return this;
+	}
+
+	public boolean isNull() {
+		return false;
+	}
+
+	@Override
+	public boolean isGeneric() {
+		return false;
 	}
 
 	public IType dup() {
@@ -59,7 +64,7 @@ public abstract class CommonType implements IType, Cloneable {
 
 	@Override
 	public int hashCode() {
-		return toString().hashCode();
+		return toEssentialString().hashCode();
 	}
 
 	protected int objectHashCode() {
@@ -76,14 +81,28 @@ public abstract class CommonType implements IType, Cloneable {
 	}
 
 	@Override
+	public IType getEffectiveLowerBound () {
+		IType type = getEffective();
+		if (type.isGeneric())
+			type = ((GenericType)type).fLowerBoundType;
+		return type;
+	}
+
+	@Override
 	public String toDiagnosticString() {
-		if (this instanceof FlexibleType && !this.isFrozen())
+		if (this instanceof GenericType && !this.isFrozen())
 			return "flexible(" + singleToString() + ")"
 					+ (isSequence() ? "*" : "");
 		else
 			return singleToString() + (isSequence() ? "*" : "");
 	}
 
+	public String toEssentialString () {
+		return singleToEssentialString() + (isSequence() ? "*" : "");
+	}
+
+	abstract String singleToEssentialString ();
+	
 	@Override
 	public String toString() {
 		return singleToString() + (isSequence() ? "*" : "");

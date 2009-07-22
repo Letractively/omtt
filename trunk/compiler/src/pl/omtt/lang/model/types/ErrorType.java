@@ -44,4 +44,9 @@ public class ErrorType extends CommonType implements IType {
 	public boolean isGeneral() {
 		return false;
 	}
+
+	@Override
+	String singleToEssentialString() {
+		return "_";
+	}
 }

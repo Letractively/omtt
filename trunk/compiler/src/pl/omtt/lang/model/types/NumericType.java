@@ -35,8 +35,8 @@ public class NumericType extends ScalarType implements IType {
 
 	@Override
 	public boolean isSubtypeOf(IType type) {
-		type = type.getEffective();
-		if (type instanceof GeneralType)
+		type = type.getEffectiveLowerBound();
+		if (type instanceof AnyType)
 			return true;
 		else if (type instanceof NumericType) {
 			if (this.isInteger())
@@ -84,7 +84,7 @@ public class NumericType extends ScalarType implements IType {
 	@Override
 	public String singleToString() {
 		if (fNumericClass == NumericClass.INTEGER)
-			return "Integer";
+			return "Int";
 		else
 			return "Real";
 	}
