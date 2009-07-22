@@ -94,6 +94,7 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 			if (node instanceof ISymbolTableOwner)
 				popST();
 		} catch (ForceSymbolTableRecalculatingException e) {
+			System.err.println("recalc");
 			if (node instanceof ISymbolTableOwner)
 				popST();
 
