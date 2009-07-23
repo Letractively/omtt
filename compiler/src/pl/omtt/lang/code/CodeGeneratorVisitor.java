@@ -236,11 +236,12 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	}
 
 	protected String jtype(IType type) {
-		if (type.isFunction()) {
+/*		if (type.isFunction()) {
 			FunctionType funtype = (FunctionType) type.getEffectiveLowerBound();
 			if (!fTypeAdapter.containsFunction(funtype))
 				signatureTemplate(funtype);
 		}
+*/
 		return fTypeAdapter.get(type);
 	}
 
@@ -260,7 +261,8 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		fBuffer.putl("package %s;\n", fPackageName);
 
 		fBuffer.putl("import java.util.*;\n");
-		fBuffer.putl("import pl.omtt.core.stdlib.*;\n");
+		fBuffer.putl("import pl.omtt.core.stdlib.*;");
+		fBuffer.putl("import pl.omtt.core.funproto.*;");
 		apply(program.getImportsNode());
 		fBuffer.putnl();
 
@@ -309,11 +311,17 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		}
 		fBuffer.pushBuffer("$buffer");
 		fBuffer.incIndentitation();
-		IExpression body = def.getBodyNode();
+
+		for (int i = 0; i < def.getArgumentsCount(); i++) {
+			final TemplateArgument ta = def.getArgument(i);
+			fSymbolLocalNames.put(ta.getSymbol(), ta.getArgumentName());
+		}
+		final IExpression body = def.getBodyNode();
 		apply(body);
 		if (!flushBuffer) {
 			fBuffer.putl("return %s;", fBuffer.getReference(body));
 		}
+
 		fBuffer.subIndentitation();
 		fBuffer.popBuffer();
 
@@ -366,7 +374,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	}
 
 	private void setFunctionSignature(FunctionType ftype, String stemplate) {
-		if (fTypeAdapter.containsFunction((FunctionType) single(ftype)))
+/*		if (fTypeAdapter.containsFunction((FunctionType) single(ftype)))
 			return;
 		String ifname = "IFunctionSignature" + fBuffer.getTemporaryVariable();
 		fTypeAdapter.putFunction((FunctionType) single(ftype), ifname);
@@ -379,7 +387,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		fBuffer.subIndentitation();
 		fBuffer.putl("}\n");
 		fBuffer.flush("interfaces");
-	}
+*/	}
 
 	private void visitVariable(TemplateDefinition def, IType type) {
 		fBuffer.putl("final %s %s = %s;", jtype(type), def.getTemplateName(),
@@ -687,8 +695,10 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		final Symbol s = ident.getSymbol();
 		if (fSymbolLocalNames.containsKey(s))
 			var = fSymbolLocalNames.get(s);
-		else
+		else if (getDirectMethodName(ident) != null)
 			var = getDirectMethodName(ident);
+		else
+			var = ident.getName();
 
 		final IType type = ident.getExpressionType();
 		if (type.isFunction()) {
@@ -705,12 +715,14 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 	private String getDirectMethodName(Ident ident) {
 		final Symbol s = ident.getSymbol();
-		if (s.getParentST().getBase().getId().equals(fBaseSymbolTable.getId())) {
-			return ident.getName();
-		} else {
+		if (!s.getParentST().getBase().getId().equals(fBaseSymbolTable.getId())) {
 			final String modcls = OmttLoader.getModuleClassName(s.getParentST()
 					.getBase().getId());
 			return modcls + "." + ident.getName();
+		} else if (s.getParentST() == fBaseSymbolTable) {
+			return ident.getName();
+		} else {
+			return null;
 		}
 	}
 
