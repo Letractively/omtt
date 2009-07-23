@@ -38,8 +38,15 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 
 	@Override
 	public void run(Tree root) {
-		pushST(new BaseSymbolTable(fClassLoader));
-		super.run(root);
+		if (root instanceof Program) {
+			Program program = (Program)root;
+			
+			ModuleDeclaration md = program.getModuleDeclaration();
+			pushST(new BaseSymbolTable(md.getPackageName() + "."
+					+ md.getModuleName(), fClassLoader));
+
+			super.run(root);
+		}
 	}
 
 	private void visitUpdater(ISymbolTableParticipant updater) {

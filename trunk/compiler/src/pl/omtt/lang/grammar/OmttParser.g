@@ -40,13 +40,13 @@ import_declarations
     -> ^(IMPORTS import_declaration+)?
   ;
 
-import_declaration 
+import_declaration
   : IMPORT ec=external_class_name
     -> ^(IMPORT<ImportDeclaration>[$IMPORT] $ec)
   ;
 use_declaration
-  : USE module_id AS VAR_ID
-    -> ^(USE<UseDeclaration>[$USE, $VAR_ID] module_id)
+  : USE module_id (AS VAR_ID)?
+    -> ^(USE<UseDeclaration>[$USE] ^(MODULE module_id) VAR_ID?)
   ;
 
 fragment external_class_name

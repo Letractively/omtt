@@ -29,6 +29,7 @@ public class SymbolTable {
 
 	public void put(Symbol s) {
 		fSymbolMap.put(s.getName(), s);
+		s.fSTOwner = this;
 	}
 
 	public SymbolTable getParent () {

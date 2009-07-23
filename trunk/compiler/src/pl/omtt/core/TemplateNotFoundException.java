@@ -1,4 +1,4 @@
-package pl.omtt.caller;
+package pl.omtt.core;
 
 public class TemplateNotFoundException extends Exception {
 	public TemplateNotFoundException(String message) {

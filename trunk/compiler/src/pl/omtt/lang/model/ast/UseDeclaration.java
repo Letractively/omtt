@@ -1,49 +1,55 @@
 package pl.omtt.lang.model.ast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.antlr.runtime.Token;
+import org.antlr.runtime.tree.Tree;
 
+import pl.omtt.lang.code.ISymbolTableParticipant;
+import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
+import pl.omtt.lang.model.types.TypeException;
 
-public class UseDeclaration extends CommonNode implements IVisitable {
-	public String as;
-	
+public class UseDeclaration extends CommonNode implements IVisitable, ISymbolTableParticipant {
+	public String fAlias;
+
 	public UseDeclaration(int token_type, Token token, Token as) {
 		this.token = token;
-		this.as = as.getText();
+		if (as != null)
+			fAlias = as.getText();
 	}
 
-	private List<Class<?>> getTargetClasses() throws ClassNotFoundException {
-		List<Class<?>> classes = new ArrayList<Class<?>>();
-		ClassLoader loader = ClassLoader.getSystemClassLoader();
+	public UseDeclaration(int tokenType, Token token) {
+		this(tokenType, token, null);
+	}
 
-		String p = "";
+	public String getUseId () {
+		StringBuffer buf = new StringBuffer ();
+		Tree idnode = getChild(0);
+		for (int i = 0; i < idnode.getChildCount(); i++) {
+			if (i > 0)
+				buf.append(".");
+			buf.append(idnode.getChild(i).toString());
+		}
+		return buf.toString();
+	}
 
-		int i = 0;
-		for (i = 0; i < this.getChildCount() - 1; i++)
-			p += this.getChild(i).getText() + ".";
-		if (this.getChild(i).getText().equals("*"))
-			// TODO: package service
-			;
+	public String getTargetNs () {
+		if (getChildCount() > 1)
+			return getChild(1).getText();
 		else
-			// single class
-			classes.add(loader.loadClass(p + this.getChild(i)));
-
-		return classes;
+			return null;
+	}
+	
+	@Override
+	public void takeSymbolTable(SymbolTable symbolTable) throws TypeException {
+		symbolTable.getBase().importLibrary(getUseId(), getTargetNs());
 	}
 
 	public String toString() {
-		try {
-			return getTargetClasses().toString();
-		} catch (ClassNotFoundException e) {
-			return "not found";
-		}
+		return "use " + getUseId();
 	}
 
-	public void accept (IVisitor visitor) {
+	public void accept(IVisitor visitor) {
 		visitor.visit(this);
 	}
 }

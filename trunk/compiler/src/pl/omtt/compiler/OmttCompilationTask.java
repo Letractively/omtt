@@ -52,7 +52,7 @@ public class OmttCompilationTask {
 		
 		fClassPath = classPath;
 		fClassPath.add(fTargetPath);
-		
+
 		fState = STATE_START;
 		fClassLoader = new URLClassLoader(getURLArray(classPath));
 	}

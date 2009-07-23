@@ -1,4 +1,4 @@
-package pl.omtt.caller;
+package pl.omtt.core;
 
 public class ModuleNotFoundException extends Exception {
 	public ModuleNotFoundException(String message) {

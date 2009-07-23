@@ -16,13 +16,15 @@ public class ScalarType extends CommonType implements IType {
 		}
 	}
 
-	public static ScalarType fromClass(Class<?> cls) {
+	public static IType fromClass(Class<?> cls) {
 		final boolean primitive = cls.isPrimitive();
 		if (primitive)
 			cls = deprimitive(cls);
 
 		ScalarType type;
-		if (Number.class.isAssignableFrom(cls))
+		if (Object.class.equals(cls))
+			return new AnyType();
+		else if (Number.class.isAssignableFrom(cls))
 			type = NumericType.fromClass(cls);
 		else
 			type = new ScalarType(cls);
@@ -31,7 +33,7 @@ public class ScalarType extends CommonType implements IType {
 		return type;
 	}
 
-	public static ScalarType fromType(Type type) throws TypeException {
+	public static IType fromType(Type type) throws TypeException {
 		if (type instanceof Class<?>)
 			return fromClass((Class<?>) type);
 
@@ -46,7 +48,7 @@ public class ScalarType extends CommonType implements IType {
 			if (Collection.class.isAssignableFrom(rawclass)) {
 				Type atype = ptype.getActualTypeArguments()[0];
 				if (atype instanceof Class<?>) {
-					ScalarType scalar = fromClass((Class<?>) atype);
+					IType scalar = fromClass((Class<?>) atype);
 					scalar.setSequence();
 					return scalar;
 				} else {
