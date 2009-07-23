@@ -19,6 +19,10 @@ public class ClassResolver {
 		fPackages.add("java.lang");
 	}
 
+	public ClassLoader getClassLoader () {
+		return fLoader;
+	}
+	
 	public Class<?> get(String name) throws ClassNotFoundException {
 		if (fClassMap.containsKey(name))
 			return fClassMap.get(name);

@@ -25,10 +25,10 @@ import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.compiler.reporting.PrintProblemCollector;
 import pl.omtt.lang.code.CodeGeneratorVisitor;
 import pl.omtt.lang.code.OmttJavaSource;
-import pl.omtt.lang.code.SymbolTableCreator;
 import pl.omtt.lang.grammar.OmttLexer;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.ast.Program;
+import pl.omtt.lang.symboltable.SymbolTableCreator;
 import pl.omtt.util.stream.FileEnrichedStream;
 
 public class OmttCompilationTask {

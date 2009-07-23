@@ -12,8 +12,8 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
         <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.core"/>
+        <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.core.functions"/>
         <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.caller"/>
-        <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.core.funproto"/>
         <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.core.stdlib"/>
     </selectedElements>
 </jardesc>

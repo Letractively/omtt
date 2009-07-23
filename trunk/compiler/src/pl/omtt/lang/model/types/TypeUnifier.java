@@ -103,15 +103,15 @@ public class TypeUnifier {
 		for (int i = 0; i < funA.fArguments.size(); i++) {
 			Argument argA = funA.getArgument(i);
 			Argument argB = funB.getArgument(i);
-			if ((!le && argA.fOptional ^ argB.fOptional)
-					|| (le && !argA.fOptional && argB.fOptional))
+			if ((!le && argA.optional ^ argB.optional)
+					|| (le && !argA.optional && argB.optional))
 				throw new TypeException("cannot use "
-						+ (argA.fOptional ? "optional" : "obligatory")
+						+ (argA.optional ? "optional" : "obligatory")
 						+ " argument as an "
-						+ (argB.fOptional ? "optional" : "obligatory") + " one");
+						+ (argB.optional ? "optional" : "obligatory") + " one");
 
-			unifyGently(funB.getArgument(i).getType(), funA.getArgument(i)
-					.getType(), le);
+			unifyGently(funB.getArgument(i).type, funA.getArgument(i)
+					.type, le);
 		}
 		unifyGently(funA.getReturnType(), funB.getReturnType(), le);
 

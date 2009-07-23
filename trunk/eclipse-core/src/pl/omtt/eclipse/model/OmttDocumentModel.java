@@ -25,10 +25,10 @@ import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import pl.omtt.eclipse.util.stream.DocumentRawStream;
 import pl.omtt.lang.code.CodeGeneratorVisitor;
-import pl.omtt.lang.code.SymbolTableCreator;
 import pl.omtt.lang.grammar.OmttLexer;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.PrintTreeVisitor;
+import pl.omtt.lang.symboltable.SymbolTableCreator;
 
 @SuppressWarnings("unused")
 public class OmttDocumentModel {

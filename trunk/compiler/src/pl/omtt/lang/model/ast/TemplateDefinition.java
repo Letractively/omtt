@@ -4,11 +4,6 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;
 
-import pl.omtt.lang.code.ForceSymbolTableRecalculatingException;
-import pl.omtt.lang.code.ISymbolTableDualParticipant;
-import pl.omtt.lang.code.ISymbolTableOwner;
-import pl.omtt.lang.code.Symbol;
-import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
@@ -19,6 +14,11 @@ import pl.omtt.lang.model.types.StringDataType;
 import pl.omtt.lang.model.types.TypeException;
 import pl.omtt.lang.model.types.TypePointer;
 import pl.omtt.lang.model.types.TypeUnifier;
+import pl.omtt.lang.symboltable.ForceSymbolTableRecalculatingException;
+import pl.omtt.lang.symboltable.ISymbolTableDualParticipant;
+import pl.omtt.lang.symboltable.ISymbolTableOwner;
+import pl.omtt.lang.symboltable.Symbol;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class TemplateDefinition extends CommonNode implements
 		ISymbolTableOwner, ISymbolTableDualParticipant, IExpression, IVisitable {

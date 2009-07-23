@@ -3,13 +3,13 @@ package pl.omtt.lang.model.ast;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.tree.Tree;
 
-import pl.omtt.lang.code.BaseSymbolTable;
-import pl.omtt.lang.code.ISymbolTableParticipant;
-import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.TypeException;
+import pl.omtt.lang.symboltable.BaseSymbolTable;
+import pl.omtt.lang.symboltable.ISymbolTableParticipant;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class Program extends CommonNode implements IVisitable,
 		ISymbolTableParticipant {

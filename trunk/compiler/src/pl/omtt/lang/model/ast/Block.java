@@ -2,11 +2,11 @@ package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.CommonToken;
 
-import pl.omtt.lang.code.ISymbolTableOwner;
-import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.IType;
+import pl.omtt.lang.symboltable.ISymbolTableOwner;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class Block extends CommonNode implements ISymbolTableOwner,
 		IExpression, IVisitable {

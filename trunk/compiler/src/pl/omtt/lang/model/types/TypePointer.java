@@ -14,13 +14,13 @@ public class TypePointer extends CommonType implements IType {
 		return fPointer.getEffective();
 	}
 
-	public TypePointer getRoot () {
+	public TypePointer getRoot() {
 		TypePointer ptr = this;
 		while (ptr.fPointer instanceof TypePointer)
 			ptr = (TypePointer) ptr.fPointer;
 		return ptr;
 	}
-	
+
 	@Override
 	public boolean isFrozen() {
 		return getRoot().fFrozen;
@@ -100,14 +100,11 @@ public class TypePointer extends CommonType implements IType {
 	}
 
 	public String singleToString() {
-		if (isFrozen())
-			return getEffective().singleToString();
-		else
-			return "flex(" + getEffective().singleToString() + ")";
+		return getEffective().singleToString();
 	}
 
 	@Override
 	String singleToEssentialString() {
-		return ((CommonType)getEffective()).singleToEssentialString();
+		return ((CommonType) getEffective()).singleToEssentialString();
 	}
 }

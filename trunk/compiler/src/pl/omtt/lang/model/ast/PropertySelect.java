@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.tree.Tree;
 
-import pl.omtt.lang.code.ISymbolTableDualParticipant;
-import pl.omtt.lang.code.ISymbolTableOwner;
-import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.ErrorType;
@@ -17,6 +14,9 @@ import pl.omtt.lang.model.types.NumericType;
 import pl.omtt.lang.model.types.ScalarType;
 import pl.omtt.lang.model.types.StringDataType;
 import pl.omtt.lang.model.types.TypeException;
+import pl.omtt.lang.symboltable.ISymbolTableDualParticipant;
+import pl.omtt.lang.symboltable.ISymbolTableOwner;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class PropertySelect extends CommonSelectorNode implements
 		IFoldExpression, ISymbolTableOwner, ISymbolTableDualParticipant,

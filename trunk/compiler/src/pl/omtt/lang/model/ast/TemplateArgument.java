@@ -2,9 +2,6 @@ package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.CommonToken;
 
-import pl.omtt.lang.code.ISymbolTableParticipant;
-import pl.omtt.lang.code.Symbol;
-import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
@@ -13,6 +10,9 @@ import pl.omtt.lang.model.types.GenericType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.TypeException;
 import pl.omtt.lang.model.types.TypePointer;
+import pl.omtt.lang.symboltable.ISymbolTableParticipant;
+import pl.omtt.lang.symboltable.Symbol;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class TemplateArgument extends CommonNode implements
 		ISymbolTableParticipant, IVisitable {
