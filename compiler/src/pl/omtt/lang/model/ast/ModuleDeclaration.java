@@ -26,15 +26,20 @@ public class ModuleDeclaration extends CommonNode implements IVisitable {
 		return getChild(getChildCount() - 1).getText();
 	}
 	
-	public String toString() {
-		String name = getPackageName();
-		if (name == null)
-			return "undefined";
-		else
-			return name;
-	}
-
 	public void accept (IVisitor visitor) {
 		visitor.visit(this);
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer buf = new StringBuffer();
+		buf.append("module ");
+		if (getPackageName() != null)
+			buf.append(getPackageName());
+		else
+			buf.append("local");
+		buf.append(".").append(getModuleName());
+		
+		return buf.toString();
 	}
 }

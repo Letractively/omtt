@@ -10,6 +10,7 @@ import java.util.Set;
 import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.core.Constants;
+import pl.omtt.core.OmttLoader;
 import pl.omtt.lang.model.AbstractTreeWalker;
 import pl.omtt.lang.model.ast.*;
 import pl.omtt.lang.model.types.FunctionType;
@@ -82,7 +83,8 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 			final String tempvar = fBuffer.getTemporaryVariable();
 			fBuffer.putl("List %s = new ArrayList();", tempvar);
 			final String castedvar = cast(var, sourceType, single(targetType));
-			fBuffer.putl("%s.add(%s);", tempvar, castedvar);
+			fBuffer.putl("if (%s != null) %s.add(%s);", castedvar, tempvar,
+					castedvar);
 			return tempvar;
 		} else if (!targetType.isSequence() && sourceType.isSequence()) {
 			if (targetType.isBoolean()) {
@@ -546,11 +548,10 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 		String callstr = null;
 		if (callingNode instanceof Ident) {
-			Symbol symbol = ((Ident) callingNode).getSymbol();
-			if (fBaseSymbolTable.contains(symbol)) {
-				callstr = symbol.getName();
-			} else {
+			callstr = getDirectMethodName((Ident) callingNode);
+			if (callstr == null) {
 				Tree t = callingNode;
+				final Symbol symbol = ((Ident) callingNode).getSymbol();
 				while (t != null) {
 					if (t instanceof TemplateDefinition) {
 						if (((TemplateDefinition) t).getSymbol().equals(symbol))
@@ -683,22 +684,34 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 	public void visit(Ident ident) {
 		String var;
-		if (fSymbolLocalNames.containsKey(ident.getSymbol()))
-			var = fSymbolLocalNames.get(ident.getSymbol());
+		final Symbol s = ident.getSymbol();
+		if (fSymbolLocalNames.containsKey(s))
+			var = fSymbolLocalNames.get(s);
 		else
-			var = ident.getName();
+			var = getDirectMethodName(ident);
 
 		final IType type = ident.getExpressionType();
 		if (type.isFunction()) {
-			if (fBaseSymbolTable.contains(ident.getSymbol())) {
+			final SymbolTable ownerST = ident.getSymbol().getParentST();
+			if (ownerST.getBase().contains(ident.getSymbol())) {
 				var = instantiateFunction(var, type, type);
 			}
 		} else if (type.isSingleData()) {
 			fBuffer.putl("%s.append(%s);", fBuffer.getCurrentBuffer(), var);
 			return;
 		}
-
 		fBuffer.putVariable(ident, var);
+	}
+
+	private String getDirectMethodName(Ident ident) {
+		final Symbol s = ident.getSymbol();
+		if (s.getParentST().getBase().getId().equals(fBaseSymbolTable.getId())) {
+			return ident.getName();
+		} else {
+			final String modcls = OmttLoader.getModuleClassName(s.getParentST()
+					.getBase().getId());
+			return modcls + "." + ident.getName();
+		}
 	}
 
 	public void visit(final AtomSelect select) {

@@ -1,15 +1,27 @@
 package pl.omtt.lang.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import pl.omtt.core.ModuleNotFoundException;
 import pl.omtt.lang.model.types.TypeException;
 
 public class BaseSymbolTable extends SymbolTable {
-	ClassResolver fClassResolver;
+	final String fId;
 
-	public BaseSymbolTable(ClassLoader fClassLoader) {
+	ClassResolver fClassResolver;
+	List<SymbolTable> fImportedLibraries = new ArrayList<SymbolTable>();
+
+	public BaseSymbolTable(String id, ClassLoader classLoader) {
 		super();
-		fClassResolver = new ClassResolver(fClassLoader);
+		fId = id;
+		fClassResolver = new ClassResolver(classLoader);
 	}
 
+	public String getId () {
+		return fId;
+	}
+	
 	@Override
 	public BaseSymbolTable getBase() {
 		return this;
@@ -19,12 +31,25 @@ public class BaseSymbolTable extends SymbolTable {
 		return fClassResolver;
 	}
 
+	@Override
+	public Symbol find (String name) {
+		Symbol s = super.find(name);
+		if (s != null)
+			return s;
+		for(int i = fImportedLibraries.size() - 1; i >= 0; i--) {
+			s = fImportedLibraries.get(i).find(name);
+			if (s != null)
+				return s;
+		}
+		return null;
+	}
+	
 	public void importLibrary(String id, String namespace) throws TypeException {
 		try {
-			Class<?> library = getClassResolver().getLibrary(id);
-			System.err.println(library);
-		} catch (ClassNotFoundException e) {
-			throw new TypeException ("module " + id + " not found");
+			fImportedLibraries.add(new LibraryBaseSymbolTable(id,
+					fClassResolver.fLoader));
+		} catch (ModuleNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 }

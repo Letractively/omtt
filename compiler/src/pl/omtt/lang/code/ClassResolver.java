@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import pl.omtt.core.Constants;
+import pl.omtt.core.ModuleNotFoundException;
+import pl.omtt.core.OmttLoader;
 
 public class ClassResolver {
 	Map<String, Class<?>> fClassMap = new HashMap<String, Class<?>>();
@@ -39,7 +40,7 @@ public class ClassResolver {
 		fPackages.add(packageName);
 	}
 
-	public Class<?> getLibrary(String id) throws ClassNotFoundException {
-		return fLoader.loadClass(Constants.OMTT_TEMPLATE_PACKAGE + "." + id);
+	public Class<?> getLibrary(String id) throws ModuleNotFoundException {
+		return new OmttLoader(fLoader).loadModuleClass(id);
 	}
 }
