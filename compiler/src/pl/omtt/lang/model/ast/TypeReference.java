@@ -3,7 +3,6 @@ package pl.omtt.lang.model.ast;
 import org.antlr.runtime.Token;
 
 import pl.omtt.lang.code.ClassResolver;
-import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
@@ -12,6 +11,7 @@ import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.NumericType;
 import pl.omtt.lang.model.types.ScalarType;
 import pl.omtt.lang.model.types.TypeException;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class TypeReference extends CommonNode implements IVisitable {
 	public TypeReference(Token token) {

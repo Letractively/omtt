@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.antlr.runtime.CommonToken;
 
-import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.FunctionType;
@@ -13,6 +12,7 @@ import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.NullType;
 import pl.omtt.lang.model.types.TypeException;
 import pl.omtt.lang.model.types.TypeUnifier;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class Call extends CommonNode implements IFoldExpression, IVisitable {
 	IType fType;
@@ -58,7 +58,7 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 		if (!callingType.isFunction()) {
 			fCallingType = buildType();
 			if (isIterateSequence())
-				fCallingType.getArgument(0).getType().unsetSequence();
+				fCallingType.getArgument(0).type.unsetSequence();
 			fEffectiveType = fCallingType;
 			TypeUnifier.unifyEq(fEffectiveType, callingType);
 		} else {
@@ -67,10 +67,10 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 
 			FunctionType requestedType = buildType(fEffectiveType).createTemplate(); 
 			if (isIterateSequence()) {
-				if (fCallingType.getArgument(0).getType().isSequence())
+				if (fCallingType.getArgument(0).type.isSequence())
 					fIterateSequence = false;
 				else
-					requestedType.getArgument(0).getType().unsetSequence();
+					requestedType.getArgument(0).type.unsetSequence();
 			}
 
 			TypeUnifier.unifyLe(requestedType, fEffectiveType);
@@ -134,7 +134,7 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 			final FunctionArgument arg = fArguments.get(i);
 			if (arg == null) {
 				funtype.putArgument(null, new NullType(), true);
-				if (!calltype.getArgument(i).isOptional())
+				if (!calltype.getArgument(i).optional)
 					throw new TypeException(this, "argument " + (i + 1)
 							+ " of called function is obligatory");
 			} else {
@@ -160,7 +160,7 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 				|| !isIterateSequence())
 			return false;
 		else if (isIterateSequence()
-				&& fCallingType.getArguments().get(0).getType().isSequence()
+				&& fCallingType.getArguments().get(0).type.isSequence()
 				&& !fCallingType.getReturnType().isSequence())
 			return false;
 		else

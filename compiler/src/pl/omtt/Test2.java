@@ -1,11 +1,17 @@
 package pl.omtt;
 
+import pl.omtt.core.functions.*;
+
 public class Test2 {
     public Double f (final Integer n) {
         final Integer x = (n) * (1);
         final Double y = 2.2;
         
         return (x) + (y);
+    }
+
+    public int x (Function1<Integer, Integer> f) {
+    	return 0;
     }
     
     public static void main (String[] args) {

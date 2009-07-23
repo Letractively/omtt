@@ -1,9 +1,11 @@
-package pl.omtt.lang.code;
+package pl.omtt.lang.symboltable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pl.omtt.core.ModuleNotFoundException;
+import pl.omtt.lang.code.ClassResolver;
+import pl.omtt.lang.code.LibraryBaseSymbolTable;
 import pl.omtt.lang.model.types.TypeException;
 
 public class BaseSymbolTable extends SymbolTable {
@@ -47,7 +49,7 @@ public class BaseSymbolTable extends SymbolTable {
 	public void importLibrary(String id, String namespace) throws TypeException {
 		try {
 			fImportedLibraries.add(new LibraryBaseSymbolTable(id,
-					fClassResolver.fLoader));
+					fClassResolver.getClassLoader()));
 		} catch (ModuleNotFoundException e) {
 			e.printStackTrace();
 		}

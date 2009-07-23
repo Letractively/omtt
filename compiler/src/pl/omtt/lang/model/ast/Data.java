@@ -2,11 +2,11 @@ package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.Token;
 
-import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.StringDataType;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class Data extends CommonNode implements IExpression, IVisitable {
 	public Data(Token token) {

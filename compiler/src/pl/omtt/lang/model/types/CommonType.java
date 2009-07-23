@@ -4,7 +4,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
-import pl.omtt.core.funproto.Function;
+import pl.omtt.core.functions.Function;
 
 public abstract class CommonType implements IType, Cloneable {
 	boolean fSequence = false;

@@ -5,11 +5,15 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
 import pl.omtt.core.ModuleNotFoundException;
+import pl.omtt.core.functions.Name;
+import pl.omtt.core.functions.Optional;
 import pl.omtt.lang.model.types.*;
+import pl.omtt.lang.symboltable.BaseSymbolTable;
+import pl.omtt.lang.symboltable.Symbol;
 
 public class LibraryBaseSymbolTable extends BaseSymbolTable {
 	Class<?> fModuleClass;
-	
+
 	public LibraryBaseSymbolTable(String id, ClassLoader classLoader)
 			throws TypeException, ModuleNotFoundException {
 		super(id, classLoader);
@@ -46,24 +50,41 @@ public class LibraryBaseSymbolTable extends BaseSymbolTable {
 			return ScalarType.fromType(rettype);
 
 		FunctionType ftype = new FunctionType();
-		int i = 0;
+		final int starti;
 		if (void.class.equals(rettype)) {
 			ftype.setReturnType(new StringDataType());
-			i++;
+			starti = 1;
 		} else {
-			ftype.setReturnType(typeFromParameter(rettype, method
-					.getAnnotations()));
+			ftype.setReturnType(CommonType.fromType(rettype));
+			starti = 0;
 		}
-		for (; i < argtypes.length; i++) {
-			ftype.putArgument(null, typeFromParameter(argtypes[i], argannot[i]),
-					false);
-		}
-		return ftype;
-	}
 
-	private IType typeFromParameter(Type type, Annotation[] annotations) throws TypeException {
-		if (Object.class.equals(type))
-			return new AnyType();
-		return ScalarType.fromType(type);
+		for (int i = starti; i < argtypes.length; i++) {
+			String name = null;
+			boolean optional = false;
+			
+			for (Annotation ann : argannot[i]) {
+				if (Optional.class.equals(ann.annotationType()))
+					optional = true;
+				if (Name.class.equals(ann.annotationType()))
+					name = ((Name)ann).value();
+			}			
+
+			ftype.putArgument(name, CommonType.fromType(argtypes[i]), optional);
+		}
+		
+		String typestr;
+		try {
+			typestr = method.getAnnotation(pl.omtt.core.functions.Type.class).value();
+		} catch (NullPointerException e) {
+			typestr = null;
+		}
+		
+		if (typestr != null) {
+//			TypeStringParser p = new TypeStringParser(typestr);
+			System.err.println(typestr);
+		}
+
+		return ftype;
 	}
 }

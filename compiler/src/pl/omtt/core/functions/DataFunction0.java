@@ -1,4 +1,4 @@
-package pl.omtt.core.funproto;
+package pl.omtt.core.functions;
 
 import pl.omtt.core.stdlib.TextBuffer;
 

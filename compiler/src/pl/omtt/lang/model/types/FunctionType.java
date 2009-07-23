@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import pl.omtt.core.funproto.Function;
+import pl.omtt.core.functions.Function;
 
 public class FunctionType extends CommonType implements IType {
 	IType fReturnType;
@@ -44,15 +44,15 @@ public class FunctionType extends CommonType implements IType {
 					"optional arguments must follow obligatory ones");
 
 		Argument a = new Argument();
-		a.fName = name;
-		a.fType = type;
-		a.fOptional = optional;
+		a.name = name;
+		a.type = type;
+		a.optional = optional;
 		fArguments.add(a);
 	}
 
 	private boolean existsOptionalArgument() {
 		for (Argument a : fArguments)
-			if (a.isOptional())
+			if (a.optional)
 				return true;
 		return false;
 	}
@@ -60,27 +60,15 @@ public class FunctionType extends CommonType implements IType {
 	public int getArgumentPosition(String targetName) {
 		int i;
 		for (i = 0; i < fArguments.size(); i++)
-			if (targetName.equals(fArguments.get(i).fName))
+			if (targetName.equals(fArguments.get(i).name))
 				return i;
 		return -1;
 	}
 
 	public class Argument {
-		String fName;
-		IType fType;
-		boolean fOptional = false;
-
-		public String getName() {
-			return fName;
-		}
-
-		public IType getType() {
-			return fType;
-		}
-
-		public boolean isOptional() {
-			return fOptional;
-		}
+		public String name;
+		public IType type;
+		public boolean optional = false;
 	}
 
 	@Override
@@ -100,7 +88,7 @@ public class FunctionType extends CommonType implements IType {
 
 		fReturnType = freezeArgument(fReturnType, genericsCount);
 		for (Argument a : fArguments)
-			a.fType = freezeArgument(a.fType, genericsCount);
+			a.type = freezeArgument(a.type, genericsCount);
 
 		fFrozen = true;
 	}
@@ -133,10 +121,10 @@ public class FunctionType extends CommonType implements IType {
 			((FunctionType) fReturnType.getEffectiveLowerBound())
 					.removeExcessiveGenerics(generics);
 		for (Argument a : fArguments) {
-			if (generics.contains(a.fType))
-				a.fType = ((GenericType) a.fType.getEffective()).toLowerBound();
-			if (a.fType.isFunction())
-				((FunctionType) a.fType.getEffectiveLowerBound())
+			if (generics.contains(a.type))
+				a.type = ((GenericType) a.type.getEffective()).toLowerBound();
+			if (a.type.isFunction())
+				((FunctionType) a.type.getEffectiveLowerBound())
 						.removeExcessiveGenerics(generics);
 		}
 	}
@@ -163,8 +151,8 @@ public class FunctionType extends CommonType implements IType {
 			if (!fReturnType.isSubtypeOf(ft.fReturnType))
 				return false;
 			for (int i = 0; i < fArguments.size(); i++)
-				if (!ft.fArguments.get(i).fType
-						.isSubtypeOf(fArguments.get(i).fType))
+				if (!ft.fArguments.get(i).type
+						.isSubtypeOf(fArguments.get(i).type))
 					return false;
 			return true;
 		} else {
@@ -221,8 +209,8 @@ public class FunctionType extends CommonType implements IType {
 			FunctionType target = new FunctionType();
 			for (int i = 0; i < source.getArguments().size(); i++) {
 				Argument a = source.getArgument(i);
-				target.putArgument(a.getName(), createTemplate(a.getType(),
-						generics), a.isOptional());
+				target.putArgument(a.name, createTemplate(a.type,
+						generics), a.optional);
 			}
 			target.setReturnType(createTemplate(source.getReturnType(),
 					generics));
@@ -249,18 +237,19 @@ public class FunctionType extends CommonType implements IType {
 						.getRawType()))
 			throw new UnsupportedOperationException(
 					"FunctionType can be created only from pl.omtt.core.funproto.Function");
-		Class<?> rawtype = (Class<?>) ptype.getRawType();
-		Type[] params = ptype.getActualTypeArguments();
+		final Class<?> rawtype = (Class<?>) ptype.getRawType();
+		final Type[] params = ptype.getActualTypeArguments();
 
-		FunctionType ftype = new FunctionType();
+		final FunctionType ftype = new FunctionType();
 		int i = 0;
 		if (rawtype.getSimpleName().startsWith("Data"))
 			ftype.setReturnType(new StringDataType());
 		else
 			ftype.setReturnType(CommonType.fromType(params[i++]));
 
-		for (; i < params.length; i++)
+		for (; i < params.length; i++) {
 			ftype.putArgument(null, CommonType.fromType(params[i]), false);
+		}
 
 		return ftype;
 	}
@@ -270,9 +259,9 @@ public class FunctionType extends CommonType implements IType {
 		StringBuffer buf = new StringBuffer();
 		buf.append("(");
 		for (Argument a : fArguments) {
-			if (a.fOptional)
+			if (a.optional)
 				buf.append("~");
-			buf.append(a.fType).append(" ");
+			buf.append(a.type).append(" ");
 		}
 		buf.append("-> ").append(fReturnType);
 		buf.append(")");
@@ -284,9 +273,9 @@ public class FunctionType extends CommonType implements IType {
 		StringBuffer buf = new StringBuffer();
 		buf.append("(");
 		for (Argument a : fArguments) {
-			if (a.fOptional)
+			if (a.optional)
 				buf.append("~");
-			buf.append(a.fType.toEssentialString()).append(" ");
+			buf.append(a.type.toEssentialString()).append(" ");
 		}
 		buf.append("-> ").append(fReturnType.toEssentialString());
 		buf.append(")");

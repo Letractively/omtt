@@ -1,4 +1,4 @@
-package pl.omtt.lang.code;
+package pl.omtt.lang.symboltable;
 
 import java.net.URI;
 import java.util.Stack;

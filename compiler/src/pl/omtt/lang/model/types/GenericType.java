@@ -96,7 +96,7 @@ public class GenericType extends CommonType implements IType {
 	}
 
 	public String singleToString() {
-		return fLowerBoundType.singleToString() + "[" + getInstanceId() + "]+";
+		return fLowerBoundType.singleToString() + "[" + getInstanceId() + "]";
 	}
 
 	@Override

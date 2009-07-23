@@ -3,14 +3,14 @@ package pl.omtt.lang.model.ast;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;
 
-import pl.omtt.lang.code.ISymbolTableDualParticipant;
-import pl.omtt.lang.code.ISymbolTableOwnerForRightNode;
-import pl.omtt.lang.code.Symbol;
-import pl.omtt.lang.code.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.TypeException;
+import pl.omtt.lang.symboltable.ISymbolTableDualParticipant;
+import pl.omtt.lang.symboltable.ISymbolTableOwnerForRightNode;
+import pl.omtt.lang.symboltable.Symbol;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class Transformation extends CommonNode implements IFoldExpression,
 		ISymbolTableDualParticipant, ISymbolTableOwnerForRightNode, IVisitable {

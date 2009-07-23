@@ -47,7 +47,7 @@ public class JavaTypesAdapter {
 			Argument a = ftype.getArgument(i);
 			if (i > 0 || !data)
 				buf.append(", ");
-			buf.append(get(a.getType()));
+			buf.append(get(a.type));
 		}
 		buf.append(">");
 		return buf.toString();

@@ -22,4 +22,5 @@ Export-Package: org.antlr.runtime,
  pl.omtt.lang.model,
  pl.omtt.lang.model.ast,
  pl.omtt.lang.model.types,
+ pl.omtt.lang.symboltable,
  pl.omtt.util.stream

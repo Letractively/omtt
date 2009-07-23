@@ -19,6 +19,9 @@ import pl.omtt.lang.model.types.NullType;
 import pl.omtt.lang.model.types.NumericType;
 import pl.omtt.lang.model.types.ScalarType;
 import pl.omtt.lang.model.types.FunctionType.Argument;
+import pl.omtt.lang.symboltable.BaseSymbolTable;
+import pl.omtt.lang.symboltable.Symbol;
+import pl.omtt.lang.symboltable.SymbolTable;
 
 public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	final JavaTypesAdapter fTypeAdapter = new JavaTypesAdapter();
@@ -174,10 +177,10 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		for (int i = 0; i < targetf.getArguments().size(); i++) {
 			Argument sourcearg = sourcef.getArguments().get(i);
 			Argument targetarg = targetf.getArguments().get(i);
-			String argname = targetarg.getName();
+			String argname = targetarg.name;
 			if (argname == null)
 				argname = "arg" + i;
-			buf.append(cast(argname, targetarg.getType(), sourcearg.getType()));
+			buf.append(cast(argname, targetarg.type, sourcearg.type));
 			if (i < targetf.getArguments().size() - 1)
 				buf.append(", ");
 		}
@@ -236,12 +239,12 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	}
 
 	protected String jtype(IType type) {
-/*		if (type.isFunction()) {
-			FunctionType funtype = (FunctionType) type.getEffectiveLowerBound();
-			if (!fTypeAdapter.containsFunction(funtype))
-				signatureTemplate(funtype);
-		}
-*/
+		/*
+		 * if (type.isFunction()) { FunctionType funtype = (FunctionType)
+		 * type.getEffectiveLowerBound(); if
+		 * (!fTypeAdapter.containsFunction(funtype)) signatureTemplate(funtype);
+		 * }
+		 */
 		return fTypeAdapter.get(type);
 	}
 
@@ -262,7 +265,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 		fBuffer.putl("import java.util.*;\n");
 		fBuffer.putl("import pl.omtt.core.stdlib.*;");
-		fBuffer.putl("import pl.omtt.core.funproto.*;");
+		fBuffer.putl("import pl.omtt.core.functions.*;");
 		apply(program.getImportsNode());
 		fBuffer.putnl();
 
@@ -307,6 +310,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 
 			fBuffer.putl(stemplate + " {", "run");
 		} else {
+			fBuffer.putl("@Type(\"%s\")", def.getExpressionType().toString());
 			fBuffer.putl("static " + stemplate + " {", def.getTemplateName());
 		}
 		fBuffer.pushBuffer("$buffer");
@@ -358,12 +362,18 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 			sig.append("final TextBuffer $buffer, ");
 		for (int i = 0; i < ftype.getArguments().size(); i++) {
 			Argument a = ftype.getArguments().get(i);
+
+			if (a.optional)
+				sig.append("@Optional ");
+			if (a.name != null)
+				sig.append("@Name(\"").append(a.name).append("\") ");
+
 			sig.append("final ");
-			sig.append(jtype(a.getType())).append(" ");
-			if (a.getName() == null)
+			sig.append(jtype(a.type)).append(" ");
+			if (a.name == null)
 				sig.append("arg").append(i).append(", ");
 			else
-				sig.append(a.getName()).append(", ");
+				sig.append(a.name).append(", ");
 		}
 		sig.delete(sig.length() - 2, sig.length());
 		sig.append(")");
@@ -374,20 +384,18 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	}
 
 	private void setFunctionSignature(FunctionType ftype, String stemplate) {
-/*		if (fTypeAdapter.containsFunction((FunctionType) single(ftype)))
-			return;
-		String ifname = "IFunctionSignature" + fBuffer.getTemporaryVariable();
-		fTypeAdapter.putFunction((FunctionType) single(ftype), ifname);
-
-		fBuffer.activate(ifname);
-		fBuffer.setIndentitation(1);
-		fBuffer.putl("public interface %s {", ifname);
-		fBuffer.incIndentitation();
-		fBuffer.putl("%s;", String.format(stemplate, "run"));
-		fBuffer.subIndentitation();
-		fBuffer.putl("}\n");
-		fBuffer.flush("interfaces");
-*/	}
+		/*
+		 * if (fTypeAdapter.containsFunction((FunctionType) single(ftype)))
+		 * return; String ifname = "IFunctionSignature" +
+		 * fBuffer.getTemporaryVariable();
+		 * fTypeAdapter.putFunction((FunctionType) single(ftype), ifname);
+		 * 
+		 * fBuffer.activate(ifname); fBuffer.setIndentitation(1);
+		 * fBuffer.putl("public interface %s {", ifname);
+		 * fBuffer.incIndentitation(); fBuffer.putl("%s;",
+		 * String.format(stemplate, "run")); fBuffer.subIndentitation();
+		 * fBuffer.putl("}\n"); fBuffer.flush("interfaces");
+		 */}
 
 	private void visitVariable(TemplateDefinition def, IType type) {
 		fBuffer.putl("final %s %s = %s;", jtype(type), def.getTemplateName(),
@@ -608,7 +616,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 				public String get(String var) {
 					var = cast(var, single(call.getBaseNode()
 							.getExpressionType()), call.getCallingType()
-							.getArguments().get(0).getType());
+							.getArguments().get(0).type);
 					if (callrettype.isSingleData()) {
 						fBuffer.initBuffer();
 						fBuffer.putl("%s(%s, %s%s%s);", callvar, fBuffer
@@ -633,7 +641,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		if (farg == null)
 			return "null";
 		final IType neededType = call.getCallingType().getArguments().get(i)
-				.getType();
+				.type;
 		return cast(farg, neededType);
 	}
 
@@ -690,6 +698,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		fBuffer.putSafeExpression(argument, "%s", exprapply(target));
 	}
 
+	@Override
 	public void visit(Ident ident) {
 		String var;
 		final Symbol s = ident.getSymbol();
