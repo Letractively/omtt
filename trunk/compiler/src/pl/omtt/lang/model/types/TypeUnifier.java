@@ -129,7 +129,7 @@ public class TypeUnifier {
 	 */
 	private static void unifyGently(IType typeA, IType typeB, boolean le)
 			throws TypeException {
-		if (!le || !typeA.isFrozen())
+		if (!le || (!typeA.isFunction() && !typeA.isFrozen()))
 			unifyEq(typeA, typeB);
 		else
 			unifyLe(typeA, typeB);

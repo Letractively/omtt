@@ -1,16 +1,11 @@
 package pl.omtt.lang.code;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 import pl.omtt.lang.model.ast.Literal;
 import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.IType;
+import pl.omtt.lang.model.types.FunctionType.Argument;
 
 public class JavaTypesAdapter {
-	Map<FunctionType,String> fFunctionTypes = new HashMap<FunctionType,String>();
-
 	String getInstance(IType type) {
 		if (type.isSequence())
 			return "new ArrayList<" + getSingle(type) + "> ()";
@@ -27,11 +22,9 @@ public class JavaTypesAdapter {
 
 	String getSingle(IType type) {
 		if (type.isFunction()) {
-			if (type.isSequence()) {
-				type = type.dup();
-				type.unsetSequence();
-			}
-			return fFunctionTypes.get(type.getEffective());
+			if (type.isSequence())
+				type = type.dup().unsetSequence();
+			return getFunction((FunctionType) type.getEffectiveLowerBound());
 		} else {
 			Class<?> cls = type.getAssociatedClass();
 			if (cls == null)
@@ -39,6 +32,25 @@ public class JavaTypesAdapter {
 			else
 				return cls.getSimpleName();
 		}
+	}
+
+	private String getFunction(FunctionType ftype) {
+		final StringBuffer buf = new StringBuffer();
+		final boolean data = ftype.getReturnType().isSingleData();
+		if (data)
+			buf.append("Data");
+		buf.append("Function").append(ftype.getArguments().size());
+		buf.append("<");
+		if (!data)
+			buf.append(get(ftype.getReturnType()));
+		for(int i = 0; i < ftype.getArguments().size(); i++) {
+			Argument a = ftype.getArgument(i);
+			if (i > 0 || !data)
+				buf.append(", ");
+			buf.append(get(a.getType()));
+		}
+		buf.append(">");
+		return buf.toString();
 	}
 
 	String getSingleReturn(IType type) {
@@ -82,13 +94,5 @@ public class JavaTypesAdapter {
 		} else {
 			return String.valueOf(o);
 		}
-	}
-
-	public boolean containsFunction (FunctionType ftype) {
-		return fFunctionTypes.containsKey(ftype);
-	}
-	
-	public void putFunction (FunctionType ftype, String jtype) {
-		fFunctionTypes.put(ftype, jtype);
 	}
 }

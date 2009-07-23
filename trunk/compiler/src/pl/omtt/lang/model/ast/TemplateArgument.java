@@ -17,6 +17,7 @@ import pl.omtt.lang.model.types.TypePointer;
 public class TemplateArgument extends CommonNode implements
 		ISymbolTableParticipant, IVisitable {
 	IType fArgumentType;
+	Symbol fSymbol;
 
 	public TemplateArgument(int token) {
 		super(new CommonToken(token, "argument"));
@@ -28,6 +29,10 @@ public class TemplateArgument extends CommonNode implements
 
 	public IType getArgumentType() {
 		return fArgumentType;
+	}
+
+	public Symbol getSymbol () {
+		return fSymbol;
 	}
 
 	public boolean isArgumentOptional() {
@@ -53,9 +58,11 @@ public class TemplateArgument extends CommonNode implements
 	public void takeSymbolTable(SymbolTable ST) throws TypeException {
 		try {
 			setArgumentType(ST);
-			ST.put(new Symbol(getArgumentName(), getArgumentType()));
+			fSymbol = new Symbol(getArgumentName(), getArgumentType());
+			ST.put(fSymbol);
 		} catch (TypeException e) {
-			ST.put(new Symbol(getArgumentName(), new ErrorType()));
+			fSymbol = new Symbol(getArgumentName(), new ErrorType());
+			ST.put(fSymbol);
 			throw e;
 		}
 	}
