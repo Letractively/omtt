@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import org.antlr.runtime.tree.*;
 
+@SuppressWarnings("all")
 public class TypeStringParser extends Parser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "FUNCTION", "SCALAR", "OPTIONAL", "SEQUENCE", "GENERIC", "ARGUMENT", "CLASS_ID", "INTEGER", "BIG_LETTER", "NAMECHAR", "WS", "'->'", "'('", "')'", "'['", "']'"

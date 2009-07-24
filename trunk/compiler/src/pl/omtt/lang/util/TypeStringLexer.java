@@ -8,6 +8,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class TypeStringLexer extends Lexer {
     public static final int INTEGER=11;
     public static final int FUNCTION=4;
