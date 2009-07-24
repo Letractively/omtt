@@ -100,7 +100,10 @@ public class TypePointer extends CommonType implements IType {
 	}
 
 	public String singleToString() {
-		return getEffective().singleToString();
+		if (isFrozen())
+			return getEffective().singleToString();
+		else
+			return "flex(" + getEffective().singleToString() + ")";
 	}
 
 	@Override

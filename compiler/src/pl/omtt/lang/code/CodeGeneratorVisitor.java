@@ -264,6 +264,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		fBuffer.putl("package %s;\n", fPackageName);
 
 		fBuffer.putl("import java.util.*;\n");
+		fBuffer.putl("import pl.omtt.core.annotations.OmttModule;");
 		fBuffer.putl("import pl.omtt.core.stdlib.*;");
 		fBuffer.putl("import pl.omtt.core.functions.*;");
 		apply(program.getImportsNode());
@@ -274,6 +275,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		fModuleName = fModuleName.substring(0, 1).toUpperCase()
 				+ fModuleName.substring(1);
 
+		fBuffer.putl("@OmttModule");
 		fBuffer.putl("public class %s {", fModuleName);
 
 		fBuffer.incIndentitation();
@@ -449,7 +451,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	}
 
 	public void visit(Literal literal) {
-		fBuffer.putSafeExpression(literal, fTypeAdapter.getLiteral(literal));
+		fBuffer.putVariable(literal, fTypeAdapter.getLiteral(literal));
 	}
 
 	public void visit(Range range) {
