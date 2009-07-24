@@ -216,15 +216,19 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	}
 
 	protected String checkNull(String var, IType type) {
-		if (type.isSequence())
-			return var + ".isEmpty()";
+		if (type.isNotNull())
+			return "false";
+		else if (type.isSequence())
+			return var + " == null || " + var + ".isEmpty()";
 		else
 			return var + " == null";
 	}
 
 	protected String checkNotNull(String var, IType type) {
-		if (type.isSequence())
-			return "!" + var + ".isEmpty()";
+		if (type.isNotNull())
+			return "true";
+		else if (type.isSequence())
+			return var + " != null && !" + var + ".isEmpty()";
 		else
 			return var + " != null";
 	}
