@@ -24,7 +24,7 @@ public class Test {
 	static final ParseComponent testComponent = ParseComponent.CODE;
 
 	final static String DIR = "/home/endrju/runtime-EclipseApplication/OMTT%20Example%20Project";
-	final static String FILE = DIR + "/templates/sample.omtt";
+	final static String FILE = DIR + "/templates/primes.omtt";
 
 	public static void main(String[] args) {
 		URI source, target, corejar;

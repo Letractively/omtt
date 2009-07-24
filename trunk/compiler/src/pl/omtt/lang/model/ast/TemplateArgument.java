@@ -31,7 +31,7 @@ public class TemplateArgument extends CommonNode implements
 		return fArgumentType;
 	}
 
-	public Symbol getSymbol () {
+	public Symbol getSymbol() {
 		return fSymbol;
 	}
 
@@ -40,18 +40,16 @@ public class TemplateArgument extends CommonNode implements
 	}
 
 	private void setArgumentType(SymbolTable ST) throws TypeException {
-		if (getTypeNode() != null) {
+		if (getTypeNode() != null)
 			fArgumentType = ((TypeReference) getTypeNode()).get(ST);
-		}
-		else {
+		else
 			fArgumentType = new TypePointer(new GenericType());
-			if (getFirstChildWithType(OmttParser.OP_MULTIPLY) != null)
-				fArgumentType.setSequence();
-		}
+		if (getFirstChildWithType(OmttParser.OP_MULTIPLY) != null)
+			fArgumentType.setSequence();
 	}
 
 	public TypeReference getTypeNode() {
-		return (TypeReference)getFirstChildWithType(OmttParser.CLASS_ID);
+		return (TypeReference) getFirstChildWithType(OmttParser.CLASS_ID);
 	}
 
 	@Override
