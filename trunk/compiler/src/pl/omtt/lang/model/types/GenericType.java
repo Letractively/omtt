@@ -9,26 +9,33 @@ public class GenericType extends CommonType implements IType {
 	}
 
 	public GenericType(IType lowerBoundType) {
-		fInstanceId = objectHashCode();
+		this(lowerBoundType, 0);
+	}
+
+	public GenericType(IType lowerBoundType, int iid) {
+		if (iid > 0)
+			fInstanceId = iid;
+		else
+			fInstanceId = objectHashCode();
 		fLowerBoundType = lowerBoundType;
 		TypeUnifier.preserveAttributes(this, lowerBoundType);
 	}
 
-	public int getInstanceId () {
+	public int getInstanceId() {
 		return fInstanceId;
 	}
-	
+
 	@Override
 	public IType getEffective() {
 		return this;
 	}
 
-	public IType toLowerBound () {
+	public IType toLowerBound() {
 		IType lb = fLowerBoundType.dup();
 		TypeUnifier.preserveAttributes(lb, this);
 		return lb;
 	}
-	
+
 	@Override
 	public boolean isSubtypeOf(IType type) {
 		return fLowerBoundType.isSubtypeOf(type);

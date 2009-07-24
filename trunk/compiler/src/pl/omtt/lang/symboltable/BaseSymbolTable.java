@@ -5,7 +5,6 @@ import java.util.List;
 
 import pl.omtt.core.ModuleNotFoundException;
 import pl.omtt.lang.code.ClassResolver;
-import pl.omtt.lang.code.LibraryBaseSymbolTable;
 import pl.omtt.lang.model.types.TypeException;
 
 public class BaseSymbolTable extends SymbolTable {
