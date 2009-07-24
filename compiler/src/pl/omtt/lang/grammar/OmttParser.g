@@ -77,8 +77,8 @@ fragment definition_signature
   ;
 
 fragment definition_argument
-  : TILDE? id=VAR_ID (OP_ASSIGN type | OP_MULTIPLY)?
-    -> ^(ARGUMENT<TemplateArgument> IDENT<Ident>[$id] type? TILDE? OP_MULTIPLY?)
+  : TILDE? id=VAR_ID OP_MULTIPLY? (LEFT_SQUARE_PAREN single_type RIGHT_SQUARE_PAREN)?
+    -> ^(ARGUMENT<TemplateArgument> IDENT<Ident>[$id] single_type? TILDE? OP_MULTIPLY?)
   ;
 // END: definitions
 
