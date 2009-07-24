@@ -24,7 +24,7 @@ import pl.omtt.lang.symboltable.Symbol;
 import pl.omtt.lang.symboltable.SymbolTable;
 
 public class CodeGeneratorVisitor extends AbstractTreeWalker {
-	final JavaTypesAdapter fTypeAdapter = new JavaTypesAdapter();
+	final TypesJavaCodeConverter fTypeAdapter = new TypesJavaCodeConverter();
 	final CodeBuffer fBuffer = new CodeBuffer(fTypeAdapter);
 
 	// document attributes

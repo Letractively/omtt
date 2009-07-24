@@ -5,7 +5,7 @@ import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.FunctionType.Argument;
 
-public class JavaTypesAdapter {
+public class TypesJavaCodeConverter {
 	String getInstance(IType type) {
 		if (type.isSequence())
 			return "new ArrayList<" + getSingle(type) + "> ()";

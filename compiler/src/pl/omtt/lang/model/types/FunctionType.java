@@ -1,14 +1,10 @@
 package pl.omtt.lang.model.types;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import pl.omtt.core.functions.Function;
 
 public class FunctionType extends CommonType implements IType {
 	IType fReturnType;
@@ -209,8 +205,8 @@ public class FunctionType extends CommonType implements IType {
 			FunctionType target = new FunctionType();
 			for (int i = 0; i < source.getArguments().size(); i++) {
 				Argument a = source.getArgument(i);
-				target.putArgument(a.name, createTemplate(a.type,
-						generics), a.optional);
+				target.putArgument(a.name, createTemplate(a.type, generics),
+						a.optional);
 			}
 			target.setReturnType(createTemplate(source.getReturnType(),
 					generics));
@@ -228,30 +224,6 @@ public class FunctionType extends CommonType implements IType {
 		} else {
 			return type.getEffective();
 		}
-	}
-
-	static public FunctionType fromParameterizedType(ParameterizedType ptype)
-			throws TypeException {
-		if (!(ptype.getRawType() instanceof Class<?>)
-				|| !Function.class.isAssignableFrom((Class<?>) ptype
-						.getRawType()))
-			throw new UnsupportedOperationException(
-					"FunctionType can be created only from pl.omtt.core.funproto.Function");
-		final Class<?> rawtype = (Class<?>) ptype.getRawType();
-		final Type[] params = ptype.getActualTypeArguments();
-
-		final FunctionType ftype = new FunctionType();
-		int i = 0;
-		if (rawtype.getSimpleName().startsWith("Data"))
-			ftype.setReturnType(new StringDataType());
-		else
-			ftype.setReturnType(CommonType.fromType(params[i++]));
-
-		for (; i < params.length; i++) {
-			ftype.putArgument(null, CommonType.fromType(params[i]), false);
-		}
-
-		return ftype;
 	}
 
 	@Override

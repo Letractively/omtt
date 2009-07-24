@@ -13,10 +13,10 @@ import pl.omtt.lang.model.types.*;
 import pl.omtt.lang.model.types.FunctionType.Argument;
 import pl.omtt.lang.util.TypeStringParser;
 
-public class LibraryBaseSymbolTable extends BaseSymbolTable {
+public class LibrarySymbolTable extends BaseSymbolTable {
 	Class<?> fModuleClass;
 
-	public LibraryBaseSymbolTable(String id, ClassLoader classLoader)
+	public LibrarySymbolTable(String id, ClassLoader classLoader)
 			throws TypeException, ModuleNotFoundException {
 		super(id, classLoader);
 		fModuleClass = getClassResolver().getLibrary(id);
@@ -48,7 +48,7 @@ public class LibraryBaseSymbolTable extends BaseSymbolTable {
 		if (void.class.equals(rettype) && argtypes.length == 1)
 			return new StringDataType();
 		else if (argtypes.length == 0)
-			return ScalarType.fromType(rettype);
+			return JavaTypesAdapter.fromType(rettype);
 
 		FunctionType ftype = new FunctionType();
 		final int starti;
@@ -56,7 +56,7 @@ public class LibraryBaseSymbolTable extends BaseSymbolTable {
 			ftype.setReturnType(new StringDataType());
 			starti = 1;
 		} else {
-			ftype.setReturnType(CommonType.fromType(rettype));
+			ftype.setReturnType(JavaTypesAdapter.fromType(rettype));
 			starti = 0;
 		}
 
@@ -71,7 +71,7 @@ public class LibraryBaseSymbolTable extends BaseSymbolTable {
 					name = ((Name) ann).value();
 			}
 
-			ftype.putArgument(name, CommonType.fromType(argtypes[i]), optional);
+			ftype.putArgument(name, JavaTypesAdapter.fromType(argtypes[i]), optional);
 		}
 
 		String typestr;
