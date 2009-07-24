@@ -99,6 +99,7 @@ public class OmttCompilationTask {
 		while (fState < level && fState < STATE_FINISH)
 			switch (fState) {
 			case STATE_START:
+System.err.println("parsing...");
 				// parsing
 				fState++;
 				for (URI source : fSources) {
@@ -109,6 +110,7 @@ public class OmttCompilationTask {
 				verifyState();
 				break;
 			case STATE_TREE:
+System.err.println("creating ST...");
 				// creating symbol table
 				fState++;
 				for (URI source : fSources) {
@@ -119,6 +121,7 @@ public class OmttCompilationTask {
 				verifyState();
 				break;
 			case STATE_SYMBOL_TABLE:
+System.err.println("generating code...");
 				// generating code
 				fState++;
 				for (URI source : fSources) {
@@ -129,7 +132,8 @@ public class OmttCompilationTask {
 				verifyState();
 				break;
 			case STATE_JAVA_CODE:
-				// compile java to byte code
+System.err.println("compiling java to bytecode...");
+				// compiling java to byte code
 				compileJava();
 				verifyState();
 			default:

@@ -10,6 +10,7 @@ import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.ErrorType;
 import pl.omtt.lang.model.types.IType;
+import pl.omtt.lang.model.types.JavaTypesAdapter;
 import pl.omtt.lang.model.types.NumericType;
 import pl.omtt.lang.model.types.ScalarType;
 import pl.omtt.lang.model.types.StringDataType;
@@ -83,7 +84,7 @@ public class PropertySelect extends CommonSelectorNode implements
 					"functional properties are not supported");
 
 		IType type;
-		type = ScalarType.fromType(fMethod.getGenericReturnType());
+		type = JavaTypesAdapter.fromType(fMethod.getGenericReturnType());
 
 		Class<?> returnClass = fMethod.getReturnType();
 		if (returnClass.isPrimitive())

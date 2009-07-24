@@ -7,7 +7,7 @@ import java.util.Stack;
 import pl.omtt.lang.model.ast.IExpression;
 
 public class CodeBuffer {
-	JavaTypesAdapter fTypeAdapter;
+	TypesJavaCodeConverter fTypeAdapter;
 
 	Map<IExpression, String> fExpressionVariable = new HashMap<IExpression, String>();
 	Map<IExpression, String> fExpressionCode = new HashMap<IExpression, String>();
@@ -20,7 +20,7 @@ public class CodeBuffer {
 	Map<String, Space> fSpaceMap = new HashMap<String, Space>();
 	Stack<Space> fActiveSpaceStack = new Stack<Space>();
 
-	public CodeBuffer(JavaTypesAdapter typeAdapter) {
+	public CodeBuffer(TypesJavaCodeConverter typeAdapter) {
 		fTypeAdapter = typeAdapter;
 	}
 

@@ -47,7 +47,7 @@ public class BaseSymbolTable extends SymbolTable {
 	
 	public void importLibrary(String id, String namespace) throws TypeException {
 		try {
-			fImportedLibraries.add(new LibraryBaseSymbolTable(id,
+			fImportedLibraries.add(new LibrarySymbolTable(id,
 					fClassResolver.getClassLoader()));
 		} catch (ModuleNotFoundException e) {
 			e.printStackTrace();

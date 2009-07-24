@@ -1,42 +1,8 @@
 package pl.omtt.lang.model.types;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Collection;
-
-import pl.omtt.core.functions.Function;
-
 public abstract class CommonType implements IType, Cloneable {
 	boolean fSequence = false;
 	boolean fNotNull = false;
-
-	public static IType fromType(Type type) throws TypeException {
-		if (Object.class.equals(type))
-			return new AnyType ();
-		if (type instanceof Class<?>)
-			return ScalarType.fromClass((Class<?>) type);
-
-		if (type instanceof ParameterizedType) {
-			ParameterizedType ptype = (ParameterizedType) type;
-
-			Type rawtype = ptype.getRawType();
-			if (!(rawtype instanceof Class<?>))
-				throw new TypeException("unhandled return type " + rawtype);
-
-			Class<?> rawclass = (Class<?>) rawtype;
-			if (Collection.class.isAssignableFrom(rawclass)) {
-				Type atype = ptype.getActualTypeArguments()[0];
-				IType itemtype = fromType(atype);
-				itemtype.setSequence();
-				return itemtype;
-			} else if (Function.class.isAssignableFrom(rawclass)) {
-				return FunctionType.fromParameterizedType(ptype);
-			} else {
-				return ScalarType.fromClass(rawclass);
-			}
-		}
-		return null;
-	}
 
 	public boolean isSequence() {
 		return fSequence;
