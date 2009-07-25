@@ -8,7 +8,7 @@ public class AbstractTreeWalker extends AbstractTreeVisitor implements IVisitor 
 	private int fIndex;
 
 	@Override
-	public void run(Tree root) {
+	protected void run(Tree root) {
 		apply(root);
 	}
 

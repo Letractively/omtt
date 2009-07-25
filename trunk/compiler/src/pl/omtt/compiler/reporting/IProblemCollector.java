@@ -15,4 +15,5 @@ public interface IProblemCollector extends IAntlrProblemCollector {
 	public void reportError(URI path, SemanticException e);
 
 	public boolean errors();
+	public int numberOfErrors();
 }

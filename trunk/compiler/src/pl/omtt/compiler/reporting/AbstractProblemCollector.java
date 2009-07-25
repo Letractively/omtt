@@ -11,9 +11,10 @@ import pl.omtt.lang.analyze.SemanticException;
 public abstract class AbstractProblemCollector implements IProblemCollector {
 
 	int fProblemLevel = NO_PROBLEMS;
+	int fNumberOfErrors = 0;
 
 	public void reportError(URI uri, String message) {
-		collect(Problem.fromMessage(Problem.ERROR, uri, message));
+		doCollect(Problem.fromMessage(Problem.ERROR, uri, message));
 	}
 
 	public void reportError(String path, Exception e) {
@@ -77,14 +78,25 @@ public abstract class AbstractProblemCollector implements IProblemCollector {
 	protected void report(Problem problem) {
 		if (fProblemLevel > problem.fType)
 			fProblemLevel = problem.fType;
+		doCollect(problem);
+	}
+
+	private void doCollect(Problem problem) {
+		fNumberOfErrors++;
 		collect(problem);
 	}
 
+	abstract protected void collect(Problem problem);
+
+	@Override
 	public boolean errors() {
 		return fProblemLevel <= Problem.ERROR;
 	}
-
-	abstract protected void collect(Problem problem);
+	
+	@Override
+	public int numberOfErrors () {
+		return fNumberOfErrors;
+	}
 
 	final static int NO_PROBLEMS = 0xffff;
 }

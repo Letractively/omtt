@@ -15,6 +15,7 @@ import pl.omtt.lang.model.ast.Program;
 public abstract class AbstractOmttParser extends Parser {
 
 	private IAntlrProblemCollector fProblems;
+	private boolean fErrorsOccured;
 
 	public AbstractOmttParser(TokenStream input) {
 		super(input);
@@ -80,6 +81,7 @@ public abstract class AbstractOmttParser extends Parser {
 
 	@Override
 	public void reportError(RecognitionException e) {
+		fErrorsOccured = true;
 		if (fProblems != null)
 			fProblems.reportError(input.getSourceName(), e, getErrorMessage(e,
 					getTokenNames()));
@@ -91,4 +93,8 @@ public abstract class AbstractOmttParser extends Parser {
 			throws RecognitionException;
 
 	abstract public void setTreeAdaptor(TreeAdaptor adaptor);
+
+	public boolean errorsOccured () {
+		return fErrorsOccured;
+	}
 }
