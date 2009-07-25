@@ -192,6 +192,7 @@ concatence_expression
 control_expression
   : if_expression
   | map_expression
+  | apply_expression
   | context_expression
   ;
 
@@ -227,6 +228,12 @@ map_tag
     expr=tag_content
     TAG_END
     -> ^(MAP<Transformation> $iter $expr)
+  ;
+
+apply_expression
+  : APPLY atom_expression arguments=function_arguments COLON
+    expr=control_expression
+    -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> $expr) $arguments?)
   ;
 
 // START: transformation expressions
