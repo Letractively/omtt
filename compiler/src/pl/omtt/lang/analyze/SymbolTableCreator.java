@@ -1,4 +1,4 @@
-package pl.omtt.lang.symboltable;
+package pl.omtt.lang.analyze;
 
 import java.net.URI;
 import java.util.Stack;
@@ -13,13 +13,16 @@ import pl.omtt.lang.model.types.TypeException;
 public class SymbolTableCreator extends AbstractTreeWalker {
 	Stack<SymbolTable> fSymbolTableStack = new Stack<SymbolTable>();
 
-	IProblemCollector fProblemCollector;
 	URI fURI;
+	IProblemCollector fProblemCollector;
 	ClassLoader fClassLoader;
+	ILibrarySymbolTableSupplier fLibrarySTSupplier;
 
-	public SymbolTableCreator(ClassLoader loader, URI uri,
+	public SymbolTableCreator(ClassLoader loader,
+			ILibrarySymbolTableSupplier librarySymbolTableSupplier, URI uri,
 			IProblemCollector problemCollector) {
 		fClassLoader = loader;
+		fLibrarySTSupplier = librarySymbolTableSupplier;
 		fURI = uri;
 		fProblemCollector = problemCollector;
 	}
@@ -43,14 +46,8 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 
 			ModuleDeclaration md = program.getModuleDeclaration();
 			pushST(new BaseSymbolTable(md.getPackageName() + "."
-					+ md.getModuleName(), fClassLoader));
-
-			try {
-				super.run(root);
-			} catch (Error e) {
-				e.printStackTrace();
-				throw e;
-			}
+					+ md.getModuleName(), fClassLoader, fLibrarySTSupplier));
+			super.run(root);
 		}
 	}
 

@@ -11,6 +11,9 @@ import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.core.Constants;
 import pl.omtt.core.OmttLoader;
+import pl.omtt.lang.analyze.BaseSymbolTable;
+import pl.omtt.lang.analyze.Symbol;
+import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.AbstractTreeWalker;
 import pl.omtt.lang.model.ast.*;
 import pl.omtt.lang.model.types.FunctionType;
@@ -19,9 +22,6 @@ import pl.omtt.lang.model.types.NullType;
 import pl.omtt.lang.model.types.NumericType;
 import pl.omtt.lang.model.types.ScalarType;
 import pl.omtt.lang.model.types.FunctionType.Argument;
-import pl.omtt.lang.symboltable.BaseSymbolTable;
-import pl.omtt.lang.symboltable.Symbol;
-import pl.omtt.lang.symboltable.SymbolTable;
 
 public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	final TypesJavaCodeConverter fTypeAdapter = new TypesJavaCodeConverter();

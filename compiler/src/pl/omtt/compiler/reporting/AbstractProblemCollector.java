@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.RecognitionException;
 
-import pl.omtt.lang.model.types.TypeException;
+import pl.omtt.lang.analyze.SemanticException;
 
 public abstract class AbstractProblemCollector implements IProblemCollector {
 
@@ -15,7 +15,7 @@ public abstract class AbstractProblemCollector implements IProblemCollector {
 	public void reportError(URI uri, String message) {
 		collect(Problem.fromMessage(Problem.ERROR, uri, message));
 	}
-	
+
 	public void reportError(String path, Exception e) {
 		URI uri = null;
 		try {
@@ -31,7 +31,7 @@ public abstract class AbstractProblemCollector implements IProblemCollector {
 		report(Problem.fromException(Problem.ERROR, uri, e));
 	}
 
-	public void reportError(String path, TypeException e) {
+	public void reportError(String path, SemanticException e) {
 		URI uri = null;
 		try {
 			uri = new URI(path);
@@ -42,8 +42,8 @@ public abstract class AbstractProblemCollector implements IProblemCollector {
 		reportError(uri, e);
 	}
 
-	public void reportError(URI uri, TypeException e) {
-		report(Problem.fromTypeException(Problem.ERROR, uri, e));
+	public void reportError(URI uri, SemanticException e) {
+		report(Problem.fromSemanticException(Problem.ERROR, uri, e));
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public abstract class AbstractProblemCollector implements IProblemCollector {
 		URI uri = null;
 		try {
 			// TODO: do it properly
-			uri = new URI (path.replaceAll(" ", "%20"));
+			uri = new URI(path.replaceAll(" ", "%20"));
 		} catch (URISyntaxException urie) {
 			urie.printStackTrace();
 			return;

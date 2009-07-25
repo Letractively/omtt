@@ -1,4 +1,4 @@
-package pl.omtt.lang.symboltable;
+package pl.omtt.lang.analyze;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -16,9 +16,10 @@ import pl.omtt.lang.util.TypeStringParser;
 public class LibrarySymbolTable extends BaseSymbolTable {
 	Class<?> fModuleClass;
 
-	public LibrarySymbolTable(String id, ClassLoader classLoader)
-			throws TypeException, ModuleNotFoundException {
-		super(id, classLoader);
+	public LibrarySymbolTable(String id, ClassLoader classLoader,
+			ILibrarySymbolTableSupplier librarySTSupplier)
+			throws ModuleNotFoundException {
+		super(id, classLoader, librarySTSupplier);
 		fModuleClass = getClassResolver().getLibrary(id);
 		putModuleSymbols();
 	}

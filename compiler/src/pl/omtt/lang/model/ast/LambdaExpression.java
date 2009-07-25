@@ -4,14 +4,14 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;
 
+import pl.omtt.lang.analyze.ISymbolTableOwner;
+import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.TypeException;
 import pl.omtt.lang.model.types.TypeUnifier;
-import pl.omtt.lang.symboltable.ISymbolTableOwner;
-import pl.omtt.lang.symboltable.SymbolTable;
 
 public class LambdaExpression extends CommonNode implements IExpression,
 		ISymbolTableOwner, IVisitable {
