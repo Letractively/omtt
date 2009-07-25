@@ -177,14 +177,12 @@ AS   : 'as';
 IS   : 'is';
 
 MAP    : 'map';
-TO     : 'to';
-
-NULL   : 'null';
-
+APPLY  : 'apply';
 LAMBDA : 'lambda';
 
-TRUE  : 'true';
-FALSE : 'false';
+NULL   : 'null';
+TRUE   : 'true';
+FALSE  : 'false';
 
 fragment INNER_TAG_KEYWORD : 'in' | 'else' | 'case' | 'default';
 fragment SINGLE_TAG_KEYWORD : 'module' | 'use' | 'import';

@@ -77,7 +77,7 @@ fragment definition_signature
   ;
 
 fragment definition_argument
-  : TILDE? id=VAR_ID OP_MULTIPLY? (OP_ASSIGN type)?
+  : TILDE? id=VAR_ID OP_MULTIPLY? (DOT type)?
     -> ^(ARGUMENT<TemplateArgument> IDENT<Ident>[$id] type? TILDE? OP_MULTIPLY?)
   ;
 // END: definitions
@@ -232,14 +232,22 @@ map_tag
 // START: transformation expressions
 context_expression
   : (fe=boolean_expression -> $fe)
-    ( OP_CONTEXT atom_expression arguments=function_arguments
+    ( op_apply atom_expression arguments=function_arguments
       -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> $context_expression) $arguments?)
-    | OP_CONTEXT lambda_expression_no_context
+    | op_apply lambda_expression_no_context
       -> ^(CALL<Call>[true] lambda_expression_no_context ^(ARGUMENT<FunctionArgument> $context_expression))
-    | OP_EXPRESSION_CONTEXT ce=functional_expression
-    	-> ^(OP_EXPRESSION_CONTEXT<Transformation> $context_expression $ce)
+    | op_map ce=functional_expression
+    	-> ^(op_map $context_expression $ce)
     )*
   ;
+fragment op_apply
+	: OP_CONTEXT
+	| APPLY
+	;
+fragment op_map
+	: OP_EXPRESSION_CONTEXT<Transformation>^
+	| MAP<Transformation>^
+	;
 // END: transformation expressions
 
 // BEGIN: boolean expressions
@@ -360,8 +368,8 @@ fragment sequence_selectors
 	| alias
 	;
 fragment type_selector
-  : LEFT_SQUARE_PAREN type RIGHT_SQUARE_PAREN
-  	-> ^(TYPE_SELECT type)
+  : DOT single_type
+  	-> ^(TYPE_SELECT single_type)
   ;
 fragment sequence_selector
   : LEFT_SQUARE_PAREN boolean_expression RIGHT_SQUARE_PAREN
