@@ -25,7 +25,7 @@ import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import pl.omtt.eclipse.util.stream.DocumentRawStream;
 import pl.omtt.lang.analyze.SymbolTableCreator;
-import pl.omtt.lang.code.CodeGeneratorVisitor;
+import pl.omtt.lang.code.CodeGenerator;
 import pl.omtt.lang.grammar.OmttLexer;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.PrintTreeVisitor;

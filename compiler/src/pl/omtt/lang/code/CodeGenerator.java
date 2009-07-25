@@ -23,7 +23,7 @@ import pl.omtt.lang.model.types.NumericType;
 import pl.omtt.lang.model.types.ScalarType;
 import pl.omtt.lang.model.types.FunctionType.Argument;
 
-public class CodeGeneratorVisitor extends AbstractTreeWalker {
+public class CodeGenerator extends AbstractTreeWalker {
 	final TypesJavaCodeConverter fTypeAdapter = new TypesJavaCodeConverter();
 	final CodeBuffer fBuffer = new CodeBuffer(fTypeAdapter);
 
@@ -37,8 +37,19 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 	final Map<Symbol, String> fSymbolLocalNames = new HashMap<Symbol, String>();
 	final Set<String> fVariableIsMethod = new HashSet<String>();
 
-	public CodeGeneratorVisitor(URI omttSourceURI) {
+	public CodeGenerator(URI omttSourceURI) {
 		fOmttSourceURI = omttSourceURI;
+	}
+
+	public void generate(Program root) throws CodeGenerationException {
+		try {
+			run(root);
+		} catch (Error e) {
+			if (e.getCause() instanceof CodeGenerationException)
+				throw (CodeGenerationException) e.getCause();
+			else
+				throw e;
+		}
 	}
 
 	protected IType single(IType type) {
@@ -94,11 +105,13 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 				return var + ".isEmpty()";
 			}
 			// TODO: extract single from sequence
-			throw new CodeGenerationError("[1] unimplemented cast");
+			throw new Error(new CodeGenerationException(
+					"[1] unimplemented cast"));
 		} else if (targetType.isSequence() && sourceType.isSequence()) {
 			if (targetType.isFunction()) {
-				throw new CodeGenerationError("[2] unimplemented cast: "
-						+ sourceType + " ~~> " + targetType);
+				throw new Error(new CodeGenerationException(
+						"[2] unimplemented cast: " + sourceType + " ~~> "
+								+ targetType));
 			}
 			if (sourceType.essentiallyEquals(targetType))
 				return var;
@@ -646,8 +659,7 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 		FunctionArgument farg = call.getArgument(i);
 		if (farg == null)
 			return "null";
-		final IType neededType = call.getCallingType().getArguments().get(i)
-				.type;
+		final IType neededType = call.getCallingType().getArguments().get(i).type;
 		return cast(farg, neededType);
 	}
 
@@ -824,7 +836,8 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 				putNullCheck(buf, var, node.getExpressionType());
 				buf.append("Boolean.FALSE.equals(").append(var).append(")");
 			} else
-				throw new CodeGenerationError();
+				throw new Error(new CodeGenerationException(
+						"unknown boolean unary operator"));
 			break;
 
 		case BooleanExpression.TYPE_BINARY_OP:
@@ -918,7 +931,8 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 				return;
 
 			default:
-				throw new CodeGenerationError();
+				throw new Error(new CodeGenerationException(
+						"unknown boolean binary operator"));
 			}
 			// line cannot be reached
 
@@ -983,7 +997,8 @@ public class CodeGeneratorVisitor extends AbstractTreeWalker {
 			break;
 
 		default:
-			throw new CodeGenerationError();
+			throw new Error(
+					new CodeGenerationException("unknown operator type"));
 		}
 
 		fBuffer.putShortExpression(bexpr, buf.toString());

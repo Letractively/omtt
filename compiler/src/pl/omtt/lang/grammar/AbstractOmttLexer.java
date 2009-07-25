@@ -17,6 +17,7 @@ public abstract class AbstractOmttLexer extends Lexer {
 
 	private IAntlrProblemCollector fProblems;
 	private IEnrichedStream fStream;
+	private boolean fErrorsOccured = false;
 
 	int DEBUG = 0;
 
@@ -50,6 +51,7 @@ public abstract class AbstractOmttLexer extends Lexer {
 
 	@Override
 	public void reportError(RecognitionException e) {
+		fErrorsOccured = true;
 		if (fProblems != null)
 			fProblems.reportError(input.getSourceName(), e, getErrorMessage(e,
 					getTokenNames()));
@@ -217,5 +219,9 @@ public abstract class AbstractOmttLexer extends Lexer {
 					: bracket);
 		}
 		popBracket();
+	}
+
+	public boolean errorsOccured () {
+		return fErrorsOccured;
 	}
 }

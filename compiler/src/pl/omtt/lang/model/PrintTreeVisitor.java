@@ -6,6 +6,10 @@ import pl.omtt.lang.model.ast.Program;
 
 public class PrintTreeVisitor extends AbstractTreeVisitor {
 
+	public void run (Program program) {
+		super.run(program);
+	}
+	
 	@Override
 	public void visit(Program node) {
 		printLines();

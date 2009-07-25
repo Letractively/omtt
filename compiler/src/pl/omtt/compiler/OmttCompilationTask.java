@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -25,7 +26,8 @@ import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.compiler.reporting.PrintProblemCollector;
 import pl.omtt.lang.analyze.SemanticAnalyzer;
 import pl.omtt.lang.analyze.SemanticException;
-import pl.omtt.lang.code.CodeGeneratorVisitor;
+import pl.omtt.lang.code.CodeGenerationException;
+import pl.omtt.lang.code.CodeGenerator;
 import pl.omtt.lang.code.OmttJavaSource;
 import pl.omtt.lang.grammar.OmttLexer;
 import pl.omtt.lang.grammar.OmttParser;
@@ -97,23 +99,21 @@ public class OmttCompilationTask {
 		if (fProblemCollector == null)
 			fProblemCollector = new PrintProblemCollector();
 
-		final CompilationQueue queueCalculator = new CompilationQueue();
+		final CompilationQueue queue = new CompilationQueue();
 		for (URI source : fSources) {
 			try {
-				parse(source);
-				queueCalculator.add(source, fTrees.get(source));
+				if (parse(source))
+					queue.add(source, fTrees.get(source));
 			} catch (SemanticException se) {
 				fProblemCollector.reportError(source, se);
 				fState = STATE_ERROR;
 			}
 		}
-		if (verifyState() > STATE_FINISH)
-			return false;
-		fState++;
+		if (!(verifyState() > STATE_FINISH))
+			fState++;
 
-		List<URI> queue;
 		try {
-			queue = queueCalculator.calculateQueue();
+			queue.calculate();
 		} catch (UseCycleException e) {
 			fState = STATE_FATAL;
 			fProblemCollector.reportError(e.fCauseURI, e);
@@ -122,17 +122,17 @@ public class OmttCompilationTask {
 
 		SymbolTableSupplier symbolTableSupplier = new SymbolTableSupplier(
 				fClassLoader);
+		List<URI> toCompile = new ArrayList<URI>();
 		for (URI source : queue) {
 			if (level > STATE_TREE)
-				analyze(source, symbolTableSupplier);
-			if (verifyState() > STATE_FINISH)
-				return false;
+				if (!analyze(source, symbolTableSupplier))
+					continue;
 			if (level > STATE_ANALYZE)
-				generateCode(source);
-			if (verifyState() > STATE_FINISH)
-				return false;
+				if (!generateCode(source))
+					continue;
+			toCompile.add(source);
 		}
-
+System.err.println("compiling: " + fJavaSources.keySet());
 		if (level > STATE_JAVA_CODE) {
 			compileJava();
 			if (verifyState() > STATE_FINISH)
@@ -149,7 +149,7 @@ public class OmttCompilationTask {
 		return fState;
 	}
 
-	protected void parse(URI uri) {
+	protected boolean parse(URI uri) {
 		// lexing phase
 		CharStream input;
 		try {
@@ -157,7 +157,7 @@ public class OmttCompilationTask {
 		} catch (FileNotFoundException e) {
 			fProblemCollector.reportError(uri, e);
 			fState = STATE_FATAL;
-			return;
+			return false;
 		}
 		OmttLexer lexer = new OmttLexer(input);
 		lexer.connectProblemContainer(fProblemCollector);
@@ -172,11 +172,12 @@ public class OmttCompilationTask {
 			fTrees.put(uri, tree);
 		} catch (RecognitionException e) {
 			fProblemCollector.reportError(uri, e);
-			return;
+			return false;
 		}
+		return !(lexer.errorsOccured() || parser.errorsOccured());
 	}
 
-	protected void analyze(URI source, SymbolTableSupplier symbolTableSupplier) {
+	protected boolean analyze(URI source, SymbolTableSupplier symbolTableSupplier) {
 		SemanticAnalyzer analyzer = new SemanticAnalyzer(fClassLoader,
 				fProblemCollector);
 		try {
@@ -187,19 +188,26 @@ public class OmttCompilationTask {
 		} catch (SemanticException e) {
 			fProblemCollector.reportError(source, e);
 			fState = STATE_FATAL;
-			return;
+			return false;
 		}
+		return true;
 	}
 
-	protected void generateCode(URI source) {
-		CodeGeneratorVisitor codeGenerator = new CodeGeneratorVisitor(source);
-		codeGenerator.run(fTrees.get(source));
+	protected boolean generateCode(URI source) {
+		CodeGenerator codeGenerator = new CodeGenerator(source);
+		try {
+			codeGenerator.generate(fTrees.get(source));
+		} catch (CodeGenerationException e) {
+			fProblemCollector.reportError(source, e);
+			return false;
+		}
 		fJavaSources.put(source, codeGenerator.getJavaSource());
+		return true;
 	}
 
-	protected void compileJava() {
+	protected boolean compileJava() {
 		if (fJavaSources.isEmpty())
-			return;
+			return true;
 
 		JavaCompiler compiler = fCompiler.getJavaCompiler();
 		DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<JavaFileObject>();
@@ -212,14 +220,19 @@ public class OmttCompilationTask {
 				diagnosticsCollector, options, null, fJavaSources.values());
 		task.call();
 
+		boolean success = true;
 		for (Diagnostic<? extends JavaFileObject> d : diagnosticsCollector
-				.getDiagnostics())
+				.getDiagnostics()) {
 			if (d.getSource() instanceof OmttJavaSource) {
 				URI omttSourceURI = ((OmttJavaSource) d.getSource())
 						.getOtSourceURI();
 				fProblemCollector.reportError(omttSourceURI, d
 						.getMessage(Locale.getDefault()));
 			}
+			if (d.getKind() == Diagnostic.Kind.ERROR)
+				success = false;
+		}
+		return success;
 	}
 
 	public final int STATE_START = 0;

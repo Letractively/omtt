@@ -9,7 +9,7 @@ import pl.omtt.lang.model.ast.*;
 public class AbstractTreeVisitor implements IVisitor {
 	protected Stack<Tree> fStack = new Stack<Tree>();
 
-	public void run(Tree root) {
+	protected void run(Tree root) {
 		fStack.add(root);
 
 		while (!fStack.empty()) {

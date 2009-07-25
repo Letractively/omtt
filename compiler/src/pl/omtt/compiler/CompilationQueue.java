@@ -19,13 +19,15 @@ import pl.omtt.lang.model.ast.ModuleDeclaration;
 import pl.omtt.lang.model.ast.Program;
 import pl.omtt.lang.model.ast.UseDeclaration;
 
-public class CompilationQueue {
+public class CompilationQueue implements Iterable<URI> {
+	List<URI> fQueue = new ArrayList<URI>();
 	Map<String, URI> fModules = new HashMap<String, URI>();
 	Map<String, Set<String>> fModuleReferences = new HashMap<String, Set<String>>();
 
 	void add(URI uri, Program program) throws SemanticException {
+		System.err.println("adding " + uri);
 		verifyFileName(uri, program);
-		
+
 		final ModuleDeclaration md = program.getModuleDeclaration();
 
 		String mid = md.getModuleName();
@@ -63,8 +65,7 @@ public class CompilationQueue {
 					+ " should be in file " + expected);
 	}
 
-	List<URI> calculateQueue() throws UseCycleException {
-		List<URI> queue = new ArrayList<URI>();
+	void calculate() throws UseCycleException {
 		Map<String, Node> graph = buildGraph();
 
 		Stack<Node> freeNodes = new Stack<Node>();
@@ -80,7 +81,7 @@ public class CompilationQueue {
 
 		while (!freeNodes.empty()) {
 			Node node = freeNodes.pop();
-			queue.add(fModules.get(node.id));
+			fQueue.add(fModules.get(node.id));
 			for (String bref : node.backReferences)
 				if (graph.containsKey(bref)) {
 					Node brefnode = getNode(graph, bref);
@@ -94,9 +95,7 @@ public class CompilationQueue {
 
 		if (!graph.isEmpty())
 			throwCycleException(graph);
-
-		System.err.println("queue: " + queue);
-		return queue;
+		System.err.println("queue: " + this);
 	}
 
 	private Map<String, Node> buildGraph() {
@@ -166,5 +165,44 @@ public class CompilationQueue {
 		String id;
 		int referenceCount;
 		Set<String> backReferences;
+	}
+
+	@Override
+	public CompilationQueueIterator iterator() {
+		return new CompilationQueueIterator();
+	}
+
+	/* (non-Javadoc)
+	 * This iterator does nothing more than standard list iterator.
+	 * However, it will... (for example mark errors in queue).
+	 */
+	public class CompilationQueueIterator implements Iterator<URI> {
+		Iterator<URI> fQueueIterator;
+
+		public CompilationQueueIterator() {
+			fQueueIterator = fQueue.iterator();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return fQueueIterator.hasNext();
+		}
+
+		@Override
+		public URI next() {
+			URI next = fQueueIterator.next();
+
+			return next;
+		}
+
+		@Override
+		public void remove() {
+			fQueueIterator.remove();
+		}
+	}
+	
+	@Override
+	public String toString () {
+		return fQueue.toString();
 	}
 }
