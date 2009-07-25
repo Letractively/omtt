@@ -1,4 +1,4 @@
-package pl.omtt.lang.symboltable;
+package pl.omtt.lang.analyze;
 
 import java.util.HashMap;
 import java.util.Map;

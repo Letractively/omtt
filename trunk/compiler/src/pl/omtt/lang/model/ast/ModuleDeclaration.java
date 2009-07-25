@@ -10,6 +10,13 @@ public class ModuleDeclaration extends CommonNode implements IVisitable {
 		super(token);
 	}
 
+	public String getModuleId () {
+		String pkgName = getPackageName();
+		if (pkgName == null)
+			pkgName = "local";
+		return pkgName + "." + getModuleName();
+	}
+	
 	public String getPackageName () {
 		StringBuffer buf = new StringBuffer();
 		if (getChildCount() < 2)

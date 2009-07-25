@@ -15,7 +15,7 @@ public abstract class CommonType implements IType, Cloneable {
 
 	public IType unsetSequence() {
 		fSequence = false;
-		return null;
+		return this;
 	}
 
 	public boolean isNotNull() {

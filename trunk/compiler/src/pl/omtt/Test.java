@@ -27,10 +27,13 @@ public class Test {
 	final static String FILE = DIR + "/templates/sample.omtt";
 
 	public static void main(String[] args) {
-		URI source, target, corejar;
+		URI target, corejar;
 		List<URI> classpath = new ArrayList<URI>();
+		List<URI> sources = new ArrayList<URI>();
 		try {
-			source = new URI("file:" + FILE);
+			sources.add(new URI("file:" + DIR + "/templates/sample.omtt"));
+			sources.add(new URI("file:" + DIR + "/templates/sample2.omtt"));
+			sources.add(new URI("file:" + DIR + "/templates/primes.omtt"));
 			target = new URI("file:" + DIR + "/bin/");
 			corejar = new URI("file:lib/omtt-core.jar");
 			classpath.add(corejar);
@@ -41,13 +44,13 @@ public class Test {
 		}
 
 		if (testComponent == ParseComponent.LEXER) {
-			printTokens(source);
+			printTokens(sources.get(0));
 			return;
 		}
 
 		OmttCompiler compiler = new OmttCompiler();
 		compiler.setEnvorionmentDirectory(DIR + "/bin/");
-		OmttCompilationTask task = compiler.getTask(source, target, classpath);
+		OmttCompilationTask task = compiler.getTask(sources, target, classpath);
 
 		try {
 			if (testComponent == ParseComponent.PARSER)
@@ -60,11 +63,11 @@ public class Test {
 		}
 
 		System.out.println("---");
-		new PrintTreeVisitor().run(task.getTree(source));
+		new PrintTreeVisitor().run(task.getTree(sources.get(0)));
 
 		if (testComponent == ParseComponent.CODE) {
 			System.out.println("---");
-			System.out.println(task.getJavaCode(source).getCode());
+			System.out.println(task.getJavaCode(sources.get(0)).getCode());
 		}
 	}
 

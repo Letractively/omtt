@@ -3,14 +3,16 @@ package pl.omtt.lang.model.ast;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 
+import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.TypeException;
-import pl.omtt.lang.symboltable.SymbolTable;
 
 public class FunctionArgument extends CommonNode implements IExpression,
 		IVisitable {
+	IType fExpressionType;
+
 	public FunctionArgument(int tokenId) {
 		super(new CommonToken(tokenId, "argument"));
 	}
@@ -32,11 +34,12 @@ public class FunctionArgument extends CommonNode implements IExpression,
 
 	@Override
 	public IType getExpressionType() {
-		return getTargetNode().getExpressionType().dup();
+		return fExpressionType;
 	}
 
 	@Override
 	public void setExpressionType(SymbolTable symbolTable) throws TypeException {
+		fExpressionType = getTargetNode().getExpressionType().dup();
 	}
 
 	@Override

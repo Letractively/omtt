@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.antlr.runtime.CommonToken;
 
+import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.FunctionType;
@@ -12,7 +13,6 @@ import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.NullType;
 import pl.omtt.lang.model.types.TypeException;
 import pl.omtt.lang.model.types.TypeUnifier;
-import pl.omtt.lang.symboltable.SymbolTable;
 
 public class Call extends CommonNode implements IFoldExpression, IVisitable {
 	IType fType;

@@ -2,7 +2,7 @@ package pl.omtt.compiler.reporting;
 
 import java.net.URI;
 
-import pl.omtt.lang.model.types.TypeException;
+import pl.omtt.lang.analyze.SemanticException;
 
 public interface IProblemCollector extends IAntlrProblemCollector {
 
@@ -11,8 +11,8 @@ public interface IProblemCollector extends IAntlrProblemCollector {
 	public void reportError(String path, Exception e);
 	public void reportError(URI path, Exception e);
 
-	public void reportError(String path, TypeException e);
-	public void reportError(URI path, TypeException e);
+	public void reportError(String path, SemanticException e);
+	public void reportError(URI path, SemanticException e);
 
 	public boolean errors();
 }

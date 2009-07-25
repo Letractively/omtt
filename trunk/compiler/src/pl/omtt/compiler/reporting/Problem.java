@@ -5,8 +5,8 @@ import java.net.URI;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.RecognitionException;
 
+import pl.omtt.lang.analyze.SemanticException;
 import pl.omtt.lang.model.ast.CommonNode;
-import pl.omtt.lang.model.types.TypeException;
 
 public class Problem implements Comparable<Problem> {
 	public Problem(int type, URI uri, String message, int offset, int length,
@@ -105,7 +105,7 @@ public class Problem implements Comparable<Problem> {
 		return new Problem(type, uri, message, 0, 0, 0);
 	}
 
-	public static Problem fromTypeException(int type, URI uri, TypeException e) {
+	public static Problem fromSemanticException(int type, URI uri, SemanticException e) {
 		Object o = e.getCauseObject();
 		if (o instanceof CommonToken)
 			return fromCommonToken(type, uri, e.getMessage(), (CommonToken) o);

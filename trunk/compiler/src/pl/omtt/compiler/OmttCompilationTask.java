@@ -23,12 +23,13 @@ import org.antlr.runtime.RecognitionException;
 
 import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.compiler.reporting.PrintProblemCollector;
+import pl.omtt.lang.analyze.SemanticAnalyzer;
+import pl.omtt.lang.analyze.SemanticException;
 import pl.omtt.lang.code.CodeGeneratorVisitor;
 import pl.omtt.lang.code.OmttJavaSource;
 import pl.omtt.lang.grammar.OmttLexer;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.ast.Program;
-import pl.omtt.lang.symboltable.SymbolTableCreator;
 import pl.omtt.util.stream.FileEnrichedStream;
 
 public class OmttCompilationTask {
@@ -49,7 +50,7 @@ public class OmttCompilationTask {
 		fCompiler = compiler;
 		fSources = sources;
 		fTargetPath = targetPath;
-		
+
 		fClassPath = classPath;
 		fClassPath.add(fTargetPath);
 
@@ -77,7 +78,7 @@ public class OmttCompilationTask {
 	}
 
 	public void buildTree() {
-		compile(STATE_SYMBOL_TABLE);
+		compile(STATE_ANALYZE);
 	}
 
 	public boolean errors() {
@@ -96,56 +97,56 @@ public class OmttCompilationTask {
 		if (fProblemCollector == null)
 			fProblemCollector = new PrintProblemCollector();
 
-		while (fState < level && fState < STATE_FINISH)
-			switch (fState) {
-			case STATE_START:
-System.err.println("parsing...");
-				// parsing
-				fState++;
-				for (URI source : fSources) {
-					parse(source);
-					if (fState == STATE_FATAL)
-						return false;
-				}
-				verifyState();
-				break;
-			case STATE_TREE:
-System.err.println("creating ST...");
-				// creating symbol table
-				fState++;
-				for (URI source : fSources) {
-					buildSymbolTable(source);
-					if (fState == STATE_FATAL)
-						return false;
-				}
-				verifyState();
-				break;
-			case STATE_SYMBOL_TABLE:
-System.err.println("generating code...");
-				// generating code
-				fState++;
-				for (URI source : fSources) {
-					generateCode(source);
-					if (fState == STATE_FATAL)
-						return false;
-				}
-				verifyState();
-				break;
-			case STATE_JAVA_CODE:
-System.err.println("compiling java to bytecode...");
-				// compiling java to byte code
-				compileJava();
-				verifyState();
-			default:
-				fState++;
+		final CompilationQueue queueCalculator = new CompilationQueue();
+		for (URI source : fSources) {
+			try {
+				parse(source);
+				queueCalculator.add(source, fTrees.get(source));
+			} catch (SemanticException se) {
+				fProblemCollector.reportError(source, se);
+				fState = STATE_ERROR;
 			}
+		}
+		if (verifyState() > STATE_FINISH)
+			return false;
+		fState++;
 
+		List<URI> queue;
+		try {
+			queue = queueCalculator.calculateQueue();
+		} catch (UseCycleException e) {
+			fState = STATE_FATAL;
+			fProblemCollector.reportError(e.fCauseURI, e);
+			return false;
+		}
+
+		SymbolTableSupplier symbolTableSupplier = new SymbolTableSupplier(
+				fClassLoader);
+		for (URI source : queue) {
+			if (level > STATE_TREE)
+				analyze(source, symbolTableSupplier);
+			if (verifyState() > STATE_FINISH)
+				return false;
+			if (level > STATE_ANALYZE)
+				generateCode(source);
+			if (verifyState() > STATE_FINISH)
+				return false;
+		}
+
+		if (level > STATE_JAVA_CODE) {
+			compileJava();
+			if (verifyState() > STATE_FINISH)
+				return false;
+		}
+
+		fState = level;
 		return true;
 	}
 
-	private void verifyState() {
+	private int verifyState() {
 		if (fState <= STATE_FINISH && fProblemCollector.errors())
 			fState = STATE_ERROR;
+		return fState;
 	}
 
 	protected void parse(URI uri) {
@@ -175,10 +176,19 @@ System.err.println("compiling java to bytecode...");
 		}
 	}
 
-	protected void buildSymbolTable(URI source) {
-		SymbolTableCreator stCreator = new SymbolTableCreator(fClassLoader,
-				source, fProblemCollector);
-		stCreator.run(fTrees.get(source));
+	protected void analyze(URI source, SymbolTableSupplier symbolTableSupplier) {
+		SemanticAnalyzer analyzer = new SemanticAnalyzer(fClassLoader,
+				fProblemCollector);
+		try {
+			Program program = fTrees.get(source);
+			analyzer.run(source, program, symbolTableSupplier);
+			symbolTableSupplier.put(program.getModuleDeclaration()
+					.getModuleId(), program.getSymbolTable());
+		} catch (SemanticException e) {
+			fProblemCollector.reportError(source, e);
+			fState = STATE_FATAL;
+			return;
+		}
 	}
 
 	protected void generateCode(URI source) {
@@ -207,14 +217,14 @@ System.err.println("compiling java to bytecode...");
 			if (d.getSource() instanceof OmttJavaSource) {
 				URI omttSourceURI = ((OmttJavaSource) d.getSource())
 						.getOtSourceURI();
-				fProblemCollector.reportError(omttSourceURI, d.getMessage(Locale
-						.getDefault()));
+				fProblemCollector.reportError(omttSourceURI, d
+						.getMessage(Locale.getDefault()));
 			}
 	}
 
 	public final int STATE_START = 0;
 	public final int STATE_TREE = 1;
-	public final int STATE_SYMBOL_TABLE = 2;
+	public final int STATE_ANALYZE = 2;
 	public final int STATE_JAVA_CODE = 3;
 	public final int STATE_FINISH = 4;
 
