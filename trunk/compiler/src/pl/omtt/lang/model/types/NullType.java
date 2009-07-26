@@ -56,6 +56,11 @@ public class NullType extends CommonType implements IType {
 	}
 
 	@Override
+	public boolean essentiallyEquals (IType t) {
+		return t.getEffective() instanceof NullType;
+	}
+	
+	@Override
 	String singleToEssentialString() {
 		return "~";
 	}

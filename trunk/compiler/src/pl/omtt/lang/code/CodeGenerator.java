@@ -280,13 +280,20 @@ public class CodeGenerator extends AbstractTreeWalker {
 			fPackageName = Constants.OMTT_TEMPLATE_PACKAGE + ".local";
 		fBuffer.putl("package %s;\n", fPackageName);
 
+		fBuffer.activate("methods");
+		fBuffer.incIndentitation();
+		applyChildren(TemplateDefinition.class);
+		fBuffer.subIndentitation();
+		fBuffer.deactivate();
+
 		fBuffer.putl("import java.util.*;\n");
 		fBuffer.putl("import pl.omtt.core.annotations.OmttModule;");
 		fBuffer.putl("import pl.omtt.core.stdlib.*;");
 		fBuffer.putl("import pl.omtt.core.functions.*;");
-		apply(program.getImportsNode());
-		fBuffer.putnl();
+		for (Class<?> clazz : fTypeAdapter.getUsedClasses())
+			fBuffer.putl("import %s;", clazz.getName());
 
+		fBuffer.putnl();
 		if (md != null)
 			fModuleName = md.getModuleName();
 		fModuleName = fModuleName.substring(0, 1).toUpperCase()
@@ -295,8 +302,6 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("@OmttModule");
 		fBuffer.putl("public class %s {", fModuleName);
 
-		fBuffer.incIndentitation();
-		applyChildren(TemplateDefinition.class);
 		fBuffer.putSpace("methods");
 		fBuffer.putSpace("interfaces");
 		fBuffer.chop(1);
@@ -582,7 +587,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 		final String argsep = argbuf.length() == 0 ? "" : ", ";
 
 		String callstr = null;
-		if (callingNode instanceof Ident) {
+		if (callingNode instanceof Ident
+				&& ((Ident) callingNode).getSource() != Ident.SOURCE_CONTEXT_OBJECT) {
 			callstr = getDirectMethodName((Ident) callingNode);
 			if (callstr == null) {
 				Tree t = callingNode;
@@ -595,12 +601,9 @@ public class CodeGenerator extends AbstractTreeWalker {
 					}
 					t = t.getParent();
 				}
-				if (callstr == null) {
-					apply(callingNode);
-					callstr = fBuffer.getReference(callingNode) + ".run";
-				}
 			}
-		} else {
+		}
+		if (callstr == null) {
 			apply(callingNode);
 			callstr = "(" + fBuffer.getReference(callingNode) + ").run";
 		}
@@ -727,6 +730,15 @@ public class CodeGenerator extends AbstractTreeWalker {
 		else
 			var = ident.getName();
 
+		if (ident.getSource() == Ident.SOURCE_CONTEXT_OBJECT) {
+			final String basevar = var;
+			var = fBuffer.getTemporaryVariable();
+			fBuffer.putl("final %s %s = %s ? null : %s;", jtype(ident
+					.getExpressionType()), var,
+					checkNull(basevar, s.getType()), getPropertyString(basevar,
+							ident));
+		}
+
 		final IType type = ident.getExpressionType();
 		if (type.isFunction()) {
 			final SymbolTable ownerST = ident.getSymbol().getParentST();
@@ -741,6 +753,9 @@ public class CodeGenerator extends AbstractTreeWalker {
 	}
 
 	private String getDirectMethodName(Ident ident) {
+		if (ident.getSource() == Ident.SOURCE_CONTEXT_OBJECT)
+			return null;
+
 		final Symbol s = ident.getSymbol();
 		if (!s.getParentST().getBase().getId().equals(fBaseSymbolTable.getId())) {
 			final String modcls = OmttLoader.getModuleClassName(s.getParentST()
@@ -766,20 +781,24 @@ public class CodeGenerator extends AbstractTreeWalker {
 		new FoldCode(select).fold(new IFoldCodeFragment() {
 			@Override
 			public String get(String var) {
-				StringBuffer buf = new StringBuffer();
-				final boolean wrapType = select.isMethodNeedsTypeWrapping()
-						&& !select.getExpressionType().isSequence();
-				if (wrapType)
-					buf.append("new ").append(
-							fTypeAdapter.get(select.getExpressionType()))
-							.append("(");
-				buf.append(var).append(".")
-						.append(select.getMethod().getName()).append("()");
-				if (wrapType)
-					buf.append(")");
-				return buf.toString();
+				return getPropertyString(var, select);
 			}
 		});
+	}
+
+	private String getPropertyString(String base,
+			IPropertySelectExpression property) {
+		StringBuffer buf = new StringBuffer();
+		boolean wrapType = property.isPropertyMethodNeedsTypeWrapping()
+				&& !property.getExpressionType().isSequence();
+		if (wrapType)
+			buf.append("new ").append(
+					fTypeAdapter.get(property.getExpressionType())).append("(");
+		buf.append(base).append(".").append(
+				property.getPropertyMethod().getName()).append("()");
+		if (wrapType)
+			buf.append(")");
+		return buf.toString();
 	}
 
 	public void visit(Block block) {

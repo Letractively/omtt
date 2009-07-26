@@ -13,7 +13,7 @@ public class OmttLoader {
 		try {
 			return fClassLoader.loadClass(getModuleClassName(id));
 		} catch (ClassNotFoundException e) {
-			throw new ModuleNotFoundException("Module " + id + " not found");
+			throw new ModuleNotFoundException("module " + id + " not found");
 		}
 	}
 

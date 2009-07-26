@@ -227,6 +227,60 @@ public class FunctionType extends CommonType implements IType {
 	}
 
 	@Override
+	public boolean essentiallyEquals(IType t) {
+		if (t.getEffective() instanceof FunctionType)
+			return equals(this, t.getEffective(),
+					new HashMap<Integer, Integer>());
+		return false;
+	}
+
+	private static boolean equals(IType a, IType b,
+			Map<Integer, Integer> generics) {
+		a = a.getEffective();
+		b = b.getEffective();
+		if (a.getEffective() instanceof FunctionType) {
+			if (!(b.getEffective() instanceof FunctionType))
+				return false;
+			if (!CommonType.attributeEquals(a, b))
+				return false;
+			FunctionType funa = (FunctionType) a;
+			FunctionType funb = (FunctionType) b;
+			if (funa.getArguments().size() != funb.getArguments().size())
+				return false;
+			if (!equals(funa.getReturnType(), funb.getReturnType(), generics))
+				return false;
+			for (int i = 0; i < funa.getArguments().size(); i++)
+				if (!equals(funa.getArgument(i).type, funb.getArgument(i).type,
+						generics))
+					return false;
+			return true;
+		} else if (a.isGeneric()) {
+			if (!b.isGeneric())
+				return false;
+			if (!CommonType.attributeEquals(a, b))
+				return false;
+			GenericType ga = (GenericType) a.getEffective();
+			GenericType gb = (GenericType) b.getEffective();
+			if (!equals(ga.fLowerBoundType, gb.fLowerBoundType, generics))
+				return false;
+			boolean presenta = generics.containsKey(ga.fInstanceId);
+			boolean presentb = generics.containsKey(gb.fInstanceId);
+			if (presenta && presentb) {
+				return generics.get(ga.fInstanceId) == generics
+						.get(gb.fInstanceId);
+			} else if (!presenta && !presentb) {
+				int id = generics.size();
+				generics.put(ga.fInstanceId, id);
+				generics.put(gb.fInstanceId, id);
+				return true;
+			}
+			return false;
+		} else {
+			return a.equals(b);
+		}
+	}
+
+	@Override
 	public String singleToString() {
 		StringBuffer buf = new StringBuffer();
 		buf.append("(");

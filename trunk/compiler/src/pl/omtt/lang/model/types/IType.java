@@ -26,6 +26,7 @@ public interface IType {
 
 	boolean isFunction();
 	boolean isGeneric();
+	boolean isError();
 	
 	Class<?> getAssociatedClass ();
 	

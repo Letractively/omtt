@@ -21,6 +21,11 @@ public class ErrorType extends CommonType implements IType {
 	}
 
 	@Override
+	public boolean isError() {
+		return true;
+	}
+	
+	@Override
 	public boolean isBoolean() {
 		return false;
 	}
@@ -45,6 +50,11 @@ public class ErrorType extends CommonType implements IType {
 		return false;
 	}
 
+	@Override
+	public boolean essentiallyEquals (IType t) {
+		return false;
+	}
+	
 	@Override
 	String singleToEssentialString() {
 		return "_";

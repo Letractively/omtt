@@ -20,27 +20,30 @@ import pl.omtt.lang.model.types.StringDataType;
 import pl.omtt.lang.model.types.TypeException;
 
 public class PropertySelect extends CommonSelectorNode implements
-		IFoldExpression, ISymbolTableOwner, ISymbolTableDualParticipant,
-		IVisitable {
-	IType fPropertyType;
-	Method fMethod;
+		IFoldExpression, IPropertySelectExpression, ISymbolTableOwner,
+		ISymbolTableDualParticipant, IVisitable {
+	IType fType;
+	Property fProperty;
 	boolean fMethodReturnsSequence;
-	boolean fMethodNeedsTypeWrapping;
+
+	// IType fPropertyType;
+	// Method fMethod;
+	// boolean fMethodNeedsTypeWrapping;
 
 	public PropertySelect(int token) {
 		super(new CommonToken(token, "select"));
 	}
 
-	public Method getMethod() {
-		return fMethod;
+	public Method getPropertyMethod() {
+		return fProperty.method;
 	}
 
-	public boolean isMethodReturnsSequence () {
+	public boolean isPropertyMethodReturnsSequence() {
 		return fMethodReturnsSequence;
 	}
 
-	public boolean isMethodNeedsTypeWrapping () {
-		return fMethodNeedsTypeWrapping;
+	public boolean isPropertyMethodNeedsTypeWrapping() {
+		return fProperty.needsTypeWrapping;
 	}
 
 	public boolean isItemSequence() {
@@ -51,19 +54,44 @@ public class PropertySelect extends CommonSelectorNode implements
 	protected IType getOriginalType(SymbolTable symbolTable)
 			throws TypeException {
 		IType base = getBaseNode().getExpressionType().getEffective();
+
+		try {
+			fProperty = findProperty(base, getPropertyNode().getText());
+			// make dup() to have always correct property type, not necesary now
+			if (fProperty == null) {
+				fType = new ErrorType();
+				return fType;
+			}
+			fType = fProperty.type;
+		} catch (TypeException e) {
+			fType = new ErrorType();
+			e.setCauseObject(getPropertyNode());
+			throw e;
+		}
+
+		if (fType.isSequence())
+			fMethodReturnsSequence = true;
+		if (base.isSequence())
+			fType.setSequence();
+		if (!base.isNotNull())
+			fType.unsetNotNull();
+		return fType;
+	}
+
+	protected static Property findProperty(IType base, String name)
+			throws TypeException {
 		Class<?> cls;
 		if (base instanceof StringDataType)
 			cls = String.class;
 		else if (base instanceof ScalarType)
 			cls = ((ScalarType) base).getAssociatedClass();
 		else if (base instanceof ErrorType) {
-			return new ErrorType();
+			return null;
 		} else
-			throw new TypeException(getPropertyNode(), "type " + base
+			throw new TypeException("type " + base
 					+ " does not have properties");
 
 		ArrayList<String> possibleNames = new ArrayList<String>();
-		String name = getPropertyNode().getText();
 		String uppername = name.substring(0, 1).toUpperCase()
 				+ name.substring(1);
 		possibleNames.add("get" + uppername);
@@ -71,34 +99,34 @@ public class PropertySelect extends CommonSelectorNode implements
 		if ("java.lang".equals(cls.getPackage().getName()))
 			possibleNames.add(name);
 
+		Property property = new Property();
 		for (Method method : cls.getMethods())
 			if (possibleNames.contains(method.getName())) {
-				fMethod = method;
+				property.method = method;
 				break;
 			}
-		if (fMethod == null)
-			throw new TypeException(getPropertyNode(), "property " + name
-					+ " not found in type " + base.singleToString());
-		if (fMethod.getParameterTypes().length > 0)
-			throw new TypeException(getPropertyNode(),
-					"functional properties are not supported");
+		if (property.method == null)
+			throw new TypeException("property " + name + " not found in type "
+					+ base.singleToString());
+		if (property.method.getParameterTypes().length > 0)
+			throw new TypeException("functional properties are not supported");
 
-		IType type;
-		type = JavaTypesAdapter.fromType(fMethod.getGenericReturnType());
+		property.type = JavaTypesAdapter.fromType(property.method
+				.getGenericReturnType());
 
-		Class<?> returnClass = fMethod.getReturnType();
+		Class<?> returnClass = property.method.getReturnType();
 		if (returnClass.isPrimitive())
-			fMethodNeedsTypeWrapping = true;
+			property.needsTypeWrapping = true;
 		else if (returnClass.isAssignableFrom(Number.class))
-			fMethodNeedsTypeWrapping = !NumericType.isSupportedNumber(returnClass);
+			property.needsTypeWrapping = !NumericType
+					.isSupportedNumber(returnClass);
+		return property;
+	}
 
-		if (type.isSequence())
-			fMethodReturnsSequence = true;
-		if (base.isSequence())
-			type.setSequence();
-		if (!base.isNotNull())
-			type.unsetNotNull();
-		return type;
+	protected static class Property {
+		public Method method;
+		public IType type;
+		public boolean needsTypeWrapping = false;
 	}
 
 	public IExpression getBaseNode() {
