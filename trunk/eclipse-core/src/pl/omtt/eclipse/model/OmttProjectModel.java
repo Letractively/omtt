@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -98,6 +97,7 @@ public class OmttProjectModel {
 	}
 
 	private void compile() {
+		refreshTemplateBuildDirectory();
 		while (!fCompileQueue.isEmpty()) {
 			List<URI> uris = new ArrayList<URI>();
 			for (IResource resource : fCompileQueue) {
@@ -169,6 +169,7 @@ public class OmttProjectModel {
 					itor.remove();
 			}
 		}
+		refreshTemplateBuildDirectory();
 		System.err.println("[ref] " + fComponentReferences.fReferences);
 	}
 
@@ -209,13 +210,9 @@ public class OmttProjectModel {
 	}
 
 	private void deleteBuildFile(IResource resource) {
-		IPath buildDir;
-		try {
-			buildDir = getJavaProject().getOutputLocation();
-		} catch (JavaModelException e) {
-			e.printStackTrace();
+		IPath buildDir = getBuildDirectory();
+		if (buildDir == null)
 			return;
-		}
 
 		String id = getResourceId(resource);
 		if (id == null)
@@ -230,13 +227,39 @@ public class OmttProjectModel {
 		IPath buildFilePath = buildDir.addTrailingSeparator().append(
 				Constants.OMTT_TEMPLATE_PACKAGE).addTrailingSeparator().append(
 				path).addFileExtension("class");
-		IFile buildFile = fProject.getFile(buildFilePath);
+		IResource buildFile = fProject.getWorkspace().getRoot().findMember(
+				buildFilePath);
 		if (buildFile != null)
 			try {
 				buildFile.delete(true, null);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
+	}
+
+	private IPath getBuildDirectory() {
+		try {
+			return getJavaProject().getOutputLocation();
+		} catch (JavaModelException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private void refreshTemplateBuildDirectory() {
+		IPath buildDir = getBuildDirectory();
+		if (buildDir == null)
+			return;
+		try {
+			fProject.getWorkspace().getRoot().findMember(buildDir)
+					.refreshLocal(IResource.DEPTH_ZERO, null);
+			IPath templateBuildDir = buildDir.addTrailingSeparator().append(
+					Constants.OMTT_TEMPLATE_PACKAGE);
+			fProject.getWorkspace().getRoot().findMember(templateBuildDir)
+					.refreshLocal(IResource.DEPTH_INFINITE, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void add(IResource resource) {
