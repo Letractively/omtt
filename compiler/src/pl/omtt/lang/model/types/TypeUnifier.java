@@ -170,7 +170,7 @@ public class TypeUnifier {
 			Class<?> clsB = typeBeff.getAssociatedClass();
 
 			Class<?> cls;
-			for (cls = clsA; !cls.equals(String.class); cls = superclass(cls))
+			for (cls = clsA; !cls.equals(Object.class); cls = superclass(cls))
 				if (isSuperclass(cls, clsB))
 					break;
 
@@ -229,10 +229,8 @@ public class TypeUnifier {
 	}
 
 	public static boolean isSuperclass(Class<?> base, Class<?> superclass) {
-		if (base.equals(String.class))
-			return true;
-		else if (base.equals(Float.class)
-				&& Integer.class.isAssignableFrom(superclass))
+		if (base.equals(NumericType.REAL_CLASS)
+				&& NumericType.INTEGER_CLASS.isAssignableFrom(superclass))
 			return true;
 		else
 			return base.isAssignableFrom(superclass);

@@ -47,7 +47,7 @@ public class Ident extends CommonNode implements IExpression,
 	public int getSource() {
 		return fSource;
 	}
-	
+
 	public Symbol getSymbol() {
 		return fSymbol;
 	}
@@ -74,6 +74,8 @@ public class Ident extends CommonNode implements IExpression,
 			throw new TypeException("context object not found");
 		}
 		fProperty = PropertySelect.findProperty(fSymbol.getType(), getName());
+		if (fProperty == null)
+			throw new TypeException("property " + getName() + " not found");
 		fSource = SOURCE_CONTEXT_OBJECT;
 		fType = fProperty.type;
 	}

@@ -8,6 +8,7 @@ import org.antlr.runtime.CommonToken;
 import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
+import pl.omtt.lang.model.types.ErrorType;
 import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.NullType;
@@ -55,26 +56,35 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 	@Override
 	public void setExpressionType(SymbolTable symbolArray) throws TypeException {
 		IType callingType = getCallingNode().getExpressionType();
-		if (!callingType.isFunction()) {
-			fCallingType = buildType();
-			if (isIterateSequence())
-				fCallingType.getArgument(0).type.unsetSequence();
-			fEffectiveType = fCallingType;
-			TypeUnifier.unifyEq(fEffectiveType, callingType);
-		} else {
-			fCallingType = (FunctionType)(callingType.getEffective());
-			fEffectiveType = fCallingType.createTemplate();
+		try {
+			if (!callingType.isFunction()) {
+				fCallingType = buildType();
+				if (isIterateSequence())
+					fCallingType.getArgument(0).type.unsetSequence();
+				fEffectiveType = fCallingType;
+				TypeUnifier.unifyEq(fEffectiveType, callingType);
+			} else {
+				fCallingType = (FunctionType) (callingType.getEffective());
+				fEffectiveType = fCallingType.createTemplate();
 
-			FunctionType requestedType = buildType(fEffectiveType).createTemplate(); 
-			if (isIterateSequence()) {
-				if (fCallingType.getArgument(0).type.isSequence())
-					fIterateSequence = false;
-				else
-					requestedType.getArgument(0).type.unsetSequence();
+				FunctionType requestedType = buildType(fEffectiveType)
+						.createTemplate();
+				if (isIterateSequence()) {
+					if (fCallingType.getArgument(0).type.isSequence())
+						fIterateSequence = false;
+					else
+						requestedType.getArgument(0).type.unsetSequence();
+				}
+				TypeUnifier.unifyLe(requestedType, fEffectiveType);
 			}
-
-			TypeUnifier.unifyLe(requestedType, fEffectiveType);
-		}		
+		} catch (TypeException e) {
+			fType = new ErrorType ();
+			if (isIterateSequence())
+				e.setCauseObject(getCallingNode());
+			else
+				e.setCauseObject(this);
+			throw e;
+		}
 
 		fType = fEffectiveType.getReturnType().dup();
 		if (sequenceOnOutput())
@@ -102,7 +112,7 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 
 	private FunctionType buildType(FunctionType calltype) throws TypeException {
 		FunctionType funtype = new FunctionType();
-		final int callArgCount = calltype.getArguments().size();
+		final int callArgCount = calltype.getArgumentLength();
 
 		fArguments = new ArrayList<FunctionArgument>(callArgCount);
 		for (int i = 0; i < callArgCount; i++)
@@ -138,7 +148,7 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 					throw new TypeException(this, "argument " + (i + 1)
 							+ " of called function is obligatory");
 			} else {
-				funtype.putArgument(null, arg.getExpressionType(), false);
+				funtype.putArgument(null, arg.getExpressionType().dup(), false);
 			}
 		}
 		return funtype;
@@ -160,7 +170,7 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 				|| !isIterateSequence())
 			return false;
 		else if (isIterateSequence()
-				&& fCallingType.getArguments().get(0).type.isSequence()
+				&& fCallingType.getArgument(0).type.isSequence()
 				&& !fCallingType.getReturnType().isSequence())
 			return false;
 		else

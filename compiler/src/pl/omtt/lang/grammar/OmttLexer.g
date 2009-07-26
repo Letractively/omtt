@@ -187,7 +187,10 @@ FALSE  : 'false';
 fragment INNER_TAG_KEYWORD : 'in' | 'else' | 'case' | 'default';
 fragment SINGLE_TAG_KEYWORD : 'module' | 'use' | 'import';
 
-OP_FUNCTION_DEFINITION : '->';
+OP_FOLLOW         : '->';
+OP_REVERSE_FOLLOW : '<-';
+OP_DOUBLE_FOLLOW  : '=>';
+
 
 COLON
 	: ( (':' NEWLINE) => ':'

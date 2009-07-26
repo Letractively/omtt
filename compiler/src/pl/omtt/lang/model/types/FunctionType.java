@@ -9,10 +9,19 @@ import java.util.Set;
 public class FunctionType extends CommonType implements IType {
 	IType fReturnType;
 	List<Argument> fArguments = new ArrayList<Argument>();
+	boolean fContext = false;
 	boolean fFrozen = false;
 
 	public FunctionType() {
 		fReturnType = new TypePointer(new GenericType());
+	}
+
+	public void setContext(boolean context) {
+		fContext = context;
+	}
+
+	public boolean isContext() {
+		return fContext;
 	}
 
 	public IType getReturnType() {
@@ -23,8 +32,8 @@ public class FunctionType extends CommonType implements IType {
 		fReturnType = returnType;
 	}
 
-	public List<Argument> getArguments() {
-		return fArguments;
+	public int getArgumentLength() {
+		return fArguments.size();
 	}
 
 	public Argument getArgument(int i) {
@@ -203,7 +212,7 @@ public class FunctionType extends CommonType implements IType {
 		} else if (type.isFunction()) {
 			FunctionType source = (FunctionType) type.getEffective();
 			FunctionType target = new FunctionType();
-			for (int i = 0; i < source.getArguments().size(); i++) {
+			for (int i = 0; i < source.getArgumentLength(); i++) {
 				Argument a = source.getArgument(i);
 				target.putArgument(a.name, createTemplate(a.type, generics),
 						a.optional);
@@ -245,11 +254,11 @@ public class FunctionType extends CommonType implements IType {
 				return false;
 			FunctionType funa = (FunctionType) a;
 			FunctionType funb = (FunctionType) b;
-			if (funa.getArguments().size() != funb.getArguments().size())
+			if (funa.getArgumentLength() != funb.getArgumentLength())
 				return false;
 			if (!equals(funa.getReturnType(), funb.getReturnType(), generics))
 				return false;
-			for (int i = 0; i < funa.getArguments().size(); i++)
+			for (int i = 0; i < funa.getArgumentLength(); i++)
 				if (!equals(funa.getArgument(i).type, funb.getArgument(i).type,
 						generics))
 					return false;
