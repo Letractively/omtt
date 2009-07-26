@@ -15,9 +15,9 @@ Require-Bundle: pl.omtt.lang,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Export-Package: pl.omtt.eclipse.builder,
- pl.omtt.eclipse.core,
+Export-Package: pl.omtt.eclipse.core,
  pl.omtt.eclipse.model,
+ pl.omtt.eclipse.nature,
  pl.omtt.eclipse.util.stream
 Import-Package: org.eclipse.core.expressions,
  org.eclipse.jdt.core

@@ -5,7 +5,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -43,6 +42,7 @@ public class OmttCompilationTask {
 	int fState;
 	final ClassLoader fClassLoader;
 	IProblemCollector fProblemCollector;
+	boolean fCollectLibraryReferences;
 
 	final Map<URI, Program> fTrees = new HashMap<URI, Program>();
 	final Map<URI, OmttJavaSource> fJavaSources = new HashMap<URI, OmttJavaSource>();
@@ -73,6 +73,10 @@ public class OmttCompilationTask {
 
 	public void setProblemCollector(IProblemCollector problemCollector) {
 		fProblemCollector = problemCollector;
+	}
+
+	public void setCollectLibraryReferences(boolean collectLibraryReferences) {
+		fCollectLibraryReferences = collectLibraryReferences;
 	}
 
 	public void compile() {
@@ -122,7 +126,6 @@ public class OmttCompilationTask {
 
 		SymbolTableSupplier symbolTableSupplier = new SymbolTableSupplier(
 				fClassLoader);
-		List<URI> toCompile = new ArrayList<URI>();
 		for (URI source : queue) {
 			if (level > STATE_TREE)
 				if (!analyze(source, symbolTableSupplier))
@@ -130,9 +133,8 @@ public class OmttCompilationTask {
 			if (level > STATE_ANALYZE)
 				if (!generateCode(source))
 					continue;
-			toCompile.add(source);
 		}
-System.err.println("compiling: " + fJavaSources.keySet());
+		System.err.println("compiling: " + fJavaSources.keySet());
 		if (level > STATE_JAVA_CODE) {
 			compileJava();
 			if (verifyState() > STATE_FINISH)
@@ -177,20 +179,16 @@ System.err.println("compiling: " + fJavaSources.keySet());
 		return !(lexer.errorsOccured() || parser.errorsOccured());
 	}
 
-	protected boolean analyze(URI source, SymbolTableSupplier symbolTableSupplier) {
+	protected boolean analyze(URI source,
+			SymbolTableSupplier symbolTableSupplier) {
 		SemanticAnalyzer analyzer = new SemanticAnalyzer(fClassLoader,
 				fProblemCollector);
-		try {
-			Program program = fTrees.get(source);
-			analyzer.run(source, program, symbolTableSupplier);
-			symbolTableSupplier.put(program.getModuleDeclaration()
-					.getModuleId(), program.getSymbolTable());
-		} catch (SemanticException e) {
-			fProblemCollector.reportError(source, e);
-			fState = STATE_FATAL;
-			return false;
-		}
-		return true;
+		analyzer.setCollectLibraryReferences(fCollectLibraryReferences);
+		Program program = fTrees.get(source);
+		boolean success = analyzer.run(source, program, symbolTableSupplier);
+		symbolTableSupplier.put(program.getModuleDeclaration().getModuleId(),
+				program.getSymbolTable());
+		return success;
 	}
 
 	protected boolean generateCode(URI source) {
@@ -213,7 +211,6 @@ System.err.println("compiling: " + fJavaSources.keySet());
 		DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<JavaFileObject>();
 		StandardJavaFileManager fileManager = compiler.getStandardFileManager(
 				diagnosticsCollector, null, null);
-
 		final List<String> options = fCompiler.getJavaCompilerOptions(
 				fTargetPath, fClassPath);
 		CompilationTask task = compiler.getTask(null, fileManager,

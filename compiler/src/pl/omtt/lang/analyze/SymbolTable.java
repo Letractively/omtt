@@ -1,5 +1,6 @@
 package pl.omtt.lang.analyze;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,5 +43,13 @@ public class SymbolTable {
 
 	public boolean contains (Symbol s) {
 		return fSymbolMap.containsValue(s);
+	}
+
+	public Collection<Symbol> getSymbols() {
+		return fSymbolMap.values();
+	}
+
+	public Symbol get(String name) {
+		return fSymbolMap.get(name);
 	}
 }

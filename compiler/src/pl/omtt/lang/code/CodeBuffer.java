@@ -167,7 +167,7 @@ public class CodeBuffer {
 
 	public CodeBuffer initBuffer() {
 		String bufferName = "$buf" + (fTemporaryCount++);
-		putl("TextBuffer %s = new TextBuffer ();", bufferName);
+		putl("final TextBuffer %s = new TextBuffer ();", bufferName);
 		pushBuffer(bufferName);
 		return this;
 	}

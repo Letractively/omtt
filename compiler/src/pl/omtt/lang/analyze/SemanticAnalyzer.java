@@ -2,12 +2,16 @@ package pl.omtt.lang.analyze;
 
 import java.net.URI;
 
+import org.antlr.runtime.tree.Tree;
+
 import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.lang.model.ast.Program;
+import pl.omtt.lang.model.ast.UseDeclaration;
 
 public class SemanticAnalyzer {
 	ClassLoader fClassLoader;
 	IProblemCollector fProblemCollector;
+	boolean fCollectLibraryReferences;
 
 	public SemanticAnalyzer(ClassLoader classLoader,
 			IProblemCollector problemCollector) {
@@ -15,18 +19,37 @@ public class SemanticAnalyzer {
 		fProblemCollector = problemCollector;
 	}
 
-	public void run(URI source, Program program,
-			ILibrarySymbolTableSupplier librarySymbolTableSupplier)
-			throws SemanticException {
-		createSymbolTable(source, program, librarySymbolTableSupplier);
+	public void setCollectLibraryReferences(boolean collectLibraryReferences) {
+		fCollectLibraryReferences = collectLibraryReferences;
 	}
 
-	private void createSymbolTable(URI source, Program program,
+	public boolean run(URI source, Program program,
+			ILibrarySymbolTableSupplier librarySymbolTableSupplier) {
+		return createSymbolTable(source, program, librarySymbolTableSupplier);
+	}
+
+	private boolean createSymbolTable(URI source, Program program,
 			ILibrarySymbolTableSupplier librarySymbolTableSupplier) {
 		SymbolTableCreator symbolTableCreator;
 		symbolTableCreator = new SymbolTableCreator(fClassLoader,
-				librarySymbolTableSupplier, source, fProblemCollector);
+				librarySymbolTableSupplier, source, fProblemCollector,
+				fCollectLibraryReferences);
 		symbolTableCreator.run(program);
-	}
 
+		if (fCollectLibraryReferences) {
+			Tree usenode = program.getUsesNode();
+			BaseSymbolTable st = program.getSymbolTable();
+			if (st == null)
+				return false;
+			if (usenode != null)
+				for (int i = 0; i < usenode.getChildCount(); i++) {
+					UseDeclaration ud = (UseDeclaration) usenode.getChild(i);
+					String libid = st.getLibraryFullId(ud.getUseId());
+					st.fOuterReferences.add(libid);
+					if (symbolTableCreator.fErrors)
+						st.fOuterReferences.add(libid + "::_");
+				}
+		}
+		return !symbolTableCreator.fErrors;
+	}
 }
