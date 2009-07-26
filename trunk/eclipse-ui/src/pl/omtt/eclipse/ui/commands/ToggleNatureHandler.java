@@ -10,7 +10,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import pl.omtt.eclipse.builder.OmttProjectSetup;
+import pl.omtt.eclipse.nature.OmttProjectSetup;
 
 public class ToggleNatureHandler extends AbstractHandler {
 	@SuppressWarnings("unchecked")

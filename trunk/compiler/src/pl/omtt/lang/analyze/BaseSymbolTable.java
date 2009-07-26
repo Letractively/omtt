@@ -1,7 +1,9 @@
 package pl.omtt.lang.analyze;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import pl.omtt.core.ModuleNotFoundException;
 import pl.omtt.lang.code.ClassResolver;
@@ -11,8 +13,10 @@ public class BaseSymbolTable extends SymbolTable {
 	final String fId;
 
 	ClassResolver fClassResolver;
-	List<SymbolTable> fImportedLibraries = new ArrayList<SymbolTable>();
+	List<BaseSymbolTable> fImportedLibraries = new ArrayList<BaseSymbolTable>();
 	ILibrarySymbolTableSupplier fLibrarySTSupplier;
+	
+	Set<String> fOuterReferences;
 
 	public BaseSymbolTable(String id, ClassLoader classLoader,
 			ILibrarySymbolTableSupplier librarySTSupplier) {
@@ -35,23 +39,35 @@ public class BaseSymbolTable extends SymbolTable {
 		return fClassResolver;
 	}
 
+	public void collectReferences () {
+		fOuterReferences = new HashSet<String> ();
+	}
+	
+	public Set<String> retrieveReferences () {
+		Set<String> references = fOuterReferences;
+		fOuterReferences = null;
+		return references;
+	}
+	
 	@Override
 	public Symbol find(String name) {
 		Symbol s = super.find(name);
 		if (s != null)
 			return s;
 		for (int i = fImportedLibraries.size() - 1; i >= 0; i--) {
-			s = fImportedLibraries.get(i).find(name);
-			if (s != null)
+			BaseSymbolTable libraryST = fImportedLibraries.get(i);
+			s = libraryST.find(name);
+			if (s != null) {
+				if (fOuterReferences != null)
+					fOuterReferences.add(libraryST.getId() + "::" + name);
 				return s;
+			}
 		}
 		return null;
 	}
 
 	public void importLibrary(String id, String namespace) throws TypeException {
-		if (id.indexOf('.') < 0)
-			id = getPackageId() + "." + id;
-
+		id = getLibraryFullId(id);
 		try {
 			fImportedLibraries.add(fLibrarySTSupplier.get(id, fClassResolver));
 		} catch (ModuleNotFoundException e) {
@@ -59,8 +75,14 @@ public class BaseSymbolTable extends SymbolTable {
 		}
 	}
 
+	public String getLibraryFullId(String id) {
+		if (id.indexOf('.') < 0)
+			id = getPackageId() + "." + id;
+		return id;
+	}
+	
 	private String getPackageId() {
-		final int dotpos = fId.indexOf('.');
+		final int dotpos = fId.lastIndexOf('.');
 		if (dotpos < 0)
 			return null;
 		else

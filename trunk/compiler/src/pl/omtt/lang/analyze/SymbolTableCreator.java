@@ -17,14 +17,18 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 	IProblemCollector fProblemCollector;
 	ClassLoader fClassLoader;
 	ILibrarySymbolTableSupplier fLibrarySTSupplier;
+	boolean fCollectLibraryReferences;
+	boolean fErrors = false;
+	boolean fReportErrors = true;
 
 	public SymbolTableCreator(ClassLoader loader,
 			ILibrarySymbolTableSupplier librarySymbolTableSupplier, URI uri,
-			IProblemCollector problemCollector) {
+			IProblemCollector problemCollector, boolean collectLibraryReferences) {
 		fClassLoader = loader;
 		fLibrarySTSupplier = librarySymbolTableSupplier;
 		fURI = uri;
 		fProblemCollector = problemCollector;
+		fCollectLibraryReferences = collectLibraryReferences;
 	}
 
 	private SymbolTable ST() {
@@ -45,8 +49,12 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 			Program program = (Program) root;
 
 			ModuleDeclaration md = program.getModuleDeclaration();
-			pushST(new BaseSymbolTable(md.getPackageName() + "."
-					+ md.getModuleName(), fClassLoader, fLibrarySTSupplier));
+			BaseSymbolTable baseST = new BaseSymbolTable(md.getPackageName()
+					+ "." + md.getModuleName(), fClassLoader,
+					fLibrarySTSupplier);
+			if (fCollectLibraryReferences)
+				baseST.collectReferences();
+			pushST(baseST);
 			super.run(root);
 		}
 	}
@@ -67,7 +75,12 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 		try {
 			updater.takeSymbolTable(ST());
 		} catch (TypeException e) {
-			fProblemCollector.reportError(fURI, e);
+			if (fReportErrors)
+				fProblemCollector.reportError(fURI, e);
+			fErrors = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			fErrors = true;
 		}
 
 		if (updater instanceof ISymbolTableDualParticipant)
@@ -82,7 +95,14 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 		try {
 			expr.setExpressionType(ST());
 		} catch (TypeException e) {
-			fProblemCollector.reportError(fURI, e);
+			if (fReportErrors)
+				fProblemCollector.reportError(fURI, e);
+			fErrors = true;
+		} catch (ForceSymbolTableRecalculatingException e) {
+			throw e;
+		} catch (Exception e) {
+			e.printStackTrace();
+			fErrors = true;
 		}
 	}
 
@@ -106,8 +126,10 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 			System.err.println("recalc");
 			if (node instanceof ISymbolTableOwner)
 				popST();
-
+			boolean beforeReportErrors = fReportErrors;
+			fReportErrors = false;
 			defaultVisit(node);
+			fReportErrors = beforeReportErrors;
 		}
 	}
 }

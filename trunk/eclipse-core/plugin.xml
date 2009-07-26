@@ -25,7 +25,7 @@
 		name="OMTT Project Builder"
 		point="org.eclipse.core.resources.builders">
 		<builder hasNature="true">
-			<run class="pl.omtt.eclipse.builder.OmttBuilder"/>
+			<run class="pl.omtt.eclipse.nature.OmttBuilder"/>
 		</builder>
 	</extension>
 
@@ -34,7 +34,7 @@
 		name="OMTT Project Nature"
 		point="org.eclipse.core.resources.natures">
 		<runtime>
-			<run class="pl.omtt.eclipse.builder.OmttNature"/>
+			<run class="pl.omtt.eclipse.nature.OmttNature"/>
 		</runtime>
 		<builder id="pl.omtt.eclipse.builder"/>
 	</extension>
@@ -45,6 +45,22 @@
 		point="org.eclipse.core.resources.markers"
 		name="OMTT Problem">
 		<super type="org.eclipse.core.resources.problemmarker"/>
+		<super type="org.eclipse.core.resources.textmarker"/>
+		<persistent value="true" />
+	</extension>
+
+	<extension
+		id="pl.omtt.eclipse.markers.componentid"
+		point="org.eclipse.core.resources.markers"
+		name="OMTT Reference">
+		<super type="org.eclipse.core.resources.textmarker"/>
+		<persistent value="true" />
+	</extension>
+
+	<extension
+		id="pl.omtt.eclipse.markers.reference"
+		point="org.eclipse.core.resources.markers"
+		name="OMTT Reference">
 		<super type="org.eclipse.core.resources.textmarker"/>
 		<persistent value="true" />
 	</extension>

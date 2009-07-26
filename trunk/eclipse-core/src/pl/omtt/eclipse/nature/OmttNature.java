@@ -1,4 +1,4 @@
-package pl.omtt.eclipse.builder;
+package pl.omtt.eclipse.nature;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
