@@ -46,11 +46,11 @@ public class TypesJavaCodeConverter {
 		final boolean data = ftype.getReturnType().isSingleData();
 		if (data)
 			buf.append("Data");
-		buf.append("Function").append(ftype.getArguments().size());
+		buf.append("Function").append(ftype.getArgumentLength());
 		buf.append("<");
 		if (!data)
 			buf.append(get(ftype.getReturnType()));
-		for(int i = 0; i < ftype.getArguments().size(); i++) {
+		for(int i = 0; i < ftype.getArgumentLength(); i++) {
 			Argument a = ftype.getArgument(i);
 			if (i > 0 || !data)
 				buf.append(", ");

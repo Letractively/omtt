@@ -84,7 +84,6 @@ public class ScalarType extends CommonType implements IType {
 			cls = ((ScalarType) type).fTypeClass;
 		else
 			return false;
-
 		return cls.isAssignableFrom(fTypeClass);
 	}
 

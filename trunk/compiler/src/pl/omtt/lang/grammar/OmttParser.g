@@ -72,9 +72,13 @@ tag_definition :
   ;
 
 fragment definition_signature
-  : (VAR_ID|DEFAULT) (OP_LE it=single_type OP_GE)? definition_argument* (OP_FUNCTION_DEFINITION ret_type=type)?
-    -> VAR_ID<Ident>? DEFAULT<Ident>? $it? ^(ARGUMENTS definition_argument*) ^(RETURNS $ret_type?)
+  : (VAR_ID|DEFAULT) definition_context? definition_argument* (OP_FOLLOW ret_type=type)?
+    -> VAR_ID<Ident>? DEFAULT<Ident>? definition_context? ^(ARGUMENTS definition_argument*) ^(RETURNS $ret_type?)
   ;
+fragment definition_context
+	: OP_REVERSE_FOLLOW single_type
+		-> ^(ARGUMENT single_type)
+	;
 
 fragment definition_argument
   : TILDE? id=VAR_ID OP_MULTIPLY? (DOT type)?
@@ -116,6 +120,7 @@ fragment tag_inside_data
 expression
   : lambda_expression
   | def_in_expression
+  | apply_expression
   | concatence_expression
   ;
 
@@ -156,7 +161,7 @@ definition_inside_tag
 lambda_expression
   : LAMBDA definition_argument* COLON expression
     -> ^(LAMBDA<LambdaExpression> ^(ARGUMENTS definition_argument*) expression)
-  | definition_argument* OP_FUNCTION_DEFINITION expression
+  | definition_argument* OP_FOLLOW expression
   	-> ^(LAMBDA<LambdaExpression> ^(ARGUMENTS definition_argument*) expression)
   | lambda_match_expression
   ;
@@ -164,14 +169,8 @@ fragment lambda_match_expression
 	: single_lambda_match (SEMICOLON single_lambda_match)*
 	;
 fragment single_lambda_match
-	: type OP_FUNCTION_DEFINITION concatence_expression
+	: type OP_FOLLOW concatence_expression
 	;
-lambda_expression_no_context
-  : LAMBDA definition_argument COLON atom_expression
-  	-> ^(LAMBDA<LambdaExpression> ^(ARGUMENTS definition_argument*) atom_expression)
-  | definition_argument* OP_FUNCTION_DEFINITION atom_expression
-  	-> ^(LAMBDA<LambdaExpression> ^(ARGUMENTS definition_argument*) atom_expression)
-  ;
 
 fragment type
   : CLASS_ID OP_MULTIPLY?
@@ -192,7 +191,6 @@ concatence_expression
 control_expression
   : if_expression
   | map_expression
-  | apply_expression
   | context_expression
   ;
 
@@ -219,37 +217,40 @@ fragment if_subtag
 	;
 
 map_expression
-  : MAP iter=context_expression COLON
+  : MAP item_alias? iter=context_expression COLON
     expr=control_expression
-    -> ^(MAP<Transformation> $iter $expr)
+    -> ^(MAP<Transformation> $iter $expr item_alias?)
   ;
 map_tag
-  : TAG_START MAP iter=context_expression
+  : TAG_START MAP item_alias? iter=context_expression
     expr=tag_content
     TAG_END
-    -> ^(MAP<Transformation> $iter $expr)
+    -> ^(MAP<Transformation> $iter $expr item_alias?)
   ;
 
 apply_expression
-  : APPLY atom_expression arguments=function_arguments COLON
-    expr=control_expression
-    -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> $expr) $arguments?)
+  : APPLY item_alias? expression COLON
+    expr=lambda_expression
+    -> ^(CALL<Call>[true] $expr ^(ARGUMENT<FunctionArgument> expression) item_alias?)
   ;
+
+fragment item_alias
+	: VAR_ID OP_REVERSE_FOLLOW
+		-> ^(AS VAR_ID)
+	;
 
 // START: transformation expressions
 context_expression
   : (fe=boolean_expression -> $fe)
     ( op_apply atom_expression arguments=function_arguments
       -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> $context_expression) $arguments?)
-    | op_apply lambda_expression_no_context
-      -> ^(CALL<Call>[true] lambda_expression_no_context ^(ARGUMENT<FunctionArgument> $context_expression))
-    | op_map ce=functional_expression
+    | op_map ce=boolean_expression
     	-> ^(op_map $context_expression $ce)
     )*
   ;
 fragment op_apply
-	: OP_CONTEXT
-	| APPLY
+	: OP_CONTEXT^
+	| APPLY^
 	;
 fragment op_map
 	: OP_EXPRESSION_CONTEXT<Transformation>^
@@ -355,8 +356,8 @@ atom_expression
 
 atom_with_properties
   : (a=atom_with_selectors -> $a)
-  	( ps=property_selector
-  	  -> ^(PROPERTY_SELECT<PropertySelect> $atom_with_properties $ps)
+  	( DOT ps=atom_with_selectors
+  	  -> ^(DOT<Transformation> $atom_with_properties $ps)
   	)*
   ;
 fragment atom_with_selectors

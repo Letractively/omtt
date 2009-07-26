@@ -23,8 +23,10 @@ import pl.omtt.lang.model.types.TypeUnifier;
 public class TemplateDefinition extends CommonNode implements
 		ISymbolTableOwner, ISymbolTableDualParticipant, IExpression, IVisitable {
 	IType fType;
-	boolean fForceSequenceReturn = false;
 	Symbol fSymbol;
+	Symbol fItSymbol;
+
+	private boolean fForceSequenceReturn = false;
 
 	public TemplateDefinition(Token token) {
 		super(token);
@@ -32,6 +34,10 @@ public class TemplateDefinition extends CommonNode implements
 
 	public TemplateDefinition(int token) {
 		super(new CommonToken(token));
+	}
+
+	public boolean isContext() {
+		return fItSymbol != null;
 	}
 
 	public TemplateArgument getArgument(int i) {
@@ -66,6 +72,10 @@ public class TemplateDefinition extends CommonNode implements
 		return fSymbol;
 	}
 
+	public Symbol getItSymbol() {
+		return fItSymbol;
+	}
+
 	@Override
 	public void takeSymbolTable(SymbolTable ST) throws TypeException {
 		IType returnType;
@@ -80,20 +90,36 @@ public class TemplateDefinition extends CommonNode implements
 		}
 
 		Tree args = getArgumentsNode();
-		if (args == null || args.getChildCount() == 0) {
+		Tree contextnode = getContextNode();
+		if ((args == null || args.getChildCount() == 0) && contextnode == null) {
 			fType = returnType;
 		} else {
 			FunctionType type = new FunctionType();
-			for (int i = 0; i < args.getChildCount(); i++) {
-				TemplateArgument arg = (TemplateArgument) args.getChild(i);
-				type.putArgument(arg.getArgumentName(), arg.getArgumentType(),
-						arg.isArgumentOptional());
+
+			if (contextnode != null) {
+				IType contexttype = ((TypeReference) contextnode.getChild(0))
+						.get(ST);
+				fItSymbol = new Symbol("it", contexttype);
+				ST.put(fItSymbol);
+				type.putArgument("it", contexttype, false);
+				type.setContext(true);
 			}
+
+			if (!(args == null))
+				for (int i = 0; i < args.getChildCount(); i++) {
+					TemplateArgument arg = (TemplateArgument) args.getChild(i);
+					type.putArgument(arg.getArgumentName(), arg
+							.getArgumentType(), arg.isArgumentOptional());
+				}
 			type.setReturnType(returnType);
 			fType = type;
 		}
 		fSymbol = new Symbol(getTemplateName(), fType);
 		ST.getParent().put(fSymbol);
+	}
+
+	public Tree getContextNode() {
+		return getFirstChildWithType(OmttParser.ARGUMENT);
 	}
 
 	@Override

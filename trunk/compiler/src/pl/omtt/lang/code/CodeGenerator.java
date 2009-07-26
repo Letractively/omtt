@@ -187,14 +187,14 @@ public class CodeGenerator extends AbstractTreeWalker {
 		buf.append(call).append("(");
 		if (targetf.getReturnType().isSingleData())
 			buf.append(fBuffer.getCurrentBuffer()).append(", ");
-		for (int i = 0; i < targetf.getArguments().size(); i++) {
-			Argument sourcearg = sourcef.getArguments().get(i);
-			Argument targetarg = targetf.getArguments().get(i);
+		for (int i = 0; i < targetf.getArgumentLength(); i++) {
+			Argument sourcearg = sourcef.getArgument(i);
+			Argument targetarg = targetf.getArgument(i);
 			String argname = targetarg.name;
 			if (argname == null)
 				argname = "arg" + i;
 			buf.append(cast(argname, targetarg.type, sourcearg.type));
-			if (i < targetf.getArguments().size() - 1)
+			if (i < targetf.getArgumentLength() - 1)
 				buf.append(", ");
 		}
 		buf.append(")");
@@ -323,6 +323,9 @@ public class CodeGenerator extends AbstractTreeWalker {
 		final boolean inner = !(def.getParent() instanceof Program);
 		final boolean flushBuffer = rettype.isSingleData();
 
+		if (def.isContext())
+			fSymbolLocalNames.put(def.getItSymbol(), "it");
+		
 		final String stemplate = signatureTemplate(type);
 
 		if (inner) {
@@ -362,14 +365,6 @@ public class CodeGenerator extends AbstractTreeWalker {
 		}
 	}
 
-	/*
-	 * private String functionInterfaceName(Symbol s) { if
-	 * (fFunctionIterfaceNames.containsKey(s)) return
-	 * fFunctionIterfaceNames.get(s); String ifname = "IFunction" +
-	 * s.getName().substring(0, 1).toUpperCase() + s.getName().substring(1) +
-	 * fBuffer.getTemporaryVariable(); fFunctionIterfaceNames.put(s, ifname);
-	 * return ifname; }
-	 */
 	private String signatureTemplate(FunctionType ftype) {
 		IType rettype = ftype.getReturnType();
 
@@ -384,8 +379,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		if (rettype.isSingleData())
 			sig.append("final TextBuffer $buffer, ");
-		for (int i = 0; i < ftype.getArguments().size(); i++) {
-			Argument a = ftype.getArguments().get(i);
+		for (int i = 0; i < ftype.getArgumentLength(); i++) {
+			Argument a = ftype.getArgument(i);
 
 			if (a.optional)
 				sig.append("@Optional ");
@@ -402,24 +397,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 		sig.delete(sig.length() - 2, sig.length());
 		sig.append(")");
 
-		setFunctionSignature(ftype, sig.toString());
-
 		return sig.toString();
 	}
-
-	private void setFunctionSignature(FunctionType ftype, String stemplate) {
-		/*
-		 * if (fTypeAdapter.containsFunction((FunctionType) single(ftype)))
-		 * return; String ifname = "IFunctionSignature" +
-		 * fBuffer.getTemporaryVariable();
-		 * fTypeAdapter.putFunction((FunctionType) single(ftype), ifname);
-		 * 
-		 * fBuffer.activate(ifname); fBuffer.setIndentitation(1);
-		 * fBuffer.putl("public interface %s {", ifname);
-		 * fBuffer.incIndentitation(); fBuffer.putl("%s;",
-		 * String.format(stemplate, "run")); fBuffer.subIndentitation();
-		 * fBuffer.putl("}\n"); fBuffer.flush("interfaces");
-		 */}
 
 	private void visitVariable(TemplateDefinition def, IType type) {
 		fBuffer.putl("final %s %s = %s;", jtype(type), def.getTemplateName(),
@@ -429,7 +408,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 	public void visit(TemplateDefinition def) {
 		IType type = def.getExpressionType();
 		IType efftype = type.getEffectiveLowerBound();
-
+		
 		if (efftype instanceof FunctionType && !type.isSequence()) {
 			visitFunction(def, (FunctionType) efftype);
 		} else {
@@ -638,7 +617,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 				public String get(String var) {
 					var = cast(var, single(call.getBaseNode()
 							.getExpressionType()), call.getCallingType()
-							.getArguments().get(0).type);
+							.getArgument(0).type);
 					if (callrettype.isSingleData()) {
 						fBuffer.initBuffer();
 						fBuffer.putl("%s(%s, %s%s%s);", callvar, fBuffer
@@ -662,7 +641,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		FunctionArgument farg = call.getArgument(i);
 		if (farg == null)
 			return "null";
-		final IType neededType = call.getCallingType().getArguments().get(i).type;
+		final IType neededType = call.getCallingType().getArgument(i).type;
 		return cast(farg, neededType);
 	}
 
