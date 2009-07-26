@@ -90,9 +90,9 @@ public class ScalarType extends CommonType implements IType {
 
 	@Override
 	public boolean essentiallyEquals(IType t) {
-		if (!(t instanceof ScalarType))
+		if (!(t.getEffective() instanceof ScalarType))
 			return false;
-		ScalarType st = ((ScalarType) t);
+		ScalarType st = ((ScalarType) t.getEffective());
 		return st.fTypeClass.equals(fTypeClass);
 	}
 

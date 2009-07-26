@@ -41,6 +41,11 @@ public abstract class CommonType implements IType, Cloneable {
 		return false;
 	}
 
+	@Override
+	public boolean isError() {
+		return false;
+	}
+
 	public IType dup() {
 		try {
 			return (IType) this.clone();
@@ -62,6 +67,10 @@ public abstract class CommonType implements IType, Cloneable {
 		return isSubtypeOf(type) && type.isSubtypeOf(this);
 	}
 
+	public static boolean attributeEquals(IType a, IType b) {
+		return !(a.isNull() ^ b.isNull() || a.isSequence() ^ b.isSequence());
+	}
+
 	@Override
 	public int hashCode() {
 		return toEssentialString().hashCode();
@@ -73,9 +82,11 @@ public abstract class CommonType implements IType, Cloneable {
 
 	@Override
 	public boolean equals(Object o) {
-		// TODO: do it neatly
-		if (o instanceof CommonType) {
-			return toString().equals(o.toString());
+		if (o instanceof IType) {
+			IType t = (IType)o;
+			if (!attributeEquals(this, t))
+				return false;
+			return essentiallyEquals(t);
 		}
 		return false;
 	}

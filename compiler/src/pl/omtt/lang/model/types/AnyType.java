@@ -47,6 +47,12 @@ public class AnyType extends CommonType implements IType {
 	}
 	
 	@Override
+	public boolean essentiallyEquals(IType t) {
+		return t.getEffective() instanceof AnyType;
+		
+	}
+	
+	@Override
 	public String singleToString () {
 		return "_";
 	}

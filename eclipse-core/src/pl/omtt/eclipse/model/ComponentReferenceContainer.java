@@ -111,16 +111,19 @@ class ComponentReferenceContainer {
 		Set<IResource> affected = new HashSet<IResource>();
 		for (String changed : getChangedSymbols(oldST, newST)) {
 			changed = id + "::" + changed;
+			System.err.println("changed: " + changed);
 			if (fBackReferences.containsKey(changed))
 				affected.addAll(fBackReferences.get(changed));
 		}
-		System.err.println("[bref] " + id + ": " + fBackReferences.get(id));
+		System.err.println("[bref] " + fBackReferences);
 		if (fBackReferences.containsKey(id + "::_"))
 			affected.addAll(fBackReferences.get(id + "::_"));
 		
+		System.err.println("affected oldST: " + oldST + "; " + affected);
 		// TODO: it's bad workaround -- symbol table should be remembered
 		if (oldST == null && fBackReferences.containsKey(id))
 			affected.addAll(fBackReferences.get(id));
+		System.err.println("affected ret: " + affected);
 		return affected;
 	}
 

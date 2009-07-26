@@ -1,11 +1,16 @@
 package pl.omtt.lang.code;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import pl.omtt.lang.model.ast.Literal;
 import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.FunctionType.Argument;
 
 public class TypesJavaCodeConverter {
+	private Set<Class<?>> fUsedClasses = new HashSet<Class<?>>();
+
 	String getInstance(IType type) {
 		if (type.isSequence())
 			return "new ArrayList<" + getSingle(type) + "> ()";
@@ -29,8 +34,10 @@ public class TypesJavaCodeConverter {
 			Class<?> cls = type.getAssociatedClass();
 			if (cls == null)
 				return "Object";
-			else
+			else {
+				fUsedClasses.add(cls);
 				return cls.getSimpleName();
+			}
 		}
 	}
 
@@ -94,5 +101,9 @@ public class TypesJavaCodeConverter {
 		} else {
 			return String.valueOf(o);
 		}
+	}
+
+	public Set<Class<?>> getUsedClasses() {
+		return fUsedClasses ;
 	}
 }

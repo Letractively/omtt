@@ -43,6 +43,9 @@ public class TypeUnifier {
 				+ (le ? " < " : " == ") + typeB.toDiagnosticString());
 		if (typeA == null || typeB == null)
 			return;
+		
+		if (typeA.isError() || typeB.isError())
+			return;
 
 		if (typeA.isFunction() && typeB.isFunction()) {
 			unifyFunctions(typeA, typeB, le);

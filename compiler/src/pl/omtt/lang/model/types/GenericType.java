@@ -93,11 +93,8 @@ public class GenericType extends CommonType implements IType {
 
 	@Override
 	public boolean essentiallyEquals(IType t) {
-		if (t instanceof GenericType) {
-			IType otype = ((GenericType) t).fLowerBoundType;
-			return (otype != null && otype == fLowerBoundType)
-					|| (otype == null && fLowerBoundType == t)
-					|| (fLowerBoundType == null && otype == this);
+		if (t.getEffective() instanceof GenericType) {
+			return fInstanceId == ((GenericType) t.getEffective()).fInstanceId;
 		}
 		return false;
 	}

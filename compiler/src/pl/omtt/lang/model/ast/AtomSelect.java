@@ -18,7 +18,7 @@ public class AtomSelect extends CommonSelectorNode implements IFoldExpression,
 
 	@Override
 	public IExpression getBaseNode() {
-		return (IExpression)this.getChild(0);
+		return (IExpression) this.getChild(0);
 	}
 
 	@Override

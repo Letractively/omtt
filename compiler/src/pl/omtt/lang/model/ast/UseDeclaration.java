@@ -42,7 +42,11 @@ public class UseDeclaration extends CommonNode implements IVisitable, ISymbolTab
 	
 	@Override
 	public void takeSymbolTable(SymbolTable symbolTable) throws TypeException {
-		symbolTable.getBase().importLibrary(getUseId(), getTargetNs());
+		try {
+			symbolTable.getBase().importLibrary(getUseId(), getTargetNs());
+		} catch (TypeException e) {
+			e.setCauseObject(this);
+		}
 	}
 
 	public String toString() {

@@ -122,6 +122,7 @@ public class OmttProjectModel {
 				e.printStackTrace();
 				return;
 			}
+			refreshTemplateBuildDirectory();
 			System.err.println("done");
 
 			for (IResource resource : compiled) {
@@ -169,7 +170,6 @@ public class OmttProjectModel {
 					itor.remove();
 			}
 		}
-		refreshTemplateBuildDirectory();
 		System.err.println("[ref] " + fComponentReferences.fReferences);
 	}
 
@@ -229,6 +229,7 @@ public class OmttProjectModel {
 				path).addFileExtension("class");
 		IResource buildFile = fProject.getWorkspace().getRoot().findMember(
 				buildFilePath);
+		System.err.println("deleting " + buildFile);
 		if (buildFile != null)
 			try {
 				buildFile.delete(true, null);
@@ -251,13 +252,19 @@ public class OmttProjectModel {
 		if (buildDir == null)
 			return;
 		try {
-			fProject.getWorkspace().getRoot().findMember(buildDir)
-					.refreshLocal(IResource.DEPTH_ZERO, null);
+			IResource bdir = fProject.getWorkspace().getRoot().findMember(
+					buildDir);
+			System.err.println("refreshing " + bdir);
+			if (bdir != null)
+				bdir.refreshLocal(IResource.DEPTH_ONE, null);
 			IPath templateBuildDir = buildDir.addTrailingSeparator().append(
 					Constants.OMTT_TEMPLATE_PACKAGE);
-			fProject.getWorkspace().getRoot().findMember(templateBuildDir)
-					.refreshLocal(IResource.DEPTH_INFINITE, null);
-		} catch (CoreException e) {
+			IResource tdir = fProject.getWorkspace().getRoot().findMember(
+					templateBuildDir);
+			System.err.println("refreshing " + tdir);
+			if (tdir != null)
+				tdir.refreshLocal(IResource.DEPTH_INFINITE, null);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

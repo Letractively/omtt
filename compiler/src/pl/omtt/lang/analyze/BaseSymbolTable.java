@@ -71,7 +71,7 @@ public class BaseSymbolTable extends SymbolTable {
 		try {
 			fImportedLibraries.add(fLibrarySTSupplier.get(id, fClassResolver));
 		} catch (ModuleNotFoundException e) {
-			throw new TypeException(e);
+			throw new TypeException(e.getMessage());
 		}
 	}
 

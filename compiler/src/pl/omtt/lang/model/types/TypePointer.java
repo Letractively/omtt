@@ -90,12 +90,7 @@ public class TypePointer extends CommonType implements IType {
 
 	@Override
 	public boolean essentiallyEquals(IType t) {
-		if (t instanceof TypePointer) {
-			IType otype = ((TypePointer) t).fPointer;
-			return (otype != null && otype == fPointer)
-					|| (otype == null && fPointer == t)
-					|| (fPointer == null && otype == this);
-		}
+		t.getEffective().essentiallyEquals(t.getEffective());
 		return false;
 	}
 
