@@ -34,6 +34,8 @@ public abstract class AbstractOmttParser extends Parser {
 		setTreeAdaptor(new CommonNodeAdaptor());
 
 		Program tree = (Program) program().getTree();
+		tree.setTokenStream(this.getTokenStream());
+		
 		TreeIterator itor = new TreeIterator(tree);
 		while (itor.hasNext()) {
 			Object o = itor.next();

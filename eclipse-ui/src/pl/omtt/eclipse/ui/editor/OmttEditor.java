@@ -1,7 +1,6 @@
 package pl.omtt.eclipse.ui.editor;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
@@ -43,15 +42,6 @@ public class OmttEditor extends TextEditor {
 		setDocumentProvider(new OmttDocumentProvider());
 		setSourceViewerConfiguration(new OmttSourceViewerConfiguration(this,
 				fColorProvider));
-	}
-
-	@Override
-	public void doSave(IProgressMonitor progressMonitor) {
-		super.doSave(progressMonitor);
-
-		OmttDocumentModel model = getOmttDocumentModel();
-		if (model != null)
-			model.persist();
 	}
 
 	@Override

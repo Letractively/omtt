@@ -1,5 +1,7 @@
 package pl.omtt.eclipse.util.stream;
 
+import java.net.URI;
+
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.Lexer;
 import org.eclipse.jface.text.BadLocationException;
@@ -20,9 +22,11 @@ import pl.omtt.util.stream.EnrichedRawStream;
  * @see IDocumentStream
  * @see org.antlr.runtime.ANTLRStringStream
  */
-public class DocumentRawStream extends EnrichedRawStream implements IDocumentStream {
+public class DocumentRawStream extends EnrichedRawStream implements
+		IDocumentStream {
 
 	protected IDocument d;
+	protected URI uri;
 
 	public DocumentRawStream(IDocument d) {
 		this.d = d;
@@ -33,6 +37,10 @@ public class DocumentRawStream extends EnrichedRawStream implements IDocumentStr
 		this(d);
 		this.l = l;
 		l.setCharStream(this);
+	}
+
+	public void setLocation(URI uri) {
+		this.uri = uri;
 	}
 
 	@Override
@@ -47,7 +55,7 @@ public class DocumentRawStream extends EnrichedRawStream implements IDocumentStr
 			return CharStream.EOF;
 		}
 	}
-	
+
 	@Override
 	public int size() {
 		return d.getLength();
@@ -64,7 +72,10 @@ public class DocumentRawStream extends EnrichedRawStream implements IDocumentStr
 
 	@Override
 	public String getSourceName() {
-		return d.toString();
+		if (uri == null)
+			return "document stream";
+		else
+			return uri.toString();
 	}
 
 	@Override

@@ -12,6 +12,6 @@ public class StringDataType extends ScalarType implements IType {
 	
 	@Override
 	public String singleToString() {
-		return "$";
+		return "Data";
 	}
 }

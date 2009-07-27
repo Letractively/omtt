@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -24,7 +25,9 @@ import org.eclipse.jdt.core.JavaModelException;
 
 import pl.omtt.compiler.OmttCompilationTask;
 import pl.omtt.compiler.OmttCompiler;
+import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.core.Constants;
+import pl.omtt.eclipse.util.stream.DocumentRawStream;
 import pl.omtt.lang.analyze.BaseSymbolTable;
 import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.ast.Program;
@@ -35,6 +38,8 @@ public class OmttProjectModel {
 
 	ComponentReferenceContainer fComponentReferences;
 	Map<IResource, SymbolTable> fSymbolTables = new HashMap<IResource, SymbolTable>();
+
+	Map<IFile, OmttDocumentModel> fDocumentModels = new HashMap<IFile, OmttDocumentModel>();
 
 	public OmttProjectModel(IProject project) {
 		fProject = project;
@@ -98,6 +103,7 @@ public class OmttProjectModel {
 
 	private void compile() {
 		refreshTemplateBuildDirectory();
+		Map<IResource, Program> compiled = new HashMap<IResource, Program>();
 		while (!fCompileQueue.isEmpty()) {
 			List<URI> uris = new ArrayList<URI>();
 			for (IResource resource : fCompileQueue) {
@@ -109,7 +115,7 @@ public class OmttProjectModel {
 					e.printStackTrace();
 				}
 			}
-			Set<IResource> compiled = fCompileQueue;
+			Set<IResource> turn = fCompileQueue;
 			fCompileQueue = new HashSet<IResource>();
 
 			System.err.println("compiling...");
@@ -125,10 +131,12 @@ public class OmttProjectModel {
 			refreshTemplateBuildDirectory();
 			System.err.println("done");
 
-			for (IResource resource : compiled) {
+			for (IResource resource : turn) {
 				final URI uri = resource.getLocationURI();
-
 				final Program program = task.getTree(uri);
+				if (hasDocumentModel(resource))
+					compiled.put(resource, program);
+
 				System.err.println(resource + ": " + program);
 				final BaseSymbolTable st = program.getSymbolTable();
 				final Set<String> references;
@@ -166,10 +174,18 @@ public class OmttProjectModel {
 
 			Iterator<IResource> itor = fCompileQueue.iterator();
 			while (itor.hasNext()) {
-				if (compiled.contains(itor.next()))
+				if (turn.contains(itor.next()))
 					itor.remove();
 			}
 		}
+
+		Iterator<Map.Entry<IResource, Program>> itor = compiled.entrySet()
+				.iterator();
+		while (itor.hasNext()) {
+			Map.Entry<IResource, Program> unit = itor.next();
+			reconcileDocumentModel(unit.getKey(), unit.getValue());
+		}
+
 		System.err.println("[ref] " + fComponentReferences.fReferences);
 	}
 
@@ -303,6 +319,12 @@ public class OmttProjectModel {
 		fSymbolTables.put(resource, newST);
 	}
 
+	private OmttCompilationTask getTask(URI source) {
+		List<URI> sources = new ArrayList<URI>();
+		sources.add(source);
+		return getTask(sources);
+	}
+
 	private OmttCompilationTask getTask(List<URI> sources) {
 		IJavaProject jproject = getJavaProject();
 		if (jproject == null)
@@ -333,6 +355,40 @@ public class OmttProjectModel {
 		OmttCompiler c = OmttModelManager.getOmttModelManager()
 				.getOmttCompiler();
 		return c.getTask(sources, target, classPath);
+	}
+
+	synchronized public Program parse(OmttDocumentModel model,
+			IProblemCollector problemCollector) {
+		final URI source = model.fFile.getLocationURI();
+		final DocumentRawStream stream = new DocumentRawStream(model.fDocument);
+		stream.setLocation(model.fFile.getLocationURI());
+
+		OmttCompilationTask task = getTask(source);
+		task.setSourceStream(source, stream);
+		if (problemCollector != null)
+			task.setProblemCollector(problemCollector);
+		task.buildTree();
+
+		return task.getTree(source);
+	}
+
+	public void registerDocumentModel(OmttDocumentModel model) {
+		fDocumentModels.put(model.getFile(), model);
+	}
+
+	public void unregisterDocumentModel(OmttDocumentModel model) {
+		fDocumentModels.remove(model);
+	}
+
+	private boolean hasDocumentModel(IResource resource) {
+		return fDocumentModels.containsKey(resource);
+	}
+
+	private void reconcileDocumentModel(IResource resource, Program tree) {
+		if (fDocumentModels.containsKey(resource)) {
+			OmttDocumentModel model = fDocumentModels.get(resource);
+			model.updateDocumentTree(tree);
+		}
 	}
 
 	protected IJavaProject getJavaProject() {

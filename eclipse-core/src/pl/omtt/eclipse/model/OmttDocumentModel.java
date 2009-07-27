@@ -9,6 +9,7 @@ import java.util.Set;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 import org.antlr.runtime.tree.TreeIterator;
@@ -23,28 +24,28 @@ import org.eclipse.jface.text.source.IAnnotationModelExtension;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
+import pl.omtt.compiler.reporting.PrintProblemCollector;
 import pl.omtt.eclipse.util.stream.DocumentRawStream;
 import pl.omtt.lang.analyze.SymbolTableCreator;
 import pl.omtt.lang.code.CodeGenerator;
 import pl.omtt.lang.grammar.OmttLexer;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.PrintTreeVisitor;
+import pl.omtt.lang.model.ast.Program;
 
 @SuppressWarnings("unused")
 public class OmttDocumentModel {
-	IDocument fDocument;
-	IFile fFile;
+	final IDocument fDocument;
+	final IFile fFile;
 
-	CommonTokenStream fDocumentTokens;
-	CommonTree fDocumentTree;
-	ProblemMarkerCollector fProblems;
+	OmttProjectModel fOmttProjectModel;
+	Program fDocumentTree;
 
 	// annotations
 	IAnnotationModel fAnnotationModel;
 	Set<Annotation> fAnnotations;
 
 	IEditorInput fEditorInput;
-//	IEclipseProblemCollector fInEditorProblems;
 
 	Set<IDocumentModelListener> fListeners = new HashSet<IDocumentModelListener>();
 
@@ -55,13 +56,29 @@ public class OmttDocumentModel {
 	public OmttDocumentModel(IDocument document, IFile file) {
 		fDocument = document;
 		fFile = file;
-		fProblems = new ProblemMarkerCollector();
 
-		persist();
+		fOmttProjectModel = OmttModelManager.getOmttModelManager()
+				.getProjectModel(file.getProject());
+		if (fOmttProjectModel != null)
+			fOmttProjectModel.registerDocumentModel(this);
+		
+		reconcile();
 	}
 
-	public CommonTree getDocumentTree() {
+	public IDocument getDocument() {
+		return fDocument;
+	}
+
+	public IFile getFile() {
+		return fFile;
+	}
+
+	public Program getDocumentTree() {
 		return fDocumentTree;
+	}
+
+	public TokenStream getDocumentTokens() {
+		return fDocumentTree.getTokenStream();
 	}
 
 	public Tree getNodeAt(int offset, int length) {
@@ -72,14 +89,14 @@ public class OmttDocumentModel {
 			for (int i = 0; i < current.getChildCount(); i++) {
 				Tree child = current.getChild(i);
 				try {
-					CommonToken start = (CommonToken) fDocumentTokens.get(child
-							.getTokenStartIndex());
-					CommonToken stop = (CommonToken) fDocumentTokens.get(child
-							.getTokenStopIndex());
+					CommonToken start = (CommonToken) getDocumentTokens().get(
+							child.getTokenStartIndex());
+					CommonToken stop = (CommonToken) getDocumentTokens().get(
+							child.getTokenStopIndex());
 
 					if (start.getStartIndex() <= offset
 							&& stop.getStopIndex() >= offset + length) {
-						current = (CommonTree)child;
+						current = (CommonTree) child;
 						finishFlag = false;
 						break;
 					}
@@ -91,26 +108,20 @@ public class OmttDocumentModel {
 	}
 
 	public CommonTree getNodeAnchoredAt(int offset, int length) {
-		TreeIterator itor = new TreeIterator(fDocumentTree);
-		while(itor.hasNext()) {
+		TreeIterator itor = new TreeIterator(getDocumentTree());
+		while (itor.hasNext()) {
 			Object o = itor.next();
 			if (o instanceof CommonTree) {
-				if (((CommonTree)o).getToken() instanceof CommonToken) {
-					CommonToken token = (CommonToken)((CommonTree)o).getToken();
-					if (token.getStartIndex() <= offset && token.getStopIndex() >= offset + length)
-						return (CommonTree)o;
+				if (((CommonTree) o).getToken() instanceof CommonToken) {
+					CommonToken token = (CommonToken) ((CommonTree) o)
+							.getToken();
+					if (token.getStartIndex() <= offset
+							&& token.getStopIndex() >= offset + length)
+						return (CommonTree) o;
 				}
 			}
 		}
 		return null;
-	}
-
-	public CommonTokenStream getDocumentTokens() {
-		return fDocumentTokens;
-	}
-
-	public IDocument getDocument() {
-		return fDocument;
 	}
 
 	public void addDocumentModelListener(IDocumentModelListener listener) {
@@ -131,33 +142,24 @@ public class OmttDocumentModel {
 		fAnnotations = new HashSet<Annotation>();
 		fAnnotationModel = annotationModel;
 		fEditorInput = editorInput;
-//		fInEditorProblems = new ProblemMarkerCollector();
 	}
 
-	public synchronized void persist() {
-		if (fFile != null)
-			try {
-				fFile.deleteMarkers(EclipseProblem.BUILD_PROBLEM_MARKER, false,
-						IResource.DEPTH_INFINITE);
-			} catch (CoreException e) {
-				e.printStackTrace();
-				return;
-			}
-
-//		fProblems.clear();
-//		parse(fProblems);
-
-//		if (fFile != null)
-//			fProblems.createMarkers(fFile);
-
-		fireDocumentModelChanged(true);
+	synchronized public void updateDocumentTree(Program tree) {
+		fDocumentTree = tree;
+		doReconcile();
 	}
 
 	synchronized public void reconcile() {
-//		fInEditorProblems.clear();
-//		parse(fInEditorProblems);
+		System.err.println("reconcile...");
+		fDocumentTree = fOmttProjectModel.parse(this,
+				new PrintProblemCollector());
+		System.out.println("new tree: ");
+		new PrintTreeVisitor().run(fDocumentTree);
+		doReconcile();
+	}
 
-//		updateAnnotations();
+	private void doReconcile() {
+		System.err.println("doReconcile");
 		fireDocumentModelChanged(false);
 	}
 
@@ -176,49 +178,29 @@ public class OmttDocumentModel {
 
 			Position position = fAnnotationModel.getPosition(annotation);
 			EclipseProblem problem = new EclipseProblem(position, annotation);
-//			if (fInEditorProblems.contains(problem)) {
-//				MarkerAnnotation ma = (MarkerAnnotation) annotation;
-//				fInEditorProblems.ceiling(problem).attachMarker(ma.getMarker());
-//			} else {
-//				fAnnotationModel.removeAnnotation(annotation);
-//				annotation.markDeleted(true);
-//				deletedProblems.put(annotation, position);
-//			}
+			// if (fInEditorProblems.contains(problem)) {
+			// MarkerAnnotation ma = (MarkerAnnotation) annotation;
+			// fInEditorProblems.ceiling(problem).attachMarker(ma.getMarker());
+			// } else {
+			// fAnnotationModel.removeAnnotation(annotation);
+			// annotation.markDeleted(true);
+			// deletedProblems.put(annotation, position);
+			// }
 		}
-/*
-		if (fAnnotationModel instanceof IAnnotationModelExtension) {
-			IAnnotationModelExtension ext = (IAnnotationModelExtension) fAnnotationModel;
-			Map<Annotation, Position> activeProblems = fInEditorProblems
-					.toAnnotationMap();
-			ext.replaceAnnotations(fAnnotations
-					.toArray(new Annotation[fAnnotations.size()]),
-					activeProblems);
-			fAnnotations = activeProblems.keySet();
-		}
-*/
+		/*
+		 * if (fAnnotationModel instanceof IAnnotationModelExtension) {
+		 * IAnnotationModelExtension ext = (IAnnotationModelExtension)
+		 * fAnnotationModel; Map<Annotation, Position> activeProblems =
+		 * fInEditorProblems .toAnnotationMap();
+		 * ext.replaceAnnotations(fAnnotations .toArray(new
+		 * Annotation[fAnnotations.size()]), activeProblems); fAnnotations =
+		 * activeProblems.keySet(); }
+		 */
 	}
-/*
-	private void parse(ProblemMarkerCollector problems) {
-		fDocumentTree = null;
-		fDocumentTokens = null;
 
-		CharStream stream = new DocumentRawStream(fDocument);
-		OmttLexer lexer = new OmttLexer(stream);
-		lexer.connectProblemContainer(problems);
-
-		fDocumentTokens = new CommonTokenStream(lexer);
-		OmttParser parser = new OmttParser(
-				fDocumentTokens);
-		parser.connectProblemContainer(problems);
-	}
-*/
-/*
-	public IEclipseProblemCollector getProblems() {
-		return fProblems;
-	}
-*/
 	public void dispose() {
-		fProblems = null;
-//		fInEditorProblems = null;
+		fAnnotations = null;
+		fDocumentTree = null;
+		fListeners = null;
 	}
 }

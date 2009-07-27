@@ -11,6 +11,7 @@ import pl.omtt.lang.model.types.AnyType;
 import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.NumericType;
 import pl.omtt.lang.model.types.ScalarType;
+import pl.omtt.lang.model.types.StringDataType;
 import pl.omtt.lang.model.types.TypeException;
 
 public class TypeReference extends CommonNode implements IVisitable {
@@ -33,6 +34,8 @@ public class TypeReference extends CommonNode implements IVisitable {
 					type = NumericType.realInstance();
 				else if ("Char".equals(name))
 					type = ScalarType.charInstance();
+				else if ("Data".equals(name))
+					type = new StringDataType();
 				else {
 					Class<?> cls = cr.get(name);
 					if (Number.class.isAssignableFrom(cls))
