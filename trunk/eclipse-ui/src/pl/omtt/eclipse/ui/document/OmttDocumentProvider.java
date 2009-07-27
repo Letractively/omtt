@@ -1,4 +1,4 @@
-package pl.omtt.eclipse.ui.editor;
+package pl.omtt.eclipse.ui.document;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
@@ -6,7 +6,6 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.TextFileDocumentProvider;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 
-import pl.omtt.eclipse.model.OmttDocumentModel;
 
 public class OmttDocumentProvider extends TextFileDocumentProvider {
 

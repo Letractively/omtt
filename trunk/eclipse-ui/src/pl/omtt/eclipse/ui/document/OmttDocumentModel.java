@@ -1,4 +1,4 @@
-package pl.omtt.eclipse.model;
+package pl.omtt.eclipse.ui.document;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,7 +24,11 @@ import org.eclipse.jface.text.source.IAnnotationModelExtension;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 
+import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.compiler.reporting.PrintProblemCollector;
+import pl.omtt.eclipse.model.IDocumentModelListener;
+import pl.omtt.eclipse.model.OmttModelManager;
+import pl.omtt.eclipse.model.OmttProjectModel;
 import pl.omtt.eclipse.util.stream.DocumentRawStream;
 import pl.omtt.lang.analyze.SymbolTableCreator;
 import pl.omtt.lang.code.CodeGenerator;
@@ -41,10 +45,7 @@ public class OmttDocumentModel {
 	OmttProjectModel fOmttProjectModel;
 	Program fDocumentTree;
 
-	// annotations
-	IAnnotationModel fAnnotationModel;
-	Set<Annotation> fAnnotations;
-
+	ProblemAnnotationCollector fProblemAnnotationCollector;
 	IEditorInput fEditorInput;
 
 	Set<IDocumentModelListener> fListeners = new HashSet<IDocumentModelListener>();
@@ -59,9 +60,6 @@ public class OmttDocumentModel {
 
 		fOmttProjectModel = OmttModelManager.getOmttModelManager()
 				.getProjectModel(file.getProject());
-		if (fOmttProjectModel != null)
-			fOmttProjectModel.registerDocumentModel(this);
-		
 		reconcile();
 	}
 
@@ -139,8 +137,7 @@ public class OmttDocumentModel {
 
 	public void setEditor(IEditorInput editorInput,
 			IAnnotationModel annotationModel) {
-		fAnnotations = new HashSet<Annotation>();
-		fAnnotationModel = annotationModel;
+		fProblemAnnotationCollector = new ProblemAnnotationCollector(annotationModel);
 		fEditorInput = editorInput;
 	}
 
@@ -151,8 +148,20 @@ public class OmttDocumentModel {
 
 	synchronized public void reconcile() {
 		System.err.println("reconcile...");
-		fDocumentTree = fOmttProjectModel.parse(this,
-				new PrintProblemCollector());
+		
+		IProblemCollector problemCollector;
+		if (fProblemAnnotationCollector != null)
+			problemCollector = fProblemAnnotationCollector;
+		else
+			problemCollector = new PrintProblemCollector();
+
+		final DocumentRawStream stream = new DocumentRawStream(fDocument);
+		stream.setLocation(fFile.getLocationURI());
+
+		fDocumentTree = fOmttProjectModel.parse(fFile, stream, problemCollector);
+		if (fProblemAnnotationCollector != null)
+			fProblemAnnotationCollector.apply();
+		
 		System.out.println("new tree: ");
 		new PrintTreeVisitor().run(fDocumentTree);
 		doReconcile();
@@ -163,43 +172,7 @@ public class OmttDocumentModel {
 		fireDocumentModelChanged(false);
 	}
 
-	@SuppressWarnings("unchecked")
-	private void updateAnnotations() {
-		Map<Annotation, Position> deletedProblems = new HashMap<Annotation, Position>();
-
-		Iterator<Annotation> annItor = fAnnotationModel.getAnnotationIterator();
-		while (annItor.hasNext()) {
-			Annotation annotation = annItor.next();
-			if (!(annotation instanceof MarkerAnnotation))
-				continue;
-
-			if (annotation.isMarkedDeleted())
-				continue;
-
-			Position position = fAnnotationModel.getPosition(annotation);
-			EclipseProblem problem = new EclipseProblem(position, annotation);
-			// if (fInEditorProblems.contains(problem)) {
-			// MarkerAnnotation ma = (MarkerAnnotation) annotation;
-			// fInEditorProblems.ceiling(problem).attachMarker(ma.getMarker());
-			// } else {
-			// fAnnotationModel.removeAnnotation(annotation);
-			// annotation.markDeleted(true);
-			// deletedProblems.put(annotation, position);
-			// }
-		}
-		/*
-		 * if (fAnnotationModel instanceof IAnnotationModelExtension) {
-		 * IAnnotationModelExtension ext = (IAnnotationModelExtension)
-		 * fAnnotationModel; Map<Annotation, Position> activeProblems =
-		 * fInEditorProblems .toAnnotationMap();
-		 * ext.replaceAnnotations(fAnnotations .toArray(new
-		 * Annotation[fAnnotations.size()]), activeProblems); fAnnotations =
-		 * activeProblems.keySet(); }
-		 */
-	}
-
 	public void dispose() {
-		fAnnotations = null;
 		fDocumentTree = null;
 		fListeners = null;
 	}

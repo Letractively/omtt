@@ -14,9 +14,9 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 
 import pl.omtt.eclipse.model.IDocumentModelListener;
-import pl.omtt.eclipse.model.OmttDocumentModel;
 import pl.omtt.eclipse.ui.IOmttPreferenceConstants;
 import pl.omtt.eclipse.ui.OmttUI;
+import pl.omtt.eclipse.ui.document.OmttDocumentModel;
 import pl.omtt.eclipse.ui.partitioner.AbstractPartitionNode;
 import pl.omtt.eclipse.ui.partitioner.OmttPartitioner;
 import pl.omtt.eclipse.ui.partitioner.PartitionTagNode;

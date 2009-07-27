@@ -29,6 +29,8 @@ public class CompilationQueue implements Iterable<URI> {
 		verifyFileName(uri, program);
 
 		final ModuleDeclaration md = program.getModuleDeclaration();
+		if (md == null)
+			return;
 
 		String mid = md.getModuleName();
 		String pid = md.getPackageName();

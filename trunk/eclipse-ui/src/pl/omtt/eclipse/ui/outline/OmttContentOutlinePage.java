@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
 import pl.omtt.eclipse.model.IDocumentModelListener;
-import pl.omtt.eclipse.model.OmttDocumentModel;
+import pl.omtt.eclipse.ui.document.OmttDocumentModel;
 import pl.omtt.eclipse.ui.editor.OmttEditor;
 import pl.omtt.lang.model.ast.TemplateDefinition;
 

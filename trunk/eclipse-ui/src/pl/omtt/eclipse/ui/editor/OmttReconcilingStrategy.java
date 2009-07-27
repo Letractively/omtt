@@ -22,8 +22,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 import pl.omtt.compiler.reporting.IAntlrProblemCollector;
 import pl.omtt.compiler.reporting.Problem;
-import pl.omtt.eclipse.model.OmttDocumentModel;
 import pl.omtt.eclipse.model.ProblemMarkerCollector;
+import pl.omtt.eclipse.ui.document.OmttDocumentModel;
 import pl.omtt.lang.grammar.OmttLexer;
 
 @SuppressWarnings("unused")
