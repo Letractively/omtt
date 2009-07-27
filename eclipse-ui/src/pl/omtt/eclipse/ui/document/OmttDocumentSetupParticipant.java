@@ -1,4 +1,4 @@
-package pl.omtt.eclipse.ui.editor;
+package pl.omtt.eclipse.ui.document;
 
 import org.eclipse.core.filebuffers.IDocumentSetupParticipant;
 import org.eclipse.jface.text.IDocument;

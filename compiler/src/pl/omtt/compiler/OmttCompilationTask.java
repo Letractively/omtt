@@ -87,7 +87,7 @@ public class OmttCompilationTask {
 	 * compiler treats uri as path to the source file.
 	 * 
 	 * @param uri
-	 *            identifier of source file
+	 *            identifier of source
 	 * @param stream
 	 *            source file stream
 	 */

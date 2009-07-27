@@ -1,39 +1,19 @@
 package pl.omtt.eclipse.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.text.source.Annotation;
 
 import pl.omtt.compiler.reporting.AbstractProblemCollector;
 import pl.omtt.compiler.reporting.Problem;
 
-/**
- * <code>IEclipseProblemContainer</code> implementation based on
- * <code>AbstractProblemCollector</code>.
- * 
- * @author Andrzej Chodor
- */
 public class ProblemMarkerCollector extends AbstractProblemCollector {
-	Map<Problem, IMarker> fMarkers = new HashMap<Problem, IMarker>();
-	Map<Problem, Annotation> fAnnotations = new HashMap<Problem, Annotation>();
-
 	public ProblemMarkerCollector() {
 		super();
 	}
-
-	/*
-	 * @Override public Map<Annotation, Position> toAnnotationMap() {
-	 * Map<Annotation, Position> map = new HashMap<Annotation, Position>(); for
-	 * (Problem problem : this) if (getAttachedMarker(problem) == null)
-	 * map.put(toAnnotation(problem), toPosition(problem)); return map; }
-	 */
 
 	/**
 	 * @see AbstractProblemCollector#collect(Problem)

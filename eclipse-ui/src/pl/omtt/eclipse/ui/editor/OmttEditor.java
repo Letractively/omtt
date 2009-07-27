@@ -14,12 +14,13 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
-import pl.omtt.eclipse.model.OmttDocumentModel;
 import pl.omtt.eclipse.ui.IOmttPreferenceConstants;
 import pl.omtt.eclipse.ui.OmttUI;
 import pl.omtt.eclipse.ui.decoration.OmttFoldingManager;
 import pl.omtt.eclipse.ui.decoration.OmttRegionPairMatcher;
 import pl.omtt.eclipse.ui.decoration.OmttSourceViewerDecorationSupport;
+import pl.omtt.eclipse.ui.document.OmttDocumentModel;
+import pl.omtt.eclipse.ui.document.OmttDocumentProvider;
 import pl.omtt.eclipse.ui.outline.OmttContentOutlinePage;
 
 public class OmttEditor extends TextEditor {
