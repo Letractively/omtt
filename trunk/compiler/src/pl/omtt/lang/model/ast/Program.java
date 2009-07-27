@@ -1,6 +1,7 @@
 package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.lang.analyze.BaseSymbolTable;
@@ -14,6 +15,7 @@ import pl.omtt.lang.model.types.TypeException;
 public class Program extends CommonNode implements IVisitable,
 		ISymbolTableParticipant {
 	BaseSymbolTable fSymbolTable;
+	TokenStream fTokenStream;
 
 	public Program(int token) {
 		super(new CommonToken(token, "program"));
@@ -41,6 +43,14 @@ public class Program extends CommonNode implements IVisitable,
 
 	public BaseSymbolTable getSymbolTable () {
 		return fSymbolTable;
+	}
+
+	public TokenStream getTokenStream () {
+		return fTokenStream;
+	}
+	
+	public void setTokenStream (TokenStream tokenStream) {
+		fTokenStream = tokenStream;
 	}
 	
 	@Override

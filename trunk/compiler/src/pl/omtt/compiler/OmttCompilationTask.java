@@ -32,6 +32,7 @@ import pl.omtt.lang.grammar.OmttLexer;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.ast.Program;
 import pl.omtt.util.stream.FileEnrichedStream;
+import pl.omtt.util.stream.IEnrichedStream;
 
 public class OmttCompilationTask {
 	final OmttCompiler fCompiler;
@@ -46,6 +47,8 @@ public class OmttCompilationTask {
 
 	final Map<URI, Program> fTrees = new HashMap<URI, Program>();
 	final Map<URI, OmttJavaSource> fJavaSources = new HashMap<URI, OmttJavaSource>();
+
+	private Map<URI, IEnrichedStream> fSourceFileStreams;
 
 	protected OmttCompilationTask(OmttCompiler compiler, List<URI> sources,
 			URI targetPath, List<URI> classPath) {
@@ -77,6 +80,21 @@ public class OmttCompilationTask {
 
 	public void setCollectLibraryReferences(boolean collectLibraryReferences) {
 		fCollectLibraryReferences = collectLibraryReferences;
+	}
+
+	/**
+	 * Allows for optional supply of input OMTT file stream. When not set,
+	 * compiler treats uri as path to the source file.
+	 * 
+	 * @param uri
+	 *            identifier of source file
+	 * @param stream
+	 *            source file stream
+	 */
+	public void setSourceStream(URI uri, IEnrichedStream stream) {
+		if (fSourceFileStreams == null)
+			fSourceFileStreams = new HashMap<URI, IEnrichedStream>();
+		fSourceFileStreams.put(uri, stream);
 	}
 
 	public void compile() {
@@ -154,13 +172,16 @@ public class OmttCompilationTask {
 	protected boolean parse(URI uri) {
 		// lexing phase
 		CharStream input;
-		try {
-			input = new FileEnrichedStream(uri);
-		} catch (FileNotFoundException e) {
-			fProblemCollector.reportError(uri, e);
-			fState = STATE_FATAL;
-			return false;
-		}
+		if (fSourceFileStreams != null && fSourceFileStreams.containsKey(uri))
+			input = fSourceFileStreams.get(uri);
+		else
+			try {
+				input = new FileEnrichedStream(uri);
+			} catch (FileNotFoundException e) {
+				fProblemCollector.reportError(uri, e);
+				fState = STATE_FATAL;
+				return false;
+			}
 		OmttLexer lexer = new OmttLexer(input);
 		lexer.connectProblemContainer(fProblemCollector);
 
