@@ -46,8 +46,13 @@ public class OmttLoader {
 			modname = id;
 		}
 
-		return Constants.OMTT_TEMPLATE_PACKAGE + "." + pkgname + "."
-				+ modname.substring(0, 1).toUpperCase() + modname.substring(1);
+		final String className = modname.substring(0, 1).toUpperCase()
+				+ modname.substring(1);
+		if (Constants.OMTT_STDLIB_PREFIX.equals(pkgname))
+			return Constants.OMTT_STDLIB_PACKAGE + "." + className;
+		else
+			return Constants.OMTT_TEMPLATE_PACKAGE + "." + pkgname + "."
+					+ className;
 	}
 
 	public class Template {

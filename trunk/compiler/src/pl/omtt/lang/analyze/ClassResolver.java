@@ -1,4 +1,4 @@
-package pl.omtt.lang.code;
+package pl.omtt.lang.analyze;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class ClassResolver {
 		Class<?> aclass = fLoader.loadClass(className);
 		fClassMap.put(aclass.getSimpleName(), aclass);
 	}
-	
+
 	public void putPackage (String packageName) throws ClassNotFoundException {
 		fPackages.add(packageName);
 	}

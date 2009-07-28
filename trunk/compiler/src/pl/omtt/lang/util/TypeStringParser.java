@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g 2009-07-24 01:29:12
+// $ANTLR 3.1.2 /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g 2009-07-28 04:12:40
 
 package pl.omtt.lang.util;
 
@@ -127,28 +127,28 @@ public class TypeStringParser extends Parser {
     };
 
     // $ANTLR start "function"
-    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:37:1: function : (args= argument )+ '->' ret= type -> $ret ( $args)+ ;
+    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:37:1: function : ( argument )+ '->' ret= type -> $ret ( argument )+ ;
     public final TypeStringParser.function_return function() throws RecognitionException {
         TypeStringParser.function_return retval = new TypeStringParser.function_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token string_literal3=null;
-        TypeStringParser.argument_return args = null;
-
+        Token string_literal4=null;
         TypeStringParser.type_return ret = null;
 
+        TypeStringParser.argument_return argument3 = null;
 
-        Object string_literal3_tree=null;
+
+        Object string_literal4_tree=null;
         RewriteRuleTokenStream stream_15=new RewriteRuleTokenStream(adaptor,"token 15");
         RewriteRuleSubtreeStream stream_argument=new RewriteRuleSubtreeStream(adaptor,"rule argument");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:38:2: ( (args= argument )+ '->' ret= type -> $ret ( $args)+ )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:38:4: (args= argument )+ '->' ret= type
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:38:2: ( ( argument )+ '->' ret= type -> $ret ( argument )+ )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:38:4: ( argument )+ '->' ret= type
             {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:38:8: (args= argument )+
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:38:4: ( argument )+
             int cnt1=0;
             loop1:
             do {
@@ -162,14 +162,14 @@ public class TypeStringParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:38:8: args= argument
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:38:4: argument
             	    {
-            	    pushFollow(FOLLOW_argument_in_function96);
-            	    args=argument();
+            	    pushFollow(FOLLOW_argument_in_function94);
+            	    argument3=argument();
 
             	    state._fsp--;
 
-            	    stream_argument.add(args.getTree());
+            	    stream_argument.add(argument3.getTree());
 
             	    }
             	    break;
@@ -183,10 +183,10 @@ public class TypeStringParser extends Parser {
                 cnt1++;
             } while (true);
 
-            string_literal3=(Token)match(input,15,FOLLOW_15_in_function99);  
-            stream_15.add(string_literal3);
+            string_literal4=(Token)match(input,15,FOLLOW_15_in_function97);  
+            stream_15.add(string_literal4);
 
-            pushFollow(FOLLOW_type_in_function103);
+            pushFollow(FOLLOW_type_in_function101);
             ret=type();
 
             state._fsp--;
@@ -195,29 +195,28 @@ public class TypeStringParser extends Parser {
 
 
             // AST REWRITE
-            // elements: args, ret
+            // elements: ret, argument
             // token labels: 
-            // rule labels: ret, retval, args
+            // rule labels: ret, retval
             // token list labels: 
             // rule list labels: 
             // wildcard labels: 
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_ret=new RewriteRuleSubtreeStream(adaptor,"rule ret",ret!=null?ret.tree:null);
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-            RewriteRuleSubtreeStream stream_args=new RewriteRuleSubtreeStream(adaptor,"rule args",args!=null?args.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 39:3: -> $ret ( $args)+
+            // 39:3: -> $ret ( argument )+
             {
                 adaptor.addChild(root_0, stream_ret.nextTree());
-                if ( !(stream_args.hasNext()) ) {
+                if ( !(stream_argument.hasNext()) ) {
                     throw new RewriteEarlyExitException();
                 }
-                while ( stream_args.hasNext() ) {
-                    adaptor.addChild(root_0, stream_args.nextTree());
+                while ( stream_argument.hasNext() ) {
+                    adaptor.addChild(root_0, stream_argument.nextTree());
 
                 }
-                stream_args.reset();
+                stream_argument.reset();
 
             }
 
@@ -255,11 +254,11 @@ public class TypeStringParser extends Parser {
 
         Object root_0 = null;
 
-        Token OPTIONAL4=null;
-        TypeStringParser.type_return type5 = null;
+        Token OPTIONAL5=null;
+        TypeStringParser.type_return type6 = null;
 
 
-        Object OPTIONAL4_tree=null;
+        Object OPTIONAL5_tree=null;
         RewriteRuleTokenStream stream_OPTIONAL=new RewriteRuleTokenStream(adaptor,"token OPTIONAL");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try {
@@ -277,8 +276,8 @@ public class TypeStringParser extends Parser {
                 case 1 :
                     // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:43:4: OPTIONAL
                     {
-                    OPTIONAL4=(Token)match(input,OPTIONAL,FOLLOW_OPTIONAL_in_argument125);  
-                    stream_OPTIONAL.add(OPTIONAL4);
+                    OPTIONAL5=(Token)match(input,OPTIONAL,FOLLOW_OPTIONAL_in_argument122);  
+                    stream_OPTIONAL.add(OPTIONAL5);
 
 
                     }
@@ -286,12 +285,12 @@ public class TypeStringParser extends Parser {
 
             }
 
-            pushFollow(FOLLOW_type_in_argument128);
-            type5=type();
+            pushFollow(FOLLOW_type_in_argument125);
+            type6=type();
 
             state._fsp--;
 
-            stream_type.add(type5.getTree());
+            stream_type.add(type6.getTree());
 
 
             // AST REWRITE
@@ -359,19 +358,19 @@ public class TypeStringParser extends Parser {
 
         Object root_0 = null;
 
-        Token CLASS_ID6=null;
-        Token char_literal8=null;
-        Token char_literal10=null;
-        TypeStringParser.modifiers_return modifiers7 = null;
+        Token CLASS_ID7=null;
+        Token char_literal9=null;
+        Token char_literal11=null;
+        TypeStringParser.modifiers_return modifiers8 = null;
 
-        TypeStringParser.function_return function9 = null;
+        TypeStringParser.function_return function10 = null;
 
-        TypeStringParser.modifiers_return modifiers11 = null;
+        TypeStringParser.modifiers_return modifiers12 = null;
 
 
-        Object CLASS_ID6_tree=null;
-        Object char_literal8_tree=null;
-        Object char_literal10_tree=null;
+        Object CLASS_ID7_tree=null;
+        Object char_literal9_tree=null;
+        Object char_literal11_tree=null;
         RewriteRuleTokenStream stream_17=new RewriteRuleTokenStream(adaptor,"token 17");
         RewriteRuleTokenStream stream_16=new RewriteRuleTokenStream(adaptor,"token 16");
         RewriteRuleTokenStream stream_CLASS_ID=new RewriteRuleTokenStream(adaptor,"token CLASS_ID");
@@ -398,15 +397,15 @@ public class TypeStringParser extends Parser {
                 case 1 :
                     // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:48:4: CLASS_ID modifiers
                     {
-                    CLASS_ID6=(Token)match(input,CLASS_ID,FOLLOW_CLASS_ID_in_type152);  
-                    stream_CLASS_ID.add(CLASS_ID6);
+                    CLASS_ID7=(Token)match(input,CLASS_ID,FOLLOW_CLASS_ID_in_type149);  
+                    stream_CLASS_ID.add(CLASS_ID7);
 
-                    pushFollow(FOLLOW_modifiers_in_type154);
-                    modifiers7=modifiers();
+                    pushFollow(FOLLOW_modifiers_in_type151);
+                    modifiers8=modifiers();
 
                     state._fsp--;
 
-                    stream_modifiers.add(modifiers7.getTree());
+                    stream_modifiers.add(modifiers8.getTree());
 
 
                     // AST REWRITE
@@ -446,28 +445,28 @@ public class TypeStringParser extends Parser {
                 case 2 :
                     // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:50:4: '(' function ')' modifiers
                     {
-                    char_literal8=(Token)match(input,16,FOLLOW_16_in_type172);  
-                    stream_16.add(char_literal8);
+                    char_literal9=(Token)match(input,16,FOLLOW_16_in_type169);  
+                    stream_16.add(char_literal9);
 
-                    pushFollow(FOLLOW_function_in_type174);
-                    function9=function();
-
-                    state._fsp--;
-
-                    stream_function.add(function9.getTree());
-                    char_literal10=(Token)match(input,17,FOLLOW_17_in_type176);  
-                    stream_17.add(char_literal10);
-
-                    pushFollow(FOLLOW_modifiers_in_type178);
-                    modifiers11=modifiers();
+                    pushFollow(FOLLOW_function_in_type171);
+                    function10=function();
 
                     state._fsp--;
 
-                    stream_modifiers.add(modifiers11.getTree());
+                    stream_function.add(function10.getTree());
+                    char_literal11=(Token)match(input,17,FOLLOW_17_in_type173);  
+                    stream_17.add(char_literal11);
+
+                    pushFollow(FOLLOW_modifiers_in_type175);
+                    modifiers12=modifiers();
+
+                    state._fsp--;
+
+                    stream_modifiers.add(modifiers12.getTree());
 
 
                     // AST REWRITE
-                    // elements: function, modifiers
+                    // elements: modifiers, function
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -533,9 +532,9 @@ public class TypeStringParser extends Parser {
 
         Object root_0 = null;
 
-        TypeStringParser.generic_return generic12 = null;
+        TypeStringParser.generic_return generic13 = null;
 
-        TypeStringParser.sequence_return sequence13 = null;
+        TypeStringParser.sequence_return sequence14 = null;
 
 
 
@@ -556,12 +555,12 @@ public class TypeStringParser extends Parser {
                 case 1 :
                     // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:55:4: generic
                     {
-                    pushFollow(FOLLOW_generic_in_modifiers202);
-                    generic12=generic();
+                    pushFollow(FOLLOW_generic_in_modifiers199);
+                    generic13=generic();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, generic12.getTree());
+                    adaptor.addChild(root_0, generic13.getTree());
 
                     }
                     break;
@@ -579,12 +578,12 @@ public class TypeStringParser extends Parser {
                 case 1 :
                     // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:55:13: sequence
                     {
-                    pushFollow(FOLLOW_sequence_in_modifiers205);
-                    sequence13=sequence();
+                    pushFollow(FOLLOW_sequence_in_modifiers202);
+                    sequence14=sequence();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, sequence13.getTree());
+                    adaptor.addChild(root_0, sequence14.getTree());
 
                     }
                     break;
@@ -625,13 +624,13 @@ public class TypeStringParser extends Parser {
 
         Object root_0 = null;
 
-        Token char_literal14=null;
-        Token INTEGER15=null;
-        Token char_literal16=null;
+        Token char_literal15=null;
+        Token INTEGER16=null;
+        Token char_literal17=null;
 
-        Object char_literal14_tree=null;
-        Object INTEGER15_tree=null;
-        Object char_literal16_tree=null;
+        Object char_literal15_tree=null;
+        Object INTEGER16_tree=null;
+        Object char_literal17_tree=null;
         RewriteRuleTokenStream stream_INTEGER=new RewriteRuleTokenStream(adaptor,"token INTEGER");
         RewriteRuleTokenStream stream_19=new RewriteRuleTokenStream(adaptor,"token 19");
         RewriteRuleTokenStream stream_18=new RewriteRuleTokenStream(adaptor,"token 18");
@@ -640,14 +639,14 @@ public class TypeStringParser extends Parser {
             // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:59:2: ( '[' INTEGER ']' -> ^( GENERIC INTEGER ) )
             // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:59:4: '[' INTEGER ']'
             {
-            char_literal14=(Token)match(input,18,FOLLOW_18_in_generic217);  
-            stream_18.add(char_literal14);
+            char_literal15=(Token)match(input,18,FOLLOW_18_in_generic214);  
+            stream_18.add(char_literal15);
 
-            INTEGER15=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_generic219);  
-            stream_INTEGER.add(INTEGER15);
+            INTEGER16=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_generic216);  
+            stream_INTEGER.add(INTEGER16);
 
-            char_literal16=(Token)match(input,19,FOLLOW_19_in_generic221);  
-            stream_19.add(char_literal16);
+            char_literal17=(Token)match(input,19,FOLLOW_19_in_generic218);  
+            stream_19.add(char_literal17);
 
 
 
@@ -710,9 +709,9 @@ public class TypeStringParser extends Parser {
 
         Object root_0 = null;
 
-        Token SEQUENCE17=null;
+        Token SEQUENCE18=null;
 
-        Object SEQUENCE17_tree=null;
+        Object SEQUENCE18_tree=null;
 
         try {
             // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:64:2: ( SEQUENCE )
@@ -720,9 +719,9 @@ public class TypeStringParser extends Parser {
             {
             root_0 = (Object)adaptor.nil();
 
-            SEQUENCE17=(Token)match(input,SEQUENCE,FOLLOW_SEQUENCE_in_sequence242); 
-            SEQUENCE17_tree = (Object)adaptor.create(SEQUENCE17);
-            adaptor.addChild(root_0, SEQUENCE17_tree);
+            SEQUENCE18=(Token)match(input,SEQUENCE,FOLLOW_SEQUENCE_in_sequence239); 
+            SEQUENCE18_tree = (Object)adaptor.create(SEQUENCE18);
+            adaptor.addChild(root_0, SEQUENCE18_tree);
 
 
             }
@@ -752,22 +751,22 @@ public class TypeStringParser extends Parser {
 
     public static final BitSet FOLLOW_type_in_root82 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_root84 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_argument_in_function96 = new BitSet(new long[]{0x0000000000018440L});
-    public static final BitSet FOLLOW_15_in_function99 = new BitSet(new long[]{0x0000000000018440L});
-    public static final BitSet FOLLOW_type_in_function103 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OPTIONAL_in_argument125 = new BitSet(new long[]{0x0000000000018440L});
-    public static final BitSet FOLLOW_type_in_argument128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CLASS_ID_in_type152 = new BitSet(new long[]{0x0000000000040080L});
-    public static final BitSet FOLLOW_modifiers_in_type154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_type172 = new BitSet(new long[]{0x0000000000018440L});
-    public static final BitSet FOLLOW_function_in_type174 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_type176 = new BitSet(new long[]{0x0000000000040080L});
-    public static final BitSet FOLLOW_modifiers_in_type178 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_generic_in_modifiers202 = new BitSet(new long[]{0x0000000000000082L});
-    public static final BitSet FOLLOW_sequence_in_modifiers205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_generic217 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_INTEGER_in_generic219 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_generic221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_SEQUENCE_in_sequence242 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_argument_in_function94 = new BitSet(new long[]{0x0000000000018440L});
+    public static final BitSet FOLLOW_15_in_function97 = new BitSet(new long[]{0x0000000000018440L});
+    public static final BitSet FOLLOW_type_in_function101 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OPTIONAL_in_argument122 = new BitSet(new long[]{0x0000000000018440L});
+    public static final BitSet FOLLOW_type_in_argument125 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CLASS_ID_in_type149 = new BitSet(new long[]{0x0000000000040080L});
+    public static final BitSet FOLLOW_modifiers_in_type151 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_type169 = new BitSet(new long[]{0x0000000000018440L});
+    public static final BitSet FOLLOW_function_in_type171 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_type173 = new BitSet(new long[]{0x0000000000040080L});
+    public static final BitSet FOLLOW_modifiers_in_type175 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_generic_in_modifiers199 = new BitSet(new long[]{0x0000000000000082L});
+    public static final BitSet FOLLOW_sequence_in_modifiers202 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_generic214 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_INTEGER_in_generic216 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_generic218 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_SEQUENCE_in_sequence239 = new BitSet(new long[]{0x0000000000000002L});
 
 }

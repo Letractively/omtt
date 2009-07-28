@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.lang.analyze.ISymbolTableDualParticipant;
@@ -32,6 +33,10 @@ public class PropertySelect extends CommonSelectorNode implements
 
 	public PropertySelect(int token) {
 		super(new CommonToken(token, "select"));
+	}
+
+	public PropertySelect(Token token) {
+		super(token);
 	}
 
 	public Method getPropertyMethod() {

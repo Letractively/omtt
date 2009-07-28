@@ -65,7 +65,11 @@ public class TemplateDefinition extends CommonNode implements
 	}
 
 	public String getTemplateName() {
-		return getTemplateNameIdent().getName();
+		Ident ident = getTemplateNameIdent();
+		if (ident == null)
+			return null;
+		else
+			return ident.getName();
 	}
 
 	public Symbol getSymbol() {

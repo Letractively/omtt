@@ -2,6 +2,7 @@ package pl.omtt.lang.model.types;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -80,9 +81,11 @@ public class FunctionType extends CommonType implements IType {
 	public void freeze() {
 		Map<GenericType, Integer> genericsCount = new HashMap<GenericType, Integer>();
 		freeze(genericsCount);
-		for (GenericType generic : genericsCount.keySet()) {
-			if (genericsCount.get(generic) > 1)
-				genericsCount.remove(generic);
+		Iterator<Map.Entry<GenericType, Integer>> itor = genericsCount.entrySet().iterator();
+		while(itor.hasNext()) {
+			Map.Entry<GenericType, Integer> item = itor.next();
+			if (item.getValue() > 1)
+				itor.remove();
 		}
 		removeExcessiveGenerics(genericsCount.keySet());
 	}

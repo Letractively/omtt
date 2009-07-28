@@ -155,9 +155,10 @@ public class OmttProjectModel {
 					fComponentReferences.updateReferences(resource, null);
 					fSymbolTables.remove(resource);
 				} else if (!oldid.equals(newid)) {
-					setResourceId(resource, newid);
+					System.err.println("module id changed");
 					fComponentReferences.updateReferences(resource, null);
 					updateSymbolTable(resource, null);
+					setResourceId(resource, newid);
 					fComponentReferences.updateReferences(resource, references);
 					updateSymbolTable(resource, st);
 				} else {
@@ -235,7 +236,8 @@ public class OmttProjectModel {
 		System.err.println("deleting " + buildFile);
 		if (buildFile != null)
 			try {
-				buildFile.delete(true, null);
+				System.err.println("deleting " + buildFile);
+				buildFile.delete(false, null);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}

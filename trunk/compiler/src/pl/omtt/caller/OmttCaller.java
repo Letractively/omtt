@@ -11,7 +11,7 @@ import pl.omtt.core.OmttLoader.Template;
 import pl.omtt.core.stdlib.TextBuffer;
 
 public class OmttCaller {
-	public String call(String name, Object... args) {
+	public static String call(String name, Object... args) {
 		try {
 			return callForObject(name, args).toString();
 		} catch (ModuleNotFoundException e) {
@@ -29,7 +29,7 @@ public class OmttCaller {
 		}
 	}
 
-	public Object callForObject(String name, Object... args)
+	public static Object callForObject(String name, Object... args)
 			throws ModuleNotFoundException, TemplateNotFoundException,
 			InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
@@ -41,7 +41,7 @@ public class OmttCaller {
 		return invokeTemplate(tpl, args);
 	}
 
-	protected Object invokeTemplate(Template tpl, Object... args)
+	protected static Object invokeTemplate(Template tpl, Object... args)
 			throws IllegalArgumentException, IllegalAccessException,
 			InvocationTargetException {
 		if (isVoid(tpl.method.getReturnType())) {
@@ -58,7 +58,7 @@ public class OmttCaller {
 		}
 	}
 
-	private boolean isVoid(Class<?> cls) {
+	private static boolean isVoid(Class<?> cls) {
 		return cls.equals(Void.class) || cls.equals(void.class);
 	}
 }

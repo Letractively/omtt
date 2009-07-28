@@ -43,8 +43,11 @@ public class TypeUnifier {
 				+ (le ? " < " : " == ") + typeB.toDiagnosticString());
 		if (typeA == null || typeB == null)
 			return;
-		
+
 		if (typeA.isError() || typeB.isError())
+			return;
+		
+		if (typeB.isNull())
 			return;
 
 		if (typeA.isFunction() && typeB.isFunction()) {
@@ -95,7 +98,7 @@ public class TypeUnifier {
 
 	private static void unifyFunctions(IType typeA, IType typeB, boolean le)
 			throws TypeException {
-		System.out.println("[fu] " + typeA + " ~ " + typeB);
+		System.out.println("[fu] " + typeA + (le ? " < " : " = ") + typeB);
 
 		if (!typeA.isFunction() || !typeB.isFunction())
 			throw new TypeException("unimplemented [1]");
@@ -107,7 +110,7 @@ public class TypeUnifier {
 			Argument argA = funA.getArgument(i);
 			Argument argB = funB.getArgument(i);
 			if ((!le && argA.optional ^ argB.optional)
-					|| (le && !argA.optional && argB.optional))
+					|| (le && argA.optional && !argB.optional))
 				throw new TypeException("cannot use "
 						+ (argA.optional ? "optional" : "obligatory")
 						+ " argument as an "
