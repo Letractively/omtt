@@ -1,7 +1,10 @@
 package pl.omtt.lang.analyze;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 
 import org.antlr.runtime.tree.Tree;
@@ -26,19 +29,47 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 
 	private void putModuleSymbols() {
 		for (Method method : fModuleClass.getMethods())
-			if (!Object.class.equals(method.getDeclaringClass()))
+			if (isModuleSymbol(method))
 				putTemplateSymbol(method);
+		for (Field field : fModuleClass.getFields()) {
+			if (isModuleSymbol(field))
+				putTemplateSymbol(field);
+		}
 	}
 
-	private void putTemplateSymbol(Method method) {
-		IType type;
+	private boolean isModuleSymbol(Member member) {
+		if (Object.class.equals(member.getDeclaringClass()))
+			return false;
+		final int modifiers = member.getModifiers();
+		if (!Modifier.isPublic(modifiers))
+			return false;
+		if (!Modifier.isStatic(modifiers))
+			return false;
+		return true;
+	}
+
+	private void putTemplateSymbol(Member method) {
+		IType type = null;
 		try {
-			type = typeFromMethod(method);
+			if (method instanceof Method)
+				type = typeFromMethod((Method) method);
+			if (method instanceof Field)
+				type = typeFromField((Field) method);
 		} catch (TypeException e) {
 			e.printStackTrace();
 			return;
 		}
-		put(new Symbol(method.getName(), type));
+		if (type != null)
+			put(new Symbol(method.getName(), type));
+	}
+
+	private IType typeFromField(Field field) {
+		try {
+			return JavaTypesAdapter.fromType(field.getGenericType());
+		} catch (TypeException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	private IType typeFromMethod(Method method) throws TypeException {
@@ -72,7 +103,8 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 					name = getValue(ann);
 			}
 
-			ftype.putArgument(name, JavaTypesAdapter.fromType(argtypes[i]), optional);
+			ftype.putArgument(name, JavaTypesAdapter.fromType(argtypes[i]),
+					optional);
 		}
 
 		String typestr = null;
@@ -131,8 +163,9 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 		}
 		return type;
 	}
-	
-	private static boolean ofType(Annotation a, Class<? extends Annotation> clazz) {
+
+	private static boolean ofType(Annotation a,
+			Class<? extends Annotation> clazz) {
 		return clazz.getName().equals(a.annotationType().getName());
 	}
 

@@ -64,7 +64,7 @@ public abstract class AbstractOmttLexer extends Lexer {
 	final public boolean isDataCharacter(int c) {
 		if (c == '%' && fStream != null && fStream.isNewLine())
 			return false;
-		return c >= 0 && c != '{'
+		return c >= 0 && c != '{' && c != '}'
 				&& (c != brackets.peek() || (c >= 'a' && c <= 'z'));
 	}
 

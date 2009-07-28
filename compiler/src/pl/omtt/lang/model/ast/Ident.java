@@ -2,6 +2,7 @@ package pl.omtt.lang.model.ast;
 
 import java.lang.reflect.Method;
 
+import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 
 import pl.omtt.lang.analyze.Symbol;
@@ -30,8 +31,14 @@ public class Ident extends CommonNode implements IExpression,
 		super(token);
 	}
 
+	public Ident(int token) {
+		super(new CommonToken(token));
+	}
+
 	public String getName() {
 		if (getType() == OmttParser.OP_GENERAL)
+			return "it";
+		else if (getType() == OmttParser.IT)
 			return "it";
 		else
 			return getText();

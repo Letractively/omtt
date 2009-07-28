@@ -112,6 +112,7 @@ fragment tag_inside_data
   | if_tag
   | call_tag
   | map_tag
+  | apply_tag
   ;
 // END: tag content
 
@@ -120,7 +121,7 @@ fragment tag_inside_data
 expression
   : lambda_expression
   | def_in_expression
-  | apply_expression
+  | match_expression
   | concatence_expression
   ;
 
@@ -171,6 +172,12 @@ fragment lambda_match_expression
 fragment single_lambda_match
 	: type OP_FOLLOW concatence_expression
 	;
+
+match_expression
+  : MATCH expression COLON
+    expr=lambda_match_expression
+    -> ^(CALL<Call>[true] $expr ^(ARGUMENT<FunctionArgument> expression))
+  ;
 
 fragment type
   : CLASS_ID OP_MULTIPLY?
@@ -228,12 +235,6 @@ map_tag
     -> ^(MAP<Transformation> $iter $expr item_alias?)
   ;
 
-apply_expression
-  : APPLY expression COLON
-    expr=lambda_expression
-    -> ^(CALL<Call>[true] $expr ^(ARGUMENT<FunctionArgument> expression))
-  ;
-
 fragment item_alias
 	: VAR_ID OP_REVERSE_FOLLOW
 		-> ^(AS VAR_ID)
@@ -241,9 +242,11 @@ fragment item_alias
 
 // START: transformation expressions
 context_expression
-  : (fe=boolean_expression -> $fe)
+  : (base=base_context_expression -> $base)
     ( op_apply atom_expression arguments=function_arguments
       -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> $context_expression) $arguments?)
+    | op_match LEFT_PAREN lambda_match_expression RIGHT_PAREN
+    	-> ^(CALL<Call>[true] lambda_match_expression ^(ARGUMENT<FunctionArgument> $context_expression))
     | op_map ce=boolean_expression
     	-> ^(op_map $context_expression $ce)
     )*
@@ -252,9 +255,25 @@ fragment op_apply
 	: OP_CONTEXT^
 	| APPLY^
 	;
+fragment op_match
+	: MATCH^
+	;
 fragment op_map
 	: OP_EXPRESSION_CONTEXT<Transformation>^
 	| MAP<Transformation>^
+	;
+
+fragment base_context_expression
+	: boolean_expression
+	|	apply_expression
+	;
+
+apply_expression
+	: APPLY atom_expression arguments=function_arguments
+    -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> IT<Ident>) $arguments?)
+	;
+apply_tag
+	: TAG_START! apply_expression TAG_END!
 	;
 // END: transformation expressions
 

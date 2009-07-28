@@ -28,17 +28,13 @@ public class SymbolTable {
 			return null;
 	}
 
+	public Symbol get(String name) {
+		return fSymbolMap.get(name);
+	}
+
 	public void put(Symbol s) {
 		fSymbolMap.put(s.getName(), s);
 		s.fSTOwner = this;
-	}
-
-	public SymbolTable getParent () {
-		return fParent;
-	}
-
-	public BaseSymbolTable getBase () {
-		return getParent().getBase();
 	}
 
 	public boolean contains (Symbol s) {
@@ -49,7 +45,11 @@ public class SymbolTable {
 		return fSymbolMap.values();
 	}
 
-	public Symbol get(String name) {
-		return fSymbolMap.get(name);
+	public SymbolTable getParent () {
+		return fParent;
+	}
+
+	public BaseSymbolTable getBase () {
+		return getParent().getBase();
 	}
 }
