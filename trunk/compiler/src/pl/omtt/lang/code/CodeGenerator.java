@@ -330,7 +330,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 		final boolean flushBuffer = rettype.isSingleData();
 
 		if (def.isContext())
-			fSymbolLocalNames.put(def.getItSymbol(), "it");
+			fSymbolLocalNames.put(def.getItSymbol(), def.getItSymbol()
+					.getName());
 
 		final String stemplate = signatureTemplate(type);
 
@@ -735,7 +736,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 		if (e.getExpressionType().isSingleData()) {
 			fBuffer.initBuffer();
 			apply(e);
-			fBuffer.putExpression(e, retrbuffer());
+			String rb = retrbuffer();
+			fBuffer.putExpression(e, rb);
 		} else {
 			apply(e);
 		}
@@ -981,9 +983,10 @@ public class CodeGenerator extends AbstractTreeWalker {
 				throw new Error(new CodeGenerationException(
 						"unknown boolean binary operator"));
 			}
-			
+
 			if (btype.isSingleData())
-				fBuffer.putl("%s.append(%s);", fBuffer.getCurrentBuffer(), outvar);
+				fBuffer.putl("%s.append(%s);", fBuffer.getCurrentBuffer(),
+						outvar);
 			return;
 
 		case BooleanExpression.TYPE_COMPARE:
@@ -1217,17 +1220,22 @@ public class CodeGenerator extends AbstractTreeWalker {
 					fBuffer.initExpression(e);
 				final String accvar = fBuffer.getReference(e);
 				declareAlias(e);
-				fBuffer.putl("if (%s) {", checkNotNull(basevar, basetype));
-				fBuffer.incIndentitation();
-				retrieve(fragment, basevar, accvar, etype.isSequence());
-				fBuffer.subIndentitation();
-				fBuffer.putl("}");
-				if (!etype.isSequence()) {
-					fBuffer.putl("else {");
-					fBuffer.putl("\t%s = null;", accvar);
-					fBuffer.putl("}");
+				if (!basetype.isNotNull()) {
+					fBuffer.putl("if (%s) {", checkNotNull(basevar, basetype));
+					fBuffer.incIndentitation();
 				}
-				fBuffer.putSafeExpression(e, accvar);
+				retrieve(fragment, basevar, accvar, etype.isSequence());
+				if (!basetype.isNotNull()) {
+					fBuffer.subIndentitation();
+					fBuffer.putl("}");
+					if (!etype.isSequence() && !etype.isSingleData()) {
+						fBuffer.putl("else {");
+						fBuffer.putl("\t%s = null;", accvar);
+						fBuffer.putl("}");
+					}
+				}
+				if (!etype.isSingleData())
+					fBuffer.putSafeExpression(e, accvar);
 			}
 		}
 	}
