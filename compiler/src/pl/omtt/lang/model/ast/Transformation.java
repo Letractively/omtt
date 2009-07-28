@@ -7,6 +7,7 @@ import pl.omtt.lang.analyze.ISymbolTableDualParticipant;
 import pl.omtt.lang.analyze.ISymbolTableOwnerForRightNode;
 import pl.omtt.lang.analyze.Symbol;
 import pl.omtt.lang.analyze.SymbolTable;
+import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.IType;
@@ -79,8 +80,16 @@ public class Transformation extends CommonNode implements IFoldExpression,
 		IType iterateType = getSourceNode().getExpressionType().dup()
 				.setNotNull();
 		iterateType.unsetSequence();
-		fItSymbol = new Symbol("it", iterateType);
+		fItSymbol = new Symbol(getItemAlias(), iterateType);
 		symbolTable.put(fItSymbol);
+	}
+
+	public String getItemAlias() {
+		Tree alias = getFirstChildWithType(OmttParser.AS);
+		if (alias == null)
+			return "it";
+		else
+			return alias.getChild(0).getText();
 	}
 
 	@Override

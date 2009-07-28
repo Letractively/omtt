@@ -229,9 +229,9 @@ map_tag
   ;
 
 apply_expression
-  : APPLY item_alias? expression COLON
+  : APPLY expression COLON
     expr=lambda_expression
-    -> ^(CALL<Call>[true] $expr ^(ARGUMENT<FunctionArgument> expression) item_alias?)
+    -> ^(CALL<Call>[true] $expr ^(ARGUMENT<FunctionArgument> expression))
   ;
 
 fragment item_alias
