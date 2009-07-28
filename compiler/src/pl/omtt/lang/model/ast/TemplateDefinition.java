@@ -195,6 +195,21 @@ public class TemplateDefinition extends CommonNode implements
 
 	@Override
 	public String toString() {
-		return "def " + getTemplateName() + " of " + fType;
+		StringBuffer buf = new StringBuffer();
+		buf.append(getTemplateName());
+		if (fType == null) {
+		} else if (fType.isFunction()) {
+			if (isContext())
+				buf.append(" ").append(getContextNode().getChild(0));
+			for (int i = 0; i < getArgumentsCount(); i++) {
+				TemplateArgument ta = getArgument(i);
+				buf.append(" ").append(ta.getArgumentName());
+				buf.append(".").append(ta.getArgumentType());
+			}
+			buf.append(" : ").append(((FunctionType) fType).getReturnType());
+		} else {
+			buf.append(" : ").append(fType);
+		}
+		return buf.toString();
 	}
 }
