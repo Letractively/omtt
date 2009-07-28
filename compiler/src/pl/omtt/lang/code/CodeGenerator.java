@@ -137,7 +137,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 					targetType.getEffectiveLowerBound())) {
 				return var;
 			} else if (String.class.equals(targetType.getAssociatedClass())) {
-				buf.append(var).append(".toString()");
+				buf.append(checkNotNull(var, sourceType)).append(" ? ").append(
+						var).append(".toString() : null");
 			} else if (targetType.isNumeric() && sourceType.isNumeric()) {
 				buf.append("new ").append(fTypeAdapter.get(targetType));
 				buf.append("(").append(var).append(")");
@@ -185,8 +186,11 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		StringBuffer buf = new StringBuffer();
 		buf.append(call).append("(");
-		if (targetf.getReturnType().isSingleData())
+		if (sourcef.getReturnType().isSingleData()) {
+			if (!targetf.getReturnType().isSingleData())
+				fBuffer.initBuffer();
 			buf.append(fBuffer.getCurrentBuffer()).append(", ");
+		}
 		for (int i = 0; i < targetf.getArgumentLength(); i++) {
 			Argument sourcearg = sourcef.getArgument(i);
 			Argument targetarg = targetf.getArgument(i);
@@ -198,9 +202,11 @@ public class CodeGenerator extends AbstractTreeWalker {
 				buf.append(", ");
 		}
 		buf.append(")");
-		if (targetf.getReturnType().isSingleData())
+		if (sourcef.getReturnType().isSingleData()) {
 			fBuffer.putl("%s;", buf.toString());
-		else
+			if (!targetf.getReturnType().isSingleData())
+				fBuffer.putl("return %s;", retrbuffer());
+		} else
 			fBuffer.putl("return %s;", cast(buf.toString(), sourcef
 					.getReturnType(), targetf.getReturnType()));
 
@@ -225,7 +231,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 	protected String retrbuffer() {
 		final String var = fBuffer.popBuffer();
-		return "(" + var + ".length() == 0 ? null : " + var + ".toString())";
+		return "(" + var + ".isEmpty() ? null : " + var + ".toString())";
 	}
 
 	protected String checkNull(String var, IType type) {
@@ -325,7 +331,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		if (def.isContext())
 			fSymbolLocalNames.put(def.getItSymbol(), "it");
-		
+
 		final String stemplate = signatureTemplate(type);
 
 		if (inner) {
@@ -408,7 +414,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 	public void visit(TemplateDefinition def) {
 		IType type = def.getExpressionType();
 		IType efftype = type.getEffectiveLowerBound();
-		
+
 		if (efftype instanceof FunctionType && !type.isSequence()) {
 			visitFunction(def, (FunctionType) efftype);
 		} else {
@@ -551,10 +557,13 @@ public class CodeGenerator extends AbstractTreeWalker {
 	public void visit(final Call call) {
 		final IExpression callingNode = call.getCallingNode();
 		final IType rettype = call.getExpressionType();
+		final IType calltype = callingNode.getExpressionType();
 		final IType callrettype = call.getCallingType().getReturnType();
 		final boolean flushData = rettype.isSingleData()
 				&& !rettype.isSequence();
 		final boolean iterate = call.isIterateSequence();
+
+		boolean checknull = true;
 
 		final StringBuffer argbuf = new StringBuffer();
 		for (int i = iterate ? 1 : 0; i < call.getArgumentLength(); i++) {
@@ -569,13 +578,17 @@ public class CodeGenerator extends AbstractTreeWalker {
 		if (callingNode instanceof Ident
 				&& ((Ident) callingNode).getSource() != Ident.SOURCE_CONTEXT_OBJECT) {
 			callstr = getDirectMethodName((Ident) callingNode);
+			checknull = false;
 			if (callstr == null) {
+				checknull = true;
 				Tree t = callingNode;
 				final Symbol symbol = ((Ident) callingNode).getSymbol();
 				while (t != null) {
 					if (t instanceof TemplateDefinition) {
-						if (((TemplateDefinition) t).getSymbol().equals(symbol))
+						if (((TemplateDefinition) t).getSymbol().equals(symbol)) {
 							callstr = "run";
+							checknull = false;
+						}
 						break;
 					}
 					t = t.getParent();
@@ -584,32 +597,52 @@ public class CodeGenerator extends AbstractTreeWalker {
 		}
 		if (callstr == null) {
 			apply(callingNode);
-			callstr = "(" + fBuffer.getReference(callingNode) + ").run";
+			if (calltype.isNotNull())
+				checknull = false;
+			callstr = fBuffer.getVariable(callingNode) + ".run";
 		}
 		final String callvar = callstr;
+		final String checknullstr;
+		if (checknull)
+			checknullstr = checkNotNull(fBuffer.getVariable(callingNode),
+					calltype);
+		else
+			checknullstr = null;
 
 		if (flushData) {
-			if (!iterate) {
-				fBuffer.putl("%s(%s%s%s);", callvar,
-						fBuffer.getCurrentBuffer(), argsep, argbuf);
-				return;
+			if (checknull) {
+				fBuffer.putl("if(%s) {", checknullstr);
+				fBuffer.incIndentitation();
 			}
 
-			// iterate
-			final FunctionArgument a = call.getArgument(0);
-			apply(a);
-			final String avar = fBuffer.getTemporaryVariable();
-			fBuffer.putl("%s %s = %s;",
-					fTypeAdapter.get(a.getExpressionType()), avar,
-					callArgument(call, 0));
-			fBuffer.putl("if(%s != null) %s(%s, %s%s%s);", avar, callvar,
-					fBuffer.getCurrentBuffer(), avar, argsep, argbuf);
+			// TODO: is there possibility that iterate == null?
+			if (!iterate) {
+				if (!callrettype.isSingleData())
+					fBuffer.putl("%s.append(%s(%s));", fBuffer
+							.getCurrentBuffer(), callvar, argbuf);
+				else
+					fBuffer.putl("%s(%s%s%s);", callvar, fBuffer
+							.getCurrentBuffer(), argsep, argbuf);
+			} else {
+				final FunctionArgument a = call.getArgument(0);
+				apply(a);
+				final String avar = fBuffer.getTemporaryVariable();
+				fBuffer.putl("%s %s = %s;", jtype(a.getExpressionType()), avar,
+						callArgument(call, 0));
+				fBuffer.putl("if(%s != null) %s(%s, %s%s%s);", avar, callvar,
+						fBuffer.getCurrentBuffer(), avar, argsep, argbuf);
+			}
+			if (checknull) {
+				fBuffer.subIndentitation();
+				fBuffer.putl("}");
+			}
 		} else {
 			if (!iterate) {
-				final String res = String.format("%s(%s)", callvar, argbuf);
-				fBuffer
-						.putSafeExpression(call,
-								cast(res, callrettype, rettype));
+				String res = String.format("%s(%s)", callvar, argbuf);
+				if (checknull)
+					res = String.format("%s ? %s : null", checknullstr, res);
+				fBuffer.putShortExpression(call,
+						cast(res, callrettype, rettype));
 				return;
 			}
 			new FoldCode(call).fold(new IFoldCodeFragment() {
@@ -620,17 +653,33 @@ public class CodeGenerator extends AbstractTreeWalker {
 							.getArgument(0).type);
 					if (callrettype.isSingleData()) {
 						fBuffer.initBuffer();
+						if (checknullstr != null) {
+							fBuffer.putl("if(%s) {", checknullstr);
+							fBuffer.incIndentitation();
+						}
 						fBuffer.putl("%s(%s, %s%s%s);", callvar, fBuffer
 								.getCurrentBuffer(), var, argsep, argbuf
 								.toString());
+						if (checknullstr != null) {
+							fBuffer.subIndentitation();
+							fBuffer.putl("}");
+						}
 						return retrbuffer();
 
 					} else {
+						final String retvar = fBuffer.getTemporaryVariable();
+						fBuffer.putnl("final %s %s = ", jtype(callrettype),
+								retvar);
 						final String res = String.format("%s(%s%s%s)", callvar,
 								var, argsep, argbuf.toString());
-						return cast(res, callrettype,
-								call.isItemSequence() ? rettype
-										: single(rettype));
+						if (checknullstr != null)
+							fBuffer.put("%s ? %s : null;\n", checknullstr, res);
+						else
+							fBuffer.put("%s;\n", res);
+
+						final IType restype = call.isItemSequence() ? rettype
+								: single(rettype);
+						return cast(retvar, callrettype, restype);
 					}
 				}
 			});
@@ -892,7 +941,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 					fBuffer.putl("}");
 				}
 
-				return;
+				break;
 
 			case BooleanExpression.OP_OR:
 				if (leftCheckBool)
@@ -926,13 +975,16 @@ public class CodeGenerator extends AbstractTreeWalker {
 				}
 				fBuffer.subIndentitation();
 				fBuffer.putl("}");
-				return;
+				break;
 
 			default:
 				throw new Error(new CodeGenerationException(
 						"unknown boolean binary operator"));
 			}
-			// line cannot be reached
+			
+			if (btype.isSingleData())
+				fBuffer.putl("%s.append(%s);", fBuffer.getCurrentBuffer(), outvar);
+			return;
 
 		case BooleanExpression.TYPE_COMPARE:
 			final IExpression leftnode = bexpr.getLeftNode();

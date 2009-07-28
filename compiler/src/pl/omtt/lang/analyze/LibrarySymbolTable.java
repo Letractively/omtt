@@ -66,21 +66,22 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 			boolean optional = false;
 
 			for (Annotation ann : argannot[i]) {
-				if (Optional.class.equals(ann.annotationType()))
+				if (ofType(ann, Optional.class))
 					optional = true;
-				if (Name.class.equals(ann.annotationType()))
-					name = ((Name) ann).value();
+				if (ofType(ann, Name.class))
+					name = getValue(ann);
 			}
 
 			ftype.putArgument(name, JavaTypesAdapter.fromType(argtypes[i]), optional);
 		}
 
-		String typestr;
+		String typestr = null;
 		try {
-			typestr = method.getAnnotation(pl.omtt.core.functions.Type.class)
-					.value();
+			for (Annotation ann : method.getAnnotations()) {
+				if (ofType(ann, pl.omtt.core.functions.Type.class))
+					typestr = getValue(ann);
+			}
 		} catch (NullPointerException e) {
-			typestr = null;
 		}
 
 		if (typestr != null) {
@@ -129,5 +130,18 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 			}
 		}
 		return type;
+	}
+	
+	private static boolean ofType(Annotation a, Class<? extends Annotation> clazz) {
+		return clazz.getName().equals(a.annotationType().getName());
+	}
+
+	private static String getValue(Annotation a) {
+		try {
+			return (String) a.getClass().getMethod("value").invoke(a);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

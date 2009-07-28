@@ -356,20 +356,29 @@ atom_expression
 
 atom_with_properties
   : (a=atom_with_selectors -> $a)
-  	( DOT ps=atom_with_selectors
-  	  -> ^(DOT<Transformation> $atom_with_properties $ps)
+  	( DOT es=expression_select
+  	  -> ^(DOT<Transformation> $atom_with_properties $es)
+  	| DOT ps=property_select
+  		-> ^(DOT<PropertySelect> $atom_with_properties $ps)
   	)*
   ;
 fragment atom_with_selectors
 	: atom
 		( sequence_selectors
-			-> ^(ATOM_SELECT<AtomSelect> atom sequence_selectors?)
+			-> ^(ATOM_SELECT<AtomSelect> atom sequence_selectors)
 		| -> atom
 		)
 	;
-fragment property_selector
-  : DOT! VAR_ID sequence_selectors?
-  ;
+fragment expression_select
+	: LEFT_PAREN expression RIGHT_PAREN
+		( sequence_selectors
+			-> ^(ATOM_SELECT<AtomSelect> expression sequence_selectors)
+		| -> expression
+		)
+	;
+fragment property_select
+	: VAR_ID sequence_selectors?
+	;
 fragment sequence_selectors
 	: type_selector sequence_selector? alias?
 	| sequence_selector alias?

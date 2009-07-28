@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import pl.omtt.core.ModuleNotFoundException;
-import pl.omtt.lang.code.ClassResolver;
 import pl.omtt.lang.model.types.TypeException;
 
 public class BaseSymbolTable extends SymbolTable {
@@ -24,6 +23,12 @@ public class BaseSymbolTable extends SymbolTable {
 		fId = id;
 		fClassResolver = new ClassResolver(classLoader);
 		fLibrarySTSupplier = librarySTSupplier;
+		
+		intstallStandardLibraries();
+	}
+
+	private void intstallStandardLibraries() {
+		fImportedLibraries.addAll(fLibrarySTSupplier.standardLibraries());
 	}
 
 	public String getId() {

@@ -35,8 +35,8 @@ root
 	: type EOF!;
 
 function
-	: args=argument+ '->' ret=type
-		-> $ret $args+
+	: argument+ '->' ret=type
+		-> $ret argument+
 	;
 
 argument

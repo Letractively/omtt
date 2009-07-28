@@ -2,8 +2,8 @@ package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.Token;
 
+import pl.omtt.lang.analyze.ClassResolver;
 import pl.omtt.lang.analyze.SymbolTable;
-import pl.omtt.lang.code.ClassResolver;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;

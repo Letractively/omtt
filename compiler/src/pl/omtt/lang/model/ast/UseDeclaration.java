@@ -46,6 +46,7 @@ public class UseDeclaration extends CommonNode implements IVisitable, ISymbolTab
 			symbolTable.getBase().importLibrary(getUseId(), getTargetNs());
 		} catch (TypeException e) {
 			e.setCauseObject(this);
+			throw e;
 		}
 	}
 
