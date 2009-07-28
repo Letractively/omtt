@@ -238,6 +238,12 @@ public class CodeBuffer {
 			fSpace.fBuffer.append(fSpaceMap.get(space).fBuffer);
 	}
 
+	public boolean containsSpace(String space) {
+		if (fSpaceMap.containsKey(space))
+			return fSpaceMap.get(space).fBuffer.length() > 0;
+		return false;
+	}
+
 	public String getSpaceName() {
 		return fSpace.fName;
 	}
@@ -245,17 +251,17 @@ public class CodeBuffer {
 	/*
 	 * Pretty-formatting tools.
 	 */
-	public CodeBuffer incIndentitation() {
+	public CodeBuffer incIndentation() {
 		fSpace.fIndentitation++;
 		return this;
 	}
 
-	public CodeBuffer subIndentitation() {
+	public CodeBuffer subIndentation() {
 		fSpace.fIndentitation--;
 		return this;
 	}
 
-	public CodeBuffer setIndentitation(int indentitation) {
+	public CodeBuffer setIndentation(int indentitation) {
 		fSpace.fIndentitation = indentitation;
 		return this;
 	}

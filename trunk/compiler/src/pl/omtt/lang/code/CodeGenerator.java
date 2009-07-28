@@ -179,10 +179,10 @@ public class CodeGenerator extends AbstractTreeWalker {
 		final String instvar = fBuffer.getTemporaryVariable();
 		fBuffer.putl("final %s %s = new %s () {", targetJType, instvar,
 				targetJType);
-		fBuffer.incIndentitation();
+		fBuffer.incIndentation();
 		final String sigtemplate = signatureTemplate(targetf);
 		fBuffer.putl(sigtemplate + " {", "run");
-		fBuffer.incIndentitation();
+		fBuffer.incIndentation();
 
 		StringBuffer buf = new StringBuffer();
 		buf.append(call).append("(");
@@ -210,9 +210,9 @@ public class CodeGenerator extends AbstractTreeWalker {
 			fBuffer.putl("return %s;", cast(buf.toString(), sourcef
 					.getReturnType(), targetf.getReturnType()));
 
-		fBuffer.subIndentitation();
+		fBuffer.subIndentation();
 		fBuffer.putl("}");
-		fBuffer.subIndentitation();
+		fBuffer.subIndentation();
 		fBuffer.putl("};");
 		return instvar;
 	}
@@ -287,9 +287,9 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("package %s;\n", fPackageName);
 
 		fBuffer.activate("methods");
-		fBuffer.incIndentitation();
+		fBuffer.incIndentation();
 		applyChildren(TemplateDefinition.class);
-		fBuffer.subIndentitation();
+		fBuffer.subIndentation();
 		fBuffer.deactivate();
 
 		fBuffer.putl("import java.util.*;\n");
@@ -310,8 +310,17 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		fBuffer.putSpace("methods");
 		fBuffer.putSpace("interfaces");
+		
+		if(fBuffer.containsSpace("static")) {
+			fBuffer.incIndentation();
+			fBuffer.putl("static {");
+			fBuffer.putSpace("static");
+			fBuffer.putl("}\n");
+			fBuffer.subIndentation();
+		}
+		
 		fBuffer.chop(1);
-		fBuffer.subIndentitation();
+		fBuffer.subIndentation();
 
 		fBuffer.putl("}");
 	}
@@ -340,7 +349,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			final String jtype = fTypeAdapter.get(type);
 			fSymbolLocalNames.put(def.getSymbol(), var);
 			fBuffer.putl("final %s %s = new %s () {", jtype, var, jtype);
-			fBuffer.incIndentitation();
+			fBuffer.incIndentation();
 
 			fBuffer.putl(stemplate + " {", "run");
 		} else {
@@ -348,7 +357,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			fBuffer.putl("static " + stemplate + " {", def.getTemplateName());
 		}
 		fBuffer.pushBuffer("$buffer");
-		fBuffer.incIndentitation();
+		fBuffer.incIndentation();
 
 		for (int i = 0; i < def.getArgumentsCount(); i++) {
 			final TemplateArgument ta = def.getArgument(i);
@@ -360,14 +369,14 @@ public class CodeGenerator extends AbstractTreeWalker {
 			fBuffer.putl("return %s;", fBuffer.getReference(body));
 		}
 
-		fBuffer.subIndentitation();
+		fBuffer.subIndentation();
 		fBuffer.popBuffer();
 
 		if (!inner) {
 			fBuffer.putl("}\n");
 		} else {
 			fBuffer.putl("}");
-			fBuffer.subIndentitation();
+			fBuffer.subIndentation();
 			fBuffer.putl("};");
 		}
 	}
@@ -408,8 +417,25 @@ public class CodeGenerator extends AbstractTreeWalker {
 	}
 
 	private void visitVariable(TemplateDefinition def, IType type) {
-		fBuffer.putl("final %s %s = %s;", jtype(type), def.getTemplateName(),
-				exprapply(def.getBodyNode()));
+		final boolean isInner = !(def.getParent() instanceof Program);
+
+		final String name = def.getTemplateName();
+		final String jtype = jtype(type);
+		final IExpression body = def.getBodyNode();
+
+		if (isInner) {
+			fBuffer.putl("final %s %s = %s;", jtype, name, exprapply(body));
+		} else {
+			fBuffer.putl("public final static %s %s;", jtype, name);
+			
+			fBuffer.activate("static");
+			fBuffer.incIndentation();
+			final String var = exprapply(def.getBodyNode());
+			fBuffer.putl("%s = %s;", name, var);
+			fBuffer.subIndentation();
+			fBuffer.deactivate();
+		}
+
 	}
 
 	public void visit(TemplateDefinition def) {
@@ -431,16 +457,16 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		fBuffer.putl("// %s", lambda.toString());
 		fBuffer.putl("final %s %s = new %s () {", jtype, var, jtype);
-		fBuffer.incIndentitation();
+		fBuffer.incIndentation();
 		fBuffer.putl(sigtemplate + " {", "run");
-		fBuffer.incIndentitation();
+		fBuffer.incIndentation();
 		apply(lambda.getBodyNode());
 		if (!lambda.getBodyNode().getExpressionType().isSingleData())
 			fBuffer.putl("return %s;", cast(lambda.getBodyNode(), funtype
 					.getReturnType()));
-		fBuffer.subIndentitation();
+		fBuffer.subIndentation();
 		fBuffer.putl("}");
-		fBuffer.subIndentitation();
+		fBuffer.subIndentation();
 		fBuffer.putl("};");
 
 		fBuffer.putVariable(lambda, var);
@@ -480,7 +506,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 					+ " != null";
 		if (nullcheck.length() > 0) {
 			fBuffer.putl("if (%s) {", nullcheck);
-			fBuffer.incIndentitation();
+			fBuffer.incIndentation();
 		}
 
 		final String ivar = fBuffer.getTemporaryVariable();
@@ -495,7 +521,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("\t\t%s.add(%s);", fBuffer.getReference(range), ivar);
 
 		if (nullcheck.length() > 0) {
-			fBuffer.subIndentitation();
+			fBuffer.subIndentation();
 			fBuffer.putl("}");
 		}
 	}
@@ -613,7 +639,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		if (flushData) {
 			if (checknull) {
 				fBuffer.putl("if(%s) {", checknullstr);
-				fBuffer.incIndentitation();
+				fBuffer.incIndentation();
 			}
 
 			// TODO: is there possibility that iterate == null?
@@ -634,7 +660,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 						fBuffer.getCurrentBuffer(), avar, argsep, argbuf);
 			}
 			if (checknull) {
-				fBuffer.subIndentitation();
+				fBuffer.subIndentation();
 				fBuffer.putl("}");
 			}
 		} else {
@@ -656,13 +682,13 @@ public class CodeGenerator extends AbstractTreeWalker {
 						fBuffer.initBuffer();
 						if (checknullstr != null) {
 							fBuffer.putl("if(%s) {", checknullstr);
-							fBuffer.incIndentitation();
+							fBuffer.incIndentation();
 						}
 						fBuffer.putl("%s(%s, %s%s%s);", callvar, fBuffer
 								.getCurrentBuffer(), var, argsep, argbuf
 								.toString());
 						if (checknullstr != null) {
-							fBuffer.subIndentitation();
+							fBuffer.subIndentation();
 							fBuffer.putl("}");
 						}
 						return retrbuffer();
@@ -850,7 +876,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		apply(condition);
 		fBuffer.putl("if (%s) {", condition(condition));
-		fBuffer.incIndentitation();
+		fBuffer.incIndentation();
 		if (!data) {
 			exprapply(ifNode);
 			fBuffer.assignExpression(expr, "%s;\n", cast(ifNode, expr
@@ -858,10 +884,10 @@ public class CodeGenerator extends AbstractTreeWalker {
 		} else {
 			apply(ifNode);
 		}
-		fBuffer.subIndentitation();
+		fBuffer.subIndentation();
 		fBuffer.putl("}");
 		fBuffer.putl("else {");
-		fBuffer.incIndentitation();
+		fBuffer.incIndentation();
 		if (!data) {
 			exprapply(elseNode);
 			fBuffer.assignExpression(expr, "%s;\n", cast(elseNode, expr
@@ -869,7 +895,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		} else {
 			apply(elseNode);
 		}
-		fBuffer.subIndentitation();
+		fBuffer.subIndentation();
 		fBuffer.putl("}");
 	}
 
@@ -913,12 +939,12 @@ public class CodeGenerator extends AbstractTreeWalker {
 			case BooleanExpression.OP_AND:
 				if (leftCheckBool) {
 					fBuffer.putl("if (Boolean.FALSE.equals(%s)) {", leftVar);
-					fBuffer.incIndentitation();
+					fBuffer.incIndentation();
 					fBuffer.putl("%s = Boolean.FALSE;", outvar);
-					fBuffer.subIndentitation();
+					fBuffer.subIndentation();
 					fBuffer.putl("}");
 					fBuffer.putl("else {");
-					fBuffer.incIndentitation();
+					fBuffer.incIndentation();
 				}
 
 				rightVar = exprapply(rightNode);
@@ -933,13 +959,13 @@ public class CodeGenerator extends AbstractTreeWalker {
 								leftType), checkNull(rightVar, rightType),
 						outvar);
 				fBuffer.putl("else {");
-				fBuffer.incIndentitation();
+				fBuffer.incIndentation();
 				fBuffer.putl("%s = %s;", outvar, cast(rightNode, btype));
-				fBuffer.subIndentitation();
+				fBuffer.subIndentation();
 				fBuffer.putl("}");
 
 				if (leftCheckBool) {
-					fBuffer.subIndentitation();
+					fBuffer.subIndentation();
 					fBuffer.putl("}");
 				}
 
@@ -952,12 +978,12 @@ public class CodeGenerator extends AbstractTreeWalker {
 				else
 					fBuffer.putl("if (%s) {", checkNotNull(leftVar, leftType),
 							leftVar);
-				fBuffer.incIndentitation();
+				fBuffer.incIndentation();
 				fBuffer.putl("%s = %s;", outvar, cast(leftNode, btype));
-				fBuffer.subIndentitation();
+				fBuffer.subIndentation();
 				fBuffer.putl("}");
 				fBuffer.putl("else {");
-				fBuffer.incIndentitation();
+				fBuffer.incIndentation();
 				rightVar = exprapply(rightNode);
 				if (rightCheckBool)
 					fBuffer.putl(
@@ -975,7 +1001,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 				} else {
 					fBuffer.putl("else %s = null;", outvar);
 				}
-				fBuffer.subIndentitation();
+				fBuffer.subIndentation();
 				fBuffer.putl("}");
 				break;
 
@@ -1113,7 +1139,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 				resvar = fBuffer.getTemporaryVariable();
 				fBuffer.putl("%s %s = null;", cast, resvar);
 				fBuffer.putl("if(%s instanceof %s) {", var, cast);
-				fBuffer.incIndentitation();
+				fBuffer.incIndentation();
 				fBuffer.putl("%s = (%s)%s;", resvar, cast, var);
 			} else {
 				resvar = var;
@@ -1127,7 +1153,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			}
 
 			if (cast != null) {
-				fBuffer.subIndentitation();
+				fBuffer.subIndentation();
 				fBuffer.putl("}");
 			}
 			return resvar;
@@ -1152,21 +1178,21 @@ public class CodeGenerator extends AbstractTreeWalker {
 				fBuffer.putl("%s %s = %s;", fTypeAdapter.get(otype), ovar,
 						fragment.get(var));
 				fBuffer.putl("if(%s) {", checkNotNull(ovar, otype));
-				fBuffer.incIndentitation();
+				fBuffer.incIndentation();
 
 				final String itemvar = fBuffer.getTemporaryVariable();
 				fBuffer.putl("for(%s %s : %s) {", fTypeAdapter
 						.getSingleReturn(otype), itemvar, ovar);
-				fBuffer.incIndentitation();
+				fBuffer.incIndentation();
 
 				final String selvar = select(itemvar);
 				fBuffer.putl("if(%s) %s.add(%s);", checkNotNull(selvar,
 						single(otype)), accvar, selvar);
 
-				fBuffer.subIndentitation();
+				fBuffer.subIndentation();
 				fBuffer.putl("}");
 
-				fBuffer.subIndentitation();
+				fBuffer.subIndentation();
 				fBuffer.putl("}");
 				fBuffer.putl("%s = null;", ovar);
 
@@ -1207,9 +1233,9 @@ public class CodeGenerator extends AbstractTreeWalker {
 				final String itemjtype = fTypeAdapter.getSingle(basetype);
 				fBuffer.putl("for(final %s %s : %s) {", itemjtype, itemvar,
 						basevar);
-				fBuffer.incIndentitation();
+				fBuffer.incIndentation();
 				retrieve(fragment, itemvar, evar, true);
-				fBuffer.subIndentitation();
+				fBuffer.subIndentation();
 				fBuffer.putl("}");
 			} else {
 				fBuffer.putl("// " + e);
@@ -1222,11 +1248,11 @@ public class CodeGenerator extends AbstractTreeWalker {
 				declareAlias(e);
 				if (!basetype.isNotNull()) {
 					fBuffer.putl("if (%s) {", checkNotNull(basevar, basetype));
-					fBuffer.incIndentitation();
+					fBuffer.incIndentation();
 				}
 				retrieve(fragment, basevar, accvar, etype.isSequence());
 				if (!basetype.isNotNull()) {
-					fBuffer.subIndentitation();
+					fBuffer.subIndentation();
 					fBuffer.putl("}");
 					if (!etype.isSequence() && !etype.isSingleData()) {
 						fBuffer.putl("else {");

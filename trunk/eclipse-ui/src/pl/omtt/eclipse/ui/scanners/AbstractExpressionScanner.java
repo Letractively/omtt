@@ -69,7 +69,7 @@ public abstract class AbstractExpressionScanner extends RuleBasedScanner {
 		};
 
 		private static final String[] VALUE_KEYWORDS =
-		{ "it" };
+		{ "it", "true", "false" };
 
 		public KeywordRule(Token keywordToken, Token valueKeywordToken) {
 			super(new IdDetector());

@@ -169,15 +169,12 @@ IF   : 'if';
 THEN : 'then';
 ELSE : 'else';
 
-MATCH   : 'match';
-CASE    : 'case';
-DEFAULT : 'default';
-
 AS   : 'as';
 IS   : 'is';
 
 MAP    : 'map';
 APPLY  : 'apply';
+MATCH  : 'match';
 LAMBDA : 'lambda';
 
 NULL   : 'null';

@@ -12,15 +12,7 @@ import pl.omtt.eclipse.model.OmttModelManager;
 import pl.omtt.eclipse.model.OmttProjectModel;
 
 public class OmttBuilder extends IncrementalProjectBuilder {
-
-	public static final String BUILDER_ID = "pl.omtt.eclipse.builder";
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.core.internal.events.InternalBuilder#build(int,
-	 * java.util.Map, org.eclipse.core.runtime.IProgressMonitor)
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
 			throws CoreException {
@@ -52,4 +44,6 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 	protected OmttProjectModel getProjectModel() {
 		return OmttModelManager.getOmttModelManager().getProjectModel(getProject());
 	}
+
+	public static final String BUILDER_ID = "pl.omtt.eclipse.builder";
 }

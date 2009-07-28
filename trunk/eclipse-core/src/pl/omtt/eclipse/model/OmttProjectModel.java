@@ -69,6 +69,9 @@ public class OmttProjectModel {
 
 	synchronized public boolean rebuild(IResourceDelta delta,
 			IProgressMonitor monitor) {
+		// TODO: is it really necessary?
+		refreshTemplateBuildDirectory();
+
 		RebuildCollectVisitor visitor = new RebuildCollectVisitor();
 		try {
 			delta.accept(visitor);
@@ -82,6 +85,12 @@ public class OmttProjectModel {
 
 	private boolean rebuild(List<IResource> added, List<IResource> changed,
 			List<IResource> deleted, IProgressMonitor monitor) {
+		// TODO: what's wrong - why build folder is sometimes empty?
+		// it's a silly workaround
+		if (!refreshTemplateBuildDirectory()) {
+			return rebuild(monitor);
+		}
+
 		if (added != null)
 			for (IResource resource : added)
 				add(resource);
@@ -99,7 +108,6 @@ public class OmttProjectModel {
 	}
 
 	private void compile() {
-		refreshTemplateBuildDirectory();
 		while (!fCompileQueue.isEmpty()) {
 			List<URI> uris = new ArrayList<URI>();
 			for (IResource resource : fCompileQueue) {
@@ -252,16 +260,18 @@ public class OmttProjectModel {
 		}
 	}
 
-	private void refreshTemplateBuildDirectory() {
+	private boolean refreshTemplateBuildDirectory() {
 		IPath buildDir = getBuildDirectory();
 		if (buildDir == null)
-			return;
+			return false;
 		try {
 			IResource bdir = fProject.getWorkspace().getRoot().findMember(
 					buildDir);
 			System.err.println("refreshing " + bdir);
 			if (bdir != null)
 				bdir.refreshLocal(IResource.DEPTH_ONE, null);
+			else
+				return false;
 			IPath templateBuildDir = buildDir.addTrailingSeparator().append(
 					Constants.OMTT_TEMPLATE_PACKAGE);
 			IResource tdir = fProject.getWorkspace().getRoot().findMember(
@@ -269,9 +279,13 @@ public class OmttProjectModel {
 			System.err.println("refreshing " + tdir);
 			if (tdir != null)
 				tdir.refreshLocal(IResource.DEPTH_INFINITE, null);
+			else
+				return false;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 	private void add(IResource resource) {
@@ -358,7 +372,7 @@ public class OmttProjectModel {
 		return task.getTree(source);
 	}
 
-	protected IJavaProject getJavaProject() {
+	public IJavaProject getJavaProject() {
 		return getJavaProject(fProject);
 	}
 
