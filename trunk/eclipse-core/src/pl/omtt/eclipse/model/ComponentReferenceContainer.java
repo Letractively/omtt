@@ -120,8 +120,8 @@ class ComponentReferenceContainer {
 			affected.addAll(fBackReferences.get(id + "::_"));
 		
 		System.err.println("affected oldST: " + oldST + "; " + affected);
-		// TODO: it's bad workaround -- symbol table should be remembered
-		if (oldST == null && fBackReferences.containsKey(id))
+		// TODO: checking oldST is a bad workaround -- symbol table should be remembered
+		if (fBackReferences.containsKey(id) && (newST == null || oldST == null))
 			affected.addAll(fBackReferences.get(id));
 		System.err.println("affected ret: " + affected);
 		return affected;

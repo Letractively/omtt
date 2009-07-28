@@ -8,7 +8,9 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 
 import pl.omtt.lang.grammar.OmttLexer;
+import pl.omtt.lang.model.ast.ImportDeclaration;
 import pl.omtt.lang.model.ast.ModuleDeclaration;
+import pl.omtt.lang.model.ast.UseDeclaration;
 
 public class OmttOutlineLabelProvider implements ILabelProvider {
 
@@ -35,13 +37,21 @@ public class OmttOutlineLabelProvider implements ILabelProvider {
 			return null;
 
 		if (obj instanceof ModuleDeclaration)
-			return JavaUI.getSharedImages().getImage(ISharedImages.IMG_OBJS_PACKAGE);
+			return JavaUI.getSharedImages().getImage(ISharedImages.IMG_OBJS_PACKDECL);
 		
 		switch (((Tree) obj).getType()) {
 		case OmttLexer.DEF:
 			return JavaUI.getSharedImages().getImage(ISharedImages.IMG_OBJS_PUBLIC);
 		case OmttLexer.CLASS_ID:
 			return JavaUI.getSharedImages().getImage(ISharedImages.IMG_OBJS_CLASS);
+		case OmttLexer.USES:
+			return JavaUI.getSharedImages().getImage(ISharedImages.IMG_OBJS_IMPCONT);
+		case OmttLexer.USE:
+			return JavaUI.getSharedImages().getImage(ISharedImages.IMG_OBJS_IMPDECL);
+		case OmttLexer.IMPORTS:
+			return JavaUI.getSharedImages().getImage(ISharedImages.IMG_OBJS_EXTERNAL_ARCHIVE);
+		case OmttLexer.IMPORT:
+			return JavaUI.getSharedImages().getImage(ISharedImages.IMG_OBJS_IMPDECL);
 		default:
 			return null;
 		}
@@ -58,14 +68,16 @@ public class OmttOutlineLabelProvider implements ILabelProvider {
 		Tree node = (Tree) obj;		
 		
 		switch (node.getType()) {
-		case OmttLexer.DEF:
-			String name = node.getChild(0).getText();
-			if (node.getChildCount() > 1
-					&& node.getChild(1).getType() == OmttLexer.CLASS_ID)
-				name += " <" + node.getChild(1).getText() + ">";
-			return name;
+		case OmttLexer.USES:
+			return "use declarations";
+		case OmttLexer.USE:
+			return ((UseDeclaration)node).getUseId();
+		case OmttLexer.IMPORTS:
+			return "import declarations";
+		case OmttLexer.IMPORT:
+			return ((ImportDeclaration)node).getImportingClasses();
 		default:
-			return node.getText();
+			return node.toString();
 		}
 	}
 }

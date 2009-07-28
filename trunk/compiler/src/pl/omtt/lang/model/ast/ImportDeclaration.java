@@ -48,7 +48,7 @@ public class ImportDeclaration extends CommonNode implements
 
 	public String getImportingClasses() {
 		return getPackageName() + "."
-				+ (isImportingPackage() ? "*" : getClassName());
+				+ (isImportingPackage() ? "_" : getClassName());
 	}
 
 	@Override

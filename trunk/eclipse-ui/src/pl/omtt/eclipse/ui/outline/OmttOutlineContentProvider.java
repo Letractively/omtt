@@ -1,6 +1,5 @@
 package pl.omtt.eclipse.ui.outline;
 
-
 import java.util.ArrayList;
 
 import org.antlr.runtime.tree.Tree;
@@ -8,7 +7,6 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 import pl.omtt.lang.grammar.OmttLexer;
-import pl.omtt.lang.model.ast.ModuleDeclaration;
 
 public class OmttOutlineContentProvider implements ITreeContentProvider {
 
@@ -48,17 +46,18 @@ public class OmttOutlineContentProvider implements ITreeContentProvider {
 
 	@Override
 	public boolean hasChildren(Object obj) {
-		if (obj instanceof ModuleDeclaration)
-			return false;
-		
 		if (!(obj instanceof Tree))
 			return false;
 
 		Tree node = (Tree) obj;
-		for (int i = 0; i < node.getChildCount(); i++) {
-			Tree child = node.getChild(i);
-			if (isSupportedType(child.getType()))
-				return true;
+		switch (node.getType()) {
+		case OmttLexer.USES:
+		case OmttLexer.IMPORTS:
+			for (int i = 0; i < node.getChildCount(); i++) {
+				Tree child = node.getChild(i);
+				if (isSupportedType(child.getType()))
+					return true;
+			}
 		}
 		return false;
 	}
