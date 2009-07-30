@@ -55,13 +55,13 @@ public class BaseSymbolTable extends SymbolTable {
 	}
 	
 	@Override
-	public Symbol find(String name) {
-		Symbol s = super.find(name);
-		if (s != null)
+	public Symbol find(String name, boolean recursively) {
+		Symbol s = super.find(name, recursively);
+		if (s != null || !recursively)
 			return s;
 		for (int i = fImportedLibraries.size() - 1; i >= 0; i--) {
 			BaseSymbolTable libraryST = fImportedLibraries.get(i);
-			s = libraryST.find(name);
+			s = libraryST.find(name, recursively);
 			if (s != null) {
 				if (fOuterReferences != null)
 					fOuterReferences.add(libraryST.getId() + "::" + name);

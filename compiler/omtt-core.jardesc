@@ -14,7 +14,7 @@
         <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.core.functions"/>
         <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.core"/>
         <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.caller"/>
-        <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.core.stdlib"/>
         <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.core.annotations"/>
+        <javaElement handleIdentifier="=OMTT Compiler/src&lt;pl.omtt.core.stdlib"/>
     </selectedElements>
 </jardesc>

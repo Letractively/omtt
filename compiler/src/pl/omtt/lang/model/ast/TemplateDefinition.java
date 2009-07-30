@@ -103,9 +103,10 @@ public class TemplateDefinition extends CommonNode implements
 			if (contextnode != null) {
 				IType contexttype = ((TypeReference) contextnode.getChild(0))
 						.get(ST);
-				fItSymbol = new Symbol("it", contexttype);
+				fItSymbol = new Symbol(Symbol.IT, contexttype);
 				ST.put(fItSymbol);
-				type.putArgument("it", contexttype, false);
+				ST.setAlias(fItSymbol, Symbol.CONTEXT);
+				type.putArgument(Symbol.IT, contexttype, false);
 				type.setContext(true);
 			}
 

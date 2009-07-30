@@ -96,7 +96,7 @@ public abstract class CommonSelectorNode extends CommonNode implements
 		} finally {
 			IType singleType = getExpressionType().dup();
 			singleType.unsetSequence();
-			fItSymbol = new Symbol("it", singleType);
+			fItSymbol = new Symbol(Symbol.CONTEXT, singleType);
 			symbolTable.put(fItSymbol);
 
 			if (getAliasNode() != null) {

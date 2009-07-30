@@ -20,21 +20,25 @@ public class SymbolTable {
 	}
 
 	public Symbol find(String name) {
+		return find(name, true);
+	}
+	
+	public Symbol find(String name, boolean recursive) {
 		if (fSymbolMap.containsKey(name))
 			return fSymbolMap.get(name);
-		else if (fParent != null)
-			return fParent.find(name);
+		else if (recursive && fParent != null)
+			return fParent.find(name, true);
 		else
 			return null;
-	}
-
-	public Symbol get(String name) {
-		return fSymbolMap.get(name);
 	}
 
 	public void put(Symbol s) {
 		fSymbolMap.put(s.getName(), s);
 		s.fSTOwner = this;
+	}
+
+	public void setAlias(Symbol symbol, String alias) {
+		fSymbolMap.put(alias, symbol);
 	}
 
 	public boolean contains (Symbol s) {

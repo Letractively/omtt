@@ -23,4 +23,7 @@ public class Symbol {
 	public SymbolTable getParentST () {
 		return fSTOwner;
 	}
+
+	public final static String CONTEXT = "_";
+	public final static String IT = "it";
 }

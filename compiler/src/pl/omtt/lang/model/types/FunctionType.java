@@ -79,18 +79,19 @@ public class FunctionType extends CommonType implements IType {
 
 	@Override
 	public void freeze() {
-		Map<GenericType, Integer> genericsCount = new HashMap<GenericType, Integer>();
+		Map<Integer, Integer> genericsCount = new HashMap<Integer, Integer>();
 		freeze(genericsCount);
-		Iterator<Map.Entry<GenericType, Integer>> itor = genericsCount.entrySet().iterator();
-		while(itor.hasNext()) {
-			Map.Entry<GenericType, Integer> item = itor.next();
+		Iterator<Map.Entry<Integer, Integer>> itor = genericsCount.entrySet()
+				.iterator();
+		while (itor.hasNext()) {
+			Map.Entry<Integer, Integer> item = itor.next();
 			if (item.getValue() > 1)
 				itor.remove();
 		}
 		removeExcessiveGenerics(genericsCount.keySet());
 	}
 
-	private void freeze(Map<GenericType, Integer> genericsCount) {
+	private void freeze(Map<Integer, Integer> genericsCount) {
 		if (fFrozen)
 			return;
 
@@ -101,8 +102,7 @@ public class FunctionType extends CommonType implements IType {
 		fFrozen = true;
 	}
 
-	public IType freezeArgument(IType type,
-			Map<GenericType, Integer> genericsCount) {
+	public IType freezeArgument(IType type, Map<Integer, Integer> genericsCount) {
 		IType typeCopy = type.getEffective().dup();
 		if (typeCopy.getEffectiveLowerBound() instanceof FunctionType) {
 			((FunctionType) typeCopy.getEffectiveLowerBound())
@@ -111,25 +111,27 @@ public class FunctionType extends CommonType implements IType {
 		TypeUnifier.preserveAttributes(typeCopy, type);
 
 		if (typeCopy.isGeneric()) {
-			GenericType generic = (GenericType) (typeCopy);
-			if (genericsCount.containsKey(generic))
-				genericsCount.put(generic, genericsCount.get(generic) + 1);
+			int iid = ((GenericType) typeCopy).fInstanceId;
+			if (genericsCount.containsKey(iid))
+				genericsCount.put(iid, genericsCount.get(iid) + 1);
 			else
-				genericsCount.put(generic, 1);
+				genericsCount.put(iid, 1);
 		}
 
 		return typeCopy;
 	}
 
-	private void removeExcessiveGenerics(Set<GenericType> generics) {
-		if (generics.contains(fReturnType))
+	private void removeExcessiveGenerics(Set<Integer> generics) {
+		if (fReturnType.isGeneric()
+				&& generics.contains(((GenericType) fReturnType).fInstanceId))
 			fReturnType = ((GenericType) fReturnType.getEffective())
 					.toLowerBound();
 		if (fReturnType.isFunction())
 			((FunctionType) fReturnType.getEffectiveLowerBound())
 					.removeExcessiveGenerics(generics);
 		for (Argument a : fArguments) {
-			if (generics.contains(a.type))
+			if (a.type.isGeneric()
+					&& generics.contains(((GenericType) a.type).fInstanceId))
 				a.type = ((GenericType) a.type.getEffective()).toLowerBound();
 			if (a.type.isFunction())
 				((FunctionType) a.type.getEffectiveLowerBound())
@@ -226,13 +228,17 @@ public class FunctionType extends CommonType implements IType {
 		} else if (type.isGeneric()) {
 			GenericType source = (GenericType) type.getEffective();
 			int iid = source.getInstanceId();
+			TypePointer ptr;
 			if (generics.containsKey(iid)) {
-				return new TypePointer(generics.get(iid));
+				ptr = new TypePointer(generics.get(iid));
 			} else {
-				TypePointer ptr = new TypePointer(source);
+				GenericType dup = (GenericType) source.dup();
+				dup.fInstanceId = dup.objectHashCode();
+				ptr = new TypePointer(dup);
 				generics.put(iid, ptr);
-				return ptr;
 			}
+			TypeUnifier.preserveAttributes(ptr, source);
+			return ptr;
 		} else {
 			return type.getEffective();
 		}

@@ -1,6 +1,7 @@
 package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
@@ -11,7 +12,7 @@ import pl.omtt.lang.model.types.TypeUnifier;
 
 public class Sequence extends CommonNode implements IExpression, IVisitable {
 	IType fType;
-	
+
 	public Sequence(int token) {
 		super(new CommonToken(token, "sequence"));
 	}
@@ -22,9 +23,13 @@ public class Sequence extends CommonNode implements IExpression, IVisitable {
 	}
 
 	public IExpression getChild(int i) {
-		return (IExpression)super.getChild(i);
+		Tree child = super.getChild(i);
+		if (child instanceof IExpression)
+			return (IExpression) child;
+		else
+			return null;
 	}
-	
+
 	@Override
 	public void setExpressionType(SymbolTable symbolArray) {
 		if (getChildCount() == 0) {
@@ -34,10 +39,11 @@ public class Sequence extends CommonNode implements IExpression, IVisitable {
 		}
 
 		fType = getChild(0).getExpressionType().dup();
-		for(int i = 1; i < getChildCount(); i++)
-			fType = TypeUnifier.intersect(fType, getChild(i).getExpressionType());
+		for (int i = 1; i < getChildCount(); i++)
+			fType = TypeUnifier.intersect(fType, getChild(i)
+					.getExpressionType());
 		fType.setSequence();
-		
+
 		// type is not null if any of child is so
 		for (int i = 0; i < getChildCount(); i++)
 			if (getChild(i).getExpressionType().isNotNull())
@@ -45,12 +51,12 @@ public class Sequence extends CommonNode implements IExpression, IVisitable {
 	}
 
 	@Override
-	public void accept (IVisitor visitor) {
+	public void accept(IVisitor visitor) {
 		visitor.visit(this);
 	}
-	
+
 	@Override
-	public String toString () {
+	public String toString() {
 		return "seq of " + fType;
 	}
 }

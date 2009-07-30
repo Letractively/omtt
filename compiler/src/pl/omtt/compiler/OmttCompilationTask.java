@@ -196,6 +196,9 @@ public class OmttCompilationTask {
 		} catch (RecognitionException e) {
 			fProblemCollector.reportError(uri, e);
 			return false;
+		} catch (Exception e) {
+			fProblemCollector.reportError(uri, e);
+			return false;
 		}
 		return !(lexer.errorsOccured() || parser.errorsOccured());
 	}

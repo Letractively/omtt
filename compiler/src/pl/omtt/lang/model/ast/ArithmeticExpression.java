@@ -103,8 +103,9 @@ public class ArithmeticExpression extends CommonNode implements IExpression,
 	}
 
 	private boolean isReal(IType type) {
-		if (type instanceof NumericType)
-			return ((NumericType) type).isReal();
+		IType efftype = type.getEffectiveLowerBound();
+		if (efftype instanceof NumericType)
+			return ((NumericType)efftype).isReal();
 		else
 			return false;
 	}

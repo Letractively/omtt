@@ -1,5 +1,7 @@
 package pl.omtt.lang.model;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 import org.antlr.runtime.tree.Tree;
@@ -11,9 +13,16 @@ public class AbstractTreeVisitor implements IVisitor {
 
 	protected void run(Tree root) {
 		fStack.add(root);
+		Set<Tree> visited = new HashSet<Tree>();
 
 		while (!fStack.empty()) {
 			Tree node = fStack.peek();
+			if (node == null) {
+				System.err.println("null node met");
+				fStack.pop();
+				continue;
+			}
+			
 			if (node instanceof IVisitable)
 				((IVisitable) node).accept(this);
 
@@ -22,11 +31,18 @@ public class AbstractTreeVisitor implements IVisitor {
 			else
 				while (!fStack.empty()) {
 					if (fStack.peek().getChildCount() > node.getChildIndex() + 1) {
-						fStack.add(fStack.peek().getChild(node.getChildIndex() + 1));
-						break;
+						Tree child = fStack.peek().getChild(
+								node.getChildIndex() + 1);
+						if (!visited.contains(child)) {
+							fStack.add(child);
+							break;
+						} else {
+							System.err.println("recursion met: " + child);
+						}
 					}
 
 					node = fStack.peek();
+					visited.add(fStack.peek());
 					fStack.pop();
 				}
 		}
@@ -46,7 +62,7 @@ public class AbstractTreeVisitor implements IVisitor {
 	protected void defaultVisit(Tree node) {
 		// do nothing
 	}
-	
+
 	@Override
 	public void visit(Program node) {
 		defaultVisit(node);

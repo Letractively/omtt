@@ -98,6 +98,8 @@ public class TypesJavaCodeConverter {
 			return "\"" + str + "\"";
 		} else if (o instanceof Literal.Null) {
 			return "null";
+		} else if (o instanceof Boolean) {
+			return "Boolean."+String.valueOf(o).toUpperCase();
 		} else {
 			return String.valueOf(o);
 		}

@@ -4,8 +4,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,9 +11,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -25,7 +21,6 @@ import org.eclipse.jdt.core.JavaModelException;
 import pl.omtt.compiler.OmttCompilationTask;
 import pl.omtt.compiler.OmttCompiler;
 import pl.omtt.compiler.reporting.IProblemCollector;
-import pl.omtt.core.Constants;
 import pl.omtt.lang.analyze.BaseSymbolTable;
 import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.ast.Program;
@@ -33,7 +28,6 @@ import pl.omtt.util.stream.IEnrichedStream;
 
 public class OmttProjectModel {
 	IProject fProject;
-	Set<IResource> fCompileQueue = new HashSet<IResource>();
 
 	ComponentReferenceContainer fComponentReferences;
 	Map<IResource, SymbolTable> fSymbolTables = new HashMap<IResource, SymbolTable>();
@@ -43,149 +37,12 @@ public class OmttProjectModel {
 		fComponentReferences = new ComponentReferenceContainer(fProject);
 	}
 
-	synchronized public boolean rebuild(IProgressMonitor monitor) {
-		try {
-			clear();
-		} catch (CoreException e) {
-			e.printStackTrace();
-			return false;
-		}
-
-		RebuildCollectVisitor visitor = new RebuildCollectVisitor();
-		try {
-			fProject.accept(visitor);
-		} catch (CoreException e) {
-			e.printStackTrace();
-			return false;
-		}
-
-		return rebuild(visitor.fOmttAdded, null, null, monitor);
-	}
-
-	private void clear() throws CoreException {
+	public void clear() throws CoreException {
 		deleteOmttMarkers(fProject);
 		fComponentReferences.clear();
 	}
 
-	synchronized public boolean rebuild(IResourceDelta delta,
-			IProgressMonitor monitor) {
-		// TODO: is it really necessary?
-		refreshTemplateBuildDirectory();
-
-		RebuildCollectVisitor visitor = new RebuildCollectVisitor();
-		try {
-			delta.accept(visitor);
-		} catch (CoreException e) {
-			e.printStackTrace();
-			return false;
-		}
-		return rebuild(visitor.fOmttAdded, visitor.fOmttChanged,
-				visitor.fOmttRemoved, monitor);
-	}
-
-	private boolean rebuild(List<IResource> added, List<IResource> changed,
-			List<IResource> deleted, IProgressMonitor monitor) {
-		// TODO: what's wrong - why build folder is sometimes empty?
-		// it's a silly workaround
-		if (!refreshTemplateBuildDirectory()) {
-			return rebuild(monitor);
-		}
-
-		if (added != null)
-			for (IResource resource : added)
-				add(resource);
-
-		if (changed != null)
-			for (IResource resource : changed)
-				update(resource);
-
-		if (deleted != null)
-			for (IResource resource : deleted)
-				delete(resource);
-
-		compile();
-		return true;
-	}
-
-	private void compile() {
-		while (!fCompileQueue.isEmpty()) {
-			List<URI> uris = new ArrayList<URI>();
-			for (IResource resource : fCompileQueue) {
-				uris.add(resource.getLocationURI());
-				deleteBuildFile(resource);
-				try {
-					ProblemMarkerCollector.deleteProblemMarkers(resource);
-				} catch (CoreException e) {
-					e.printStackTrace();
-				}
-			}
-			Set<IResource> turn = fCompileQueue;
-			fCompileQueue = new HashSet<IResource>();
-
-			System.err.println("compiling...");
-			OmttCompilationTask task = getTask(uris);
-			task.setCollectLibraryReferences(true);
-			task.setProblemCollector(new ProblemMarkerCollector());
-			try {
-				task.compile();
-			} catch (Throwable e) {
-				e.printStackTrace();
-				return;
-			}
-			refreshTemplateBuildDirectory();
-			System.err.println("done");
-
-			for (IResource resource : turn) {
-				final URI uri = resource.getLocationURI();
-				final Program program = task.getTree(uri);
-
-				System.err.println(resource + ": " + program);
-				final BaseSymbolTable st = program.getSymbolTable();
-				final Set<String> references;
-				if (st == null)
-					references = null;
-				else
-					references = st.retrieveReferences();
-				System.err.println(resource + ": " + references);
-
-				final String oldid = getResourceId(resource);
-				final String newid = program.getModuleDeclaration()
-						.getModuleId();
-
-				if (oldid == null && newid == null) {
-					continue;
-				} else if (oldid == null) {
-					setResourceId(resource, newid);
-					fComponentReferences.updateReferences(resource, references);
-					fSymbolTables.put(resource, st);
-				} else if (newid == null) {
-					setResourceId(resource, null);
-					fComponentReferences.updateReferences(resource, null);
-					fSymbolTables.remove(resource);
-				} else if (!oldid.equals(newid)) {
-					System.err.println("module id changed");
-					fComponentReferences.updateReferences(resource, null);
-					updateSymbolTable(resource, null);
-					setResourceId(resource, newid);
-					fComponentReferences.updateReferences(resource, references);
-					updateSymbolTable(resource, st);
-				} else {
-					fComponentReferences.updateReferences(resource, references);
-					updateSymbolTable(resource, st);
-				}
-			}
-
-			Iterator<IResource> itor = fCompileQueue.iterator();
-			while (itor.hasNext()) {
-				if (turn.contains(itor.next()))
-					itor.remove();
-			}
-		}
-
-		System.err.println("[ref] " + fComponentReferences.fReferences);
-	}
-
-	private String getResourceId(IResource resource) {
+	public String getResourceId(IResource resource) {
 		try {
 			IMarker[] markers = resource.findMarkers(OMTT_COMPONENT_ID_MARKER,
 					false, IResource.DEPTH_INFINITE);
@@ -199,7 +56,7 @@ public class OmttProjectModel {
 		return null;
 	}
 
-	private void setResourceId(IResource resource, String newid) {
+	public void setResourceId(IResource resource, String newid) {
 		try {
 			if (newid == null)
 				resource.deleteMarkers(OMTT_COMPONENT_ID_MARKER, false,
@@ -221,114 +78,104 @@ public class OmttProjectModel {
 		}
 	}
 
-	private void deleteBuildFile(IResource resource) {
-		IPath buildDir = getBuildDirectory();
-		if (buildDir == null)
-			return;
-
-		String id = getResourceId(resource);
-		if (id == null)
-			return;
-		int dotpos = id.lastIndexOf('.');
-		if (dotpos < 0)
-			return;
-		String path = id.substring(0, dotpos + 1).replace('.', IPath.SEPARATOR)
-				+ id.substring(dotpos + 1, dotpos + 2).toUpperCase()
-				+ id.substring(dotpos + 2);
-
-		IPath buildFilePath = buildDir.addTrailingSeparator().append(
-				Constants.OMTT_TEMPLATE_PACKAGE).addTrailingSeparator().append(
-				path).addFileExtension("class");
-		IResource buildFile = fProject.getWorkspace().getRoot().findMember(
-				buildFilePath);
-		System.err.println("deleting " + buildFile);
-		if (buildFile != null)
-			try {
-				System.err.println("deleting " + buildFile);
-				buildFile.delete(false, null);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-	}
-
-	private IPath getBuildDirectory() {
+	private void deleteOmttMarkers(IResource resource) {
 		try {
-			return getJavaProject().getOutputLocation();
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	private boolean refreshTemplateBuildDirectory() {
-		IPath buildDir = getBuildDirectory();
-		if (buildDir == null)
-			return false;
-		try {
-			IResource bdir = fProject.getWorkspace().getRoot().findMember(
-					buildDir);
-			System.err.println("refreshing " + bdir);
-			if (bdir != null)
-				bdir.refreshLocal(IResource.DEPTH_ONE, null);
-			else
-				return false;
-			IPath templateBuildDir = buildDir.addTrailingSeparator().append(
-					Constants.OMTT_TEMPLATE_PACKAGE);
-			IResource tdir = fProject.getWorkspace().getRoot().findMember(
-					templateBuildDir);
-			System.err.println("refreshing " + tdir);
-			if (tdir != null)
-				tdir.refreshLocal(IResource.DEPTH_INFINITE, null);
-			else
-				return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	private void add(IResource resource) {
-		fCompileQueue.add(resource);
-	}
-
-	private void update(IResource resource) {
-		fCompileQueue.add(resource);
-	}
-
-	private void delete(IResource resource) {
-		fSymbolTables.remove(resource);
-		fComponentReferences.updateReferences(resource, null);
-		try {
-			deleteOmttMarkers(resource);
+			ProblemMarkerCollector.deleteProblemMarkers(resource);
+			resource.deleteMarkers(OMTT_COMPONENT_ID_MARKER, true,
+					IResource.DEPTH_INFINITE);
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void deleteOmttMarkers(IResource resource) throws CoreException {
-		ProblemMarkerCollector.deleteProblemMarkers(resource);
-		resource.deleteMarkers(OMTT_COMPONENT_ID_MARKER, true,
-				IResource.DEPTH_INFINITE);
+	public Set<IResource> add(IResource resource, Program program,
+			IProgressMonitor monitor) {
+		final BaseSymbolTable st = program.getSymbolTable();
+		final String id = program.getResourceId();
+
+		fComponentReferences.updateReferences(resource, references(st));
+		putModel(resource, program);
+		return fComponentReferences.getAffected(id, null, st);
 	}
 
-	private void updateSymbolTable(IResource resource, SymbolTable newST) {
-		final String id = getResourceId(resource);
-		SymbolTable oldST = fSymbolTables.get(resource);
-		for (IResource affected : fComponentReferences.getAffected(id, oldST,
-				newST)) {
-			fCompileQueue.add(affected);
+	public Set<IResource> update(IResource resource, Program program,
+			IProgressMonitor monitor) {
+		final String oldId = getResourceId(resource);
+		final String newId = program.getResourceId();
+
+		if (oldId == null && newId == null)
+			return null;
+		else if (newId == null)
+			return remove(resource, monitor);
+		else if (oldId == null)
+			return add(resource, program, monitor);
+
+		final SymbolTable oldST = fSymbolTables.get(resource);
+		final BaseSymbolTable newST = program.getSymbolTable();
+		putModel(resource, program);
+		
+		Set<IResource> affected;
+		if (!oldId.equals(newId)) {
+			fComponentReferences.updateReferences(resource, null);
+			affected =  fComponentReferences.getAffected(oldId, oldST,
+					null);
+			fComponentReferences.updateReferences(resource, references(newST));
+			affected.addAll(fComponentReferences.getAffected(newId, null,
+					newST));
+		} else {
+			fComponentReferences.updateReferences(resource, references(newST));
+			affected = fComponentReferences.getAffected(oldId, oldST,					newST);
 		}
-		fSymbolTables.put(resource, newST);
+		return affected;
 	}
 
-	private OmttCompilationTask getTask(URI source) {
+	public Set<IResource> remove(IResource resource, IProgressMonitor monitor) {
+		final String id = getResourceId(resource);
+		final SymbolTable st = fSymbolTables.get(resource);
+
+		fComponentReferences.updateReferences(resource, null);
+		dropModel(resource);
+		deleteOmttMarkers(resource);
+		return fComponentReferences.getAffected(id, st, null);
+	}
+
+	private Set<String> references(BaseSymbolTable st) {
+		if (st == null)
+			return null;
+		else
+			return st.retrieveReferences();
+	}
+
+	private void putModel(IResource resource, Program program) {
+		final String id = program.getResourceId();
+		fSymbolTables.put(resource, program.getSymbolTable());
+		setResourceId(resource, id);
+	}
+
+	private void dropModel(IResource resource) {
+		fSymbolTables.remove(resource);
+		setResourceId(resource, null);
+	}
+
+	public Program parse(IResource resource, IEnrichedStream stream,
+			IProblemCollector problemCollector) {
+		final URI source = resource.getLocationURI();
+		OmttCompilationTask task = getCompilationTask(source);
+		task.setSourceStream(source, stream);
+		if (problemCollector != null)
+			task.setProblemCollector(problemCollector);
+		task.buildTree();
+
+		return task.getTree(source);
+	}
+
+	public OmttCompilationTask getCompilationTask(URI source) {
 		List<URI> sources = new ArrayList<URI>();
 		sources.add(source);
-		return getTask(sources);
+		return getCompilationTask(sources);
 	}
 
-	private OmttCompilationTask getTask(List<URI> sources) {
+	public OmttCompilationTask getCompilationTask(List<URI> sources) {
 		IJavaProject jproject = getJavaProject();
 		if (jproject == null)
 			return null;
@@ -358,18 +205,6 @@ public class OmttProjectModel {
 		OmttCompiler c = OmttModelManager.getOmttModelManager()
 				.getOmttCompiler();
 		return c.getTask(sources, target, classPath);
-	}
-
-	public Program parse(IResource resource, IEnrichedStream stream,
-			IProblemCollector problemCollector) {
-		final URI source = resource.getLocationURI();
-		OmttCompilationTask task = getTask(source);
-		task.setSourceStream(source, stream);
-		if (problemCollector != null)
-			task.setProblemCollector(problemCollector);
-		task.buildTree();
-
-		return task.getTree(source);
 	}
 
 	public IJavaProject getJavaProject() {
