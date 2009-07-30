@@ -175,6 +175,8 @@ IS   : 'is';
 MAP    : 'map';
 APPLY  : 'apply';
 MATCH  : 'match';
+WHERE  : 'where';
+
 LAMBDA : 'lambda';
 
 NULL   : 'null';

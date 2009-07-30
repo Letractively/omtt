@@ -37,9 +37,9 @@ public class Ident extends CommonNode implements IExpression,
 
 	public String getName() {
 		if (getType() == OmttParser.OP_GENERAL)
-			return "it";
+			return Symbol.CONTEXT;
 		else if (getType() == OmttParser.IT)
-			return "it";
+			return Symbol.IT;
 		else
 			return getText();
 	}
@@ -74,7 +74,7 @@ public class Ident extends CommonNode implements IExpression,
 	}
 
 	private void setFromContextObject(SymbolTable st) throws TypeException {
-		fSymbol = st.find("it");
+		fSymbol = st.find(Symbol.CONTEXT);
 		if (fSymbol == null) {
 			fSource = SOURCE_NONE;
 			fType = new ErrorType();

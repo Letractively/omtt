@@ -1,4 +1,4 @@
-package pl.omtt.eclipse.model;
+package pl.omtt.eclipse.nature;
 
 import java.util.ArrayList;
 import java.util.List;

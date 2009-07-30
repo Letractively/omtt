@@ -125,7 +125,6 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 				return ftype;
 			}
 		}
-
 		ftype.freeze();
 		return ftype;
 	}

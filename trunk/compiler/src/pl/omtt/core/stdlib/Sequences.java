@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import pl.omtt.core.annotations.OmttModule;
 import pl.omtt.core.functions.Function2;
@@ -53,6 +55,50 @@ public class Sequences {
 	public static Collection<String> split(String string,
 			@Name("sep") String sep) {
 		return Arrays.asList(string.split(sep));
+	}
+
+	@Type("(_[1]* -> _[1]*)")
+	public static Collection<Object> distinct(Collection<Object> c) {
+		Set<Object> set = new HashSet<Object>();
+		set.addAll(c);
+		return set;
+	}
+
+	@Type("(_[1]* -> _[1])")
+	@SuppressWarnings("unchecked")
+	public static Object max (Collection<Comparable> seq) {
+		return Collections.max(seq);
+	}
+	
+	@Type("(_[1]* -> _[1])")
+	@SuppressWarnings("unchecked")
+	public static Object min (Collection<Comparable> seq) {
+		return Collections.min(seq);
+	}
+	
+	@Type("(_[1]* -> _[1])")
+	@SuppressWarnings("unchecked")
+	public static Object head (Collection<Object> seq) {
+		if (seq == null || seq.isEmpty())
+			return null;
+		else if (seq instanceof List)
+			return ((List)seq).get(0);
+		else
+			return seq.iterator().next();
+	}
+
+	@Type("(_[1]* -> _[1]*)")
+	@SuppressWarnings("unchecked")
+	public static Collection<Object> tail (Collection<Object> seq) {
+		if (seq == null || seq.isEmpty())
+			return seq;
+
+		if (!(seq instanceof List)) {
+			List list = new ArrayList(seq.size());
+			list.addAll(seq);
+			seq = list;
+		}
+		return ((List)seq).subList(1, seq.size());
 	}
 
 	private static class FunctionComparator implements Comparator<Object> {

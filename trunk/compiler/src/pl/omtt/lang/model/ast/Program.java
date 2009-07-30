@@ -21,6 +21,14 @@ public class Program extends CommonNode implements IVisitable,
 		super(new CommonToken(token, "program"));
 	}
 
+	public String getResourceId () {
+		ModuleDeclaration md = getModuleDeclaration();
+		if (md == null)
+			return null;
+		else
+			return md.getModuleId();
+	}
+	
 	public ModuleDeclaration getModuleDeclaration() {
 		if (getChild(0) instanceof ModuleDeclaration)
 			return (ModuleDeclaration) getChild(0);

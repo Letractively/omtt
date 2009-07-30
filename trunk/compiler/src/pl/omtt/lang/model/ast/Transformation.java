@@ -80,14 +80,17 @@ public class Transformation extends CommonNode implements IFoldExpression,
 		IType iterateType = getSourceNode().getExpressionType().dup()
 				.setNotNull();
 		iterateType.unsetSequence();
-		fItSymbol = new Symbol(getItemAlias(), iterateType);
+		fItSymbol = new Symbol(Symbol.CONTEXT, iterateType);
 		symbolTable.put(fItSymbol);
+
+		if (getItemAlias() != null)
+			symbolTable.setAlias(fItSymbol, getItemAlias());
 	}
 
 	public String getItemAlias() {
 		Tree alias = getFirstChildWithType(OmttParser.AS);
 		if (alias == null)
-			return "it";
+			return null;
 		else
 			return alias.getChild(0).getText();
 	}

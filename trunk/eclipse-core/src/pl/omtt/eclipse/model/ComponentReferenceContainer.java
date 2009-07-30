@@ -132,7 +132,7 @@ class ComponentReferenceContainer {
 		if (oldST != null)
 			for (Symbol oldsymbol : oldST.getSymbols()) {
 				String name = oldsymbol.getName();
-				Symbol newsymbol = newST == null ? null : newST.get(name);
+				Symbol newsymbol = newST == null ? null : newST.find(name, false);
 				if (newsymbol == null)
 					changed.add(name);
 				else if (!oldsymbol.getType().equals(newsymbol.getType()))

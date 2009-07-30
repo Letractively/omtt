@@ -72,8 +72,8 @@ tag_definition :
   ;
 
 fragment definition_signature
-  : (VAR_ID|DEFAULT) definition_context? definition_argument* (OP_FOLLOW ret_type=type)?
-    -> VAR_ID<Ident>? DEFAULT<Ident>? definition_context? ^(ARGUMENTS definition_argument*) ^(RETURNS $ret_type?)
+  : VAR_ID definition_context? definition_argument* (OP_FOLLOW ret_type=type)?
+    -> VAR_ID<Ident> definition_context? ^(ARGUMENTS definition_argument*) ^(RETURNS $ret_type?)
   ;
 fragment definition_context
 	: OP_REVERSE_FOLLOW single_type
@@ -119,18 +119,32 @@ fragment tag_inside_data
 
 // START: expressions
 expression
-  : lambda_expression
-  | def_in_expression
+  : def_in_expression
+  | if_expression
+  | map_expression
   | match_expression
-  | concatence_expression
+  | lambda_expression
+  | context_expression
   ;
 
+safe_expression
+  : safe_def_in_expression
+  | safe_if_expression
+  | safe_map_expression
+  | strict_expression
+  ;
 
 // START: def-in block
 def_in_expression
   : DEF definition+=definition_inside_expression
     (AND definition+=definition_inside_expression)*
     IN COLON? content=expression
+    -> ^(BLOCK<Block> $definition+ $content)
+  ;
+safe_def_in_expression
+  : DEF definition+=definition_inside_expression
+    (AND definition+=definition_inside_expression)*
+    IN COLON? content=safe_expression
     -> ^(BLOCK<Block> $definition+ $content)
   ;
 definition_inside_expression
@@ -170,14 +184,8 @@ fragment lambda_match_expression
 	: single_lambda_match (SEMICOLON single_lambda_match)*
 	;
 fragment single_lambda_match
-	: type OP_FOLLOW concatence_expression
+	: type OP_FOLLOW safe_expression
 	;
-
-match_expression
-  : MATCH expression COLON
-    expr=lambda_match_expression
-    -> ^(CALL<Call>[true] $expr ^(ARGUMENT<FunctionArgument> expression))
-  ;
 
 fragment type
   : CLASS_ID OP_MULTIPLY?
@@ -190,22 +198,19 @@ fragment single_type
 // END: template expressions
 
 
-concatence_expression
-  : (expr+=control_expression -> $expr)
-    ((OP_CONCAT expr+=control_expression)+ -> ^(OP_CONCAT<Data> $expr+))?
-  ;
-
-control_expression
-  : if_expression
-  | map_expression
-  | context_expression
-  ;
-
+// START: control expressions
 if_expression
   : IF condition=context_expression COLON
-    part_if=control_expression
+    part_if=expression
     ELSE COLON?
-    part_else=control_expression
+    part_else=expression
+    -> ^(IF_ELSE<IfElse> $condition $part_if $part_else)
+  ;
+safe_if_expression
+  : IF condition=context_expression COLON
+    part_if=safe_expression
+    ELSE COLON?
+    part_else=safe_expression
     -> ^(IF_ELSE<IfElse> $condition $part_if $part_else)
   ;
 if_tag
@@ -225,7 +230,12 @@ fragment if_subtag
 
 map_expression
   : MAP item_alias? iter=context_expression COLON
-    expr=control_expression
+    expr=expression
+    -> ^(MAP<Transformation> $iter $expr item_alias?)
+  ;
+safe_map_expression
+  : MAP item_alias? iter=context_expression COLON
+    expr=safe_expression
     -> ^(MAP<Transformation> $iter $expr item_alias?)
   ;
 map_tag
@@ -234,48 +244,61 @@ map_tag
     TAG_END
     -> ^(MAP<Transformation> $iter $expr item_alias?)
   ;
-
+// should be replaced by records in future
 fragment item_alias
 	: VAR_ID OP_REVERSE_FOLLOW
 		-> ^(AS VAR_ID)
 	;
 
+match_expression
+  : MATCH iter=context_expression COLON
+    expr=lambda_match_expression
+    -> ^(CALL<Call>[true] $expr ^(ARGUMENT<FunctionArgument> $iter))
+  ;
+// END: control expressions
+
 // START: transformation expressions
 context_expression
-  : (base=base_context_expression -> $base)
-    ( op_apply atom_expression arguments=function_arguments
+  : (base=strict_expression -> $base)
+		( op_apply atom_expression arguments=function_arguments
       -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> $context_expression) $arguments?)
-    | op_match LEFT_PAREN lambda_match_expression RIGHT_PAREN
-    	-> ^(CALL<Call>[true] lambda_match_expression ^(ARGUMENT<FunctionArgument> $context_expression))
-    | op_map ce=boolean_expression
+		| op_map ce=safe_expression
     	-> ^(op_map $context_expression $ce)
+		| MATCH LEFT_PAREN lambda_match_expression RIGHT_PAREN
+    	-> ^(CALL<Call>[true] lambda_match_expression ^(ARGUMENT<FunctionArgument> $context_expression))
+		| WHERE safe_expression
+			-> ^(ATOM_SELECT<AtomSelect> $context_expression ^(SEQUENCE_SELECT safe_expression))
     )*
   ;
 fragment op_apply
 	: OP_CONTEXT^
 	| APPLY^
 	;
-fragment op_match
-	: MATCH^
-	;
 fragment op_map
 	: OP_EXPRESSION_CONTEXT<Transformation>^
 	| MAP<Transformation>^
 	;
 
-fragment base_context_expression
-	: boolean_expression
-	|	apply_expression
-	;
-
 apply_expression
 	: APPLY atom_expression arguments=function_arguments
-    -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> IT<Ident>) $arguments?)
+    -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> OP_GENERAL<Ident>) $arguments?)
 	;
+
 apply_tag
 	: TAG_START! apply_expression TAG_END!
 	;
 // END: transformation expressions
+
+
+strict_expression
+	: concatence_expression
+	| apply_expression
+	;
+
+concatence_expression
+  : (expr+=boolean_expression -> $expr)
+    ((OP_CONCAT expr+=boolean_expression)+ -> ^(OP_CONCAT<Data> $expr+))?
+  ;
 
 // BEGIN: boolean expressions
 boolean_expression
@@ -353,10 +376,12 @@ call_expression
     )
   ;
 call_tag
-  : TAG_START ident=namespace_id function_arguments
-    (content=tag_content)?
+  : TAG_START ident=namespace_id
+  	(	(content=tag_content | args+=function_argument+ (content=tag_content)?)
+			-> ^(CALL<Call>[false] $ident ^(ARGUMENT<FunctionArgument> $content)? $args*)
+  	|	-> $ident
+  	)
     TAG_END
-    -> ^(CALL<Call>[false] $ident ^(ARGUMENT<FunctionArgument> $content)? function_arguments?)
   ;
 fragment function_arguments
   : function_argument*
@@ -369,16 +394,11 @@ fragment function_argument
 
 // START: atoms
 atom_expression
-	: (a=atom_with_properties -> $a)
-	  ((COMA atom_with_properties)+ -> ^(SEQUENCE<Sequence> atom_with_properties+))?
-  ;
-
-atom_with_properties
   : (a=atom_with_selectors -> $a)
   	( DOT es=expression_select
-  	  -> ^(DOT<Transformation> $atom_with_properties $es)
+  	  -> ^(DOT<Transformation> $atom_expression $es)
   	| DOT ps=property_select
-  		-> ^(DOT<PropertySelect> $atom_with_properties $ps)
+  		-> ^(DOT<PropertySelect> $atom_expression $ps)
   	)*
   ;
 fragment atom_with_selectors
@@ -408,8 +428,8 @@ fragment type_selector
   	-> ^(TYPE_SELECT single_type)
   ;
 fragment sequence_selector
-  : LEFT_SQUARE_PAREN boolean_expression RIGHT_SQUARE_PAREN
-  	-> ^(SEQUENCE_SELECT boolean_expression)
+  : LEFT_SQUARE_PAREN expression RIGHT_SQUARE_PAREN
+  	-> ^(SEQUENCE_SELECT expression)
   ;
 fragment alias
 	: AS VAR_ID
@@ -430,7 +450,7 @@ selectable_atom
   : object_atom
   | data_expression
   | namespace_id
-  | LEFT_PAREN! expression RIGHT_PAREN!
+  | LEFT_PAREN! sequence_expression RIGHT_PAREN!
   ;
 fragment namespace_id
   : (ns=VAR_ID OP_VIEW)? id=VAR_ID
@@ -438,6 +458,14 @@ fragment namespace_id
   | id=OP_GENERAL
   	-> ^(IDENT<Ident>[$id])
   ;
+
+sequence_expression
+	: (expr=expression -> $expr)
+		( (COMA rexpr+=expression)+
+			-> ^(SEQUENCE<Sequence> $sequence_expression $rexpr+)
+		|	-> $sequence_expression
+		)
+	;
 
 // START: atom objects
 object_atom

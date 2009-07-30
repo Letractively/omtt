@@ -105,7 +105,8 @@ public class Problem implements Comparable<Problem> {
 		return new Problem(type, uri, message, 0, 0, 0);
 	}
 
-	public static Problem fromSemanticException(int type, URI uri, SemanticException e) {
+	public static Problem fromSemanticException(int type, URI uri,
+			SemanticException e) {
 		Object o = e.getCauseObject();
 		if (o instanceof CommonToken)
 			return fromCommonToken(type, uri, e.getMessage(), (CommonToken) o);
@@ -125,18 +126,19 @@ public class Problem implements Comparable<Problem> {
 	public static Problem fromCommonNode(int type, URI uri, String message,
 			CommonNode tree) {
 		if (tree.hasSourceInfo()) {
-			return new Problem(type, uri, message, tree.getSourceIndex(), tree.getSourceLength(), tree.getSourceLine());
+			return new Problem(type, uri, message, tree.getSourceIndex(), tree
+					.getSourceLength(), tree.getSourceLine());
 		} else if (tree.getToken() instanceof CommonToken) {
 			return fromCommonToken(type, uri, message, (CommonToken) tree
 					.getToken());
-		}
-		else {
+		} else {
 			return fromMessage(type, uri, message);
 		}
 	}
 
 	public static Problem fromException(int type, URI uri, Exception e) {
-		return fromMessage(type, uri, e.getMessage());
+		return fromMessage(type, uri, e.getClass().getSimpleName() + ": "
+				+ e.getMessage());
 	}
 
 	public static Problem fromRecognitionException(int type, URI uri,

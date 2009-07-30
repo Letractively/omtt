@@ -109,6 +109,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 					"[1] unimplemented cast"));
 		} else if (targetType.isSequence() && sourceType.isSequence()) {
 			if (targetType.isFunction()) {
+				if (sourceType.equals(targetType))
+					return var;
 				throw new Error(new CodeGenerationException(
 						"[2] unimplemented cast: " + sourceType + " ~~> "
 								+ targetType));
@@ -137,8 +139,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 					targetType.getEffectiveLowerBound())) {
 				return var;
 			} else if (String.class.equals(targetType.getAssociatedClass())) {
-				buf.append(checkNotNull(var, sourceType)).append(" ? ").append(
-						var).append(".toString() : null");
+				buf.append(checkNotNull(var, sourceType)).append(" ? ");
+				buf.append(var).append(".toString() : null");
 			} else if (targetType.isNumeric() && sourceType.isNumeric()) {
 				buf.append("new ").append(fTypeAdapter.get(targetType));
 				buf.append("(").append(var).append(")");
@@ -147,11 +149,13 @@ public class CodeGenerator extends AbstractTreeWalker {
 				return var;
 			} else if (targetType.isNumeric()) {
 				if (((NumericType) targetType.getEffectiveLowerBound())
-						.isReal())
-					return String.format(
-							"new Double(((Number)%s).doubleValue())", var);
-				else
+						.isReal()) {
+					buf.append(checkNotNull(var, sourceType)).append(" ? ");
+					buf.append("new Double(((Number)").append(var);
+					buf.append(").doubleValue()) : null");
+				} else {
 					return String.format("(Integer)%s", var);
+				}
 			} else if (targetType.isBoolean()) {
 				if (sourceType.isBoolean())
 					return var;
@@ -310,15 +314,15 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		fBuffer.putSpace("methods");
 		fBuffer.putSpace("interfaces");
-		
-		if(fBuffer.containsSpace("static")) {
+
+		if (fBuffer.containsSpace("static")) {
 			fBuffer.incIndentation();
 			fBuffer.putl("static {");
 			fBuffer.putSpace("static");
 			fBuffer.putl("}\n");
 			fBuffer.subIndentation();
 		}
-		
+
 		fBuffer.chop(1);
 		fBuffer.subIndentation();
 
@@ -427,7 +431,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			fBuffer.putl("final %s %s = %s;", jtype, name, exprapply(body));
 		} else {
 			fBuffer.putl("public final static %s %s;", jtype, name);
-			
+
 			fBuffer.activate("static");
 			fBuffer.incIndentation();
 			final String var = exprapply(def.getBodyNode());
