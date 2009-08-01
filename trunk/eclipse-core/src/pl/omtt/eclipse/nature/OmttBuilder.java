@@ -110,8 +110,9 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 
 	private void compile(IProgressMonitor monitor) {
 		final OmttProjectModel model = getProjectModel();
-System.err.println("\n\nRunning compilation");
+		System.err.println("\n\nRunning compilation");
 		
+		Set<IResource> compiled = new HashSet<IResource>();
 		while (!fCompileQueue.isEmpty()) {
 			List<URI> uris = new ArrayList<URI>();
 			for (IResource resource : fCompileQueue) {
@@ -154,7 +155,10 @@ System.err.println("\n\nRunning compilation");
 				if (turn.contains(itor.next()))
 					itor.remove();
 			}
+			compiled.addAll(turn);
 		}
+		
+		getProjectModel().notifyRebuild(compiled);
 	}
 
 	private void deleteBuildFile(IResource resource) {

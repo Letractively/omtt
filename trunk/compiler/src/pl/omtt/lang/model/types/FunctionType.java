@@ -93,6 +93,7 @@ public class FunctionType extends CommonType implements IType {
 				itor.remove();
 		}
 		removeExcessiveGenerics(genericsCount.keySet());
+		renameGenerics(new HashMap<Integer,Integer>());
 	}
 
 	private void freeze(Map<Integer, Integer> genericsCount) {
@@ -140,6 +141,39 @@ public class FunctionType extends CommonType implements IType {
 			if (a.type.isFunction())
 				((FunctionType) a.type.getEffectiveLowerBound())
 						.removeExcessiveGenerics(generics);
+		}
+	}
+
+	private void renameGenerics(HashMap<Integer, Integer> names) {
+		if (fReturnType.isGeneric()) {
+			GenericType generic = (GenericType) fReturnType.getEffective();
+			if (names.containsKey(generic.fInstanceId)) {
+				generic.fInstanceId = names.get(generic.fInstanceId);
+			}
+			else {
+				int iid = names.size();
+				names.put(generic.fInstanceId, iid);
+				generic.fInstanceId = iid;
+			}
+		}
+		if (fReturnType.isFunction())
+			((FunctionType) fReturnType.getEffectiveLowerBound())
+					.renameGenerics(names);
+		for (Argument a : fArguments) {
+			if (a.type.isGeneric()) {
+				GenericType generic = (GenericType) a.type.getEffective();
+				if (names.containsKey(generic.fInstanceId)) {
+					generic.fInstanceId = names.get(generic.fInstanceId);
+				}
+				else {
+					int iid = names.size();
+					names.put(generic.fInstanceId, iid);
+					generic.fInstanceId = iid;
+				}
+			}
+			if (a.type.isFunction())
+				((FunctionType) a.type.getEffectiveLowerBound())
+						.renameGenerics(names);
 		}
 	}
 
