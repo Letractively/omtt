@@ -41,6 +41,10 @@ public class FunctionType extends CommonType implements IType {
 		return fArguments.get(i);
 	}
 
+	public void setArgument(int i, Argument a) {
+		fArguments.set(i, a);
+	}
+	
 	public void putArgument(String name, IType type, boolean optional)
 			throws TypeException {
 		if (fArguments.isEmpty() && optional)
@@ -324,5 +328,13 @@ public class FunctionType extends CommonType implements IType {
 		buf.append("-> ").append(fReturnType.toEssentialString());
 		buf.append(")");
 		return buf.toString();
+	}
+
+	public FunctionType deepCopy () {
+		FunctionType copy = (FunctionType) this.dup();
+		copy.fArguments = new ArrayList<Argument>(fArguments.size());
+		for(Argument a : fArguments)
+			copy.fArguments.add(a);
+		return copy;
 	}
 }

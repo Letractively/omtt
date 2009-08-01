@@ -12,6 +12,7 @@ import org.antlr.runtime.tree.Tree;
 import pl.omtt.core.Constants;
 import pl.omtt.core.OmttLoader;
 import pl.omtt.lang.analyze.BaseSymbolTable;
+import pl.omtt.lang.analyze.MultiSymbol;
 import pl.omtt.lang.analyze.Symbol;
 import pl.omtt.lang.model.AbstractTreeWalker;
 import pl.omtt.lang.model.ast.*;
@@ -312,6 +313,12 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("@OmttModule");
 		fBuffer.putl("public class %s {", fModuleName);
 
+		fBuffer.incIndentation();
+		for (Symbol s : fBaseSymbolTable.getSymbols())
+			if (s instanceof MultiSymbol)
+				putMultiFunction((MultiSymbol) s);
+		fBuffer.subIndentation();
+
 		fBuffer.putSpace("methods");
 		fBuffer.putSpace("interfaces");
 
@@ -327,6 +334,47 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.subIndentation();
 
 		fBuffer.putl("}");
+	}
+
+	private void putMultiFunction(MultiSymbol ms) {
+		final String sigtemplate = signatureTemplate(ms.getType());
+		final IType rettype = ms.getType().getReturnType();
+
+		fBuffer.putl("@Type(\"%s\")", ms.getType().toString());
+		fBuffer.putl(sigtemplate + " {", "static public", ms.getName());
+		fBuffer.incIndentation();
+
+		StringBuffer argbuf = new StringBuffer();
+		for (int i = 0; i < ms.getType().getArgumentLength(); i++) {
+			Argument a = ms.getType().getArgument(i);
+			if (i > 0)
+				argbuf.append(", ");
+			if (a.name == null)
+				argbuf.append("arg" + i);
+			else
+				argbuf.append(a.name.replace('@', '$'));
+		}
+		for (Symbol s : ms.getParticipants()) {
+			final FunctionType stype = (FunctionType) s.getType();
+			final String jtype = jtype(stype.getArgument(0).type);
+			fBuffer.putl("if (it instanceof %s) {", jtype);
+			fBuffer.incIndentation();
+			if (rettype.isSingleData()) {
+				fBuffer.putl("%s($buffer, (%s) %s);", fSymbolLocalNames.get(s),
+						jtype, argbuf.toString());
+				fBuffer.putl("return;");
+			} else {
+
+			}
+			fBuffer.subIndentation();
+			fBuffer.putl("}");
+		}
+
+		if (!rettype.isSingleData())
+			fBuffer.putl("return null;");
+		fBuffer.subIndentation();
+		fBuffer.putl("}\n");
+
 	}
 
 	public void visit(ModuleDeclaration node) {
@@ -375,7 +423,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		for (int i = 0; i < def.getArgumentsCount(); i++) {
 			final TemplateArgument ta = def.getArgument(i);
-			fSymbolLocalNames.put(ta.getSymbol(), ta.getArgumentName().replace('@', '$'));
+			fSymbolLocalNames.put(ta.getSymbol(), ta.getArgumentName().replace(
+					'@', '$'));
 		}
 		final IExpression body = def.getBodyNode();
 		apply(body);
@@ -507,7 +556,10 @@ public class CodeGenerator extends AbstractTreeWalker {
 					apply(expr);
 					if (expr.getExpressionType().isSingleData())
 						continue;
-					fBuffer.putData("%s", fBuffer.getReference(expr));
+					final String ref = fBuffer.getReference(expr);
+					// prevent from putting empty string literals
+					if (!ref.equals("\"\""))
+						fBuffer.putData("%s", ref);
 				}
 	}
 
