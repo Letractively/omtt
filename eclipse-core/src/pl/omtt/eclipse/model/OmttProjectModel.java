@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -31,6 +33,8 @@ public class OmttProjectModel {
 
 	ComponentReferenceContainer fComponentReferences;
 	Map<IResource, SymbolTable> fSymbolTables = new HashMap<IResource, SymbolTable>();
+
+	private Map<IResource,Set<IModelChangeListener>> fModelChangeListeners = new HashMap<IResource, Set<IModelChangeListener>>();
 
 	public OmttProjectModel(IProject project) {
 		fProject = project;
@@ -207,6 +211,36 @@ public class OmttProjectModel {
 		return c.getTask(sources, target, classPath);
 	}
 
+	public void notifyRebuild(final Set<IResource> compiled) {
+		IWorkspaceRunnable notifyAction = new IWorkspaceRunnable() {
+			@Override
+			public void run(IProgressMonitor monitor) throws CoreException {
+				for (IResource resource : compiled) {
+					if (fModelChangeListeners.containsKey(resource)) {
+						Set<IModelChangeListener> listeners  = fModelChangeListeners.get(resource);
+						for (IModelChangeListener listener : listeners)
+							listener.notifyChange(resource);
+					}
+				}
+			}
+		};
+		try {
+			fProject.getWorkspace().run(notifyAction, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addModelChangeListener (IModelChangeListener listener, IResource resource) {
+		if (!fModelChangeListeners.containsKey(resource))
+			fModelChangeListeners.put(resource, new HashSet<IModelChangeListener>());
+		fModelChangeListeners.get(resource).add(listener);
+	}
+	
+	public void removeModelChangeListener (IModelChangeListener listener, IResource resource) {
+		fModelChangeListeners.get(resource).remove(listener);
+	}
+	
 	public IJavaProject getJavaProject() {
 		return getJavaProject(fProject);
 	}

@@ -23,6 +23,7 @@ import pl.omtt.lang.model.types.StringDataType;
 import pl.omtt.lang.model.types.TypeException;
 import pl.omtt.lang.model.types.TypePointer;
 import pl.omtt.lang.model.types.TypeUnifier;
+import pl.omtt.lang.model.types.FunctionType.Argument;
 
 public class TemplateDefinition extends CommonNode implements
 		ISymbolTableOwner, ISymbolTableDualParticipant, IExpression, IVisitable {
@@ -255,12 +256,25 @@ public class TemplateDefinition extends CommonNode implements
 		buf.append(getTemplateName());
 		if (fType == null) {
 		} else if (fType.isFunction()) {
+			FunctionType funtype = (FunctionType) fType;
 			if (isContext())
-				buf.append(" ").append(getContextNode().getChild(0));
-			for (int i = 0; i < getArgumentsCount(); i++) {
-				TemplateArgument ta = getArgument(i);
-				buf.append(" ").append(ta.getArgumentName());
-				buf.append(".").append(ta.getArgumentType());
+				buf.append(" <-");
+			for (int i = 0; i < funtype.getArgumentLength(); i++) {
+				Argument a = funtype.getArgument(i);
+				buf.append(" ");
+				if (a.optional)
+					buf.append("~");
+				if (isContext() && i == 0) {
+					buf.append(a.type);
+				} else {
+					buf.append(a.name);
+					if (a.type.isGeneral() && !a.type.isGeneric()) {
+						if (a.type.isSequence())
+							buf.append("*");
+					} else {
+						buf.append(".").append(a.type);
+					}
+				}
 			}
 			buf.append(" : ").append(
 					((FunctionType) fType.getEffectiveLowerBound())

@@ -100,7 +100,14 @@ public class GenericType extends CommonType implements IType {
 	}
 
 	public String singleToString() {
-		return fLowerBoundType.singleToString() + "[" + getInstanceId() + "]";
+		String name = "";
+		if (fInstanceId < 26)
+			name += "`" + ((char)('a' + fInstanceId));
+		else
+			name += fInstanceId;
+		if (!fLowerBoundType.isGeneral())
+			name += " [" + fLowerBoundType + "]";
+		return name;
 	}
 
 	@Override

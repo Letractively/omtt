@@ -27,6 +27,7 @@ import org.eclipse.ui.texteditor.MarkerAnnotation;
 import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.compiler.reporting.PrintProblemCollector;
 import pl.omtt.eclipse.model.IDocumentModelListener;
+import pl.omtt.eclipse.model.IModelChangeListener;
 import pl.omtt.eclipse.model.OmttModelManager;
 import pl.omtt.eclipse.model.OmttProjectModel;
 import pl.omtt.eclipse.util.stream.DocumentRawStream;
@@ -38,7 +39,7 @@ import pl.omtt.lang.model.PrintTreeVisitor;
 import pl.omtt.lang.model.ast.Program;
 
 @SuppressWarnings("unused")
-public class OmttDocumentModel {
+public class OmttDocumentModel implements IModelChangeListener {
 	final IDocument fDocument;
 	final IFile fFile;
 
@@ -60,6 +61,7 @@ public class OmttDocumentModel {
 
 		fOmttProjectModel = OmttModelManager.getOmttModelManager()
 				.getProjectModel(file.getProject());
+		fOmttProjectModel.addModelChangeListener(this, file);
 		reconcile();
 	}
 
@@ -173,7 +175,14 @@ public class OmttDocumentModel {
 	}
 
 	public void dispose() {
+		fOmttProjectModel.removeModelChangeListener(this, fFile);
 		fDocumentTree = null;
 		fListeners = null;
+	}
+
+	@Override
+	public void notifyChange(IResource resource) {
+		if (resource.equals(fFile))
+			reconcile();
 	}
 }
