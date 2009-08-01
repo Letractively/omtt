@@ -24,12 +24,15 @@ public class SymbolTable {
 	}
 	
 	public Symbol find(String name, boolean recursive) {
-		if (fSymbolMap.containsKey(name))
-			return fSymbolMap.get(name);
-		else if (recursive && fParent != null)
+		if (fSymbolMap.containsKey(name)) {
+			Symbol s = fSymbolMap.get(name);
+			s.fReferenceCount++;
+			return s;
+		} else if (recursive && fParent != null) {
 			return fParent.find(name, true);
-		else
+		} else {
 			return null;
+		}
 	}
 
 	public void put(Symbol s) {

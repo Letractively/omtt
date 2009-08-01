@@ -1,28 +1,42 @@
 package pl.omtt;
 
 import pl.omtt.core.functions.*;
+import pl.omtt.core.stdlib.TextBuffer;
 
 public class Test2 {
-    public Double f (final Integer n) {
-        final Integer x = (n) * (1);
-        final Double y = 2.2;
-        
-        return (x) + (y);
+    @Type("(_ -> Data)")
+    static public void sample (final TextBuffer $buffer, @Name("it") final Object it) {
+        if (it instanceof Double) {
+            $buffer.append("->" + it);
+            sample$t0($buffer, (Double) it);
+            $buffer.append("->" + it);
+            return;
+        }
+        if (it instanceof Integer) {
+            $buffer.append("->" + it);
+            sample$t1($buffer, (Integer) it);
+            $buffer.append("->" + it);
+            return;
+        }
     }
 
-    public int x (Function1<Integer, Integer> f) {
-    	Function1<Integer,Integer> g = new Function1<Integer, Integer>() {
-			@Override
-			public Integer run(Integer arg0) {
-				return null;
-			}
-		};
-    	g.run(1);
-    	return 0;
+    static private void sample$t0 (final TextBuffer $buffer, @Name("it") final Double it) {
+        $buffer.append("departament\n");
     }
-    
+
+    static private void sample$t1 (final TextBuffer $buffer, @Name("it") final Integer it) {
+        $buffer.append("pracownik\n");
+    }
+
+    static private void f$t2 (final TextBuffer $buffer) {
+        sample($buffer, 1);
+        $buffer.append("\n");
+    }
+
     public static void main (String[] args) {
-    	System.out.println(2 * 3 % 4);
+    	TextBuffer buf = new TextBuffer();
+    	f$t2(buf);
+    	System.out.println(buf);
     }
     
     public interface IFunction {

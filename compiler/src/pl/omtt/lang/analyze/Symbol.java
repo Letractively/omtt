@@ -6,6 +6,7 @@ public class Symbol {
 	String fName;
 	IType fType;
 	SymbolTable fSTOwner;
+	int fReferenceCount = 0;
 
 	public Symbol(String name, IType type) {
 		fName = name;
@@ -32,6 +33,13 @@ public class Symbol {
 		return getParentST() instanceof BaseSymbolTable;
 	}
 
+	/**
+	 * @return how many references to the symbol exist
+	 */
+	public int getReferencesCount () {
+		return fReferenceCount;
+	}
+	
 	public final static String CONTEXT = "_";
 	public final static String IT = "it";
 }

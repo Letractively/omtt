@@ -8,6 +8,7 @@ import pl.omtt.compiler.reporting.Problem;
 import pl.omtt.lang.analyze.ForceSymbolTableRecalculatingException;
 import pl.omtt.lang.analyze.ISymbolTableDualParticipant;
 import pl.omtt.lang.analyze.ISymbolTableOwner;
+import pl.omtt.lang.analyze.MultiSymbol;
 import pl.omtt.lang.analyze.SemanticException;
 import pl.omtt.lang.analyze.Symbol;
 import pl.omtt.lang.analyze.SymbolTable;
@@ -145,14 +146,35 @@ public class TemplateDefinition extends CommonNode implements
 
 	private void setSymbol(SymbolTable ST) throws SemanticException {
 		fSymbol = new Symbol(getTemplateName(), fType);
-		final boolean covering = ST.getParent().find(getTemplateName(), false) != null;
+		Symbol covering = ST.getParent().find(getTemplateName(), false);
 
-		ST.getParent().put(fSymbol);
-		if (getParent() instanceof Program && covering) {
-			throw new SemanticException(getTemplateNameIdent().getToken(),
-					"template with name " + getTemplateName()
-							+ " was declared yet and will not be exported",
-					Problem.WARNING);
+		if (isContext()) {
+			final MultiSymbol ms;
+			if (covering != null) {
+				if (!(covering instanceof MultiSymbol))
+					throw new TypeException(getTemplateNameToken(),
+							"single-template " + getTemplateName()
+									+ " was defined yet");
+				ms = (MultiSymbol) covering;
+			} else {
+				ms = new MultiSymbol(getTemplateName(), (FunctionType) fSymbol
+						.getType());
+				ST.getParent().put(ms);
+			}
+			try {
+				ms.addParticipant(fSymbol);
+			} catch (TypeException e) {
+				e.setCauseObject(getTemplateNameToken());
+				throw e;
+			}
+		} else {
+			ST.getParent().put(fSymbol);
+			if (getParent() instanceof Program && covering != null) {
+				throw new SemanticException(getTemplateNameIdent().getToken(),
+						"template with name " + getTemplateName()
+								+ " was declared yet and will not be exported",
+						Problem.WARNING);
+			}
 		}
 	}
 
