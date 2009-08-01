@@ -18,6 +18,7 @@ public class OmttUI extends AbstractUIPlugin {
 	 * The constructor
 	 */
 	public OmttUI() {
+		super();
 	}
 
 	/*
@@ -46,5 +47,7 @@ public class OmttUI extends AbstractUIPlugin {
 	public static OmttUI getDefault() {
 		return plugin;
 	}
+
+
 
 }

@@ -83,6 +83,7 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 			return JavaTypesAdapter.fromType(rettype);
 
 		FunctionType ftype = new FunctionType();
+		ftype.setNotNull();
 		final int starti;
 		if (void.class.equals(rettype)) {
 			ftype.setReturnType(new StringDataType());

@@ -44,7 +44,7 @@ public abstract class AbstractProblemCollector implements IProblemCollector {
 	}
 
 	public void reportError(URI uri, SemanticException e) {
-		report(Problem.fromSemanticException(Problem.ERROR, uri, e));
+		report(Problem.fromSemanticException(uri, e));
 	}
 
 	@Override
@@ -76,8 +76,8 @@ public abstract class AbstractProblemCollector implements IProblemCollector {
 	}
 
 	protected void report(Problem problem) {
-		if (fProblemLevel > problem.fType)
-			fProblemLevel = problem.fType;
+		if (fProblemLevel > problem.fSeverity)
+			fProblemLevel = problem.fSeverity;
 		doCollect(problem);
 	}
 

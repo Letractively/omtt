@@ -4,6 +4,7 @@ options {
   output = AST;
   tokenVocab = OmttLexer;
   superClass = AbstractOmttParser;
+  backtrack = true;
 }
 
 @header {
@@ -187,13 +188,31 @@ fragment single_lambda_match
 	: type OP_FOLLOW safe_expression
 	;
 
-fragment type
-  : CLASS_ID OP_MULTIPLY?
-  	-> ^(CLASS_ID<TypeReference> OP_MULTIPLY?)
+type
+  : type_content OP_MULTIPLY?
+  	-> ^(TYPE<TypeReference> type_content OP_MULTIPLY?)
   ;
-fragment single_type
+single_type
+  : type_content
+  	-> ^(TYPE<TypeReference> type_content)
+  ;
+fragment type_content
   : CLASS_ID
-  	-> ^(CLASS_ID<TypeReference>)
+  | LEFT_PAREN argument_type+ OP_FOLLOW type RIGHT_PAREN
+  	-> ^(FUNCTION type argument_type+)
+  | LEFT_SQUARE_PAREN tuple_types+=type (COMMA tuple_types+=type)+ RIGHT_SQUARE_PAREN
+		{reportNotImplemented("tuples");}
+  	-> ^(TUPLE $tuple_types*)
+  | LEFT_SQUARE_PAREN record_types+=record_item_type (COMMA record_types+=record_item_type)* RIGHT_SQUARE_PAREN
+		{reportNotImplemented("records");}
+  	-> ^(RECORD $record_types*)
+	;
+fragment argument_type
+	: TILDE? (VAR_ID DOT)? type
+		-> ^(ARGUMENT type VAR_ID? TILDE?)
+	;
+fragment record_item_type
+	: VAR_ID DOT! type
 	;
 // END: template expressions
 
@@ -450,18 +469,35 @@ selectable_atom
   : object_atom
   | data_expression
   | namespace_id
+	| tuple
+  | record
   | LEFT_PAREN! sequence_expression RIGHT_PAREN!
   ;
+
 fragment namespace_id
   : (ns=VAR_ID OP_VIEW)? id=VAR_ID
     -> ^(IDENT<Ident>[$id] $ns?)
-  | id=OP_GENERAL
-  	-> ^(IDENT<Ident>[$id])
+  | (ns=VAR_ID OP_VIEW)? id=OP_GENERAL
+    -> ^(IDENT<Ident>[$id] $ns?)
   ;
+
+tuple
+	: LEFT_SQUARE_PAREN expr+=expression (COMMA expr+=expression)* RIGHT_SQUARE_PAREN
+		{reportNotImplemented("tuples");}
+		-> ^(TUPLE $expr+)
+	;
+record
+	:	LEFT_SQUARE_PAREN expr+=record_item (COMMA expr+=record_item)* RIGHT_SQUARE_PAREN
+	{reportNotImplemented("records");}
+		-> ^(RECORD $expr*)
+	;
+fragment record_item
+	: VAR_ID COLON! expression
+	;
 
 sequence_expression
 	: (expr=expression -> $expr)
-		( (COMA rexpr+=expression)+
+		( (COMMA rexpr+=expression)+
 			-> ^(SEQUENCE<Sequence> $sequence_expression $rexpr+)
 		|	-> $sequence_expression
 		)

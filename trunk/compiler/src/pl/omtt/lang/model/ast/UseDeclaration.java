@@ -10,16 +10,8 @@ import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.TypeException;
 
 public class UseDeclaration extends CommonNode implements IVisitable, ISymbolTableParticipant {
-	public String fAlias;
-
-	public UseDeclaration(int token_type, Token token, Token as) {
-		this.token = token;
-		if (as != null)
-			fAlias = as.getText();
-	}
-
-	public UseDeclaration(int tokenType, Token token) {
-		this(tokenType, token, null);
+	public UseDeclaration(int token_type, Token token) {
+		super(token);
 	}
 
 	public String getUseId () {

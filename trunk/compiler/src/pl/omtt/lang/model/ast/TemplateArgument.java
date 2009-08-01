@@ -49,7 +49,7 @@ public class TemplateArgument extends CommonNode implements
 	}
 
 	public TypeReference getTypeNode() {
-		return (TypeReference) getFirstChildWithType(OmttParser.CLASS_ID);
+		return (TypeReference) getFirstChildWithType(OmttParser.TYPE);
 	}
 
 	@Override

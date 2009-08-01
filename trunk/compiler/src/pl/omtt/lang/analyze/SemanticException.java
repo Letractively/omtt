@@ -3,12 +3,20 @@ package pl.omtt.lang.analyze;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;
 
+import pl.omtt.compiler.reporting.Problem;
+
 public class SemanticException extends Exception {
 	Object fCauseObject;
+	int fSeverity = Problem.ERROR;
 
-	protected SemanticException(Object cause, String message) {
+	public SemanticException(Object cause, String message, int severity) {
 		this(message);
 		fCauseObject = cause;
+		fSeverity = severity;
+	}
+
+	protected SemanticException(Object cause, String message) {
+		this(cause, message, Problem.ERROR);
 	}
 	
 	public SemanticException(Token token, String message) {
@@ -39,5 +47,13 @@ public class SemanticException extends Exception {
 		fCauseObject = o;
 	}
 
+	public int getSeverity () {
+		return fSeverity;
+	}
+	
+	public void setSeverity (int severity) {
+		fSeverity = severity;
+	}
+	
 	private static final long serialVersionUID = -4491948348650581470L;
 }

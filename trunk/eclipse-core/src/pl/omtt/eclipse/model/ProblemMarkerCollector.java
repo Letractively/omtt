@@ -35,7 +35,7 @@ public class ProblemMarkerCollector extends AbstractProblemCollector {
 		try {
 			marker = resource.createMarker(OMTT_PROBLEM_MARKER);
 
-			switch (problem.getType()) {
+			switch (problem.getSeverity()) {
 			case Problem.ERROR:
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 				break;

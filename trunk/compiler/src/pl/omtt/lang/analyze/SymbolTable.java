@@ -56,4 +56,8 @@ public class SymbolTable {
 	public BaseSymbolTable getBase () {
 		return getParent().getBase();
 	}
+
+	public String getModuleId() {
+		return getBase().getModuleId();
+	}
 }

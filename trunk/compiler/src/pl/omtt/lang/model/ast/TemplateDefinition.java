@@ -4,14 +4,17 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;
 
+import pl.omtt.compiler.reporting.Problem;
 import pl.omtt.lang.analyze.ForceSymbolTableRecalculatingException;
 import pl.omtt.lang.analyze.ISymbolTableDualParticipant;
 import pl.omtt.lang.analyze.ISymbolTableOwner;
+import pl.omtt.lang.analyze.SemanticException;
 import pl.omtt.lang.analyze.Symbol;
 import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
+import pl.omtt.lang.model.types.ErrorType;
 import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.GenericType;
 import pl.omtt.lang.model.types.IType;
@@ -38,6 +41,10 @@ public class TemplateDefinition extends CommonNode implements
 
 	public boolean isContext() {
 		return fItSymbol != null;
+	}
+
+	public boolean isFunction() {
+		return isContext() || getArgumentsCount() > 0;
 	}
 
 	public TemplateArgument getArgument(int i) {
@@ -81,7 +88,7 @@ public class TemplateDefinition extends CommonNode implements
 	}
 
 	@Override
-	public void takeSymbolTable(SymbolTable ST) throws TypeException {
+	public void takeSymbolTable(SymbolTable ST) throws SemanticException {
 		IType returnType;
 		if (getReturnsTypeNode() != null) {
 			returnType = getReturnsTypeNode().get(ST);
@@ -99,6 +106,7 @@ public class TemplateDefinition extends CommonNode implements
 			fType = returnType;
 		} else {
 			FunctionType type = new FunctionType();
+			type.setNotNull();
 
 			if (contextnode != null) {
 				IType contexttype = ((TypeReference) contextnode.getChild(0))
@@ -112,15 +120,40 @@ public class TemplateDefinition extends CommonNode implements
 
 			if (!(args == null))
 				for (int i = 0; i < args.getChildCount(); i++) {
-					TemplateArgument arg = (TemplateArgument) args.getChild(i);
-					type.putArgument(arg.getArgumentName(), arg
-							.getArgumentType(), arg.isArgumentOptional());
+					final TemplateArgument arg = (TemplateArgument) args
+							.getChild(i);
+					final String argname = arg.getArgumentName();
+					final boolean argoptional = arg.isArgumentOptional();
+					final IType argtype = arg.getArgumentType();
+					try {
+						type.putArgument(argname, argtype, argoptional);
+					} catch (TypeException e) {
+						e.setCauseObject(arg);
+						fType = ErrorType.instance();
+						try {
+							setSymbol(ST);
+						} catch (TypeException sse) {
+						}
+						throw e;
+					}
 				}
 			type.setReturnType(returnType);
 			fType = type;
 		}
+		setSymbol(ST);
+	}
+
+	private void setSymbol(SymbolTable ST) throws SemanticException {
 		fSymbol = new Symbol(getTemplateName(), fType);
+		final boolean covering = ST.getParent().find(getTemplateName(), false) != null;
+
 		ST.getParent().put(fSymbol);
+		if (getParent() instanceof Program && covering) {
+			throw new SemanticException(getTemplateNameIdent().getToken(),
+					"template with name " + getTemplateName()
+							+ " was declared yet and will not be exported",
+					Problem.WARNING);
+		}
 	}
 
 	public Tree getContextNode() {
@@ -207,7 +240,9 @@ public class TemplateDefinition extends CommonNode implements
 				buf.append(" ").append(ta.getArgumentName());
 				buf.append(".").append(ta.getArgumentType());
 			}
-			buf.append(" : ").append(((FunctionType) fType).getReturnType());
+			buf.append(" : ").append(
+					((FunctionType) fType.getEffectiveLowerBound())
+							.getReturnType());
 		} else {
 			buf.append(" : ").append(fType);
 		}

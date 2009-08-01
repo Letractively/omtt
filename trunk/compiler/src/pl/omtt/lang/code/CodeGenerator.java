@@ -13,7 +13,6 @@ import pl.omtt.core.Constants;
 import pl.omtt.core.OmttLoader;
 import pl.omtt.lang.analyze.BaseSymbolTable;
 import pl.omtt.lang.analyze.Symbol;
-import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.AbstractTreeWalker;
 import pl.omtt.lang.model.ast.*;
 import pl.omtt.lang.model.types.FunctionType;
@@ -76,7 +75,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 	}
 
 	/**
-	 * <u>Caution:</u> no null checking is done.
+	 * <u>Caution:</u> null checking may not be done.
 	 * 
 	 * @param var
 	 *            casting variable name
@@ -105,15 +104,14 @@ public class CodeGenerator extends AbstractTreeWalker {
 				return var + ".isEmpty()";
 			}
 			// TODO: extract single from sequence
-			throw new Error(new CodeGenerationException(
-					"[1] unimplemented cast"));
+			error("[1] unimplemented cast");
+			return null;
 		} else if (targetType.isSequence() && sourceType.isSequence()) {
 			if (targetType.isFunction()) {
 				if (sourceType.equals(targetType))
 					return var;
-				throw new Error(new CodeGenerationException(
-						"[2] unimplemented cast: " + sourceType + " ~~> "
-								+ targetType));
+				error("[2] unimplemented cast: " + sourceType + " ~~> "
+						+ targetType);
 			}
 			if (sourceType.essentiallyEquals(targetType))
 				return var;
@@ -185,7 +183,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 				targetJType);
 		fBuffer.incIndentation();
 		final String sigtemplate = signatureTemplate(targetf);
-		fBuffer.putl(sigtemplate + " {", "run");
+		fBuffer.putl(sigtemplate + " {", "public", "run");
 		fBuffer.incIndentation();
 
 		StringBuffer buf = new StringBuffer();
@@ -195,14 +193,18 @@ public class CodeGenerator extends AbstractTreeWalker {
 				fBuffer.initBuffer();
 			buf.append(fBuffer.getCurrentBuffer()).append(", ");
 		}
-		for (int i = 0; i < targetf.getArgumentLength(); i++) {
+		for (int i = 0; i < sourcef.getArgumentLength(); i++) {
 			Argument sourcearg = sourcef.getArgument(i);
-			Argument targetarg = targetf.getArgument(i);
-			String argname = targetarg.name;
-			if (argname == null)
-				argname = "arg" + i;
-			buf.append(cast(argname, targetarg.type, sourcearg.type));
-			if (i < targetf.getArgumentLength() - 1)
+			if (i < targetf.getArgumentLength()) {
+				Argument targetarg = targetf.getArgument(i);
+				String argname = targetarg.name.replace('@', '$');
+				if (argname == null)
+					argname = "arg" + i;
+				buf.append(cast(argname, targetarg.type, sourcearg.type));
+			} else {
+				buf.append("null");
+			}
+			if (i < sourcef.getArgumentLength() - 1)
 				buf.append(", ");
 		}
 		buf.append(")");
@@ -266,17 +268,15 @@ public class CodeGenerator extends AbstractTreeWalker {
 	}
 
 	protected String jtype(IType type) {
-		/*
-		 * if (type.isFunction()) { FunctionType funtype = (FunctionType)
-		 * type.getEffectiveLowerBound(); if
-		 * (!fTypeAdapter.containsFunction(funtype)) signatureTemplate(funtype);
-		 * }
-		 */
 		return fTypeAdapter.get(type);
 	}
 
 	protected String jsingletype(IType type) {
 		return jtype(single(type));
+	}
+
+	protected void error(String message) throws Error {
+		throw new Error(new CodeGenerationException(message));
 	}
 
 	public void visit(Program program) {
@@ -344,28 +344,38 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		if (def.isContext())
 			fSymbolLocalNames.put(def.getItSymbol(), def.getItSymbol()
-					.getName());
+					.getName().replace('@', '$'));
 
 		final String stemplate = signatureTemplate(type);
 
 		if (inner) {
-			final String var = fBuffer.getTemporaryVariable();
+			final String var = def.getTemplateName().replace('@', '$')
+					+ fBuffer.getTemporaryVariable();
 			final String jtype = fTypeAdapter.get(type);
 			fSymbolLocalNames.put(def.getSymbol(), var);
 			fBuffer.putl("final %s %s = new %s () {", jtype, var, jtype);
 			fBuffer.incIndentation();
 
-			fBuffer.putl(stemplate + " {", "run");
+			fBuffer.putl(stemplate + " {", "public", "run");
 		} else {
-			fBuffer.putl("@Type(\"%s\")", def.getExpressionType().toString());
-			fBuffer.putl("static " + stemplate + " {", def.getTemplateName());
+			if (isCovered(def) || def.getTemplateName().startsWith("@")) {
+				final String var = def.getTemplateName().replace('@', '$')
+						+ fBuffer.getTemporaryVariable();
+				fSymbolLocalNames.put(def.getSymbol(), var);
+				fBuffer.putl(stemplate + " {", "static private", var);
+			} else {
+				fBuffer.putl("@Type(\"%s\")", def.getExpressionType()
+						.toString());
+				fBuffer.putl(stemplate + " {", "static public", def
+						.getTemplateName());
+			}
 		}
 		fBuffer.pushBuffer("$buffer");
 		fBuffer.incIndentation();
 
 		for (int i = 0; i < def.getArgumentsCount(); i++) {
 			final TemplateArgument ta = def.getArgument(i);
-			fSymbolLocalNames.put(ta.getSymbol(), ta.getArgumentName());
+			fSymbolLocalNames.put(ta.getSymbol(), ta.getArgumentName().replace('@', '$'));
 		}
 		final IExpression body = def.getBodyNode();
 		apply(body);
@@ -389,7 +399,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		IType rettype = ftype.getReturnType();
 
 		StringBuffer sig = new StringBuffer();
-		sig.append("public ");
+		sig.append("%s ");
 		if (rettype.isSingleData())
 			sig.append("void");
 		else
@@ -412,7 +422,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			if (a.name == null)
 				sig.append("arg").append(i).append(", ");
 			else
-				sig.append(a.name).append(", ");
+				sig.append(a.name.replace('@', '$')).append(", ");
 		}
 		sig.delete(sig.length() - 2, sig.length());
 		sig.append(")");
@@ -423,30 +433,43 @@ public class CodeGenerator extends AbstractTreeWalker {
 	private void visitVariable(TemplateDefinition def, IType type) {
 		final boolean isInner = !(def.getParent() instanceof Program);
 
-		final String name = def.getTemplateName();
+		String var = def.getTemplateName();
 		final String jtype = jtype(type);
 		final IExpression body = def.getBodyNode();
 
 		if (isInner) {
-			fBuffer.putl("final %s %s = %s;", jtype, name, exprapply(body));
+			var = var + fBuffer.getTemporaryVariable();
+			fSymbolLocalNames.put(def.getSymbol(), var);
+			fBuffer.putl("final %s %s = %s;", jtype, var, exprapply(body));
 		} else {
-			fBuffer.putl("public final static %s %s;", jtype, name);
+			if (isCovered(def) || def.getTemplateName().startsWith("@")) {
+				var = var.replace('@', '$') + fBuffer.getTemporaryVariable();
+				fBuffer.putl("private final static %s %s;", jtype, var);
+				fSymbolLocalNames.put(def.getSymbol(), var);
+			} else {
+				fBuffer.putl("public final static %s %s;", jtype, var);
+			}
 
 			fBuffer.activate("static");
 			fBuffer.incIndentation();
-			final String var = exprapply(def.getBodyNode());
-			fBuffer.putl("%s = %s;", name, var);
+			final String exprResult = exprapply(def.getBodyNode());
+			fBuffer.putl("%s = %s;", var, exprResult);
 			fBuffer.subIndentation();
 			fBuffer.deactivate();
 		}
 
 	}
 
+	private boolean isCovered(TemplateDefinition def) {
+		final Symbol s = def.getSymbol();
+		return s.getParentST().find(s.getName(), false) != s;
+	}
+
 	public void visit(TemplateDefinition def) {
 		IType type = def.getExpressionType();
 		IType efftype = type.getEffectiveLowerBound();
 
-		if (efftype instanceof FunctionType && !type.isSequence()) {
+		if (def.isFunction()) {
 			visitFunction(def, (FunctionType) efftype);
 		} else {
 			visitVariable(def, type);
@@ -462,7 +485,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("// %s", lambda.toString());
 		fBuffer.putl("final %s %s = new %s () {", jtype, var, jtype);
 		fBuffer.incIndentation();
-		fBuffer.putl(sigtemplate + " {", "run");
+		fBuffer.putl(sigtemplate + " {", "public", "run");
 		fBuffer.incIndentation();
 		apply(lambda.getBodyNode());
 		if (!lambda.getBodyNode().getExpressionType().isSingleData())
@@ -594,8 +617,6 @@ public class CodeGenerator extends AbstractTreeWalker {
 				&& !rettype.isSequence();
 		final boolean iterate = call.isIterateSequence();
 
-		boolean checknull = true;
-
 		final StringBuffer argbuf = new StringBuffer();
 		for (int i = iterate ? 1 : 0; i < call.getArgumentLength(); i++) {
 			apply(call.getArgument(i));
@@ -605,39 +626,23 @@ public class CodeGenerator extends AbstractTreeWalker {
 		}
 		final String argsep = argbuf.length() == 0 ? "" : ", ";
 
+		boolean checknull = !calltype.isNotNull();
+
 		String callstr = null;
-		if (callingNode instanceof Ident
-				&& ((Ident) callingNode).getSource() != Ident.SOURCE_CONTEXT_OBJECT) {
-			callstr = getDirectMethodName((Ident) callingNode);
-			checknull = false;
-			if (callstr == null) {
-				checknull = true;
-				Tree t = callingNode;
-				final Symbol symbol = ((Ident) callingNode).getSymbol();
-				while (t != null) {
-					if (t instanceof TemplateDefinition) {
-						if (((TemplateDefinition) t).getSymbol().equals(symbol)) {
-							callstr = "run";
-							checknull = false;
-						}
-						break;
-					}
-					t = t.getParent();
-				}
-			}
+		if (callingNode instanceof Ident) {
+			final Symbol s = ((Ident) callingNode).getSymbol();
+			callstr = getGlobalReference(s, callingNode);
 		}
 		if (callstr == null) {
 			apply(callingNode);
-			if (calltype.isNotNull())
-				checknull = false;
 			callstr = fBuffer.getVariable(callingNode) + ".run";
 		}
 		final String callvar = callstr;
 		final String checknullstr;
-		if (checknull)
-			checknullstr = checkNotNull(fBuffer.getVariable(callingNode),
-					calltype);
-		else
+		if (checknull) {
+			String var = fBuffer.getVariable(callingNode);
+			checknullstr = checkNotNull(var, calltype);
+		} else
 			checknullstr = null;
 
 		if (flushData) {
@@ -779,53 +784,76 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putSafeExpression(argument, "%s", exprapply(target));
 	}
 
-	@Override
-	public void visit(Ident ident) {
-		String var;
-		final Symbol s = ident.getSymbol();
-		if (fSymbolLocalNames.containsKey(s))
-			var = fSymbolLocalNames.get(s);
-		else if (getDirectMethodName(ident) != null)
-			var = getDirectMethodName(ident);
-		else
-			var = ident.getName();
-
-		if (ident.getSource() == Ident.SOURCE_CONTEXT_OBJECT) {
-			final String basevar = var;
-			var = fBuffer.getTemporaryVariable();
-			fBuffer.putl("final %s %s = %s ? null : %s;", jtype(ident
-					.getExpressionType()), var,
-					checkNull(basevar, s.getType()), getPropertyString(basevar,
-							ident));
-		}
-
-		final IType type = ident.getExpressionType();
-		if (type.isFunction()) {
-			final SymbolTable ownerST = ident.getSymbol().getParentST();
-			if (ownerST.getBase().contains(ident.getSymbol())) {
-				var = instantiateFunction(var, type, type);
+	private String getGlobalReference(Symbol s, Tree caller) {
+		// check if symbol is called recursively
+		for (Tree node = caller; node != null; node = node.getParent())
+			if (node instanceof TemplateDefinition) {
+				TemplateDefinition def = (TemplateDefinition) node;
+				if (def.getSymbol().equals(s)) {
+					// reference is recursive
+					if (def.isFunction())
+						return "run";
+					else
+						error(caller
+								+ ": calling variables recursively is not allowed");
+				}
 			}
-		} else if (type.isSingleData()) {
-			fBuffer.putl("%s.append(%s);", fBuffer.getCurrentBuffer(), var);
-			return;
-		}
-		fBuffer.putVariable(ident, var);
+
+		if (!s.isGlobal())
+			return null;
+		else if (fSymbolLocalNames.containsKey(s))
+			return fSymbolLocalNames.get(s);
+		else if (!fBaseSymbolTable.getModuleId().equals(s.getModuleId()))
+			return OmttLoader.getModuleClassName(s.getModuleId()) + "."
+					+ s.getName().replace('@', '$');
+		else
+			return s.getName().replace('@', '$');
 	}
 
-	private String getDirectMethodName(Ident ident) {
-		if (ident.getSource() == Ident.SOURCE_CONTEXT_OBJECT)
-			return null;
-
+	@Override
+	public void visit(Ident ident) {
 		final Symbol s = ident.getSymbol();
-		if (!s.getParentST().getBase().getId().equals(fBaseSymbolTable.getId())) {
-			final String modcls = OmttLoader.getModuleClassName(s.getParentST()
-					.getBase().getId());
-			return modcls + "." + ident.getName();
-		} else if (s.getParentST() == fBaseSymbolTable) {
-			return ident.getName();
+		final IType type = ident.getExpressionType();
+
+		// collect call to symbol referenced by getSymbol()
+		String acc = getGlobalReference(s, ident);
+		if (acc == null) {
+			// symbol refers to local variable
+			if (fSymbolLocalNames.containsKey(s))
+				acc = fSymbolLocalNames.get(s);
+			else
+				acc = s.getName().replace('@', '$');
 		} else {
-			return null;
+			if (type.isFunction()) {
+				final String var = acc.toString();
+				acc = instantiateFunction(var, type, type);
+			}
 		}
+
+		// if identifier points to property of context object,
+		// we need to replace content of accumulator with
+		// proper call
+		if (ident.getSource() == Ident.SOURCE_CONTEXT_OBJECT) {
+			if (type.isFunction())
+				error("getIdent: I cannot extract property from function object");
+
+			// acc points to context object now
+			final String basevar = acc;
+			acc = fBuffer.getTemporaryVariable();
+
+			final String jtype = jtype(ident.getExpressionType());
+			final String nullcheck = checkNull(basevar, s.getType());
+			final String property = getPropertyString(basevar, ident);
+			fBuffer.putl("final %s %s = %s ? null : %s;", jtype, acc,
+					nullcheck, property);
+		}
+
+		if (type.isSingleData() && !type.isFunction()) {
+			fBuffer.putl("%s.append(%s);", fBuffer.getCurrentBuffer(), acc);
+			return;
+		}
+
+		fBuffer.putVariable(ident, acc);
 	}
 
 	public void visit(final AtomSelect select) {
@@ -914,9 +942,9 @@ public class CodeGenerator extends AbstractTreeWalker {
 			if (bexpr.getOperator() == BooleanExpression.OP_NOT) {
 				putNullCheck(buf, var, node.getExpressionType());
 				buf.append("Boolean.FALSE.equals(").append(var).append(")");
-			} else
-				throw new Error(new CodeGenerationException(
-						"unknown boolean unary operator"));
+			} else {
+				error("unknown boolean unary operator");
+			}
 			break;
 
 		case BooleanExpression.TYPE_BINARY_OP:
@@ -1010,8 +1038,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 				break;
 
 			default:
-				throw new Error(new CodeGenerationException(
-						"unknown boolean binary operator"));
+				error("unknown boolean binary operator");
 			}
 
 			if (btype.isSingleData())
@@ -1080,8 +1107,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			break;
 
 		default:
-			throw new Error(
-					new CodeGenerationException("unknown operator type"));
+			error("unknown operator type");
 		}
 
 		fBuffer.putShortExpression(bexpr, buf.toString());

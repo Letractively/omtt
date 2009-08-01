@@ -6,22 +6,30 @@ public class Symbol {
 	String fName;
 	IType fType;
 	SymbolTable fSTOwner;
-	
+
 	public Symbol(String name, IType type) {
 		fName = name;
 		fType = type;
 	}
 
-	public String getName () {
+	public String getName() {
 		return fName;
 	}
-	
+
 	public IType getType() {
 		return fType;
 	}
-	
-	public SymbolTable getParentST () {
+
+	public SymbolTable getParentST() {
 		return fSTOwner;
+	}
+
+	public String getModuleId() {
+		return fSTOwner.getModuleId();
+	}
+
+	public boolean isGlobal() {
+		return getParentST() instanceof BaseSymbolTable;
 	}
 
 	public final static String CONTEXT = "_";

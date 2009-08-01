@@ -66,37 +66,74 @@ public class Ident extends CommonNode implements IExpression,
 
 	@Override
 	public void setExpressionType(SymbolTable st) throws TypeException {
-		try {
-			setFromContextObject(st);
-		} catch (TypeException e) {
-			setFromSymbolTable(st);
+		String ns = getNamespace();
+		boolean checkContext = true;
+		if (NS_SUPER.equals(ns)) {
+			st = st.getParent();
+			ns = null;
+		} else if (NS_LOCAL.equals(ns)) {
+			checkContext = false;
+			ns = null;
+		} else if (NS_GLOBAL.equals(ns)) {
+			checkContext = false;
+			ns = null;
+			st = st.getBase();
 		}
+		if (ns != null) {
+			if (setFromSymbolTableNs(st, ns)) {
+				fSource = SOURCE_NS;
+				return;
+			}
+		} else {
+			if (setFromSymbolTable(st, false)) {
+				fSource = SOURCE_LOCAL;
+				return;
+			}
+			if (checkContext && setFromContextObject(st)) {
+				fSource = SOURCE_CONTEXT_OBJECT;
+				return;
+			}
+			SymbolTable pst = st.getParent();
+			if (pst != null && setFromSymbolTable(pst, true)) {
+				fSource = SOURCE_LOCAL;
+				return;
+			}
+		}
+		fType = ErrorType.instance();
+		fSource = SOURCE_NONE;
+		throw new TypeException(getToken(), "symbol " + getName()
+				+ " not found");
 	}
 
-	private void setFromContextObject(SymbolTable st) throws TypeException {
+	private boolean setFromContextObject(SymbolTable st) {
 		fSymbol = st.find(Symbol.CONTEXT);
-		if (fSymbol == null) {
-			fSource = SOURCE_NONE;
-			fType = new ErrorType();
-			throw new TypeException("context object not found");
-		}
-		fProperty = PropertySelect.findProperty(fSymbol.getType(), getName());
+		if (fSymbol == null)
+			return false;
+		try {
+			fProperty = PropertySelect.findProperty(fSymbol.getType(), getName());
+		} catch (TypeException e) {
+			return false;
+		}		
 		if (fProperty == null)
-			throw new TypeException("property " + getName() + " not found");
-		fSource = SOURCE_CONTEXT_OBJECT;
+			return false;
 		fType = fProperty.type;
+		return true;
 	}
 
-	private void setFromSymbolTable(SymbolTable st) throws TypeException {
-		fSymbol = st.find(getName());
-		if (fSymbol == null) {
-			fSource = SOURCE_NONE;
-			fType = new ErrorType();
-			throw new TypeException(getToken(), "symbol " + getName()
-					+ " not found");
-		}
-		fSource = SOURCE_LOCAL;
+	private boolean setFromSymbolTable(SymbolTable st, boolean recursively) {
+		fSymbol = st.find(getName(), recursively);
+		if (fSymbol == null)
+			return false;
 		fType = fSymbol.getType();
+		return true;
+	}
+
+	private boolean setFromSymbolTableNs(SymbolTable st, String ns) {
+		fSymbol = st.getBase().find(getName(), ns);
+		if (fSymbol == null)
+			return false;
+		fType = fSymbol.getType();
+		return true;
 	}
 
 	public Method getPropertyMethod() {
@@ -119,9 +156,12 @@ public class Ident extends CommonNode implements IExpression,
 		visitor.visit(this);
 	}
 
+	public final static String NS_SUPER = "super";
+	public final static String NS_LOCAL = "local";
+	public final static String NS_GLOBAL = "global";
+	
 	public final static int SOURCE_NONE = 0;
 	public final static int SOURCE_CONTEXT_OBJECT = 1;
 	public final static int SOURCE_LOCAL = 2;
-	public final static int SOURCE_SUPER = 3;
-	public final static int SOURCE_GLOBAL = 4;
+	public final static int SOURCE_NS = 3;
 }

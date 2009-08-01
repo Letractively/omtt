@@ -41,6 +41,10 @@ public class ProblemAnnotationCollector extends AbstractProblemCollector {
 			Annotation a = itor.next();
 			if (OMTT_ANNOTATION_ERROR.equals(a.getType()))
 				managed.add(a);
+			else if (OMTT_ANNOTATION_WARNING.equals(a.getType()))
+				managed.add(a);
+			else if (OMTT_ANNOTATION_INFO.equals(a.getType()))
+				managed.add(a);
 		}
 		return managed;
 	}
@@ -57,7 +61,19 @@ public class ProblemAnnotationCollector extends AbstractProblemCollector {
 	protected void collect(Problem problem) {
 		Position p = new Position(problem.getOffset(), problem.getLength());
 		Annotation a = new Annotation(true);
-		a.setType(OMTT_ANNOTATION_ERROR);
+		switch (problem.getSeverity()) {
+		case Problem.ERROR:
+		case Problem.FATAL:
+			a.setType(OMTT_ANNOTATION_ERROR);
+			break;
+		case Problem.WARNING:
+			a.setType(OMTT_ANNOTATION_WARNING);
+			break;
+		case Problem.INFO:
+		case Problem.OTHER:
+			a.setType(OMTT_ANNOTATION_INFO);
+			break;
+		}
 		a.setText(problem.getMessage());
 		fCollectedAnnotations.put(a, p);
 

@@ -11,6 +11,13 @@ public class Test2 {
     }
 
     public int x (Function1<Integer, Integer> f) {
+    	Function1<Integer,Integer> g = new Function1<Integer, Integer>() {
+			@Override
+			public Integer run(Integer arg0) {
+				return null;
+			}
+		};
+    	g.run(1);
     	return 0;
     }
     

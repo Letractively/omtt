@@ -1,5 +1,6 @@
 package pl.omtt.lang.grammar;
 
+import org.antlr.runtime.IntStream;
 import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
@@ -21,8 +22,7 @@ public abstract class AbstractOmttParser extends Parser {
 		super(input);
 	}
 
-	public AbstractOmttParser(TokenStream input,
-			RecognizerSharedState state) {
+	public AbstractOmttParser(TokenStream input, RecognizerSharedState state) {
 		super(input, state);
 	}
 
@@ -35,7 +35,7 @@ public abstract class AbstractOmttParser extends Parser {
 
 		Program tree = (Program) program().getTree();
 		tree.setTokenStream(this.getTokenStream());
-		
+
 		TreeIterator itor = new TreeIterator(tree);
 		while (itor.hasNext()) {
 			Object o = itor.next();
@@ -91,12 +91,31 @@ public abstract class AbstractOmttParser extends Parser {
 			super.reportError(e);
 	}
 
+	protected void reportNotImplemented(String what) throws RecognitionException {
+		throw new NotImplementedException(what, getTokenStream());
+	}
+
 	public abstract OmttParser.program_return program()
 			throws RecognitionException;
 
 	abstract public void setTreeAdaptor(TreeAdaptor adaptor);
 
-	public boolean errorsOccured () {
+	public boolean errorsOccured() {
 		return fErrorsOccured;
+	}
+
+	public class NotImplementedException extends RecognitionException{
+		String cause;
+
+		public NotImplementedException(String msg, IntStream stream) {
+			super(stream);
+			this.cause = msg;
+		}
+
+		public String getMessage() {
+			return cause + " are not implemented yet";
+		}
+
+		private static final long serialVersionUID = 1484884878382850930L;
 	}
 }
