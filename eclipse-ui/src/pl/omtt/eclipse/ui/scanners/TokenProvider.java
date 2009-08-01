@@ -13,7 +13,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 
 import pl.omtt.eclipse.ui.IOmttPreferenceConstants;
-import pl.omtt.eclipse.ui.OmttUI;
 import pl.omtt.eclipse.ui.editor.OmttColorProvider;
 
 public class TokenProvider implements IPropertyChangeListener {
@@ -22,7 +21,7 @@ public class TokenProvider implements IPropertyChangeListener {
 	private Map<String, Token> fCachedTokens = new HashMap<String, Token>();
 
 	public TokenProvider(IPreferenceStore store, OmttColorProvider colorProvider) {
-		fPreferenceStore = OmttUI.getDefault().getPreferenceStore();
+		fPreferenceStore = store;
 		fColorProvider = colorProvider;
 		fPreferenceStore.addPropertyChangeListener(this);
 	}

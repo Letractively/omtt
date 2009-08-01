@@ -12,7 +12,8 @@ tokens {
   IMPORT;
   IMPORTS;
   
-  CLASS;
+  TYPE;
+
   IDENT;
   ATOM_SELECT;
   PROPERTY_SELECT;
@@ -30,6 +31,9 @@ tokens {
   CAST;
 
   SEQUENCE;
+  TUPLE;
+  RECORD;
+  FUNCTION;
   STRING_LITERAL;
   INT_NUMBER;
   REAL_NUMBER;
@@ -205,7 +209,7 @@ COLON
 SEMICOLON : ';';
 DOT : '.';
 DOUBLE_DOT : '..';
-COMA : ',';
+COMMA : ',';
 SLASH : '/';
 TILDE : '~';
 
@@ -250,7 +254,7 @@ OP_GENERAL : '_';
 OP_DATA    : '$';
 
 VAR_ID
-  : (SMALL_LETTER | '_') NAMECHAR*
+  : (SMALL_LETTER | '_' | '@') NAMECHAR*
   ;
 CLASS_ID
   : BIG_LETTER NAMECHAR*

@@ -9,9 +9,9 @@ import pl.omtt.lang.analyze.SemanticException;
 import pl.omtt.lang.model.ast.CommonNode;
 
 public class Problem implements Comparable<Problem> {
-	public Problem(int type, URI uri, String message, int offset, int length,
-			int lineNumber) {
-		fType = type;
+	public Problem(int severity, URI uri, String message, int offset,
+			int length, int lineNumber) {
+		fSeverity = severity;
 		fURI = uri;
 
 		fMessage = message;
@@ -20,7 +20,7 @@ public class Problem implements Comparable<Problem> {
 		fLineNumber = lineNumber;
 	}
 
-	int fType;
+	int fSeverity;
 	URI fURI;
 
 	String fMessage;
@@ -28,8 +28,8 @@ public class Problem implements Comparable<Problem> {
 	int fLength;
 	int fLineNumber;
 
-	public int getType() {
-		return fType;
+	public int getSeverity() {
+		return fSeverity;
 	}
 
 	public URI getURI() {
@@ -86,9 +86,9 @@ public class Problem implements Comparable<Problem> {
 			return 1;
 		}
 
-		if (fType < p.fType)
+		if (fSeverity < p.fSeverity)
 			return -1;
-		else if (fType > p.fType)
+		else if (fSeverity > p.fSeverity)
 			return 1;
 
 		return 0;
@@ -101,55 +101,56 @@ public class Problem implements Comparable<Problem> {
 		return false;
 	}
 
-	public static Problem fromMessage(int type, URI uri, String message) {
-		return new Problem(type, uri, message, 0, 0, 0);
+	public static Problem fromMessage(int severity, URI uri, String message) {
+		return new Problem(severity, uri, message, 0, 0, 0);
 	}
 
-	public static Problem fromSemanticException(int type, URI uri,
-			SemanticException e) {
+	public static Problem fromSemanticException(URI uri, SemanticException e) {
 		Object o = e.getCauseObject();
 		if (o instanceof CommonToken)
-			return fromCommonToken(type, uri, e.getMessage(), (CommonToken) o);
+			return fromCommonToken(e.getSeverity(), uri, e.getMessage(),
+					(CommonToken) o);
 		else if (o instanceof CommonNode)
-			return fromCommonNode(type, uri, e.getMessage(), (CommonNode) o);
+			return fromCommonNode(e.getSeverity(), uri, e.getMessage(),
+					(CommonNode) o);
 		else
-			return fromMessage(type, uri, e.getMessage());
+			return fromMessage(e.getSeverity(), uri, e.getMessage());
 	}
 
-	public static Problem fromCommonToken(int type, URI uri, String message,
-			CommonToken token) {
-		return new Problem(type, uri, message, token.getStartIndex(), token
+	public static Problem fromCommonToken(int severity, URI uri,
+			String message, CommonToken token) {
+		return new Problem(severity, uri, message, token.getStartIndex(), token
 				.getStopIndex()
 				- token.getStartIndex() + 1, token.getLine());
 	}
 
-	public static Problem fromCommonNode(int type, URI uri, String message,
+	public static Problem fromCommonNode(int severity, URI uri, String message,
 			CommonNode tree) {
 		if (tree.hasSourceInfo()) {
-			return new Problem(type, uri, message, tree.getSourceIndex(), tree
-					.getSourceLength(), tree.getSourceLine());
+			return new Problem(severity, uri, message, tree.getSourceIndex(),
+					tree.getSourceLength(), tree.getSourceLine());
 		} else if (tree.getToken() instanceof CommonToken) {
-			return fromCommonToken(type, uri, message, (CommonToken) tree
+			return fromCommonToken(severity, uri, message, (CommonToken) tree
 					.getToken());
 		} else {
-			return fromMessage(type, uri, message);
+			return fromMessage(severity, uri, message);
 		}
 	}
 
-	public static Problem fromException(int type, URI uri, Exception e) {
-		return fromMessage(type, uri, e.getClass().getSimpleName() + ": "
+	public static Problem fromException(int severity, URI uri, Exception e) {
+		return fromMessage(severity, uri, e.getClass().getSimpleName() + ": "
 				+ e.getMessage());
 	}
 
-	public static Problem fromRecognitionException(int type, URI uri,
+	public static Problem fromRecognitionException(int severity, URI uri,
 			RecognitionException e, String message) {
 		Problem p;
 		if (e.token != null && e.token instanceof CommonToken)
-			p = fromCommonToken(type, uri, message, (CommonToken) e.token);
+			p = fromCommonToken(severity, uri, message, (CommonToken) e.token);
 		else if (e.node != null && e.node instanceof CommonNode)
-			p = fromCommonNode(type, uri, message, (CommonNode) e.node);
+			p = fromCommonNode(severity, uri, message, (CommonNode) e.node);
 		else {
-			p = fromMessage(type, uri, message);
+			p = fromMessage(severity, uri, message);
 			p.fLineNumber = e.line;
 			p.fOffset = e.index;
 			p.fLength = 1;
@@ -157,8 +158,10 @@ public class Problem implements Comparable<Problem> {
 		return p;
 	}
 
-	public final static int ERROR = 1;
-	public final static int WARNING = 2;
-	public final static int INFO = 3;
-	public final static int OTHER = 4;
+	public final static int UNKNOWN = 0;
+	public final static int FATAL = 1;
+	public final static int ERROR = 2;
+	public final static int WARNING = 3;
+	public final static int INFO = 4;
+	public final static int OTHER = 5;
 }

@@ -59,4 +59,10 @@ public class ErrorType extends CommonType implements IType {
 	String singleToEssentialString() {
 		return "_";
 	}
+
+	public static IType instance() {
+		return INSTANCE;
+	}
+	
+	public final static ErrorType INSTANCE = new ErrorType();
 }

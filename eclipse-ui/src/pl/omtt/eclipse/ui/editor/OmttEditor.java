@@ -1,5 +1,8 @@
 package pl.omtt.eclipse.ui.editor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -8,6 +11,8 @@ import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.IDocumentProvider;
@@ -24,22 +29,14 @@ import pl.omtt.eclipse.ui.document.OmttDocumentProvider;
 import pl.omtt.eclipse.ui.outline.OmttContentOutlinePage;
 
 public class OmttEditor extends TextEditor {
-	OmttColorProvider fColorProvider;
+	OmttColorProvider fColorProvider = new OmttColorProvider();
 	OmttContentOutlinePage fContentOutlinePage;
 
 	// Projections
 	OmttFoldingManager fFoldingManager;
 
 	public OmttEditor() {
-		super();
-		fColorProvider = new OmttColorProvider();
-
-		IPreferenceStore store = new ChainedPreferenceStore(
-				new IPreferenceStore[] {
-						OmttUI.getDefault().getPreferenceStore(),
-						getPreferenceStore() });
-		setPreferenceStore(store);
-
+		setPreferenceStore(createCombinedPreferenceStore());
 		setDocumentProvider(new OmttDocumentProvider());
 		setSourceViewerConfiguration(new OmttSourceViewerConfiguration(this,
 				fColorProvider));
@@ -137,6 +134,17 @@ public class OmttEditor extends TextEditor {
 			return fContentOutlinePage;
 		}
 		return super.getAdapter(required);
+	}
+
+	private IPreferenceStore createCombinedPreferenceStore() {
+		List<IPreferenceStore> stores = new ArrayList<IPreferenceStore>();
+
+		stores.add(OmttUI.getDefault().getPreferenceStore());
+		stores.add(EditorsUI.getPreferenceStore());
+		stores.add(PlatformUI.getPreferenceStore());
+
+		return new ChainedPreferenceStore(stores
+				.toArray(new IPreferenceStore[stores.size()]));
 	}
 
 	@Override

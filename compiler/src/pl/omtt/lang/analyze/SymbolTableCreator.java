@@ -6,9 +6,9 @@ import java.util.Stack;
 import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.compiler.reporting.IProblemCollector;
+import pl.omtt.compiler.reporting.Problem;
 import pl.omtt.lang.model.AbstractTreeWalker;
 import pl.omtt.lang.model.ast.*;
-import pl.omtt.lang.model.types.TypeException;
 
 public class SymbolTableCreator extends AbstractTreeWalker {
 	Stack<SymbolTable> fSymbolTableStack = new Stack<SymbolTable>();
@@ -74,10 +74,15 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 
 		try {
 			updater.takeSymbolTable(ST());
-		} catch (TypeException e) {
+		} catch (SemanticException e) {
 			if (fReportErrors)
 				fProblemCollector.reportError(fURI, e);
-			fErrors = true;
+			if (e.getSeverity() == Problem.ERROR) {
+				fErrors = true;
+			}
+			else if (e.getSeverity() == Problem.FATAL) {
+				fErrors = true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			fErrors = true;
@@ -94,10 +99,15 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 			throws ForceSymbolTableRecalculatingException {
 		try {
 			expr.setExpressionType(ST());
-		} catch (TypeException e) {
+		} catch (SemanticException e) {
 			if (fReportErrors)
 				fProblemCollector.reportError(fURI, e);
-			fErrors = true;
+			if (e.getSeverity() == Problem.ERROR) {
+				fErrors = true;
+			}
+			else if (e.getSeverity() == Problem.FATAL) {
+				fErrors = true;
+			}
 		} catch (ForceSymbolTableRecalculatingException e) {
 			throw e;
 		} catch (Exception e) {

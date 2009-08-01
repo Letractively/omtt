@@ -46,7 +46,7 @@ public class TypeUnifier {
 
 		if (typeA.isError() || typeB.isError())
 			return;
-		
+
 		if (typeB.isNull())
 			return;
 
@@ -106,18 +106,27 @@ public class TypeUnifier {
 		FunctionType funA = (FunctionType) typeA.getEffective();
 		FunctionType funB = (FunctionType) typeB.getEffective();
 
-		for (int i = 0; i < funA.fArguments.size(); i++) {
-			Argument argA = funA.getArgument(i);
+		if (funA.getArgumentLength() > funB.getArgumentLength())
+			throw new TypeException("cannot use " + typeA + " as " + typeB);
+
+		for (int i = 0; i < funB.fArguments.size(); i++) {
 			Argument argB = funB.getArgument(i);
+			if (funA.getArgumentLength() <= i) {
+				if (le && argB.optional)
+					continue;
+				else
+					throw new TypeException("cannot use " + typeA + " as "
+							+ typeB);
+			}
+			Argument argA = funA.getArgument(i);
+
 			if ((!le && argA.optional ^ argB.optional)
 					|| (le && argA.optional && !argB.optional))
 				throw new TypeException("cannot use "
 						+ (argA.optional ? "optional" : "obligatory")
 						+ " argument as an "
 						+ (argB.optional ? "optional" : "obligatory") + " one");
-
-			unifyGently(funB.getArgument(i).type, funA.getArgument(i)
-					.type, le);
+			unifyGently(funB.getArgument(i).type, funA.getArgument(i).type, le);
 		}
 		unifyGently(funA.getReturnType(), funB.getReturnType(), le);
 
@@ -145,7 +154,7 @@ public class TypeUnifier {
 		if (toUnify instanceof TypePointer) {
 			TypePointer root = ((TypePointer) toUnify).getRoot();
 			if (base instanceof TypePointer) {
-				base = ((TypePointer)base).getRoot();
+				base = ((TypePointer) base).getRoot();
 				if (base == root)
 					return;
 			}
