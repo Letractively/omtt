@@ -187,4 +187,9 @@ public class AbstractTreeVisitor implements IVisitor {
 	public void visit(LambdaMatch node) {
 		defaultVisit(node);
 	}
+
+	@Override
+	public void visit(LambdaMatchItem node) {
+		defaultVisit(node);
+	}
 }

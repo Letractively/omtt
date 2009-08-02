@@ -18,6 +18,7 @@ public interface IVisitor {
 	public void visit (IfElse node);
 	public void visit (LambdaExpression node);
 	public void visit (LambdaMatch lambdaMatch);
+	public void visit (LambdaMatchItem lambdaMatchItem);
 	public void visit (Transformation node);
 	public void visit (FunctionArgument node);
 

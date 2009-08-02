@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+
+@SuppressWarnings("all")
 public class OmttLexer extends AbstractOmttLexer {
     public static final int FUNCTION=28;
     public static final int CAST=24;

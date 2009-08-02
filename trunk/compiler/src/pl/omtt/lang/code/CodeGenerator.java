@@ -581,7 +581,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		final String sigtemplate = signatureTemplate(funtype);
 		final String jtype = jtype(match.getExpressionType());
 		final String var = fBuffer.getTemporaryVariable();
-		final boolean data = funtype.getReturnType().isSequence();
+		final boolean data = funtype.getReturnType().isSingleData();
 
 		fBuffer.putl("// %s", match.toString());
 		fBuffer.putl("final %s %s = new %s () {", jtype, var, jtype);
@@ -590,13 +590,24 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.incIndentation();
 
 		for (int i = 0; i < match.getItemLength(); i++) {
-			final String itemjtype = jtype(match.getItemType(i));
+			final LambdaMatchItem item = match.getItemNode(i);
+			final Symbol cs = item.getContextSymbol();
+			final String cjtype = jtype(cs.getType());
 			fBuffer.putl("%sif (%s instanceof %s) {", i > 0 ? "else " : "",
-					"it", itemjtype);
-//			fSymbolLocalNames.put(, arg1)
-			apply(match.getBodyNode(i));
+					Symbol.IT, cjtype);
+			fBuffer.incIndentation();
+			fSymbolLocalNames.put(cs, "(("+cjtype+")"+Symbol.IT+")");
+			if (data) {
+				apply(item.getBodyNode());
+			}
+			else {
+				fBuffer.putl("return %s;", cast(exprapply(item.getBodyNode()), item.getExpressionType(), funtype.getReturnType()));
+			}
+			fBuffer.subIndentation();
 			fBuffer.putl("}");
 		}
+		if (!data)
+			fBuffer.putl("return null;");
 
 		fBuffer.subIndentation();
 		fBuffer.putl("}");
