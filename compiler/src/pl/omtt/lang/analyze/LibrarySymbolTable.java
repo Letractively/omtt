@@ -59,7 +59,12 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 			e.printStackTrace();
 			return;
 		}
-		if (type != null)
+		if (type == null)
+			return;
+		if (type instanceof FunctionType
+				&& ((FunctionType) type).isMultimethod())
+			put(new MultiSymbol(method.getName(), (FunctionType) type));
+		else
 			put(new Symbol(method.getName(), type));
 	}
 
@@ -113,6 +118,8 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 			for (Annotation ann : method.getAnnotations()) {
 				if (ofType(ann, pl.omtt.core.functions.Type.class))
 					typestr = getValue(ann);
+				if (ofType(ann, pl.omtt.core.annotations.OmttMultimethod.class))
+					ftype.setMultimethod();
 			}
 		} catch (NullPointerException e) {
 		}

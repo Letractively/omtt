@@ -70,9 +70,14 @@ public class OmttOutlineContentProvider implements ITreeContentProvider {
 	public boolean isSupportedType(int type) {
 		switch (type) {
 		case OmttLexer.DEF:
+		case OmttLexer.USES:
+		case OmttLexer.USE:
+		case OmttLexer.IMPORTS:
+		case OmttLexer.IMPORT:
+		case OmttLexer.MODULE:
 			return true;
 		default:
-			return true;
+			return false;
 		}
 	}
 }

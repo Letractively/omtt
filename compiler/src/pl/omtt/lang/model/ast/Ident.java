@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 
+import pl.omtt.lang.analyze.BaseSymbolTable;
 import pl.omtt.lang.analyze.Symbol;
 import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.grammar.OmttParser;
@@ -93,7 +94,7 @@ public class Ident extends CommonNode implements IExpression,
 				fSource = SOURCE_CONTEXT_OBJECT;
 				return;
 			}
-			SymbolTable pst = st.getParent();
+			SymbolTable pst = st instanceof BaseSymbolTable ? st : st.getParent();
 			if (pst != null && setFromSymbolTable(pst, true)) {
 				fSource = SOURCE_LOCAL;
 				return;

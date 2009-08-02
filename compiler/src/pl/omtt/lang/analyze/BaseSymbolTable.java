@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import pl.omtt.core.ModuleNotFoundException;
+import pl.omtt.lang.model.types.FunctionType;
 import pl.omtt.lang.model.types.TypeException;
 
 public class BaseSymbolTable extends SymbolTable {
@@ -91,11 +92,48 @@ public class BaseSymbolTable extends SymbolTable {
 	}
 
 	public void importLibrary(String id, String ns) throws TypeException {
+		final BaseSymbolTable lst;
 		id = getLibraryFullId(id);
+		if (ns == null)
+			ns = LOCAL_NS;
 		try {
-			ns(ns).add(fLibrarySTSupplier.get(id, fClassResolver));
+			lst = fLibrarySTSupplier.get(id, fClassResolver);
+			ns(ns).add(lst);
 		} catch (ModuleNotFoundException e) {
 			throw new TypeException(e.getMessage());
+		}
+
+		if (LOCAL_NS.equals(ns))
+			for (Symbol s : lst.getSymbols()) {
+				if (!(s instanceof MultiSymbol))
+					continue;
+				if (fOuterReferences != null)
+					fOuterReferences.add(id + "::" + s.getName());
+				MultiSymbol ms = putMultimethod(s);
+				ms.fGrowthPosition = 0;
+			}
+	}
+
+	public MultiSymbol putMultimethod(Symbol s) throws TypeException {
+		if (!(s.getType() instanceof FunctionType))
+			throw new TypeException(s.getName()
+					+ ": multimethod must be a function");
+		final FunctionType ftype = (FunctionType) s.getType();
+
+		if (fSymbolMap.containsKey(s.getName())) {
+			Symbol ms = fSymbolMap.get(s.getName());
+			if (!(ms instanceof MultiSymbol))
+				throw new TypeException(
+						s.getName()
+								+ " is not compatible with previously declared function from package "
+								+ s.getModuleId());
+			((MultiSymbol) ms).addParticipant(s);
+			return (MultiSymbol) ms;
+		} else {
+			MultiSymbol ms = new MultiSymbol(s.getName(), ftype);
+			put(ms);
+			ms.addParticipant(s);
+			return ms;
 		}
 	}
 

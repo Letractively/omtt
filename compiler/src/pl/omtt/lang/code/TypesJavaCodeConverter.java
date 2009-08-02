@@ -100,6 +100,10 @@ public class TypesJavaCodeConverter {
 			return "null";
 		} else if (o instanceof Boolean) {
 			return "Boolean."+String.valueOf(o).toUpperCase();
+		} else if (o instanceof Integer) {
+			return "Integer.valueOf("+String.valueOf(o)+")";
+		} else if (o instanceof Double) {
+			return "Double.valueOf("+String.valueOf(o)+")";
 		} else {
 			return String.valueOf(o);
 		}

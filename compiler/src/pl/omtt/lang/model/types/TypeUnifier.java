@@ -1,5 +1,6 @@
 package pl.omtt.lang.model.types;
 
+import pl.omtt.core.Debugging;
 import pl.omtt.lang.model.types.FunctionType.Argument;
 
 public class TypeUnifier {
@@ -39,10 +40,11 @@ public class TypeUnifier {
 
 	private static void unify(IType typeA, IType typeB, boolean le)
 			throws TypeException {
-		System.out.println("[tu] " + typeA.toDiagnosticString()
-				+ (le ? " < " : " == ") + typeB.toDiagnosticString());
 		if (typeA == null || typeB == null)
 			return;
+		if (Debugging.DEBUG > 0)
+			System.out.println("[tu] " + typeA.toDiagnosticString()
+					+ (le ? " < " : " == ") + typeB.toDiagnosticString());
 
 		if (typeA.isError() || typeB.isError())
 			return;
@@ -50,6 +52,7 @@ public class TypeUnifier {
 		if (typeB.isNull())
 			return;
 
+		checkSequenceCompliance(typeA, typeB, le);
 		if (typeA.isFunction() && typeB.isFunction()) {
 			unifyFunctions(typeA, typeB, le);
 		} else if (le && !typeA.isFrozen()) {
@@ -96,10 +99,21 @@ public class TypeUnifier {
 		}
 	}
 
+	private static void checkSequenceCompliance(IType typeA, IType typeB,
+			boolean le) throws TypeException {
+		if (!le && typeA.isSequence() ^ typeB.isSequence()) {
+			throw new TypeException("types " + typeA + " and " + typeB
+					+ " cannot be unified");
+		}
+		if (le & !typeA.isSequence() && typeB.isSequence()) {
+			throw new TypeException("using " + typeB + " as " + typeA);
+		}
+	}
+
 	private static void unifyFunctions(IType typeA, IType typeB, boolean le)
 			throws TypeException {
-		System.out.println("[fu] " + typeA + (le ? " < " : " = ") + typeB);
-
+		if (Debugging.DEBUG > 0)
+			System.out.println("[fu] " + typeA + (le ? " < " : " = ") + typeB);
 		if (!typeA.isFunction() || !typeB.isFunction())
 			throw new TypeException("unimplemented [1]");
 
@@ -130,7 +144,8 @@ public class TypeUnifier {
 		}
 		unifyGently(funA.getReturnType(), funB.getReturnType(), le);
 
-		System.out.println("[fu] after: " + typeA + " ~ " + typeB);
+		if (Debugging.DEBUG > 0)
+			System.out.println("[fu] after: " + typeA + " ~ " + typeB);
 	}
 
 	/**
@@ -144,9 +159,14 @@ public class TypeUnifier {
 	 */
 	private static void unifyGently(IType typeA, IType typeB, boolean le)
 			throws TypeException {
-		if (!le || (!typeA.isFunction() && !typeA.isFrozen()))
+		if (!le)
 			unifyEq(typeA, typeB);
-		else
+		else if (!typeA.isFunction() && !typeA.isFrozen()) {
+			if (typeA.isSequence() && !typeB.isSequence())
+				unifyEq(typeA.dup().unsetSequence(), typeB);
+			else
+				unifyEq(typeA, typeB);
+		} else
 			unifyLe(typeA, typeB);
 	}
 

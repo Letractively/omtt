@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.omtt.core.Debugging;
 import pl.omtt.core.ModuleNotFoundException;
 import pl.omtt.core.OmttLoader;
 import pl.omtt.core.TemplateNotFoundException;
@@ -53,7 +54,8 @@ public class OmttCaller {
 			tpl.method.invoke(null, arglist.toArray());
 			return buf;
 		} else {
-			System.out.println("invokin" + tpl.method.getReturnType());
+			if (Debugging.DEBUG > 0)
+				System.out.println("invokin" + tpl.method.getReturnType());
 			return tpl.method.invoke(null, args);
 		}
 	}

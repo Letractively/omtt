@@ -298,7 +298,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.deactivate();
 
 		fBuffer.putl("import java.util.*;\n");
-		fBuffer.putl("import pl.omtt.core.annotations.OmttModule;");
+		fBuffer.putl("import pl.omtt.core.annotations.*;");
 		fBuffer.putl("import pl.omtt.core.stdlib.*;");
 		fBuffer.putl("import pl.omtt.core.functions.*;");
 		for (Class<?> clazz : fTypeAdapter.getUsedClasses())
@@ -316,7 +316,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.incIndentation();
 		for (Symbol s : fBaseSymbolTable.getSymbols())
 			if (s instanceof MultiSymbol)
-				putMultiFunction((MultiSymbol) s);
+				putMultimethod((MultiSymbol) s);
 		fBuffer.subIndentation();
 
 		fBuffer.putSpace("methods");
@@ -336,12 +336,13 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("}");
 	}
 
-	private void putMultiFunction(MultiSymbol ms) {
+	private void putMultimethod(MultiSymbol ms) {
 		final String sigtemplate = signatureTemplate(ms.getType());
 		final IType rettype = ms.getType().getReturnType();
 
-		fBuffer.putl("@Type(\"%s\")", ms.getType().toString());
-		fBuffer.putl(sigtemplate + " {", "static public", ms.getName());
+		fBuffer.putl("@OmttMultimethod @Type(\"%s\")", ms.getType().toString());
+		fBuffer.putl(sigtemplate + " throws NoSuitableTemplateException {",
+				"static public", ms.getName());
 		fBuffer.incIndentation();
 
 		StringBuffer argbuf = new StringBuffer();
@@ -357,24 +358,50 @@ public class CodeGenerator extends AbstractTreeWalker {
 		for (Symbol s : ms.getParticipants()) {
 			final FunctionType stype = (FunctionType) s.getType();
 			final String jtype = jtype(stype.getArgument(0).type);
-			fBuffer.putl("if (it instanceof %s) {", jtype);
+			final boolean outer = s.getParentST() != fBaseSymbolTable;
+			if (outer)
+				fBuffer.putl("try {");
+			else
+				fBuffer.putl("if (it instanceof %s) {", jtype);
 			fBuffer.incIndentation();
 			if (rettype.isSingleData()) {
-				fBuffer.putl("%s($buffer, (%s) %s);", fSymbolLocalNames.get(s),
-						jtype, argbuf.toString());
+				fBuffer.putl("%s($buffer, %s%s);", getGlobalReference(s, null),
+						"Object".equals(jtype) ? "" : "(" + jtype + ")", argbuf
+								.toString());
 				fBuffer.putl("return;");
 			} else {
-
+				fBuffer.putl("return %s(%s%s);", getGlobalReference(s, null),
+						"Object".equals(jtype) ? "" : "(" + jtype + ")", argbuf
+								.toString());
 			}
 			fBuffer.subIndentation();
+			if (outer)
+				fBuffer.putl("} catch (NoSuitableTemplateException e) {");
 			fBuffer.putl("}");
 		}
 
-		if (!rettype.isSingleData())
-			fBuffer.putl("return null;");
+		fBuffer.putl("throw new NoSuitableTemplateException();");
 		fBuffer.subIndentation();
 		fBuffer.putl("}\n");
 
+		fBuffer.putl(sigtemplate + " {", "static private",
+				multimethodWrapperName(ms));
+		fBuffer.incIndentation();
+		fBuffer.putl("try {");
+		if (rettype.isSingleData())
+			fBuffer.putl("\t%s($buffer, %s);", ms.getName(), argbuf.toString());
+		else
+			fBuffer.putl("\treturn %s(%s);", ms.getName(), argbuf.toString());
+		fBuffer.putl("} catch (NoSuitableTemplateException e) {");
+		if (!rettype.isSingleData())
+			fBuffer.putl("\treturn null;");
+		fBuffer.putl("}");
+		fBuffer.subIndentation();
+		fBuffer.putl("}");
+	}
+
+	private String multimethodWrapperName(MultiSymbol ms) {
+		return ms.getName() + "$Wrapper";
 	}
 
 	public void visit(ModuleDeclaration node) {
@@ -429,7 +456,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 		final IExpression body = def.getBodyNode();
 		apply(body);
 		if (!flushBuffer) {
-			fBuffer.putl("return %s;", fBuffer.getReference(body));
+			fBuffer.putl("return %s;", cast(fBuffer.getReference(body), body
+					.getExpressionType(), rettype));
 		}
 
 		fBuffer.subIndentation();
@@ -546,6 +574,36 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("};");
 
 		fBuffer.putVariable(lambda, var);
+	}
+
+	public void visit(LambdaMatch match) {
+		FunctionType funtype = (FunctionType) match.getExpressionType();
+		final String sigtemplate = signatureTemplate(funtype);
+		final String jtype = jtype(match.getExpressionType());
+		final String var = fBuffer.getTemporaryVariable();
+		final boolean data = funtype.getReturnType().isSequence();
+
+		fBuffer.putl("// %s", match.toString());
+		fBuffer.putl("final %s %s = new %s () {", jtype, var, jtype);
+		fBuffer.incIndentation();
+		fBuffer.putl(sigtemplate + " {", "public", "run");
+		fBuffer.incIndentation();
+
+		for (int i = 0; i < match.getItemLength(); i++) {
+			final String itemjtype = jtype(match.getItemType(i));
+			fBuffer.putl("%sif (%s instanceof %s) {", i > 0 ? "else " : "",
+					"it", itemjtype);
+//			fSymbolLocalNames.put(, arg1)
+			apply(match.getBodyNode(i));
+			fBuffer.putl("}");
+		}
+
+		fBuffer.subIndentation();
+		fBuffer.putl("}");
+		fBuffer.subIndentation();
+		fBuffer.putl("};");
+
+		fBuffer.putVariable(match, var);
 	}
 
 	public void visit(Data data) {
@@ -838,18 +896,19 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 	private String getGlobalReference(Symbol s, Tree caller) {
 		// check if symbol is called recursively
-		for (Tree node = caller; node != null; node = node.getParent())
-			if (node instanceof TemplateDefinition) {
-				TemplateDefinition def = (TemplateDefinition) node;
-				if (def.getSymbol().equals(s)) {
-					// reference is recursive
-					if (def.isFunction())
-						return "run";
-					else
-						error(caller
-								+ ": calling variables recursively is not allowed");
+		if (caller != null)
+			for (Tree node = caller; node != null; node = node.getParent())
+				if (node instanceof TemplateDefinition) {
+					TemplateDefinition def = (TemplateDefinition) node;
+					if (def.getSymbol().equals(s)) {
+						// reference is recursive
+						if (def.isFunction())
+							return "run";
+						else
+							error(caller
+									+ ": calling variables recursively is not allowed");
+					}
 				}
-			}
 
 		if (!s.isGlobal())
 			return null;
@@ -858,6 +917,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 		else if (!fBaseSymbolTable.getModuleId().equals(s.getModuleId()))
 			return OmttLoader.getModuleClassName(s.getModuleId()) + "."
 					+ s.getName().replace('@', '$');
+		else if (s instanceof MultiSymbol)
+			return multimethodWrapperName((MultiSymbol) s);
 		else
 			return s.getName().replace('@', '$');
 	}
@@ -1294,10 +1355,11 @@ public class CodeGenerator extends AbstractTreeWalker {
 				// else
 				if (etype.isSingleData())
 					fBuffer.putl("if(%s) %s.append(%s);", checkNotNull(svar,
-							single(otype)), fBuffer.getCurrentBuffer(), svar);
+							single(otype).dup().unsetNotNull()), fBuffer
+							.getCurrentBuffer(), svar);
 				else if (accseq)
 					fBuffer.putl("if(%s) %s.add(%s);", checkNotNull(svar,
-							single(otype)), accvar, svar);
+							single(otype).dup().unsetNotNull()), accvar, svar);
 				else
 					fBuffer.putl("%s = %s;", accvar, svar);
 			}

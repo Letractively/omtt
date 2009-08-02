@@ -114,6 +114,9 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 		FunctionType funtype = new FunctionType();
 		final int callArgCount = calltype.getArgumentLength();
 
+		if (calltype.getReturnType().isSequence())
+			funtype.getReturnType().setSequence();
+		
 		fArguments = new ArrayList<FunctionArgument>(callArgCount);
 		for (int i = 0; i < callArgCount; i++)
 			fArguments.add(null);
@@ -143,7 +146,7 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 		for (int i = 0; i < callArgCount; i++) {
 			final FunctionArgument arg = fArguments.get(i);
 			if (arg == null) {
-				funtype.putArgument(null, new NullType(), true);
+				funtype.putArgument(null, new NullType(), false);
 				if (!calltype.getArgument(i).optional)
 					throw new TypeException(this, "argument " + (i + 1)
 							+ " of called function is obligatory");
@@ -163,7 +166,6 @@ public class Call extends CommonNode implements IFoldExpression, IVisitable {
 	}
 
 	private boolean sequenceOnOutput() {
-		System.err.println();
 		if (fCallingType.getReturnType().isSequence())
 			return true;
 		else if (!getArgument(0).getExpressionType().isSequence()

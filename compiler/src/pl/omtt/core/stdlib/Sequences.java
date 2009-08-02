@@ -31,11 +31,13 @@ public class Sequences {
 	public static List<Object> sort(Collection<Object> c,
 			@Optional @Name("lower") Function2<Boolean, Object, Object> lower) {
 		List list = new ArrayList(c);
-
-		if (lower == null)
-			Collections.sort(list);
-		else
-			Collections.sort(list, new FunctionComparator(lower));
+		try {
+			if (lower == null)
+				Collections.sort(list);
+			else
+				Collections.sort(list, new FunctionComparator(lower));
+		} catch (ClassCastException e) {
+		}
 		return list;
 	}
 
@@ -66,30 +68,30 @@ public class Sequences {
 
 	@Type("(_[1]* -> _[1])")
 	@SuppressWarnings("unchecked")
-	public static Object max (Collection<Comparable> seq) {
+	public static Object max(Collection<Comparable> seq) {
 		return Collections.max(seq);
 	}
-	
+
 	@Type("(_[1]* -> _[1])")
 	@SuppressWarnings("unchecked")
-	public static Object min (Collection<Comparable> seq) {
+	public static Object min(Collection<Comparable> seq) {
 		return Collections.min(seq);
 	}
-	
+
 	@Type("(_[1]* -> _[1])")
 	@SuppressWarnings("unchecked")
-	public static Object head (Collection<Object> seq) {
+	public static Object head(Collection<Object> seq) {
 		if (seq == null || seq.isEmpty())
 			return null;
 		else if (seq instanceof List)
-			return ((List)seq).get(0);
+			return ((List) seq).get(0);
 		else
 			return seq.iterator().next();
 	}
 
 	@Type("(_[1]* -> _[1]*)")
 	@SuppressWarnings("unchecked")
-	public static Collection<Object> tail (Collection<Object> seq) {
+	public static Collection<Object> tail(Collection<Object> seq) {
 		if (seq == null || seq.isEmpty())
 			return seq;
 
@@ -98,7 +100,7 @@ public class Sequences {
 			list.addAll(seq);
 			seq = list;
 		}
-		return ((List)seq).subList(1, seq.size());
+		return ((List) seq).subList(1, seq.size());
 	}
 
 	private static class FunctionComparator implements Comparator<Object> {

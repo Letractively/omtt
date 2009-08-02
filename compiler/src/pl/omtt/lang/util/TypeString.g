@@ -40,7 +40,7 @@ function
 	;
 
 argument
-	: OPTIONAL? type
+	: OPTIONAL? (VAR_ID '.')? type
 		-> ^(ARGUMENT type OPTIONAL?)
 	;
 
@@ -71,8 +71,22 @@ CLASS_ID
 
 INTEGER : ('0'..'9')+;
 
-fragment BIG_LETTER : 'A'..'Z';
 fragment NAMECHAR   : 'a'..'z' | 'A'..'Z' | '0'..'9' | '$' | '_';
+
+VAR_ID
+  : (SMALL_LETTER | '_' | '@') NAMECHAR*
+  ;
+
+fragment LETTER
+  : 'a' .. 'z'
+  | 'A' .. 'Z'
+  ;
+fragment BIG_LETTER
+  : 'A' .. 'Z'
+  ;
+fragment SMALL_LETTER
+  : 'a' .. 'z'
+  ;
 
 WS
   : (' ' | '\t' | '\n' | '\r' | '\u000C') {$channel = HIDDEN;}

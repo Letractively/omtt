@@ -26,6 +26,7 @@ import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.compiler.reporting.PrintProblemCollector;
+import pl.omtt.core.Debugging;
 import pl.omtt.eclipse.model.IDocumentModelListener;
 import pl.omtt.eclipse.model.IModelChangeListener;
 import pl.omtt.eclipse.model.OmttModelManager;
@@ -139,7 +140,8 @@ public class OmttDocumentModel implements IModelChangeListener {
 
 	public void setEditor(IEditorInput editorInput,
 			IAnnotationModel annotationModel) {
-		fProblemAnnotationCollector = new ProblemAnnotationCollector(annotationModel);
+		fProblemAnnotationCollector = new ProblemAnnotationCollector(
+				annotationModel);
 		fEditorInput = editorInput;
 	}
 
@@ -149,8 +151,6 @@ public class OmttDocumentModel implements IModelChangeListener {
 	}
 
 	synchronized public void reconcile() {
-		System.err.println("reconcile...");
-		
 		IProblemCollector problemCollector;
 		if (fProblemAnnotationCollector != null)
 			problemCollector = fProblemAnnotationCollector;
@@ -160,17 +160,19 @@ public class OmttDocumentModel implements IModelChangeListener {
 		final DocumentRawStream stream = new DocumentRawStream(fDocument);
 		stream.setLocation(fFile.getLocationURI());
 
-		fDocumentTree = fOmttProjectModel.parse(fFile, stream, problemCollector);
+		fDocumentTree = fOmttProjectModel
+				.parse(fFile, stream, problemCollector);
 		if (fProblemAnnotationCollector != null)
 			fProblemAnnotationCollector.apply();
-		
-		System.out.println("new tree: ");
-		new PrintTreeVisitor().run(fDocumentTree);
+
+		if (Debugging.DEBUG > 0) {
+			System.out.println("new tree: ");
+			new PrintTreeVisitor().run(fDocumentTree);
+		}
 		doReconcile();
 	}
 
 	private void doReconcile() {
-		System.err.println("doReconcile");
 		fireDocumentModelChanged(false);
 	}
 

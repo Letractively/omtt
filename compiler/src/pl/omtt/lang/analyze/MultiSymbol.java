@@ -24,8 +24,8 @@ public class MultiSymbol extends Symbol {
 	public void addParticipant(Symbol s) throws TypeException {
 		checkCompliance((FunctionType) s.fType);
 		fParticipants.add(fGrowthPosition++, s);
-		s.fSTOwner = fSTOwner;
-		System.err.println("putting " + s.fType + " => " + getName());
+		if (s.fSTOwner == null)
+			s.fSTOwner = fSTOwner;
 	}
 
 	@Override
@@ -41,7 +41,8 @@ public class MultiSymbol extends Symbol {
 		FunctionType ctype = getCommonType();
 		if (ctype.getArgumentLength() != ftype.getArgumentLength())
 			throw new TypeException(
-					"argument count does not match with base of type " + ctype);
+					"argument count does not match with base of type " + ctype
+							+ " from module " + anyParticipantModuleId());
 		TypeUnifier.unifyEq(ctype.getReturnType(), ftype.getReturnType());
 		for (int i = 1; i < ftype.getArgumentLength(); i++) {
 			Argument farg = ftype.getArgument(i);
@@ -49,14 +50,22 @@ public class MultiSymbol extends Symbol {
 			if (farg.name == null ^ carg.name == null
 					|| (farg.name != null && !farg.name.equals(carg.name))) {
 				throw new TypeException("name of argument " + i
-						+ " does not match with base (" + carg.name + ")");
+						+ " does not match with base " + carg.name
+						+ " from module " + anyParticipantModuleId());
 			}
 			if (farg.optional ^ carg.optional) {
 				throw new TypeException("optionality of argument " + i
-						+ " does not match with base");
+						+ " does not match with base from module "
+						+ anyParticipantModuleId());
 			}
 			TypeUnifier.unifyEq(carg.type, farg.type);
 		}
+	}
+
+	private String anyParticipantModuleId() {
+		if (fParticipants.isEmpty())
+			return null;
+		return fParticipants.get(0).getModuleId();
 	}
 
 	private static FunctionType commonType(FunctionType type) {

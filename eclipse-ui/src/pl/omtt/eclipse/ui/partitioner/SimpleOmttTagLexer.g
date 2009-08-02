@@ -23,7 +23,7 @@ private void supressWarnings () {
 TAG : '%';
 TAG_SINGLE : '%%';
 
-TAG_INNER : 'in' | 'else' | 'case' | 'default';
+TAG_INNER : 'in' | 'and' | 'else' | 'case' | 'default';
 TAG_END : 'end' ~('\n' | '\r')* ('\n' | '\r' | '\r' '\n')?;
 
 LEFT_DATA_PAREN : '{';

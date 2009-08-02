@@ -40,25 +40,28 @@ class ComponentReferenceContainer {
 		}
 	}
 
-	synchronized public void updateReferences(IResource resource,
-			Set<String> newReferences) {
-		System.err.println("[upd] " + resource + ": " + newReferences);
-		Set<String> oldReferences = fReferences.get(resource);
-		if (oldReferences != null) {
-			for (String target : oldReferences)
-				if (newReferences != null && newReferences.contains(target))
-					newReferences.remove(target);
-				else
-					deleteReference(resource, target);
+	public void updateReferences(IResource resource, Set<String> newReferences) {
+		synchronized (fReferences) {
+			// System.err.println("[upd] " + resource + ": " + newReferences);
+			Set<String> oldReferences = fReferences.get(resource);
+			Set<String> toDelete = new HashSet<String> ();
+			if (oldReferences != null) {
+				for (String target : oldReferences)
+					if (newReferences != null && newReferences.contains(target))
+						newReferences.remove(target);
+					else
+						toDelete.add(target);
+			}
+			for (String target : toDelete)
+				deleteReference(resource, target);
+			if (newReferences != null)
+				for (String target : newReferences)
+					createReference(resource, target);
 		}
-		if (newReferences != null)
-			for (String target : newReferences)
-				createReference(resource, target);
 	}
 
 	private void createReference(IResource from, String to) {
 		setReference(from, to);
-
 		try {
 			IMarker marker = from.createMarker(OMTT_REFERENCE_MARKER);
 			marker.setAttribute(IMarker.TEXT, to);
@@ -66,7 +69,7 @@ class ComponentReferenceContainer {
 			e.printStackTrace();
 		}
 
-		System.err.println("[cre] " + to + " <-- " + from);
+		// System.err.println("[cre] " + to + " <-- " + from);
 	}
 
 	private void setReference(IResource from, String to) {
@@ -103,27 +106,32 @@ class ComponentReferenceContainer {
 			e.printStackTrace();
 		}
 
-		System.err.println("[del] " + to + " <-- " + from);
+		// System.err.println("[del] " + to + " <-- " + from);
 	}
 
-	synchronized public Set<IResource> getAffected(String id,
-			SymbolTable oldST, SymbolTable newST) {
+	public Set<IResource> getAffected(String id, SymbolTable oldST,
+			SymbolTable newST) {
 		Set<IResource> affected = new HashSet<IResource>();
-		for (String changed : getChangedSymbols(oldST, newST)) {
-			changed = id + "::" + changed;
-			System.err.println("changed: " + changed);
-			if (fBackReferences.containsKey(changed))
-				affected.addAll(fBackReferences.get(changed));
+		synchronized (fReferences) {
+			for (String changed : getChangedSymbols(oldST, newST)) {
+				changed = id + "::" + changed;
+				// System.err.println("changed: " + changed);
+				if (fBackReferences.containsKey(changed))
+					affected.addAll(fBackReferences.get(changed));
+			}
+			// System.err.println("[bref] " + fBackReferences);
+			if (fBackReferences.containsKey(id + "::_"))
+				affected.addAll(fBackReferences.get(id + "::_"));
+
+			// System.err.println("affected oldST: " + oldST + "; " + affected);
+			// TODO: checking oldST is a bad workaround -- symbol table should
+			// be
+			// remembered
+			if (fBackReferences.containsKey(id)
+					&& (newST == null || oldST == null))
+				affected.addAll(fBackReferences.get(id));
+			// System.err.println("affected ret: " + affected);
 		}
-		System.err.println("[bref] " + fBackReferences);
-		if (fBackReferences.containsKey(id + "::_"))
-			affected.addAll(fBackReferences.get(id + "::_"));
-		
-		System.err.println("affected oldST: " + oldST + "; " + affected);
-		// TODO: checking oldST is a bad workaround -- symbol table should be remembered
-		if (fBackReferences.containsKey(id) && (newST == null || oldST == null))
-			affected.addAll(fBackReferences.get(id));
-		System.err.println("affected ret: " + affected);
 		return affected;
 	}
 
@@ -132,18 +140,28 @@ class ComponentReferenceContainer {
 		if (oldST != null)
 			for (Symbol oldsymbol : oldST.getSymbols()) {
 				String name = oldsymbol.getName();
-				Symbol newsymbol = newST == null ? null : newST.find(name, false);
+				Symbol newsymbol = newST == null ? null : newST.find(name,
+						false);
 				if (newsymbol == null)
 					changed.add(name);
 				else if (!oldsymbol.getType().equals(newsymbol.getType()))
 					changed.add(name);
 			}
+		if (newST != null)
+			for (Symbol newsymbol : newST.getSymbols()) {
+				String name = newsymbol.getName();
+				if (oldST == null || oldST.find(name, false) == null) {
+					changed.add(name);
+				}
+			}
 		return changed;
 	}
 
 	public void clear() {
-		fReferences.clear();
-		fBackReferences.clear();
+		synchronized (fReferences) {
+			fReferences.clear();
+			fBackReferences.clear();
+		}
 
 		try {
 			fProject.deleteMarkers(OMTT_REFERENCE_MARKER, true,

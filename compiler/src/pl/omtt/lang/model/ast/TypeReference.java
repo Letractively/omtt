@@ -37,6 +37,9 @@ public class TypeReference extends CommonNode implements IVisitable {
 			throws TypeException {
 		IType type;
 		switch (typeref.getKind()) {
+		case OmttParser.OP_GENERAL:
+			type = new AnyType();
+			break;
 		case OmttParser.CLASS_ID:
 			type = getScalar(typeref.getChild(0), ST);
 			break;

@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -34,7 +36,9 @@ public class OmttProjectModel {
 	ComponentReferenceContainer fComponentReferences;
 	Map<IResource, SymbolTable> fSymbolTables = new HashMap<IResource, SymbolTable>();
 
-	private Map<IResource,Set<IModelChangeListener>> fModelChangeListeners = new HashMap<IResource, Set<IModelChangeListener>>();
+	ReadWriteLock fBuildLock = new ReentrantReadWriteLock();
+
+	private Map<IResource, Set<IModelChangeListener>> fModelChangeListeners = new HashMap<IResource, Set<IModelChangeListener>>();
 
 	public OmttProjectModel(IProject project) {
 		fProject = project;
@@ -117,18 +121,16 @@ public class OmttProjectModel {
 		final SymbolTable oldST = fSymbolTables.get(resource);
 		final BaseSymbolTable newST = program.getSymbolTable();
 		putModel(resource, program);
-		
-		Set<IResource> affected;
+		Set<IResource> affected = null;
 		if (!oldId.equals(newId)) {
 			fComponentReferences.updateReferences(resource, null);
-			affected =  fComponentReferences.getAffected(oldId, oldST,
-					null);
+			affected = fComponentReferences.getAffected(oldId, oldST, null);
 			fComponentReferences.updateReferences(resource, references(newST));
-			affected.addAll(fComponentReferences.getAffected(newId, null,
-					newST));
+			affected.addAll(fComponentReferences
+					.getAffected(newId, null, newST));
 		} else {
 			fComponentReferences.updateReferences(resource, references(newST));
-			affected = fComponentReferences.getAffected(oldId, oldST,					newST);
+			affected = fComponentReferences.getAffected(oldId, oldST, newST);
 		}
 		return affected;
 	}
@@ -163,13 +165,14 @@ public class OmttProjectModel {
 
 	public Program parse(IResource resource, IEnrichedStream stream,
 			IProblemCollector problemCollector) {
+		fBuildLock.readLock().lock();
 		final URI source = resource.getLocationURI();
 		OmttCompilationTask task = getCompilationTask(source);
 		task.setSourceStream(source, stream);
 		if (problemCollector != null)
 			task.setProblemCollector(problemCollector);
 		task.buildTree();
-
+		fBuildLock.readLock().unlock();
 		return task.getTree(source);
 	}
 
@@ -211,13 +214,21 @@ public class OmttProjectModel {
 		return c.getTask(sources, target, classPath);
 	}
 
-	public void notifyRebuild(final Set<IResource> compiled) {
+	public void startRebuild() {
+		fBuildLock.writeLock().lock();
+	}
+
+	public void finishRebuild(final Set<IResource> compiled) {
+		fBuildLock.writeLock().unlock();
+		if (compiled == null)
+			return;
 		IWorkspaceRunnable notifyAction = new IWorkspaceRunnable() {
 			@Override
 			public void run(IProgressMonitor monitor) throws CoreException {
 				for (IResource resource : compiled) {
 					if (fModelChangeListeners.containsKey(resource)) {
-						Set<IModelChangeListener> listeners  = fModelChangeListeners.get(resource);
+						Set<IModelChangeListener> listeners = fModelChangeListeners
+								.get(resource);
 						for (IModelChangeListener listener : listeners)
 							listener.notifyChange(resource);
 					}
@@ -231,16 +242,19 @@ public class OmttProjectModel {
 		}
 	}
 
-	public void addModelChangeListener (IModelChangeListener listener, IResource resource) {
+	public void addModelChangeListener(IModelChangeListener listener,
+			IResource resource) {
 		if (!fModelChangeListeners.containsKey(resource))
-			fModelChangeListeners.put(resource, new HashSet<IModelChangeListener>());
+			fModelChangeListeners.put(resource,
+					new HashSet<IModelChangeListener>());
 		fModelChangeListeners.get(resource).add(listener);
 	}
-	
-	public void removeModelChangeListener (IModelChangeListener listener, IResource resource) {
+
+	public void removeModelChangeListener(IModelChangeListener listener,
+			IResource resource) {
 		fModelChangeListeners.get(resource).remove(listener);
 	}
-	
+
 	public IJavaProject getJavaProject() {
 		return getJavaProject(fProject);
 	}

@@ -77,7 +77,7 @@ fragment definition_signature
     -> VAR_ID<Ident> definition_context? ^(ARGUMENTS definition_argument*) ^(RETURNS $ret_type?)
   ;
 fragment definition_context
-	: OP_REVERSE_FOLLOW single_type
+	: LEFT_SQUARE_PAREN single_type RIGHT_SQUARE_PAREN
 		-> ^(ARGUMENT single_type)
 	;
 
@@ -183,9 +183,11 @@ lambda_expression
   ;
 fragment lambda_match_expression
 	: single_lambda_match (SEMICOLON single_lambda_match)*
+		-> ^(LAMBDA_MATCH<LambdaMatch> single_lambda_match+)
 	;
 fragment single_lambda_match
-	: type OP_FOLLOW safe_expression
+	: single_type OP_FOLLOW safe_expression
+		-> ^(ITEM single_type safe_expression)
 	;
 
 type
@@ -198,6 +200,7 @@ single_type
   ;
 fragment type_content
   : CLASS_ID
+  | OP_GENERAL
   | LEFT_PAREN argument_type+ OP_FOLLOW type RIGHT_PAREN
   	-> ^(FUNCTION type argument_type+)
   | LEFT_SQUARE_PAREN tuple_types+=type (COMMA tuple_types+=type)+ RIGHT_SQUARE_PAREN

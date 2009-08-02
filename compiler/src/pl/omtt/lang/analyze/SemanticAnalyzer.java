@@ -48,6 +48,12 @@ public class SemanticAnalyzer {
 					st.fOuterReferences.add(libid);
 					if (symbolTableCreator.fErrors)
 						st.fOuterReferences.add(libid + "::_");
+					if (ud.getTargetNs() == null) {
+						for (Symbol s : st.fSymbolMap.values())
+							if (s instanceof MultiSymbol)
+								st.fOuterReferences.add(libid + "::"
+										+ s.getName());
+					}
 				}
 		}
 		return !symbolTableCreator.fErrors;
