@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OMTT Eclipse UI
 Bundle-SymbolicName: pl.omtt.eclipse.ui;singleton:=true
-Bundle-Version: 2009
+Bundle-Version: 1.0.0.alpha1
 Bundle-Activator: pl.omtt.eclipse.ui.OmttUI
 Bundle-Vendor: Andrzej Chodor
 Require-Bundle: pl.omtt.eclipse.core,
@@ -19,5 +19,6 @@ Import-Package: org.eclipse.core.expressions,
  org.eclipse.jdt.core,
  org.eclipse.jdt.ui,
  org.eclipse.jdt.ui.text,
- org.eclipse.ui.views.contentoutline
+ org.eclipse.ui.views.contentoutline,
+ pl.omtt.eclipse.nature
 Bundle-ClassPath: ./src
