@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="pl.omtt.eclipse.feature"
+      label="OMTT"
+      version="1.0.0.alpha1"
+      provider-name="Andrzej Chodor">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <plugin
+         id="pl.omtt.eclipse.core"
+         download-size="0"
+         install-size="0"
+         version="1.0.0.alpha1"
+         unpack="false"/>
+
+   <plugin
+         id="pl.omtt.eclipse.ui"
+         download-size="0"
+         install-size="0"
+         version="1.0.0.alpha1"/>
+
+   <plugin
+         id="pl.omtt.lang"
+         download-size="0"
+         install-size="0"
+         version="1.0.0.alpha1"
+         unpack="false"/>
+
+</feature>

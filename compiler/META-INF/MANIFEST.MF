@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OMTT Compiler
 Bundle-SymbolicName: pl.omtt.lang;singleton:=true
-Bundle-Version: 2009
+Bundle-Version: 1.0.0.alpha1
 Bundle-Activator: pl.omtt.Activator
 Bundle-Vendor: Andrzej Chodor
 Require-Bundle: org.eclipse.ui,
