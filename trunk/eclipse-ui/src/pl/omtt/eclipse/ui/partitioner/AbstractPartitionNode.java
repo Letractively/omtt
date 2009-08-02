@@ -219,7 +219,8 @@ abstract public class AbstractPartitionNode extends
 				if (result < 0)
 				// our node should be deleted
 				{
-					System.out.println("# i'm gonna be deleted");
+					if (DEBUG > 0)
+						System.out.println("# i'm gonna be deleted");
 					return null;
 				}
 

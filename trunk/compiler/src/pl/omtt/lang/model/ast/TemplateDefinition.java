@@ -54,7 +54,10 @@ public class TemplateDefinition extends CommonNode implements
 	}
 
 	public int getArgumentsCount() {
-		return getArgumentsNode().getChildCount();
+		if (getArgumentsNode() != null)
+			return getArgumentsNode().getChildCount();
+		else
+			return 0;
 	}
 
 	public Ident getTemplateNameIdent() {
@@ -94,6 +97,8 @@ public class TemplateDefinition extends CommonNode implements
 		IType returnType;
 		if (getReturnsTypeNode() != null) {
 			returnType = getReturnsTypeNode().get(ST);
+			if (returnType == null)
+				returnType = ErrorType.instance();
 		} else if (getBodyNode() instanceof Data) {
 			returnType = new StringDataType();
 		} else {
@@ -113,6 +118,8 @@ public class TemplateDefinition extends CommonNode implements
 			if (contextnode != null) {
 				IType contexttype = ((TypeReference) contextnode.getChild(0))
 						.get(ST);
+				if (contexttype == null)
+					contexttype = ErrorType.instance();
 				fItSymbol = new Symbol(Symbol.IT, contexttype);
 				ST.put(fItSymbol);
 				ST.setAlias(fItSymbol, Symbol.CONTEXT);
@@ -257,15 +264,17 @@ public class TemplateDefinition extends CommonNode implements
 		if (fType == null) {
 		} else if (fType.isFunction()) {
 			FunctionType funtype = (FunctionType) fType;
-			if (isContext())
-				buf.append(" <-");
 			for (int i = 0; i < funtype.getArgumentLength(); i++) {
 				Argument a = funtype.getArgument(i);
 				buf.append(" ");
+				if (a == null || a.type == null) {
+					buf.append("<error>");
+					continue;
+				}
 				if (a.optional)
 					buf.append("~");
 				if (isContext() && i == 0) {
-					buf.append(a.type);
+					buf.append("[").append(a.type).append("]");
 				} else {
 					buf.append(a.name);
 					if (a.type.isGeneral() && !a.type.isGeneric()) {

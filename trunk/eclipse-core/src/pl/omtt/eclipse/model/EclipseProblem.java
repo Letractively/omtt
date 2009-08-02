@@ -25,14 +25,6 @@ public class EclipseProblem {
 		fText = a.getText();
 
 		String type = a.getType();
-//		if (type.equals(ANNOTATION_TYPE_ERROR))
-//			fType = ERROR;
-//		else if (type.equals(ANNOTATION_TYPE_WARNING))
-//			fType = WARNING;
-//		else
-//			fType = INFO;
-
-		System.out.println("setting " + this);
 	}
 
 	public EclipseProblem(int type, int offset, int length, int lineNumber,

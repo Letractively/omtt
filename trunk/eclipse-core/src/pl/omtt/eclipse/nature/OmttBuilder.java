@@ -19,6 +19,7 @@ import org.eclipse.jdt.core.JavaModelException;
 
 import pl.omtt.compiler.OmttCompilationTask;
 import pl.omtt.core.Constants;
+import pl.omtt.core.Debugging;
 import pl.omtt.eclipse.model.OmttModelManager;
 import pl.omtt.eclipse.model.OmttProjectModel;
 import pl.omtt.eclipse.model.ProblemMarkerCollector;
@@ -90,28 +91,37 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 
 	private boolean rebuild(List<IResource> added, List<IResource> changed,
 			List<IResource> deleted, IProgressMonitor monitor) {
-		if (added != null)
-			for (IResource resource : added)
-				fCompileQueue.add(resource);
+		getProjectModel().startRebuild();
+		Set<IResource> compiled = null;
+		try {
+			if (added != null)
+				for (IResource resource : added)
+					fCompileQueue.add(resource);
 
-		if (changed != null)
-			for (IResource resource : changed)
-				fCompileQueue.add(resource);
+			if (changed != null)
+				for (IResource resource : changed)
+					fCompileQueue.add(resource);
 
-		if (deleted != null)
-			for (IResource resource : deleted) {
-				deleteBuildFile(resource);
-				getProjectModel().remove(resource, monitor);
-			}
-
-		compile(monitor);
+			if (deleted != null)
+				for (IResource resource : deleted) {
+					deleteBuildFile(resource);
+					getProjectModel().remove(resource, monitor);
+				}
+			compiled = compile(monitor);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("--- THIS IS BUG, please report");
+		} finally {
+			getProjectModel().finishRebuild(compiled);
+		}
 		return true;
 	}
 
-	private void compile(IProgressMonitor monitor) {
+	private Set<IResource> compile(IProgressMonitor monitor) {
 		final OmttProjectModel model = getProjectModel();
-		System.err.println("\n\nRunning compilation");
-		
+		if (Debugging.DEBUG > 0)
+			System.err.println("\n\nRunning compilation");
+
 		Set<IResource> compiled = new HashSet<IResource>();
 		while (!fCompileQueue.isEmpty()) {
 			List<URI> uris = new ArrayList<URI>();
@@ -127,7 +137,8 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 			Set<IResource> turn = fCompileQueue;
 			fCompileQueue = new HashSet<IResource>();
 
-			System.err.println("compiling...");
+			if (Debugging.DEBUG > 0)
+				System.err.println("compiling...");
 			OmttCompilationTask task = model.getCompilationTask(uris);
 			task.setCollectLibraryReferences(true);
 			task.setProblemCollector(new ProblemMarkerCollector());
@@ -135,17 +146,20 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 				task.compile();
 			} catch (Throwable e) {
 				e.printStackTrace();
-				return;
+				return compiled;
 			}
 			refreshTemplateBuildDirectory();
-			System.err.println("done");
+			if (Debugging.DEBUG > 0)
+				System.err.println("done");
 
 			for (IResource resource : turn) {
 				final URI uri = resource.getLocationURI();
 				final Program program = task.getTree(uri);
 
-				System.err.println(resource + ": " + program);
-				Set<IResource> affected = model.update(resource, program, monitor);
+				if (Debugging.DEBUG > 0)
+					System.err.println(resource + ": " + program);
+				Set<IResource> affected = model.update(resource, program,
+						monitor);
 				if (affected != null)
 					fCompileQueue.addAll(affected);
 			}
@@ -157,8 +171,8 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 			}
 			compiled.addAll(turn);
 		}
-		
-		getProjectModel().notifyRebuild(compiled);
+
+		return compiled;
 	}
 
 	private void deleteBuildFile(IResource resource) {
@@ -181,10 +195,10 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 				path).addFileExtension("class");
 		IResource buildFile = getProject().getWorkspace().getRoot().findMember(
 				buildFilePath);
-		System.err.println("deleting " + buildFile);
+		if (Debugging.DEBUG > 0)
+			System.err.println("deleting " + buildFile);
 		if (buildFile != null)
 			try {
-				System.err.println("deleting " + buildFile);
 				buildFile.delete(false, null);
 			} catch (CoreException e) {
 				e.printStackTrace();
@@ -207,7 +221,8 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 		try {
 			IResource bdir = getProject().getWorkspace().getRoot().findMember(
 					buildDir);
-			System.err.println("refreshing " + bdir);
+			if (Debugging.DEBUG > 0)
+				System.err.println("refreshing " + bdir);
 			if (bdir != null)
 				bdir.refreshLocal(IResource.DEPTH_ONE, null);
 			else
@@ -216,7 +231,8 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 					Constants.OMTT_TEMPLATE_PACKAGE);
 			IResource tdir = getProject().getWorkspace().getRoot().findMember(
 					templateBuildDir);
-			System.err.println("refreshing " + tdir);
+			if (Debugging.DEBUG > 0)
+				System.err.println("refreshing " + tdir);
 			if (tdir != null)
 				tdir.refreshLocal(IResource.DEPTH_INFINITE, null);
 			else

@@ -25,7 +25,6 @@ public class CompilationQueue implements Iterable<URI> {
 	Map<String, Set<String>> fModuleReferences = new HashMap<String, Set<String>>();
 
 	void add(URI uri, Program program) throws SemanticException {
-		System.err.println("adding " + uri);
 		verifyFileName(uri, program);
 
 		final ModuleDeclaration md = program.getModuleDeclaration();
@@ -97,7 +96,6 @@ public class CompilationQueue implements Iterable<URI> {
 
 		if (!graph.isEmpty())
 			throwCycleException(graph);
-		System.err.println("queue: " + this);
 	}
 
 	private Map<String, Node> buildGraph() {

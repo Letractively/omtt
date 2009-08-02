@@ -23,7 +23,8 @@ public class Data extends CommonNode implements IExpression, IVisitable {
 	public void setExpressionType(SymbolTable symbolArray) throws TypeException {
 		for (int i = 0; i < getChildCount(); i++) {
 			IExpression expr = (IExpression) getChild(i);
-			if (expr.getExpressionType().isFunction())
+			if (expr.getExpressionType() != null
+					&& expr.getExpressionType().isFunction())
 				throw new TypeException(expr,
 						"function casts to data are not allowed");
 		}

@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.osgi.framework.Bundle;
 
 import pl.omtt.core.Constants;
+import pl.omtt.core.Debugging;
 import pl.omtt.eclipse.model.OmttProjectModel;
 
 public class OmttProjectSetup {
@@ -107,12 +108,14 @@ public class OmttProjectSetup {
 					description.setNatureIds(newNatures);
 					project.setDescription(description, null);
 
-					System.out.println("removing  OMTT nature");
+					if (Debugging.DEBUG > 0)
+						System.out.println("removing  OMTT nature");
 					return;
 				}
 			}
 
-			System.out.println("adding OMTT nature");
+			if (Debugging.DEBUG > 0)
+				System.out.println("adding OMTT nature");
 
 			// Add the nature
 			String[] newNatures = new String[natures.length + 1];

@@ -23,6 +23,7 @@ import org.antlr.runtime.RecognitionException;
 
 import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.compiler.reporting.PrintProblemCollector;
+import pl.omtt.core.Debugging;
 import pl.omtt.lang.analyze.SemanticAnalyzer;
 import pl.omtt.lang.analyze.SemanticException;
 import pl.omtt.lang.code.CodeGenerationException;
@@ -152,7 +153,9 @@ public class OmttCompilationTask {
 				if (!generateCode(source))
 					continue;
 		}
-		System.err.println("compiling: " + fJavaSources.keySet());
+
+		if (Debugging.DEBUG > 0)
+			System.err.println("compiling: " + fJavaSources.keySet());
 		if (level > STATE_JAVA_CODE) {
 			compileJava();
 			if (verifyState() > STATE_FINISH)

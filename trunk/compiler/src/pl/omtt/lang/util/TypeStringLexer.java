@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g 2009-07-28 04:12:40
+// $ANTLR 3.1.2 /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g 2009-08-02 06:01:45
 
 package pl.omtt.lang.util;
 
@@ -10,23 +10,27 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class TypeStringLexer extends Lexer {
-    public static final int INTEGER=11;
+    public static final int INTEGER=12;
     public static final int FUNCTION=4;
+    public static final int SMALL_LETTER=15;
+    public static final int VAR_ID=10;
     public static final int GENERIC=8;
+    public static final int LETTER=16;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int T__21=21;
+    public static final int T__20=20;
     public static final int EOF=-1;
     public static final int OPTIONAL=6;
-    public static final int NAMECHAR=13;
+    public static final int NAMECHAR=14;
     public static final int T__19=19;
     public static final int SEQUENCE=7;
-    public static final int BIG_LETTER=12;
-    public static final int T__16=16;
-    public static final int WS=14;
-    public static final int T__15=15;
+    public static final int BIG_LETTER=13;
+    public static final int WS=17;
     public static final int T__18=18;
-    public static final int T__17=17;
     public static final int ARGUMENT=9;
     public static final int SCALAR=5;
-    public static final int CLASS_ID=10;
+    public static final int CLASS_ID=11;
 
     // delegates
     // delegators
@@ -81,76 +85,16 @@ public class TypeStringLexer extends Lexer {
     }
     // $ANTLR end "SEQUENCE"
 
-    // $ANTLR start "T__15"
-    public final void mT__15() throws RecognitionException {
+    // $ANTLR start "T__18"
+    public final void mT__18() throws RecognitionException {
         try {
-            int _type = T__15;
+            int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:9:7: ( '->' )
             // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:9:9: '->'
             {
             match("->"); 
 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__15"
-
-    // $ANTLR start "T__16"
-    public final void mT__16() throws RecognitionException {
-        try {
-            int _type = T__16;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:10:7: ( '(' )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:10:9: '('
-            {
-            match('('); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__16"
-
-    // $ANTLR start "T__17"
-    public final void mT__17() throws RecognitionException {
-        try {
-            int _type = T__17;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:11:7: ( ')' )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:11:9: ')'
-            {
-            match(')'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__17"
-
-    // $ANTLR start "T__18"
-    public final void mT__18() throws RecognitionException {
-        try {
-            int _type = T__18;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:12:7: ( '[' )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:12:9: '['
-            {
-            match('['); 
 
             }
 
@@ -167,8 +111,88 @@ public class TypeStringLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:13:7: ( ']' )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:13:9: ']'
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:10:7: ( '.' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:10:9: '.'
+            {
+            match('.'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__19"
+
+    // $ANTLR start "T__20"
+    public final void mT__20() throws RecognitionException {
+        try {
+            int _type = T__20;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:11:7: ( '(' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:11:9: '('
+            {
+            match('('); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__20"
+
+    // $ANTLR start "T__21"
+    public final void mT__21() throws RecognitionException {
+        try {
+            int _type = T__21;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:12:7: ( ')' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:12:9: ')'
+            {
+            match(')'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__21"
+
+    // $ANTLR start "T__22"
+    public final void mT__22() throws RecognitionException {
+        try {
+            int _type = T__22;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:13:7: ( '[' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:13:9: '['
+            {
+            match('['); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__22"
+
+    // $ANTLR start "T__23"
+    public final void mT__23() throws RecognitionException {
+        try {
+            int _type = T__23;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:14:7: ( ']' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:14:9: ']'
             {
             match(']'); 
 
@@ -180,7 +204,7 @@ public class TypeStringLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__19"
+    // $ANTLR end "T__23"
 
     // $ANTLR start "CLASS_ID"
     public final void mCLASS_ID() throws RecognitionException {
@@ -302,26 +326,10 @@ public class TypeStringLexer extends Lexer {
     }
     // $ANTLR end "INTEGER"
 
-    // $ANTLR start "BIG_LETTER"
-    public final void mBIG_LETTER() throws RecognitionException {
-        try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:74:21: ( 'A' .. 'Z' )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:74:23: 'A' .. 'Z'
-            {
-            matchRange('A','Z'); 
-
-            }
-
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "BIG_LETTER"
-
     // $ANTLR start "NAMECHAR"
     public final void mNAMECHAR() throws RecognitionException {
         try {
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:75:21: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '$' | '_' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:74:21: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '$' | '_' )
             // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:
             {
             if ( input.LA(1)=='$'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
@@ -342,13 +350,122 @@ public class TypeStringLexer extends Lexer {
     }
     // $ANTLR end "NAMECHAR"
 
+    // $ANTLR start "VAR_ID"
+    public final void mVAR_ID() throws RecognitionException {
+        try {
+            int _type = VAR_ID;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:77:3: ( ( SMALL_LETTER | '_' | '@' ) ( NAMECHAR )* )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:77:5: ( SMALL_LETTER | '_' | '@' ) ( NAMECHAR )*
+            {
+            if ( input.LA(1)=='@'||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+                input.consume();
+
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;}
+
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:77:32: ( NAMECHAR )*
+            loop4:
+            do {
+                int alt4=2;
+                int LA4_0 = input.LA(1);
+
+                if ( (LA4_0=='$'||(LA4_0>='0' && LA4_0<='9')||(LA4_0>='A' && LA4_0<='Z')||LA4_0=='_'||(LA4_0>='a' && LA4_0<='z')) ) {
+                    alt4=1;
+                }
+
+
+                switch (alt4) {
+            	case 1 :
+            	    // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:77:32: NAMECHAR
+            	    {
+            	    mNAMECHAR(); 
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop4;
+                }
+            } while (true);
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "VAR_ID"
+
+    // $ANTLR start "LETTER"
+    public final void mLETTER() throws RecognitionException {
+        try {
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:81:3: ( 'a' .. 'z' | 'A' .. 'Z' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:
+            {
+            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+                input.consume();
+
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;}
+
+
+            }
+
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "LETTER"
+
+    // $ANTLR start "BIG_LETTER"
+    public final void mBIG_LETTER() throws RecognitionException {
+        try {
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:85:3: ( 'A' .. 'Z' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:85:5: 'A' .. 'Z'
+            {
+            matchRange('A','Z'); 
+
+            }
+
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "BIG_LETTER"
+
+    // $ANTLR start "SMALL_LETTER"
+    public final void mSMALL_LETTER() throws RecognitionException {
+        try {
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:88:3: ( 'a' .. 'z' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:88:5: 'a' .. 'z'
+            {
+            matchRange('a','z'); 
+
+            }
+
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "SMALL_LETTER"
+
     // $ANTLR start "WS"
     public final void mWS() throws RecognitionException {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:78:3: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\u000C' ) )
-            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:78:5: ( ' ' | '\\t' | '\\n' | '\\r' | '\\u000C' )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:92:3: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\u000C' ) )
+            // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:92:5: ( ' ' | '\\t' | '\\n' | '\\r' | '\\u000C' )
             {
             if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||(input.LA(1)>='\f' && input.LA(1)<='\r')||input.LA(1)==' ' ) {
                 input.consume();
@@ -372,106 +489,10 @@ public class TypeStringLexer extends Lexer {
     // $ANTLR end "WS"
 
     public void mTokens() throws RecognitionException {
-        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:8: ( OPTIONAL | SEQUENCE | T__15 | T__16 | T__17 | T__18 | T__19 | CLASS_ID | INTEGER | WS )
-        int alt4=10;
-        switch ( input.LA(1) ) {
-        case '~':
-            {
-            alt4=1;
-            }
-            break;
-        case '*':
-            {
-            alt4=2;
-            }
-            break;
-        case '-':
-            {
-            alt4=3;
-            }
-            break;
-        case '(':
-            {
-            alt4=4;
-            }
-            break;
-        case ')':
-            {
-            alt4=5;
-            }
-            break;
-        case '[':
-            {
-            alt4=6;
-            }
-            break;
-        case ']':
-            {
-            alt4=7;
-            }
-            break;
-        case 'A':
-        case 'B':
-        case 'C':
-        case 'D':
-        case 'E':
-        case 'F':
-        case 'G':
-        case 'H':
-        case 'I':
-        case 'J':
-        case 'K':
-        case 'L':
-        case 'M':
-        case 'N':
-        case 'O':
-        case 'P':
-        case 'Q':
-        case 'R':
-        case 'S':
-        case 'T':
-        case 'U':
-        case 'V':
-        case 'W':
-        case 'X':
-        case 'Y':
-        case 'Z':
-        case '_':
-            {
-            alt4=8;
-            }
-            break;
-        case '0':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-            {
-            alt4=9;
-            }
-            break;
-        case '\t':
-        case '\n':
-        case '\f':
-        case '\r':
-        case ' ':
-            {
-            alt4=10;
-            }
-            break;
-        default:
-            NoViableAltException nvae =
-                new NoViableAltException("", 4, 0, input);
-
-            throw nvae;
-        }
-
-        switch (alt4) {
+        // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:8: ( OPTIONAL | SEQUENCE | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | CLASS_ID | INTEGER | VAR_ID | WS )
+        int alt5=12;
+        alt5 = dfa5.predict(input);
+        switch (alt5) {
             case 1 :
                 // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:10: OPTIONAL
                 {
@@ -487,56 +508,70 @@ public class TypeStringLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:28: T__15
-                {
-                mT__15(); 
-
-                }
-                break;
-            case 4 :
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:34: T__16
-                {
-                mT__16(); 
-
-                }
-                break;
-            case 5 :
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:40: T__17
-                {
-                mT__17(); 
-
-                }
-                break;
-            case 6 :
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:46: T__18
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:28: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
-            case 7 :
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:52: T__19
+            case 4 :
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:34: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
+            case 5 :
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:40: T__20
+                {
+                mT__20(); 
+
+                }
+                break;
+            case 6 :
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:46: T__21
+                {
+                mT__21(); 
+
+                }
+                break;
+            case 7 :
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:52: T__22
+                {
+                mT__22(); 
+
+                }
+                break;
             case 8 :
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:58: CLASS_ID
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:58: T__23
+                {
+                mT__23(); 
+
+                }
+                break;
+            case 9 :
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:64: CLASS_ID
                 {
                 mCLASS_ID(); 
 
                 }
                 break;
-            case 9 :
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:67: INTEGER
+            case 10 :
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:73: INTEGER
                 {
                 mINTEGER(); 
 
                 }
                 break;
-            case 10 :
-                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:75: WS
+            case 11 :
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:81: VAR_ID
+                {
+                mVAR_ID(); 
+
+                }
+                break;
+            case 12 :
+                // /home/endrju/.workspace/OMTT Compiler/src/pl/omtt/lang/util/TypeString.g:1:88: WS
                 {
                 mWS(); 
 
@@ -548,6 +583,73 @@ public class TypeStringLexer extends Lexer {
     }
 
 
+    protected DFA5 dfa5 = new DFA5(this);
+    static final String DFA5_eotS =
+        "\12\uffff\1\11\3\uffff";
+    static final String DFA5_eofS =
+        "\16\uffff";
+    static final String DFA5_minS =
+        "\1\11\11\uffff\1\44\3\uffff";
+    static final String DFA5_maxS =
+        "\1\176\11\uffff\1\172\3\uffff";
+    static final String DFA5_acceptS =
+        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\uffff\1\12\1\13"+
+        "\1\14";
+    static final String DFA5_specialS =
+        "\16\uffff}>";
+    static final String[] DFA5_transitionS = {
+            "\2\15\1\uffff\2\15\22\uffff\1\15\7\uffff\1\5\1\6\1\2\2\uffff"+
+            "\1\3\1\4\1\uffff\12\13\6\uffff\1\14\32\11\1\7\1\uffff\1\10\1"+
+            "\uffff\1\12\1\uffff\32\14\3\uffff\1\1",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\14\13\uffff\12\14\7\uffff\32\14\4\uffff\1\14\1\uffff\32"+
+            "\14",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA5_eot = DFA.unpackEncodedString(DFA5_eotS);
+    static final short[] DFA5_eof = DFA.unpackEncodedString(DFA5_eofS);
+    static final char[] DFA5_min = DFA.unpackEncodedStringToUnsignedChars(DFA5_minS);
+    static final char[] DFA5_max = DFA.unpackEncodedStringToUnsignedChars(DFA5_maxS);
+    static final short[] DFA5_accept = DFA.unpackEncodedString(DFA5_acceptS);
+    static final short[] DFA5_special = DFA.unpackEncodedString(DFA5_specialS);
+    static final short[][] DFA5_transition;
+
+    static {
+        int numStates = DFA5_transitionS.length;
+        DFA5_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA5_transition[i] = DFA.unpackEncodedString(DFA5_transitionS[i]);
+        }
+    }
+
+    class DFA5 extends DFA {
+
+        public DFA5(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 5;
+            this.eot = DFA5_eot;
+            this.eof = DFA5_eof;
+            this.min = DFA5_min;
+            this.max = DFA5_max;
+            this.accept = DFA5_accept;
+            this.special = DFA5_special;
+            this.transition = DFA5_transition;
+        }
+        public String getDescription() {
+            return "1:1: Tokens : ( OPTIONAL | SEQUENCE | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | CLASS_ID | INTEGER | VAR_ID | WS );";
+        }
+    }
  
 
 }

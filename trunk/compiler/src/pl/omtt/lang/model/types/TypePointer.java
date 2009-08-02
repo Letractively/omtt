@@ -1,5 +1,7 @@
 package pl.omtt.lang.model.types;
 
+import pl.omtt.core.Debugging;
+
 public class TypePointer extends CommonType implements IType {
 	IType fPointer;
 	boolean fFrozen = false;
@@ -95,10 +97,14 @@ public class TypePointer extends CommonType implements IType {
 	}
 
 	public String singleToString() {
-		// if (isFrozen())
-		return getEffective().singleToString();
-		// else
-		// return "flex(" + getEffective().singleToString() + ")";
+		if (Debugging.DEBUG > 1) {
+			if (isFrozen())
+				return getEffective().singleToString();
+			else
+				return "flex(" + getEffective().singleToString() + ")";
+		} else {
+			return getEffective().singleToString();
+		}
 	}
 
 	@Override
