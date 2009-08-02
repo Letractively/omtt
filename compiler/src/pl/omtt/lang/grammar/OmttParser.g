@@ -187,7 +187,7 @@ fragment lambda_match_expression
 	;
 fragment single_lambda_match
 	: single_type OP_FOLLOW safe_expression
-		-> ^(ITEM single_type safe_expression)
+		-> ^(ITEM<LambdaMatchItem> single_type safe_expression)
 	;
 
 type

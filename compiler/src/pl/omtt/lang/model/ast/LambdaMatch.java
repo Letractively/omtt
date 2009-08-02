@@ -1,12 +1,10 @@
 package pl.omtt.lang.model.ast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 
 import pl.omtt.lang.analyze.ISymbolTableOwner;
+import pl.omtt.lang.analyze.Symbol;
 import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
@@ -20,7 +18,6 @@ import pl.omtt.lang.model.types.TypeUnifier;
 public class LambdaMatch extends CommonNode implements IExpression,
 		ISymbolTableOwner, IVisitable {
 	IType fType;
-	List<IType> fItemTypes = new ArrayList<IType>();
 
 	public LambdaMatch(Token token) {
 		super(token);
@@ -34,22 +31,10 @@ public class LambdaMatch extends CommonNode implements IExpression,
 		return getChildCount();
 	}
 	
-	public TypeReference getItemTypeNode(int i) {
+	public LambdaMatchItem getItemNode(int i) {
 		if (getChildCount() <= i)
 			return null;
-		return (TypeReference)getChild(i).getChild(0);
-	}
-	
-	public IType getItemType(int i) {
-		if (getChildCount() <= i)
-			return null;
-		return fItemTypes.get(i);
-	}
-
-	public IExpression getBodyNode(int i) {
-		if (getChildCount() <= i)
-			return null;
-		return (IExpression)getChild(i).getChild(1);
+		return (LambdaMatchItem)getChild(i);
 	}
 	
 	@Override
@@ -59,16 +44,13 @@ public class LambdaMatch extends CommonNode implements IExpression,
 
 	@Override
 	public void setExpressionType(SymbolTable ST) throws TypeException {
-		for (int i = 0; i < getItemLength(); i++)
-			fItemTypes.add(getItemTypeNode(i).get(ST));
-		
 		FunctionType ftype = new FunctionType();
 		ftype.setNotNull();
-		ftype.putArgument("it", new AnyType(), false);
+		ftype.putArgument(Symbol.IT, new AnyType(), false);
 		
 		IType cur = new NullType();
 		for (int i = 0; i < getItemLength(); i++) {
-			IType type = getBodyNode(i).getExpressionType();
+			IType type = getItemNode(i).getExpressionType();
 			cur = TypeUnifier.intersect(cur, type);
 			if (type.isSequence())
 				cur.setSequence();
