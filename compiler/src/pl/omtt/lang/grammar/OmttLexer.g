@@ -181,6 +181,8 @@ MAP    : 'map';
 APPLY  : 'apply';
 MATCH  : 'match';
 WHERE  : 'where';
+ORDER  : 'order';
+BY     : 'by';
 
 LAMBDA : 'lambda';
 
@@ -247,7 +249,6 @@ OP_OR  : 'or' | '||';
 OP_NOT : 'not';
 
 OP_CONTEXT : '|';
-OP_EXPRESSION_CONTEXT : '!';
 OP_VIEW : '::';
 OP_CONCAT : '^';
 

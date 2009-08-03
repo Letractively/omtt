@@ -286,10 +286,13 @@ context_expression
       -> ^(CALL<Call>[true] atom_expression ^(ARGUMENT<FunctionArgument> $context_expression) $arguments?)
 		| op_map ce=safe_expression
     	-> ^(op_map $context_expression $ce)
-		| MATCH LEFT_PAREN lambda_match_expression RIGHT_PAREN
-    	-> ^(CALL<Call>[true] lambda_match_expression ^(ARGUMENT<FunctionArgument> $context_expression))
 		| WHERE safe_expression
 			-> ^(ATOM_SELECT<AtomSelect> $context_expression ^(SEQUENCE_SELECT safe_expression))
+    | ORDER BY safe_expression
+    	{ reportNotImplemented("order by operation"); }
+    	-> ^(ORDER $context_expression safe_expression)
+		| MATCH lambda_match_expression
+    	-> ^(CALL<Call>[true] lambda_match_expression ^(ARGUMENT<FunctionArgument> $context_expression))
     )*
   ;
 fragment op_apply
@@ -297,8 +300,7 @@ fragment op_apply
 	| APPLY^
 	;
 fragment op_map
-	: OP_EXPRESSION_CONTEXT<Transformation>^
-	| MAP<Transformation>^
+	: MAP<Transformation>^
 	;
 
 apply_expression
@@ -431,10 +433,10 @@ fragment atom_with_selectors
 		)
 	;
 fragment expression_select
-	: LEFT_PAREN expression RIGHT_PAREN
+	: object
 		( sequence_selectors
-			-> ^(ATOM_SELECT<AtomSelect> expression sequence_selectors)
-		| -> expression
+			-> ^(ATOM_SELECT<AtomSelect> object sequence_selectors)
+		| -> object
 		)
 	;
 fragment property_select
@@ -469,13 +471,16 @@ atom
 	;
 
 selectable_atom
-  : object_atom
+  : namespace_id
+  | object
+  ;
+fragment object
+	: object_atom
   | data_expression
-  | namespace_id
 	| tuple
   | record
   | LEFT_PAREN! sequence_expression RIGHT_PAREN!
-  ;
+	;
 
 fragment namespace_id
   : (ns=VAR_ID OP_VIEW)? id=VAR_ID
