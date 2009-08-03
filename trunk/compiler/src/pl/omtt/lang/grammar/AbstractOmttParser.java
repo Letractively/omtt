@@ -14,7 +14,6 @@ import pl.omtt.lang.model.ast.CommonNode;
 import pl.omtt.lang.model.ast.Program;
 
 public abstract class AbstractOmttParser extends Parser {
-
 	private IAntlrProblemCollector fProblems;
 	private boolean fErrorsOccured;
 
@@ -113,7 +112,7 @@ public abstract class AbstractOmttParser extends Parser {
 		}
 
 		public String getMessage() {
-			return cause + " are not implemented yet";
+			return cause + " not implemented yet";
 		}
 
 		private static final long serialVersionUID = 1484884878382850930L;
