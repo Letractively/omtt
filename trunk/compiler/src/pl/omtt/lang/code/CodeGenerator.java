@@ -282,13 +282,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 	public void visit(Program program) {
 		fBaseSymbolTable = program.getSymbolTable();
-		ModuleDeclaration md = program.getModuleDeclaration();
-
-		if (md != null)
-			fPackageName = Constants.OMTT_TEMPLATE_PACKAGE + "."
-					+ md.getPackageName();
-		else
-			fPackageName = Constants.OMTT_TEMPLATE_PACKAGE + ".local";
+		fPackageName = Constants.OMTT_TEMPLATE_PACKAGE + "."
+				+ program.getResourcePackage();
 		fBuffer.putl("package %s;\n", fPackageName);
 
 		fBuffer.activate("methods");
@@ -305,8 +300,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			fBuffer.putl("import %s;", clazz.getName());
 
 		fBuffer.putnl();
-		if (md != null)
-			fModuleName = md.getModuleName();
+		fModuleName = program.getResourceName();
 		fModuleName = fModuleName.substring(0, 1).toUpperCase()
 				+ fModuleName.substring(1);
 
@@ -596,12 +590,12 @@ public class CodeGenerator extends AbstractTreeWalker {
 			fBuffer.putl("%sif (%s instanceof %s) {", i > 0 ? "else " : "",
 					Symbol.IT, cjtype);
 			fBuffer.incIndentation();
-			fSymbolLocalNames.put(cs, "(("+cjtype+")"+Symbol.IT+")");
+			fSymbolLocalNames.put(cs, "((" + cjtype + ")" + Symbol.IT + ")");
 			if (data) {
 				apply(item.getBodyNode());
-			}
-			else {
-				fBuffer.putl("return %s;", cast(exprapply(item.getBodyNode()), item.getExpressionType(), funtype.getReturnType()));
+			} else {
+				fBuffer.putl("return %s;", cast(exprapply(item.getBodyNode()),
+						item.getExpressionType(), funtype.getReturnType()));
 			}
 			fBuffer.subIndentation();
 			fBuffer.putl("}");

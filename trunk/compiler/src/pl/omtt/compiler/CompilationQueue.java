@@ -27,16 +27,7 @@ public class CompilationQueue implements Iterable<URI> {
 	void add(URI uri, Program program) throws SemanticException {
 		verifyFileName(uri, program);
 
-		final ModuleDeclaration md = program.getModuleDeclaration();
-		if (md == null)
-			return;
-
-		String mid = md.getModuleName();
-		String pid = md.getPackageName();
-		if (pid == null)
-			pid = "local";
-		final String id = pid + "." + mid;
-
+		final String id = program.getResourceId();
 		fModules.put(id, uri);
 
 		Set<String> references = new HashSet<String>();
@@ -46,7 +37,7 @@ public class CompilationQueue implements Iterable<URI> {
 				UseDeclaration ud = (UseDeclaration) un.getChild(i);
 				String uid = ud.getUseId();
 				if (uid.lastIndexOf('.') < 0)
-					uid = pid + "." + uid;
+					uid = program.getResourcePackage() + "." + uid;
 				references.add(uid);
 			}
 		fModuleReferences.put(id, references);

@@ -24,6 +24,7 @@ public class Test {
 	static final ParseComponent testComponent = ParseComponent.CODE;
 
 	final static String DIR = "/home/endrju/runtime-EclipseApplication/OMTT%20Example%20Project";
+	final static String DIR2 = "/home/endrju/runtime-EclipseApplication/Simple%20OMTT";
 	final static String FILE = DIR + "/templates/sample.omtt";
 
 	public static void main(String[] args) {
@@ -31,13 +32,14 @@ public class Test {
 		List<URI> classpath = new ArrayList<URI>();
 		List<URI> sources = new ArrayList<URI>();
 		try {
-			sources.add(new URI("file:" + DIR + "/templates/sample.omtt"));
+			sources.add(new URI("file:" + DIR2 + "/templates/test.omtt"));
+//			sources.add(new URI("file:" + DIR + "/templates/sample.omtt"));
 //			sources.add(new URI("file:" + DIR + "/templates/html.omtt"));
 //			sources.add(new URI("file:" + DIR + "/templates/empage.omtt"));
 //			sources.add(new URI("file:" + DIR + "/templates/sample2.omtt"));
 //			sources.add(new URI("file:" + DIR + "/templates/primes.omtt"));
 			target = new URI("file:" + DIR + "/bin/");
-			corejar = new URI("file:lib/omtt-core.jar");
+			corejar = new URI("file:../pl.omtt.core/lib/omtt-core.jar");
 			classpath.add(corejar);
 			
 		} catch (URISyntaxException e) {
