@@ -58,6 +58,9 @@ public class PropertySelect extends CommonSelectorNode implements
 	@Override
 	protected IType getOriginalType(SymbolTable symbolTable)
 			throws TypeException {
+		if (getBaseNode() == null || getBaseNode().getExpressionType() == null)
+			return ErrorType.instance();
+
 		IType base = getBaseNode().getExpressionType().getEffective();
 
 		try {

@@ -125,8 +125,11 @@ public class OmttCompilationTask {
 		final CompilationQueue queue = new CompilationQueue();
 		for (URI source : fSources) {
 			try {
-				if (parse(source))
-					queue.add(source, fTrees.get(source));
+				if (parse(source)) {
+					Program program = fTrees.get(source);
+					program.setSourceURI(source);
+					queue.add(source, program);
+				}
 			} catch (SemanticException se) {
 				fProblemCollector.reportError(source, se);
 				fState = STATE_ERROR;
@@ -197,9 +200,11 @@ public class OmttCompilationTask {
 			Program tree = parser.parse();
 			fTrees.put(uri, tree);
 		} catch (RecognitionException e) {
+			e.printStackTrace();
 			fProblemCollector.reportError(uri, e);
 			return false;
 		} catch (Exception e) {
+			e.printStackTrace();
 			fProblemCollector.reportError(uri, e);
 			return false;
 		}
@@ -213,8 +218,8 @@ public class OmttCompilationTask {
 		analyzer.setCollectLibraryReferences(fCollectLibraryReferences);
 		Program program = fTrees.get(source);
 		boolean success = analyzer.run(source, program, symbolTableSupplier);
-		symbolTableSupplier.put(program.getModuleDeclaration().getModuleId(),
-				program.getSymbolTable());
+		symbolTableSupplier.put(program.getResourceId(), program
+				.getSymbolTable());
 		return success;
 	}
 

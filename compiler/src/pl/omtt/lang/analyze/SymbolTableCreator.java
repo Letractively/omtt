@@ -47,11 +47,8 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 	public void run(Tree root) {
 		if (root instanceof Program) {
 			Program program = (Program) root;
-
-			ModuleDeclaration md = program.getModuleDeclaration();
-			BaseSymbolTable baseST = new BaseSymbolTable(md.getPackageName()
-					+ "." + md.getModuleName(), fClassLoader,
-					fLibrarySTSupplier);
+			BaseSymbolTable baseST = new BaseSymbolTable(program
+					.getResourceId(), fClassLoader, fLibrarySTSupplier);
 			if (fCollectLibraryReferences)
 				baseST.collectReferences();
 			pushST(baseST);
@@ -79,8 +76,7 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 				fProblemCollector.reportError(fURI, e);
 			if (e.getSeverity() == Problem.ERROR) {
 				fErrors = true;
-			}
-			else if (e.getSeverity() == Problem.FATAL) {
+			} else if (e.getSeverity() == Problem.FATAL) {
 				fErrors = true;
 			}
 		} catch (Exception e) {
@@ -104,8 +100,7 @@ public class SymbolTableCreator extends AbstractTreeWalker {
 				fProblemCollector.reportError(fURI, e);
 			if (e.getSeverity() == Problem.ERROR) {
 				fErrors = true;
-			}
-			else if (e.getSeverity() == Problem.FATAL) {
+			} else if (e.getSeverity() == Problem.FATAL) {
 				fErrors = true;
 			}
 		} catch (ForceSymbolTableRecalculatingException e) {
