@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="Object Model Template Transformation Update Site" url="http://www.omtt.pl">
-      [To be done]
+   <description name="Object Model Template Transformation Update Site" url="http://omtt.googlecode.com/svn/trunk/update-site/">
+      OMTT is language designed for transformation of structured object data into textual formats, for example XML. OMTT templates run in Java Platform and may be used in JVM-based languages.
    </description>
    <feature url="features/pl.omtt.eclipse.feature_1.0.0.alpha1.jar" id="pl.omtt.eclipse.feature" version="1.0.0.alpha1">
       <category name="pl.omtt.eclipse.category"/>
    </feature>
-   <category-def name="pl.omtt.eclipse.category" label="OMTT alpha"/>
+   <feature url="features/pl.omtt.compilerfeature_1.0.0.alpha1.jar" id="pl.omtt.compilerfeature" version="1.0.0.alpha1">
+      <category name="pl.omtt.eclipse.category"/>
+   </feature>
+   <feature url="features/pl.omtt.corefeature_1.0.0.alpha1.jar" id="pl.omtt.corefeature" version="1.0.0.alpha1">
+      <category name="pl.omtt.eclipse.category"/>
+   </feature>
+   <category-def name="pl.omtt.eclipse.category" label="OMTT (alpha version)">
+      <description>
+         Object Model Transformation Templates - alpha packages
+      </description>
+   </category-def>
 </site>
