@@ -22,6 +22,8 @@
    </url>
 
    <requires>
+      <import plugin="pl.omtt.core"/>
+      <import plugin="pl.omtt.compiler"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
@@ -31,21 +33,9 @@
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.jdt.ui"/>
       <import plugin="org.eclipse.ui.views"/>
+      <import feature="pl.omtt.compilerfeature" version="1.0.0.alpha1"/>
+      <import feature="pl.omtt.corefeature" version="1.0.0.alpha1"/>
    </requires>
-
-   <plugin
-         id="pl.omtt.compiler"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="pl.omtt.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="pl.omtt.eclipse.core"
