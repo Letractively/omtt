@@ -22,8 +22,11 @@ public class Sequences {
 		return c == null || c.isEmpty();
 	}
 
-	public static Integer size(Collection<Object> c) {
-		return c.size();
+	public static Integer count(Collection<Object> c) {
+		if (c == null)
+			return 0;
+		else
+			return c.size();
 	}
 
 	@Type("(_[1]* ~(_[1] _[1] -> Boolean) -> _[1]*)")

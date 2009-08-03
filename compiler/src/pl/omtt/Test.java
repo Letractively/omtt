@@ -32,8 +32,8 @@ public class Test {
 		List<URI> classpath = new ArrayList<URI>();
 		List<URI> sources = new ArrayList<URI>();
 		try {
-			sources.add(new URI("file:" + DIR2 + "/templates/test.omtt"));
-//			sources.add(new URI("file:" + DIR + "/templates/sample.omtt"));
+//			sources.add(new URI("file:" + DIR2 + "/templates/test.omtt"));
+			sources.add(new URI("file:" + DIR + "/templates/sample.omtt"));
 //			sources.add(new URI("file:" + DIR + "/templates/html.omtt"));
 //			sources.add(new URI("file:" + DIR + "/templates/empage.omtt"));
 //			sources.add(new URI("file:" + DIR + "/templates/sample2.omtt"));

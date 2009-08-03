@@ -33,7 +33,7 @@ public class Program extends CommonNode implements IVisitable,
 		if (getModuleDeclaration() == null)
 			return Constants.OMTT_LOCAL_PACKAGE;
 		else
-			return getModuleDeclaration().getModuleName();
+			return getModuleDeclaration().getPackageName();
 	}
 
 	public String getResourceName() {

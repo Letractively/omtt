@@ -9,6 +9,7 @@ import org.eclipse.core.runtime.Path;
 
 import pl.omtt.compiler.reporting.AbstractProblemCollector;
 import pl.omtt.compiler.reporting.Problem;
+import pl.omtt.core.Debugging;
 
 public class ProblemMarkerCollector extends AbstractProblemCollector {
 	public ProblemMarkerCollector() {
@@ -20,8 +21,9 @@ public class ProblemMarkerCollector extends AbstractProblemCollector {
 	 */
 	@Override
 	protected void collect(Problem problem) {
-		System.err.println(problem);
 		createMarker(problem);
+		if (Debugging.DEBUG > 0)
+			System.err.println(problem);
 	}
 
 	private void createMarker(Problem problem) {
