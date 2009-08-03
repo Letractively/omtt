@@ -1,12 +1,14 @@
 package pl.omtt.eclipse.nature;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
@@ -29,45 +31,67 @@ public class OmttProjectSetup {
 		if (jproject != null) {
 			addPostfixResourceCopyExclusion(jproject);
 			installCallerJarToClasspath(jproject);
+			addTemplatesFolderToProject(jproject);
 		}
 	}
 
+	public static void addTemplatesFolderToProject(IJavaProject jproject) {
+		IFolder folder = jproject.getProject().getFolder("/templates");
+		if (folder.exists())
+			return;
+		try {
+			folder.create(false, true, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+			return;
+		}
+		IClasspathEntry cpentry = JavaCore.newSourceEntry(folder.getFullPath());
+		addClassPathEntry(jproject, cpentry);
+	}
+
 	public static void installCallerJarToClasspath(IJavaProject jproject) {
-		Bundle bundle = Platform.getBundle(Constants.OMTT_CORE_BUNDLE);
+		Bundle bundle = Platform
+				.getBundle(pl.omtt.core.eclipse.Activator.PLUGIN_ID);
 		if (bundle == null)
 			return;
 
-		URL installLocation = bundle.getEntry("/");
+		final URL local;
 		try {
-			URL local = FileLocator.toFileURL(installLocation);
-			String fullPath = new File(local.getPath() + "/lib/omtt-core.jar")
-					.getAbsolutePath();
+			local = FileLocator.toFileURL(bundle.getEntry("/"));
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return;
+		}
+		String fullPath = new File(local.getPath() + "/lib/omtt-core.jar")
+				.getAbsolutePath();
+		IClasspathEntry cpentry = JavaCore.newLibraryEntry(Path
+				.fromOSString(fullPath), null, null);
+		addClassPathEntry(jproject, cpentry);
+	}
+
+	private static void addClassPathEntry(IJavaProject jproject,
+			IClasspathEntry cpentry) {
+		try {
 			Set<IClasspathEntry> cp = new HashSet<IClasspathEntry>();
-			cp.add(JavaCore.newLibraryEntry(Path.fromOSString(fullPath), null,
-					null));
+			cp.add(cpentry);
 			cp.addAll(Arrays.asList(jproject.getRawClasspath()));
 			jproject.setRawClasspath(
 					cp.toArray(new IClasspathEntry[cp.size()]), null);
 		} catch (JavaModelException e) {
-			System.err.println("model exception");
 			e.printStackTrace();
 			return;
 		} catch (Exception e) {
-			System.err.println("other exception");
 			e.printStackTrace();
+			return;
 		}
-
-		// JavaCore.setClasspathVariable(OtCorePlugin.PLUGIN_ID,
-		// Path.fromOSString(fullPath), null);
-		System.err.println(JavaCore.getClasspathVariableNames());
 	}
 
 	/**
 	 * Add an exclusion to the JDT resource copy mechanism to prevent Eclipse's
-	 * Java compiler from copying the postfix files to the bin directory
+	 * Java compiler from copying the OMTT source files to the bin directory
 	 * 
-	 * @param project
-	 *            Project having the exclusion added
+	 * @param jproject
+	 *            Java project having the exclusion added
 	 */
 	@SuppressWarnings("unchecked")
 	public static void addPostfixResourceCopyExclusion(IJavaProject jproject) {
@@ -124,7 +148,7 @@ public class OmttProjectSetup {
 			description.setNatureIds(newNatures);
 			project.setDescription(description, null);
 
-			OmttProjectSetup.setup(project);
+			setup(project);
 		} catch (CoreException e) {
 		}
 	}
