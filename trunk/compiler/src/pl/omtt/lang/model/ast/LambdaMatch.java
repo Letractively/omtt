@@ -54,7 +54,6 @@ public class LambdaMatch extends CommonNode implements IExpression,
 			cur = TypeUnifier.intersect(cur, type);
 			if (type.isSequence())
 				cur.setSequence();
-			System.err.println(cur);
 		}
 		ftype.setReturnType(cur);
 		fType = ftype;

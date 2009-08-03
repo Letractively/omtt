@@ -13,6 +13,7 @@ import org.eclipse.jface.text.source.IAnnotationModelExtension;
 
 import pl.omtt.compiler.reporting.AbstractProblemCollector;
 import pl.omtt.compiler.reporting.Problem;
+import pl.omtt.core.Debugging;
 
 public class ProblemAnnotationCollector extends AbstractProblemCollector {
 	IAnnotationModel fModel;
@@ -77,7 +78,8 @@ public class ProblemAnnotationCollector extends AbstractProblemCollector {
 		a.setText(problem.getMessage());
 		fCollectedAnnotations.put(a, p);
 
-		System.err.println(problem);
+		if (Debugging.DEBUG > 0)
+			System.err.println(problem);
 	}
 
 	public final String OMTT_ANNOTATION_ERROR = "pl.omtt.eclipse.markers.error";

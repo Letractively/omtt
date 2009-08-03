@@ -547,68 +547,73 @@ public class CodeGenerator extends AbstractTreeWalker {
 		}
 	}
 
-	public void visit(LambdaExpression lambda) {
-		FunctionType funtype = (FunctionType) lambda.getExpressionType();
-		final String sigtemplate = signatureTemplate(funtype);
-		final String jtype = jtype(lambda.getExpressionType());
-		final String var = fBuffer.getTemporaryVariable();
+	private abstract class FunctionWriter {
+		void write(IExpression node) {
+			FunctionType funtype = (FunctionType) node.getExpressionType();
+			final String sigtemplate = signatureTemplate(funtype);
+			final String jtype = jtype(node.getExpressionType());
+			final String var = fBuffer.getTemporaryVariable();
 
-		fBuffer.putl("// %s", lambda.toString());
-		fBuffer.putl("final %s %s = new %s () {", jtype, var, jtype);
-		fBuffer.incIndentation();
-		fBuffer.putl(sigtemplate + " {", "public", "run");
-		fBuffer.incIndentation();
-		apply(lambda.getBodyNode());
-		if (!lambda.getBodyNode().getExpressionType().isSingleData())
-			fBuffer.putl("return %s;", cast(lambda.getBodyNode(), funtype
-					.getReturnType()));
-		fBuffer.subIndentation();
-		fBuffer.putl("}");
-		fBuffer.subIndentation();
-		fBuffer.putl("};");
+			fBuffer.putl("// %s", node.toString());
+			fBuffer.putl("final %s %s = new %s () {", jtype, var, jtype);
+			fBuffer.incIndentation();
+			fBuffer.putl(sigtemplate + " {", "public", "run");
+			fBuffer.pushBuffer("$buffer");
+			fBuffer.incIndentation();
+			content(funtype.getReturnType());
+			fBuffer.subIndentation();
+			fBuffer.popBuffer();
+			fBuffer.putl("}");
+			fBuffer.subIndentation();
+			fBuffer.putl("};");
 
-		fBuffer.putVariable(lambda, var);
+			fBuffer.putVariable(node, var);
+		}
+
+		abstract void content(IType rettype);
+	};
+
+	public void visit(final LambdaExpression lambda) {
+		new FunctionWriter() {
+			@Override
+			void content(IType rettype) {
+				apply(lambda.getBodyNode());
+				if (!lambda.getBodyNode().getExpressionType().isSingleData())
+					fBuffer.putl("return %s;", cast(lambda.getBodyNode(),
+							rettype));
+			}
+		}.write(lambda);
 	}
 
-	public void visit(LambdaMatch match) {
-		FunctionType funtype = (FunctionType) match.getExpressionType();
-		final String sigtemplate = signatureTemplate(funtype);
-		final String jtype = jtype(match.getExpressionType());
-		final String var = fBuffer.getTemporaryVariable();
-		final boolean data = funtype.getReturnType().isSingleData();
+	public void visit(final LambdaMatch match) {
+		new FunctionWriter() {
+			@Override
+			void content(IType rettype) {
+				final boolean data = rettype.isSingleData();
 
-		fBuffer.putl("// %s", match.toString());
-		fBuffer.putl("final %s %s = new %s () {", jtype, var, jtype);
-		fBuffer.incIndentation();
-		fBuffer.putl(sigtemplate + " {", "public", "run");
-		fBuffer.incIndentation();
-
-		for (int i = 0; i < match.getItemLength(); i++) {
-			final LambdaMatchItem item = match.getItemNode(i);
-			final Symbol cs = item.getContextSymbol();
-			final String cjtype = jtype(cs.getType());
-			fBuffer.putl("%sif (%s instanceof %s) {", i > 0 ? "else " : "",
-					Symbol.IT, cjtype);
-			fBuffer.incIndentation();
-			fSymbolLocalNames.put(cs, "((" + cjtype + ")" + Symbol.IT + ")");
-			if (data) {
-				apply(item.getBodyNode());
-			} else {
-				fBuffer.putl("return %s;", cast(exprapply(item.getBodyNode()),
-						item.getExpressionType(), funtype.getReturnType()));
+				for (int i = 0; i < match.getItemLength(); i++) {
+					final LambdaMatchItem item = match.getItemNode(i);
+					final Symbol cs = item.getContextSymbol();
+					final String cjtype = jtype(cs.getType());
+					fBuffer.putl("%sif (%s instanceof %s) {", i > 0 ? "else "
+							: "", Symbol.IT, cjtype);
+					fBuffer.incIndentation();
+					fSymbolLocalNames.put(cs, "((" + cjtype + ")" + Symbol.IT
+							+ ")");
+					if (data) {
+						apply(item.getBodyNode());
+					} else {
+						fBuffer.putl("return %s;", cast(exprapply(item
+								.getBodyNode()), item.getExpressionType(),
+								rettype));
+					}
+					fBuffer.subIndentation();
+					fBuffer.putl("}");
+				}
+				if (!data)
+					fBuffer.putl("return null;");
 			}
-			fBuffer.subIndentation();
-			fBuffer.putl("}");
-		}
-		if (!data)
-			fBuffer.putl("return null;");
-
-		fBuffer.subIndentation();
-		fBuffer.putl("}");
-		fBuffer.subIndentation();
-		fBuffer.putl("};");
-
-		fBuffer.putVariable(match, var);
+		}.write(match);
 	}
 
 	public void visit(Data data) {
