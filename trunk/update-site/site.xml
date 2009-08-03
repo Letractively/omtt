@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/pl.omtt.eclipse.feature_1.0.0.alpha1.jar" id="pl.omtt.eclipse.feature" version="1.0.0.alpha1"/>
+   <description name="Object Model Template Transformation Update Site" url="http://www.omtt.pl">
+      [To be done]
+   </description>
+   <feature url="features/pl.omtt.eclipse.feature_1.0.0.alpha1.jar" id="pl.omtt.eclipse.feature" version="1.0.0.alpha1">
+      <category name="pl.omtt.eclipse.category"/>
+   </feature>
+   <category-def name="pl.omtt.eclipse.category" label="OMTT alpha"/>
 </site>
