@@ -63,7 +63,7 @@ public abstract class AbstractExpressionScanner extends RuleBasedScanner {
 		{ "def", "and", "in", "end",
 		  "if", "else",
 		  "map", "apply", "match", "where",
-		  "is", "as",
+		  "is", "as", "order", "by",
 		  "module", "use", "import",
 		  "or", "not"
 		};

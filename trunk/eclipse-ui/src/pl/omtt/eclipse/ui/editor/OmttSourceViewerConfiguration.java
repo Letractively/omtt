@@ -14,24 +14,23 @@ import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 
-import pl.omtt.eclipse.ui.OmttUI;
 import pl.omtt.eclipse.ui.autoedit.*;
 import pl.omtt.eclipse.ui.decoration.*;
 import pl.omtt.eclipse.ui.partitioner.OmttPartitioner;
 import pl.omtt.eclipse.ui.scanners.*;
 
-public class OmttSourceViewerConfiguration extends SourceViewerConfiguration {
+public class OmttSourceViewerConfiguration extends TextSourceViewerConfiguration {
 	private TokenProvider fTokenProvider;
 	private OmttEditor fEditor;
 
 	public OmttSourceViewerConfiguration(OmttEditor editor,
-			OmttColorProvider colorProvider) {
+			OmttColorProvider colorProvider, IPreferenceStore preferenceStore) {
+		super(preferenceStore);
 		fEditor = editor;
-
-		IPreferenceStore preferenceStore = OmttUI.getDefault().getPreferenceStore();
 		fTokenProvider = new TokenProvider(preferenceStore, colorProvider);
+		
 	}
 
 	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
