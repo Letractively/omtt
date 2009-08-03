@@ -5,7 +5,6 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.editors.text.EditorsUI;
-import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 
 import pl.omtt.eclipse.ui.scanners.ITokens;
 
@@ -20,7 +19,6 @@ public class OmttUIPreferenceInitializer extends AbstractPreferenceInitializer {
 		initializeTokenPreferences(store);
 		initializeBracketPreferences(store);
 
-		store.setValue(AbstractDecoratedTextEditorPreferenceConstants.EDITOR_TAB_WIDTH, 2);
 		store.setDefault(IOmttPreferenceConstants.FOLDING, true);
 	}
 

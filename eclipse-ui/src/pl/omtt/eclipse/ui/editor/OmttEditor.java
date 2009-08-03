@@ -29,19 +29,23 @@ import pl.omtt.eclipse.ui.document.OmttDocumentProvider;
 import pl.omtt.eclipse.ui.outline.OmttContentOutlinePage;
 
 public class OmttEditor extends TextEditor {
-	OmttColorProvider fColorProvider = new OmttColorProvider();
+	OmttColorProvider fColorProvider;
 	OmttContentOutlinePage fContentOutlinePage;
 
 	// Projections
 	OmttFoldingManager fFoldingManager;
 
-	public OmttEditor() {
+	@Override
+	protected void initializeEditor () {
+		super.initializeEditor();
+
+		fColorProvider = new OmttColorProvider();
 		setPreferenceStore(createCombinedPreferenceStore());
 		setDocumentProvider(new OmttDocumentProvider());
 		setSourceViewerConfiguration(new OmttSourceViewerConfiguration(this,
-				fColorProvider));
+				fColorProvider, getPreferenceStore()));
 	}
-
+	
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
 		super.doSetInput(input);
@@ -54,15 +58,6 @@ public class OmttEditor extends TextEditor {
 			fFoldingManager.setDocumentModel(model);
 		if (fContentOutlinePage != null)
 			fContentOutlinePage.setDocumentModel(model);
-	}
-
-	public OmttDocumentModel getOmttDocumentModel() {
-		IDocumentProvider docProvider = getDocumentProvider();
-		if (docProvider instanceof OmttDocumentProvider) {
-			return ((OmttDocumentProvider) docProvider)
-					.getOmttDocumentModel(getEditorInput());
-		}
-		return null;
 	}
 
 	@Override
@@ -136,12 +131,12 @@ public class OmttEditor extends TextEditor {
 		return super.getAdapter(required);
 	}
 
-	private IPreferenceStore createCombinedPreferenceStore() {
+	private static IPreferenceStore createCombinedPreferenceStore() {
 		List<IPreferenceStore> stores = new ArrayList<IPreferenceStore>();
 
-		stores.add(OmttUI.getDefault().getPreferenceStore());
 		stores.add(EditorsUI.getPreferenceStore());
 		stores.add(PlatformUI.getPreferenceStore());
+		stores.add(OmttUI.getDefault().getPreferenceStore());
 
 		return new ChainedPreferenceStore(stores
 				.toArray(new IPreferenceStore[stores.size()]));
@@ -151,6 +146,15 @@ public class OmttEditor extends TextEditor {
 	public void dispose() {
 		fColorProvider.dispose();
 		super.dispose();
+	}
+
+	public OmttDocumentModel getOmttDocumentModel() {
+		IDocumentProvider docProvider = getDocumentProvider();
+		if (docProvider instanceof OmttDocumentProvider) {
+			return ((OmttDocumentProvider) docProvider)
+					.getOmttDocumentModel(getEditorInput());
+		}
+		return null;
 	}
 
 	public static final String EDITOR_ID = "pl.omtt.eclipse.ui.editor";
