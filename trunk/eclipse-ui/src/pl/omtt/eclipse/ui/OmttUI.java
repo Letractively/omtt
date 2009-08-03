@@ -47,7 +47,4 @@ public class OmttUI extends AbstractUIPlugin {
 	public static OmttUI getDefault() {
 		return plugin;
 	}
-
-
-
 }

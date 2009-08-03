@@ -19,6 +19,10 @@ public class ModuleCreationWizard extends Wizard implements INewWizard {
 	IStructuredSelection fSelection;
 	ModuleCreationPage fMainPage;
 
+	public ModuleCreationWizard() {
+		super();
+	}
+
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		fWorkbench = workbench;
