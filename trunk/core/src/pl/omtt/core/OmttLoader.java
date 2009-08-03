@@ -1,6 +1,5 @@
 package pl.omtt.core;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class OmttLoader {
@@ -19,7 +18,7 @@ public class OmttLoader {
 	}
 
 	public Template loadTemplate(String id) throws TemplateNotFoundException,
-			ModuleNotFoundException, SecurityException, NoSuchFieldException {
+			ModuleNotFoundException, SecurityException {
 		int dotpos = id.lastIndexOf('.');
 		if (dotpos < 0)
 			throw new TemplateNotFoundException(
@@ -33,10 +32,10 @@ public class OmttLoader {
 				return new Template(method, module);
 			}
 
-		Field field = module.getField(name);
-		if (field != null)
-			return new Template(field, module);
-		
+		try {
+			return new Template(module.getField(name), module);
+		} catch (NoSuchFieldException e) {
+		}
 		throw new TemplateNotFoundException("template " + id + " not found");
 	}
 

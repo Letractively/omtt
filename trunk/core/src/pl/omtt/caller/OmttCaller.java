@@ -25,8 +25,6 @@ public class OmttCaller {
 			throw new TemplateCallError(e);
 		} catch (SecurityException e) {
 			throw new TemplateCallError(e);
-		} catch (NoSuchFieldException e) {
-			throw new TemplateCallError(e);
 		}
 	}
 
@@ -38,7 +36,7 @@ public class OmttCaller {
 			throws ModuleNotFoundException, TemplateNotFoundException,
 			InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException,
-			SecurityException, NoSuchFieldException {
+			SecurityException {
 
 		Template tpl = new OmttLoader(ClassLoader.getSystemClassLoader())
 				.loadTemplate(name);
