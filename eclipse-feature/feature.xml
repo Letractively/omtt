@@ -1,40 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="pl.omtt.eclipse.feature"
-      label="OMTT"
+      label="OMTT Eclipse IDE"
       version="1.0.0.alpha1"
       provider-name="Andrzej Chodor">
 
    <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+      Some description.
    </description>
 
    <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+      (c) Andrzej Chodor 2009
    </copyright>
 
    <license url="http://www.example.com/license">
-      [Enter License Description here.]
+      Apache Licence 2.0.
    </license>
+
+   <url>
+      <discovery label="OMTT Project Site" url="http://www.omtt.pl"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.ui.views"/>
+   </requires>
+
+   <plugin
+         id="pl.omtt.compiler"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="pl.omtt.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="pl.omtt.eclipse.core"
          download-size="0"
          install-size="0"
-         version="1.0.0.alpha1"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="pl.omtt.eclipse.ui"
          download-size="0"
          install-size="0"
-         version="1.0.0.alpha1"/>
-
-   <plugin
-         id="pl.omtt.lang"
-         download-size="0"
-         install-size="0"
-         version="1.0.0.alpha1"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

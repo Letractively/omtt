@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OMTT Core
+Bundle-SymbolicName: pl.omtt.core
+Bundle-Version: 1.0.0.alpha1
+Bundle-Activator: pl.omtt.core.eclipse.Activator
+Bundle-Vendor: Andrzej Chodor
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: pl.omtt.caller,
+ pl.omtt.core,
+ pl.omtt.core.annotations,
+ pl.omtt.core.eclipse,
+ pl.omtt.core.functions,
+ pl.omtt.core.stdlib
