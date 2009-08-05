@@ -77,8 +77,12 @@ fragment definition_signature
     -> VAR_ID<Ident> definition_context? ^(ARGUMENTS definition_argument*) ^(RETURNS $ret_type?)
   ;
 fragment definition_context
-	: LEFT_SQUARE_PAREN single_type RIGHT_SQUARE_PAREN
-		-> ^(ARGUMENT single_type)
+	: LEFT_SQUARE_PAREN single_type where_clause? RIGHT_SQUARE_PAREN
+		-> ^(ARGUMENT single_type where_clause?)
+	;
+
+fragment where_clause
+	: WHERE! safe_expression
 	;
 
 fragment definition_argument
@@ -186,8 +190,8 @@ fragment lambda_match_expression
 		-> ^(LAMBDA_MATCH<LambdaMatch> single_lambda_match+)
 	;
 fragment single_lambda_match
-	: single_type OP_FOLLOW safe_expression
-		-> ^(ITEM<LambdaMatchItem> single_type safe_expression)
+	: single_type where_clause? OP_FOLLOW safe_expression
+		-> ^(ITEM<LambdaMatchItem> single_type safe_expression where_clause?)
 	;
 
 type
@@ -198,6 +202,7 @@ single_type
   : type_content
   	-> ^(TYPE<TypeReference> type_content)
   ;
+
 fragment type_content
   : CLASS_ID
   | OP_GENERAL

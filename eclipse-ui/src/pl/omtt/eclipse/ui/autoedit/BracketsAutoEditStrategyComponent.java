@@ -22,18 +22,23 @@ public class BracketsAutoEditStrategyComponent {
 	}
 
 	public void customize(IDocument document, DocumentCommand command) {
-		// check following char - return if is name char
-		try {
-			int fchar = document.getChar(command.offset);
-			if (IdDetector.isIdChar(fchar))
-				return;
-		} catch (BadLocationException e) {
-		}
+		Character precedingChar = getChar(document, command.offset - 1);
+		Character followingChar = getChar(document, command.offset);
 
 		// Bracket auto-insert
 		if (command.text.length() == 1) {
 			char c = command.text.charAt(0);
-			if (fBrackets.containsKey(c)) {
+
+			// check if preceding char is an opening char
+			if (precedingChar != null && fBrackets.containsKey(precedingChar)
+					&& fBrackets.get(precedingChar) == c)
+				return;
+
+			if (fBrackets.values().contains(c)
+					&& IdDetector.isIdChar(precedingChar))
+				return;
+
+			if (fBrackets.containsKey(c) && !IdDetector.isIdChar(followingChar)) {
 				command.text += fBrackets.get(c);
 				setCursor(command);
 			}
@@ -41,14 +46,10 @@ public class BracketsAutoEditStrategyComponent {
 
 		// Bracket auto-removal
 		else if (command.text.length() == 0 && command.length == 1) {
-			try {
-				char c = document.getChar(command.offset);
-				if (fBrackets.containsKey(c)
-						&& fBrackets.get(c) == document.getChar(command.offset + 1))
-					command.length = 2;
-			} catch (BadLocationException e) {
-				return;
-			}
+			if (fBrackets.containsKey(followingChar)
+					&& fBrackets.get(followingChar) == getChar(document,
+							command.offset + 1))
+				command.length = 2;
 		}
 	}
 
@@ -56,4 +57,15 @@ public class BracketsAutoEditStrategyComponent {
 		command.caretOffset = command.offset + 1;
 		command.shiftsCaret = false;
 	}
+
+	private Character getChar(IDocument document, int offset) {
+		try {
+			return document.getChar(offset);
+		} catch (BadLocationException e) {
+			return null;
+		}
+	}
+
+	final static int OPEN_BRACKET = 0x01;
+	final static int CLOSE_BRACKER = 0x02;
 }

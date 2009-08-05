@@ -66,13 +66,13 @@ public class Transformation extends CommonNode implements IFoldExpression,
 	}
 
 	@Override
-	public Tree getTreePrecedingParticipatingST() {
-		return getSourceNode();
+	public Tree[] getTreePrecedingParticipatingST() {
+		return new Tree[]{getSourceNode()};
 	}
 
 	@Override
-	public Tree getTreeFollowingParticipatingST() {
-		return getTransformationNode();
+	public Tree[] getTreeFollowingParticipatingST() {
+		return new Tree[]{getTransformationNode()};
 	}
 
 	@Override

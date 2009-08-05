@@ -60,6 +60,11 @@ public class AbstractTreeWalker extends AbstractTreeVisitor implements IVisitor 
 			apply((Tree) node);
 	}
 
+	protected final void apply(Object[] nodes) {
+		for (Object node : nodes)
+			apply(node);
+	}
+
 	protected final void apply(Class<?> type) {
 		apply(type, true);
 	}

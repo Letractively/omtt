@@ -82,7 +82,7 @@ public class ProblemAnnotationCollector extends AbstractProblemCollector {
 			System.err.println(problem);
 	}
 
-	public final String OMTT_ANNOTATION_ERROR = "pl.omtt.eclipse.markers.error";
-	public final String OMTT_ANNOTATION_WARNING = "pl.omtt.eclipse.markers.warning";
-	public final String OMTT_ANNOTATION_INFO = "pl.omtt.eclipse.markers.info";
+	public final static String OMTT_ANNOTATION_ERROR = "pl.omtt.eclipse.markers.error";
+	public final static String OMTT_ANNOTATION_WARNING = "pl.omtt.eclipse.markers.warning";
+	public final static String OMTT_ANNOTATION_INFO = "pl.omtt.eclipse.markers.info";
 }

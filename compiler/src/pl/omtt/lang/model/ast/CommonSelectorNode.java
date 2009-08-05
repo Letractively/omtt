@@ -75,15 +75,15 @@ public abstract class CommonSelectorNode extends CommonNode implements
 	}
 
 	@Override
-	public Tree getTreePrecedingParticipatingST() {
-		return getBaseNode();
+	public Tree[] getTreePrecedingParticipatingST() {
+		return new Tree[] {getBaseNode()};
 	}
 
 	public abstract IExpression getBaseNode();
 
 	@Override
-	public Tree getTreeFollowingParticipatingST() {
-		return getSequenceSelectorNode();
+	public Tree[] getTreeFollowingParticipatingST() {
+		return new Tree[] {getSequenceSelectorNode()};
 	}
 
 	@Override

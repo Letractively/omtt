@@ -21,12 +21,13 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import pl.omtt.eclipse.ui.IOmttPreferenceConstants;
 import pl.omtt.eclipse.ui.OmttUI;
-import pl.omtt.eclipse.ui.decoration.OmttFoldingManager;
 import pl.omtt.eclipse.ui.decoration.OmttRegionPairMatcher;
 import pl.omtt.eclipse.ui.decoration.OmttSourceViewerDecorationSupport;
 import pl.omtt.eclipse.ui.document.OmttDocumentModel;
 import pl.omtt.eclipse.ui.document.OmttDocumentProvider;
+import pl.omtt.eclipse.ui.document.ProblemAnnotationCollector;
 import pl.omtt.eclipse.ui.outline.OmttContentOutlinePage;
+import pl.omtt.eclipse.ui.text.folding.OmttFoldingManager;
 
 public class OmttEditor extends TextEditor {
 	OmttColorProvider fColorProvider;
@@ -34,9 +35,10 @@ public class OmttEditor extends TextEditor {
 
 	// Projections
 	OmttFoldingManager fFoldingManager;
+	private ProjectionSupport fProjectionSupport;
 
 	@Override
-	protected void initializeEditor () {
+	protected void initializeEditor() {
 		super.initializeEditor();
 
 		fColorProvider = new OmttColorProvider();
@@ -45,7 +47,7 @@ public class OmttEditor extends TextEditor {
 		setSourceViewerConfiguration(new OmttSourceViewerConfiguration(this,
 				fColorProvider, getPreferenceStore()));
 	}
-	
+
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
 		super.doSetInput(input);
@@ -94,9 +96,13 @@ public class OmttEditor extends TextEditor {
 		super.createPartControl(parent);
 
 		ProjectionViewer viewer = (ProjectionViewer) getSourceViewer();
-		ProjectionSupport support = new ProjectionSupport(viewer,
+		fProjectionSupport = new ProjectionSupport(viewer,
 				getAnnotationAccess(), getSharedColors());
-		support.install();
+		fProjectionSupport
+				.addSummarizableAnnotationType(ProblemAnnotationCollector.OMTT_ANNOTATION_ERROR);
+		fProjectionSupport
+				.addSummarizableAnnotationType(ProblemAnnotationCollector.OMTT_ANNOTATION_WARNING);
+		fProjectionSupport.install();
 
 		fFoldingManager = new OmttFoldingManager(viewer);
 
@@ -127,6 +133,12 @@ public class OmttEditor extends TextEditor {
 					fContentOutlinePage.setDocumentModel(model);
 			}
 			return fContentOutlinePage;
+		}
+		if (fProjectionSupport != null) {
+			Object adapter = fProjectionSupport.getAdapter(getSourceViewer(),
+					required);
+			if (adapter != null)
+				return adapter;
 		}
 		return super.getAdapter(required);
 	}

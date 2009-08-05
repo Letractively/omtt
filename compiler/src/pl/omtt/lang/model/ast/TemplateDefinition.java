@@ -54,10 +54,10 @@ public class TemplateDefinition extends CommonNode implements
 	}
 
 	public int getArgumentsCount() {
-		if (getArgumentsNode() != null)
-			return getArgumentsNode().getChildCount();
-		else
+		if (getArgumentsNode() == null)
 			return 0;
+		else 
+			return getArgumentsNode().getChildCount();
 	}
 
 	public Ident getTemplateNameIdent() {
@@ -128,9 +128,8 @@ public class TemplateDefinition extends CommonNode implements
 			}
 
 			if (!(args == null))
-				for (int i = 0; i < args.getChildCount(); i++) {
-					final TemplateArgument arg = (TemplateArgument) args
-							.getChild(i);
+				for (int i = 0; i < getArgumentsCount(); i++) {
+					final TemplateArgument arg = getArgument(i);
 					final String argname = arg.getArgumentName();
 					final boolean argoptional = arg.isArgumentOptional();
 					final IType argtype = arg.getArgumentType();
@@ -190,14 +189,22 @@ public class TemplateDefinition extends CommonNode implements
 		return getFirstChildWithType(OmttParser.ARGUMENT);
 	}
 
-	@Override
-	public Tree getTreePrecedingParticipatingST() {
-		return getArgumentsNode();
+	public IExpression getContextWhereNode () {
+		Tree context = getContextNode();
+		if (context != null)
+			return (IExpression)context.getChild(1);
+		else
+			return null;
 	}
 
 	@Override
-	public Tree getTreeFollowingParticipatingST() {
-		return getChild(getChildCount() - 1);
+	public Tree[] getTreePrecedingParticipatingST() {
+		return new Tree[] {getArgumentsNode()};
+	}
+
+	@Override
+	public Tree[] getTreeFollowingParticipatingST() {
+		return new Tree[] {getContextNode(), getChild(getChildCount() - 1)};
 	}
 
 	public Tree getArgumentsNode() {

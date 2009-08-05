@@ -31,6 +31,13 @@ public class LambdaMatchItem extends CommonNode implements IExpression,
 		return fExpectingType;
 	}
 	
+	public IExpression getTypeWhereNode () {
+		if (getChildCount() > 1)
+			return (IExpression)getChild(2);
+		else
+			return null;
+	}
+	
 	public Symbol getContextSymbol () {
 		return fContextSymbol;
 	}
