@@ -281,7 +281,10 @@ public class TemplateDefinition extends CommonNode implements
 				if (a.optional)
 					buf.append("~");
 				if (isContext() && i == 0) {
-					buf.append("[").append(a.type).append("]");
+					buf.append("[").append(a.type);
+					if (getContextWhereNode() != null)
+						buf.append(" ...");
+					buf.append("]");
 				} else {
 					buf.append(a.name);
 					if (a.type.isGeneral() && !a.type.isGeneric()) {
