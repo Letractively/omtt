@@ -6,11 +6,17 @@ import pl.omtt.core.ModuleNotFoundException;
 import pl.omtt.core.OmttLoader;
 import pl.omtt.core.TemplateNotFoundException;
 import pl.omtt.core.Template;
+import pl.omtt.core.stdlib.NoSuitableTemplateException;
 
 public class OmttCaller {
 	public static Object call(String name, Object... args) {
 		try {
 			return run(name, args);
+		} catch (InvocationTargetException e) {
+			Throwable cause = e.getCause();
+			if (cause instanceof NoSuitableTemplateException)
+				return null;
+			throw new TemplateCallError(cause);
 		} catch (ModuleNotFoundException e) {
 			throw new TemplateCallError(e);
 		} catch (TemplateNotFoundException e) {
@@ -20,8 +26,6 @@ public class OmttCaller {
 		} catch (InstantiationException e) {
 			throw new TemplateCallError(e);
 		} catch (IllegalAccessException e) {
-			throw new TemplateCallError(e);
-		} catch (InvocationTargetException e) {
 			throw new TemplateCallError(e);
 		} catch (SecurityException e) {
 			throw new TemplateCallError(e);

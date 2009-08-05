@@ -1,4 +1,4 @@
-package pl.omtt.eclipse.ui.decoration;
+package pl.omtt.eclipse.ui.text.folding;
 
 import java.util.HashMap;
 import java.util.Map;

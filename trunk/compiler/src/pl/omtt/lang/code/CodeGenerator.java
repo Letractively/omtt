@@ -35,6 +35,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 	// helper maps
 	final Map<Symbol, String> fFunctionIterfaceNames = new HashMap<Symbol, String>();
 	final Map<Symbol, String> fSymbolLocalNames = new HashMap<Symbol, String>();
+	final Map<Symbol, TemplateDefinition> fMultimethodTemplates = new HashMap<Symbol, TemplateDefinition>();
 	final Set<String> fVariableIsMethod = new HashSet<String>();
 
 	public CodeGenerator(URI omttSourceURI) {
@@ -353,10 +354,22 @@ public class CodeGenerator extends AbstractTreeWalker {
 			final FunctionType stype = (FunctionType) s.getType();
 			final String jtype = jtype(stype.getArgument(0).type);
 			final boolean outer = s.getParentST() != fBaseSymbolTable;
-			if (outer)
+			boolean whereClause = false;
+			if (outer) {
 				fBuffer.putl("try {");
-			else
+			} else {
+				TemplateDefinition def = fMultimethodTemplates.get(s);
+				IExpression where = def.getContextWhereNode();
 				fBuffer.putl("if (it instanceof %s) {", jtype);
+				fBuffer.incIndentation();
+				if (where != null) {
+					whereClause = true;
+					fSymbolLocalNames.put(def.getItSymbol(), "((" + jtype
+							+ ")it)");
+					exprapply(where);
+					fBuffer.putl("if (%s) {", condition(where));
+				}
+			}
 			fBuffer.incIndentation();
 			if (rettype.isSingleData()) {
 				fBuffer.putl("%s($buffer, %s%s);", getGlobalReference(s, null),
@@ -367,6 +380,10 @@ public class CodeGenerator extends AbstractTreeWalker {
 				fBuffer.putl("return %s(%s%s);", getGlobalReference(s, null),
 						"Object".equals(jtype) ? "" : "(" + jtype + ")", argbuf
 								.toString());
+			}
+			if (whereClause) {
+				fBuffer.subIndentation();
+				fBuffer.putl("}");
 			}
 			fBuffer.subIndentation();
 			if (outer)
@@ -411,9 +428,11 @@ public class CodeGenerator extends AbstractTreeWalker {
 		final boolean inner = !(def.getParent() instanceof Program);
 		final boolean flushBuffer = rettype.isSingleData();
 
-		if (def.isContext())
+		if (def.isContext()) {
 			fSymbolLocalNames.put(def.getItSymbol(), def.getItSymbol()
 					.getName().replace('@', '$'));
+			fMultimethodTemplates.put(def.getSymbol(), def);
+		}
 
 		final String stemplate = signatureTemplate(type);
 
@@ -595,17 +614,29 @@ public class CodeGenerator extends AbstractTreeWalker {
 					final LambdaMatchItem item = match.getItemNode(i);
 					final Symbol cs = item.getContextSymbol();
 					final String cjtype = jtype(cs.getType());
-					fBuffer.putl("%sif (%s instanceof %s) {", i > 0 ? "else "
-							: "", Symbol.IT, cjtype);
-					fBuffer.incIndentation();
+					fBuffer.putl("if (%s instanceof %s) {", Symbol.IT, cjtype);
 					fSymbolLocalNames.put(cs, "((" + cjtype + ")" + Symbol.IT
 							+ ")");
+					boolean whereClause = false;
+					if (item.getTypeWhereNode() != null) {
+						whereClause = true;
+						fBuffer.incIndentation();
+						exprapply(item.getTypeWhereNode());
+						fBuffer.putl("if (%s) {", condition(item
+								.getTypeWhereNode()));
+					}
+					fBuffer.incIndentation();
 					if (data) {
 						apply(item.getBodyNode());
+						fBuffer.putl("return;");
 					} else {
 						fBuffer.putl("return %s;", cast(exprapply(item
 								.getBodyNode()), item.getExpressionType(),
 								rettype));
+					}
+					if (whereClause) {
+						fBuffer.subIndentation();
+						fBuffer.putl("}");
 					}
 					fBuffer.subIndentation();
 					fBuffer.putl("}");
@@ -1172,9 +1203,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 		case BooleanExpression.TYPE_COMPARE:
 			final IExpression leftnode = bexpr.getLeftNode();
 			final IExpression rightnode = bexpr.getRightNode();
-			apply();
-			final String leftvar = fBuffer.getVariable(leftnode);
-			final String rightvar = fBuffer.getVariable(bexpr.getRightNode());
+			final String leftvar = exprapply(leftnode);
+			final String rightvar = exprapply(bexpr.getRightNode());
 
 			putNullCheck(buf, leftvar, rightvar, leftnode.getExpressionType(),
 					rightnode.getExpressionType());
