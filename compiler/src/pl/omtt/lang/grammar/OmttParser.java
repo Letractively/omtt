@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-08-04 10:21:05
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-08-06 17:21:00
 
 package pl.omtt.lang.grammar;
 
@@ -17,7 +17,7 @@ import org.antlr.runtime.tree.*;
 @SuppressWarnings("all")
 public class OmttParser extends AbstractOmttParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "TYPE", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "LAMBDA_MATCH", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "TUPLE", "RECORD", "FUNCTION", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "AND", "IN", "IF", "THEN", "ELSE", "AS", "IS", "MAP", "APPLY", "MATCH", "WHERE", "ORDER", "BY", "LAMBDA", "NULL", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FOLLOW", "OP_REVERSE_FOLLOW", "OP_DOUBLE_FOLLOW", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMMA", "SLASH", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_NOT", "OP_CONTEXT", "OP_VIEW", "OP_CONCAT", "OP_GENERAL", "OP_DATA", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "TYPE", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "LAMBDA_MATCH", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "TUPLE", "RECORD", "FUNCTION", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "AND", "IN", "IF", "THEN", "ELSE", "AS", "IS", "MAP", "APPLY", "MATCH", "WHERE", "ORDER", "BY", "FUN", "NULL", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FOLLOW", "OP_REVERSE_FOLLOW", "OP_DOUBLE_FOLLOW", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMMA", "SLASH", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_NOT", "OP_CONTEXT", "OP_VIEW", "OP_CONCAT", "OP_GENERAL", "OP_DATA", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME"
     };
     public static final int CAST=24;
     public static final int FUNCTION=28;
@@ -64,6 +64,7 @@ public class OmttParser extends AbstractOmttParser {
     public static final int CALL=23;
     public static final int OP_DATA_IS_EXPRESSION=39;
     public static final int USE=6;
+    public static final int FUN=65;
     public static final int FALSE=68;
     public static final int STRING_PARENS=47;
     public static final int COMMENT_SINGLE_LINE=42;
@@ -103,7 +104,6 @@ public class OmttParser extends AbstractOmttParser {
     public static final int OP_NOT=98;
     public static final int OP_DOUBLE_FOLLOW=73;
     public static final int DIGIT=109;
-    public static final int LAMBDA=65;
     public static final int HEADER=5;
     public static final int DOT=76;
     public static final int NOT_NAME=112;
@@ -217,7 +217,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: header, definitions
+            // elements: definitions, header
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1350,7 +1350,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definition_signature, content, DEF
+            // elements: definition_signature, DEF, content
             // token labels: 
             // rule labels: content, retval
             // token list labels: 
@@ -1518,7 +1518,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definition_argument, definition_context, ret_type, VAR_ID
+            // elements: definition_argument, VAR_ID, ret_type, definition_context
             // token labels: 
             // rule labels: retval, ret_type
             // token list labels: 
@@ -2036,7 +2036,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: CONTENT, data_body_atom
+                    // elements: data_body_atom, CONTENT
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2472,7 +2472,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "expression"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:126:1: expression : ( def_in_expression | if_expression | map_expression | match_expression | lambda_expression | context_expression );
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:126:1: expression : ( def_in_expression | if_expression | map_expression | match_expression | function_expression | context_expression );
     public final OmttParser.expression_return expression() throws RecognitionException {
         OmttParser.expression_return retval = new OmttParser.expression_return();
         retval.start = input.LT(1);
@@ -2487,14 +2487,14 @@ public class OmttParser extends AbstractOmttParser {
 
         OmttParser.match_expression_return match_expression66 = null;
 
-        OmttParser.lambda_expression_return lambda_expression67 = null;
+        OmttParser.function_expression_return function_expression67 = null;
 
         OmttParser.context_expression_return context_expression68 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:127:3: ( def_in_expression | if_expression | map_expression | match_expression | lambda_expression | context_expression )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:127:3: ( def_in_expression | if_expression | map_expression | match_expression | function_expression | context_expression )
             int alt22=6;
             alt22 = dfa22.predict(input);
             switch (alt22) {
@@ -2555,16 +2555,16 @@ public class OmttParser extends AbstractOmttParser {
                     }
                     break;
                 case 5 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:131:5: lambda_expression
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:131:5: function_expression
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_lambda_expression_in_expression779);
-                    lambda_expression67=lambda_expression();
+                    pushFollow(FOLLOW_function_expression_in_expression779);
+                    function_expression67=function_expression();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, lambda_expression67.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, function_expression67.getTree());
 
                     }
                     break;
@@ -2868,7 +2868,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definition, content
+            // elements: content, definition
             // token labels: 
             // rule labels: content, retval
             // token list labels: 
@@ -3180,7 +3180,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: expression, definition_signature
+                    // elements: definition_signature, expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3227,7 +3227,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: expression, VAR_ID
+                    // elements: VAR_ID, expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3399,7 +3399,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: content, definition
+            // elements: definition, content
             // token labels: 
             // rule labels: content, retval
             // token list labels: 
@@ -3678,20 +3678,20 @@ public class OmttParser extends AbstractOmttParser {
     }
     // $ANTLR end "definition_inside_tag"
 
-    public static class lambda_expression_return extends ParserRuleReturnScope {
+    public static class function_expression_return extends ParserRuleReturnScope {
         Object tree;
         public Object getTree() { return tree; }
     };
 
-    // $ANTLR start "lambda_expression"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:181:1: lambda_expression : ( LAMBDA ( definition_argument )* COLON expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | ( definition_argument )* OP_FOLLOW expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | lambda_match_expression );
-    public final OmttParser.lambda_expression_return lambda_expression() throws RecognitionException {
-        OmttParser.lambda_expression_return retval = new OmttParser.lambda_expression_return();
+    // $ANTLR start "function_expression"
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:181:1: function_expression : ( FUN ( definition_argument )* COLON expression -> ^( FUN ^( ARGUMENTS ( definition_argument )* ) expression ) | ( definition_argument )* OP_FOLLOW expression -> ^( FUN ^( ARGUMENTS ( definition_argument )* ) expression ) | lambda_match_expression );
+    public final OmttParser.function_expression_return function_expression() throws RecognitionException {
+        OmttParser.function_expression_return retval = new OmttParser.function_expression_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token LAMBDA100=null;
+        Token FUN100=null;
         Token COLON102=null;
         Token OP_FOLLOW105=null;
         OmttParser.definition_argument_return definition_argument101 = null;
@@ -3705,19 +3705,19 @@ public class OmttParser extends AbstractOmttParser {
         OmttParser.lambda_match_expression_return lambda_match_expression107 = null;
 
 
-        Object LAMBDA100_tree=null;
+        Object FUN100_tree=null;
         Object COLON102_tree=null;
         Object OP_FOLLOW105_tree=null;
         RewriteRuleTokenStream stream_COLON=new RewriteRuleTokenStream(adaptor,"token COLON");
-        RewriteRuleTokenStream stream_LAMBDA=new RewriteRuleTokenStream(adaptor,"token LAMBDA");
         RewriteRuleTokenStream stream_OP_FOLLOW=new RewriteRuleTokenStream(adaptor,"token OP_FOLLOW");
+        RewriteRuleTokenStream stream_FUN=new RewriteRuleTokenStream(adaptor,"token FUN");
         RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
         RewriteRuleSubtreeStream stream_definition_argument=new RewriteRuleSubtreeStream(adaptor,"rule definition_argument");
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:3: ( LAMBDA ( definition_argument )* COLON expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | ( definition_argument )* OP_FOLLOW expression -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression ) | lambda_match_expression )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:3: ( FUN ( definition_argument )* COLON expression -> ^( FUN ^( ARGUMENTS ( definition_argument )* ) expression ) | ( definition_argument )* OP_FOLLOW expression -> ^( FUN ^( ARGUMENTS ( definition_argument )* ) expression ) | lambda_match_expression )
             int alt35=3;
             switch ( input.LA(1) ) {
-            case LAMBDA:
+            case FUN:
                 {
                 alt35=1;
                 }
@@ -3747,12 +3747,12 @@ public class OmttParser extends AbstractOmttParser {
 
             switch (alt35) {
                 case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:5: LAMBDA ( definition_argument )* COLON expression
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:5: FUN ( definition_argument )* COLON expression
                     {
-                    LAMBDA100=(Token)match(input,LAMBDA,FOLLOW_LAMBDA_in_lambda_expression1172); if (state.failed) return retval; 
-                    if ( state.backtracking==0 ) stream_LAMBDA.add(LAMBDA100);
+                    FUN100=(Token)match(input,FUN,FOLLOW_FUN_in_function_expression1172); if (state.failed) return retval; 
+                    if ( state.backtracking==0 ) stream_FUN.add(FUN100);
 
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:12: ( definition_argument )*
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:182:9: ( definition_argument )*
                     loop33:
                     do {
                         int alt33=2;
@@ -3767,7 +3767,7 @@ public class OmttParser extends AbstractOmttParser {
                     	case 1 :
                     	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:0:0: definition_argument
                     	    {
-                    	    pushFollow(FOLLOW_definition_argument_in_lambda_expression1174);
+                    	    pushFollow(FOLLOW_definition_argument_in_function_expression1174);
                     	    definition_argument101=definition_argument();
 
                     	    state._fsp--;
@@ -3782,10 +3782,10 @@ public class OmttParser extends AbstractOmttParser {
                         }
                     } while (true);
 
-                    COLON102=(Token)match(input,COLON,FOLLOW_COLON_in_lambda_expression1177); if (state.failed) return retval; 
+                    COLON102=(Token)match(input,COLON,FOLLOW_COLON_in_function_expression1177); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_COLON.add(COLON102);
 
-                    pushFollow(FOLLOW_expression_in_lambda_expression1179);
+                    pushFollow(FOLLOW_expression_in_function_expression1179);
                     expression103=expression();
 
                     state._fsp--;
@@ -3794,7 +3794,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: LAMBDA, expression, definition_argument
+                    // elements: definition_argument, expression, FUN
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3805,19 +3805,19 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 183:5: -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression )
+                    // 183:5: -> ^( FUN ^( ARGUMENTS ( definition_argument )* ) expression )
                     {
-                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:183:8: ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression )
+                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:183:8: ^( FUN ^( ARGUMENTS ( definition_argument )* ) expression )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(new LambdaExpression(stream_LAMBDA.nextToken()), root_1);
+                        root_1 = (Object)adaptor.becomeRoot(new FunExpression(stream_FUN.nextToken()), root_1);
 
-                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:183:35: ^( ARGUMENTS ( definition_argument )* )
+                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:183:29: ^( ARGUMENTS ( definition_argument )* )
                         {
                         Object root_2 = (Object)adaptor.nil();
                         root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(ARGUMENTS, "ARGUMENTS"), root_2);
 
-                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:183:47: ( definition_argument )*
+                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:183:41: ( definition_argument )*
                         while ( stream_definition_argument.hasNext() ) {
                             adaptor.addChild(root_2, stream_definition_argument.nextTree());
 
@@ -3854,7 +3854,7 @@ public class OmttParser extends AbstractOmttParser {
                     	case 1 :
                     	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:0:0: definition_argument
                     	    {
-                    	    pushFollow(FOLLOW_definition_argument_in_lambda_expression1207);
+                    	    pushFollow(FOLLOW_definition_argument_in_function_expression1207);
                     	    definition_argument104=definition_argument();
 
                     	    state._fsp--;
@@ -3869,10 +3869,10 @@ public class OmttParser extends AbstractOmttParser {
                         }
                     } while (true);
 
-                    OP_FOLLOW105=(Token)match(input,OP_FOLLOW,FOLLOW_OP_FOLLOW_in_lambda_expression1210); if (state.failed) return retval; 
+                    OP_FOLLOW105=(Token)match(input,OP_FOLLOW,FOLLOW_OP_FOLLOW_in_function_expression1210); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_OP_FOLLOW.add(OP_FOLLOW105);
 
-                    pushFollow(FOLLOW_expression_in_lambda_expression1212);
+                    pushFollow(FOLLOW_expression_in_function_expression1212);
                     expression106=expression();
 
                     state._fsp--;
@@ -3881,7 +3881,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: definition_argument, expression
+                    // elements: expression, definition_argument
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3892,19 +3892,19 @@ public class OmttParser extends AbstractOmttParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 185:4: -> ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression )
+                    // 185:4: -> ^( FUN ^( ARGUMENTS ( definition_argument )* ) expression )
                     {
-                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:185:7: ^( LAMBDA ^( ARGUMENTS ( definition_argument )* ) expression )
+                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:185:7: ^( FUN ^( ARGUMENTS ( definition_argument )* ) expression )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(new LambdaExpression(LAMBDA), root_1);
+                        root_1 = (Object)adaptor.becomeRoot(new FunExpression(FUN), root_1);
 
-                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:185:34: ^( ARGUMENTS ( definition_argument )* )
+                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:185:28: ^( ARGUMENTS ( definition_argument )* )
                         {
                         Object root_2 = (Object)adaptor.nil();
                         root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(ARGUMENTS, "ARGUMENTS"), root_2);
 
-                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:185:46: ( definition_argument )*
+                        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:185:40: ( definition_argument )*
                         while ( stream_definition_argument.hasNext() ) {
                             adaptor.addChild(root_2, stream_definition_argument.nextTree());
 
@@ -3928,7 +3928,7 @@ public class OmttParser extends AbstractOmttParser {
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    pushFollow(FOLLOW_lambda_match_expression_in_lambda_expression1239);
+                    pushFollow(FOLLOW_lambda_match_expression_in_function_expression1239);
                     lambda_match_expression107=lambda_match_expression();
 
                     state._fsp--;
@@ -3957,7 +3957,7 @@ public class OmttParser extends AbstractOmttParser {
         }
         return retval;
     }
-    // $ANTLR end "lambda_expression"
+    // $ANTLR end "function_expression"
 
     public static class lambda_match_expression_return extends ParserRuleReturnScope {
         Object tree;
@@ -4153,7 +4153,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: where_clause, safe_expression, single_type
+            // elements: safe_expression, single_type, where_clause
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -5258,7 +5258,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: part_else, part_if, condition
+            // elements: part_if, condition, part_else
             // token labels: 
             // rule labels: retval, part_else, condition, part_if
             // token list labels: 
@@ -5499,7 +5499,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: subtag, part_else, part_if, condition
+            // elements: subtag, condition, part_if, part_else
             // token labels: 
             // rule labels: subtag, retval, part_else, condition, part_if
             // token list labels: 
@@ -5783,7 +5783,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: expr, item_alias, iter, MAP
+            // elements: expr, iter, item_alias, MAP
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -5927,7 +5927,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: iter, item_alias, MAP, expr
+            // elements: iter, MAP, expr, item_alias
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -6117,7 +6117,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: iter, expr
+            // elements: expr, iter
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -6323,7 +6323,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: context_expression, atom_expression, arguments
+            	    // elements: context_expression, arguments, atom_expression
             	    // token labels: 
             	    // rule labels: retval, arguments
             	    // token list labels: 
@@ -6385,7 +6385,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: context_expression, ce, op_map
+            	    // elements: ce, context_expression, op_map
             	    // token labels: 
             	    // rule labels: retval, ce
             	    // token list labels: 
@@ -6488,7 +6488,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: context_expression, safe_expression, ORDER
+            	    // elements: context_expression, ORDER, safe_expression
             	    // token labels: 
             	    // rule labels: retval
             	    // token list labels: 
@@ -6780,7 +6780,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: arguments, atom_expression
+            // elements: atom_expression, arguments
             // token labels: 
             // rule labels: retval, arguments
             // token list labels: 
@@ -8145,7 +8145,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: functional_expression, OP_MINUS
+                    // elements: OP_MINUS, functional_expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -8351,7 +8351,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: function_argument, atom_expression
+                    // elements: atom_expression, function_argument
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -8615,7 +8615,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: content, args, ident
+                    // elements: ident, content, args
                     // token labels: 
                     // rule labels: content, retval, ident
                     // token list labels: 
@@ -9014,7 +9014,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: DOT, es, atom_expression
+            	    // elements: es, atom_expression, DOT
             	    // token labels: 
             	    // rule labels: retval, es
             	    // token list labels: 
@@ -9059,7 +9059,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: atom_expression, DOT, ps
+            	    // elements: ps, DOT, atom_expression
             	    // token labels: 
             	    // rule labels: retval, ps
             	    // token list labels: 
@@ -9164,7 +9164,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: sequence_selectors, atom
+                    // elements: atom, sequence_selectors
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -9290,7 +9290,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: sequence_selectors, object
+                    // elements: object, sequence_selectors
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -9834,7 +9834,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: AS, VAR_ID
+            // elements: VAR_ID, AS
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -9948,7 +9948,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: DATA_START, data_body_atom
+            // elements: data_body_atom, DATA_START
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -10243,7 +10243,7 @@ public class OmttParser extends AbstractOmttParser {
                         throw nvae;
                     }
                 }
-                else if ( ((LA86_3>=STRING_LITERAL && LA86_3<=REAL_NUMBER)||LA86_3==DATA_START||LA86_3==DEF||LA86_3==IF||(LA86_3>=MAP && LA86_3<=MATCH)||(LA86_3>=LAMBDA && LA86_3<=FALSE)||LA86_3==OP_FOLLOW||(LA86_3>=TILDE && LA86_3<=LEFT_PAREN)||LA86_3==LEFT_SQUARE_PAREN||LA86_3==OP_MINUS||LA86_3==OP_NOT||LA86_3==OP_GENERAL||LA86_3==CLASS_ID) ) {
+                else if ( ((LA86_3>=STRING_LITERAL && LA86_3<=REAL_NUMBER)||LA86_3==DATA_START||LA86_3==DEF||LA86_3==IF||(LA86_3>=MAP && LA86_3<=MATCH)||(LA86_3>=FUN && LA86_3<=FALSE)||LA86_3==OP_FOLLOW||(LA86_3>=TILDE && LA86_3<=LEFT_PAREN)||LA86_3==LEFT_SQUARE_PAREN||LA86_3==OP_MINUS||LA86_3==OP_NOT||LA86_3==OP_GENERAL||LA86_3==CLASS_ID) ) {
                     alt86=3;
                 }
                 else {
@@ -11452,11 +11452,11 @@ public class OmttParser extends AbstractOmttParser {
 
     // $ANTLR start synpred31_OmttParser
     public final void synpred31_OmttParser_fragment() throws RecognitionException {   
-        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:131:5: ( lambda_expression )
-        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:131:5: lambda_expression
+        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:131:5: ( function_expression )
+        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:131:5: function_expression
         {
-        pushFollow(FOLLOW_lambda_expression_in_synpred31_OmttParser779);
-        lambda_expression();
+        pushFollow(FOLLOW_function_expression_in_synpred31_OmttParser779);
+        function_expression();
 
         state._fsp--;
         if (state.failed) return ;
@@ -11675,7 +11675,7 @@ public class OmttParser extends AbstractOmttParser {
             this.transition = DFA22_transition;
         }
         public String getDescription() {
-            return "126:1: expression : ( def_in_expression | if_expression | map_expression | match_expression | lambda_expression | context_expression );";
+            return "126:1: expression : ( def_in_expression | if_expression | map_expression | match_expression | function_expression | context_expression );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -12386,7 +12386,7 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_if_expression_in_expression761 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_map_expression_in_expression767 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_match_expression_in_expression773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_lambda_expression_in_expression779 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_function_expression_in_expression779 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_context_expression_in_expression785 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_safe_def_in_expression_in_safe_expression798 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_safe_if_expression_in_safe_expression804 = new BitSet(new long[]{0x0000000000000002L});
@@ -12429,14 +12429,14 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_expression_in_definition_inside_tag1128 = new BitSet(new long[]{0x0000000100000002L});
     public static final BitSet FOLLOW_CONTENT_in_definition_inside_tag1131 = new BitSet(new long[]{0x0000000020000002L});
     public static final BitSet FOLLOW_STRING_LITERAL_in_definition_inside_tag1133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LAMBDA_in_lambda_expression1172 = new BitSet(new long[]{0x0000000000000000L,0x0000040000010400L});
-    public static final BitSet FOLLOW_definition_argument_in_lambda_expression1174 = new BitSet(new long[]{0x0000000000000000L,0x0000040000010400L});
-    public static final BitSet FOLLOW_COLON_in_lambda_expression1177 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
-    public static final BitSet FOLLOW_expression_in_lambda_expression1179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_definition_argument_in_lambda_expression1207 = new BitSet(new long[]{0x0000000000000000L,0x0000040000010080L});
-    public static final BitSet FOLLOW_OP_FOLLOW_in_lambda_expression1210 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
-    public static final BitSet FOLLOW_expression_in_lambda_expression1212 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_lambda_match_expression_in_lambda_expression1239 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FUN_in_function_expression1172 = new BitSet(new long[]{0x0000000000000000L,0x0000040000010400L});
+    public static final BitSet FOLLOW_definition_argument_in_function_expression1174 = new BitSet(new long[]{0x0000000000000000L,0x0000040000010400L});
+    public static final BitSet FOLLOW_COLON_in_function_expression1177 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_expression_in_function_expression1179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_definition_argument_in_function_expression1207 = new BitSet(new long[]{0x0000000000000000L,0x0000040000010080L});
+    public static final BitSet FOLLOW_OP_FOLLOW_in_function_expression1210 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_expression_in_function_expression1212 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_lambda_match_expression_in_function_expression1239 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_single_lambda_match_in_lambda_match_expression1252 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
     public static final BitSet FOLLOW_SEMICOLON_in_lambda_match_expression1255 = new BitSet(new long[]{0x0000000000000000L,0x00001440000B0082L});
     public static final BitSet FOLLOW_single_lambda_match_in_lambda_match_expression1257 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
@@ -12657,7 +12657,7 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_FALSE_in_object_atom3736 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_INT_NUMBER_in_number_atom3754 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_REAL_NUMBER_in_number_atom3764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_lambda_expression_in_synpred31_OmttParser779 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_function_expression_in_synpred31_OmttParser779 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_sequence_selectors_in_synpred101_OmttParser3116 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_sequence_selectors_in_synpred102_OmttParser3162 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_sequence_selectors_in_synpred103_OmttParser3204 = new BitSet(new long[]{0x0000000000000002L});

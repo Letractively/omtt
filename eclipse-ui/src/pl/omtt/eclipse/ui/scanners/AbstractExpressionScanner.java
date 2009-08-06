@@ -60,7 +60,7 @@ public abstract class AbstractExpressionScanner extends RuleBasedScanner {
 
 	public final static class KeywordRule extends WordRule {
 		private static final String[] KEYWORDS =
-		{ "def", "and", "in", "end",
+		{ "def", "and", "in", "end", "fun",
 		  "if", "else",
 		  "map", "apply", "match", "where",
 		  "is", "as", "order", "by",
