@@ -1,0 +1,10 @@
+{{{
+%% use std.math
+
+% def primes n:
+	def is_prime k:
+		empty (2..(round (sqrt k)) where k mod _ == 0)
+	in:
+		2..n where is_prime _
+% end
+}}}
