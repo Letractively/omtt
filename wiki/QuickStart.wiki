@@ -1,0 +1,5 @@
+=Szybki start=
+
+Ten artykuł opisuje, w jaki sposób rozpocząć pracę z OMTT.
+
+===Instalacja paczki dla Eclipse===
