@@ -592,7 +592,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		abstract void content(IType rettype);
 	};
 
-	public void visit(final LambdaExpression lambda) {
+	public void visit(final FunExpression lambda) {
 		new FunctionWriter() {
 			@Override
 			void content(IType rettype) {

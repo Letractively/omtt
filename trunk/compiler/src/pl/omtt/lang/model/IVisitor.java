@@ -16,7 +16,7 @@ public interface IVisitor {
 	public void visit (Cast node);
 	public void visit (Data node);
 	public void visit (IfElse node);
-	public void visit (LambdaExpression node);
+	public void visit (FunExpression node);
 	public void visit (LambdaMatch lambdaMatch);
 	public void visit (LambdaMatchItem lambdaMatchItem);
 	public void visit (Transformation node);

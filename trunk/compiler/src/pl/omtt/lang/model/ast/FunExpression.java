@@ -13,15 +13,15 @@ import pl.omtt.lang.model.types.IType;
 import pl.omtt.lang.model.types.TypeException;
 import pl.omtt.lang.model.types.TypeUnifier;
 
-public class LambdaExpression extends CommonNode implements IExpression,
+public class FunExpression extends CommonNode implements IExpression,
 		ISymbolTableOwner, IVisitable {
 	IType fType;
 
-	public LambdaExpression(Token token) {
+	public FunExpression(Token token) {
 		super(token);
 	}
 
-	public LambdaExpression(int token) {
+	public FunExpression(int token) {
 		super(new CommonToken(token, "lambda expression"));
 	}
 

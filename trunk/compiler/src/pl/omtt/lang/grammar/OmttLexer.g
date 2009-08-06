@@ -184,7 +184,7 @@ WHERE  : 'where';
 ORDER  : 'order';
 BY     : 'by';
 
-LAMBDA : 'lambda';
+FUN    : 'fun';
 
 NULL   : 'null';
 TRUE   : 'true';

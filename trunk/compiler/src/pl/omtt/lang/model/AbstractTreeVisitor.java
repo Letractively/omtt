@@ -119,7 +119,7 @@ public class AbstractTreeVisitor implements IVisitor {
 	}
 
 	@Override
-	public void visit(LambdaExpression node) {
+	public void visit(FunExpression node) {
 		defaultVisit(node);
 	}
 

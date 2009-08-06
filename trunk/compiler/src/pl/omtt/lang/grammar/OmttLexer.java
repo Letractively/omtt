@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g 2009-08-03 11:20:46
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g 2009-08-06 17:20:57
 
 package pl.omtt.lang.grammar;
 
@@ -57,6 +57,7 @@ public class OmttLexer extends AbstractOmttLexer {
     public static final int CALL=23;
     public static final int OP_DATA_IS_EXPRESSION=39;
     public static final int USE=6;
+    public static final int FUN=65;
     public static final int FALSE=68;
     public static final int STRING_PARENS=47;
     public static final int COMMENT_SINGLE_LINE=42;
@@ -96,7 +97,6 @@ public class OmttLexer extends AbstractOmttLexer {
     public static final int OP_NOT=98;
     public static final int OP_DOUBLE_FOLLOW=73;
     public static final int DIGIT=109;
-    public static final int LAMBDA=65;
     public static final int HEADER=5;
     public static final int DOT=76;
     public static final int NOT_NAME=112;
@@ -1084,15 +1084,15 @@ public class OmttLexer extends AbstractOmttLexer {
     }
     // $ANTLR end "BY"
 
-    // $ANTLR start "LAMBDA"
-    public final void mLAMBDA() throws RecognitionException {
+    // $ANTLR start "FUN"
+    public final void mFUN() throws RecognitionException {
         try {
-            int _type = LAMBDA;
+            int _type = FUN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:187:8: ( 'lambda' )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:187:10: 'lambda'
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:187:8: ( 'fun' )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:187:10: 'fun'
             {
-            match("lambda"); if (state.failed) return ;
+            match("fun"); if (state.failed) return ;
 
 
             }
@@ -1103,7 +1103,7 @@ public class OmttLexer extends AbstractOmttLexer {
         finally {
         }
     }
-    // $ANTLR end "LAMBDA"
+    // $ANTLR end "FUN"
 
     // $ANTLR start "NULL"
     public final void mNULL() throws RecognitionException {
@@ -2597,7 +2597,7 @@ public class OmttLexer extends AbstractOmttLexer {
     // $ANTLR end "NEWLINE"
 
     public void mTokens() throws RecognitionException {
-        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:8: ( COMMENT_SINGLE_LINE | COMMENT_MULTI_LINE | STRING_LITERAL | TAG_START | ACTION_ON_NEWLINE | STRING_PARENS | MODE_LEFT_PAREN | MODE_RIGHT_PAREN | MODULE | IMPORT | USE | DEF | AND | IN | IF | THEN | ELSE | AS | IS | MAP | APPLY | MATCH | WHERE | ORDER | BY | LAMBDA | NULL | TRUE | FALSE | OP_FOLLOW | OP_REVERSE_FOLLOW | OP_DOUBLE_FOLLOW | COLON | SEMICOLON | DOT | DOUBLE_DOT | COMMA | SLASH | TILDE | LEFT_PAREN | RIGHT_PAREN | LEFT_SQUARE_PAREN | RIGHT_SQUARE_PAREN | OP_PLUS | OP_MINUS | OP_MULTIPLY | OP_MODULO | OP_EQUAL | OP_NOT_EQUAL | OP_LEQ | OP_LE | OP_GEQ | OP_GE | OP_ASSIGN | OP_AND | OP_OR | OP_NOT | OP_CONTEXT | OP_VIEW | OP_CONCAT | OP_GENERAL | OP_DATA | VAR_ID | CLASS_ID | INT_OR_REAL_NUMBER | WS )
+        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:8: ( COMMENT_SINGLE_LINE | COMMENT_MULTI_LINE | STRING_LITERAL | TAG_START | ACTION_ON_NEWLINE | STRING_PARENS | MODE_LEFT_PAREN | MODE_RIGHT_PAREN | MODULE | IMPORT | USE | DEF | AND | IN | IF | THEN | ELSE | AS | IS | MAP | APPLY | MATCH | WHERE | ORDER | BY | FUN | NULL | TRUE | FALSE | OP_FOLLOW | OP_REVERSE_FOLLOW | OP_DOUBLE_FOLLOW | COLON | SEMICOLON | DOT | DOUBLE_DOT | COMMA | SLASH | TILDE | LEFT_PAREN | RIGHT_PAREN | LEFT_SQUARE_PAREN | RIGHT_SQUARE_PAREN | OP_PLUS | OP_MINUS | OP_MULTIPLY | OP_MODULO | OP_EQUAL | OP_NOT_EQUAL | OP_LEQ | OP_LE | OP_GEQ | OP_GE | OP_ASSIGN | OP_AND | OP_OR | OP_NOT | OP_CONTEXT | OP_VIEW | OP_CONCAT | OP_GENERAL | OP_DATA | VAR_ID | CLASS_ID | INT_OR_REAL_NUMBER | WS )
         int alt23=66;
         alt23 = dfa23.predict(input);
         switch (alt23) {
@@ -2777,287 +2777,287 @@ public class OmttLexer extends AbstractOmttLexer {
                 }
                 break;
             case 26 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:218: LAMBDA
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:218: FUN
                 {
-                mLAMBDA(); if (state.failed) return ;
+                mFUN(); if (state.failed) return ;
 
                 }
                 break;
             case 27 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:225: NULL
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:222: NULL
                 {
                 mNULL(); if (state.failed) return ;
 
                 }
                 break;
             case 28 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:230: TRUE
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:227: TRUE
                 {
                 mTRUE(); if (state.failed) return ;
 
                 }
                 break;
             case 29 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:235: FALSE
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:232: FALSE
                 {
                 mFALSE(); if (state.failed) return ;
 
                 }
                 break;
             case 30 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:241: OP_FOLLOW
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:238: OP_FOLLOW
                 {
                 mOP_FOLLOW(); if (state.failed) return ;
 
                 }
                 break;
             case 31 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:251: OP_REVERSE_FOLLOW
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:248: OP_REVERSE_FOLLOW
                 {
                 mOP_REVERSE_FOLLOW(); if (state.failed) return ;
 
                 }
                 break;
             case 32 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:269: OP_DOUBLE_FOLLOW
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:266: OP_DOUBLE_FOLLOW
                 {
                 mOP_DOUBLE_FOLLOW(); if (state.failed) return ;
 
                 }
                 break;
             case 33 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:286: COLON
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:283: COLON
                 {
                 mCOLON(); if (state.failed) return ;
 
                 }
                 break;
             case 34 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:292: SEMICOLON
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:289: SEMICOLON
                 {
                 mSEMICOLON(); if (state.failed) return ;
 
                 }
                 break;
             case 35 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:302: DOT
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:299: DOT
                 {
                 mDOT(); if (state.failed) return ;
 
                 }
                 break;
             case 36 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:306: DOUBLE_DOT
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:303: DOUBLE_DOT
                 {
                 mDOUBLE_DOT(); if (state.failed) return ;
 
                 }
                 break;
             case 37 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:317: COMMA
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:314: COMMA
                 {
                 mCOMMA(); if (state.failed) return ;
 
                 }
                 break;
             case 38 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:323: SLASH
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:320: SLASH
                 {
                 mSLASH(); if (state.failed) return ;
 
                 }
                 break;
             case 39 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:329: TILDE
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:326: TILDE
                 {
                 mTILDE(); if (state.failed) return ;
 
                 }
                 break;
             case 40 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:335: LEFT_PAREN
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:332: LEFT_PAREN
                 {
                 mLEFT_PAREN(); if (state.failed) return ;
 
                 }
                 break;
             case 41 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:346: RIGHT_PAREN
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:343: RIGHT_PAREN
                 {
                 mRIGHT_PAREN(); if (state.failed) return ;
 
                 }
                 break;
             case 42 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:358: LEFT_SQUARE_PAREN
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:355: LEFT_SQUARE_PAREN
                 {
                 mLEFT_SQUARE_PAREN(); if (state.failed) return ;
 
                 }
                 break;
             case 43 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:376: RIGHT_SQUARE_PAREN
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:373: RIGHT_SQUARE_PAREN
                 {
                 mRIGHT_SQUARE_PAREN(); if (state.failed) return ;
 
                 }
                 break;
             case 44 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:395: OP_PLUS
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:392: OP_PLUS
                 {
                 mOP_PLUS(); if (state.failed) return ;
 
                 }
                 break;
             case 45 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:403: OP_MINUS
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:400: OP_MINUS
                 {
                 mOP_MINUS(); if (state.failed) return ;
 
                 }
                 break;
             case 46 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:412: OP_MULTIPLY
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:409: OP_MULTIPLY
                 {
                 mOP_MULTIPLY(); if (state.failed) return ;
 
                 }
                 break;
             case 47 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:424: OP_MODULO
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:421: OP_MODULO
                 {
                 mOP_MODULO(); if (state.failed) return ;
 
                 }
                 break;
             case 48 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:434: OP_EQUAL
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:431: OP_EQUAL
                 {
                 mOP_EQUAL(); if (state.failed) return ;
 
                 }
                 break;
             case 49 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:443: OP_NOT_EQUAL
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:440: OP_NOT_EQUAL
                 {
                 mOP_NOT_EQUAL(); if (state.failed) return ;
 
                 }
                 break;
             case 50 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:456: OP_LEQ
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:453: OP_LEQ
                 {
                 mOP_LEQ(); if (state.failed) return ;
 
                 }
                 break;
             case 51 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:463: OP_LE
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:460: OP_LE
                 {
                 mOP_LE(); if (state.failed) return ;
 
                 }
                 break;
             case 52 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:469: OP_GEQ
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:466: OP_GEQ
                 {
                 mOP_GEQ(); if (state.failed) return ;
 
                 }
                 break;
             case 53 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:476: OP_GE
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:473: OP_GE
                 {
                 mOP_GE(); if (state.failed) return ;
 
                 }
                 break;
             case 54 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:482: OP_ASSIGN
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:479: OP_ASSIGN
                 {
                 mOP_ASSIGN(); if (state.failed) return ;
 
                 }
                 break;
             case 55 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:492: OP_AND
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:489: OP_AND
                 {
                 mOP_AND(); if (state.failed) return ;
 
                 }
                 break;
             case 56 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:499: OP_OR
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:496: OP_OR
                 {
                 mOP_OR(); if (state.failed) return ;
 
                 }
                 break;
             case 57 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:505: OP_NOT
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:502: OP_NOT
                 {
                 mOP_NOT(); if (state.failed) return ;
 
                 }
                 break;
             case 58 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:512: OP_CONTEXT
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:509: OP_CONTEXT
                 {
                 mOP_CONTEXT(); if (state.failed) return ;
 
                 }
                 break;
             case 59 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:523: OP_VIEW
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:520: OP_VIEW
                 {
                 mOP_VIEW(); if (state.failed) return ;
 
                 }
                 break;
             case 60 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:531: OP_CONCAT
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:528: OP_CONCAT
                 {
                 mOP_CONCAT(); if (state.failed) return ;
 
                 }
                 break;
             case 61 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:541: OP_GENERAL
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:538: OP_GENERAL
                 {
                 mOP_GENERAL(); if (state.failed) return ;
 
                 }
                 break;
             case 62 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:552: OP_DATA
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:549: OP_DATA
                 {
                 mOP_DATA(); if (state.failed) return ;
 
                 }
                 break;
             case 63 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:560: VAR_ID
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:557: VAR_ID
                 {
                 mVAR_ID(); if (state.failed) return ;
 
                 }
                 break;
             case 64 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:567: CLASS_ID
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:564: CLASS_ID
                 {
                 mCLASS_ID(); if (state.failed) return ;
 
                 }
                 break;
             case 65 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:576: INT_OR_REAL_NUMBER
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:573: INT_OR_REAL_NUMBER
                 {
                 mINT_OR_REAL_NUMBER(); if (state.failed) return ;
 
                 }
                 break;
             case 66 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:595: WS
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:592: WS
                 {
                 mWS(); if (state.failed) return ;
 
@@ -3254,80 +3254,78 @@ public class OmttLexer extends AbstractOmttLexer {
 
     protected DFA23 dfa23 = new DFA23(this);
     static final String DFA23_eotS =
-        "\1\uffff\1\60\6\uffff\15\52\1\107\1\112\1\115\1\117\1\uffff\1\121"+
-        "\11\uffff\1\123\1\uffff\1\125\1\uffff\1\126\10\uffff\3\52\1\133"+
-        "\1\134\1\135\3\52\1\141\5\52\1\124\1\150\4\52\21\uffff\1\156\1\157"+
-        "\2\52\3\uffff\1\162\1\163\1\164\1\uffff\6\52\1\uffff\2\52\1\175"+
-        "\2\52\2\uffff\2\52\3\uffff\1\52\1\u0083\1\u0084\1\u0085\3\52\1\u0089"+
-        "\1\uffff\2\52\1\u008c\1\52\1\u008e\3\uffff\1\u008f\1\u0090\1\52"+
-        "\1\uffff\1\u0092\1\u0093\1\uffff\1\u0094\3\uffff\1\u0095\4\uffff";
+        "\1\uffff\1\57\6\uffff\14\51\1\106\1\111\1\114\1\116\1\uffff\1\120"+
+        "\11\uffff\1\122\1\uffff\1\124\1\uffff\1\125\10\uffff\3\51\1\132"+
+        "\1\133\1\134\3\51\1\140\5\51\1\123\1\147\4\51\21\uffff\1\155\1\156"+
+        "\2\51\3\uffff\1\161\1\162\1\163\1\uffff\6\51\1\uffff\1\172\2\51"+
+        "\1\175\1\51\2\uffff\2\51\3\uffff\1\51\1\u0082\1\u0083\1\u0084\2"+
+        "\51\1\uffff\1\51\1\u0088\1\uffff\1\51\1\u008a\1\51\1\u008c\3\uffff"+
+        "\1\u008d\1\u008e\1\u008f\1\uffff\1\u0090\1\uffff\1\u0091\6\uffff";
     static final String DFA23_eofS =
-        "\u0096\uffff";
+        "\u0092\uffff";
     static final String DFA23_minS =
         "\1\11\1\52\6\uffff\1\141\1\146\1\163\1\145\1\156\1\150\1\154\1\150"+
-        "\1\162\1\171\1\141\1\157\1\141\1\76\1\55\1\75\1\72\1\uffff\1\56"+
-        "\11\uffff\1\75\1\uffff\1\174\1\uffff\1\60\10\uffff\1\144\2\160\3"+
-        "\60\1\145\1\146\1\144\1\60\1\160\1\145\1\165\1\163\1\145\2\60\1"+
-        "\155\1\154\1\164\1\154\21\uffff\2\60\1\143\1\157\3\uffff\3\60\1"+
-        "\uffff\1\154\1\156\2\145\1\162\1\145\1\uffff\1\142\1\154\1\60\1"+
-        "\163\1\154\2\uffff\1\150\1\162\3\uffff\1\171\3\60\1\145\1\162\1"+
-        "\144\1\60\1\uffff\2\145\1\60\1\164\1\60\3\uffff\2\60\1\141\1\uffff"+
-        "\2\60\1\uffff\1\60\3\uffff\1\60\4\uffff";
+        "\1\162\1\171\1\141\1\157\1\76\1\55\1\75\1\72\1\uffff\1\56\11\uffff"+
+        "\1\75\1\uffff\1\174\1\uffff\1\60\10\uffff\1\144\2\160\3\60\1\145"+
+        "\1\146\1\144\1\60\1\160\1\145\1\165\1\163\1\145\2\60\1\156\2\154"+
+        "\1\164\21\uffff\2\60\1\143\1\157\3\uffff\3\60\1\uffff\1\154\1\156"+
+        "\2\145\1\162\1\145\1\uffff\1\60\1\163\1\154\1\60\1\154\2\uffff\1"+
+        "\150\1\162\3\uffff\1\171\3\60\1\145\1\162\1\uffff\1\145\1\60\1\uffff"+
+        "\1\145\1\60\1\164\1\60\3\uffff\3\60\1\uffff\1\60\1\uffff\1\60\6"+
+        "\uffff";
     static final String DFA23_maxS =
         "\1\176\1\57\6\uffff\1\157\2\163\1\145\1\163\1\162\1\154\1\150\1"+
-        "\162\1\171\1\141\1\165\1\141\1\76\1\75\1\76\1\72\1\uffff\1\56\11"+
-        "\uffff\1\75\1\uffff\1\174\1\uffff\1\172\10\uffff\1\144\1\164\1\160"+
-        "\3\172\1\145\1\146\1\144\1\172\1\160\1\145\1\165\1\163\1\145\2\172"+
-        "\1\155\1\154\1\164\1\154\21\uffff\2\172\1\143\1\157\3\uffff\3\172"+
-        "\1\uffff\1\154\1\156\2\145\1\162\1\145\1\uffff\1\142\1\154\1\172"+
-        "\1\163\1\154\2\uffff\1\150\1\162\3\uffff\1\171\3\172\1\145\1\162"+
-        "\1\144\1\172\1\uffff\2\145\1\172\1\164\1\172\3\uffff\2\172\1\141"+
-        "\1\uffff\2\172\1\uffff\1\172\3\uffff\1\172\4\uffff";
+        "\162\1\171\2\165\1\76\1\75\1\76\1\72\1\uffff\1\56\11\uffff\1\75"+
+        "\1\uffff\1\174\1\uffff\1\172\10\uffff\1\144\1\164\1\160\3\172\1"+
+        "\145\1\146\1\144\1\172\1\160\1\145\1\165\1\163\1\145\2\172\1\156"+
+        "\2\154\1\164\21\uffff\2\172\1\143\1\157\3\uffff\3\172\1\uffff\1"+
+        "\154\1\156\2\145\1\162\1\145\1\uffff\1\172\1\163\1\154\1\172\1\154"+
+        "\2\uffff\1\150\1\162\3\uffff\1\171\3\172\1\145\1\162\1\uffff\1\145"+
+        "\1\172\1\uffff\1\145\1\172\1\164\1\172\3\uffff\3\172\1\uffff\1\172"+
+        "\1\uffff\1\172\6\uffff";
     static final String DFA23_acceptS =
-        "\2\uffff\1\3\1\4\1\5\1\6\1\7\1\10\21\uffff\1\42\1\uffff\1\45\1\47"+
+        "\2\uffff\1\3\1\4\1\5\1\6\1\7\1\10\20\uffff\1\42\1\uffff\1\45\1\47"+
         "\1\50\1\51\1\52\1\53\1\54\1\56\1\61\1\uffff\1\67\1\uffff\1\74\1"+
         "\uffff\1\76\1\77\1\100\1\101\1\102\1\1\1\2\1\46\25\uffff\1\36\1"+
         "\55\1\37\1\62\1\63\1\40\1\60\1\66\1\73\1\41\1\44\1\43\1\64\1\65"+
         "\1\70\1\72\1\75\4\uffff\1\16\1\17\1\23\3\uffff\1\22\6\uffff\1\31"+
-        "\5\uffff\1\57\1\24\2\uffff\1\13\1\14\1\15\10\uffff\1\71\5\uffff"+
-        "\1\20\1\34\1\21\3\uffff\1\33\2\uffff\1\26\1\uffff\1\25\1\27\1\30"+
-        "\1\uffff\1\35\1\11\1\12\1\32";
+        "\5\uffff\1\57\1\24\2\uffff\1\13\1\14\1\15\6\uffff\1\32\2\uffff\1"+
+        "\71\4\uffff\1\20\1\34\1\21\3\uffff\1\33\1\uffff\1\26\1\uffff\1\25"+
+        "\1\27\1\30\1\35\1\11\1\12";
     static final String DFA23_specialS =
-        "\u0096\uffff}>";
+        "\u0092\uffff}>";
     static final String[] DFA23_transitionS = {
-            "\1\55\1\4\1\uffff\1\55\1\4\22\uffff\1\55\1\43\1\5\1\uffff\1"+
-            "\51\1\3\1\45\1\2\1\35\1\36\1\42\1\41\1\33\1\25\1\32\1\1\12\54"+
-            "\1\30\1\31\1\26\1\27\1\44\1\uffff\1\52\32\53\1\37\1\uffff\1"+
-            "\40\1\47\1\50\1\uffff\1\14\1\21\1\52\1\13\1\16\1\24\2\52\1\11"+
-            "\2\52\1\22\1\10\1\23\1\20\4\52\1\15\1\12\1\52\1\17\3\52\1\6"+
-            "\1\46\1\7\1\34",
-            "\1\57\4\uffff\1\56",
+            "\1\54\1\4\1\uffff\1\54\1\4\22\uffff\1\54\1\42\1\5\1\uffff\1"+
+            "\50\1\3\1\44\1\2\1\34\1\35\1\41\1\40\1\32\1\24\1\31\1\1\12\53"+
+            "\1\27\1\30\1\25\1\26\1\43\1\uffff\1\51\32\52\1\36\1\uffff\1"+
+            "\37\1\46\1\47\1\uffff\1\14\1\21\1\51\1\13\1\16\1\22\2\51\1\11"+
+            "\3\51\1\10\1\23\1\20\4\51\1\15\1\12\1\51\1\17\3\51\1\6\1\45"+
+            "\1\7\1\33",
+            "\1\56\4\uffff\1\55",
             "",
             "",
             "",
             "",
             "",
             "",
-            "\1\62\15\uffff\1\61",
-            "\1\65\6\uffff\1\63\1\64\4\uffff\1\66",
+            "\1\61\15\uffff\1\60",
+            "\1\64\6\uffff\1\62\1\63\4\uffff\1\65",
+            "\1\66",
             "\1\67",
-            "\1\70",
-            "\1\71\1\uffff\1\73\2\uffff\1\72",
-            "\1\74\11\uffff\1\75",
+            "\1\70\1\uffff\1\72\2\uffff\1\71",
+            "\1\73\11\uffff\1\74",
+            "\1\75",
             "\1\76",
             "\1\77",
             "\1\100",
-            "\1\101",
-            "\1\102",
+            "\1\102\23\uffff\1\101",
             "\1\104\5\uffff\1\103",
             "\1\105",
-            "\1\106",
-            "\1\110\17\uffff\1\111",
-            "\1\114\1\113",
-            "\1\116",
+            "\1\107\17\uffff\1\110",
+            "\1\113\1\112",
+            "\1\115",
             "",
-            "\1\120",
-            "",
+            "\1\117",
             "",
             "",
             "",
@@ -3336,40 +3334,41 @@ public class OmttLexer extends AbstractOmttLexer {
             "",
             "",
             "",
-            "\1\122",
             "",
-            "\1\124",
+            "\1\121",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\123",
             "",
-            "",
-            "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
             "",
             "",
             "",
             "",
-            "\1\127",
-            "\1\130\3\uffff\1\131",
-            "\1\132",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "",
+            "",
+            "",
+            "\1\126",
+            "\1\127\3\uffff\1\130",
+            "\1\131",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\1\135",
             "\1\136",
             "\1\137",
-            "\1\140",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\1\141",
             "\1\142",
             "\1\143",
             "\1\144",
             "\1\145",
-            "\1\146",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\3\52\1\147\26\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\3\51\1\146\26\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\1\150",
             "\1\151",
             "\1\152",
             "\1\153",
-            "\1\154",
             "",
             "",
             "",
@@ -3387,65 +3386,62 @@ public class OmttLexer extends AbstractOmttLexer {
             "",
             "",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\24\52\1\155\5\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\24\51\1\154\5\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\1\157",
             "\1\160",
-            "\1\161",
             "",
             "",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
+            "\1\164",
             "\1\165",
             "\1\166",
             "\1\167",
             "\1\170",
             "\1\171",
-            "\1\172",
             "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\173",
             "\1\174",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\176",
+            "",
+            "",
             "\1\177",
-            "",
-            "",
             "\1\u0080",
+            "",
+            "",
+            "",
             "\1\u0081",
-            "",
-            "",
-            "",
-            "\1\u0082",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\1\u0085",
             "\1\u0086",
+            "",
             "\1\u0087",
-            "\1\u0088",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
-            "\1\u008a",
+            "\1\u0089",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\u008b",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\1\u008d",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
             "",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\1\u0091",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "",
             "",
             "",
@@ -3482,7 +3478,7 @@ public class OmttLexer extends AbstractOmttLexer {
             this.transition = DFA23_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( COMMENT_SINGLE_LINE | COMMENT_MULTI_LINE | STRING_LITERAL | TAG_START | ACTION_ON_NEWLINE | STRING_PARENS | MODE_LEFT_PAREN | MODE_RIGHT_PAREN | MODULE | IMPORT | USE | DEF | AND | IN | IF | THEN | ELSE | AS | IS | MAP | APPLY | MATCH | WHERE | ORDER | BY | LAMBDA | NULL | TRUE | FALSE | OP_FOLLOW | OP_REVERSE_FOLLOW | OP_DOUBLE_FOLLOW | COLON | SEMICOLON | DOT | DOUBLE_DOT | COMMA | SLASH | TILDE | LEFT_PAREN | RIGHT_PAREN | LEFT_SQUARE_PAREN | RIGHT_SQUARE_PAREN | OP_PLUS | OP_MINUS | OP_MULTIPLY | OP_MODULO | OP_EQUAL | OP_NOT_EQUAL | OP_LEQ | OP_LE | OP_GEQ | OP_GE | OP_ASSIGN | OP_AND | OP_OR | OP_NOT | OP_CONTEXT | OP_VIEW | OP_CONCAT | OP_GENERAL | OP_DATA | VAR_ID | CLASS_ID | INT_OR_REAL_NUMBER | WS );";
+            return "1:1: Tokens : ( COMMENT_SINGLE_LINE | COMMENT_MULTI_LINE | STRING_LITERAL | TAG_START | ACTION_ON_NEWLINE | STRING_PARENS | MODE_LEFT_PAREN | MODE_RIGHT_PAREN | MODULE | IMPORT | USE | DEF | AND | IN | IF | THEN | ELSE | AS | IS | MAP | APPLY | MATCH | WHERE | ORDER | BY | FUN | NULL | TRUE | FALSE | OP_FOLLOW | OP_REVERSE_FOLLOW | OP_DOUBLE_FOLLOW | COLON | SEMICOLON | DOT | DOUBLE_DOT | COMMA | SLASH | TILDE | LEFT_PAREN | RIGHT_PAREN | LEFT_SQUARE_PAREN | RIGHT_SQUARE_PAREN | OP_PLUS | OP_MINUS | OP_MULTIPLY | OP_MODULO | OP_EQUAL | OP_NOT_EQUAL | OP_LEQ | OP_LE | OP_GEQ | OP_GE | OP_ASSIGN | OP_AND | OP_OR | OP_NOT | OP_CONTEXT | OP_VIEW | OP_CONCAT | OP_GENERAL | OP_DATA | VAR_ID | CLASS_ID | INT_OR_REAL_NUMBER | WS );";
         }
     }
  

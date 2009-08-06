@@ -128,7 +128,7 @@ expression
   | if_expression
   | map_expression
   | match_expression
-  | lambda_expression
+  | function_expression
   | context_expression
   ;
 
@@ -177,12 +177,12 @@ definition_inside_tag
 // END: def-in block
 
 
-// START: lambda expressions
-lambda_expression
-  : LAMBDA definition_argument* COLON expression
-    -> ^(LAMBDA<LambdaExpression> ^(ARGUMENTS definition_argument*) expression)
+// START: function expressions
+function_expression
+  : FUN definition_argument* COLON expression
+    -> ^(FUN<FunExpression> ^(ARGUMENTS definition_argument*) expression)
   | definition_argument* OP_FOLLOW expression
-  	-> ^(LAMBDA<LambdaExpression> ^(ARGUMENTS definition_argument*) expression)
+  	-> ^(FUN<FunExpression> ^(ARGUMENTS definition_argument*) expression)
   | lambda_match_expression
   ;
 fragment lambda_match_expression
