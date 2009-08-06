@@ -1,0 +1,17 @@
+sample.omtt:
+{{{
+% def hello
+  Hello, world!
+% end
+}}}
+
+
+{{{
+import pl.omtt.caller.OmttCaller;
+
+public class Launcher {
+	public static void main (String[] args) {
+		OmttCaller.print("sample.hello");
+	}
+}
+}}}
