@@ -1,1 +1,12 @@
 #summary Jak szybko zacząć pracę z OMTT?
+
+==Instalacja==
+
+Obecnie OMTT jest rozprowadzany wraz ze środowiskiem deweloperskim dla Eclipse. Najprostszym sposobem instalacji w Eclipse jest skorzystanie z opcji *Find and install new software* a następnie wybranie repozytorium (_update site_) pod adresem:
+
+  http://omtt.googlecode.com/svn/trunk/update-site/ 
+
+Wymagany jest Eclipse w wersji przynajmniej 3.4 (Ganymede lub Galileo).
+
+
+==Konfiguracja projektu do pracy z OMTT==
