@@ -17,6 +17,7 @@ Aby skonfigurować projekt Javy (to ważne!) do pracy z OMTT należy w *Package 
   http://omtt.googlecode.com/svn/wiki/images/post-install-package.jpg
 
 W tym momencie środowisko jest gotowe do pracy. Wszystkie pliki z rozszerzeniem *omtt* zostaną otwarte w dedykowanym edytorze a ich zapis uruchomi automatyczną kompilację.
+
 _Uwaga:_ builder OMTT działa w sposób przyrostowy, co oznacza, że kompilacji poddawane są jedynie te źródła, które uległy zmianie.
 
 ==Co dalej?==
