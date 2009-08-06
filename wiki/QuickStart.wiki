@@ -1,4 +1,5 @@
 #summary Jak szybko zacząć pracę z OMTT?
+#labels Featured,Phase-Deploy
 
 ==Instalacja==
 
