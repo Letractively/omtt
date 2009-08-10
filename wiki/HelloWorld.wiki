@@ -1,3 +1,5 @@
+#summary Traditional Hello World template in OMTT
+
 *sample.omtt*:
 {{{
 % def hello
