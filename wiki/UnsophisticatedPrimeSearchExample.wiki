@@ -10,7 +10,7 @@
 // finds prime numbers from 2 to n (n >= 3)
 % def primes n:
 	def is_prime k:
-		empty 2..(round (sqrt k))[k mod _ == 0]
+		empty (2..(round (sqrt k)) where k mod _ == 0)
 	in:
 		(2, 3, 5..n[is_prime _])
 % end
