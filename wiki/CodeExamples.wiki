@@ -1,7 +1,11 @@
 #summary Przykłady szablonów OMTT
 #labels Featured,Phase-Support,CodeExamples
 
-===Podstawy===
+==Podstawy==
   * [HelloWorld Hello world]
   * [SimpleGapExample Prosty szablon z lukami]
   * [SequencesExample Sekwencje]
+
+
+==Inne==
+  * [UnsophisticatedPrimeSearchExample Niezbyt wyrafinowane wyszukiwanie liczb pierwszych]
