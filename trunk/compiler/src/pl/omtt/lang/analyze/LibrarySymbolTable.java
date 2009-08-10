@@ -61,11 +61,12 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 		}
 		if (type == null)
 			return;
+		final String name = method.getName().replace('$', '@');
 		if (type instanceof FunctionType
 				&& ((FunctionType) type).isMultimethod())
-			put(new MultiSymbol(method.getName(), (FunctionType) type));
+			put(new MultiSymbol(name, (FunctionType) type));
 		else
-			put(new Symbol(method.getName(), type));
+			put(new Symbol(name, type));
 	}
 
 	private IType typeFromField(Field field) {

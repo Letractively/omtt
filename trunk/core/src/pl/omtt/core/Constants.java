@@ -7,7 +7,7 @@ public interface Constants {
 	
 	static final String OMTT_STDLIB_PREFIX = "std";
 	final static String OMTT_STDLIB_PACKAGE = "pl.omtt.core.stdlib";
-	final static String[] OMTT_STDLIB_MODULES = {"sequences"};
+	final static String[] OMTT_STDLIB_MODULES = {"sequences", "properties"};
 
 	static final String OMTT_LOCAL_PACKAGE = "local";
 }
