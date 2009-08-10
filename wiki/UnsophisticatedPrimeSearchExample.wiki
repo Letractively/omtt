@@ -1,0 +1,35 @@
+#summary Niezbyt wyrafinowane wyszukiwanie liczb pierwszych
+#labels CodeExamples
+
+*primes.omtt*:
+{{{
+%% module samples.primes
+%% use std.math
+%% use html as html
+
+// finds prime numbers from 2 to n (n >= 3)
+% def primes n:
+	def is_prime k:
+		empty 2..(round (sqrt k))[k mod _ == 0]
+	in:
+		(2, 3, 5..n[is_prime _])
+% end
+
+% def list_primes n
+	% def from = 950
+	% and title
+		Primes from {from} to {n}
+	% in
+	<html>
+		<head><title>{title}</title></head>
+		<body>
+			<h2>{title}</h2>
+			{	primes n
+				where _ > from 
+				apply html::list
+			}
+		</body>
+	</html>
+	% end
+% end
+}}}
