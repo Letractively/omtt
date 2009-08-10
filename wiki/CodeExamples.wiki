@@ -1,5 +1,5 @@
 #summary Przykłady szablonów OMTT
-#labels Featured,Phase-Support
+#labels Featured,Phase-Support,CodeExamples
 
 ===Podstawy===
   * [HelloWorld Hello world]
