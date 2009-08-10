@@ -552,7 +552,6 @@ public class CodeGenerator extends AbstractTreeWalker {
 			fBuffer.subIndentation();
 			fBuffer.deactivate();
 		}
-
 	}
 
 	private boolean isCovered(TemplateDefinition def) {
@@ -890,8 +889,10 @@ public class CodeGenerator extends AbstractTreeWalker {
 		new FoldCode(transform).fold(new IFoldCodeFragment() {
 			@Override
 			public String get(String var) {
+				fBuffer.putl("// inside " + transform);
 				fSymbolLocalNames.put(transform.getItSymbol(), var);
-				return exprapply(transform.getTransformationNode());
+				final String res = exprapply(transform.getTransformationNode());
+				return res;
 			}
 		});
 	}

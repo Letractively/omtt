@@ -149,7 +149,9 @@ public class CodeBuffer {
 	}
 
 	public String getVariable(IExpression node) {
-		if (fExpressionCode.containsKey(node)) {
+		if (fExpressionVariable.containsKey(node)) {
+			return fExpressionVariable.get(node);
+		} else if (fExpressionCode.containsKey(node)) {
 			putExpression(node, "%s", fExpressionCode.get(node));
 			fExpressionCode.remove(node);
 		}

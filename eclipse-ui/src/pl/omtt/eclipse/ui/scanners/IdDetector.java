@@ -10,7 +10,7 @@ public final class IdDetector implements IWordDetector {
 
 	@Override
 	public boolean isWordStart(char c) {
-		return isIdChar(c);
+		return isIdChar(c) || c == '@';
 	}
 
 	public static boolean isIdChar(int c) {
