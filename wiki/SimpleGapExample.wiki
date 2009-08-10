@@ -14,7 +14,7 @@
   <body>
     {content}
     <hr>
-    <!-- when footer variable is not set, default string will be used -->
+    <!-- when footer is not set, default string will be used -->
     {footer or "default footer generated with OMTT"}
   </body>
 </html>
