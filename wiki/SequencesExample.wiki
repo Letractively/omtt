@@ -1,4 +1,5 @@
 #summary Przykłady użycia sekwencji
+#labels CodeExamples
 
 *sequences.omtt*:
 {{{
