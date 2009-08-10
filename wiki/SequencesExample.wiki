@@ -11,7 +11,7 @@
     anint * 2
 % end
 
-/* Indicating specific type is not necessary. When no type, compiler assumes it is Any.
+/* Indicating concrete type is not necessary. When no type, compiler assumes it is Any.
  * (Any is equivalent of java's Object, taken from Scala.)
  */
 % def html_list items*
