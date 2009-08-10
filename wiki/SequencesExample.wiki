@@ -24,6 +24,7 @@
 
 }}}
 
+<br>
 *sequences.java*:
 {{{
 import java.util.*;
