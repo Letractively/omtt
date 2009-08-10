@@ -1,0 +1,33 @@
+#summary Prosty szablon z lukami
+#labels Phase-Support,CodeExamples
+
+*gapExample.omtt*:
+{{{
+/* arguments body and title are obligatory
+ * while footer is optional
+ */
+% def page content title ~footer
+<html>
+  <head>
+    <title>{title}</title>
+  </head>
+  <body>
+    {content}
+    <hr>
+    {footer or "default footer generated with OMTT"}
+  </body>
+</html>
+% end
+}}}
+
+<br>
+*gapExample.java*:
+{{{
+import pl.omtt.caller.OmttCaller;
+
+public class Launcher {
+        public static void main (String[] args) {
+                OmttCaller.print("gapExample.page", "Some page content", "Sample page title");
+        }
+}
+}}}
