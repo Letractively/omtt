@@ -1,11 +1,12 @@
-sample.omtt:
+*sample.omtt*:
 {{{
 % def hello
   Hello, world!
 % end
 }}}
 
-
+<br>
+*sample.java*:
 {{{
 import pl.omtt.caller.OmttCaller;
 
