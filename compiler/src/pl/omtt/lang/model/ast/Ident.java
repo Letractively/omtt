@@ -86,18 +86,22 @@ public class Ident extends CommonNode implements IExpression,
 				return;
 			}
 		} else {
-			if (setFromSymbolTable(st, false)) {
-				fSource = SOURCE_LOCAL;
-				return;
-			}
-			if (checkContext && setFromContextObject(st)) {
-				fSource = SOURCE_CONTEXT_OBJECT;
-				return;
-			}
-			SymbolTable pst = st instanceof BaseSymbolTable ? st : st.getParent();
-			if (pst != null && setFromSymbolTable(pst, true)) {
-				fSource = SOURCE_LOCAL;
-				return;
+			while (st != null) {
+				if (setFromSymbolTable(st, false)) {
+					fSource = SOURCE_LOCAL;
+					return;
+				}
+				if (checkContext && setFromContextObject(st)) {
+					fSource = SOURCE_CONTEXT_OBJECT;
+					return;
+				}
+
+				if (st instanceof BaseSymbolTable && setFromSymbolTable(st, true)) {
+					fSource = SOURCE_LOCAL;
+					return;
+				}
+				
+				st = st.getParent();
 			}
 		}
 		fType = ErrorType.instance();

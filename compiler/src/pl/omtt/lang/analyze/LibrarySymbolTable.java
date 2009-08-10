@@ -141,13 +141,19 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 		if (type.isGeneric()) {
 			throw new UnsupportedOperationException();
 		} else if (!type.isFunction()) {
-			if (typetree.getType() != TypeStringParser.SCALAR)
+			if (typetree.getType() != TypeStringParser.SCALAR
+					&& typetree.getType() != TypeStringParser.GENERIC_VAR)
 				throw new Exception(
 						"annotated type and method signature not suit");
+			Integer iid = null;
 			if (typetree.getChildCount() > 1
 					&& typetree.getChild(1).getType() == TypeStringParser.GENERIC) {
-				int iid = Integer.parseInt(typetree.getChild(1).getChild(0)
+				iid = Integer.parseInt(typetree.getChild(1).getChild(0)
 						.getText());
+			} else if (typetree.getType() == TypeStringParser.GENERIC_VAR) {
+				iid = typetree.getText().hashCode();
+			}
+			if (iid != null) {
 				GenericType gtype = new GenericType(type, iid);
 				TypeUnifier.preserveAttributes(gtype, type);
 				return gtype;
