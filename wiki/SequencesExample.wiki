@@ -3,7 +3,7 @@
 *sequences.omtt*:
 {{{
 /* Start (*) following type (e.g. Int) declares sequence.
- * Colon at the end of def line means, that the body is an expression, not data.
+ * Colon at the end of def line means, that the body is expression, not data.
  */
 % def doubleIntegers ints.Int*:
   map anint <- ints:
