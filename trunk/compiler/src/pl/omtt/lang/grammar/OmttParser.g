@@ -448,9 +448,8 @@ fragment property_select
 	: VAR_ID sequence_selectors?
 	;
 fragment sequence_selectors
-	: type_selector sequence_selector? alias?
-	| sequence_selector alias?
-	| alias
+	: type_selector sequence_selector?
+	| sequence_selector
 	;
 fragment type_selector
   : DOT single_type
@@ -460,10 +459,6 @@ fragment sequence_selector
   : LEFT_SQUARE_PAREN expression RIGHT_SQUARE_PAREN
   	-> ^(SEQUENCE_SELECT expression)
   ;
-fragment alias
-	: AS VAR_ID
-		-> ^(AS VAR_ID)
-	;
 
 data_expression
   : DATA_START data_body_atom* DATA_END

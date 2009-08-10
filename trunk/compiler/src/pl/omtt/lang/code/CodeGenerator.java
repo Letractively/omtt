@@ -199,7 +199,10 @@ public class CodeGenerator extends AbstractTreeWalker {
 			Argument sourcearg = sourcef.getArgument(i);
 			if (i < targetf.getArgumentLength()) {
 				Argument targetarg = targetf.getArgument(i);
-				String argname = targetarg.name.replace('@', '$');
+				String argname = targetarg.name;
+				if (argname == null)
+					argname = "arg" + i;
+				argname = argname.replace('@', '$');
 				if (argname == null)
 					argname = "arg" + i;
 				buf.append(cast(argname, targetarg.type, sourcearg.type));
@@ -467,8 +470,10 @@ public class CodeGenerator extends AbstractTreeWalker {
 					'@', '$'));
 		}
 		final IExpression body = def.getBodyNode();
-		apply(body);
-		if (!flushBuffer) {
+		if (flushBuffer) {
+			apply(body);
+		} else {
+			exprapply(body);
 			fBuffer.putl("return %s;", cast(fBuffer.getReference(body), body
 					.getExpressionType(), rettype));
 		}

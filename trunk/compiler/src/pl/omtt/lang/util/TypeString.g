@@ -49,6 +49,8 @@ type
 		-> ^(SCALAR CLASS_ID modifiers?)
 	| '(' function ')' modifiers
 		-> ^(FUNCTION function modifiers?)
+	| GENERIC_VAR sequence?
+		-> ^(GENERIC_VAR sequence?)
 	;
 
 modifiers
@@ -69,9 +71,13 @@ CLASS_ID
 	| '_'
 	;
 
-INTEGER : ('0'..'9')+;
-
 fragment NAMECHAR   : 'a'..'z' | 'A'..'Z' | '0'..'9' | '$' | '_';
+
+INTEGER : ('0'..'9')+;
+GENERIC_VAR
+	: '`' l=('a'..'z')
+		{setText(getText().substring(1));}
+	;
 
 VAR_ID
   : (SMALL_LETTER | '_' | '@') NAMECHAR*

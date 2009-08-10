@@ -1,5 +1,7 @@
 package pl.omtt.lang.model.ast;
 
+import java.util.List;
+
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;
@@ -152,9 +154,18 @@ public class TemplateDefinition extends CommonNode implements
 	}
 
 	private void setSymbol(SymbolTable ST) throws SemanticException {
-		fSymbol = new Symbol(getTemplateName(), fType);
 		Symbol covering = ST.getParent().find(getTemplateName(), false);
 
+		// check if this node sets its symbol again
+		if (covering == fSymbol) {
+			covering = null;
+		} else if (covering instanceof MultiSymbol) {
+			List<Symbol> part = ((MultiSymbol) covering).getParticipants();
+			if (part.size() == 1 && part.get(0) == fSymbol)
+				covering = null;
+		}
+
+		fSymbol = new Symbol(getTemplateName(), fType);
 		if (isContext()) {
 			final MultiSymbol ms;
 			if (covering != null) {
