@@ -3,5 +3,5 @@
 
 ===Podstawy===
   * [HelloWorld Hello world]
-  * [CodeSimple1 Tekst z lukami]
-  * [CodeSimple2 Sekwencje]
+  * [SimpleGapExample Prosty szablon z lukami]
+  * [SequencesExample Sekwencje]
