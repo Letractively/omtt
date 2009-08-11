@@ -1,0 +1,47 @@
+#summary Przykład użycia szablonów polimorficznych
+
+*declarative.omtt*:
+{{{
+/* First we declare polymoprphic template. Object will be matched in order of declaring
+ * templates.
+ * I.e. if we had object that matches more than one template, the first will be used.
+ */
+% def polysample [String where length > 10]
+  long string
+% end
+
+% def polysample [String]
+  string {it} with length {it.length}
+% end
+
+% def polysample [Int]
+  integer number: {it}
+% end
+
+% def polysample [Real]
+  real number: {it}
+% end
+
+% def polysample [_]
+  some other object: {it}
+% end
+
+/* Now, let's test it!
+ */
+% def test
+  <!-- will show integer number -->
+  {12 | polysample}
+
+  <!-- will show real number -->
+  {1.11 | polysample}
+
+  <!--will show long string-->
+  {"many many many words many" | polysample}
+
+  <!--will show normal string with its length-->
+  {"short" | polysample}
+
+  <!--will show 'other object' with object converted to string-->
+  {true | polysample}
+% end
+}}}
