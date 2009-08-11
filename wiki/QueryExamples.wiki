@@ -1,5 +1,5 @@
 #summary Przykłady zapytań
-#sidebar TOCCodeExamples
+#sidebar TOCCodeExamplesBasics
 
 http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
 
