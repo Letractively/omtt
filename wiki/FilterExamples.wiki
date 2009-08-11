@@ -18,7 +18,7 @@
   // it's the same!
   {"unsophisticated" | trimmer}
 
-  // an this too
+  // and this too
   {"unsophisticated" apply trimmer}
 
   // let's check a sequence
