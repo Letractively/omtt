@@ -11,7 +11,7 @@
 % end
 
 % def polysample [String]
-  string {it} with length {it.length}
+  string {it} with length {length}
 % end
 
 % def polysample [Int]
