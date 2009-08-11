@@ -1,5 +1,6 @@
 #summary Przykłady użycia sekwencji
 #labels CodeExamples
+#sidebar TOCCodeExamplesBasics
 
 *sequences.omtt*:
 {{{
