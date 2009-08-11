@@ -7,7 +7,7 @@
 // let's define a template for use as filter
 // trimmer takes a string s and integer n
 // returns s back when it's shorter than n letters or 'long' otherwise
-% def trimmer s.String n.Integer
+% def trimmer s.String n.Int
   {
     if s.length < n: s else: "long"
   }
