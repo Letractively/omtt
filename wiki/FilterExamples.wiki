@@ -1,4 +1,5 @@
 #summary Przykłady użycia filtrów
+#labels CodeExamples
 #sidebar TOCCodeExamplesBasics
 
 *filters.omtt*:
