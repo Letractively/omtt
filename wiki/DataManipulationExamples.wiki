@@ -14,7 +14,6 @@ http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
   </ul>
 % end
 
-
 % def test [Company]
   // list all the employees as HTML list
   { employees | html_list }
