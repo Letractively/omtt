@@ -7,6 +7,8 @@ http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
 
 *dataManipulation.omtt*
 {{{
+%% import pl.omtt.samples.enterprise-model._
+
 // simple template transformating sequence into HTML list
 % def html_list items*
   <ul>
