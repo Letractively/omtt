@@ -1,4 +1,5 @@
 #summary Przykład użycia szablonów polimorficznych
+#sidebar TOCCodeExamplesBasics
 
 *declarative.omtt*:
 {{{
