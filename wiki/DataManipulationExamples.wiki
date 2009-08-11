@@ -1,2 +1,3 @@
 #summary Przykłady manipulacji danymi
+#labels CodeExamples
 #sidebar TOCCodeExamplesBasics
