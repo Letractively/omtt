@@ -1,5 +1,6 @@
 #summary Prosty szablon z lukami
 #labels Phase-Support,CodeExamples
+#sidebar TOCCodeExamplesBasics
 
 *gapExample.omtt*:
 {{{
