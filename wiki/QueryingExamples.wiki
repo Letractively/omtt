@@ -10,7 +10,6 @@ http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
 
 // testQueries gets a Company as an argument and takes into context
 % def testQueries [Company]
-
   // list names of all main departments
   { departments.name }
 
