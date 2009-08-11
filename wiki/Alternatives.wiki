@@ -7,11 +7,16 @@
   * [http://www.jamon.org Jamon]
 
   * [http://www.smarty.net Smarty]
-  * [http://jinja.pocoo.org Jinja]
   * [http://phptal.org PHP TAL]
+  * [http://jinja.pocoo.org Jinja]
+  * [http://www.invenzzia.org/en/projects/open-power-libraries/open-power-template Open Power Template]
 
 ==Deklaratywne języki przekształceń (_m2t - model to text_)==
   * [http://www.w3.org/Style/XSL/ XSLT]
   * XQuery
   * [http://www.openarchitectureware.org openArchitectureWare]
   * [http://wiki.eclipse.org/Acceleo Acceleo]
+
+==Projekty==
+  * [http://www.eclipse.org/modeling/m2t/ Eclipse Model To Text]
+  * 
