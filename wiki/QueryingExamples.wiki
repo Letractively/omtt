@@ -31,7 +31,7 @@ http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
 
   // find all managers living and working in different cities
   {
-    employees.Manager as m
+    employees.Manager
     where
       address.city != department.address.city
   }
