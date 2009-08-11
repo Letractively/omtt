@@ -5,29 +5,29 @@
 *filters.omtt*:
 {{{
 // let's define a template for use as filter
-// trimmer takes a string and returns it back only when shorter than 6 letters
-// otherwise, returns 'long'
-% def trimmer str.Int
+// trimmer takes a string s and integer n
+// returns s back when it's shorter than n letters or 'long' otherwise
+% def trimmer s.String n.Integer
   {
-    if str.length < 6: str else: "long"
+    if s.length < n: s else: "long"
   }
 % end
 
 % def testFilters
   // will show 'long'
-  {trimmer "unsophisticated"}
+  {trimmer "unsophisticated" 6}
 
   // it's the same!
-  {"unsophisticated" | trimmer}
+  {"unsophisticated" | trimmer 6}
 
   // and this too
-  {"unsophisticated" apply trimmer}
+  {"unsophisticated" apply trimmer 6}
 
   // let's check a sequence
   // this will show ("three", "long", "a")
-  { ("three", "many many many", "a") | trimmer }
+  { ("three", "many many many", "a") | trimmer 6 }
 
   // this will FAIL
-  {trimmer ("three", "many many many", "a")}
+  { trimmer ("three", "many many many", "a") 6 }
 % end
 }}}
