@@ -1,4 +1,5 @@
 #summary Traditional Hello World template in OMTT
+#sidebar TOCCodeExamplesBasics
 
 *sample.omtt*:
 {{{
