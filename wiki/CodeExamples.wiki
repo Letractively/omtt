@@ -8,7 +8,7 @@
   * [TagExamples Tagi]
   * [FilterExamples Filtry]
   * [DeclarativeExample Szablony polimorficzne]
-  * [QueryingExamples Zapytania]
+  * [QueryExamples Zapytania]
   * [DataManipulationExamples Manipulacja danymi]
 
 ==Inne==
