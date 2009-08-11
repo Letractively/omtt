@@ -29,19 +29,19 @@
 /* Now, let's test it!
  */
 % def test
-  <!-- will show integer number -->
+  // will show integer number
   {12 | polysample}
 
-  <!-- will show real number -->
+  // will show real number
   {1.11 | polysample}
 
-  <!--will show long string-->
+  // will show long string
   {"many many many words many" | polysample}
 
-  <!--will show normal string with its length-->
+  // will show normal string with its length
   {"short" | polysample}
 
-  <!--will show 'other object' with object converted to string-->
+  // will show 'other object' with object converted to string
   {true | polysample}
 % end
 }}}
