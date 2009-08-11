@@ -1,18 +1,15 @@
 #summary Subiektywny przegląd alternatywnych do OMTT rozwiązań w dziedzinie generowania tekstu
 
 ==Systemy szablonów==
-====[http://www.freemarker.org FreeMarker]====
-  aaa
-  aaa
+  * [http://www.freemarker.org FreeMarker] - najpopularniejszy system szablonów dla Javy
+  * [http://velocity.apache.org Velocity] - o nieskomplikowanej składni, dedykowany dla osób nietechnicznych
+  * [http://www.stringtemplate.org StringTemplate] - jedyny projekt akademicki, opracowany przez Terrence Parr'a - twórcę generatora parserów ANTLR
+  * [http://www.jamon.org Jamon] - niezbyt popularny, ale kompilowany
 
-====[http://velocity.apache.org Velocity]====
-====[http://www.stringtemplate.org StringTemplate]====
-====[http://www.jamon.org Jamon]====
-
-====[http://www.smarty.net Smarty]====
-====[http://phptal.org PHP TAL]====
-====[http://jinja.pocoo.org Jinja]====
-====[http://www.invenzzia.org/en/projects/open-power-libraries/open-power-template Open Power Template]====
+  * [http://www.smarty.net Smarty] - prawdopodobnie najpopularniejszy na świecie, przeznaczony dla PHP
+  * [http://phptal.org PHP TAL] - system szablonów wykorzystujący atrybuty HTML-owe i dzięki temu przyjazny graficznym edytorom HTML
+  * [http://jinja.pocoo.org Jinja] - system szablonów dla Pythona, o eleganckiej składni
+  * [http://www.invenzzia.org/en/projects/open-power-libraries/open-power-template Open Power Template] - polski system szablonów dla PHP
 
 ==Deklaratywne języki przekształceń (_m2t - model to text_)==
   * [http://www.w3.org/Style/XSL/ XSLT]
