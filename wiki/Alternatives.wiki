@@ -3,7 +3,7 @@
 ==Systemy szablonów==
   * [http://www.freemarker.org FreeMarker] - najpopularniejszy system szablonów dla Javy
   * [http://velocity.apache.org Velocity] - o nieskomplikowanej składni, dedykowany dla osób nietechnicznych
-  * [http://www.stringtemplate.org StringTemplate] - jedyny projekt akademicki, opracowany przez Terrence Parr'a - twórcę generatora parserów ANTLR, o prostej składni podszytej pozytywną ideologią (brak dostępu do wiedzy o modelu)
+  * [http://www.stringtemplate.org StringTemplate] - jedyny projekt akademicki, opracowany przez Terrence Parr'a - twórcę generatora parserów ANTLR, o prostej składni podszytej pozytywną ideologią (szablony nie mogą nie tylko modyfikować, ale również sprawdzać zawartości modelu)
   * [http://www.jamon.org Jamon] - niezbyt popularny, ale jako jedyny obok JSP kompilowany
 
   * [http://www.smarty.net Smarty] - prawdopodobnie najpopularniejszy na świecie, przeznaczony dla PHP
