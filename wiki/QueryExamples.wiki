@@ -1,4 +1,5 @@
 #summary Przykłady zapytań
+#sidebar CodeExamplesSidebar
 
 http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
 
