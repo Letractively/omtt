@@ -1,13 +1,17 @@
-#summary Opis alternatywnych rozwiązań w dziedzinie generowania tekstu
+#summary Subiektywny przegląd alternatywnych do OMTT rozwiązań w dziedzinie generowania tekstu
 
-= Introduction =
+==Systemy szablonów==
+  * [FreeMarker http://www.freemarker.org]
+  * Velocity
+  * StringTemplate
+  * Jamon
 
-Add your content here.
+  * Smarty
+  * Jinja
+  * PHP TAL
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+==Deklaratywne języki przekształceń ([i]m2t - model to text[/i])==
+  * XSLT
+  * XQuery
+  * [openArchitectureWare http://www.openarchitectureware.org]
+  * [Acceleo http://wiki.eclipse.org/Acceleo]
