@@ -43,5 +43,9 @@
 
   // will show 'other object' with object converted to string
   {true | polysample}
+
+  // this will work too!
+  // items will be transformed item by item
+  {(42, 42.42, "abc") | polysample}
 % end
 }}}
