@@ -22,7 +22,7 @@ http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
   // or - what is exactly the same
   { employees apply html_list }
 
-  // list main departments with count of their employees as HTML list
+  // show main departments with number of their employees as HTML list
   {
     deparmtments as d
     map
