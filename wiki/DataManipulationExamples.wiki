@@ -23,7 +23,7 @@ http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
 
   // show main departments with number of their employees as HTML list
   {
-    deparmtments as d
+    departments as d
     map
       "<b>{name}</b>: {count employees[department == d]} employees"
     apply
