@@ -320,13 +320,16 @@ apply_tag
 
 
 strict_expression
-	: concatence_expression
-	| apply_expression
+	: (expr=concatence_expression -> $expr)
+		( AS VAR_ID
+			-> ^(AS<Alias> $expr VAR_ID)
+		)?
 	;
 
 concatence_expression
   : (expr+=boolean_expression -> $expr)
     ((OP_CONCAT expr+=boolean_expression)+ -> ^(OP_CONCAT<Data> $expr+))?
+	| apply_expression
   ;
 
 // BEGIN: boolean expressions

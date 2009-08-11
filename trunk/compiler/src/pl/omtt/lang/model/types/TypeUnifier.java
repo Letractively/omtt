@@ -216,7 +216,7 @@ public class TypeUnifier {
 		return preserveAttributes(new AnyType(), typeA, typeB);
 	}
 
-	public static IType preserveAttributes(IType target, IType srcA, IType srcB) {
+	public static IType preserveAttributes(IType target, IType srcA, IType srcB) {		
 		if (srcA.isSequence() || srcB.isSequence())
 			target.setSequence();
 		else
@@ -227,6 +227,11 @@ public class TypeUnifier {
 		else
 			target.unsetNotNull();
 
+		if (srcA.getName() != null && srcA.getName().equals(srcB.getName()))
+			target.setName(srcA.getName());
+		else
+			target.setName(null);
+		
 		return target;
 	}
 
@@ -241,6 +246,8 @@ public class TypeUnifier {
 		else
 			target.unsetNotNull();
 
+		target.setName(src.getName());
+		
 		return target;
 	}
 

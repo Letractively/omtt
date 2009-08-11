@@ -98,6 +98,8 @@ public abstract class CommonSelectorNode extends CommonNode implements
 			singleType.unsetSequence();
 			fItSymbol = new Symbol(Symbol.CONTEXT, singleType);
 			symbolTable.put(fItSymbol);
+			if (singleType.getName() != null)
+				symbolTable.setAlias(fItSymbol, singleType.getName());
 
 			if (getAliasNode() != null) {
 				fAliasSymbol = new Symbol(getAliasNode().getText(),

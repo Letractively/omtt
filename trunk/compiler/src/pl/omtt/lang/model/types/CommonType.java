@@ -3,6 +3,7 @@ package pl.omtt.lang.model.types;
 public abstract class CommonType implements IType, Cloneable {
 	boolean fSequence = false;
 	boolean fNotNull = false;
+	String fName = null;
 
 	public boolean isSequence() {
 		return fSequence;
@@ -46,6 +47,15 @@ public abstract class CommonType implements IType, Cloneable {
 		return false;
 	}
 
+	@Override
+	public String getName () {
+		return fName;
+	}
+
+	public void setName (String name) {
+		fName = name;
+	}
+	
 	public IType dup() {
 		try {
 			return (IType) this.clone();
