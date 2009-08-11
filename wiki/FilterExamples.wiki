@@ -1,0 +1,31 @@
+#summary Przykłady użycia filtrów
+
+*filters.omtt*:
+{{{
+// let's define a template
+// trimmer takes a string and shows it only when shorter than 6 letters
+// otherwise, returns 'long'
+% def trimmer str.Int
+  {
+    if str.length < 6: str else: "long"
+  }
+% end
+
+% def testFilters
+  // will show 'long'
+  {trimmer "unsophisticated"}
+
+  // it's the same!
+  {"unsophisticated" | trimmer}
+
+  // this as well
+  {"unsophisticated" apply trimmer}
+
+  // let's check a sequence
+  // will show ("three", "long", "a")
+  { ("three", "many many many", "a") | trimmer }
+
+  // this will FAIL
+  {trimmer ("three", "many many many", "a")}
+% end
+}}}
