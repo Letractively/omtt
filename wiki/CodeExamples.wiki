@@ -8,7 +8,8 @@
   * [TagExamples Tagi]
   * [FilterExamples Filtry]
   * [DeclarativeExample Szablony polimorficzne]
-
+  * [QueryingExamples Zapytania]
+  * [DataManipulationExamples Manipulacja danymi]
 
 ==Inne==
   * [UnsophisticatedPrimeSearchExample Niezbyt wyrafinowane wyszukiwanie liczb pierwszych]
