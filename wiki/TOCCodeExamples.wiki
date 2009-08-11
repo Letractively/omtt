@@ -1,4 +1,3 @@
-  * [Welcome ↑ Strona powitalna]
-  * [CodeExamples Przykłady szablonów OMTT]
-    * *Podstawy*
-      * [HelloWorld Hello World]
+* [CodeExamples Przykłady szablonów OMTT]
+  * *Podstawy*
+    * [HelloWorld Hello World]
