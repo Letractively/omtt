@@ -11,7 +11,7 @@ http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
 // testQueries gets a Company as an argument and takes into context
 % def testQueries [Company]
 
-  // list names of all the departments
+  // list names of all main departments
   { departments.name }
 
   // list all of the employees
@@ -20,7 +20,7 @@ http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
   // find director of IT department
   { employees.Director[department.name == 'IT'] }
 
-  // or, what is the same (where has lower priority):
+  // or, what is the same (where operator has lower priority):
   { employees where department.name == 'IT' }
 
   // find directors that earn less money than any of their employees
