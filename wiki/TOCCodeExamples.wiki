@@ -1,4 +1,4 @@
-  *Podstawy*
+*Podstawy*
   * [HelloWorld Hello world]
   * [SimpleGapExample Prosty szablon z lukami]
   * [SequencesExample Sekwencje]
