@@ -3,13 +3,13 @@
 ==Systemy szablonów==
   * [http://www.freemarker.org FreeMarker] - najpopularniejszy system szablonów dla Javy
   * [http://velocity.apache.org Velocity] - o nieskomplikowanej składni, dedykowany dla osób nietechnicznych
-  * [http://www.stringtemplate.org StringTemplate] - jedyny projekt akademicki, opracowany przez Terrence Parr'a - twórcę generatora parserów ANTLR
+  * [http://www.stringtemplate.org StringTemplate] - jedyny projekt akademicki, opracowany przez Terrence Parr'a - twórcę generatora parserów ANTLR, o prostej składni podszytej pozytywną ideologią (brak dostępu do wiedzy o modelu)
   * [http://www.jamon.org Jamon] - niezbyt popularny, ale jako jedyny obok JSP kompilowany
 
   * [http://www.smarty.net Smarty] - prawdopodobnie najpopularniejszy na świecie, przeznaczony dla PHP
-  * [http://phptal.org PHP TAL] - system szablonów wykorzystujący atrybuty HTML-owe i dzięki temu przyjazny graficznym edytorom HTML
-  * [http://jinja.pocoo.org Jinja] - system szablonów dla Pythona, o eleganckiej składni
-  * [http://www.invenzzia.org/en/projects/open-power-libraries/open-power-template Open Power Template] - polski system szablonów dla PHP
+  * [http://phptal.org PHP TAL] - wykorzystuje atrybuty HTML-owe i dzięki temu jest strawny dla graficznych edytorów HTML
+  * [http://jinja.pocoo.org Jinja] - dla Pythona, posiada całkiem elegancką składnię
+  * [http://www.invenzzia.org/en/projects/open-power-libraries/open-power-template Open Power Template] - stworzony przez polski zespół, o składni XML-owej, przeznaczony dla PHP
 
 ==Deklaratywne języki przekształceń (_m2t - model to text_)==
   * [http://www.w3.org/Style/XSL/ XSLT]
