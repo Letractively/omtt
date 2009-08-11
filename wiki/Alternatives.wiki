@@ -2,6 +2,8 @@
 
 ==Systemy szablonów==
   * [http://www.freemarker.org FreeMarker]
+    aaa
+    aaa
   * [http://velocity.apache.org Velocity]
   * [http://www.stringtemplate.org StringTemplate]
   * [http://www.jamon.org Jamon]
@@ -19,4 +21,4 @@
 
 ==Projekty==
   * [http://www.eclipse.org/modeling/m2t/ Eclipse Model To Text]
-  * 
+  * [http://www.omg.org/mda/ OMG Model Driven Architecture]
