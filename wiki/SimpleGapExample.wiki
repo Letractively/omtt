@@ -27,8 +27,8 @@
 import pl.omtt.caller.OmttCaller;
 
 public class Launcher {
-        public static void main (String[] args) {
-                OmttCaller.print("gapExample.page", "Some page content", "Sample page title");
-        }
+  public static void main (String[] args) {
+    OmttCaller.print("gapExample.page", "Some page content", "Sample page title");
+  }
 }
 }}}
