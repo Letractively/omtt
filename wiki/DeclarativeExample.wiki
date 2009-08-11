@@ -22,7 +22,7 @@
   real number: {it}
 % end
 
-% def polysample [_]
+% def polysample [Any]
   some other object: {it}
 % end
 
