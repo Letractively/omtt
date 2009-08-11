@@ -21,6 +21,7 @@ public interface IVisitor {
 	public void visit (LambdaMatchItem lambdaMatchItem);
 	public void visit (Transformation node);
 	public void visit (FunctionArgument node);
+	public void visit (Alias alias);
 
 	public void visit (ArithmeticExpression node);
 	public void visit (ArithmeticMinus node);

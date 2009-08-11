@@ -37,4 +37,7 @@ public interface IType {
 	String toEssentialString();
 
 	IType getEffectiveLowerBound();
+
+	String getName();
+	void setName(String name);
 }

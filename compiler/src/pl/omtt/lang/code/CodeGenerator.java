@@ -1272,6 +1272,13 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putShortExpression(bexpr, buf.toString());
 	}
 
+	public void visit (Alias alias) {
+		if (alias.getExpressionType().isSingleData())
+			apply(alias.getContent());
+		else
+			fBuffer.putExpression(alias, exprapply(alias.getContent()));
+	}
+	
 	private void putNullCheck(StringBuffer buf, final String var, IType type) {
 		if (!type.isNotNull())
 			buf.append(checkNull(var, type)).append(" ? null : ");

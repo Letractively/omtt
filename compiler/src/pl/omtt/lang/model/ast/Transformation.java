@@ -82,6 +82,8 @@ public class Transformation extends CommonNode implements IFoldExpression,
 		iterateType.unsetSequence();
 		fItSymbol = new Symbol(Symbol.CONTEXT, iterateType);
 		symbolTable.put(fItSymbol);
+		if (iterateType.getName() != null)
+			symbolTable.setAlias(fItSymbol, iterateType.getName());
 
 		if (getItemAlias() != null)
 			symbolTable.setAlias(fItSymbol, getItemAlias());
