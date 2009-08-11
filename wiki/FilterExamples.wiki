@@ -22,7 +22,7 @@
   {"unsophisticated" apply trimmer}
 
   // let's check a sequence
-  // will show ("three", "long", "a")
+  // this will show ("three", "long", "a")
   { ("three", "many many many", "a") | trimmer }
 
   // this will FAIL
