@@ -22,6 +22,6 @@
 % def testAsFunction:
   chapter
     {Test Content}
-    title={Test chapter}
+    title="Test chapter"
 % end
 }}}
