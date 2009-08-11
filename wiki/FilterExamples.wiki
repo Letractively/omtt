@@ -3,7 +3,7 @@
 *filters.omtt*:
 {{{
 // let's define a template
-// trimmer takes a string and shows it only when shorter than 6 letters
+// trimmer takes a string and shows it only when it's shorter than 6 letters
 // otherwise, returns 'long'
 % def trimmer str.Int
   {
