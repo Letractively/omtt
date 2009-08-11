@@ -2,16 +2,16 @@
 
 ==Systemy szablonów==
   * [http://www.freemarker.org FreeMarker]
-  * Velocity
-  * StringTemplate
-  * Jamon
+  * [http://velocity.apache.org Velocity]
+  * [http://www.stringtemplate.org StringTemplate]
+  * [http://www.jamon.org Jamon]
 
-  * Smarty
-  * Jinja
-  * PHP TAL
+  * [http://www.smarty.net Smarty]
+  * [http://jinja.pocoo.org Jinja]
+  * [http://phptal.org PHP TAL]
 
 ==Deklaratywne języki przekształceń (_m2t - model to text_)==
-  * XSLT
+  * [http://www.w3.org/Style/XSL/ XSLT]
   * XQuery
   * [http://www.openarchitectureware.org openArchitectureWare]
   * [http://wiki.eclipse.org/Acceleo Acceleo]
