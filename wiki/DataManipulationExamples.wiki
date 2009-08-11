@@ -34,9 +34,9 @@ http://omtt.googlecode.com/svn/wiki/images/enterprise-diagram.jpg
 
   // list all teams with their participants
   // managers should be bolded
-  % map employees.Manager as manager
-    <h3>Team: {manager.team.number}</h3>
-    { employees[team == manager.team] as emp
+  % map employees.Manager.team as t
+    <h3>Team: {number}</h3>
+    { employees[team == t] as emp
       map
         if emp.Manager: "<b>{emp}</b>" else: emp
       apply
