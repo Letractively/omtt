@@ -1,12 +1,11 @@
-  * [CodeExamples Przykłady szablonów OMTT]
-    * *Podstawy*
-      * [HelloWorld Hello world]
-      * [SimpleGapExample Prosty szablon z lukami]
-      * [SequencesExample Sekwencje]
-      * [TagExamples Tagi]
-      * [FilterExamples Filtry]
-      * [DeclarativeExample Szablony polimorficzne]
-      * [QueryExamples Zapytania]
-      * [DataManipulationExamples Manipulacja danymi]
-    * *Inne*
-      * [UnsophisticatedPrimeSearchExample Niezbyt wyrafinowane wyszukiwanie liczb pierwszych]
+  * *Podstawy*
+    * [HelloWorld Hello world]
+    * [SimpleGapExample Prosty szablon z lukami]
+    * [SequencesExample Sekwencje]
+    * [TagExamples Tagi]
+    * [FilterExamples Filtry]
+    * [DeclarativeExample Szablony polimorficzne]
+    * [QueryExamples Zapytania]
+    * [DataManipulationExamples Manipulacja danymi]
+  * *Inne*
+    * [UnsophisticatedPrimeSearchExample Niezbyt wyrafinowane wyszukiwanie liczb pierwszych]
