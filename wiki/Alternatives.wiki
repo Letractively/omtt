@@ -1,17 +1,18 @@
 #summary Subiektywny przegląd alternatywnych do OMTT rozwiązań w dziedzinie generowania tekstu
 
 ==Systemy szablonów==
-  * [http://www.freemarker.org FreeMarker]
+====[http://www.freemarker.org FreeMarker]====
   aaa
   aaa
-  * [http://velocity.apache.org Velocity]
-  * [http://www.stringtemplate.org StringTemplate]
-  * [http://www.jamon.org Jamon]
 
-  * [http://www.smarty.net Smarty]
-  * [http://phptal.org PHP TAL]
-  * [http://jinja.pocoo.org Jinja]
-  * [http://www.invenzzia.org/en/projects/open-power-libraries/open-power-template Open Power Template]
+====[http://velocity.apache.org Velocity]====
+====[http://www.stringtemplate.org StringTemplate]====
+====[http://www.jamon.org Jamon]====
+
+====[http://www.smarty.net Smarty]====
+====[http://phptal.org PHP TAL]====
+====[http://jinja.pocoo.org Jinja]====
+====[http://www.invenzzia.org/en/projects/open-power-libraries/open-power-template Open Power Template]====
 
 ==Deklaratywne języki przekształceń (_m2t - model to text_)==
   * [http://www.w3.org/Style/XSL/ XSLT]
