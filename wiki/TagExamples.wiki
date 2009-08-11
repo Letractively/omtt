@@ -18,7 +18,7 @@
 // it is correct too and results the same
 // hovewer the above use is much more readable and intuitive!
 //
-// take attention to colon at the and of def line! (means that content is an expression)
+// take attention to colon at the and of the def line! (means that content is an expression)
 % def testAsFunction:
   chapter
     {Test Content}
