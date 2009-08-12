@@ -51,7 +51,7 @@
   {(42, 42.42, "abc") | polysample}
 
   // polymorphic templates may be used as normal functions
-  // polysample is treated like any funciton with type (_ -> Data)
+  // polysample is treated like any other funciton with type (_ -> Data)
   polysample 11
 % end
 }}}
