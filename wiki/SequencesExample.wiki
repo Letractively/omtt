@@ -8,7 +8,7 @@
  * Colon at the end of def line means, that the body is expression, not textual data.
  */
 % def doubleIntegers ints.Int*:
-  map anint <- ints:
+  map ints as anint:
     anint * 2
 % end
 
