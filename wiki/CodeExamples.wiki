@@ -11,7 +11,7 @@
   * [QueryExamples Zapytania]
   * [DataManipulationExamples Manipulacja danymi]
 
-To przykłady użycia najważniejszych, choć nie wszystkich funkcji - w kolejce czekają jeszcze funkcje wyższych rzędów, rozszerzanie szablonów polimorficznych pochodzących z bibliotek, wykorzystywanie inferencji typów i tworzenie modułów w Javie. Ich zwięzły opis znaleźć można na stronie powitalnej.
+To przykłady użycia najważniejszych, choć nie wszystkich konstrukcji języka - w kolejce czekają jeszcze funkcje wyższych rzędów, rozszerzanie szablonów polimorficznych pochodzących z bibliotek, wykorzystywanie inferencji typów i tworzenie modułów w Javie. Ich zwięzły opis znaleźć można na stronie powitalnej.
 
 ==Inne==
   * [UnsophisticatedPrimeSearchExample Niezbyt wyrafinowane wyszukiwanie liczb pierwszych]
