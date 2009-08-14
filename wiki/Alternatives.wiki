@@ -16,6 +16,7 @@
   * XQuery
   * [http://www.openarchitectureware.org openArchitectureWare]
   * [http://wiki.eclipse.org/Acceleo Acceleo]
+  * [http://www.eclipse.org/gmt/mofscript/ MOFScript]
 
 ==Projekty==
   * [http://www.eclipse.org/modeling/m2t/ Eclipse Model To Text]
