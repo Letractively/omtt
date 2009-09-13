@@ -35,7 +35,6 @@ public class SemanticAnalyzer {
 				librarySymbolTableSupplier, source, fProblemCollector,
 				fCollectLibraryReferences);
 		symbolTableCreator.run(program);
-
 		if (fCollectLibraryReferences) {
 			Tree usenode = program.getUsesNode();
 			BaseSymbolTable st = program.getSymbolTable();

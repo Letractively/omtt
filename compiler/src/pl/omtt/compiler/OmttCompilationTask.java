@@ -232,6 +232,13 @@ public class OmttCompilationTask {
 			return false;
 		}
 		fJavaSources.put(source, codeGenerator.getJavaSource());
+		
+		if (Debugging.DEBUG > 1) {
+			System.out.println("---" + source + ":");
+			System.out.println(codeGenerator.getJavaSource().getCode());
+			System.out.println();
+		}
+		
 		return true;
 	}
 

@@ -108,11 +108,14 @@ public class PropertySelect extends CommonSelectorNode implements
 			possibleNames.add(name);
 
 		Property property = new Property();
-		for (Method method : cls.getMethods())
-			if (possibleNames.contains(method.getName())) {
-				property.method = method;
+		for (String possibleName : possibleNames) {
+			try {
+				property.method = cls.getMethod(possibleName);
 				break;
+			} catch (Exception e) {
 			}
+		}
+
 		if (property.method == null)
 			throw new TypeException("property " + name + " not found in type "
 					+ base.singleToString());
@@ -123,9 +126,10 @@ public class PropertySelect extends CommonSelectorNode implements
 				.getGenericReturnType());
 
 		Class<?> returnClass = property.method.getReturnType();
+		System.err.println("needs wrapping? " + returnClass);
 		if (returnClass.isPrimitive())
 			property.needsTypeWrapping = true;
-		else if (returnClass.isAssignableFrom(Number.class))
+		else if (Number.class.isAssignableFrom(returnClass))
 			property.needsTypeWrapping = !NumericType
 					.isSupportedNumber(returnClass);
 		return property;
