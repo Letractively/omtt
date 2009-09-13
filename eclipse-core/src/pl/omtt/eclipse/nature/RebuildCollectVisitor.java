@@ -43,8 +43,8 @@ public class RebuildCollectVisitor implements IResourceVisitor,
 
 	protected boolean isOmttSource(IResource resource) {
 		if (resource.getType() == IResource.FILE)
-			return ((IFile) resource).getFileExtension().equals(
-					Constants.OMTT_FILE_EXTENSION);
+			return Constants.OMTT_FILE_EXTENSION.equals(((IFile) resource)
+					.getFileExtension());
 		else
 			return false;
 	}

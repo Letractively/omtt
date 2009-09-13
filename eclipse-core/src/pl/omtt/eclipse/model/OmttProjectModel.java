@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -198,9 +199,7 @@ public class OmttProjectModel {
 				targetRelativeDir += "/";
 			target = new URI(basePath + targetRelativeDir);
 			for (IClasspathEntry cpentry : jproject.getRawClasspath())
-				if (cpentry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
-					classPath.add(cpentry.getPath().toFile().toURI());
-				}
+				addClasspathEntry(cpentry, classPath, jproject);
 		} catch (JavaModelException e) {
 			e.printStackTrace();
 			return null;
@@ -212,6 +211,23 @@ public class OmttProjectModel {
 		OmttCompiler c = OmttModelManager.getOmttModelManager()
 				.getOmttCompiler();
 		return c.getTask(sources, target, classPath);
+	}
+
+	private void addClasspathEntry(IClasspathEntry cpentry,
+			List<URI> cpContainer, IJavaProject jproject) {
+		if (cpentry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
+			cpContainer.add(cpentry.getPath().toFile().toURI());
+		} else if (cpentry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
+			IClasspathContainer container;
+			try {
+				container = JavaCore.getClasspathContainer(cpentry.getPath(),
+						jproject);
+			} catch (JavaModelException e) {
+				return;
+			}
+			for (IClasspathEntry cpsubentry : container.getClasspathEntries())
+				addClasspathEntry(cpsubentry, cpContainer, jproject);
+		}
 	}
 
 	public void startRebuild() {
