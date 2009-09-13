@@ -81,6 +81,9 @@ public class BooleanExpression extends CommonNode implements IExpression,
 		final Class<?> clsA = typeA.getAssociatedClass();
 		final Class<?> clsB = typeB.getAssociatedClass();
 
+		if (clsA == null || clsB == null)
+			return false;
+		
 		for (Type gi : clsA.getGenericInterfaces()) {
 			if (!(gi instanceof ParameterizedType))
 				continue;

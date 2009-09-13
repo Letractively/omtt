@@ -1036,14 +1036,22 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 	private String getPropertyString(String base,
 			IPropertySelectExpression property) {
+		final IType ptype = property.getExpressionType();
 		StringBuffer buf = new StringBuffer();
 		boolean wrapType = property.isPropertyMethodNeedsTypeWrapping()
-				&& !property.getExpressionType().isSequence();
-		if (wrapType)
-			buf.append("new ").append(
-					fTypeAdapter.get(property.getExpressionType())).append("(");
+				&& !ptype.isSequence();
+		if (wrapType) {
+			buf.append("new ").append(fTypeAdapter.get(ptype)).append("(");
+		}
 		buf.append(base).append(".").append(
 				property.getPropertyMethod().getName()).append("()");
+		if (wrapType && ptype.isNumeric()
+				&& !property.getPropertyMethod().getReturnType().isPrimitive()) {
+			if (((NumericType) ptype).isReal())
+				buf.append(".doubleValue()");
+			else
+				buf.append(".intValue()");
+		}
 		if (wrapType)
 			buf.append(")");
 		return buf.toString();
@@ -1272,13 +1280,13 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putShortExpression(bexpr, buf.toString());
 	}
 
-	public void visit (Alias alias) {
+	public void visit(Alias alias) {
 		if (alias.getExpressionType().isSingleData())
 			apply(alias.getContent());
 		else
 			fBuffer.putExpression(alias, exprapply(alias.getContent()));
 	}
-	
+
 	private void putNullCheck(StringBuffer buf, final String var, IType type) {
 		if (!type.isNotNull())
 			buf.append(checkNull(var, type)).append(" ? null : ");
