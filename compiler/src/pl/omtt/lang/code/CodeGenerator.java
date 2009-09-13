@@ -360,6 +360,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			boolean whereClause = false;
 			if (outer) {
 				fBuffer.putl("try {");
+				fBuffer.incIndentation();
 			} else {
 				TemplateDefinition def = fMultimethodTemplates.get(s);
 				IExpression where = def.getContextWhereNode();
@@ -373,7 +374,6 @@ public class CodeGenerator extends AbstractTreeWalker {
 					fBuffer.putl("if (%s) {", condition(where));
 				}
 			}
-			fBuffer.incIndentation();
 			if (rettype.isSingleData()) {
 				fBuffer.putl("%s($buffer, %s%s);", getGlobalReference(s, null),
 						"Object".equals(jtype) ? "" : "(" + jtype + ")", argbuf
@@ -398,7 +398,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.subIndentation();
 		fBuffer.putl("}\n");
 
-		fBuffer.putl(sigtemplate + " {", "static private",
+		fBuffer.putl(sigtemplate + " {", "static public",
 				multimethodWrapperName(ms));
 		fBuffer.incIndentation();
 		fBuffer.putl("try {");
@@ -961,13 +961,16 @@ public class CodeGenerator extends AbstractTreeWalker {
 			return null;
 		else if (fSymbolLocalNames.containsKey(s))
 			return fSymbolLocalNames.get(s);
-		else if (!fBaseSymbolTable.getModuleId().equals(s.getModuleId()))
-			return OmttLoader.getModuleClassName(s.getModuleId()) + "."
-					+ s.getName().replace('@', '$');
-		else if (s instanceof MultiSymbol)
-			return multimethodWrapperName((MultiSymbol) s);
+		
+		StringBuffer callbuf = new StringBuffer();
+		if (!fBaseSymbolTable.getModuleId().equals(s.getModuleId()))
+			callbuf.append(OmttLoader.getModuleClassName(s.getModuleId())).append(".");
+
+		if (s instanceof MultiSymbol)
+			callbuf.append(multimethodWrapperName((MultiSymbol) s));
 		else
-			return s.getName().replace('@', '$');
+			callbuf.append(s.getName().replace('@', '$'));
+		return callbuf.toString();
 	}
 
 	@Override
