@@ -1,5 +1,5 @@
 package pl.omtt.core;
 
 public class Debugging {
-	public static int DEBUG = 2;
+	public static int DEBUG = 0;
 }

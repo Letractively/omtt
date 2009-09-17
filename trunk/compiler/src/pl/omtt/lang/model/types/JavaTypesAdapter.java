@@ -2,6 +2,7 @@ package pl.omtt.lang.model.types;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.Collection;
 
 public class JavaTypesAdapter {
@@ -30,8 +31,10 @@ public class JavaTypesAdapter {
 			} else {
 				return ScalarType.fromClass(rawclass);
 			}
+		} else if (type instanceof TypeVariable<?>) {
+			return new AnyType();
 		}
-		return null;
+		throw new TypeException("unhandled type " + type);
 	}
 
 	private static FunctionType functionFromType(ParameterizedType ptype)
