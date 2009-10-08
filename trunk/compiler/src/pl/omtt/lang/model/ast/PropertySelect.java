@@ -7,6 +7,7 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.Tree;
 
+import pl.omtt.core.Debugging;
 import pl.omtt.lang.analyze.ISymbolTableDualParticipant;
 import pl.omtt.lang.analyze.ISymbolTableOwner;
 import pl.omtt.lang.analyze.SymbolTable;
@@ -61,11 +62,13 @@ public class PropertySelect extends CommonSelectorNode implements
 		if (getBaseNode() == null || getBaseNode().getExpressionType() == null)
 			return ErrorType.instance();
 
-		IType base = getBaseNode().getExpressionType().getEffective();
+		IType base = getBaseNode().getExpressionType();
 
 		try {
-			fProperty = findProperty(base, getPropertyNode().getText());
-			// make dup() to have always correct property type, not necesary now
+			fProperty = findProperty(base.getEffective(), getPropertyNode()
+					.getText());
+			// make dup() to have always correct property type, not necessary
+			// now
 			if (fProperty == null) {
 				fType = new ErrorType();
 				return fType;
@@ -126,7 +129,8 @@ public class PropertySelect extends CommonSelectorNode implements
 				.getGenericReturnType());
 
 		Class<?> returnClass = property.method.getReturnType();
-		System.err.println("needs wrapping? " + returnClass);
+		if (Debugging.DEBUG > 2)
+			System.err.println("needs wrapping? " + returnClass);
 		if (returnClass.isPrimitive())
 			property.needsTypeWrapping = true;
 		else if (Number.class.isAssignableFrom(returnClass))
