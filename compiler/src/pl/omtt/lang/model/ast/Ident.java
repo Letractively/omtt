@@ -115,10 +115,10 @@ public class Ident extends CommonNode implements IExpression,
 		if (fSymbol == null)
 			return false;
 		try {
-			fProperty = PropertySelect.findProperty(fSymbol.getType(), getName());
+			fProperty = PropertySelect.findProperty(fSymbol.getType().getEffective(), getName());
 		} catch (TypeException e) {
 			return false;
-		}		
+		}
 		if (fProperty == null)
 			return false;
 		fType = fProperty.type;
