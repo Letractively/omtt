@@ -215,6 +215,7 @@ DOUBLE_DOT : '..';
 COMMA : ',';
 SLASH : '/';
 TILDE : '~';
+QUESTION_MARK : '?';
 
 LEFT_PAREN : '(';
 RIGHT_PAREN : ')';

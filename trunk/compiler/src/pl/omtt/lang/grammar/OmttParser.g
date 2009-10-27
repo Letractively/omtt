@@ -24,30 +24,30 @@ program
 // START: header
 header
   : module_declaration?
-    use_declarations
     import_declarations
+    use_declarations
   ;
 
 module_declaration
   : TAG_START MODULE module_id TAG_END
     -> ^(MODULE<ModuleDeclaration>[$MODULE] module_id)
   ;
-use_declarations
-  : ((TAG_START (use_declaration) TAG_END)+)?
-    -> ^(USES use_declaration+)?
-  ;
 import_declarations
   : ((TAG_START (import_declaration) TAG_END)+)?
     -> ^(IMPORTS import_declaration+)?
   ;
+use_declarations
+  : ((TAG_START (use_declaration) TAG_END)+)?
+    -> ^(USES use_declaration+)?
+  ;
 
 import_declaration
-  : IMPORT ec=external_class_name
-    -> ^(IMPORT<ImportDeclaration>[$IMPORT] $ec)
+  : IMPORT module_id (AS VAR_ID)?
+    -> ^(IMPORT<ImportDeclaration>[$IMPORT] ^(MODULE module_id) VAR_ID?)
   ;
 use_declaration
-  : USE module_id (AS VAR_ID)?
-    -> ^(USE<UseDeclaration>[$USE] ^(MODULE module_id) VAR_ID?)
+  : USE ec=external_class_name
+    -> ^(USE<UseDeclaration>[$USE] $ec)
   ;
 
 fragment external_class_name
@@ -86,8 +86,8 @@ fragment where_clause
 	;
 
 fragment definition_argument
-  : TILDE? id=VAR_ID OP_MULTIPLY? (DOT type)?
-    -> ^(ARGUMENT<TemplateArgument> IDENT<Ident>[$id] type? TILDE? OP_MULTIPLY?)
+  : QUESTION_MARK? id=VAR_ID OP_MULTIPLY? (DOT type)?
+    -> ^(ARGUMENT<TemplateArgument> IDENT<Ident>[$id] type? QUESTION_MARK? OP_MULTIPLY?)
   ;
 // END: definitions
 
@@ -216,8 +216,8 @@ fragment type_content
   	-> ^(RECORD $record_types*)
 	;
 fragment argument_type
-	: TILDE? (VAR_ID DOT)? type
-		-> ^(ARGUMENT type VAR_ID? TILDE?)
+	: QUESTION_MARK? (VAR_ID DOT)? type
+		-> ^(ARGUMENT type VAR_ID? QUESTION_MARK?)
 	;
 fragment record_item_type
 	: VAR_ID DOT! type

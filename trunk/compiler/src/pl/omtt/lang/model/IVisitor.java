@@ -6,8 +6,8 @@ public interface IVisitor {
 	public void visit (Program node);
 
 	public void visit (ModuleDeclaration node);
-	public void visit (ImportDeclaration node);
 	public void visit (UseDeclaration node);
+	public void visit (ImportDeclaration node);
 
 	public void visit (TemplateDefinition node);
 	public void visit (TemplateArgument templateArguments);
