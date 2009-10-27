@@ -36,7 +36,7 @@ public class TemplateArgument extends CommonNode implements
 	}
 
 	public boolean isArgumentOptional() {
-		return getFirstChildWithType(OmttParser.TILDE) != null;
+		return getFirstChildWithType(OmttParser.QUESTION_MARK) != null;
 	}
 
 	private void setArgumentType(SymbolTable ST) throws TypeException {

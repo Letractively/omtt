@@ -17,7 +17,7 @@ import pl.omtt.core.Constants;
 import pl.omtt.lang.analyze.SemanticException;
 import pl.omtt.lang.model.ast.ModuleDeclaration;
 import pl.omtt.lang.model.ast.Program;
-import pl.omtt.lang.model.ast.UseDeclaration;
+import pl.omtt.lang.model.ast.ImportDeclaration;
 
 public class CompilationQueue implements Iterable<URI> {
 	List<URI> fQueue = new ArrayList<URI>();
@@ -31,10 +31,10 @@ public class CompilationQueue implements Iterable<URI> {
 		fModules.put(id, uri);
 
 		Set<String> references = new HashSet<String>();
-		final Tree un = program.getUsesNode();
+		final Tree un = program.getImportsNode();
 		if (un != null)
 			for (int i = 0; i < un.getChildCount(); i++) {
-				UseDeclaration ud = (UseDeclaration) un.getChild(i);
+				ImportDeclaration ud = (ImportDeclaration) un.getChild(i);
 				String uid = ud.getUseId();
 				if (uid.lastIndexOf('.') < 0)
 					uid = program.getResourcePackage() + "." + uid;
@@ -163,9 +163,9 @@ public class CompilationQueue implements Iterable<URI> {
 		return new CompilationQueueIterator();
 	}
 
-	/* (non-Javadoc)
-	 * This iterator does nothing more than standard list iterator.
-	 * However, it will... (for example mark errors in queue).
+	/*
+	 * (non-Javadoc) This iterator does nothing more than standard list
+	 * iterator. However, it will... (for example mark errors in queue).
 	 */
 	public class CompilationQueueIterator implements Iterator<URI> {
 		Iterator<URI> fQueueIterator;
@@ -191,9 +191,9 @@ public class CompilationQueue implements Iterable<URI> {
 			fQueueIterator.remove();
 		}
 	}
-	
+
 	@Override
-	public String toString () {
+	public String toString() {
 		return fQueue.toString();
 	}
 }

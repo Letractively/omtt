@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-08-11 14:52:58
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-10-27 13:59:08
 
 package pl.omtt.lang.grammar;
 
@@ -17,30 +17,31 @@ import org.antlr.runtime.tree.*;
 @SuppressWarnings("all")
 public class OmttParser extends AbstractOmttParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "TYPE", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "LAMBDA_MATCH", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "TUPLE", "RECORD", "FUNCTION", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "AND", "IN", "IF", "THEN", "ELSE", "AS", "IS", "MAP", "APPLY", "MATCH", "WHERE", "ORDER", "BY", "FUN", "NULL", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FOLLOW", "OP_REVERSE_FOLLOW", "OP_DOUBLE_FOLLOW", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMMA", "SLASH", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_NOT", "OP_CONTEXT", "OP_VIEW", "OP_CONCAT", "OP_GENERAL", "OP_DATA", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "TYPE", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "LAMBDA_MATCH", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "TUPLE", "RECORD", "FUNCTION", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "AND", "IN", "IF", "THEN", "ELSE", "AS", "IS", "MAP", "APPLY", "MATCH", "WHERE", "ORDER", "BY", "FUN", "NULL", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FOLLOW", "OP_REVERSE_FOLLOW", "OP_DOUBLE_FOLLOW", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMMA", "SLASH", "TILDE", "QUESTION_MARK", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_NOT", "OP_CONTEXT", "OP_VIEW", "OP_CONCAT", "OP_GENERAL", "OP_DATA", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME"
     };
     public static final int CAST=24;
     public static final int FUNCTION=28;
-    public static final int OP_LE=92;
+    public static final int OP_LE=93;
     public static final int INT_NUMBER=30;
     public static final int OP_REVERSE_FOLLOW=72;
-    public static final int OP_AND=96;
-    public static final int INT_OR_REAL_NUMBER=110;
-    public static final int LETTER=111;
-    public static final int OP_GEQ=93;
-    public static final int OP_GE=94;
+    public static final int OP_AND=97;
+    public static final int INT_OR_REAL_NUMBER=111;
+    public static final int LETTER=112;
+    public static final int OP_GEQ=94;
+    public static final int OP_GE=95;
     public static final int EOF=-1;
     public static final int DOUBLE_DOT=77;
     public static final int TYPE=10;
     public static final int TUPLE=26;
     public static final int IMPORT=8;
     public static final int STRING_LITERAL=29;
-    public static final int OP_MINUS=86;
+    public static final int OP_MINUS=87;
     public static final int MODE_LEFT_PAREN=48;
-    public static final int OP_NOT_EQUAL=90;
+    public static final int OP_NOT_EQUAL=91;
+    public static final int QUESTION_MARK=81;
     public static final int SEQUENCE_SELECT=15;
     public static final int RECORD=27;
-    public static final int VAR_ID=106;
+    public static final int VAR_ID=107;
     public static final int ARGUMENTS=18;
     public static final int NULL=66;
     public static final int ELSE=56;
@@ -51,16 +52,16 @@ public class OmttParser extends AbstractOmttParser {
     public static final int CONTENT=32;
     public static final int DATA_START=35;
     public static final int EXPRESSION_START=37;
-    public static final int NAMECHAR=105;
+    public static final int NAMECHAR=106;
     public static final int SEQUENCE=25;
     public static final int INNER_TAG_KEYWORD=69;
     public static final int WS=44;
-    public static final int OP_DATA=103;
+    public static final int OP_DATA=104;
     public static final int USES=7;
     public static final int REAL_NUMBER=31;
-    public static final int LEFT_PAREN=81;
+    public static final int LEFT_PAREN=82;
     public static final int IMPORTS=9;
-    public static final int OP_EQUAL=89;
+    public static final int OP_EQUAL=90;
     public static final int CALL=23;
     public static final int OP_DATA_IS_EXPRESSION=39;
     public static final int USE=6;
@@ -68,15 +69,15 @@ public class OmttParser extends AbstractOmttParser {
     public static final int FALSE=68;
     public static final int STRING_PARENS=47;
     public static final int COMMENT_SINGLE_LINE=42;
-    public static final int CLASS_ID=108;
-    public static final int OP_CONCAT=101;
-    public static final int SMALL_LETTER=104;
+    public static final int CLASS_ID=109;
+    public static final int OP_CONCAT=102;
+    public static final int SMALL_LETTER=105;
     public static final int APPLY=60;
     public static final int WHERE=62;
     public static final int DEF=51;
-    public static final int OP_ASSIGN=95;
+    public static final int OP_ASSIGN=96;
     public static final int OP_FOLLOW=71;
-    public static final int OP_OR=97;
+    public static final int OP_OR=98;
     public static final int EXPRESSION_END=38;
     public static final int ORDER=63;
     public static final int TYPE_SELECT=14;
@@ -86,37 +87,37 @@ public class OmttParser extends AbstractOmttParser {
     public static final int IF=54;
     public static final int COMMENT_MULTI_LINE=43;
     public static final int AS=57;
-    public static final int RIGHT_PAREN=82;
-    public static final int BIG_LETTER=107;
+    public static final int RIGHT_PAREN=83;
+    public static final int BIG_LETTER=108;
     public static final int SLASH=79;
     public static final int IN=53;
     public static final int THEN=55;
-    public static final int LEFT_SQUARE_PAREN=83;
+    public static final int LEFT_SQUARE_PAREN=84;
     public static final int COMMA=78;
     public static final int IS=58;
     public static final int IT=40;
     public static final int TAG_START=33;
     public static final int ARGUMENT=19;
-    public static final int RIGHT_SQUARE_PAREN=84;
+    public static final int RIGHT_SQUARE_PAREN=85;
     public static final int TILDE=80;
-    public static final int OP_GENERAL=102;
+    public static final int OP_GENERAL=103;
     public static final int IDENT=11;
-    public static final int OP_NOT=98;
+    public static final int OP_NOT=99;
     public static final int OP_DOUBLE_FOLLOW=73;
-    public static final int DIGIT=109;
+    public static final int DIGIT=110;
     public static final int HEADER=5;
     public static final int DOT=76;
-    public static final int NOT_NAME=112;
-    public static final int OP_MULTIPLY=87;
+    public static final int NOT_NAME=113;
+    public static final int OP_MULTIPLY=88;
     public static final int RETURNS=20;
     public static final int BY=64;
-    public static final int OP_PLUS=85;
+    public static final int OP_PLUS=86;
     public static final int ITEM=41;
     public static final int ATOM_SELECT=12;
     public static final int MODULE=50;
     public static final int TRUE=67;
-    public static final int OP_VIEW=100;
-    public static final int OP_MODULO=88;
+    public static final int OP_VIEW=101;
+    public static final int OP_MODULO=89;
     public static final int COLON=74;
     public static final int ITERATE=16;
     public static final int TAG_END=34;
@@ -124,10 +125,10 @@ public class OmttParser extends AbstractOmttParser {
     public static final int BLOCK=21;
     public static final int MAP=59;
     public static final int PROPERTY_SELECT=13;
-    public static final int OP_CONTEXT=99;
+    public static final int OP_CONTEXT=100;
     public static final int ACTION_ON_NEWLINE=46;
     public static final int PROGRAM=4;
-    public static final int OP_LEQ=91;
+    public static final int OP_LEQ=92;
     public static final int LAMBDA_MATCH=17;
 
     // delegates
@@ -282,7 +283,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "header"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:25:1: header : ( module_declaration )? use_declarations import_declarations ;
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:25:1: header : ( module_declaration )? import_declarations use_declarations ;
     public final OmttParser.header_return header() throws RecognitionException {
         OmttParser.header_return retval = new OmttParser.header_return();
         retval.start = input.LT(1);
@@ -291,15 +292,15 @@ public class OmttParser extends AbstractOmttParser {
 
         OmttParser.module_declaration_return module_declaration4 = null;
 
-        OmttParser.use_declarations_return use_declarations5 = null;
+        OmttParser.import_declarations_return import_declarations5 = null;
 
-        OmttParser.import_declarations_return import_declarations6 = null;
+        OmttParser.use_declarations_return use_declarations6 = null;
 
 
 
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:26:3: ( ( module_declaration )? use_declarations import_declarations )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:26:5: ( module_declaration )? use_declarations import_declarations
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:26:3: ( ( module_declaration )? import_declarations use_declarations )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:26:5: ( module_declaration )? import_declarations use_declarations
             {
             root_0 = (Object)adaptor.nil();
 
@@ -330,18 +331,18 @@ public class OmttParser extends AbstractOmttParser {
 
             }
 
-            pushFollow(FOLLOW_use_declarations_in_header109);
-            use_declarations5=use_declarations();
+            pushFollow(FOLLOW_import_declarations_in_header109);
+            import_declarations5=import_declarations();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, use_declarations5.getTree());
-            pushFollow(FOLLOW_import_declarations_in_header115);
-            import_declarations6=import_declarations();
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, import_declarations5.getTree());
+            pushFollow(FOLLOW_use_declarations_in_header115);
+            use_declarations6=use_declarations();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, import_declarations6.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, use_declarations6.getTree());
 
             }
 
@@ -461,49 +462,49 @@ public class OmttParser extends AbstractOmttParser {
     }
     // $ANTLR end "module_declaration"
 
-    public static class use_declarations_return extends ParserRuleReturnScope {
+    public static class import_declarations_return extends ParserRuleReturnScope {
         Object tree;
         public Object getTree() { return tree; }
     };
 
-    // $ANTLR start "use_declarations"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:35:1: use_declarations : ( ( TAG_START ( use_declaration ) TAG_END )+ )? -> ( ^( USES ( use_declaration )+ ) )? ;
-    public final OmttParser.use_declarations_return use_declarations() throws RecognitionException {
-        OmttParser.use_declarations_return retval = new OmttParser.use_declarations_return();
+    // $ANTLR start "import_declarations"
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:35:1: import_declarations : ( ( TAG_START ( import_declaration ) TAG_END )+ )? -> ( ^( IMPORTS ( import_declaration )+ ) )? ;
+    public final OmttParser.import_declarations_return import_declarations() throws RecognitionException {
+        OmttParser.import_declarations_return retval = new OmttParser.import_declarations_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
         Token TAG_START11=null;
         Token TAG_END13=null;
-        OmttParser.use_declaration_return use_declaration12 = null;
+        OmttParser.import_declaration_return import_declaration12 = null;
 
 
         Object TAG_START11_tree=null;
         Object TAG_END13_tree=null;
         RewriteRuleTokenStream stream_TAG_END=new RewriteRuleTokenStream(adaptor,"token TAG_END");
         RewriteRuleTokenStream stream_TAG_START=new RewriteRuleTokenStream(adaptor,"token TAG_START");
-        RewriteRuleSubtreeStream stream_use_declaration=new RewriteRuleSubtreeStream(adaptor,"rule use_declaration");
+        RewriteRuleSubtreeStream stream_import_declaration=new RewriteRuleSubtreeStream(adaptor,"rule import_declaration");
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:3: ( ( ( TAG_START ( use_declaration ) TAG_END )+ )? -> ( ^( USES ( use_declaration )+ ) )? )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:5: ( ( TAG_START ( use_declaration ) TAG_END )+ )?
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:3: ( ( ( TAG_START ( import_declaration ) TAG_END )+ )? -> ( ^( IMPORTS ( import_declaration )+ ) )? )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:5: ( ( TAG_START ( import_declaration ) TAG_END )+ )?
             {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:5: ( ( TAG_START ( use_declaration ) TAG_END )+ )?
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:5: ( ( TAG_START ( import_declaration ) TAG_END )+ )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
             if ( (LA4_0==TAG_START) ) {
                 int LA4_1 = input.LA(2);
 
-                if ( (LA4_1==USE) ) {
+                if ( (LA4_1==IMPORT) ) {
                     alt4=1;
                 }
             }
             switch (alt4) {
                 case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:6: ( TAG_START ( use_declaration ) TAG_END )+
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:6: ( TAG_START ( import_declaration ) TAG_END )+
                     {
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:6: ( TAG_START ( use_declaration ) TAG_END )+
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:6: ( TAG_START ( import_declaration ) TAG_END )+
                     int cnt3=0;
                     loop3:
                     do {
@@ -513,7 +514,7 @@ public class OmttParser extends AbstractOmttParser {
                         if ( (LA3_0==TAG_START) ) {
                             int LA3_1 = input.LA(2);
 
-                            if ( (LA3_1==USE) ) {
+                            if ( (LA3_1==IMPORT) ) {
                                 alt3=1;
                             }
 
@@ -523,24 +524,24 @@ public class OmttParser extends AbstractOmttParser {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:7: TAG_START ( use_declaration ) TAG_END
+                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:7: TAG_START ( import_declaration ) TAG_END
                     	    {
-                    	    TAG_START11=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_use_declarations164); if (state.failed) return retval; 
+                    	    TAG_START11=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_import_declarations164); if (state.failed) return retval; 
                     	    if ( state.backtracking==0 ) stream_TAG_START.add(TAG_START11);
 
-                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:17: ( use_declaration )
-                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:18: use_declaration
+                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:17: ( import_declaration )
+                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:36:18: import_declaration
                     	    {
-                    	    pushFollow(FOLLOW_use_declaration_in_use_declarations167);
-                    	    use_declaration12=use_declaration();
+                    	    pushFollow(FOLLOW_import_declaration_in_import_declarations167);
+                    	    import_declaration12=import_declaration();
 
                     	    state._fsp--;
                     	    if (state.failed) return retval;
-                    	    if ( state.backtracking==0 ) stream_use_declaration.add(use_declaration12.getTree());
+                    	    if ( state.backtracking==0 ) stream_import_declaration.add(import_declaration12.getTree());
 
                     	    }
 
-                    	    TAG_END13=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_use_declarations170); if (state.failed) return retval; 
+                    	    TAG_END13=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_import_declarations170); if (state.failed) return retval; 
                     	    if ( state.backtracking==0 ) stream_TAG_END.add(TAG_END13);
 
 
@@ -566,171 +567,6 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: use_declaration
-            // token labels: 
-            // rule labels: retval
-            // token list labels: 
-            // rule list labels: 
-            // wildcard labels: 
-            if ( state.backtracking==0 ) {
-            retval.tree = root_0;
-            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-
-            root_0 = (Object)adaptor.nil();
-            // 37:5: -> ( ^( USES ( use_declaration )+ ) )?
-            {
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:37:8: ( ^( USES ( use_declaration )+ ) )?
-                if ( stream_use_declaration.hasNext() ) {
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:37:8: ^( USES ( use_declaration )+ )
-                    {
-                    Object root_1 = (Object)adaptor.nil();
-                    root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(USES, "USES"), root_1);
-
-                    if ( !(stream_use_declaration.hasNext()) ) {
-                        throw new RewriteEarlyExitException();
-                    }
-                    while ( stream_use_declaration.hasNext() ) {
-                        adaptor.addChild(root_1, stream_use_declaration.nextTree());
-
-                    }
-                    stream_use_declaration.reset();
-
-                    adaptor.addChild(root_0, root_1);
-                    }
-
-                }
-                stream_use_declaration.reset();
-
-            }
-
-            retval.tree = root_0;}
-            }
-
-            retval.stop = input.LT(-1);
-
-            if ( state.backtracking==0 ) {
-
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
-            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
-
-        }
-        finally {
-        }
-        return retval;
-    }
-    // $ANTLR end "use_declarations"
-
-    public static class import_declarations_return extends ParserRuleReturnScope {
-        Object tree;
-        public Object getTree() { return tree; }
-    };
-
-    // $ANTLR start "import_declarations"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:39:1: import_declarations : ( ( TAG_START ( import_declaration ) TAG_END )+ )? -> ( ^( IMPORTS ( import_declaration )+ ) )? ;
-    public final OmttParser.import_declarations_return import_declarations() throws RecognitionException {
-        OmttParser.import_declarations_return retval = new OmttParser.import_declarations_return();
-        retval.start = input.LT(1);
-
-        Object root_0 = null;
-
-        Token TAG_START14=null;
-        Token TAG_END16=null;
-        OmttParser.import_declaration_return import_declaration15 = null;
-
-
-        Object TAG_START14_tree=null;
-        Object TAG_END16_tree=null;
-        RewriteRuleTokenStream stream_TAG_END=new RewriteRuleTokenStream(adaptor,"token TAG_END");
-        RewriteRuleTokenStream stream_TAG_START=new RewriteRuleTokenStream(adaptor,"token TAG_START");
-        RewriteRuleSubtreeStream stream_import_declaration=new RewriteRuleSubtreeStream(adaptor,"rule import_declaration");
-        try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:3: ( ( ( TAG_START ( import_declaration ) TAG_END )+ )? -> ( ^( IMPORTS ( import_declaration )+ ) )? )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:5: ( ( TAG_START ( import_declaration ) TAG_END )+ )?
-            {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:5: ( ( TAG_START ( import_declaration ) TAG_END )+ )?
-            int alt6=2;
-            int LA6_0 = input.LA(1);
-
-            if ( (LA6_0==TAG_START) ) {
-                int LA6_1 = input.LA(2);
-
-                if ( (LA6_1==IMPORT) ) {
-                    alt6=1;
-                }
-            }
-            switch (alt6) {
-                case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:6: ( TAG_START ( import_declaration ) TAG_END )+
-                    {
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:6: ( TAG_START ( import_declaration ) TAG_END )+
-                    int cnt5=0;
-                    loop5:
-                    do {
-                        int alt5=2;
-                        int LA5_0 = input.LA(1);
-
-                        if ( (LA5_0==TAG_START) ) {
-                            int LA5_1 = input.LA(2);
-
-                            if ( (LA5_1==IMPORT) ) {
-                                alt5=1;
-                            }
-
-
-                        }
-
-
-                        switch (alt5) {
-                    	case 1 :
-                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:7: TAG_START ( import_declaration ) TAG_END
-                    	    {
-                    	    TAG_START14=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_import_declarations202); if (state.failed) return retval; 
-                    	    if ( state.backtracking==0 ) stream_TAG_START.add(TAG_START14);
-
-                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:17: ( import_declaration )
-                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:18: import_declaration
-                    	    {
-                    	    pushFollow(FOLLOW_import_declaration_in_import_declarations205);
-                    	    import_declaration15=import_declaration();
-
-                    	    state._fsp--;
-                    	    if (state.failed) return retval;
-                    	    if ( state.backtracking==0 ) stream_import_declaration.add(import_declaration15.getTree());
-
-                    	    }
-
-                    	    TAG_END16=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_import_declarations208); if (state.failed) return retval; 
-                    	    if ( state.backtracking==0 ) stream_TAG_END.add(TAG_END16);
-
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    if ( cnt5 >= 1 ) break loop5;
-                    	    if (state.backtracking>0) {state.failed=true; return retval;}
-                                EarlyExitException eee =
-                                    new EarlyExitException(5, input);
-                                throw eee;
-                        }
-                        cnt5++;
-                    } while (true);
-
-
-                    }
-                    break;
-
-            }
-
-
-
-            // AST REWRITE
             // elements: import_declaration
             // token labels: 
             // rule labels: retval
@@ -742,11 +578,11 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 41:5: -> ( ^( IMPORTS ( import_declaration )+ ) )?
+            // 37:5: -> ( ^( IMPORTS ( import_declaration )+ ) )?
             {
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:41:8: ( ^( IMPORTS ( import_declaration )+ ) )?
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:37:8: ( ^( IMPORTS ( import_declaration )+ ) )?
                 if ( stream_import_declaration.hasNext() ) {
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:41:8: ^( IMPORTS ( import_declaration )+ )
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:37:8: ^( IMPORTS ( import_declaration )+ )
                     {
                     Object root_1 = (Object)adaptor.nil();
                     root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(IMPORTS, "IMPORTS"), root_1);
@@ -791,13 +627,178 @@ public class OmttParser extends AbstractOmttParser {
     }
     // $ANTLR end "import_declarations"
 
+    public static class use_declarations_return extends ParserRuleReturnScope {
+        Object tree;
+        public Object getTree() { return tree; }
+    };
+
+    // $ANTLR start "use_declarations"
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:39:1: use_declarations : ( ( TAG_START ( use_declaration ) TAG_END )+ )? -> ( ^( USES ( use_declaration )+ ) )? ;
+    public final OmttParser.use_declarations_return use_declarations() throws RecognitionException {
+        OmttParser.use_declarations_return retval = new OmttParser.use_declarations_return();
+        retval.start = input.LT(1);
+
+        Object root_0 = null;
+
+        Token TAG_START14=null;
+        Token TAG_END16=null;
+        OmttParser.use_declaration_return use_declaration15 = null;
+
+
+        Object TAG_START14_tree=null;
+        Object TAG_END16_tree=null;
+        RewriteRuleTokenStream stream_TAG_END=new RewriteRuleTokenStream(adaptor,"token TAG_END");
+        RewriteRuleTokenStream stream_TAG_START=new RewriteRuleTokenStream(adaptor,"token TAG_START");
+        RewriteRuleSubtreeStream stream_use_declaration=new RewriteRuleSubtreeStream(adaptor,"rule use_declaration");
+        try {
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:3: ( ( ( TAG_START ( use_declaration ) TAG_END )+ )? -> ( ^( USES ( use_declaration )+ ) )? )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:5: ( ( TAG_START ( use_declaration ) TAG_END )+ )?
+            {
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:5: ( ( TAG_START ( use_declaration ) TAG_END )+ )?
+            int alt6=2;
+            int LA6_0 = input.LA(1);
+
+            if ( (LA6_0==TAG_START) ) {
+                int LA6_1 = input.LA(2);
+
+                if ( (LA6_1==USE) ) {
+                    alt6=1;
+                }
+            }
+            switch (alt6) {
+                case 1 :
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:6: ( TAG_START ( use_declaration ) TAG_END )+
+                    {
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:6: ( TAG_START ( use_declaration ) TAG_END )+
+                    int cnt5=0;
+                    loop5:
+                    do {
+                        int alt5=2;
+                        int LA5_0 = input.LA(1);
+
+                        if ( (LA5_0==TAG_START) ) {
+                            int LA5_1 = input.LA(2);
+
+                            if ( (LA5_1==USE) ) {
+                                alt5=1;
+                            }
+
+
+                        }
+
+
+                        switch (alt5) {
+                    	case 1 :
+                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:7: TAG_START ( use_declaration ) TAG_END
+                    	    {
+                    	    TAG_START14=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_use_declarations202); if (state.failed) return retval; 
+                    	    if ( state.backtracking==0 ) stream_TAG_START.add(TAG_START14);
+
+                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:17: ( use_declaration )
+                    	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:40:18: use_declaration
+                    	    {
+                    	    pushFollow(FOLLOW_use_declaration_in_use_declarations205);
+                    	    use_declaration15=use_declaration();
+
+                    	    state._fsp--;
+                    	    if (state.failed) return retval;
+                    	    if ( state.backtracking==0 ) stream_use_declaration.add(use_declaration15.getTree());
+
+                    	    }
+
+                    	    TAG_END16=(Token)match(input,TAG_END,FOLLOW_TAG_END_in_use_declarations208); if (state.failed) return retval; 
+                    	    if ( state.backtracking==0 ) stream_TAG_END.add(TAG_END16);
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    if ( cnt5 >= 1 ) break loop5;
+                    	    if (state.backtracking>0) {state.failed=true; return retval;}
+                                EarlyExitException eee =
+                                    new EarlyExitException(5, input);
+                                throw eee;
+                        }
+                        cnt5++;
+                    } while (true);
+
+
+                    }
+                    break;
+
+            }
+
+
+
+            // AST REWRITE
+            // elements: use_declaration
+            // token labels: 
+            // rule labels: retval
+            // token list labels: 
+            // rule list labels: 
+            // wildcard labels: 
+            if ( state.backtracking==0 ) {
+            retval.tree = root_0;
+            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+
+            root_0 = (Object)adaptor.nil();
+            // 41:5: -> ( ^( USES ( use_declaration )+ ) )?
+            {
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:41:8: ( ^( USES ( use_declaration )+ ) )?
+                if ( stream_use_declaration.hasNext() ) {
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:41:8: ^( USES ( use_declaration )+ )
+                    {
+                    Object root_1 = (Object)adaptor.nil();
+                    root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(USES, "USES"), root_1);
+
+                    if ( !(stream_use_declaration.hasNext()) ) {
+                        throw new RewriteEarlyExitException();
+                    }
+                    while ( stream_use_declaration.hasNext() ) {
+                        adaptor.addChild(root_1, stream_use_declaration.nextTree());
+
+                    }
+                    stream_use_declaration.reset();
+
+                    adaptor.addChild(root_0, root_1);
+                    }
+
+                }
+                stream_use_declaration.reset();
+
+            }
+
+            retval.tree = root_0;}
+            }
+
+            retval.stop = input.LT(-1);
+
+            if ( state.backtracking==0 ) {
+
+            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+        finally {
+        }
+        return retval;
+    }
+    // $ANTLR end "use_declarations"
+
     public static class import_declaration_return extends ParserRuleReturnScope {
         Object tree;
         public Object getTree() { return tree; }
     };
 
     // $ANTLR start "import_declaration"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:44:1: import_declaration : IMPORT ec= external_class_name -> ^( IMPORT[$IMPORT] $ec) ;
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:44:1: import_declaration : IMPORT module_id ( AS VAR_ID )? -> ^( IMPORT[$IMPORT] ^( MODULE module_id ) ( VAR_ID )? ) ;
     public final OmttParser.import_declaration_return import_declaration() throws RecognitionException {
         OmttParser.import_declaration_return retval = new OmttParser.import_declaration_return();
         retval.start = input.LT(1);
@@ -805,48 +806,90 @@ public class OmttParser extends AbstractOmttParser {
         Object root_0 = null;
 
         Token IMPORT17=null;
-        OmttParser.external_class_name_return ec = null;
+        Token AS19=null;
+        Token VAR_ID20=null;
+        OmttParser.module_id_return module_id18 = null;
 
 
         Object IMPORT17_tree=null;
+        Object AS19_tree=null;
+        Object VAR_ID20_tree=null;
+        RewriteRuleTokenStream stream_AS=new RewriteRuleTokenStream(adaptor,"token AS");
         RewriteRuleTokenStream stream_IMPORT=new RewriteRuleTokenStream(adaptor,"token IMPORT");
-        RewriteRuleSubtreeStream stream_external_class_name=new RewriteRuleSubtreeStream(adaptor,"rule external_class_name");
+        RewriteRuleTokenStream stream_VAR_ID=new RewriteRuleTokenStream(adaptor,"token VAR_ID");
+        RewriteRuleSubtreeStream stream_module_id=new RewriteRuleSubtreeStream(adaptor,"rule module_id");
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:45:3: ( IMPORT ec= external_class_name -> ^( IMPORT[$IMPORT] $ec) )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:45:5: IMPORT ec= external_class_name
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:45:3: ( IMPORT module_id ( AS VAR_ID )? -> ^( IMPORT[$IMPORT] ^( MODULE module_id ) ( VAR_ID )? ) )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:45:5: IMPORT module_id ( AS VAR_ID )?
             {
             IMPORT17=(Token)match(input,IMPORT,FOLLOW_IMPORT_in_import_declaration239); if (state.failed) return retval; 
             if ( state.backtracking==0 ) stream_IMPORT.add(IMPORT17);
 
-            pushFollow(FOLLOW_external_class_name_in_import_declaration243);
-            ec=external_class_name();
+            pushFollow(FOLLOW_module_id_in_import_declaration241);
+            module_id18=module_id();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_external_class_name.add(ec.getTree());
+            if ( state.backtracking==0 ) stream_module_id.add(module_id18.getTree());
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:45:22: ( AS VAR_ID )?
+            int alt7=2;
+            int LA7_0 = input.LA(1);
+
+            if ( (LA7_0==AS) ) {
+                alt7=1;
+            }
+            switch (alt7) {
+                case 1 :
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:45:23: AS VAR_ID
+                    {
+                    AS19=(Token)match(input,AS,FOLLOW_AS_in_import_declaration244); if (state.failed) return retval; 
+                    if ( state.backtracking==0 ) stream_AS.add(AS19);
+
+                    VAR_ID20=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_import_declaration246); if (state.failed) return retval; 
+                    if ( state.backtracking==0 ) stream_VAR_ID.add(VAR_ID20);
+
+
+                    }
+                    break;
+
+            }
+
 
 
             // AST REWRITE
-            // elements: IMPORT, ec
+            // elements: module_id, VAR_ID, IMPORT
             // token labels: 
-            // rule labels: retval, ec
+            // rule labels: retval
             // token list labels: 
             // rule list labels: 
             // wildcard labels: 
             if ( state.backtracking==0 ) {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-            RewriteRuleSubtreeStream stream_ec=new RewriteRuleSubtreeStream(adaptor,"rule ec",ec!=null?ec.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 46:5: -> ^( IMPORT[$IMPORT] $ec)
+            // 46:5: -> ^( IMPORT[$IMPORT] ^( MODULE module_id ) ( VAR_ID )? )
             {
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:46:8: ^( IMPORT[$IMPORT] $ec)
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:46:8: ^( IMPORT[$IMPORT] ^( MODULE module_id ) ( VAR_ID )? )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new ImportDeclaration(IMPORT, IMPORT17), root_1);
 
-                adaptor.addChild(root_1, stream_ec.nextTree());
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:46:45: ^( MODULE module_id )
+                {
+                Object root_2 = (Object)adaptor.nil();
+                root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(MODULE, "MODULE"), root_2);
+
+                adaptor.addChild(root_2, stream_module_id.nextTree());
+
+                adaptor.addChild(root_1, root_2);
+                }
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:46:65: ( VAR_ID )?
+                if ( stream_VAR_ID.hasNext() ) {
+                    adaptor.addChild(root_1, stream_VAR_ID.nextNode());
+
+                }
+                stream_VAR_ID.reset();
 
                 adaptor.addChild(root_0, root_1);
                 }
@@ -882,98 +925,56 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "use_declaration"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:48:1: use_declaration : USE module_id ( AS VAR_ID )? -> ^( USE[$USE] ^( MODULE module_id ) ( VAR_ID )? ) ;
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:48:1: use_declaration : USE ec= external_class_name -> ^( USE[$USE] $ec) ;
     public final OmttParser.use_declaration_return use_declaration() throws RecognitionException {
         OmttParser.use_declaration_return retval = new OmttParser.use_declaration_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token USE18=null;
-        Token AS20=null;
-        Token VAR_ID21=null;
-        OmttParser.module_id_return module_id19 = null;
+        Token USE21=null;
+        OmttParser.external_class_name_return ec = null;
 
 
-        Object USE18_tree=null;
-        Object AS20_tree=null;
-        Object VAR_ID21_tree=null;
-        RewriteRuleTokenStream stream_AS=new RewriteRuleTokenStream(adaptor,"token AS");
-        RewriteRuleTokenStream stream_VAR_ID=new RewriteRuleTokenStream(adaptor,"token VAR_ID");
+        Object USE21_tree=null;
         RewriteRuleTokenStream stream_USE=new RewriteRuleTokenStream(adaptor,"token USE");
-        RewriteRuleSubtreeStream stream_module_id=new RewriteRuleSubtreeStream(adaptor,"rule module_id");
+        RewriteRuleSubtreeStream stream_external_class_name=new RewriteRuleSubtreeStream(adaptor,"rule external_class_name");
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:49:3: ( USE module_id ( AS VAR_ID )? -> ^( USE[$USE] ^( MODULE module_id ) ( VAR_ID )? ) )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:49:5: USE module_id ( AS VAR_ID )?
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:49:3: ( USE ec= external_class_name -> ^( USE[$USE] $ec) )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:49:5: USE ec= external_class_name
             {
-            USE18=(Token)match(input,USE,FOLLOW_USE_in_use_declaration272); if (state.failed) return retval; 
-            if ( state.backtracking==0 ) stream_USE.add(USE18);
+            USE21=(Token)match(input,USE,FOLLOW_USE_in_use_declaration283); if (state.failed) return retval; 
+            if ( state.backtracking==0 ) stream_USE.add(USE21);
 
-            pushFollow(FOLLOW_module_id_in_use_declaration274);
-            module_id19=module_id();
+            pushFollow(FOLLOW_external_class_name_in_use_declaration287);
+            ec=external_class_name();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_module_id.add(module_id19.getTree());
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:49:19: ( AS VAR_ID )?
-            int alt7=2;
-            int LA7_0 = input.LA(1);
-
-            if ( (LA7_0==AS) ) {
-                alt7=1;
-            }
-            switch (alt7) {
-                case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:49:20: AS VAR_ID
-                    {
-                    AS20=(Token)match(input,AS,FOLLOW_AS_in_use_declaration277); if (state.failed) return retval; 
-                    if ( state.backtracking==0 ) stream_AS.add(AS20);
-
-                    VAR_ID21=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_use_declaration279); if (state.failed) return retval; 
-                    if ( state.backtracking==0 ) stream_VAR_ID.add(VAR_ID21);
-
-
-                    }
-                    break;
-
-            }
-
+            if ( state.backtracking==0 ) stream_external_class_name.add(ec.getTree());
 
 
             // AST REWRITE
-            // elements: module_id, USE, VAR_ID
+            // elements: ec, USE
             // token labels: 
-            // rule labels: retval
+            // rule labels: retval, ec
             // token list labels: 
             // rule list labels: 
             // wildcard labels: 
             if ( state.backtracking==0 ) {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+            RewriteRuleSubtreeStream stream_ec=new RewriteRuleSubtreeStream(adaptor,"rule ec",ec!=null?ec.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 50:5: -> ^( USE[$USE] ^( MODULE module_id ) ( VAR_ID )? )
+            // 50:5: -> ^( USE[$USE] $ec)
             {
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:50:8: ^( USE[$USE] ^( MODULE module_id ) ( VAR_ID )? )
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:50:8: ^( USE[$USE] $ec)
                 {
                 Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(new UseDeclaration(USE, USE18), root_1);
+                root_1 = (Object)adaptor.becomeRoot(new UseDeclaration(USE, USE21), root_1);
 
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:50:36: ^( MODULE module_id )
-                {
-                Object root_2 = (Object)adaptor.nil();
-                root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(MODULE, "MODULE"), root_2);
-
-                adaptor.addChild(root_2, stream_module_id.nextTree());
-
-                adaptor.addChild(root_1, root_2);
-                }
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:50:56: ( VAR_ID )?
-                if ( stream_VAR_ID.hasNext() ) {
-                    adaptor.addChild(root_1, stream_VAR_ID.nextNode());
-
-                }
-                stream_VAR_ID.reset();
+                adaptor.addChild(root_1, stream_ec.nextTree());
 
                 adaptor.addChild(root_0, root_1);
                 }
@@ -1350,7 +1351,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: DEF, definition_signature, content
+            // elements: definition_signature, content, DEF
             // token labels: 
             // rule labels: content, retval
             // token list labels: 
@@ -1465,7 +1466,7 @@ public class OmttParser extends AbstractOmttParser {
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( (LA12_0==TILDE||LA12_0==VAR_ID) ) {
+                if ( (LA12_0==QUESTION_MARK||LA12_0==VAR_ID) ) {
                     alt12=1;
                 }
 
@@ -1518,7 +1519,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: VAR_ID, definition_context, ret_type, definition_argument
+            // elements: definition_context, ret_type, definition_argument, VAR_ID
             // token labels: 
             // rule labels: retval, ret_type
             // token list labels: 
@@ -1776,7 +1777,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "definition_argument"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:88:10: fragment definition_argument : ( TILDE )? id= VAR_ID ( OP_MULTIPLY )? ( DOT type )? -> ^( ARGUMENT IDENT[$id] ( type )? ( TILDE )? ( OP_MULTIPLY )? ) ;
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:88:10: fragment definition_argument : ( QUESTION_MARK )? id= VAR_ID ( OP_MULTIPLY )? ( DOT type )? -> ^( ARGUMENT IDENT[$id] ( type )? ( QUESTION_MARK )? ( OP_MULTIPLY )? ) ;
     public final OmttParser.definition_argument_return definition_argument() throws RecognitionException {
         OmttParser.definition_argument_return retval = new OmttParser.definition_argument_return();
         retval.start = input.LT(1);
@@ -1784,38 +1785,38 @@ public class OmttParser extends AbstractOmttParser {
         Object root_0 = null;
 
         Token id=null;
-        Token TILDE43=null;
+        Token QUESTION_MARK43=null;
         Token OP_MULTIPLY44=null;
         Token DOT45=null;
         OmttParser.type_return type46 = null;
 
 
         Object id_tree=null;
-        Object TILDE43_tree=null;
+        Object QUESTION_MARK43_tree=null;
         Object OP_MULTIPLY44_tree=null;
         Object DOT45_tree=null;
         RewriteRuleTokenStream stream_VAR_ID=new RewriteRuleTokenStream(adaptor,"token VAR_ID");
         RewriteRuleTokenStream stream_DOT=new RewriteRuleTokenStream(adaptor,"token DOT");
         RewriteRuleTokenStream stream_OP_MULTIPLY=new RewriteRuleTokenStream(adaptor,"token OP_MULTIPLY");
-        RewriteRuleTokenStream stream_TILDE=new RewriteRuleTokenStream(adaptor,"token TILDE");
+        RewriteRuleTokenStream stream_QUESTION_MARK=new RewriteRuleTokenStream(adaptor,"token QUESTION_MARK");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:3: ( ( TILDE )? id= VAR_ID ( OP_MULTIPLY )? ( DOT type )? -> ^( ARGUMENT IDENT[$id] ( type )? ( TILDE )? ( OP_MULTIPLY )? ) )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:5: ( TILDE )? id= VAR_ID ( OP_MULTIPLY )? ( DOT type )?
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:3: ( ( QUESTION_MARK )? id= VAR_ID ( OP_MULTIPLY )? ( DOT type )? -> ^( ARGUMENT IDENT[$id] ( type )? ( QUESTION_MARK )? ( OP_MULTIPLY )? ) )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:5: ( QUESTION_MARK )? id= VAR_ID ( OP_MULTIPLY )? ( DOT type )?
             {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:5: ( TILDE )?
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:5: ( QUESTION_MARK )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
-            if ( (LA15_0==TILDE) ) {
+            if ( (LA15_0==QUESTION_MARK) ) {
                 alt15=1;
             }
             switch (alt15) {
                 case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:0:0: TILDE
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:0:0: QUESTION_MARK
                     {
-                    TILDE43=(Token)match(input,TILDE,FOLLOW_TILDE_in_definition_argument546); if (state.failed) return retval; 
-                    if ( state.backtracking==0 ) stream_TILDE.add(TILDE43);
+                    QUESTION_MARK43=(Token)match(input,QUESTION_MARK,FOLLOW_QUESTION_MARK_in_definition_argument546); if (state.failed) return retval; 
+                    if ( state.backtracking==0 ) stream_QUESTION_MARK.add(QUESTION_MARK43);
 
 
                     }
@@ -1826,7 +1827,7 @@ public class OmttParser extends AbstractOmttParser {
             id=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_definition_argument551); if (state.failed) return retval; 
             if ( state.backtracking==0 ) stream_VAR_ID.add(id);
 
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:22: ( OP_MULTIPLY )?
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:30: ( OP_MULTIPLY )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1846,7 +1847,7 @@ public class OmttParser extends AbstractOmttParser {
 
             }
 
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:35: ( DOT type )?
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:43: ( DOT type )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1855,7 +1856,7 @@ public class OmttParser extends AbstractOmttParser {
             }
             switch (alt17) {
                 case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:36: DOT type
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:89:44: DOT type
                     {
                     DOT45=(Token)match(input,DOT,FOLLOW_DOT_in_definition_argument557); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_DOT.add(DOT45);
@@ -1875,7 +1876,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: TILDE, OP_MULTIPLY, type
+            // elements: QUESTION_MARK, type, OP_MULTIPLY
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1886,9 +1887,9 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 90:5: -> ^( ARGUMENT IDENT[$id] ( type )? ( TILDE )? ( OP_MULTIPLY )? )
+            // 90:5: -> ^( ARGUMENT IDENT[$id] ( type )? ( QUESTION_MARK )? ( OP_MULTIPLY )? )
             {
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:90:8: ^( ARGUMENT IDENT[$id] ( type )? ( TILDE )? ( OP_MULTIPLY )? )
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:90:8: ^( ARGUMENT IDENT[$id] ( type )? ( QUESTION_MARK )? ( OP_MULTIPLY )? )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(new TemplateArgument(ARGUMENT), root_1);
@@ -1900,13 +1901,13 @@ public class OmttParser extends AbstractOmttParser {
 
                 }
                 stream_type.reset();
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:90:61: ( TILDE )?
-                if ( stream_TILDE.hasNext() ) {
-                    adaptor.addChild(root_1, stream_TILDE.nextNode());
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:90:61: ( QUESTION_MARK )?
+                if ( stream_QUESTION_MARK.hasNext() ) {
+                    adaptor.addChild(root_1, stream_QUESTION_MARK.nextNode());
 
                 }
-                stream_TILDE.reset();
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:90:68: ( OP_MULTIPLY )?
+                stream_QUESTION_MARK.reset();
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:90:76: ( OP_MULTIPLY )?
                 if ( stream_OP_MULTIPLY.hasNext() ) {
                     adaptor.addChild(root_1, stream_OP_MULTIPLY.nextNode());
 
@@ -2036,7 +2037,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: data_body_atom, CONTENT
+                    // elements: CONTENT, data_body_atom
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2868,7 +2869,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: content, definition
+            // elements: definition, content
             // token labels: 
             // rule labels: content, retval
             // token list labels: 
@@ -3140,7 +3141,7 @@ public class OmttParser extends AbstractOmttParser {
                 if ( (LA28_1==OP_ASSIGN) ) {
                     alt28=2;
                 }
-                else if ( (LA28_1==OP_FOLLOW||LA28_1==COLON||LA28_1==TILDE||LA28_1==LEFT_SQUARE_PAREN||LA28_1==VAR_ID) ) {
+                else if ( (LA28_1==OP_FOLLOW||LA28_1==COLON||LA28_1==QUESTION_MARK||LA28_1==LEFT_SQUARE_PAREN||LA28_1==VAR_ID) ) {
                     alt28=1;
                 }
                 else {
@@ -3227,7 +3228,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: VAR_ID, expression
+                    // elements: expression, VAR_ID
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3502,7 +3503,7 @@ public class OmttParser extends AbstractOmttParser {
                 if ( (LA32_1==OP_ASSIGN) ) {
                     alt32=2;
                 }
-                else if ( (LA32_1==CONTENT||LA32_1==OP_DATA_IS_EXPRESSION||LA32_1==OP_FOLLOW||LA32_1==TILDE||LA32_1==LEFT_SQUARE_PAREN||LA32_1==VAR_ID) ) {
+                else if ( (LA32_1==CONTENT||LA32_1==OP_DATA_IS_EXPRESSION||LA32_1==OP_FOLLOW||LA32_1==QUESTION_MARK||LA32_1==LEFT_SQUARE_PAREN||LA32_1==VAR_ID) ) {
                     alt32=1;
                 }
                 else {
@@ -3723,7 +3724,7 @@ public class OmttParser extends AbstractOmttParser {
                 }
                 break;
             case OP_FOLLOW:
-            case TILDE:
+            case QUESTION_MARK:
             case VAR_ID:
                 {
                 alt35=2;
@@ -3758,7 +3759,7 @@ public class OmttParser extends AbstractOmttParser {
                         int alt33=2;
                         int LA33_0 = input.LA(1);
 
-                        if ( (LA33_0==TILDE||LA33_0==VAR_ID) ) {
+                        if ( (LA33_0==QUESTION_MARK||LA33_0==VAR_ID) ) {
                             alt33=1;
                         }
 
@@ -3794,7 +3795,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: FUN, definition_argument, expression
+                    // elements: expression, definition_argument, FUN
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3845,7 +3846,7 @@ public class OmttParser extends AbstractOmttParser {
                         int alt34=2;
                         int LA34_0 = input.LA(1);
 
-                        if ( (LA34_0==TILDE||LA34_0==VAR_ID) ) {
+                        if ( (LA34_0==QUESTION_MARK||LA34_0==VAR_ID) ) {
                             alt34=1;
                         }
 
@@ -3881,7 +3882,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: expression, definition_argument
+                    // elements: definition_argument, expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -4153,7 +4154,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: safe_expression, where_clause, single_type
+            // elements: where_clause, single_type, safe_expression
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -4261,7 +4262,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: type_content, OP_MULTIPLY
+            // elements: OP_MULTIPLY, type_content
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -4533,7 +4534,7 @@ public class OmttParser extends AbstractOmttParser {
                         int alt39=2;
                         int LA39_0 = input.LA(1);
 
-                        if ( ((LA39_0>=TILDE && LA39_0<=LEFT_PAREN)||LA39_0==LEFT_SQUARE_PAREN||LA39_0==OP_GENERAL||LA39_0==VAR_ID||LA39_0==CLASS_ID) ) {
+                        if ( ((LA39_0>=QUESTION_MARK && LA39_0<=LEFT_PAREN)||LA39_0==LEFT_SQUARE_PAREN||LA39_0==OP_GENERAL||LA39_0==VAR_ID||LA39_0==CLASS_ID) ) {
                             alt39=1;
                         }
 
@@ -4577,7 +4578,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: type, argument_type
+                    // elements: argument_type, type
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -4833,43 +4834,43 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "argument_type"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:218:10: fragment argument_type : ( TILDE )? ( VAR_ID DOT )? type -> ^( ARGUMENT type ( VAR_ID )? ( TILDE )? ) ;
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:218:10: fragment argument_type : ( QUESTION_MARK )? ( VAR_ID DOT )? type -> ^( ARGUMENT type ( VAR_ID )? ( QUESTION_MARK )? ) ;
     public final OmttParser.argument_type_return argument_type() throws RecognitionException {
         OmttParser.argument_type_return retval = new OmttParser.argument_type_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token TILDE131=null;
+        Token QUESTION_MARK131=null;
         Token VAR_ID132=null;
         Token DOT133=null;
         OmttParser.type_return type134 = null;
 
 
-        Object TILDE131_tree=null;
+        Object QUESTION_MARK131_tree=null;
         Object VAR_ID132_tree=null;
         Object DOT133_tree=null;
         RewriteRuleTokenStream stream_VAR_ID=new RewriteRuleTokenStream(adaptor,"token VAR_ID");
         RewriteRuleTokenStream stream_DOT=new RewriteRuleTokenStream(adaptor,"token DOT");
-        RewriteRuleTokenStream stream_TILDE=new RewriteRuleTokenStream(adaptor,"token TILDE");
+        RewriteRuleTokenStream stream_QUESTION_MARK=new RewriteRuleTokenStream(adaptor,"token QUESTION_MARK");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:2: ( ( TILDE )? ( VAR_ID DOT )? type -> ^( ARGUMENT type ( VAR_ID )? ( TILDE )? ) )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:4: ( TILDE )? ( VAR_ID DOT )? type
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:2: ( ( QUESTION_MARK )? ( VAR_ID DOT )? type -> ^( ARGUMENT type ( VAR_ID )? ( QUESTION_MARK )? ) )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:4: ( QUESTION_MARK )? ( VAR_ID DOT )? type
             {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:4: ( TILDE )?
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:4: ( QUESTION_MARK )?
             int alt43=2;
             int LA43_0 = input.LA(1);
 
-            if ( (LA43_0==TILDE) ) {
+            if ( (LA43_0==QUESTION_MARK) ) {
                 alt43=1;
             }
             switch (alt43) {
                 case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:0:0: TILDE
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:0:0: QUESTION_MARK
                     {
-                    TILDE131=(Token)match(input,TILDE,FOLLOW_TILDE_in_argument_type1506); if (state.failed) return retval; 
-                    if ( state.backtracking==0 ) stream_TILDE.add(TILDE131);
+                    QUESTION_MARK131=(Token)match(input,QUESTION_MARK,FOLLOW_QUESTION_MARK_in_argument_type1506); if (state.failed) return retval; 
+                    if ( state.backtracking==0 ) stream_QUESTION_MARK.add(QUESTION_MARK131);
 
 
                     }
@@ -4877,7 +4878,7 @@ public class OmttParser extends AbstractOmttParser {
 
             }
 
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:11: ( VAR_ID DOT )?
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:19: ( VAR_ID DOT )?
             int alt44=2;
             int LA44_0 = input.LA(1);
 
@@ -4886,7 +4887,7 @@ public class OmttParser extends AbstractOmttParser {
             }
             switch (alt44) {
                 case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:12: VAR_ID DOT
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:219:20: VAR_ID DOT
                     {
                     VAR_ID132=(Token)match(input,VAR_ID,FOLLOW_VAR_ID_in_argument_type1510); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_VAR_ID.add(VAR_ID132);
@@ -4909,7 +4910,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: TILDE, type, VAR_ID
+            // elements: QUESTION_MARK, VAR_ID, type
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -4920,9 +4921,9 @@ public class OmttParser extends AbstractOmttParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 220:3: -> ^( ARGUMENT type ( VAR_ID )? ( TILDE )? )
+            // 220:3: -> ^( ARGUMENT type ( VAR_ID )? ( QUESTION_MARK )? )
             {
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:220:6: ^( ARGUMENT type ( VAR_ID )? ( TILDE )? )
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:220:6: ^( ARGUMENT type ( VAR_ID )? ( QUESTION_MARK )? )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(ARGUMENT, "ARGUMENT"), root_1);
@@ -4934,12 +4935,12 @@ public class OmttParser extends AbstractOmttParser {
 
                 }
                 stream_VAR_ID.reset();
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:220:30: ( TILDE )?
-                if ( stream_TILDE.hasNext() ) {
-                    adaptor.addChild(root_1, stream_TILDE.nextNode());
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:220:30: ( QUESTION_MARK )?
+                if ( stream_QUESTION_MARK.hasNext() ) {
+                    adaptor.addChild(root_1, stream_QUESTION_MARK.nextNode());
 
                 }
-                stream_TILDE.reset();
+                stream_QUESTION_MARK.reset();
 
                 adaptor.addChild(root_0, root_1);
                 }
@@ -5118,7 +5119,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: part_else, part_if, condition
+            // elements: part_if, condition, part_else
             // token labels: 
             // rule labels: retval, part_else, condition, part_if
             // token list labels: 
@@ -5499,7 +5500,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: part_if, subtag, condition, part_else
+            // elements: subtag, condition, part_if, part_else
             // token labels: 
             // rule labels: subtag, retval, part_else, condition, part_if
             // token list labels: 
@@ -5645,7 +5646,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: item_alias, iter, expr, MAP
+            // elements: item_alias, iter, MAP, expr
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -5783,7 +5784,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: iter, item_alias, MAP, expr
+            // elements: MAP, iter, expr, item_alias
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -5927,7 +5928,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: expr, MAP, item_alias, iter
+            // elements: item_alias, expr, MAP, iter
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -6385,7 +6386,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: op_map, ce, context_expression
+            	    // elements: ce, context_expression, op_map
             	    // token labels: 
             	    // rule labels: retval, ce
             	    // token list labels: 
@@ -6780,7 +6781,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: atom_expression, arguments
+            // elements: arguments, atom_expression
             // token labels: 
             // rule labels: retval, arguments
             // token list labels: 
@@ -6982,7 +6983,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: AS, expr, VAR_ID
+                    // elements: expr, AS, VAR_ID
                     // token labels: 
                     // rule labels: retval, expr
                     // token list labels: 
@@ -7065,7 +7066,7 @@ public class OmttParser extends AbstractOmttParser {
             int alt57=2;
             int LA57_0 = input.LA(1);
 
-            if ( ((LA57_0>=STRING_LITERAL && LA57_0<=REAL_NUMBER)||LA57_0==DATA_START||(LA57_0>=NULL && LA57_0<=FALSE)||(LA57_0>=TILDE && LA57_0<=LEFT_PAREN)||LA57_0==LEFT_SQUARE_PAREN||LA57_0==OP_MINUS||LA57_0==OP_NOT||LA57_0==OP_GENERAL||LA57_0==VAR_ID) ) {
+            if ( ((LA57_0>=STRING_LITERAL && LA57_0<=REAL_NUMBER)||LA57_0==DATA_START||(LA57_0>=NULL && LA57_0<=FALSE)||LA57_0==TILDE||LA57_0==LEFT_PAREN||LA57_0==LEFT_SQUARE_PAREN||LA57_0==OP_MINUS||LA57_0==OP_NOT||LA57_0==OP_GENERAL||LA57_0==VAR_ID) ) {
                 alt57=1;
             }
             else if ( (LA57_0==APPLY) ) {
@@ -7173,7 +7174,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                             // AST REWRITE
-                            // elements: OP_CONCAT, expr
+                            // elements: expr, OP_CONCAT
                             // token labels: 
                             // rule labels: retval
                             // token list labels: 
@@ -7423,7 +7424,7 @@ public class OmttParser extends AbstractOmttParser {
             if ( (LA59_0==OP_NOT) ) {
                 alt59=1;
             }
-            else if ( ((LA59_0>=STRING_LITERAL && LA59_0<=REAL_NUMBER)||LA59_0==DATA_START||(LA59_0>=NULL && LA59_0<=FALSE)||(LA59_0>=TILDE && LA59_0<=LEFT_PAREN)||LA59_0==LEFT_SQUARE_PAREN||LA59_0==OP_MINUS||LA59_0==OP_GENERAL||LA59_0==VAR_ID) ) {
+            else if ( ((LA59_0>=STRING_LITERAL && LA59_0<=REAL_NUMBER)||LA59_0==DATA_START||(LA59_0>=NULL && LA59_0<=FALSE)||LA59_0==TILDE||LA59_0==LEFT_PAREN||LA59_0==LEFT_SQUARE_PAREN||LA59_0==OP_MINUS||LA59_0==OP_GENERAL||LA59_0==VAR_ID) ) {
                 alt59=2;
             }
             else {
@@ -8203,7 +8204,7 @@ public class OmttParser extends AbstractOmttParser {
             if ( (LA67_0==OP_MINUS) ) {
                 alt67=1;
             }
-            else if ( ((LA67_0>=STRING_LITERAL && LA67_0<=REAL_NUMBER)||LA67_0==DATA_START||(LA67_0>=NULL && LA67_0<=FALSE)||(LA67_0>=TILDE && LA67_0<=LEFT_PAREN)||LA67_0==LEFT_SQUARE_PAREN||LA67_0==OP_GENERAL||LA67_0==VAR_ID) ) {
+            else if ( ((LA67_0>=STRING_LITERAL && LA67_0<=REAL_NUMBER)||LA67_0==DATA_START||(LA67_0>=NULL && LA67_0<=FALSE)||LA67_0==TILDE||LA67_0==LEFT_PAREN||LA67_0==LEFT_SQUARE_PAREN||LA67_0==OP_GENERAL||LA67_0==VAR_ID) ) {
                 alt67=2;
             }
             else {
@@ -8379,7 +8380,7 @@ public class OmttParser extends AbstractOmttParser {
             int alt69=2;
             int LA69_0 = input.LA(1);
 
-            if ( ((LA69_0>=STRING_LITERAL && LA69_0<=REAL_NUMBER)||LA69_0==DATA_START||(LA69_0>=NULL && LA69_0<=FALSE)||(LA69_0>=TILDE && LA69_0<=LEFT_PAREN)||LA69_0==LEFT_SQUARE_PAREN||LA69_0==OP_GENERAL||LA69_0==VAR_ID) ) {
+            if ( ((LA69_0>=STRING_LITERAL && LA69_0<=REAL_NUMBER)||LA69_0==DATA_START||(LA69_0>=NULL && LA69_0<=FALSE)||LA69_0==TILDE||LA69_0==LEFT_PAREN||LA69_0==LEFT_SQUARE_PAREN||LA69_0==OP_GENERAL||LA69_0==VAR_ID) ) {
                 alt69=1;
             }
             else if ( (LA69_0==EOF||(LA69_0>=CONTENT && LA69_0<=TAG_END)||(LA69_0>=EXPRESSION_END && LA69_0<=OP_DATA_IS_EXPRESSION)||(LA69_0>=AND && LA69_0<=IN)||(LA69_0>=ELSE && LA69_0<=AS)||(LA69_0>=MAP && LA69_0<=ORDER)||LA69_0==OP_FOLLOW||(LA69_0>=COLON && LA69_0<=SEMICOLON)||(LA69_0>=COMMA && LA69_0<=SLASH)||LA69_0==RIGHT_PAREN||(LA69_0>=RIGHT_SQUARE_PAREN && LA69_0<=OP_GE)||(LA69_0>=OP_AND && LA69_0<=OP_OR)||LA69_0==OP_CONTEXT||LA69_0==OP_CONCAT) ) {
@@ -8403,7 +8404,7 @@ public class OmttParser extends AbstractOmttParser {
                         int alt68=2;
                         int LA68_0 = input.LA(1);
 
-                        if ( ((LA68_0>=STRING_LITERAL && LA68_0<=REAL_NUMBER)||LA68_0==DATA_START||(LA68_0>=NULL && LA68_0<=FALSE)||(LA68_0>=TILDE && LA68_0<=LEFT_PAREN)||LA68_0==LEFT_SQUARE_PAREN||LA68_0==OP_GENERAL||LA68_0==VAR_ID) ) {
+                        if ( ((LA68_0>=STRING_LITERAL && LA68_0<=REAL_NUMBER)||LA68_0==DATA_START||(LA68_0>=NULL && LA68_0<=FALSE)||LA68_0==TILDE||LA68_0==LEFT_PAREN||LA68_0==LEFT_SQUARE_PAREN||LA68_0==OP_GENERAL||LA68_0==VAR_ID) ) {
                             alt68=1;
                         }
 
@@ -8578,7 +8579,7 @@ public class OmttParser extends AbstractOmttParser {
             int alt73=2;
             int LA73_0 = input.LA(1);
 
-            if ( ((LA73_0>=STRING_LITERAL && LA73_0<=CONTENT)||LA73_0==DATA_START||LA73_0==OP_DATA_IS_EXPRESSION||(LA73_0>=NULL && LA73_0<=FALSE)||(LA73_0>=TILDE && LA73_0<=LEFT_PAREN)||LA73_0==LEFT_SQUARE_PAREN||LA73_0==OP_GENERAL||LA73_0==VAR_ID) ) {
+            if ( ((LA73_0>=STRING_LITERAL && LA73_0<=CONTENT)||LA73_0==DATA_START||LA73_0==OP_DATA_IS_EXPRESSION||(LA73_0>=NULL && LA73_0<=FALSE)||LA73_0==TILDE||LA73_0==LEFT_PAREN||LA73_0==LEFT_SQUARE_PAREN||LA73_0==OP_GENERAL||LA73_0==VAR_ID) ) {
                 alt73=1;
             }
             else if ( (LA73_0==TAG_END) ) {
@@ -8602,7 +8603,7 @@ public class OmttParser extends AbstractOmttParser {
                     if ( (LA72_0==CONTENT||LA72_0==OP_DATA_IS_EXPRESSION) ) {
                         alt72=1;
                     }
-                    else if ( ((LA72_0>=STRING_LITERAL && LA72_0<=REAL_NUMBER)||LA72_0==DATA_START||(LA72_0>=NULL && LA72_0<=FALSE)||(LA72_0>=TILDE && LA72_0<=LEFT_PAREN)||LA72_0==LEFT_SQUARE_PAREN||LA72_0==OP_GENERAL||LA72_0==VAR_ID) ) {
+                    else if ( ((LA72_0>=STRING_LITERAL && LA72_0<=REAL_NUMBER)||LA72_0==DATA_START||(LA72_0>=NULL && LA72_0<=FALSE)||LA72_0==TILDE||LA72_0==LEFT_PAREN||LA72_0==LEFT_SQUARE_PAREN||LA72_0==OP_GENERAL||LA72_0==VAR_ID) ) {
                         alt72=2;
                     }
                     else {
@@ -8635,7 +8636,7 @@ public class OmttParser extends AbstractOmttParser {
                                 int alt70=2;
                                 int LA70_0 = input.LA(1);
 
-                                if ( ((LA70_0>=STRING_LITERAL && LA70_0<=REAL_NUMBER)||LA70_0==DATA_START||(LA70_0>=NULL && LA70_0<=FALSE)||(LA70_0>=TILDE && LA70_0<=LEFT_PAREN)||LA70_0==LEFT_SQUARE_PAREN||LA70_0==OP_GENERAL||LA70_0==VAR_ID) ) {
+                                if ( ((LA70_0>=STRING_LITERAL && LA70_0<=REAL_NUMBER)||LA70_0==DATA_START||(LA70_0>=NULL && LA70_0<=FALSE)||LA70_0==TILDE||LA70_0==LEFT_PAREN||LA70_0==LEFT_SQUARE_PAREN||LA70_0==OP_GENERAL||LA70_0==VAR_ID) ) {
                                     alt70=1;
                                 }
 
@@ -8699,7 +8700,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: content, args, ident
+                    // elements: args, ident, content
                     // token labels: 
                     // rule labels: content, retval, ident
                     // token list labels: 
@@ -8833,7 +8834,7 @@ public class OmttParser extends AbstractOmttParser {
                 int alt74=2;
                 int LA74_0 = input.LA(1);
 
-                if ( ((LA74_0>=STRING_LITERAL && LA74_0<=REAL_NUMBER)||LA74_0==DATA_START||(LA74_0>=NULL && LA74_0<=FALSE)||(LA74_0>=TILDE && LA74_0<=LEFT_PAREN)||LA74_0==LEFT_SQUARE_PAREN||LA74_0==OP_GENERAL||LA74_0==VAR_ID) ) {
+                if ( ((LA74_0>=STRING_LITERAL && LA74_0<=REAL_NUMBER)||LA74_0==DATA_START||(LA74_0>=NULL && LA74_0<=FALSE)||LA74_0==TILDE||LA74_0==LEFT_PAREN||LA74_0==LEFT_SQUARE_PAREN||LA74_0==OP_GENERAL||LA74_0==VAR_ID) ) {
                     alt74=1;
                 }
 
@@ -9074,7 +9075,7 @@ public class OmttParser extends AbstractOmttParser {
                     if ( (LA76_2==VAR_ID) ) {
                         alt76=2;
                     }
-                    else if ( ((LA76_2>=STRING_LITERAL && LA76_2<=REAL_NUMBER)||LA76_2==DATA_START||(LA76_2>=NULL && LA76_2<=FALSE)||(LA76_2>=TILDE && LA76_2<=LEFT_PAREN)||LA76_2==LEFT_SQUARE_PAREN) ) {
+                    else if ( ((LA76_2>=STRING_LITERAL && LA76_2<=REAL_NUMBER)||LA76_2==DATA_START||(LA76_2>=NULL && LA76_2<=FALSE)||LA76_2==TILDE||LA76_2==LEFT_PAREN||LA76_2==LEFT_SQUARE_PAREN) ) {
                         alt76=1;
                     }
 
@@ -9098,7 +9099,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: es, atom_expression, DOT
+            	    // elements: DOT, atom_expression, es
             	    // token labels: 
             	    // rule labels: retval, es
             	    // token list labels: 
@@ -9143,7 +9144,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: ps, DOT, atom_expression
+            	    // elements: ps, atom_expression, DOT
             	    // token labels: 
             	    // rule labels: retval, ps
             	    // token list labels: 
@@ -10039,7 +10040,7 @@ public class OmttParser extends AbstractOmttParser {
             if ( (LA84_0==OP_GENERAL||LA84_0==VAR_ID) ) {
                 alt84=1;
             }
-            else if ( ((LA84_0>=STRING_LITERAL && LA84_0<=REAL_NUMBER)||LA84_0==DATA_START||(LA84_0>=NULL && LA84_0<=FALSE)||(LA84_0>=TILDE && LA84_0<=LEFT_PAREN)||LA84_0==LEFT_SQUARE_PAREN) ) {
+            else if ( ((LA84_0>=STRING_LITERAL && LA84_0<=REAL_NUMBER)||LA84_0==DATA_START||(LA84_0>=NULL && LA84_0<=FALSE)||LA84_0==TILDE||LA84_0==LEFT_PAREN||LA84_0==LEFT_SQUARE_PAREN) ) {
                 alt84=2;
             }
             else {
@@ -10341,7 +10342,7 @@ public class OmttParser extends AbstractOmttParser {
                         throw nvae;
                     }
                 }
-                else if ( (LA88_1==EOF||(LA88_1>=STRING_LITERAL && LA88_1<=DATA_START)||(LA88_1>=EXPRESSION_END && LA88_1<=OP_DATA_IS_EXPRESSION)||(LA88_1>=AND && LA88_1<=IN)||(LA88_1>=ELSE && LA88_1<=AS)||(LA88_1>=MAP && LA88_1<=ORDER)||(LA88_1>=NULL && LA88_1<=FALSE)||LA88_1==OP_FOLLOW||(LA88_1>=COLON && LA88_1<=OP_GE)||(LA88_1>=OP_AND && LA88_1<=OP_OR)||LA88_1==OP_CONTEXT||(LA88_1>=OP_CONCAT && LA88_1<=OP_GENERAL)||LA88_1==VAR_ID) ) {
+                else if ( (LA88_1==EOF||(LA88_1>=STRING_LITERAL && LA88_1<=DATA_START)||(LA88_1>=EXPRESSION_END && LA88_1<=OP_DATA_IS_EXPRESSION)||(LA88_1>=AND && LA88_1<=IN)||(LA88_1>=ELSE && LA88_1<=AS)||(LA88_1>=MAP && LA88_1<=ORDER)||(LA88_1>=NULL && LA88_1<=FALSE)||LA88_1==OP_FOLLOW||(LA88_1>=COLON && LA88_1<=TILDE)||(LA88_1>=LEFT_PAREN && LA88_1<=OP_GE)||(LA88_1>=OP_AND && LA88_1<=OP_OR)||LA88_1==OP_CONTEXT||(LA88_1>=OP_CONCAT && LA88_1<=OP_GENERAL)||LA88_1==VAR_ID) ) {
                     alt88=1;
                 }
                 else {
@@ -11532,20 +11533,20 @@ public class OmttParser extends AbstractOmttParser {
     protected DFA79 dfa79 = new DFA79(this);
     protected DFA80 dfa80 = new DFA80(this);
     static final String DFA22_eotS =
-        "\27\uffff";
+        "\30\uffff";
     static final String DFA22_eofS =
-        "\27\uffff";
+        "\30\uffff";
     static final String DFA22_minS =
-        "\1\35\5\uffff\2\0\2\uffff\3\0\12\uffff";
+        "\1\35\6\uffff\1\0\2\uffff\3\0\13\uffff";
     static final String DFA22_maxS =
-        "\1\154\5\uffff\2\0\2\uffff\3\0\12\uffff";
+        "\1\155\6\uffff\1\0\2\uffff\3\0\13\uffff";
     static final String DFA22_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\5\7\uffff\1\6\11\uffff";
+        "\1\uffff\1\1\1\2\1\3\1\4\1\5\7\uffff\1\6\12\uffff";
     static final String DFA22_specialS =
-        "\6\uffff\1\0\1\1\2\uffff\1\2\1\3\1\4\12\uffff}>";
+        "\7\uffff\1\0\2\uffff\1\1\1\2\1\3\13\uffff}>";
     static final String[] DFA22_transitionS = {
             "\3\15\3\uffff\1\15\17\uffff\1\1\2\uffff\1\2\4\uffff\1\3\1\15"+
-            "\1\4\3\uffff\1\5\3\15\2\uffff\1\5\10\uffff\1\6\1\13\1\uffff"+
+            "\1\4\3\uffff\1\5\3\15\2\uffff\1\5\10\uffff\1\15\1\5\1\13\1\uffff"+
             "\1\14\2\uffff\1\15\13\uffff\1\15\3\uffff\1\12\3\uffff\1\7\1"+
             "\uffff\1\5",
             "",
@@ -11553,13 +11554,14 @@ public class OmttParser extends AbstractOmttParser {
             "",
             "",
             "",
-            "\1\uffff",
+            "",
             "\1\uffff",
             "",
             "",
             "\1\uffff",
             "\1\uffff",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -11609,21 +11611,6 @@ public class OmttParser extends AbstractOmttParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA22_6 = input.LA(1);
-
-                         
-                        int index22_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred31_OmttParser()) ) {s = 5;}
-
-                        else if ( (true) ) {s = 13;}
-
-                         
-                        input.seek(index22_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA22_7 = input.LA(1);
 
                          
@@ -11638,7 +11625,7 @@ public class OmttParser extends AbstractOmttParser {
                         input.seek(index22_7);
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 1 : 
                         int LA22_10 = input.LA(1);
 
                          
@@ -11653,7 +11640,7 @@ public class OmttParser extends AbstractOmttParser {
                         input.seek(index22_10);
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
+                    case 2 : 
                         int LA22_11 = input.LA(1);
 
                          
@@ -11668,7 +11655,7 @@ public class OmttParser extends AbstractOmttParser {
                         input.seek(index22_11);
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
+                    case 3 : 
                         int LA22_12 = input.LA(1);
 
                          
@@ -11698,15 +11685,15 @@ public class OmttParser extends AbstractOmttParser {
     static final String DFA77_minS =
         "\1\35\2\0\60\uffff";
     static final String DFA77_maxS =
-        "\1\152\2\0\60\uffff";
+        "\1\153\2\0\60\uffff";
     static final String DFA77_acceptS =
         "\3\uffff\1\2\56\uffff\1\1";
     static final String DFA77_specialS =
         "\1\uffff\1\0\1\1\60\uffff}>";
     static final String[] DFA77_transitionS = {
             "\7\3\2\uffff\2\3\14\uffff\2\3\2\uffff\2\3\1\uffff\5\3\2\uffff"+
-            "\3\3\2\uffff\1\3\2\uffff\2\3\1\1\1\uffff\5\3\1\2\13\3\1\uffff"+
-            "\2\3\1\uffff\1\3\1\uffff\2\3\3\uffff\1\3",
+            "\3\3\2\uffff\1\3\2\uffff\2\3\1\1\1\uffff\3\3\1\uffff\2\3\1\2"+
+            "\13\3\1\uffff\2\3\1\uffff\1\3\1\uffff\2\3\3\uffff\1\3",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -11840,15 +11827,15 @@ public class OmttParser extends AbstractOmttParser {
     static final String DFA78_minS =
         "\1\35\2\0\60\uffff";
     static final String DFA78_maxS =
-        "\1\152\2\0\60\uffff";
+        "\1\153\2\0\60\uffff";
     static final String DFA78_acceptS =
         "\3\uffff\1\2\56\uffff\1\1";
     static final String DFA78_specialS =
         "\1\uffff\1\0\1\1\60\uffff}>";
     static final String[] DFA78_transitionS = {
             "\7\3\2\uffff\2\3\14\uffff\2\3\2\uffff\2\3\1\uffff\5\3\2\uffff"+
-            "\3\3\2\uffff\1\3\2\uffff\2\3\1\1\1\uffff\5\3\1\2\13\3\1\uffff"+
-            "\2\3\1\uffff\1\3\1\uffff\2\3\3\uffff\1\3",
+            "\3\3\2\uffff\1\3\2\uffff\2\3\1\1\1\uffff\3\3\1\uffff\2\3\1\2"+
+            "\13\3\1\uffff\2\3\1\uffff\1\3\1\uffff\2\3\3\uffff\1\3",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -11982,15 +11969,15 @@ public class OmttParser extends AbstractOmttParser {
     static final String DFA79_minS =
         "\1\35\2\0\60\uffff";
     static final String DFA79_maxS =
-        "\1\152\2\0\60\uffff";
+        "\1\153\2\0\60\uffff";
     static final String DFA79_acceptS =
         "\3\uffff\1\2\56\uffff\1\1";
     static final String DFA79_specialS =
         "\1\uffff\1\0\1\1\60\uffff}>";
     static final String[] DFA79_transitionS = {
             "\7\3\2\uffff\2\3\14\uffff\2\3\2\uffff\2\3\1\uffff\5\3\2\uffff"+
-            "\3\3\2\uffff\1\3\2\uffff\2\3\1\1\1\uffff\5\3\1\2\13\3\1\uffff"+
-            "\2\3\1\uffff\1\3\1\uffff\2\3\3\uffff\1\3",
+            "\3\3\2\uffff\1\3\2\uffff\2\3\1\1\1\uffff\3\3\1\uffff\2\3\1\2"+
+            "\13\3\1\uffff\2\3\1\uffff\1\3\1\uffff\2\3\3\uffff\1\3",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -12124,15 +12111,15 @@ public class OmttParser extends AbstractOmttParser {
     static final String DFA80_minS =
         "\1\35\1\0\61\uffff";
     static final String DFA80_maxS =
-        "\1\152\1\0\61\uffff";
+        "\1\153\1\0\61\uffff";
     static final String DFA80_acceptS =
         "\2\uffff\1\2\57\uffff\1\1";
     static final String DFA80_specialS =
         "\1\uffff\1\0\61\uffff}>";
     static final String[] DFA80_transitionS = {
             "\7\2\2\uffff\2\2\14\uffff\2\2\2\uffff\2\2\1\uffff\5\2\2\uffff"+
-            "\3\2\2\uffff\1\2\2\uffff\3\2\1\uffff\5\2\1\1\13\2\1\uffff\2"+
-            "\2\1\uffff\1\2\1\uffff\2\2\3\uffff\1\2",
+            "\3\2\2\uffff\1\2\2\uffff\3\2\1\uffff\3\2\1\uffff\2\2\1\1\13"+
+            "\2\1\uffff\2\2\1\uffff\1\2\1\uffff\2\2\3\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -12250,61 +12237,61 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_definitions_in_program64 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_program67 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_module_declaration_in_header102 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_use_declarations_in_header109 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_import_declarations_in_header115 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_import_declarations_in_header109 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_use_declarations_in_header115 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_TAG_START_in_module_declaration128 = new BitSet(new long[]{0x0004000000000000L});
-    public static final BitSet FOLLOW_MODULE_in_module_declaration130 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_MODULE_in_module_declaration130 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_module_id_in_module_declaration132 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_TAG_END_in_module_declaration134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_START_in_use_declarations164 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_use_declaration_in_use_declarations167 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_TAG_END_in_use_declarations170 = new BitSet(new long[]{0x0000000200000002L});
-    public static final BitSet FOLLOW_TAG_START_in_import_declarations202 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_import_declaration_in_import_declarations205 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_TAG_END_in_import_declarations208 = new BitSet(new long[]{0x0000000200000002L});
-    public static final BitSet FOLLOW_IMPORT_in_import_declaration239 = new BitSet(new long[]{0x0000000000000000L,0x0000144000000000L});
-    public static final BitSet FOLLOW_external_class_name_in_import_declaration243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_USE_in_use_declaration272 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
-    public static final BitSet FOLLOW_module_id_in_use_declaration274 = new BitSet(new long[]{0x0200000000000002L});
-    public static final BitSet FOLLOW_AS_in_use_declaration277 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
-    public static final BitSet FOLLOW_VAR_ID_in_use_declaration279 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TAG_START_in_import_declarations164 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_import_declaration_in_import_declarations167 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_TAG_END_in_import_declarations170 = new BitSet(new long[]{0x0000000200000002L});
+    public static final BitSet FOLLOW_TAG_START_in_use_declarations202 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_use_declaration_in_use_declarations205 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_TAG_END_in_use_declarations208 = new BitSet(new long[]{0x0000000200000002L});
+    public static final BitSet FOLLOW_IMPORT_in_import_declaration239 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_module_id_in_import_declaration241 = new BitSet(new long[]{0x0200000000000002L});
+    public static final BitSet FOLLOW_AS_in_import_declaration244 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_VAR_ID_in_import_declaration246 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_USE_in_use_declaration283 = new BitSet(new long[]{0x0000000000000000L,0x0000288000000000L});
+    public static final BitSet FOLLOW_external_class_name_in_use_declaration287 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_VAR_ID_in_external_class_name320 = new BitSet(new long[]{0x0000000000000000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_DOT_in_external_class_name322 = new BitSet(new long[]{0x0000000000000000L,0x0000144000000000L});
+    public static final BitSet FOLLOW_DOT_in_external_class_name322 = new BitSet(new long[]{0x0000000000000000L,0x0000288000000000L});
     public static final BitSet FOLLOW_set_in_external_class_name327 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_VAR_ID_in_module_id348 = new BitSet(new long[]{0x0000000000000000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_DOT_in_module_id350 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_DOT_in_module_id350 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_VAR_ID_in_module_id355 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_tag_definition_in_definitions371 = new BitSet(new long[]{0x0000000200000002L});
     public static final BitSet FOLLOW_TAG_START_in_tag_definition394 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_DEF_in_tag_definition396 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_DEF_in_tag_definition396 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_signature_in_tag_definition398 = new BitSet(new long[]{0x0000008100000000L});
     public static final BitSet FOLLOW_tag_content_in_tag_definition404 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_TAG_END_in_tag_definition408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_definition_signature439 = new BitSet(new long[]{0x0000000000000002L,0x0000040000090080L});
-    public static final BitSet FOLLOW_definition_context_in_definition_signature441 = new BitSet(new long[]{0x0000000000000002L,0x0000040000010080L});
-    public static final BitSet FOLLOW_definition_argument_in_definition_signature444 = new BitSet(new long[]{0x0000000000000002L,0x0000040000010080L});
-    public static final BitSet FOLLOW_OP_FOLLOW_in_definition_signature448 = new BitSet(new long[]{0x0000000000000000L,0x00001040000A0000L});
+    public static final BitSet FOLLOW_VAR_ID_in_definition_signature439 = new BitSet(new long[]{0x0000000000000002L,0x0000080000120080L});
+    public static final BitSet FOLLOW_definition_context_in_definition_signature441 = new BitSet(new long[]{0x0000000000000002L,0x0000080000020080L});
+    public static final BitSet FOLLOW_definition_argument_in_definition_signature444 = new BitSet(new long[]{0x0000000000000002L,0x0000080000020080L});
+    public static final BitSet FOLLOW_OP_FOLLOW_in_definition_signature448 = new BitSet(new long[]{0x0000000000000000L,0x0000208000140000L});
     public static final BitSet FOLLOW_type_in_definition_signature452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_definition_context496 = new BitSet(new long[]{0x0000000000000000L,0x00001040000A0000L});
-    public static final BitSet FOLLOW_single_type_in_definition_context498 = new BitSet(new long[]{0x4000000000000000L,0x0000000000100000L});
-    public static final BitSet FOLLOW_where_clause_in_definition_context500 = new BitSet(new long[]{0x0000000000000000L,0x0000000000100000L});
+    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_definition_context496 = new BitSet(new long[]{0x0000000000000000L,0x0000208000140000L});
+    public static final BitSet FOLLOW_single_type_in_definition_context498 = new BitSet(new long[]{0x4000000000000000L,0x0000000000200000L});
+    public static final BitSet FOLLOW_where_clause_in_definition_context500 = new BitSet(new long[]{0x0000000000000000L,0x0000000000200000L});
     public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_definition_context503 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_WHERE_in_where_clause529 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_WHERE_in_where_clause529 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_safe_expression_in_where_clause532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TILDE_in_definition_argument546 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
-    public static final BitSet FOLLOW_VAR_ID_in_definition_argument551 = new BitSet(new long[]{0x0000000000000002L,0x0000000000801000L});
+    public static final BitSet FOLLOW_QUESTION_MARK_in_definition_argument546 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_VAR_ID_in_definition_argument551 = new BitSet(new long[]{0x0000000000000002L,0x0000000001001000L});
     public static final BitSet FOLLOW_OP_MULTIPLY_in_definition_argument553 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_DOT_in_definition_argument557 = new BitSet(new long[]{0x0000000000000000L,0x00001040000A0000L});
+    public static final BitSet FOLLOW_DOT_in_definition_argument557 = new BitSet(new long[]{0x0000000000000000L,0x0000208000140000L});
     public static final BitSet FOLLOW_type_in_definition_argument559 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_CONTENT_in_tag_content605 = new BitSet(new long[]{0x0000002220000002L});
     public static final BitSet FOLLOW_data_body_atom_in_tag_content611 = new BitSet(new long[]{0x0000002220000002L});
     public static final BitSet FOLLOW_OP_DATA_IS_EXPRESSION_in_tag_content634 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_CONTENT_in_tag_content636 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_CONTENT_in_tag_content636 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_tag_content642 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_STRING_LITERAL_in_data_body_atom663 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_expression_inside_data_in_data_body_atom673 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_tag_inside_data_in_data_body_atom679 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_EXPRESSION_START_in_expression_inside_data694 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_EXPRESSION_START_in_expression_inside_data694 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_expression_inside_data697 = new BitSet(new long[]{0x0000004000000000L});
     public static final BitSet FOLLOW_EXPRESSION_END_in_expression_inside_data699 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_def_in_tag_in_tag_inside_data715 = new BitSet(new long[]{0x0000000000000002L});
@@ -12322,31 +12309,31 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_safe_if_expression_in_safe_expression804 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_safe_map_expression_in_safe_expression810 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_strict_expression_in_safe_expression816 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DEF_in_def_in_expression830 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_DEF_in_def_in_expression830 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression834 = new BitSet(new long[]{0x0030000000000000L});
-    public static final BitSet FOLLOW_AND_in_def_in_expression841 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_AND_in_def_in_expression841 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression845 = new BitSet(new long[]{0x0030000000000000L});
-    public static final BitSet FOLLOW_IN_in_def_in_expression853 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B049EL});
-    public static final BitSet FOLLOW_COLON_in_def_in_expression855 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_IN_in_def_in_expression853 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097049EL});
+    public static final BitSet FOLLOW_COLON_in_def_in_expression855 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_def_in_expression860 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DEF_in_safe_def_in_expression892 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_DEF_in_safe_def_in_expression892 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_expression_in_safe_def_in_expression896 = new BitSet(new long[]{0x0030000000000000L});
-    public static final BitSet FOLLOW_AND_in_safe_def_in_expression903 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_AND_in_safe_def_in_expression903 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_expression_in_safe_def_in_expression907 = new BitSet(new long[]{0x0030000000000000L});
-    public static final BitSet FOLLOW_IN_in_safe_def_in_expression915 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B041CL});
-    public static final BitSet FOLLOW_COLON_in_safe_def_in_expression917 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_IN_in_safe_def_in_expression915 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095041CL});
+    public static final BitSet FOLLOW_COLON_in_safe_def_in_expression917 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_safe_expression_in_safe_def_in_expression922 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_definition_signature_in_definition_inside_expression954 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
-    public static final BitSet FOLLOW_COLON_in_definition_inside_expression956 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_COLON_in_definition_inside_expression956 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_definition_inside_expression962 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_definition_inside_expression985 = new BitSet(new long[]{0x0000000000000000L,0x0000000080000000L});
-    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_expression987 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_VAR_ID_in_definition_inside_expression985 = new BitSet(new long[]{0x0000000000000000L,0x0000000100000000L});
+    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_expression987 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_definition_inside_expression992 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_TAG_START_in_def_in_tag1025 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_DEF_in_def_in_tag1027 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_DEF_in_def_in_tag1027 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_tag_in_def_in_tag1031 = new BitSet(new long[]{0x0000000200000000L});
     public static final BitSet FOLLOW_TAG_START_in_def_in_tag1038 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_AND_in_def_in_tag1040 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_AND_in_def_in_tag1040 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_tag_in_def_in_tag1044 = new BitSet(new long[]{0x0000000200000000L});
     public static final BitSet FOLLOW_TAG_START_in_def_in_tag1052 = new BitSet(new long[]{0x0020000000000000L});
     public static final BitSet FOLLOW_IN_in_def_in_tag1054 = new BitSet(new long[]{0x0000008100000000L});
@@ -12354,196 +12341,196 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_TAG_END_in_def_in_tag1064 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_definition_signature_in_definition_inside_tag1096 = new BitSet(new long[]{0x0000008100000000L});
     public static final BitSet FOLLOW_tag_content_in_definition_inside_tag1100 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_definition_inside_tag1124 = new BitSet(new long[]{0x0000000000000000L,0x0000000080000000L});
-    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_tag1126 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_VAR_ID_in_definition_inside_tag1124 = new BitSet(new long[]{0x0000000000000000L,0x0000000100000000L});
+    public static final BitSet FOLLOW_OP_ASSIGN_in_definition_inside_tag1126 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_definition_inside_tag1128 = new BitSet(new long[]{0x0000000100000002L});
     public static final BitSet FOLLOW_CONTENT_in_definition_inside_tag1131 = new BitSet(new long[]{0x0000000020000002L});
     public static final BitSet FOLLOW_STRING_LITERAL_in_definition_inside_tag1133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FUN_in_function_expression1172 = new BitSet(new long[]{0x0000000000000000L,0x0000040000010400L});
-    public static final BitSet FOLLOW_definition_argument_in_function_expression1174 = new BitSet(new long[]{0x0000000000000000L,0x0000040000010400L});
-    public static final BitSet FOLLOW_COLON_in_function_expression1177 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_FUN_in_function_expression1172 = new BitSet(new long[]{0x0000000000000000L,0x0000080000020400L});
+    public static final BitSet FOLLOW_definition_argument_in_function_expression1174 = new BitSet(new long[]{0x0000000000000000L,0x0000080000020400L});
+    public static final BitSet FOLLOW_COLON_in_function_expression1177 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_function_expression1179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_definition_argument_in_function_expression1207 = new BitSet(new long[]{0x0000000000000000L,0x0000040000010080L});
-    public static final BitSet FOLLOW_OP_FOLLOW_in_function_expression1210 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_definition_argument_in_function_expression1207 = new BitSet(new long[]{0x0000000000000000L,0x0000080000020080L});
+    public static final BitSet FOLLOW_OP_FOLLOW_in_function_expression1210 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_function_expression1212 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_lambda_match_expression_in_function_expression1239 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_single_lambda_match_in_lambda_match_expression1252 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
-    public static final BitSet FOLLOW_SEMICOLON_in_lambda_match_expression1255 = new BitSet(new long[]{0x0000000000000000L,0x00001440000B0082L});
+    public static final BitSet FOLLOW_SEMICOLON_in_lambda_match_expression1255 = new BitSet(new long[]{0x0000000000000000L,0x0000288000160082L});
     public static final BitSet FOLLOW_single_lambda_match_in_lambda_match_expression1257 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
     public static final BitSet FOLLOW_single_type_in_single_lambda_match1285 = new BitSet(new long[]{0x4000000000000000L,0x0000000000000080L});
     public static final BitSet FOLLOW_where_clause_in_single_lambda_match1287 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
-    public static final BitSet FOLLOW_OP_FOLLOW_in_single_lambda_match1290 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_OP_FOLLOW_in_single_lambda_match1290 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_safe_expression_in_single_lambda_match1292 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_content_in_type1322 = new BitSet(new long[]{0x0000000000000002L,0x0000000000800000L});
+    public static final BitSet FOLLOW_type_content_in_type1322 = new BitSet(new long[]{0x0000000000000002L,0x0000000001000000L});
     public static final BitSet FOLLOW_OP_MULTIPLY_in_type1324 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_type_content_in_single_type1354 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_CLASS_ID_in_type_content1383 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_GENERAL_in_type_content1389 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_PAREN_in_type_content1395 = new BitSet(new long[]{0x0000000000000000L,0x00001440000B0000L});
-    public static final BitSet FOLLOW_argument_type_in_type_content1397 = new BitSet(new long[]{0x0000000000000000L,0x00001440000B0080L});
-    public static final BitSet FOLLOW_OP_FOLLOW_in_type_content1400 = new BitSet(new long[]{0x0000000000000000L,0x00001040000A0000L});
-    public static final BitSet FOLLOW_type_in_type_content1402 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
+    public static final BitSet FOLLOW_LEFT_PAREN_in_type_content1395 = new BitSet(new long[]{0x0000000000000000L,0x0000288000160000L});
+    public static final BitSet FOLLOW_argument_type_in_type_content1397 = new BitSet(new long[]{0x0000000000000000L,0x0000288000160080L});
+    public static final BitSet FOLLOW_OP_FOLLOW_in_type_content1400 = new BitSet(new long[]{0x0000000000000000L,0x0000208000140000L});
+    public static final BitSet FOLLOW_type_in_type_content1402 = new BitSet(new long[]{0x0000000000000000L,0x0000000000080000L});
     public static final BitSet FOLLOW_RIGHT_PAREN_in_type_content1404 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_type_content1424 = new BitSet(new long[]{0x0000000000000000L,0x00001040000A0000L});
+    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_type_content1424 = new BitSet(new long[]{0x0000000000000000L,0x0000208000140000L});
     public static final BitSet FOLLOW_type_in_type_content1428 = new BitSet(new long[]{0x0000000000000000L,0x0000000000004000L});
-    public static final BitSet FOLLOW_COMMA_in_type_content1431 = new BitSet(new long[]{0x0000000000000000L,0x00001040000A0000L});
-    public static final BitSet FOLLOW_type_in_type_content1435 = new BitSet(new long[]{0x0000000000000000L,0x0000000000104000L});
+    public static final BitSet FOLLOW_COMMA_in_type_content1431 = new BitSet(new long[]{0x0000000000000000L,0x0000208000140000L});
+    public static final BitSet FOLLOW_type_in_type_content1435 = new BitSet(new long[]{0x0000000000000000L,0x0000000000204000L});
     public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_type_content1439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_type_content1462 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
-    public static final BitSet FOLLOW_record_item_type_in_type_content1466 = new BitSet(new long[]{0x0000000000000000L,0x0000000000104000L});
-    public static final BitSet FOLLOW_COMMA_in_type_content1469 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
-    public static final BitSet FOLLOW_record_item_type_in_type_content1473 = new BitSet(new long[]{0x0000000000000000L,0x0000000000104000L});
+    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_type_content1462 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_record_item_type_in_type_content1466 = new BitSet(new long[]{0x0000000000000000L,0x0000000000204000L});
+    public static final BitSet FOLLOW_COMMA_in_type_content1469 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_record_item_type_in_type_content1473 = new BitSet(new long[]{0x0000000000000000L,0x0000000000204000L});
     public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_type_content1477 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TILDE_in_argument_type1506 = new BitSet(new long[]{0x0000000000000000L,0x00001440000A0000L});
+    public static final BitSet FOLLOW_QUESTION_MARK_in_argument_type1506 = new BitSet(new long[]{0x0000000000000000L,0x0000288000140000L});
     public static final BitSet FOLLOW_VAR_ID_in_argument_type1510 = new BitSet(new long[]{0x0000000000000000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_DOT_in_argument_type1512 = new BitSet(new long[]{0x0000000000000000L,0x00001040000A0000L});
+    public static final BitSet FOLLOW_DOT_in_argument_type1512 = new BitSet(new long[]{0x0000000000000000L,0x0000208000140000L});
     public static final BitSet FOLLOW_type_in_argument_type1516 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_VAR_ID_in_record_item_type1544 = new BitSet(new long[]{0x0000000000000000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_DOT_in_record_item_type1546 = new BitSet(new long[]{0x0000000000000000L,0x00001040000A0000L});
+    public static final BitSet FOLLOW_DOT_in_record_item_type1546 = new BitSet(new long[]{0x0000000000000000L,0x0000208000140000L});
     public static final BitSet FOLLOW_type_in_record_item_type1549 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_if_expression1564 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_IF_in_if_expression1564 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_context_expression_in_if_expression1568 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
-    public static final BitSet FOLLOW_COLON_in_if_expression1570 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_COLON_in_if_expression1570 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_if_expression1578 = new BitSet(new long[]{0x0100000000000000L});
-    public static final BitSet FOLLOW_ELSE_in_if_expression1584 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B049EL});
-    public static final BitSet FOLLOW_COLON_in_if_expression1586 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_ELSE_in_if_expression1584 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097049EL});
+    public static final BitSet FOLLOW_COLON_in_if_expression1586 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_if_expression1595 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_safe_if_expression1629 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_IF_in_safe_if_expression1629 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_context_expression_in_safe_if_expression1633 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
-    public static final BitSet FOLLOW_COLON_in_safe_if_expression1635 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_COLON_in_safe_if_expression1635 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_safe_expression_in_safe_if_expression1643 = new BitSet(new long[]{0x0100000000000000L});
-    public static final BitSet FOLLOW_ELSE_in_safe_if_expression1649 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B041CL});
-    public static final BitSet FOLLOW_COLON_in_safe_if_expression1651 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_ELSE_in_safe_if_expression1649 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095041CL});
+    public static final BitSet FOLLOW_COLON_in_safe_if_expression1651 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_safe_expression_in_safe_if_expression1660 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_TAG_START_in_if_tag1694 = new BitSet(new long[]{0x0040000000000000L});
     public static final BitSet FOLLOW_if_subtag_in_if_tag1700 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_TAG_END_in_if_tag1706 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_if_subtag1722 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_IF_in_if_subtag1722 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_context_expression_in_if_subtag1726 = new BitSet(new long[]{0x0000008100000000L});
     public static final BitSet FOLLOW_tag_content_in_if_subtag1734 = new BitSet(new long[]{0x0000000200000002L});
     public static final BitSet FOLLOW_TAG_START_in_if_subtag1744 = new BitSet(new long[]{0x0100000000000000L});
     public static final BitSet FOLLOW_ELSE_in_if_subtag1746 = new BitSet(new long[]{0x0040008100000000L});
     public static final BitSet FOLLOW_tag_content_in_if_subtag1754 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_if_subtag_in_if_subtag1760 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MAP_in_map_expression1803 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
-    public static final BitSet FOLLOW_item_alias_in_map_expression1805 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_MAP_in_map_expression1803 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
+    public static final BitSet FOLLOW_item_alias_in_map_expression1805 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_context_expression_in_map_expression1810 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
-    public static final BitSet FOLLOW_COLON_in_map_expression1812 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_COLON_in_map_expression1812 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_map_expression1820 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MAP_in_safe_map_expression1854 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
-    public static final BitSet FOLLOW_item_alias_in_safe_map_expression1856 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_MAP_in_safe_map_expression1854 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
+    public static final BitSet FOLLOW_item_alias_in_safe_map_expression1856 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_context_expression_in_safe_map_expression1861 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
-    public static final BitSet FOLLOW_COLON_in_safe_map_expression1863 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_COLON_in_safe_map_expression1863 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_safe_expression_in_safe_map_expression1871 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_TAG_START_in_map_tag1905 = new BitSet(new long[]{0x0800000000000000L});
-    public static final BitSet FOLLOW_MAP_in_map_tag1907 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
-    public static final BitSet FOLLOW_item_alias_in_map_tag1909 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_MAP_in_map_tag1907 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
+    public static final BitSet FOLLOW_item_alias_in_map_tag1909 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_context_expression_in_map_tag1914 = new BitSet(new long[]{0x0000008100000000L});
     public static final BitSet FOLLOW_tag_content_in_map_tag1922 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_TAG_END_in_map_tag1928 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_VAR_ID_in_item_alias1964 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
     public static final BitSet FOLLOW_OP_REVERSE_FOLLOW_in_item_alias1966 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MATCH_in_match_expression1988 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_MATCH_in_match_expression1988 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_context_expression_in_match_expression1992 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
-    public static final BitSet FOLLOW_COLON_in_match_expression1994 = new BitSet(new long[]{0x0000000000000000L,0x00001440000B0082L});
+    public static final BitSet FOLLOW_COLON_in_match_expression1994 = new BitSet(new long[]{0x0000000000000000L,0x0000288000160082L});
     public static final BitSet FOLLOW_lambda_match_expression_in_match_expression2002 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_strict_expression_in_context_expression2047 = new BitSet(new long[]{0xF800000000000002L,0x0000000800000000L});
-    public static final BitSet FOLLOW_op_apply_in_context_expression2059 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_atom_expression_in_context_expression2061 = new BitSet(new long[]{0xF8000008E0000000L,0x0000044C004B001CL});
-    public static final BitSet FOLLOW_function_arguments_in_context_expression2065 = new BitSet(new long[]{0xF800000000000002L,0x0000000800000000L});
-    public static final BitSet FOLLOW_op_map_in_context_expression2103 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_safe_expression_in_context_expression2107 = new BitSet(new long[]{0xF800000000000002L,0x0000000800000000L});
-    public static final BitSet FOLLOW_WHERE_in_context_expression2130 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_safe_expression_in_context_expression2132 = new BitSet(new long[]{0xF800000000000002L,0x0000000800000000L});
+    public static final BitSet FOLLOW_strict_expression_in_context_expression2047 = new BitSet(new long[]{0xF800000000000002L,0x0000001000000000L});
+    public static final BitSet FOLLOW_op_apply_in_context_expression2059 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_atom_expression_in_context_expression2061 = new BitSet(new long[]{0xF8000008E0000000L,0x000008980095001CL});
+    public static final BitSet FOLLOW_function_arguments_in_context_expression2065 = new BitSet(new long[]{0xF800000000000002L,0x0000001000000000L});
+    public static final BitSet FOLLOW_op_map_in_context_expression2103 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_safe_expression_in_context_expression2107 = new BitSet(new long[]{0xF800000000000002L,0x0000001000000000L});
+    public static final BitSet FOLLOW_WHERE_in_context_expression2130 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_safe_expression_in_context_expression2132 = new BitSet(new long[]{0xF800000000000002L,0x0000001000000000L});
     public static final BitSet FOLLOW_ORDER_in_context_expression2161 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_BY_in_context_expression2163 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_safe_expression_in_context_expression2165 = new BitSet(new long[]{0xF800000000000002L,0x0000000800000000L});
-    public static final BitSet FOLLOW_MATCH_in_context_expression2194 = new BitSet(new long[]{0x0000000000000000L,0x00001440000B0082L});
-    public static final BitSet FOLLOW_lambda_match_expression_in_context_expression2196 = new BitSet(new long[]{0xF800000000000002L,0x0000000800000000L});
+    public static final BitSet FOLLOW_BY_in_context_expression2163 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_safe_expression_in_context_expression2165 = new BitSet(new long[]{0xF800000000000002L,0x0000001000000000L});
+    public static final BitSet FOLLOW_MATCH_in_context_expression2194 = new BitSet(new long[]{0x0000000000000000L,0x0000288000160082L});
+    public static final BitSet FOLLOW_lambda_match_expression_in_context_expression2196 = new BitSet(new long[]{0xF800000000000002L,0x0000001000000000L});
     public static final BitSet FOLLOW_OP_CONTEXT_in_op_apply2243 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_APPLY_in_op_apply2249 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_MAP_in_op_map2262 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_APPLY_in_apply_expression2277 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_atom_expression_in_apply_expression2279 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_APPLY_in_apply_expression2277 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_atom_expression_in_apply_expression2279 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_function_arguments_in_apply_expression2283 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_START_in_apply_tag2326 = new BitSet(new long[]{0x18480008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_TAG_START_in_apply_tag2326 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_apply_expression_in_apply_tag2329 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_TAG_END_in_apply_tag2331 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_concatence_expression_in_strict_expression2348 = new BitSet(new long[]{0x0200000000000002L});
-    public static final BitSet FOLLOW_AS_in_strict_expression2360 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_AS_in_strict_expression2360 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_VAR_ID_in_strict_expression2362 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_boolean_expression_in_concatence_expression2399 = new BitSet(new long[]{0x0000000000000002L,0x0000002000000000L});
-    public static final BitSet FOLLOW_OP_CONCAT_in_concatence_expression2413 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_boolean_expression_in_concatence_expression2417 = new BitSet(new long[]{0x0000000000000002L,0x0000002000000000L});
+    public static final BitSet FOLLOW_boolean_expression_in_concatence_expression2399 = new BitSet(new long[]{0x0000000000000002L,0x0000004000000000L});
+    public static final BitSet FOLLOW_OP_CONCAT_in_concatence_expression2413 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_boolean_expression_in_concatence_expression2417 = new BitSet(new long[]{0x0000000000000002L,0x0000004000000000L});
     public static final BitSet FOLLOW_apply_expression_in_concatence_expression2439 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_boolean_binary_expression_in_boolean_expression2452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression2465 = new BitSet(new long[]{0x0000000000000002L,0x0000000300000000L});
-    public static final BitSet FOLLOW_boolean_binary_operator_in_boolean_binary_expression2468 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression2471 = new BitSet(new long[]{0x0000000000000002L,0x0000000300000000L});
-    public static final BitSet FOLLOW_boolean_unary_operator_in_boolean_unary_expression2487 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression2465 = new BitSet(new long[]{0x0000000000000002L,0x0000000600000000L});
+    public static final BitSet FOLLOW_boolean_binary_operator_in_boolean_binary_expression2468 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_boolean_unary_expression_in_boolean_binary_expression2471 = new BitSet(new long[]{0x0000000000000002L,0x0000000600000000L});
+    public static final BitSet FOLLOW_boolean_unary_operator_in_boolean_unary_expression2487 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression2490 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_boolean_comparsion_expression_in_boolean_unary_expression2496 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_AND_in_boolean_binary_operator2511 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_OR_in_boolean_binary_operator2521 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_NOT_in_boolean_unary_operator2539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression2556 = new BitSet(new long[]{0x0000000000000002L,0x000000007E000000L});
-    public static final BitSet FOLLOW_boolean_comparsion_operator_in_boolean_comparsion_expression2559 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression2562 = new BitSet(new long[]{0x0000000000000002L,0x000000007E000000L});
+    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression2556 = new BitSet(new long[]{0x0000000000000002L,0x00000000FC000000L});
+    public static final BitSet FOLLOW_boolean_comparsion_operator_in_boolean_comparsion_expression2559 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_additive_expression_in_boolean_comparsion_expression2562 = new BitSet(new long[]{0x0000000000000002L,0x00000000FC000000L});
     public static final BitSet FOLLOW_OP_EQUAL_in_boolean_comparsion_operator2578 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_NOT_EQUAL_in_boolean_comparsion_operator2588 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_LE_in_boolean_comparsion_operator2598 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_LEQ_in_boolean_comparsion_operator2608 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_GE_in_boolean_comparsion_operator2618 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_OP_GEQ_in_boolean_comparsion_operator2628 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression2648 = new BitSet(new long[]{0x0000000000000002L,0x0000000000600000L});
-    public static final BitSet FOLLOW_OP_PLUS_in_additive_expression2664 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_OP_MINUS_in_additive_expression2678 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression2698 = new BitSet(new long[]{0x0000000000000002L,0x0000000000600000L});
-    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression2718 = new BitSet(new long[]{0x0000000000000002L,0x0000000001808000L});
-    public static final BitSet FOLLOW_OP_MULTIPLY_in_multiplicative_expression2728 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_SLASH_in_multiplicative_expression2742 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_OP_MODULO_in_multiplicative_expression2756 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression2776 = new BitSet(new long[]{0x0000000000000002L,0x0000000001808000L});
-    public static final BitSet FOLLOW_OP_MINUS_in_negative_expression2795 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression2648 = new BitSet(new long[]{0x0000000000000002L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_OP_PLUS_in_additive_expression2664 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_OP_MINUS_in_additive_expression2678 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_multiplicative_expression_in_additive_expression2698 = new BitSet(new long[]{0x0000000000000002L,0x0000000000C00000L});
+    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression2718 = new BitSet(new long[]{0x0000000000000002L,0x0000000003008000L});
+    public static final BitSet FOLLOW_OP_MULTIPLY_in_multiplicative_expression2728 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_SLASH_in_multiplicative_expression2742 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_OP_MODULO_in_multiplicative_expression2756 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
+    public static final BitSet FOLLOW_negative_expression_in_multiplicative_expression2776 = new BitSet(new long[]{0x0000000000000002L,0x0000000003008000L});
+    public static final BitSet FOLLOW_OP_MINUS_in_negative_expression2795 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_functional_expression_in_negative_expression2797 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_functional_expression_in_negative_expression2815 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_call_expression_in_functional_expression2829 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_atom_expression_in_call_expression2842 = new BitSet(new long[]{0x00000008E0000002L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_function_argument_in_call_expression2850 = new BitSet(new long[]{0x00000008E0000002L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_TAG_START_in_call_tag2910 = new BitSet(new long[]{0x0000000000000000L,0x0000044000000000L});
-    public static final BitSet FOLLOW_namespace_id_in_call_tag2914 = new BitSet(new long[]{0x0000008DE0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_atom_expression_in_call_expression2842 = new BitSet(new long[]{0x00000008E0000002L,0x000008880095001CL});
+    public static final BitSet FOLLOW_function_argument_in_call_expression2850 = new BitSet(new long[]{0x00000008E0000002L,0x000008880095001CL});
+    public static final BitSet FOLLOW_TAG_START_in_call_tag2910 = new BitSet(new long[]{0x0000000000000000L,0x0000088000000000L});
+    public static final BitSet FOLLOW_namespace_id_in_call_tag2914 = new BitSet(new long[]{0x0000008DE0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_tag_content_in_call_tag2924 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_function_argument_in_call_tag2930 = new BitSet(new long[]{0x0000008DE0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_function_argument_in_call_tag2930 = new BitSet(new long[]{0x0000008DE0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_tag_content_in_call_tag2936 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_TAG_END_in_call_tag2991 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_function_argument_in_function_arguments3005 = new BitSet(new long[]{0x00000008E0000002L,0x00000444004B001CL});
-    public static final BitSet FOLLOW_VAR_ID_in_function_argument3021 = new BitSet(new long[]{0x0000000000000000L,0x0000000080000000L});
-    public static final BitSet FOLLOW_OP_ASSIGN_in_function_argument3023 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_function_argument_in_function_arguments3005 = new BitSet(new long[]{0x00000008E0000002L,0x000008880095001CL});
+    public static final BitSet FOLLOW_VAR_ID_in_function_argument3021 = new BitSet(new long[]{0x0000000000000000L,0x0000000100000000L});
+    public static final BitSet FOLLOW_OP_ASSIGN_in_function_argument3023 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_atom_expression_in_function_argument3027 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_atom_with_selectors_in_atom_expression3063 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_DOT_in_atom_expression3076 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_DOT_in_atom_expression3076 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_expression_select_in_atom_expression3080 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_DOT_in_atom_expression3107 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_DOT_in_atom_expression3107 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_property_select_in_atom_expression3111 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_atom_in_atom_with_selectors3149 = new BitSet(new long[]{0x0000000000000002L,0x0000000000081000L});
+    public static final BitSet FOLLOW_atom_in_atom_with_selectors3149 = new BitSet(new long[]{0x0000000000000002L,0x0000000000101000L});
     public static final BitSet FOLLOW_sequence_selectors_in_atom_with_selectors3155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_object_in_expression_select3195 = new BitSet(new long[]{0x0000000000000002L,0x0000000000081000L});
+    public static final BitSet FOLLOW_object_in_expression_select3195 = new BitSet(new long[]{0x0000000000000002L,0x0000000000101000L});
     public static final BitSet FOLLOW_sequence_selectors_in_expression_select3201 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_property_select3241 = new BitSet(new long[]{0x0000000000000002L,0x0000000000081000L});
+    public static final BitSet FOLLOW_VAR_ID_in_property_select3241 = new BitSet(new long[]{0x0000000000000002L,0x0000000000101000L});
     public static final BitSet FOLLOW_sequence_selectors_in_property_select3243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_selector_in_sequence_selectors3256 = new BitSet(new long[]{0x0000000000000002L,0x0000000000081000L});
+    public static final BitSet FOLLOW_type_selector_in_sequence_selectors3256 = new BitSet(new long[]{0x0000000000000002L,0x0000000000101000L});
     public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors3258 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_sequence_selector_in_sequence_selectors3264 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DOT_in_type_selector3277 = new BitSet(new long[]{0x0000000000000000L,0x00001040000A0000L});
+    public static final BitSet FOLLOW_DOT_in_type_selector3277 = new BitSet(new long[]{0x0000000000000000L,0x0000208000140000L});
     public static final BitSet FOLLOW_single_type_in_type_selector3279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_sequence_selector3304 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
-    public static final BitSet FOLLOW_expression_in_sequence_selector3306 = new BitSet(new long[]{0x0000000000000000L,0x0000000000100000L});
+    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_sequence_selector3304 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
+    public static final BitSet FOLLOW_expression_in_sequence_selector3306 = new BitSet(new long[]{0x0000000000000000L,0x0000000000200000L});
     public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_sequence_selector3308 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_DATA_START_in_data_expression3332 = new BitSet(new long[]{0x0000003220000000L});
     public static final BitSet FOLLOW_data_body_atom_in_data_expression3334 = new BitSet(new long[]{0x0000003220000000L});
     public static final BitSet FOLLOW_DATA_END_in_data_expression3337 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_selectable_atom_in_atom3365 = new BitSet(new long[]{0x0000000000000002L,0x0000000000002000L});
-    public static final BitSet FOLLOW_DOUBLE_DOT_in_atom3370 = new BitSet(new long[]{0x00000008E0000000L,0x00000444004B001CL});
+    public static final BitSet FOLLOW_DOUBLE_DOT_in_atom3370 = new BitSet(new long[]{0x00000008E0000000L,0x000008880095001CL});
     public static final BitSet FOLLOW_selectable_atom_in_atom3376 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_namespace_id_in_selectable_atom3390 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_object_in_selectable_atom3396 = new BitSet(new long[]{0x0000000000000002L});
@@ -12551,30 +12538,30 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_data_expression_in_object3415 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_tuple_in_object3420 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_record_in_object3426 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_PAREN_in_object3432 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
-    public static final BitSet FOLLOW_sequence_expression_in_object3435 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
+    public static final BitSet FOLLOW_LEFT_PAREN_in_object3432 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
+    public static final BitSet FOLLOW_sequence_expression_in_object3435 = new BitSet(new long[]{0x0000000000000000L,0x0000000000080000L});
     public static final BitSet FOLLOW_RIGHT_PAREN_in_object3437 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_namespace_id3455 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_OP_VIEW_in_namespace_id3457 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_VAR_ID_in_namespace_id3455 = new BitSet(new long[]{0x0000000000000000L,0x0000002000000000L});
+    public static final BitSet FOLLOW_OP_VIEW_in_namespace_id3457 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_VAR_ID_in_namespace_id3463 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_VAR_ID_in_namespace_id3490 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L});
-    public static final BitSet FOLLOW_OP_VIEW_in_namespace_id3492 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_VAR_ID_in_namespace_id3490 = new BitSet(new long[]{0x0000000000000000L,0x0000002000000000L});
+    public static final BitSet FOLLOW_OP_VIEW_in_namespace_id3492 = new BitSet(new long[]{0x0000000000000000L,0x0000008000000000L});
     public static final BitSet FOLLOW_OP_GENERAL_in_namespace_id3498 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_tuple3528 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
-    public static final BitSet FOLLOW_expression_in_tuple3532 = new BitSet(new long[]{0x0000000000000000L,0x0000000000104000L});
-    public static final BitSet FOLLOW_COMMA_in_tuple3535 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
-    public static final BitSet FOLLOW_expression_in_tuple3539 = new BitSet(new long[]{0x0000000000000000L,0x0000000000104000L});
+    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_tuple3528 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
+    public static final BitSet FOLLOW_expression_in_tuple3532 = new BitSet(new long[]{0x0000000000000000L,0x0000000000204000L});
+    public static final BitSet FOLLOW_COMMA_in_tuple3535 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
+    public static final BitSet FOLLOW_expression_in_tuple3539 = new BitSet(new long[]{0x0000000000000000L,0x0000000000204000L});
     public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_tuple3543 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_record3569 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
-    public static final BitSet FOLLOW_record_item_in_record3573 = new BitSet(new long[]{0x0000000000000000L,0x0000000000104000L});
-    public static final BitSet FOLLOW_COMMA_in_record3576 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
-    public static final BitSet FOLLOW_record_item_in_record3580 = new BitSet(new long[]{0x0000000000000000L,0x0000000000104000L});
+    public static final BitSet FOLLOW_LEFT_SQUARE_PAREN_in_record3569 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_record_item_in_record3573 = new BitSet(new long[]{0x0000000000000000L,0x0000000000204000L});
+    public static final BitSet FOLLOW_COMMA_in_record3576 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_record_item_in_record3580 = new BitSet(new long[]{0x0000000000000000L,0x0000000000204000L});
     public static final BitSet FOLLOW_RIGHT_SQUARE_PAREN_in_record3584 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_VAR_ID_in_record_item3611 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
-    public static final BitSet FOLLOW_COLON_in_record_item3613 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_COLON_in_record_item3613 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_record_item3616 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_expression_in_sequence_expression3630 = new BitSet(new long[]{0x0000000000000002L,0x0000000000004000L});
-    public static final BitSet FOLLOW_COMMA_in_sequence_expression3643 = new BitSet(new long[]{0x38480008E0000000L,0x00001444004B009EL});
+    public static final BitSet FOLLOW_COMMA_in_sequence_expression3643 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_sequence_expression3647 = new BitSet(new long[]{0x0000000000000002L,0x0000000000004000L});
     public static final BitSet FOLLOW_number_atom_in_object_atom3694 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_STRING_LITERAL_in_object_atom3700 = new BitSet(new long[]{0x0000000000000002L});

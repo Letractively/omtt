@@ -6,7 +6,7 @@ import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.compiler.reporting.IProblemCollector;
 import pl.omtt.lang.model.ast.Program;
-import pl.omtt.lang.model.ast.UseDeclaration;
+import pl.omtt.lang.model.ast.ImportDeclaration;
 
 public class SemanticAnalyzer {
 	ClassLoader fClassLoader;
@@ -36,13 +36,13 @@ public class SemanticAnalyzer {
 				fCollectLibraryReferences);
 		symbolTableCreator.run(program);
 		if (fCollectLibraryReferences) {
-			Tree usenode = program.getUsesNode();
+			Tree importnode = program.getImportsNode();
 			BaseSymbolTable st = program.getSymbolTable();
 			if (st == null)
 				return false;
-			if (usenode != null)
-				for (int i = 0; i < usenode.getChildCount(); i++) {
-					UseDeclaration ud = (UseDeclaration) usenode.getChild(i);
+			if (importnode != null)
+				for (int i = 0; i < importnode.getChildCount(); i++) {
+					ImportDeclaration ud = (ImportDeclaration) importnode.getChild(i);
 					String libid = st.getLibraryFullId(ud.getUseId());
 					st.fOuterReferences.add(libid);
 					if (symbolTableCreator.fErrors)

@@ -422,7 +422,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("package %s;", node.getPackageName());
 	}
 
-	public void visit(ImportDeclaration node) {
+	public void visit(UseDeclaration node) {
 		fBuffer.putl("import %s;", node.getImportingClasses());
 	}
 

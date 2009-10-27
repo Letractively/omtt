@@ -69,12 +69,12 @@ public class Program extends CommonNode implements IVisitable,
 			return null;
 	}
 
-	public Tree getUsesNode() {
-		return getFirstChildWithType(OmttParser.USES);
-	}
-
 	public Tree getImportsNode() {
 		return getFirstChildWithType(OmttParser.IMPORTS);
+	}
+
+	public Tree getUsesNode() {
+		return getFirstChildWithType(OmttParser.USES);
 	}
 
 	@Override

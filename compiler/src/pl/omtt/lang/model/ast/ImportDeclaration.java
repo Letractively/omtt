@@ -1,67 +1,49 @@
 package pl.omtt.lang.model.ast;
 
 import org.antlr.runtime.Token;
+import org.antlr.runtime.tree.Tree;
 
-import pl.omtt.lang.analyze.ClassResolver;
 import pl.omtt.lang.analyze.ISymbolTableParticipant;
 import pl.omtt.lang.analyze.SymbolTable;
-import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
 import pl.omtt.lang.model.types.TypeException;
 
-public class ImportDeclaration extends CommonNode implements
-		ISymbolTableParticipant, IVisitable {
+public class ImportDeclaration extends CommonNode implements IVisitable, ISymbolTableParticipant {
 	public ImportDeclaration(int token_type, Token token) {
 		super(token);
 	}
 
-	public boolean isImportingPackage() {
-		return getFirstChildWithType(OmttParser.OP_GENERAL) != null;
-	}
-
-	public String getPackageName() {
-		String packageName = "";
-		for (int i = 0; i < getChildCount() - 1; i++) {
-			packageName += getChild(i).getText();
-			if (i < getChildCount() - 2)
-				packageName += ".";
+	public String getUseId () {
+		StringBuffer buf = new StringBuffer ();
+		Tree idnode = getChild(0);
+		for (int i = 0; i < idnode.getChildCount(); i++) {
+			if (i > 0)
+				buf.append(".");
+			buf.append(idnode.getChild(i).toString());
 		}
-		return packageName;
+		return buf.toString();
 	}
 
-	public String getClassName() {
-		String last = getChild(this.getChildCount() - 1).getText();
-		if ("*".equals(last))
+	public String getTargetNs () {
+		if (getChildCount() > 1)
+			return getChild(1).getText();
+		else
 			return null;
-		else
-			return last;
 	}
-
-	public void addToClassResolver(ClassResolver classResolver)
-			throws ClassNotFoundException {
-		if (isImportingPackage())
-			classResolver.putPackage(getPackageName());
-		else
-			classResolver.putClass(getPackageName() + "." + getClassName());
-	}
-
-	public String getImportingClasses() {
-		return getPackageName() + "."
-				+ (isImportingPackage() ? "_" : getClassName());
-	}
-
+	
 	@Override
 	public void takeSymbolTable(SymbolTable symbolTable) throws TypeException {
 		try {
-			addToClassResolver(symbolTable.getBase().getClassResolver());
-		} catch (ClassNotFoundException e) {
-			throw new TypeException(this, "class " + e.getMessage() + " not found");
+			symbolTable.getBase().importLibrary(getUseId(), getTargetNs());
+		} catch (TypeException e) {
+			e.setCauseObject(this);
+			throw e;
 		}
 	}
 
 	public String toString() {
-		return getImportingClasses();
+		return "use " + getUseId();
 	}
 
 	public void accept(IVisitor visitor) {

@@ -74,12 +74,12 @@ public class AbstractTreeVisitor implements IVisitor {
 	}
 
 	@Override
-	public void visit(ImportDeclaration node) {
+	public void visit(UseDeclaration node) {
 		defaultVisit(node);
 	}
 
 	@Override
-	public void visit(UseDeclaration node) {
+	public void visit(ImportDeclaration node) {
 		defaultVisit(node);
 	}
 

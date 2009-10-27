@@ -8,10 +8,10 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 
 import pl.omtt.lang.grammar.OmttLexer;
-import pl.omtt.lang.model.ast.ImportDeclaration;
+import pl.omtt.lang.model.ast.UseDeclaration;
 import pl.omtt.lang.model.ast.ModuleDeclaration;
 import pl.omtt.lang.model.ast.TemplateDefinition;
-import pl.omtt.lang.model.ast.UseDeclaration;
+import pl.omtt.lang.model.ast.ImportDeclaration;
 
 public class OmttOutlineLabelProvider implements ILabelProvider {
 
@@ -85,11 +85,11 @@ public class OmttOutlineLabelProvider implements ILabelProvider {
 		case OmttLexer.USES:
 			return "use declarations";
 		case OmttLexer.USE:
-			return ((UseDeclaration) node).getUseId();
+			return ((ImportDeclaration) node).getUseId();
 		case OmttLexer.IMPORTS:
 			return "import declarations";
 		case OmttLexer.IMPORT:
-			return ((ImportDeclaration) node).getImportingClasses();
+			return ((UseDeclaration) node).getImportingClasses();
 		default:
 			return node.toString();
 		}
