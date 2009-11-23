@@ -80,6 +80,8 @@ public class TypesJavaCodeConverter {
 			return "boolean";
 		else if (Integer.class.equals(cls))
 			return "int";
+		else if (Long.class.equals(cls))
+			return "long";
 		else if (Double.class.equals(cls))
 			return "double";
 		else if (Float.class.equals(cls))
@@ -100,8 +102,8 @@ public class TypesJavaCodeConverter {
 			return "null";
 		} else if (o instanceof Boolean) {
 			return "Boolean."+String.valueOf(o).toUpperCase();
-		} else if (o instanceof Integer) {
-			return "Integer.valueOf("+String.valueOf(o)+")";
+		} else if (o instanceof Long) {
+			return "Long.valueOf("+String.valueOf(o)+")";
 		} else if (o instanceof Double) {
 			return "Double.valueOf("+String.valueOf(o)+")";
 		} else {

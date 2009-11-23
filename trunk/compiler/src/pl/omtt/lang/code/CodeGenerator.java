@@ -154,7 +154,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 					buf.append("new Double(((Number)").append(var);
 					buf.append(").doubleValue()) : null");
 				} else {
-					return String.format("(Integer)%s", var);
+					return String.format("(Long)%s", var);
 				}
 			} else if (targetType.isBoolean()) {
 				if (sourceType.isBoolean())
