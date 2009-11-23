@@ -89,6 +89,6 @@ public class NumericType extends ScalarType implements IType {
 			return "Real";
 	}
 
-	public final static Class<?> INTEGER_CLASS = Integer.class;
+	public final static Class<?> INTEGER_CLASS = Long.class;
 	public final static Class<?> REAL_CLASS = Double.class;
 }
