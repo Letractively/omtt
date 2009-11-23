@@ -22,10 +22,10 @@ public class Literal extends CommonNode implements IVisitable, IExpression {
 			break;
 		case OmttParser.INT_NUMBER:
 			try {
-				fLiteral = Integer.parseInt(getText());
+				fLiteral = Long.parseLong(getText());
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
-				fLiteral = new Integer(0);
+				fLiteral = new Long(0);
 			}
 			break;
 		case OmttParser.REAL_NUMBER:
