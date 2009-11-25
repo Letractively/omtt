@@ -961,10 +961,11 @@ public class CodeGenerator extends AbstractTreeWalker {
 			return null;
 		else if (fSymbolLocalNames.containsKey(s))
 			return fSymbolLocalNames.get(s);
-		
+
 		StringBuffer callbuf = new StringBuffer();
 		if (!fBaseSymbolTable.getModuleId().equals(s.getModuleId()))
-			callbuf.append(OmttLoader.getModuleClassName(s.getModuleId())).append(".");
+			callbuf.append(OmttLoader.getModuleClassName(s.getModuleId()))
+					.append(".");
 
 		if (s instanceof MultiSymbol)
 			callbuf.append(multimethodWrapperName((MultiSymbol) s));
@@ -1044,19 +1045,32 @@ public class CodeGenerator extends AbstractTreeWalker {
 		boolean wrapType = property.isPropertyMethodNeedsTypeWrapping()
 				&& !ptype.isSequence();
 		if (wrapType) {
-			buf.append("new ").append(fTypeAdapter.get(ptype)).append("(");
+			if (property.getPropertyMethod().getReturnType().isPrimitive()) {
+				buf.append("new ").append(fTypeAdapter.get(ptype)).append("(");
+				buf.append(base).append(".").append(
+						property.getPropertyMethod().getName()).append("()");
+				buf.append(")");
+			} else {
+				final String tempvar = fBuffer.getTemporaryVariable();
+				fBuffer.putl("%s %s = %s.%s();", property.getPropertyMethod()
+						.getReturnType().getSimpleName(), tempvar, base,
+						property.getPropertyMethod().getName());
+				buf.append("(").append(tempvar)
+						.append(" == null ? null : new ").append(
+								fTypeAdapter.get(ptype)).append("(").append(
+								tempvar);
+				if (ptype.isNumeric()) {
+					if (((NumericType) ptype).isReal())
+						buf.append(".doubleValue()");
+					else
+						buf.append(".longValue()");
+				}
+				buf.append("))");
+			}
+		} else {
+			buf.append(base).append(".").append(
+					property.getPropertyMethod().getName()).append("()");
 		}
-		buf.append(base).append(".").append(
-				property.getPropertyMethod().getName()).append("()");
-		if (wrapType && ptype.isNumeric()
-				&& !property.getPropertyMethod().getReturnType().isPrimitive()) {
-			if (((NumericType) ptype).isReal())
-				buf.append(".doubleValue()");
-			else
-				buf.append(".intValue()");
-		}
-		if (wrapType)
-			buf.append(")");
 		return buf.toString();
 	}
 
