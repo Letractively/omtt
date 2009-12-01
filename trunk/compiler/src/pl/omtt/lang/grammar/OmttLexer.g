@@ -167,7 +167,7 @@ IMPORT   : 'import';
 USE      : 'use';
 
 DEF  : 'def';
-AND  : 'and';
+TOO  : 'too';
 IN   : 'in';
 
 IF   : 'if';
@@ -245,7 +245,7 @@ OP_ASSIGN
 		)
 	;
 
-OP_AND : '&' | '&&';
+OP_AND : 'and' | '&&';
 OP_OR  : 'or' | '||';
 OP_NOT : 'not';
 

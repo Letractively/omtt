@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-10-27 13:59:08
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g 2009-12-02 00:44:03
 
 package pl.omtt.lang.grammar;
 
@@ -17,7 +17,7 @@ import org.antlr.runtime.tree.*;
 @SuppressWarnings("all")
 public class OmttParser extends AbstractOmttParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "TYPE", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "LAMBDA_MATCH", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "TUPLE", "RECORD", "FUNCTION", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "AND", "IN", "IF", "THEN", "ELSE", "AS", "IS", "MAP", "APPLY", "MATCH", "WHERE", "ORDER", "BY", "FUN", "NULL", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FOLLOW", "OP_REVERSE_FOLLOW", "OP_DOUBLE_FOLLOW", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMMA", "SLASH", "TILDE", "QUESTION_MARK", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_NOT", "OP_CONTEXT", "OP_VIEW", "OP_CONCAT", "OP_GENERAL", "OP_DATA", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PROGRAM", "HEADER", "USE", "USES", "IMPORT", "IMPORTS", "TYPE", "IDENT", "ATOM_SELECT", "PROPERTY_SELECT", "TYPE_SELECT", "SEQUENCE_SELECT", "ITERATE", "LAMBDA_MATCH", "ARGUMENTS", "ARGUMENT", "RETURNS", "BLOCK", "IF_ELSE", "CALL", "CAST", "SEQUENCE", "TUPLE", "RECORD", "FUNCTION", "STRING_LITERAL", "INT_NUMBER", "REAL_NUMBER", "CONTENT", "TAG_START", "TAG_END", "DATA_START", "DATA_END", "EXPRESSION_START", "EXPRESSION_END", "OP_DATA_IS_EXPRESSION", "IT", "ITEM", "COMMENT_SINGLE_LINE", "COMMENT_MULTI_LINE", "WS", "NEWLINE", "ACTION_ON_NEWLINE", "STRING_PARENS", "MODE_LEFT_PAREN", "MODE_RIGHT_PAREN", "MODULE", "DEF", "TOO", "IN", "IF", "THEN", "ELSE", "AS", "IS", "MAP", "APPLY", "MATCH", "WHERE", "ORDER", "BY", "FUN", "NULL", "TRUE", "FALSE", "INNER_TAG_KEYWORD", "SINGLE_TAG_KEYWORD", "OP_FOLLOW", "OP_REVERSE_FOLLOW", "OP_DOUBLE_FOLLOW", "COLON", "SEMICOLON", "DOT", "DOUBLE_DOT", "COMMA", "SLASH", "TILDE", "QUESTION_MARK", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_SQUARE_PAREN", "RIGHT_SQUARE_PAREN", "OP_PLUS", "OP_MINUS", "OP_MULTIPLY", "OP_MODULO", "OP_EQUAL", "OP_NOT_EQUAL", "OP_LEQ", "OP_LE", "OP_GEQ", "OP_GE", "OP_ASSIGN", "OP_AND", "OP_OR", "OP_NOT", "OP_CONTEXT", "OP_VIEW", "OP_CONCAT", "OP_GENERAL", "OP_DATA", "SMALL_LETTER", "NAMECHAR", "VAR_ID", "BIG_LETTER", "CLASS_ID", "DIGIT", "INT_OR_REAL_NUMBER", "LETTER", "NOT_NAME"
     };
     public static final int CAST=24;
     public static final int FUNCTION=28;
@@ -81,7 +81,6 @@ public class OmttParser extends AbstractOmttParser {
     public static final int EXPRESSION_END=38;
     public static final int ORDER=63;
     public static final int TYPE_SELECT=14;
-    public static final int AND=52;
     public static final int DATA_END=36;
     public static final int IF_ELSE=22;
     public static final int IF=54;
@@ -129,6 +128,7 @@ public class OmttParser extends AbstractOmttParser {
     public static final int ACTION_ON_NEWLINE=46;
     public static final int PROGRAM=4;
     public static final int OP_LEQ=92;
+    public static final int TOO=52;
     public static final int LAMBDA_MATCH=17;
 
     // delegates
@@ -218,7 +218,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definitions, header
+            // elements: header, definitions
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -857,7 +857,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: module_id, VAR_ID, IMPORT
+            // elements: VAR_ID, module_id, IMPORT
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -955,7 +955,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: ec, USE
+            // elements: USE, ec
             // token labels: 
             // rule labels: retval, ec
             // token list labels: 
@@ -1351,7 +1351,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definition_signature, content, DEF
+            // elements: content, definition_signature, DEF
             // token labels: 
             // rule labels: content, retval
             // token list labels: 
@@ -1519,7 +1519,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definition_context, ret_type, definition_argument, VAR_ID
+            // elements: definition_argument, VAR_ID, ret_type, definition_context
             // token labels: 
             // rule labels: retval, ret_type
             // token list labels: 
@@ -1662,7 +1662,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: single_type, where_clause
+            // elements: where_clause, single_type
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -2759,7 +2759,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "def_in_expression"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:143:1: def_in_expression : DEF definition+= definition_inside_expression ( AND definition+= definition_inside_expression )* IN ( COLON )? content= expression -> ^( BLOCK ( $definition)+ $content) ;
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:143:1: def_in_expression : DEF definition+= definition_inside_expression ( TOO definition+= definition_inside_expression )* IN ( COLON )? content= expression -> ^( BLOCK ( $definition)+ $content) ;
     public final OmttParser.def_in_expression_return def_in_expression() throws RecognitionException {
         OmttParser.def_in_expression_return retval = new OmttParser.def_in_expression_return();
         retval.start = input.LT(1);
@@ -2767,7 +2767,7 @@ public class OmttParser extends AbstractOmttParser {
         Object root_0 = null;
 
         Token DEF73=null;
-        Token AND74=null;
+        Token TOO74=null;
         Token IN75=null;
         Token COLON76=null;
         List list_definition=null;
@@ -2776,18 +2776,18 @@ public class OmttParser extends AbstractOmttParser {
         OmttParser.definition_inside_expression_return definition = null;
          definition = null;
         Object DEF73_tree=null;
-        Object AND74_tree=null;
+        Object TOO74_tree=null;
         Object IN75_tree=null;
         Object COLON76_tree=null;
         RewriteRuleTokenStream stream_COLON=new RewriteRuleTokenStream(adaptor,"token COLON");
         RewriteRuleTokenStream stream_DEF=new RewriteRuleTokenStream(adaptor,"token DEF");
         RewriteRuleTokenStream stream_IN=new RewriteRuleTokenStream(adaptor,"token IN");
-        RewriteRuleTokenStream stream_AND=new RewriteRuleTokenStream(adaptor,"token AND");
+        RewriteRuleTokenStream stream_TOO=new RewriteRuleTokenStream(adaptor,"token TOO");
         RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
         RewriteRuleSubtreeStream stream_definition_inside_expression=new RewriteRuleSubtreeStream(adaptor,"rule definition_inside_expression");
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:144:3: ( DEF definition+= definition_inside_expression ( AND definition+= definition_inside_expression )* IN ( COLON )? content= expression -> ^( BLOCK ( $definition)+ $content) )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:144:5: DEF definition+= definition_inside_expression ( AND definition+= definition_inside_expression )* IN ( COLON )? content= expression
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:144:3: ( DEF definition+= definition_inside_expression ( TOO definition+= definition_inside_expression )* IN ( COLON )? content= expression -> ^( BLOCK ( $definition)+ $content) )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:144:5: DEF definition+= definition_inside_expression ( TOO definition+= definition_inside_expression )* IN ( COLON )? content= expression
             {
             DEF73=(Token)match(input,DEF,FOLLOW_DEF_in_def_in_expression830); if (state.failed) return retval; 
             if ( state.backtracking==0 ) stream_DEF.add(DEF73);
@@ -2801,23 +2801,23 @@ public class OmttParser extends AbstractOmttParser {
             if (list_definition==null) list_definition=new ArrayList();
             list_definition.add(definition.getTree());
 
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:145:5: ( AND definition+= definition_inside_expression )*
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:145:5: ( TOO definition+= definition_inside_expression )*
             loop24:
             do {
                 int alt24=2;
                 int LA24_0 = input.LA(1);
 
-                if ( (LA24_0==AND) ) {
+                if ( (LA24_0==TOO) ) {
                     alt24=1;
                 }
 
 
                 switch (alt24) {
             	case 1 :
-            	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:145:6: AND definition+= definition_inside_expression
+            	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:145:6: TOO definition+= definition_inside_expression
             	    {
-            	    AND74=(Token)match(input,AND,FOLLOW_AND_in_def_in_expression841); if (state.failed) return retval; 
-            	    if ( state.backtracking==0 ) stream_AND.add(AND74);
+            	    TOO74=(Token)match(input,TOO,FOLLOW_TOO_in_def_in_expression841); if (state.failed) return retval; 
+            	    if ( state.backtracking==0 ) stream_TOO.add(TOO74);
 
             	    pushFollow(FOLLOW_definition_inside_expression_in_def_in_expression845);
             	    definition=definition_inside_expression();
@@ -2869,7 +2869,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: definition, content
+            // elements: content, definition
             // token labels: 
             // rule labels: content, retval
             // token list labels: 
@@ -2932,7 +2932,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "safe_def_in_expression"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:149:1: safe_def_in_expression : DEF definition+= definition_inside_expression ( AND definition+= definition_inside_expression )* IN ( COLON )? content= safe_expression -> ^( BLOCK ( $definition)+ $content) ;
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:149:1: safe_def_in_expression : DEF definition+= definition_inside_expression ( TOO definition+= definition_inside_expression )* IN ( COLON )? content= safe_expression -> ^( BLOCK ( $definition)+ $content) ;
     public final OmttParser.safe_def_in_expression_return safe_def_in_expression() throws RecognitionException {
         OmttParser.safe_def_in_expression_return retval = new OmttParser.safe_def_in_expression_return();
         retval.start = input.LT(1);
@@ -2940,7 +2940,7 @@ public class OmttParser extends AbstractOmttParser {
         Object root_0 = null;
 
         Token DEF77=null;
-        Token AND78=null;
+        Token TOO78=null;
         Token IN79=null;
         Token COLON80=null;
         List list_definition=null;
@@ -2949,18 +2949,18 @@ public class OmttParser extends AbstractOmttParser {
         OmttParser.definition_inside_expression_return definition = null;
          definition = null;
         Object DEF77_tree=null;
-        Object AND78_tree=null;
+        Object TOO78_tree=null;
         Object IN79_tree=null;
         Object COLON80_tree=null;
         RewriteRuleTokenStream stream_COLON=new RewriteRuleTokenStream(adaptor,"token COLON");
         RewriteRuleTokenStream stream_DEF=new RewriteRuleTokenStream(adaptor,"token DEF");
         RewriteRuleTokenStream stream_IN=new RewriteRuleTokenStream(adaptor,"token IN");
-        RewriteRuleTokenStream stream_AND=new RewriteRuleTokenStream(adaptor,"token AND");
+        RewriteRuleTokenStream stream_TOO=new RewriteRuleTokenStream(adaptor,"token TOO");
         RewriteRuleSubtreeStream stream_safe_expression=new RewriteRuleSubtreeStream(adaptor,"rule safe_expression");
         RewriteRuleSubtreeStream stream_definition_inside_expression=new RewriteRuleSubtreeStream(adaptor,"rule definition_inside_expression");
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:150:3: ( DEF definition+= definition_inside_expression ( AND definition+= definition_inside_expression )* IN ( COLON )? content= safe_expression -> ^( BLOCK ( $definition)+ $content) )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:150:5: DEF definition+= definition_inside_expression ( AND definition+= definition_inside_expression )* IN ( COLON )? content= safe_expression
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:150:3: ( DEF definition+= definition_inside_expression ( TOO definition+= definition_inside_expression )* IN ( COLON )? content= safe_expression -> ^( BLOCK ( $definition)+ $content) )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:150:5: DEF definition+= definition_inside_expression ( TOO definition+= definition_inside_expression )* IN ( COLON )? content= safe_expression
             {
             DEF77=(Token)match(input,DEF,FOLLOW_DEF_in_safe_def_in_expression892); if (state.failed) return retval; 
             if ( state.backtracking==0 ) stream_DEF.add(DEF77);
@@ -2974,23 +2974,23 @@ public class OmttParser extends AbstractOmttParser {
             if (list_definition==null) list_definition=new ArrayList();
             list_definition.add(definition.getTree());
 
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:151:5: ( AND definition+= definition_inside_expression )*
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:151:5: ( TOO definition+= definition_inside_expression )*
             loop26:
             do {
                 int alt26=2;
                 int LA26_0 = input.LA(1);
 
-                if ( (LA26_0==AND) ) {
+                if ( (LA26_0==TOO) ) {
                     alt26=1;
                 }
 
 
                 switch (alt26) {
             	case 1 :
-            	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:151:6: AND definition+= definition_inside_expression
+            	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:151:6: TOO definition+= definition_inside_expression
             	    {
-            	    AND78=(Token)match(input,AND,FOLLOW_AND_in_safe_def_in_expression903); if (state.failed) return retval; 
-            	    if ( state.backtracking==0 ) stream_AND.add(AND78);
+            	    TOO78=(Token)match(input,TOO,FOLLOW_TOO_in_safe_def_in_expression903); if (state.failed) return retval; 
+            	    if ( state.backtracking==0 ) stream_TOO.add(TOO78);
 
             	    pushFollow(FOLLOW_definition_inside_expression_in_safe_def_in_expression907);
             	    definition=definition_inside_expression();
@@ -3181,7 +3181,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: definition_signature, expression
+                    // elements: expression, definition_signature
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3285,7 +3285,7 @@ public class OmttParser extends AbstractOmttParser {
     };
 
     // $ANTLR start "def_in_tag"
-    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:164:1: def_in_tag : TAG_START DEF definition+= definition_inside_tag ( TAG_START AND definition+= definition_inside_tag )* TAG_START IN content= tag_content TAG_END -> ^( BLOCK ( $definition)+ $content) ;
+    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:164:1: def_in_tag : TAG_START DEF definition+= definition_inside_tag ( TAG_START TOO definition+= definition_inside_tag )* TAG_START IN content= tag_content TAG_END -> ^( BLOCK ( $definition)+ $content) ;
     public final OmttParser.def_in_tag_return def_in_tag() throws RecognitionException {
         OmttParser.def_in_tag_return retval = new OmttParser.def_in_tag_return();
         retval.start = input.LT(1);
@@ -3295,7 +3295,7 @@ public class OmttParser extends AbstractOmttParser {
         Token TAG_START87=null;
         Token DEF88=null;
         Token TAG_START89=null;
-        Token AND90=null;
+        Token TOO90=null;
         Token TAG_START91=null;
         Token IN92=null;
         Token TAG_END93=null;
@@ -3307,20 +3307,20 @@ public class OmttParser extends AbstractOmttParser {
         Object TAG_START87_tree=null;
         Object DEF88_tree=null;
         Object TAG_START89_tree=null;
-        Object AND90_tree=null;
+        Object TOO90_tree=null;
         Object TAG_START91_tree=null;
         Object IN92_tree=null;
         Object TAG_END93_tree=null;
         RewriteRuleTokenStream stream_TAG_END=new RewriteRuleTokenStream(adaptor,"token TAG_END");
         RewriteRuleTokenStream stream_DEF=new RewriteRuleTokenStream(adaptor,"token DEF");
         RewriteRuleTokenStream stream_IN=new RewriteRuleTokenStream(adaptor,"token IN");
-        RewriteRuleTokenStream stream_AND=new RewriteRuleTokenStream(adaptor,"token AND");
+        RewriteRuleTokenStream stream_TOO=new RewriteRuleTokenStream(adaptor,"token TOO");
         RewriteRuleTokenStream stream_TAG_START=new RewriteRuleTokenStream(adaptor,"token TAG_START");
         RewriteRuleSubtreeStream stream_definition_inside_tag=new RewriteRuleSubtreeStream(adaptor,"rule definition_inside_tag");
         RewriteRuleSubtreeStream stream_tag_content=new RewriteRuleSubtreeStream(adaptor,"rule tag_content");
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:165:3: ( TAG_START DEF definition+= definition_inside_tag ( TAG_START AND definition+= definition_inside_tag )* TAG_START IN content= tag_content TAG_END -> ^( BLOCK ( $definition)+ $content) )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:165:5: TAG_START DEF definition+= definition_inside_tag ( TAG_START AND definition+= definition_inside_tag )* TAG_START IN content= tag_content TAG_END
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:165:3: ( TAG_START DEF definition+= definition_inside_tag ( TAG_START TOO definition+= definition_inside_tag )* TAG_START IN content= tag_content TAG_END -> ^( BLOCK ( $definition)+ $content) )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:165:5: TAG_START DEF definition+= definition_inside_tag ( TAG_START TOO definition+= definition_inside_tag )* TAG_START IN content= tag_content TAG_END
             {
             TAG_START87=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_def_in_tag1025); if (state.failed) return retval; 
             if ( state.backtracking==0 ) stream_TAG_START.add(TAG_START87);
@@ -3337,7 +3337,7 @@ public class OmttParser extends AbstractOmttParser {
             if (list_definition==null) list_definition=new ArrayList();
             list_definition.add(definition.getTree());
 
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:166:5: ( TAG_START AND definition+= definition_inside_tag )*
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:166:5: ( TAG_START TOO definition+= definition_inside_tag )*
             loop29:
             do {
                 int alt29=2;
@@ -3346,7 +3346,7 @@ public class OmttParser extends AbstractOmttParser {
                 if ( (LA29_0==TAG_START) ) {
                     int LA29_1 = input.LA(2);
 
-                    if ( (LA29_1==AND) ) {
+                    if ( (LA29_1==TOO) ) {
                         alt29=1;
                     }
 
@@ -3356,13 +3356,13 @@ public class OmttParser extends AbstractOmttParser {
 
                 switch (alt29) {
             	case 1 :
-            	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:166:6: TAG_START AND definition+= definition_inside_tag
+            	    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttParser.g:166:6: TAG_START TOO definition+= definition_inside_tag
             	    {
             	    TAG_START89=(Token)match(input,TAG_START,FOLLOW_TAG_START_in_def_in_tag1038); if (state.failed) return retval; 
             	    if ( state.backtracking==0 ) stream_TAG_START.add(TAG_START89);
 
-            	    AND90=(Token)match(input,AND,FOLLOW_AND_in_def_in_tag1040); if (state.failed) return retval; 
-            	    if ( state.backtracking==0 ) stream_AND.add(AND90);
+            	    TOO90=(Token)match(input,TOO,FOLLOW_TOO_in_def_in_tag1040); if (state.failed) return retval; 
+            	    if ( state.backtracking==0 ) stream_TOO.add(TOO90);
 
             	    pushFollow(FOLLOW_definition_inside_tag_in_def_in_tag1044);
             	    definition=definition_inside_tag();
@@ -3628,7 +3628,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: expression, VAR_ID
+                    // elements: VAR_ID, expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3795,7 +3795,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: expression, definition_argument, FUN
+                    // elements: FUN, expression, definition_argument
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -4262,7 +4262,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: OP_MULTIPLY, type_content
+            // elements: type_content, OP_MULTIPLY
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -5119,7 +5119,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: part_if, condition, part_else
+            // elements: condition, part_if, part_else
             // token labels: 
             // rule labels: retval, part_else, condition, part_if
             // token list labels: 
@@ -5259,7 +5259,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: part_if, part_else, condition
+            // elements: part_else, part_if, condition
             // token labels: 
             // rule labels: retval, part_else, condition, part_if
             // token list labels: 
@@ -5500,7 +5500,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: subtag, condition, part_if, part_else
+            // elements: condition, subtag, part_else, part_if
             // token labels: 
             // rule labels: subtag, retval, part_else, condition, part_if
             // token list labels: 
@@ -5646,7 +5646,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: item_alias, iter, MAP, expr
+            // elements: expr, iter, MAP, item_alias
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -5784,7 +5784,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: MAP, iter, expr, item_alias
+            // elements: iter, expr, item_alias, MAP
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -5928,7 +5928,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: item_alias, expr, MAP, iter
+            // elements: expr, iter, MAP, item_alias
             // token labels: 
             // rule labels: retval, expr, iter
             // token list labels: 
@@ -6324,7 +6324,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: atom_expression, context_expression, arguments
+            	    // elements: context_expression, arguments, atom_expression
             	    // token labels: 
             	    // rule labels: retval, arguments
             	    // token list labels: 
@@ -6386,7 +6386,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: ce, context_expression, op_map
+            	    // elements: ce, op_map, context_expression
             	    // token labels: 
             	    // rule labels: retval, ce
             	    // token list labels: 
@@ -6489,7 +6489,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: safe_expression, context_expression, ORDER
+            	    // elements: context_expression, safe_expression, ORDER
             	    // token labels: 
             	    // rule labels: retval
             	    // token list labels: 
@@ -6781,7 +6781,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: arguments, atom_expression
+            // elements: atom_expression, arguments
             // token labels: 
             // rule labels: retval, arguments
             // token list labels: 
@@ -6983,7 +6983,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: expr, AS, VAR_ID
+                    // elements: VAR_ID, AS, expr
                     // token labels: 
                     // rule labels: retval, expr
                     // token list labels: 
@@ -7174,7 +7174,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                             // AST REWRITE
-                            // elements: expr, OP_CONCAT
+                            // elements: OP_CONCAT, expr
                             // token labels: 
                             // rule labels: retval
                             // token list labels: 
@@ -8230,7 +8230,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: functional_expression, OP_MINUS
+                    // elements: OP_MINUS, functional_expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -8383,7 +8383,7 @@ public class OmttParser extends AbstractOmttParser {
             if ( ((LA69_0>=STRING_LITERAL && LA69_0<=REAL_NUMBER)||LA69_0==DATA_START||(LA69_0>=NULL && LA69_0<=FALSE)||LA69_0==TILDE||LA69_0==LEFT_PAREN||LA69_0==LEFT_SQUARE_PAREN||LA69_0==OP_GENERAL||LA69_0==VAR_ID) ) {
                 alt69=1;
             }
-            else if ( (LA69_0==EOF||(LA69_0>=CONTENT && LA69_0<=TAG_END)||(LA69_0>=EXPRESSION_END && LA69_0<=OP_DATA_IS_EXPRESSION)||(LA69_0>=AND && LA69_0<=IN)||(LA69_0>=ELSE && LA69_0<=AS)||(LA69_0>=MAP && LA69_0<=ORDER)||LA69_0==OP_FOLLOW||(LA69_0>=COLON && LA69_0<=SEMICOLON)||(LA69_0>=COMMA && LA69_0<=SLASH)||LA69_0==RIGHT_PAREN||(LA69_0>=RIGHT_SQUARE_PAREN && LA69_0<=OP_GE)||(LA69_0>=OP_AND && LA69_0<=OP_OR)||LA69_0==OP_CONTEXT||LA69_0==OP_CONCAT) ) {
+            else if ( (LA69_0==EOF||(LA69_0>=CONTENT && LA69_0<=TAG_END)||(LA69_0>=EXPRESSION_END && LA69_0<=OP_DATA_IS_EXPRESSION)||(LA69_0>=TOO && LA69_0<=IN)||(LA69_0>=ELSE && LA69_0<=AS)||(LA69_0>=MAP && LA69_0<=ORDER)||LA69_0==OP_FOLLOW||(LA69_0>=COLON && LA69_0<=SEMICOLON)||(LA69_0>=COMMA && LA69_0<=SLASH)||LA69_0==RIGHT_PAREN||(LA69_0>=RIGHT_SQUARE_PAREN && LA69_0<=OP_GE)||(LA69_0>=OP_AND && LA69_0<=OP_OR)||LA69_0==OP_CONTEXT||LA69_0==OP_CONCAT) ) {
                 alt69=2;
             }
             else {
@@ -8436,7 +8436,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: atom_expression, function_argument
+                    // elements: function_argument, atom_expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -8700,7 +8700,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: args, ident, content
+                    // elements: args, content, ident
                     // token labels: 
                     // rule labels: content, retval, ident
                     // token list labels: 
@@ -8944,7 +8944,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             // AST REWRITE
-            // elements: atom_expression, VAR_ID
+            // elements: VAR_ID, atom_expression
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -9099,7 +9099,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: DOT, atom_expression, es
+            	    // elements: es, DOT, atom_expression
             	    // token labels: 
             	    // rule labels: retval, es
             	    // token list labels: 
@@ -9144,7 +9144,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
             	    // AST REWRITE
-            	    // elements: ps, atom_expression, DOT
+            	    // elements: DOT, atom_expression, ps
             	    // token labels: 
             	    // rule labels: retval, ps
             	    // token list labels: 
@@ -9249,7 +9249,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: atom, sequence_selectors
+                    // elements: sequence_selectors, atom
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -9375,7 +9375,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: object, sequence_selectors
+                    // elements: sequence_selectors, object
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -10342,7 +10342,7 @@ public class OmttParser extends AbstractOmttParser {
                         throw nvae;
                     }
                 }
-                else if ( (LA88_1==EOF||(LA88_1>=STRING_LITERAL && LA88_1<=DATA_START)||(LA88_1>=EXPRESSION_END && LA88_1<=OP_DATA_IS_EXPRESSION)||(LA88_1>=AND && LA88_1<=IN)||(LA88_1>=ELSE && LA88_1<=AS)||(LA88_1>=MAP && LA88_1<=ORDER)||(LA88_1>=NULL && LA88_1<=FALSE)||LA88_1==OP_FOLLOW||(LA88_1>=COLON && LA88_1<=TILDE)||(LA88_1>=LEFT_PAREN && LA88_1<=OP_GE)||(LA88_1>=OP_AND && LA88_1<=OP_OR)||LA88_1==OP_CONTEXT||(LA88_1>=OP_CONCAT && LA88_1<=OP_GENERAL)||LA88_1==VAR_ID) ) {
+                else if ( (LA88_1==EOF||(LA88_1>=STRING_LITERAL && LA88_1<=DATA_START)||(LA88_1>=EXPRESSION_END && LA88_1<=OP_DATA_IS_EXPRESSION)||(LA88_1>=TOO && LA88_1<=IN)||(LA88_1>=ELSE && LA88_1<=AS)||(LA88_1>=MAP && LA88_1<=ORDER)||(LA88_1>=NULL && LA88_1<=FALSE)||LA88_1==OP_FOLLOW||(LA88_1>=COLON && LA88_1<=TILDE)||(LA88_1>=LEFT_PAREN && LA88_1<=OP_GE)||(LA88_1>=OP_AND && LA88_1<=OP_OR)||LA88_1==OP_CONTEXT||(LA88_1>=OP_CONCAT && LA88_1<=OP_GENERAL)||LA88_1==VAR_ID) ) {
                     alt88=1;
                 }
                 else {
@@ -10991,7 +10991,7 @@ public class OmttParser extends AbstractOmttParser {
 
 
                     // AST REWRITE
-                    // elements: sequence_expression, rexpr
+                    // elements: rexpr, sequence_expression
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -12311,14 +12311,14 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_strict_expression_in_safe_expression816 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_DEF_in_def_in_expression830 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression834 = new BitSet(new long[]{0x0030000000000000L});
-    public static final BitSet FOLLOW_AND_in_def_in_expression841 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_TOO_in_def_in_expression841 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_expression_in_def_in_expression845 = new BitSet(new long[]{0x0030000000000000L});
     public static final BitSet FOLLOW_IN_in_def_in_expression853 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097049EL});
     public static final BitSet FOLLOW_COLON_in_def_in_expression855 = new BitSet(new long[]{0x38480008E0000000L,0x000028880097009EL});
     public static final BitSet FOLLOW_expression_in_def_in_expression860 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_DEF_in_safe_def_in_expression892 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_expression_in_safe_def_in_expression896 = new BitSet(new long[]{0x0030000000000000L});
-    public static final BitSet FOLLOW_AND_in_safe_def_in_expression903 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_TOO_in_safe_def_in_expression903 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_expression_in_safe_def_in_expression907 = new BitSet(new long[]{0x0030000000000000L});
     public static final BitSet FOLLOW_IN_in_safe_def_in_expression915 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095041CL});
     public static final BitSet FOLLOW_COLON_in_safe_def_in_expression917 = new BitSet(new long[]{0x18480008E0000000L,0x000008880095001CL});
@@ -12333,7 +12333,7 @@ public class OmttParser extends AbstractOmttParser {
     public static final BitSet FOLLOW_DEF_in_def_in_tag1027 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_tag_in_def_in_tag1031 = new BitSet(new long[]{0x0000000200000000L});
     public static final BitSet FOLLOW_TAG_START_in_def_in_tag1038 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_AND_in_def_in_tag1040 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_TOO_in_def_in_tag1040 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_definition_inside_tag_in_def_in_tag1044 = new BitSet(new long[]{0x0000000200000000L});
     public static final BitSet FOLLOW_TAG_START_in_def_in_tag1052 = new BitSet(new long[]{0x0020000000000000L});
     public static final BitSet FOLLOW_IN_in_def_in_tag1054 = new BitSet(new long[]{0x0000008100000000L});

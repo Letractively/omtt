@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g 2009-10-27 13:53:48
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g 2009-12-02 00:43:41
 
 package pl.omtt.lang.grammar;
 
@@ -74,7 +74,6 @@ public class OmttLexer extends AbstractOmttLexer {
     public static final int EXPRESSION_END=38;
     public static final int ORDER=63;
     public static final int TYPE_SELECT=14;
-    public static final int AND=52;
     public static final int DATA_END=36;
     public static final int IF_ELSE=22;
     public static final int IF=54;
@@ -122,6 +121,7 @@ public class OmttLexer extends AbstractOmttLexer {
     public static final int ACTION_ON_NEWLINE=46;
     public static final int PROGRAM=4;
     public static final int OP_LEQ=92;
+    public static final int TOO=52;
     public static final int LAMBDA_MATCH=17;
 
       protected int getStringLiteralType () {
@@ -812,15 +812,15 @@ public class OmttLexer extends AbstractOmttLexer {
     }
     // $ANTLR end "DEF"
 
-    // $ANTLR start "AND"
-    public final void mAND() throws RecognitionException {
+    // $ANTLR start "TOO"
+    public final void mTOO() throws RecognitionException {
         try {
-            int _type = AND;
+            int _type = TOO;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:170:6: ( 'and' )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:170:8: 'and'
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:170:6: ( 'too' )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:170:8: 'too'
             {
-            match("and"); if (state.failed) return ;
+            match("too"); if (state.failed) return ;
 
 
             }
@@ -831,7 +831,7 @@ public class OmttLexer extends AbstractOmttLexer {
         finally {
         }
     }
-    // $ANTLR end "AND"
+    // $ANTLR end "TOO"
 
     // $ANTLR start "IN"
     public final void mIN() throws RecognitionException {
@@ -1957,18 +1957,15 @@ public class OmttLexer extends AbstractOmttLexer {
         try {
             int _type = OP_AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:248:8: ( '&' | '&&' )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:248:8: ( 'and' | '&&' )
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0=='&') ) {
-                int LA14_1 = input.LA(2);
-
-                if ( (LA14_1=='&') ) {
-                    alt14=2;
-                }
-                else {
-                    alt14=1;}
+            if ( (LA14_0=='a') ) {
+                alt14=1;
+            }
+            else if ( (LA14_0=='&') ) {
+                alt14=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
@@ -1979,14 +1976,15 @@ public class OmttLexer extends AbstractOmttLexer {
             }
             switch (alt14) {
                 case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:248:10: '&'
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:248:10: 'and'
                     {
-                    match('&'); if (state.failed) return ;
+                    match("and"); if (state.failed) return ;
+
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:248:16: '&&'
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:248:18: '&&'
                     {
                     match("&&"); if (state.failed) return ;
 
@@ -2618,7 +2616,7 @@ public class OmttLexer extends AbstractOmttLexer {
     // $ANTLR end "NEWLINE"
 
     public void mTokens() throws RecognitionException {
-        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:8: ( COMMENT_SINGLE_LINE | COMMENT_MULTI_LINE | STRING_LITERAL | TAG_START | ACTION_ON_NEWLINE | STRING_PARENS | MODE_LEFT_PAREN | MODE_RIGHT_PAREN | MODULE | IMPORT | USE | DEF | AND | IN | IF | THEN | ELSE | AS | IS | MAP | APPLY | MATCH | WHERE | ORDER | BY | FUN | NULL | TRUE | FALSE | OP_FOLLOW | OP_REVERSE_FOLLOW | OP_DOUBLE_FOLLOW | COLON | SEMICOLON | DOT | DOUBLE_DOT | COMMA | SLASH | TILDE | QUESTION_MARK | LEFT_PAREN | RIGHT_PAREN | LEFT_SQUARE_PAREN | RIGHT_SQUARE_PAREN | OP_PLUS | OP_MINUS | OP_MULTIPLY | OP_MODULO | OP_EQUAL | OP_NOT_EQUAL | OP_LEQ | OP_LE | OP_GEQ | OP_GE | OP_ASSIGN | OP_AND | OP_OR | OP_NOT | OP_CONTEXT | OP_VIEW | OP_CONCAT | OP_GENERAL | OP_DATA | VAR_ID | CLASS_ID | INT_OR_REAL_NUMBER | WS )
+        // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:8: ( COMMENT_SINGLE_LINE | COMMENT_MULTI_LINE | STRING_LITERAL | TAG_START | ACTION_ON_NEWLINE | STRING_PARENS | MODE_LEFT_PAREN | MODE_RIGHT_PAREN | MODULE | IMPORT | USE | DEF | TOO | IN | IF | THEN | ELSE | AS | IS | MAP | APPLY | MATCH | WHERE | ORDER | BY | FUN | NULL | TRUE | FALSE | OP_FOLLOW | OP_REVERSE_FOLLOW | OP_DOUBLE_FOLLOW | COLON | SEMICOLON | DOT | DOUBLE_DOT | COMMA | SLASH | TILDE | QUESTION_MARK | LEFT_PAREN | RIGHT_PAREN | LEFT_SQUARE_PAREN | RIGHT_SQUARE_PAREN | OP_PLUS | OP_MINUS | OP_MULTIPLY | OP_MODULO | OP_EQUAL | OP_NOT_EQUAL | OP_LEQ | OP_LE | OP_GEQ | OP_GE | OP_ASSIGN | OP_AND | OP_OR | OP_NOT | OP_CONTEXT | OP_VIEW | OP_CONCAT | OP_GENERAL | OP_DATA | VAR_ID | CLASS_ID | INT_OR_REAL_NUMBER | WS )
         int alt23=67;
         alt23 = dfa23.predict(input);
         switch (alt23) {
@@ -2707,9 +2705,9 @@ public class OmttLexer extends AbstractOmttLexer {
                 }
                 break;
             case 13 :
-                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:161: AND
+                // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:1:161: TOO
                 {
-                mAND(); if (state.failed) return ;
+                mTOO(); if (state.failed) return ;
 
                 }
                 break;
@@ -3282,52 +3280,53 @@ public class OmttLexer extends AbstractOmttLexer {
 
     protected DFA23 dfa23 = new DFA23(this);
     static final String DFA23_eotS =
-        "\1\uffff\1\60\6\uffff\14\52\1\107\1\112\1\115\1\117\1\uffff\1\121"+
-        "\12\uffff\1\123\1\uffff\1\125\1\uffff\1\126\10\uffff\3\52\1\133"+
-        "\1\134\1\135\3\52\1\141\5\52\1\124\1\150\4\52\21\uffff\1\156\1\157"+
-        "\2\52\3\uffff\1\162\1\163\1\164\1\uffff\6\52\1\uffff\1\173\2\52"+
-        "\1\176\1\52\2\uffff\2\52\3\uffff\1\52\1\u0083\1\u0084\1\u0085\2"+
-        "\52\1\uffff\1\52\1\u0089\1\uffff\1\52\1\u008b\1\52\1\u008d\3\uffff"+
-        "\1\u008e\1\u008f\1\u0090\1\uffff\1\u0091\1\uffff\1\u0092\6\uffff";
+        "\1\uffff\1\60\6\uffff\14\52\1\110\1\113\1\116\1\120\1\uffff\1\122"+
+        "\12\uffff\1\124\1\uffff\1\126\1\uffff\1\127\10\uffff\3\52\1\134"+
+        "\1\135\1\136\6\52\1\145\3\52\1\125\1\152\4\52\21\uffff\1\160\1\161"+
+        "\2\52\3\uffff\1\164\1\165\1\166\3\52\1\uffff\1\52\1\45\2\52\1\uffff"+
+        "\1\175\2\52\1\u0080\1\52\2\uffff\2\52\3\uffff\1\u0084\1\u0085\1"+
+        "\u0086\3\52\1\uffff\1\52\1\u008b\1\uffff\1\52\1\u008d\1\52\3\uffff"+
+        "\1\u008f\1\u0090\1\u0091\1\u0092\1\uffff\1\u0093\1\uffff\1\u0094"+
+        "\6\uffff";
     static final String DFA23_eofS =
-        "\u0093\uffff";
+        "\u0095\uffff";
     static final String DFA23_minS =
-        "\1\11\1\52\6\uffff\1\141\1\146\1\163\1\145\1\156\1\150\1\154\1\150"+
+        "\1\11\1\52\6\uffff\1\141\1\146\1\163\1\145\1\150\1\154\1\156\1\150"+
         "\1\162\1\171\1\141\1\157\1\76\1\55\1\75\1\72\1\uffff\1\56\12\uffff"+
         "\1\75\1\uffff\1\174\1\uffff\1\60\10\uffff\1\144\2\160\3\60\1\145"+
-        "\1\146\1\144\1\60\1\160\1\145\1\165\1\163\1\145\2\60\1\156\2\154"+
-        "\1\164\21\uffff\2\60\1\143\1\157\3\uffff\3\60\1\uffff\1\154\1\156"+
-        "\2\145\1\162\1\145\1\uffff\1\60\1\163\1\154\1\60\1\154\2\uffff\1"+
-        "\150\1\162\3\uffff\1\171\3\60\1\145\1\162\1\uffff\1\145\1\60\1\uffff"+
-        "\1\145\1\60\1\164\1\60\3\uffff\3\60\1\uffff\1\60\1\uffff\1\60\6"+
-        "\uffff";
+        "\1\146\1\157\1\145\1\165\1\163\1\60\1\160\1\144\1\145\2\60\1\156"+
+        "\2\154\1\164\21\uffff\2\60\1\143\1\157\3\uffff\3\60\1\156\2\145"+
+        "\1\uffff\1\154\1\60\1\162\1\145\1\uffff\1\60\1\163\1\154\1\60\1"+
+        "\154\2\uffff\1\150\1\162\3\uffff\3\60\1\171\1\145\1\162\1\uffff"+
+        "\1\145\1\60\1\uffff\1\145\1\60\1\164\3\uffff\4\60\1\uffff\1\60\1"+
+        "\uffff\1\60\6\uffff";
     static final String DFA23_maxS =
-        "\1\176\1\57\6\uffff\1\157\2\163\1\145\1\163\1\162\1\154\1\150\1"+
+        "\1\176\1\57\6\uffff\1\157\2\163\1\145\1\162\1\154\1\163\1\150\1"+
         "\162\1\171\2\165\1\76\1\75\1\76\1\72\1\uffff\1\56\12\uffff\1\75"+
         "\1\uffff\1\174\1\uffff\1\172\10\uffff\1\144\1\164\1\160\3\172\1"+
-        "\145\1\146\1\144\1\172\1\160\1\145\1\165\1\163\1\145\2\172\1\156"+
-        "\2\154\1\164\21\uffff\2\172\1\143\1\157\3\uffff\3\172\1\uffff\1"+
-        "\154\1\156\2\145\1\162\1\145\1\uffff\1\172\1\163\1\154\1\172\1\154"+
-        "\2\uffff\1\150\1\162\3\uffff\1\171\3\172\1\145\1\162\1\uffff\1\145"+
-        "\1\172\1\uffff\1\145\1\172\1\164\1\172\3\uffff\3\172\1\uffff\1\172"+
-        "\1\uffff\1\172\6\uffff";
+        "\145\1\146\1\157\1\145\1\165\1\163\1\172\1\160\1\144\1\145\2\172"+
+        "\1\156\2\154\1\164\21\uffff\2\172\1\143\1\157\3\uffff\3\172\1\156"+
+        "\2\145\1\uffff\1\154\1\172\1\162\1\145\1\uffff\1\172\1\163\1\154"+
+        "\1\172\1\154\2\uffff\1\150\1\162\3\uffff\3\172\1\171\1\145\1\162"+
+        "\1\uffff\1\145\1\172\1\uffff\1\145\1\172\1\164\3\uffff\4\172\1\uffff"+
+        "\1\172\1\uffff\1\172\6\uffff";
     static final String DFA23_acceptS =
         "\2\uffff\1\3\1\4\1\5\1\6\1\7\1\10\20\uffff\1\42\1\uffff\1\45\1\47"+
         "\1\50\1\51\1\52\1\53\1\54\1\55\1\57\1\62\1\uffff\1\70\1\uffff\1"+
-        "\75\1\uffff\1\77\1\100\1\101\1\102\1\103\1\1\1\2\1\46\25\uffff\1"+
+        "\75\1\uffff\1\77\1\100\1\101\1\102\1\103\1\1\1\2\1\46\26\uffff\1"+
         "\36\1\56\1\37\1\63\1\64\1\40\1\61\1\67\1\74\1\41\1\44\1\43\1\65"+
-        "\1\66\1\71\1\73\1\76\4\uffff\1\16\1\17\1\23\3\uffff\1\22\6\uffff"+
+        "\1\66\1\71\1\73\1\76\4\uffff\1\16\1\17\1\23\6\uffff\1\22\4\uffff"+
         "\1\31\5\uffff\1\60\1\24\2\uffff\1\13\1\14\1\15\6\uffff\1\32\2\uffff"+
-        "\1\72\4\uffff\1\20\1\34\1\21\3\uffff\1\33\1\uffff\1\26\1\uffff\1"+
+        "\1\72\3\uffff\1\20\1\34\1\21\4\uffff\1\33\1\uffff\1\26\1\uffff\1"+
         "\25\1\27\1\30\1\35\1\11\1\12";
     static final String DFA23_specialS =
-        "\u0093\uffff}>";
+        "\u0095\uffff}>";
     static final String[] DFA23_transitionS = {
             "\1\55\1\4\1\uffff\1\55\1\4\22\uffff\1\55\1\43\1\5\1\uffff\1"+
             "\51\1\3\1\45\1\2\1\35\1\36\1\42\1\41\1\32\1\24\1\31\1\1\12\54"+
             "\1\27\1\30\1\25\1\26\1\44\1\34\1\52\32\53\1\37\1\uffff\1\40"+
-            "\1\47\1\50\1\uffff\1\14\1\21\1\52\1\13\1\16\1\22\2\52\1\11\3"+
-            "\52\1\10\1\23\1\20\4\52\1\15\1\12\1\52\1\17\3\52\1\6\1\46\1"+
+            "\1\47\1\50\1\uffff\1\16\1\21\1\52\1\13\1\15\1\22\2\52\1\11\3"+
+            "\52\1\10\1\23\1\20\4\52\1\14\1\12\1\52\1\17\3\52\1\6\1\46\1"+
             "\7\1\33",
             "\1\57\4\uffff\1\56",
             "",
@@ -3340,23 +3339,20 @@ public class OmttLexer extends AbstractOmttLexer {
             "\1\65\6\uffff\1\63\1\64\4\uffff\1\66",
             "\1\67",
             "\1\70",
-            "\1\71\1\uffff\1\73\2\uffff\1\72",
-            "\1\74\11\uffff\1\75",
-            "\1\76",
-            "\1\77",
+            "\1\72\6\uffff\1\71\2\uffff\1\73",
+            "\1\74",
+            "\1\77\1\uffff\1\76\2\uffff\1\75",
             "\1\100",
             "\1\101",
-            "\1\103\23\uffff\1\102",
-            "\1\105\5\uffff\1\104",
-            "\1\106",
-            "\1\110\17\uffff\1\111",
-            "\1\114\1\113",
-            "\1\116",
+            "\1\102",
+            "\1\104\23\uffff\1\103",
+            "\1\106\5\uffff\1\105",
+            "\1\107",
+            "\1\111\17\uffff\1\112",
+            "\1\115\1\114",
+            "\1\117",
             "",
-            "\1\120",
-            "",
-            "",
-            "",
+            "\1\121",
             "",
             "",
             "",
@@ -3364,9 +3360,12 @@ public class OmttLexer extends AbstractOmttLexer {
             "",
             "",
             "",
-            "\1\122",
             "",
-            "\1\124",
+            "",
+            "",
+            "\1\123",
+            "",
+            "\1\125",
             "",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "",
@@ -3377,27 +3376,28 @@ public class OmttLexer extends AbstractOmttLexer {
             "",
             "",
             "",
-            "\1\127",
-            "\1\130\3\uffff\1\131",
-            "\1\132",
+            "\1\130",
+            "\1\131\3\uffff\1\132",
+            "\1\133",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\1\136",
             "\1\137",
             "\1\140",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\141",
             "\1\142",
             "\1\143",
             "\1\144",
-            "\1\145",
-            "\1\146",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\3\52\1\147\26\52",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\1\151",
-            "\1\152",
+            "\1\146",
+            "\1\147",
+            "\1\150",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\3\52\1\151\26\52",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\153",
             "\1\154",
+            "\1\155",
+            "\1\156",
             "",
             "",
             "",
@@ -3415,53 +3415,54 @@ public class OmttLexer extends AbstractOmttLexer {
             "",
             "",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\24\52\1\155\5\52",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\24\52\1\157\5\52",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\1\160",
-            "\1\161",
+            "\1\162",
+            "\1\163",
             "",
             "",
             "",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "",
-            "\1\165",
-            "\1\166",
             "\1\167",
             "\1\170",
             "\1\171",
+            "",
             "\1\172",
-            "",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\173",
             "\1\174",
-            "\1\175",
+            "",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\176",
             "\1\177",
-            "",
-            "",
-            "\1\u0080",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\u0081",
             "",
             "",
-            "",
             "\1\u0082",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\1\u0086",
-            "\1\u0087",
+            "\1\u0083",
             "",
-            "\1\u0088",
+            "",
+            "",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\u0087",
+            "\1\u0088",
+            "\1\u0089",
             "",
             "\1\u008a",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "",
             "\1\u008c",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\u008e",
             "",
             "",
             "",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
@@ -3507,7 +3508,7 @@ public class OmttLexer extends AbstractOmttLexer {
             this.transition = DFA23_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( COMMENT_SINGLE_LINE | COMMENT_MULTI_LINE | STRING_LITERAL | TAG_START | ACTION_ON_NEWLINE | STRING_PARENS | MODE_LEFT_PAREN | MODE_RIGHT_PAREN | MODULE | IMPORT | USE | DEF | AND | IN | IF | THEN | ELSE | AS | IS | MAP | APPLY | MATCH | WHERE | ORDER | BY | FUN | NULL | TRUE | FALSE | OP_FOLLOW | OP_REVERSE_FOLLOW | OP_DOUBLE_FOLLOW | COLON | SEMICOLON | DOT | DOUBLE_DOT | COMMA | SLASH | TILDE | QUESTION_MARK | LEFT_PAREN | RIGHT_PAREN | LEFT_SQUARE_PAREN | RIGHT_SQUARE_PAREN | OP_PLUS | OP_MINUS | OP_MULTIPLY | OP_MODULO | OP_EQUAL | OP_NOT_EQUAL | OP_LEQ | OP_LE | OP_GEQ | OP_GE | OP_ASSIGN | OP_AND | OP_OR | OP_NOT | OP_CONTEXT | OP_VIEW | OP_CONCAT | OP_GENERAL | OP_DATA | VAR_ID | CLASS_ID | INT_OR_REAL_NUMBER | WS );";
+            return "1:1: Tokens : ( COMMENT_SINGLE_LINE | COMMENT_MULTI_LINE | STRING_LITERAL | TAG_START | ACTION_ON_NEWLINE | STRING_PARENS | MODE_LEFT_PAREN | MODE_RIGHT_PAREN | MODULE | IMPORT | USE | DEF | TOO | IN | IF | THEN | ELSE | AS | IS | MAP | APPLY | MATCH | WHERE | ORDER | BY | FUN | NULL | TRUE | FALSE | OP_FOLLOW | OP_REVERSE_FOLLOW | OP_DOUBLE_FOLLOW | COLON | SEMICOLON | DOT | DOUBLE_DOT | COMMA | SLASH | TILDE | QUESTION_MARK | LEFT_PAREN | RIGHT_PAREN | LEFT_SQUARE_PAREN | RIGHT_SQUARE_PAREN | OP_PLUS | OP_MINUS | OP_MULTIPLY | OP_MODULO | OP_EQUAL | OP_NOT_EQUAL | OP_LEQ | OP_LE | OP_GEQ | OP_GE | OP_ASSIGN | OP_AND | OP_OR | OP_NOT | OP_CONTEXT | OP_VIEW | OP_CONCAT | OP_GENERAL | OP_DATA | VAR_ID | CLASS_ID | INT_OR_REAL_NUMBER | WS );";
         }
     }
  
