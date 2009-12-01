@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g 2009-08-02 10:16:49
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g 2009-12-02 00:46:48
 
 package pl.omtt.eclipse.ui.partitioner;
 
@@ -8,6 +8,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class SimpleOmttTagLexer extends Lexer {
     public static final int TAG_END=7;
     public static final int NEWLINE=12;
@@ -50,15 +51,15 @@ public class SimpleOmttTagLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "/home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g"; }
+    public String getGrammarFileName() { return "/home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g"; }
 
     // $ANTLR start "TAG"
     public final void mTAG() throws RecognitionException {
         try {
             int _type = TAG;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:23:5: ( '%' )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:23:7: '%'
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:23:5: ( '%' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:23:7: '%'
             {
             match('%'); 
 
@@ -77,8 +78,8 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = TAG_SINGLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:24:12: ( '%%' )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:24:14: '%%'
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:24:12: ( '%%' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:24:14: '%%'
             {
             match("%%"); 
 
@@ -98,7 +99,7 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = TAG_INNER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:11: ( 'in' | 'and' | 'else' | 'case' | 'default' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:11: ( 'in' | 'too' | 'else' | 'case' | 'default' )
             int alt1=5;
             switch ( input.LA(1) ) {
             case 'i':
@@ -106,7 +107,7 @@ public class SimpleOmttTagLexer extends Lexer {
                 alt1=1;
                 }
                 break;
-            case 'a':
+            case 't':
                 {
                 alt1=2;
                 }
@@ -135,7 +136,7 @@ public class SimpleOmttTagLexer extends Lexer {
 
             switch (alt1) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:13: 'in'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:13: 'in'
                     {
                     match("in"); 
 
@@ -143,15 +144,15 @@ public class SimpleOmttTagLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:20: 'and'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:20: 'too'
                     {
-                    match("and"); 
+                    match("too"); 
 
 
                     }
                     break;
                 case 3 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:28: 'else'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:28: 'else'
                     {
                     match("else"); 
 
@@ -159,7 +160,7 @@ public class SimpleOmttTagLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:37: 'case'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:37: 'case'
                     {
                     match("case"); 
 
@@ -167,7 +168,7 @@ public class SimpleOmttTagLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:46: 'default'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:26:46: 'default'
                     {
                     match("default"); 
 
@@ -189,12 +190,12 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = TAG_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:9: ( 'end' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' | '\\r' '\\n' )? )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:11: 'end' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' | '\\r' '\\n' )?
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:9: ( 'end' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' | '\\r' '\\n' )? )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:11: 'end' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' | '\\r' '\\n' )?
             {
             match("end"); 
 
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:17: (~ ( '\\n' | '\\r' ) )*
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:17: (~ ( '\\n' | '\\r' ) )*
             loop2:
             do {
                 int alt2=2;
@@ -207,7 +208,7 @@ public class SimpleOmttTagLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:17: ~ ( '\\n' | '\\r' )
+            	    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:17: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -227,7 +228,7 @@ public class SimpleOmttTagLexer extends Lexer {
                 }
             } while (true);
 
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:33: ( '\\n' | '\\r' | '\\r' '\\n' )?
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:33: ( '\\n' | '\\r' | '\\r' '\\n' )?
             int alt3=4;
             int LA3_0 = input.LA(1);
 
@@ -243,21 +244,21 @@ public class SimpleOmttTagLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:34: '\\n'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:34: '\\n'
                     {
                     match('\n'); 
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:41: '\\r'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:41: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:48: '\\r' '\\n'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:27:48: '\\r' '\\n'
                     {
                     match('\r'); 
                     match('\n'); 
@@ -283,8 +284,8 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = LEFT_DATA_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:29:17: ( '{' )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:29:19: '{'
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:29:17: ( '{' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:29:19: '{'
             {
             match('{'); 
 
@@ -303,8 +304,8 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = RIGHT_DATA_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:30:18: ( '}' )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:30:20: '}'
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:30:18: ( '}' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:30:20: '}'
             {
             match('}'); 
 
@@ -323,8 +324,8 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = DATA_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:32:12: ( '\"' | '\\'' )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:32:12: ( '\"' | '\\'' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:
             {
             if ( input.LA(1)=='\"'||input.LA(1)=='\'' ) {
                 input.consume();
@@ -351,8 +352,8 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = EXPRESSION_NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:20: ( ( ':' | '=' ) ( '\\n' | '\\r' | '\\n' '\\r' ) )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:22: ( ':' | '=' ) ( '\\n' | '\\r' | '\\n' '\\r' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:20: ( ( ':' | '=' ) ( '\\n' | '\\r' | '\\n' '\\r' ) )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:22: ( ':' | '=' ) ( '\\n' | '\\r' | '\\n' '\\r' )
             {
             if ( input.LA(1)==':'||input.LA(1)=='=' ) {
                 input.consume();
@@ -363,7 +364,7 @@ public class SimpleOmttTagLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:32: ( '\\n' | '\\r' | '\\n' '\\r' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:32: ( '\\n' | '\\r' | '\\n' '\\r' )
             int alt4=3;
             int LA4_0 = input.LA(1);
 
@@ -387,21 +388,21 @@ public class SimpleOmttTagLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:33: '\\n'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:33: '\\n'
                     {
                     match('\n'); 
 
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:40: '\\r'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:40: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:47: '\\n' '\\r'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:34:47: '\\n' '\\r'
                     {
                     match('\n'); 
                     match('\r'); 
@@ -427,7 +428,7 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:35:9: ( '\\n' '\\r' | '\\n' | '\\r' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:35:9: ( '\\n' '\\r' | '\\n' | '\\r' )
             int alt5=3;
             int LA5_0 = input.LA(1);
 
@@ -451,7 +452,7 @@ public class SimpleOmttTagLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:35:11: '\\n' '\\r'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:35:11: '\\n' '\\r'
                     {
                     match('\n'); 
                     match('\r'); 
@@ -459,14 +460,14 @@ public class SimpleOmttTagLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:35:23: '\\n'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:35:23: '\\n'
                     {
                     match('\n'); 
 
                     }
                     break;
                 case 3 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:35:30: '\\r'
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:35:30: '\\r'
                     {
                     match('\r'); 
 
@@ -487,10 +488,10 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = HIDDEN_CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:3: ( ( ( LETTER )+ | HIDDEN_SYMBOL ) )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:5: ( ( LETTER )+ | HIDDEN_SYMBOL )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:3: ( ( ( LETTER )+ | HIDDEN_SYMBOL ) )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:5: ( ( LETTER )+ | HIDDEN_SYMBOL )
             {
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:5: ( ( LETTER )+ | HIDDEN_SYMBOL )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:5: ( ( LETTER )+ | HIDDEN_SYMBOL )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -508,9 +509,9 @@ public class SimpleOmttTagLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:6: ( LETTER )+
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:6: ( LETTER )+
                     {
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:6: ( LETTER )+
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:6: ( LETTER )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -524,7 +525,7 @@ public class SimpleOmttTagLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:6: LETTER
+                    	    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:6: LETTER
                     	    {
                     	    mLETTER(); 
 
@@ -544,7 +545,7 @@ public class SimpleOmttTagLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:16: HIDDEN_SYMBOL
+                    // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:38:16: HIDDEN_SYMBOL
                     {
                     mHIDDEN_SYMBOL(); 
 
@@ -569,8 +570,8 @@ public class SimpleOmttTagLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:42:3: ( ( ' ' | '\\t' ) )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:42:5: ( ' ' | '\\t' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:42:3: ( ( ' ' | '\\t' ) )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:42:5: ( ' ' | '\\t' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)==' ' ) {
                 input.consume();
@@ -596,8 +597,8 @@ public class SimpleOmttTagLexer extends Lexer {
     // $ANTLR start "HIDDEN_SYMBOL"
     public final void mHIDDEN_SYMBOL() throws RecognitionException {
         try {
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:46:24: ( '=' | ':' )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:46:24: ( '=' | ':' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:
             {
             if ( input.LA(1)==':'||input.LA(1)=='=' ) {
                 input.consume();
@@ -620,8 +621,8 @@ public class SimpleOmttTagLexer extends Lexer {
     // $ANTLR start "LETTER"
     public final void mLETTER() throws RecognitionException {
         try {
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:47:17: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
-            // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:47:17: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
+            // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -642,82 +643,82 @@ public class SimpleOmttTagLexer extends Lexer {
     // $ANTLR end "LETTER"
 
     public void mTokens() throws RecognitionException {
-        // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:8: ( TAG | TAG_SINGLE | TAG_INNER | TAG_END | LEFT_DATA_PAREN | RIGHT_DATA_PAREN | DATA_PAREN | EXPRESSION_NEWLINE | NEWLINE | HIDDEN_CHAR | WHITESPACE )
+        // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:8: ( TAG | TAG_SINGLE | TAG_INNER | TAG_END | LEFT_DATA_PAREN | RIGHT_DATA_PAREN | DATA_PAREN | EXPRESSION_NEWLINE | NEWLINE | HIDDEN_CHAR | WHITESPACE )
         int alt8=11;
         alt8 = dfa8.predict(input);
         switch (alt8) {
             case 1 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:10: TAG
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:10: TAG
                 {
                 mTAG(); 
 
                 }
                 break;
             case 2 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:14: TAG_SINGLE
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:14: TAG_SINGLE
                 {
                 mTAG_SINGLE(); 
 
                 }
                 break;
             case 3 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:25: TAG_INNER
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:25: TAG_INNER
                 {
                 mTAG_INNER(); 
 
                 }
                 break;
             case 4 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:35: TAG_END
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:35: TAG_END
                 {
                 mTAG_END(); 
 
                 }
                 break;
             case 5 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:43: LEFT_DATA_PAREN
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:43: LEFT_DATA_PAREN
                 {
                 mLEFT_DATA_PAREN(); 
 
                 }
                 break;
             case 6 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:59: RIGHT_DATA_PAREN
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:59: RIGHT_DATA_PAREN
                 {
                 mRIGHT_DATA_PAREN(); 
 
                 }
                 break;
             case 7 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:76: DATA_PAREN
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:76: DATA_PAREN
                 {
                 mDATA_PAREN(); 
 
                 }
                 break;
             case 8 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:87: EXPRESSION_NEWLINE
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:87: EXPRESSION_NEWLINE
                 {
                 mEXPRESSION_NEWLINE(); 
 
                 }
                 break;
             case 9 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:106: NEWLINE
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:106: NEWLINE
                 {
                 mNEWLINE(); 
 
                 }
                 break;
             case 10 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:114: HIDDEN_CHAR
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:114: HIDDEN_CHAR
                 {
                 mHIDDEN_CHAR(); 
 
                 }
                 break;
             case 11 :
-                // /home/endrju/.workspace/OMTT Eclipse UI/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:126: WHITESPACE
+                // /home/endrju/.workspace/pl.omtt.eclipse.ui/src/pl/omtt/eclipse/ui/partitioner/SimpleOmttTagLexer.g:1:126: WHITESPACE
                 {
                 mWHITESPACE(); 
 
@@ -736,13 +737,13 @@ public class SimpleOmttTagLexer extends Lexer {
     static final String DFA8_eofS =
         "\45\uffff";
     static final String DFA8_minS =
-        "\1\11\1\45\2\156\1\154\1\141\1\145\3\uffff\1\12\5\uffff\1\101\1"+
-        "\144\1\163\1\144\1\163\1\146\2\uffff\1\101\1\145\1\101\1\145\1\141"+
-        "\1\101\1\uffff\2\101\1\165\1\154\1\164\1\101";
+        "\1\11\1\45\1\156\1\157\1\154\1\141\1\145\3\uffff\1\12\5\uffff\1"+
+        "\101\1\157\1\163\1\144\1\163\1\146\2\uffff\1\101\1\145\1\101\1\145"+
+        "\1\141\1\101\1\uffff\2\101\1\165\1\154\1\164\1\101";
     static final String DFA8_maxS =
-        "\1\175\1\45\3\156\1\141\1\145\3\uffff\1\15\5\uffff\1\172\1\144\1"+
-        "\163\1\144\1\163\1\146\2\uffff\1\172\1\145\1\172\1\145\1\141\1\172"+
-        "\1\uffff\2\172\1\165\1\154\1\164\1\172";
+        "\1\175\1\45\1\156\1\157\1\156\1\141\1\145\3\uffff\1\15\5\uffff\1"+
+        "\172\1\157\1\163\1\144\1\163\1\146\2\uffff\1\172\1\145\1\172\1\145"+
+        "\1\141\1\172\1\uffff\2\172\1\165\1\154\1\164\1\172";
     static final String DFA8_acceptS =
         "\7\uffff\1\5\1\6\1\7\1\uffff\1\11\1\12\1\13\1\2\1\1\6\uffff\1\10"+
         "\1\3\6\uffff\1\4\6\uffff";
@@ -751,8 +752,8 @@ public class SimpleOmttTagLexer extends Lexer {
     static final String[] DFA8_transitionS = {
             "\1\15\1\13\2\uffff\1\13\22\uffff\1\15\1\uffff\1\11\2\uffff\1"+
             "\1\1\uffff\1\11\22\uffff\1\12\2\uffff\1\12\3\uffff\32\14\4\uffff"+
-            "\1\14\1\uffff\1\3\1\14\1\5\1\6\1\4\3\14\1\2\21\14\1\7\1\uffff"+
-            "\1\10",
+            "\1\14\1\uffff\2\14\1\5\1\6\1\4\3\14\1\2\12\14\1\3\6\14\1\7\1"+
+            "\uffff\1\10",
             "\1\16",
             "\1\20",
             "\1\21",

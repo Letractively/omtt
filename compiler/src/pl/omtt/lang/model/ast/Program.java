@@ -7,6 +7,7 @@ import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.core.Constants;
+import pl.omtt.core.Debugging;
 import pl.omtt.lang.analyze.BaseSymbolTable;
 import pl.omtt.lang.analyze.ISymbolTableParticipant;
 import pl.omtt.lang.analyze.SymbolTable;
@@ -51,7 +52,7 @@ public class Program extends CommonNode implements IVisitable,
 		String fname = path.substring(path.lastIndexOf('/') + 1, path
 				.lastIndexOf('.'));
 		
-		if (!fname.matches("[a-zA-Z]+")) {
+		if (!fname.matches("[a-zA-Z]+") && Debugging.DEBUG > 0) {
 			System.err.println("file " + path + " has unpermitted name");
 			return null;
 		}

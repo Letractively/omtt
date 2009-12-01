@@ -142,13 +142,13 @@ safe_expression
 // START: def-in block
 def_in_expression
   : DEF definition+=definition_inside_expression
-    (AND definition+=definition_inside_expression)*
+    (TOO definition+=definition_inside_expression)*
     IN COLON? content=expression
     -> ^(BLOCK<Block> $definition+ $content)
   ;
 safe_def_in_expression
   : DEF definition+=definition_inside_expression
-    (AND definition+=definition_inside_expression)*
+    (TOO definition+=definition_inside_expression)*
     IN COLON? content=safe_expression
     -> ^(BLOCK<Block> $definition+ $content)
   ;
@@ -163,7 +163,7 @@ definition_inside_expression
 
 def_in_tag
   : TAG_START DEF definition+=definition_inside_tag
-    (TAG_START AND definition+=definition_inside_tag)*
+    (TAG_START TOO definition+=definition_inside_tag)*
     TAG_START IN content=tag_content
     TAG_END
     -> ^(BLOCK<Block> $definition+ $content)
