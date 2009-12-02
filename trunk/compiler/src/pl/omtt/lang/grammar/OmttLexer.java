@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g 2009-12-02 00:43:41
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g 2009-12-02 14:50:43
 
 package pl.omtt.lang.grammar;
 
@@ -1172,7 +1172,7 @@ public class OmttLexer extends AbstractOmttLexer {
     // $ANTLR start "INNER_TAG_KEYWORD"
     public final void mINNER_TAG_KEYWORD() throws RecognitionException {
         try {
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:193:28: ( 'in' | 'and' | 'else' | 'case' | 'default' )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:193:28: ( 'in' | 'too' | 'else' | 'case' | 'default' )
             int alt10=5;
             switch ( input.LA(1) ) {
             case 'i':
@@ -1180,7 +1180,7 @@ public class OmttLexer extends AbstractOmttLexer {
                 alt10=1;
                 }
                 break;
-            case 'a':
+            case 't':
                 {
                 alt10=2;
                 }
@@ -1218,9 +1218,9 @@ public class OmttLexer extends AbstractOmttLexer {
                     }
                     break;
                 case 2 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:193:37: 'and'
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:193:37: 'too'
                     {
-                    match("and"); if (state.failed) return ;
+                    match("too"); if (state.failed) return ;
 
 
                     }
