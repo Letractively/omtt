@@ -190,7 +190,7 @@ NULL   : 'null';
 TRUE   : 'true';
 FALSE  : 'false';
 
-fragment INNER_TAG_KEYWORD : 'in' | 'and' | 'else' | 'case' | 'default';
+fragment INNER_TAG_KEYWORD : 'in' | 'too' | 'else' | 'case' | 'default';
 fragment SINGLE_TAG_KEYWORD : 'module' | 'use' | 'import';
 
 OP_FOLLOW         : '->';
