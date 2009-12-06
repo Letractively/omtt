@@ -512,6 +512,8 @@ sequence_expression
 			-> ^(SEQUENCE<Sequence> $sequence_expression $rexpr+)
 		|	-> $sequence_expression
 		)
+	| // empty sequence
+	  -> SEQUENCE<Sequence>
 	;
 
 // START: atom objects

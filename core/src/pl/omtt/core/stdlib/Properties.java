@@ -11,15 +11,23 @@ import pl.omtt.core.annotations.OmttModule;
 
 @OmttModule
 public class Properties {
+	public static Boolean isNull (Object object) {
+		return object == null;
+	}
+	
+	public static Boolean notNull (Object object) {
+		return object != null;
+	}
+
 	public static Object $(Object object, String property) {
 		return retrieveProperty(object, property, false);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static Collection<Object> $seq(Object object, String property) {
 		return (Collection)retrieveProperty(object, property, true);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static List<String> $attrs(Object o) {
 		List<String> attrs = new ArrayList<String>();
@@ -45,7 +53,7 @@ public class Properties {
 		}
 		return attrs;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private static Object retrieveProperty(Object o, String property,
 			boolean collection) {

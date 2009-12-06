@@ -5,16 +5,16 @@ import java.util.Collection;
 public class TextBuffer {
 	StringBuffer fBuffer = new StringBuffer();
 
+	public TextBuffer append(Object o) {
+		if (o != null)
+			fBuffer.append(o);
+		return this;
+	}
+
 	@SuppressWarnings("unchecked")
 	public TextBuffer append(Collection col) {
 		for (Object o : col)
 			append(o);
-		return this;
-	}
-
-	public TextBuffer append(Object o) {
-		if (o != null)
-			fBuffer.append(o);
 		return this;
 	}
 
