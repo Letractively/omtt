@@ -90,7 +90,10 @@ public class CodeGenerator extends AbstractTreeWalker {
 	 */
 	protected String cast(String var, IType sourceType, IType targetType) {
 		if (sourceType.getEffectiveLowerBound() instanceof NullType) {
-			return "null";
+			if (sourceType.isSequence())
+				return "new ArrayList()";
+			else
+				return "null";
 		}
 
 		if (targetType.isSequence() && !sourceType.isSequence()) {
@@ -98,8 +101,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			final String tempvar = fBuffer.getTemporaryVariable();
 			fBuffer.putl("List %s = new ArrayList();", tempvar);
 			final String castedvar = cast(var, sourceType, single(targetType));
-			fBuffer.putl("if (%s != null) %s.add(%s);", castedvar, tempvar,
-					castedvar);
+			fBuffer.putl("%s.add(%s);", tempvar, castedvar);
 			return tempvar;
 		} else if (!targetType.isSequence() && sourceType.isSequence()) {
 			if (targetType.isBoolean()) {
@@ -900,7 +902,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 	public void visit(Sequence seq) {
 		final IType type = seq.getExpressionType();
 		if (type.getEffectiveLowerBound() instanceof NullType) {
-			fBuffer.putSafeExpression(seq, "null");
+			fBuffer.putSafeExpression(seq, "new ArrayList ()");
 			return;
 		} else if (!type.isSequence()) {
 			apply();
@@ -1407,8 +1409,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 				fBuffer.incIndentation();
 
 				final String selvar = select(itemvar);
-				fBuffer.putl("if(%s) %s.add(%s);", checkNotNull(selvar,
-						single(otype)), accvar, selvar);
+				fBuffer.putl("%s.add(%s);", accvar, selvar);
 
 				fBuffer.subIndentation();
 				fBuffer.putl("}");
@@ -1432,12 +1433,15 @@ public class CodeGenerator extends AbstractTreeWalker {
 				// fBuffer.putl("%s.add(%s);", accvar, svar);
 				// else
 				if (etype.isSingleData())
-					fBuffer.putl("if(%s) %s.append(%s);", checkNotNull(svar,
-							single(otype).dup().unsetNotNull()), fBuffer
-							.getCurrentBuffer(), svar);
+					// fBuffer.putl("if(%s) %s.append(%s);", checkNotNull(svar,
+					// single(otype).dup().unsetNotNull()), fBuffer
+					// .getCurrentBuffer(), svar);
+					fBuffer.putl("%s.append(%s);", fBuffer.getCurrentBuffer(),
+							svar);
 				else if (accseq)
-					fBuffer.putl("if(%s) %s.add(%s);", checkNotNull(svar,
-							single(otype).dup().unsetNotNull()), accvar, svar);
+					// fBuffer.putl("if(%s) %s.add(%s);", checkNotNull(svar,
+					// single(otype).dup().unsetNotNull()), accvar, svar);
+					fBuffer.putl("%s.add(%s);", accvar, svar);
 				else
 					fBuffer.putl("%s = %s;", accvar, svar);
 			}

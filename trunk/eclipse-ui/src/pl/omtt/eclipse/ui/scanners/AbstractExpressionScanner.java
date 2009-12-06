@@ -65,7 +65,7 @@ public abstract class AbstractExpressionScanner extends RuleBasedScanner {
 		  "map", "apply", "match", "where",
 		  "is", "as", "order", "by",
 		  "module", "use", "import",
-		  "and", "or", "not"
+		  "and", "or", "not", "mod"
 		};
 
 		private static final String[] VALUE_KEYWORDS =

@@ -83,7 +83,7 @@ public class Math {
 	public static Double tanh(Double d) {
 		return java.lang.Math.tanh(d);
 	}
-	
+
 	public static final double pi = java.lang.Math.PI;
 	public static final double e = java.lang.Math.E;
 }
