@@ -49,7 +49,7 @@ public class TypeUnifier {
 		if (typeA.isError() || typeB.isError())
 			return;
 
-		if (typeB.isNull())
+		if (typeB.isNull() && (!typeB.isSequence() || typeA.isSequence()))
 			return;
 
 		checkSequenceCompliance(typeA, typeB, le);
