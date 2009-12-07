@@ -28,7 +28,7 @@ public class Math {
 		return java.lang.Math.floor(d);
 	}
 	
-	public static Double log(Double d) {
+	public static Double ln(Double d) {
 		return java.lang.Math.log(d);
 	}
 	
