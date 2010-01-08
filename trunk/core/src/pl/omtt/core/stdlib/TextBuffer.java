@@ -13,8 +13,9 @@ public class TextBuffer {
 
 	@SuppressWarnings("unchecked")
 	public TextBuffer append(Collection col) {
-		for (Object o : col)
-			append(o);
+		if (col != null)
+			for (Object o : col)
+				append(o);
 		return this;
 	}
 

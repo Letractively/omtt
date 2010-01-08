@@ -73,8 +73,8 @@ tag_definition :
   ;
 
 fragment definition_signature
-  : VAR_ID definition_context? definition_argument* (OP_FOLLOW ret_type=type)?
-    -> VAR_ID<Ident> definition_context? ^(ARGUMENTS definition_argument*) ^(RETURNS $ret_type?)
+  : (PARTIAL? VAR_ID definition_context | VAR_ID) definition_argument* (OP_FOLLOW ret_type=type)?
+    -> VAR_ID<Ident> definition_context? PARTIAL? ^(ARGUMENTS definition_argument*) ^(RETURNS $ret_type?)
   ;
 fragment definition_context
 	: LEFT_SQUARE_PAREN single_type where_clause? RIGHT_SQUARE_PAREN

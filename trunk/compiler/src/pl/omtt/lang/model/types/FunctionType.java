@@ -13,6 +13,7 @@ public class FunctionType extends CommonType implements IType {
 	boolean fContext = false;
 	boolean fFrozen = false;
 	boolean fMultimethod = false;
+	boolean fPartial = false;
 
 	public FunctionType() {
 		fReturnType = new TypePointer(new GenericType());
@@ -25,7 +26,11 @@ public class FunctionType extends CommonType implements IType {
 	public void setMultimethod() {
 		fMultimethod = true;
 	}
-	
+
+	public void setPartial (boolean partial) {
+		fPartial = partial;
+	}
+
 	public boolean isMultimethod () {
 		return fMultimethod;
 	}
@@ -34,6 +39,10 @@ public class FunctionType extends CommonType implements IType {
 		return fContext;
 	}
 
+	public boolean isPartial() {
+		return fPartial;
+	}
+	
 	public IType getReturnType() {
 		return fReturnType;
 	}

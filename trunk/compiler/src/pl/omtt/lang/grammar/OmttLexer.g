@@ -166,9 +166,10 @@ MODULE   : 'module';
 IMPORT   : 'import';
 USE      : 'use';
 
-DEF  : 'def';
-TOO  : 'too';
-IN   : 'in';
+DEF      : 'def';
+PARTIAL  : 'partial';
+TOO      : 'too';
+IN       : 'in';
 
 IF   : 'if';
 THEN : 'then';

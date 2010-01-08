@@ -12,8 +12,8 @@ public class Math {
 		return java.lang.Math.abs(d);
 	}
 	
-	public static Integer absi(Integer d) {
-		return java.lang.Math.abs(d);
+	public static Long absi(Long d) {
+		return new Long(java.lang.Math.abs(d));
 	}
 	
 	public static Double ceil(Double d) {
@@ -40,8 +40,8 @@ public class Math {
 		return java.lang.Math.pow(a, b);
 	}
 	
-	public static Integer round(Double d) {
-		return (int) java.lang.Math.round(d);
+	public static Long round(Double d) {
+		return java.lang.Math.round(d);
 	}
 	
 	public static Double sgn(Double d) {
