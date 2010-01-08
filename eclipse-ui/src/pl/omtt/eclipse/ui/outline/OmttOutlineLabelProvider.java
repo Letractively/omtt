@@ -43,9 +43,10 @@ public class OmttOutlineLabelProvider implements ILabelProvider {
 
 		switch (((Tree) obj).getType()) {
 		case OmttLexer.DEF:
+			String name;
 			if (obj instanceof TemplateDefinition
-					&& ((TemplateDefinition) obj).getTemplateName().startsWith(
-							"@"))
+					&& (name = ((TemplateDefinition) obj).getTemplateName()) != null
+					&& name.startsWith("@"))
 				return JavaUI.getSharedImages().getImage(
 						ISharedImages.IMG_OBJS_PRIVATE);
 			else
@@ -84,11 +85,11 @@ public class OmttOutlineLabelProvider implements ILabelProvider {
 		switch (node.getType()) {
 		case OmttLexer.USES:
 			return "use declarations";
-		case OmttLexer.USE:
+		case OmttLexer.IMPORT:
 			return ((ImportDeclaration) node).getUseId();
 		case OmttLexer.IMPORTS:
 			return "import declarations";
-		case OmttLexer.IMPORT:
+		case OmttLexer.USE:
 			return ((UseDeclaration) node).getImportingClasses();
 		default:
 			return node.toString();

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import pl.omtt.core.annotations.OmttModule;
+import pl.omtt.core.functions.Function1;
 import pl.omtt.core.functions.Function2;
 import pl.omtt.core.functions.Name;
 import pl.omtt.core.functions.Optional;
@@ -18,11 +19,27 @@ import pl.omtt.core.functions.Type;
 
 @OmttModule
 public class Sequences {
-	public static Integer count(Collection<Object> c) {
-		if (c == null)
-			return 0;
+	@Type("(Real* -> Real)")
+	public static Double avg(Collection<Double> c) {
+		Double acc = 0.;
+		int count = 0;
+		for (Number r : c) {
+			if (r == null)
+				return null;
+			acc += r.doubleValue();
+			count++;
+		}
+		if (count > 0)
+			return acc / count;
 		else
-			return c.size();
+			return null;
+	}
+
+	public static Long count(Collection<Object> c) {
+		if (c == null)
+			return 0l;
+		else
+			return Long.valueOf(c.size());
 	}
 
 	public Boolean contains(Collection<Object> c1, Collection<Object> c2) {
@@ -32,7 +49,7 @@ public class Sequences {
 			return Boolean.FALSE;
 		return c1.containsAll(c2);
 	}
-	
+
 	@Type("(_[1]* -> _[1]*)")
 	public static Collection<Object> distinct(Collection<Object> c) {
 		Set<Object> set = new HashSet<Object>();
@@ -43,6 +60,14 @@ public class Sequences {
 
 	public static boolean empty(Collection<Object> c) {
 		return c == null || c.isEmpty();
+	}
+
+	@Type("(_[1]* _[2] (_[1] _[2] -> _[2]) -> _[2])")
+	public static Object fold(Collection<Object> c, @Name("acc") Object acc,
+			@Name("fun") Function2<Object, Object, Object> f) {
+		for (Object cur : c)
+			acc = f.run(cur, acc);
+		return acc;
 	}
 
 	@Type("(_[1]* -> _[1])")
@@ -80,6 +105,32 @@ public class Sequences {
 			return Collections.min(seq, new FunctionComparator(lower));
 	}
 
+	@Type("(_[1]* (_[1] ?Int -> _[2]) -> _[2]*")
+	public static Collection<Object> numbermap (Collection<Object> c, Function2<Object, Object, Long> f) {
+		List<Object> l = new ArrayList<Object> ();
+		long i = 0l;
+		for (Object element : c)
+			l.add(f.run(element, i++));
+		return l;
+	}
+
+	@Type("(_[1]* -> _[1]*)")
+	public static Collection<Object> reverse(Collection<Object> c) {
+		List<Object> l = new ArrayList<Object>(c);
+		Collections.reverse(l);
+		return l;
+	}
+
+	@Type("(_[1]* _[2]* (_[1] _[2]* -> _[2]*) -> _[2]*)")
+	public static Collection<Object> seqfold(
+			Collection<Object> c,
+			@Name("acc") Collection<Object> acc,
+			@Name("fun") Function2<Collection<Object>, Object, Collection<Object>> f) {
+		for (Object cur : c)
+			acc = f.run(cur, acc);
+		return acc;
+	}
+
 	@Type("(_[1]* ~(_[1] _[1] -> Boolean) -> _[1]*)")
 	@SuppressWarnings("unchecked")
 	public static List<Object> sort(Collection<Object> c,
@@ -93,6 +144,45 @@ public class Sequences {
 		} catch (ClassCastException e) {
 		}
 		return list;
+	}
+
+	@Type("(_[1]* (_[1] -> _[2]) (_[1] -> _[2]) -> _[2]*")
+	public static Collection<Object> roundrobin(Collection<Object> c,
+			Function1<Object, Object> f1, Function1<Object, Object> f2) {
+		List<Object> l = new ArrayList<Object>();
+		if (c == null || f1 == null || f2 == null)
+			return l;
+		int i = 0;
+		for (Object element : c) {
+			if (i % 2 == 0)
+				l.add(f1.run(element));
+			else
+				l.add(f2.run(element));
+			i++;
+		}
+		return l;
+	}
+
+	@Type("(Real* -> Real)")
+	public static Double sum(Collection<Double> c) {
+		Double acc = 0.;
+		for (Number r : c) {
+			if (r == null)
+				return null;
+			acc += r.doubleValue();
+		}
+		return acc;
+	}
+
+	@Type("(Int* -> Int)")
+	public static Long sumi(Collection<Long> c) {
+		Long acc = 0l;
+		for (Long n : c) {
+			if (n == null)
+				return null;
+			acc += n;
+		}
+		return acc;
 	}
 
 	@Type("(_[1]* -> _[1]*)")

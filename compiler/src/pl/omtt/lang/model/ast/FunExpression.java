@@ -48,10 +48,15 @@ public class FunExpression extends CommonNode implements IExpression,
 			ftype.putArgument(arg.getArgumentName(), arg.getArgumentType(), arg
 					.isArgumentOptional());
 		}
-		TypeUnifier.unifyEq(ftype.getReturnType(), getBodyNode()
-				.getExpressionType());
-		TypeUnifier.preserveAttributes(ftype.getReturnType(), getBodyNode()
-				.getExpressionType());
+
+		final IType rettype = ftype.getReturnType();
+		final IType bodytype = getBodyNode().getExpressionType();
+		
+		if (bodytype.isSequence())
+			rettype.setSequence();
+
+		TypeUnifier.unifyEq(rettype, bodytype);
+		TypeUnifier.preserveAttributes(rettype, bodytype);
 
 		fType = ftype;
 		fType.freeze();

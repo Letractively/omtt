@@ -14,6 +14,7 @@ import pl.omtt.lang.analyze.MultiSymbol;
 import pl.omtt.lang.analyze.SemanticException;
 import pl.omtt.lang.analyze.Symbol;
 import pl.omtt.lang.analyze.SymbolTable;
+import pl.omtt.lang.grammar.OmttLexer;
 import pl.omtt.lang.grammar.OmttParser;
 import pl.omtt.lang.model.IVisitable;
 import pl.omtt.lang.model.IVisitor;
@@ -86,6 +87,10 @@ public class TemplateDefinition extends CommonNode implements
 			return ident.getName();
 	}
 
+	public boolean isPartial () {
+		return getFirstChildWithType(OmttLexer.PARTIAL) != null;
+	}
+	
 	public Symbol getSymbol() {
 		return fSymbol;
 	}
@@ -148,7 +153,11 @@ public class TemplateDefinition extends CommonNode implements
 					}
 				}
 			type.setReturnType(returnType);
+			type.setPartial(isPartial());
 			fType = type;
+
+			if (isPartial() && !returnType.isSingleData())
+				throw new TypeException(this, "Only templates (i.e. functions returning text) may be annotated as partial.");
 		}
 		setSymbol(ST);
 	}
@@ -215,7 +224,7 @@ public class TemplateDefinition extends CommonNode implements
 
 	@Override
 	public Tree[] getTreeFollowingParticipatingST() {
-		return new Tree[] {getContextNode(), getChild(getChildCount() - 1)};
+		return new Tree[] {getContextNode(), getBodyNode()};
 	}
 
 	public Tree getArgumentsNode() {
@@ -281,7 +290,7 @@ public class TemplateDefinition extends CommonNode implements
 		buf.append(getTemplateName());
 		if (fType == null) {
 		} else if (fType.isFunction()) {
-			FunctionType funtype = (FunctionType) fType;
+			FunctionType funtype = (FunctionType) fType.getEffective();
 			for (int i = 0; i < funtype.getArgumentLength(); i++) {
 				Argument a = funtype.getArgument(i);
 				buf.append(" ");
