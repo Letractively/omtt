@@ -105,7 +105,7 @@ public class Sequences {
 			return Collections.min(seq, new FunctionComparator(lower));
 	}
 
-	@Type("(_[1]* (_[1] ?Int -> _[2]) -> _[2]*")
+	@Type("(_[1]* (_[1] ?Int -> _[2]) -> _[2]*)")
 	public static Collection<Object> numbermap (Collection<Object> c, Function2<Object, Object, Long> f) {
 		List<Object> l = new ArrayList<Object> ();
 		long i = 0l;
@@ -146,7 +146,7 @@ public class Sequences {
 		return list;
 	}
 
-	@Type("(_[1]* (_[1] -> _[2]) (_[1] -> _[2]) -> _[2]*")
+	@Type("(_[1]* (_[1] -> _[2]) (_[1] -> _[2]) -> _[2]*)")
 	public static Collection<Object> roundrobin(Collection<Object> c,
 			Function1<Object, Object> f1, Function1<Object, Object> f2) {
 		List<Object> l = new ArrayList<Object>();

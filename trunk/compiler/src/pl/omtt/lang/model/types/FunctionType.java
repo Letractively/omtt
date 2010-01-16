@@ -380,7 +380,7 @@ public class FunctionType extends CommonType implements IType {
 		buf.append("(");
 		for (Argument a : fArguments) {
 			if (a.optional)
-				buf.append("~");
+				buf.append("?");
 			if (a.name != null)
 				buf.append(a.name).append(".");
 			buf.append(a.type).append(" ");
@@ -396,7 +396,7 @@ public class FunctionType extends CommonType implements IType {
 		buf.append("(");
 		for (Argument a : fArguments) {
 			if (a.optional)
-				buf.append("~");
+				buf.append("?");
 			buf.append(a.type.toEssentialString()).append(" ");
 		}
 		buf.append("-> ").append(fReturnType.toEssentialString());
