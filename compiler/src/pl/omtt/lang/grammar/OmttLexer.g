@@ -139,7 +139,7 @@ STRING_PARENS
 
 MODE_LEFT_PAREN
 	: '{'
-		(	{insideData()}?
+		(	{insideData()}?=>
 			'='
 			{
 				pushBracket('x');

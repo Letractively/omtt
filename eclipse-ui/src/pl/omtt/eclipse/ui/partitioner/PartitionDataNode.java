@@ -39,7 +39,7 @@ public class PartitionDataNode extends PartitionLAkTagCarefulNode {
 			return MATCHED;
 
 		case '%':
-			if ((fBracket == TAG || fBracket == '[') && stream.isNewLine()) {
+			if ((fBracket == TAG || fBracket == '{') && stream.isNewLine()) {
 				int rewind = stream.rewindToLineBegin();
 				int child = createChild(new PartitionTagNode(false), stream,
 						localOffset - rewind);

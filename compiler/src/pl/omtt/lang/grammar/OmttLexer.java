@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g 2010-01-16 19:21:16
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g 2010-01-17 00:05:54
 
 package pl.omtt.lang.grammar;
 
@@ -672,22 +672,22 @@ public class OmttLexer extends AbstractOmttLexer {
         try {
             int _type = MODE_LEFT_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:141:2: ( '{' ({...}? '=' | ) )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:141:4: '{' ({...}? '=' | )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:141:2: ( '{' ({...}? => '=' | ) )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:141:4: '{' ({...}? => '=' | )
             {
             match('{'); if (state.failed) return ;
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:142:3: ({...}? '=' | )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:142:3: ({...}? => '=' | )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0=='=') ) {
+            if ( (LA10_0=='=') && ((insideData()))) {
                 alt10=1;
             }
             else {
                 alt10=2;}
             switch (alt10) {
                 case 1 :
-                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:142:5: {...}? '='
+                    // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/grammar/OmttLexer.g:142:5: {...}? => '='
                     {
                     if ( !((insideData())) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
