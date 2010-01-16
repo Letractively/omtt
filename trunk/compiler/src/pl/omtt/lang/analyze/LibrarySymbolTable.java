@@ -161,8 +161,8 @@ public class LibrarySymbolTable extends BaseSymbolTable {
 			}
 		} else {
 			if (typetree.getType() != TypeStringParser.FUNCTION)
-				throw new Exception(
-						"annotated type and method signature not suit");
+				throw new Exception(type +
+						": annotated type and method signature not suit");
 			FunctionType ftype = (FunctionType) type;
 			ftype.setReturnType(reconcile(ftype.getReturnType(), typetree
 					.getChild(0)));

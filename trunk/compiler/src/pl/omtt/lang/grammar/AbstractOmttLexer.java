@@ -175,6 +175,7 @@ public abstract class AbstractOmttLexer extends Lexer {
 		case 'd':
 		case '}':
 		case '"':
+		case 'f':
 			return true;
 		default:
 			return false;
@@ -196,20 +197,20 @@ public abstract class AbstractOmttLexer extends Lexer {
 		brackets.push(bracket);
 	}
 
-	protected void popBracket() throws UnmatchedBracketException {
+	protected char popBracket() throws UnmatchedBracketException {
 		if (DEBUG > 0)
 			System.out.println("pop: " + brackets.peek() + " ("
 					+ (brackets.size() - 1) + ")");
 		if (brackets.empty())
 			throw new UnmatchedBracketException(input, (char) input.LA(1));
-		brackets.pop();
+		return brackets.pop();
 	}
 
 	protected Character bracket() {
 		return brackets.empty() ? null : brackets.peek();
 	}
 
-	protected void popBracket(char bracket) throws RecognitionException {
+	protected char popBracket(char bracket) throws RecognitionException {
 		if (brackets.empty() || bracket != brackets.peek()) {
 			// System.out.println(bracket);
 			// System.out.println(brackets.empty() ? "empty" : brackets.peek());
@@ -218,7 +219,7 @@ public abstract class AbstractOmttLexer extends Lexer {
 			throw new UnmatchedBracketException(input, bracket == 'a' ? '}'
 					: bracket);
 		}
-		popBracket();
+		return popBracket();
 	}
 
 	public boolean errorsOccured () {
