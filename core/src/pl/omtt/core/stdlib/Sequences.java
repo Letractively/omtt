@@ -81,7 +81,7 @@ public class Sequences {
 			return seq.iterator().next();
 	}
 
-	@Type("(_[1]* ~(_[1] _[1] -> Boolean) -> _[1])")
+	@Type("(_[1]* ?(_[1] _[1] -> Boolean) -> _[1])")
 	@SuppressWarnings("unchecked")
 	public static Object max(Collection<Comparable> seq,
 			@Optional @Name("lower") Function2<Boolean, Object, Object> lower) {
@@ -93,7 +93,7 @@ public class Sequences {
 			return Collections.max(seq, new FunctionComparator(lower));
 	}
 
-	@Type("(_[1]* ~(_[1] _[1] -> Boolean) -> _[1])")
+	@Type("(_[1]* ?(_[1] _[1] -> Boolean) -> _[1])")
 	@SuppressWarnings("unchecked")
 	public static Object min(Collection<Comparable> seq,
 			@Optional @Name("lower") Function2<Boolean, Object, Object> lower) {
@@ -131,7 +131,7 @@ public class Sequences {
 		return acc;
 	}
 
-	@Type("(_[1]* ~(_[1] _[1] -> Boolean) -> _[1]*)")
+	@Type("(_[1]* ?(_[1] _[1] -> Boolean) -> _[1]*)")
 	@SuppressWarnings("unchecked")
 	public static List<Object> sort(Collection<Object> c,
 			@Optional @Name("lower") Function2<Boolean, Object, Object> lower) {

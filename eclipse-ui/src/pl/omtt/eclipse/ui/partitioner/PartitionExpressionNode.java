@@ -41,12 +41,17 @@ public class PartitionExpressionNode extends PartitionLAkTagCarefulNode {
 
 		case '{':
 			if (!fBlock && localOffset == 0) {
-				stream.consume();
-				return MATCHED;
+				if (stream.LA(2) == '=') {
+					stream.consume(2);
+					return MATCHED;
+				} else {
+					return NO_MATCH;
+				}
 			}
 		case '"':
 		case '\'':
-			createChild(new PartitionDataNode(stream.LA(1)), stream, localOffset);
+			createChild(new PartitionDataNode(stream.LA(1)), stream,
+					localOffset);
 			return MATCHED;
 
 		default:
@@ -56,15 +61,15 @@ public class PartitionExpressionNode extends PartitionLAkTagCarefulNode {
 	}
 
 	@Override
-	public int getStartLength () {
-		return fBlock ? 0 : 1;
+	public int getStartLength() {
+		return fBlock ? 0 : 2;
 	}
-	
+
 	@Override
-	public int getEndLength () {
+	public int getEndLength() {
 		return fBlock || fStickyEnd > 0 ? 0 : 1;
 	}
-	
+
 	@Override
 	protected String getContentType() {
 		return OmttPartitioner.EXPRESSION;

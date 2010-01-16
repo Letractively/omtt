@@ -28,6 +28,12 @@ public class PartitionDataNode extends PartitionLAkTagCarefulNode {
 		}
 
 		switch (LA1) {
+		case '=':
+			if(fBracket == '{' && localOffset == 1)
+				return NO_MATCH;
+			stream.consume();
+			return MATCHED;
+			
 		case '\\':
 			stream.consume(2);
 			return MATCHED;
@@ -66,7 +72,10 @@ public class PartitionDataNode extends PartitionLAkTagCarefulNode {
 			}
 
 		case '{':
-			createChild(new PartitionExpressionNode(), stream, localOffset);
+			if (stream.LA(2) == '=')
+				createChild(new PartitionExpressionNode(), stream, localOffset);
+			else
+				createChild(new PartitionDataNode('{'), stream, localOffset);
 			return MATCHED;
 
 		case '\n':

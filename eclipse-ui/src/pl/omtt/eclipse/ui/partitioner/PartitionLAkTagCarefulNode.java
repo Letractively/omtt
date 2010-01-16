@@ -39,9 +39,9 @@ public abstract class PartitionLAkTagCarefulNode extends PartitionLAkNode {
 			if (DEBUG > 11)
 				System.out
 						.printf(
-								"match ret:%d char:%c offset:%d localOffset:%d globalOffset:%d\n",
+								"match ret:%d char:%c offset:%d localOffset:%d globalOffset:%d class:%s\n",
 								match, (char)LA1, start, stream.index() - start, stream
-										.index());
+										.index(), getClass().getSimpleName());
 
 			switch (match) {
 			case NO_MATCH:
