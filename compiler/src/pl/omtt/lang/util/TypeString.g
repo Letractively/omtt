@@ -7,7 +7,7 @@ options {
 tokens {
 	FUNCTION;
 	SCALAR;
-	OPTIONAL = '~';
+	OPTIONAL = '?';
 	SEQUENCE = '*';
 	GENERIC;
 	ARGUMENT;

@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/util/TypeString.g 2009-08-10 14:48:41
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/util/TypeString.g 2010-01-08 22:11:36
 
 package pl.omtt.lang.util;
 
@@ -51,10 +51,10 @@ public class TypeStringLexer extends Lexer {
         try {
             int _type = OPTIONAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/util/TypeString.g:7:10: ( '~' )
-            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/util/TypeString.g:7:12: '~'
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/util/TypeString.g:7:10: ( '?' )
+            // /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/util/TypeString.g:7:12: '?'
             {
-            match('~'); 
+            match('?'); 
 
             }
 
@@ -629,7 +629,7 @@ public class TypeStringLexer extends Lexer {
     static final String DFA5_minS =
         "\1\11\11\uffff\1\44\4\uffff";
     static final String DFA5_maxS =
-        "\1\176\11\uffff\1\172\4\uffff";
+        "\1\172\11\uffff\1\172\4\uffff";
     static final String DFA5_acceptS =
         "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\uffff\1\12\1\13"+
         "\1\14\1\15";
@@ -637,8 +637,8 @@ public class TypeStringLexer extends Lexer {
         "\17\uffff}>";
     static final String[] DFA5_transitionS = {
             "\2\16\1\uffff\2\16\22\uffff\1\16\7\uffff\1\5\1\6\1\2\2\uffff"+
-            "\1\3\1\4\1\uffff\12\13\6\uffff\1\15\32\11\1\7\1\uffff\1\10\1"+
-            "\uffff\1\12\1\14\32\15\3\uffff\1\1",
+            "\1\3\1\4\1\uffff\12\13\5\uffff\1\1\1\15\32\11\1\7\1\uffff\1"+
+            "\10\1\uffff\1\12\1\14\32\15",
             "",
             "",
             "",

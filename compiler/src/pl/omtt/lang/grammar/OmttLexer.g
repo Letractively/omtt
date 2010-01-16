@@ -137,12 +137,17 @@ STRING_PARENS
     {$type = DATA_END; popBracket('"');}
   ;
 
+EXPRESSION_START
+	: {insideData()}?
+		'{='
+		{pushBracket('x');}
+	;
 MODE_LEFT_PAREN
   : '{'
     {
       if (insideData()) {
-        pushBracket('x');
-        $type = EXPRESSION_START;
+        pushBracket('f');
+        $type = STRING_LITERAL;
       } else {
         pushBracket('}');
         $type = DATA_START;
@@ -153,8 +158,10 @@ MODE_RIGHT_PAREN
   : '}'
     {
       if (insideData()) {
-        popBracket('}');
-        $type = DATA_END;
+				if(popBracket() == 'f')
+					$type = STRING_LITERAL;
+				else
+	        $type = DATA_END;
       } else {
         popBracket('x');
         $type = EXPRESSION_END;

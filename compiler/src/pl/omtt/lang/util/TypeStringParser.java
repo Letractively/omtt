@@ -1,4 +1,4 @@
-// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/util/TypeString.g 2009-08-10 14:48:41
+// $ANTLR 3.1.2 /home/endrju/.workspace/pl.omtt.compiler/src/pl/omtt/lang/util/TypeString.g 2010-01-08 22:11:36
 
 package pl.omtt.lang.util;
 
@@ -200,7 +200,7 @@ public class TypeStringParser extends Parser {
 
 
             // AST REWRITE
-            // elements: ret, argument
+            // elements: argument, ret
             // token labels: 
             // rule labels: ret, retval
             // token list labels: 
@@ -328,7 +328,7 @@ public class TypeStringParser extends Parser {
 
 
             // AST REWRITE
-            // elements: OPTIONAL, type
+            // elements: type, OPTIONAL
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -515,7 +515,7 @@ public class TypeStringParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: modifiers, function
+                    // elements: function, modifiers
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -580,7 +580,7 @@ public class TypeStringParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: sequence, GENERIC_VAR
+                    // elements: GENERIC_VAR, sequence
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
