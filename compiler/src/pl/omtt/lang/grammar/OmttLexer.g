@@ -137,22 +137,24 @@ STRING_PARENS
     {$type = DATA_END; popBracket('"');}
   ;
 
-EXPRESSION_START
-	: {insideData()}?
-		'{='
-		{pushBracket('x');}
-	;
 MODE_LEFT_PAREN
-  : '{'
-    {
-      if (insideData()) {
-        pushBracket('f');
-        $type = STRING_LITERAL;
-      } else {
-        pushBracket('}');
-        $type = DATA_START;
-      }
-    }
+	: '{'
+		(	{insideData()}?
+			'='
+			{
+				pushBracket('x');
+				$type = EXPRESSION_START;
+			}
+		|	{
+  	    if (insideData()) {
+    	    pushBracket('f');
+      	  $type = STRING_LITERAL;
+	      } else {
+  	      pushBracket('}');
+    	    $type = DATA_START;
+      	}
+	    }
+    )
   ;
 MODE_RIGHT_PAREN
   : '}'
