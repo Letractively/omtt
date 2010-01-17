@@ -40,13 +40,11 @@ public class PartitionExpressionNode extends PartitionLAkTagCarefulNode {
 			}
 
 		case '{':
-			if (!fBlock && localOffset == 0) {
-				if (stream.LA(2) == '=') {
-					stream.consume(2);
-					return MATCHED;
-				} else {
-					return NO_MATCH;
-				}
+			if (stream.LA(2) == '=') {
+				stream.consume(2);
+				return MATCHED;
+			} else if (!fBlock && localOffset == 0) {
+				return NO_MATCH;
 			}
 		case '"':
 		case '\'':
