@@ -3,6 +3,7 @@ package pl.omtt.lang.model.types;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
 import java.util.Collection;
 
 public class JavaTypesAdapter {
@@ -33,9 +34,15 @@ public class JavaTypesAdapter {
 			}
 		} else if (type instanceof TypeVariable<?>) {
 			return new AnyType();
+		} else if (type instanceof WildcardType) {
+			Type[] lb = ((WildcardType) type).getUpperBounds();
+			if (lb != null && lb.length > 0)
+				return fromType(lb[0]);
+			else
+				return new AnyType();
 		} else {
-//			throw new TypeException("unhandled type " + type);
-			return new AnyType();
+			throw new TypeException("unhandled type " + type + " of type "
+					+ type.getClass().getSimpleName());
 		}
 	}
 
