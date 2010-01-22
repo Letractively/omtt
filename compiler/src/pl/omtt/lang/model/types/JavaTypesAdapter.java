@@ -33,8 +33,10 @@ public class JavaTypesAdapter {
 			}
 		} else if (type instanceof TypeVariable<?>) {
 			return new AnyType();
+		} else {
+//			throw new TypeException("unhandled type " + type);
+			return new AnyType();
 		}
-		throw new TypeException("unhandled type " + type);
 	}
 
 	private static FunctionType functionFromType(ParameterizedType ptype)
