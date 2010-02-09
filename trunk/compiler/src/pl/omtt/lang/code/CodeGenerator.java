@@ -911,12 +911,15 @@ public class CodeGenerator extends AbstractTreeWalker {
 			IExpression cnode = seq.getChild(i);
 			IType ctype = cnode.getExpressionType();
 
-			if (ctype.isSequence())
-				fBuffer.putl("%s.addAll(%s);", var, cast(exprapply(cnode),
-						ctype, type));
-			else
-				fBuffer.putl("%s.add(%s);", var, cast(exprapply(cnode), ctype,
-						single(type)));
+			if (ctype.isSequence()) {
+				String content = cast(exprapply(cnode), ctype, type);
+				fBuffer.putl("if(%s != null) %s.addAll(%s);", content, var,
+						content);
+			} else {
+				String content = cast(exprapply(cnode), ctype, single(type));
+				fBuffer.putl("if(%s != null) %s.add(%s);", content, var,
+						content);
+			}
 		}
 		fBuffer.putShortExpression(seq, var);
 	}
@@ -1323,168 +1326,167 @@ public class CodeGenerator extends AbstractTreeWalker {
 			buf.append(" ? null : ");
 	}
 
+	protected class FoldCode {
+		final IFoldExpression e;
+		final IType etype;
+		final IExpression base;
+		final IType basetype;
 
-    protected class FoldCode {
-            final IFoldExpression e;
-            final IType etype;
-            final IExpression base;
-            final IType basetype;
+		FoldCode(IFoldExpression expr) {
+			e = expr;
+			etype = e.getExpressionType();
+			base = e.getBaseNode();
+			basetype = base.getExpressionType();
+		}
 
-            FoldCode(IFoldExpression expr) {
-                    e = expr;
-                    etype = e.getExpressionType();
-                    base = e.getBaseNode();
-                    basetype = base.getExpressionType();
-            }
+		/**
+		 * Applies type and sequence selectors to non-sequence variable var
+		 */
+		String select(String var) {
+			if (!(e instanceof CommonSelectorNode))
+				return var;
+			final CommonSelectorNode snode = (CommonSelectorNode) e;
+			final Tree typenode = snode.getTypeSelectorNode();
+			String cast = null;
+			if (typenode != null)
+				cast = fTypeAdapter.getSingleReturn(etype);
+			final IExpression seqnode = snode.getSequenceSelectorNode();
 
-            /**
-             * Applies type and sequence selectors to non-sequence variable var
-             */
-            String select(String var) {
-                    if (!(e instanceof CommonSelectorNode))
-                            return var;
-                    final CommonSelectorNode snode = (CommonSelectorNode) e;
-                    final Tree typenode = snode.getTypeSelectorNode();
-                    String cast = null;
-                    if (typenode != null)
-                            cast = fTypeAdapter.getSingleReturn(etype);
-                    final IExpression seqnode = snode.getSequenceSelectorNode();
+			if (seqnode == null && cast == null)
+				return var;
 
-                    if (seqnode == null && cast == null)
-                            return var;
+			String resvar;
+			if (cast != null) {
+				resvar = fBuffer.getTemporaryVariable();
+				fBuffer.putl("%s %s = null;", cast, resvar);
+				fBuffer.putl("if(%s instanceof %s) {", var, cast);
+				fBuffer.incIndentation();
+				fBuffer.putl("%s = (%s)%s;", resvar, cast, var);
+			} else {
+				resvar = var;
+			}
 
-                    String resvar;
-                    if (cast != null) {
-                            resvar = fBuffer.getTemporaryVariable();
-                            fBuffer.putl("%s %s = null;", cast, resvar);
-                            fBuffer.putl("if(%s instanceof %s) {", var, cast);
-                            fBuffer.incIndentation();
-                            fBuffer.putl("%s = (%s)%s;", resvar, cast, var);
-                    } else {
-                            resvar = var;
-                    }
+			if (seqnode != null) {
+				fSymbolLocalNames.put(snode.getItSymbol(), resvar);
+				apply(seqnode);
+				fBuffer.putl("if (!(%s)) %s = null;", condition(seqnode),
+						resvar);
+			}
 
-                    if (seqnode != null) {
-                            fSymbolLocalNames.put(snode.getItSymbol(), resvar);
-                            apply(seqnode);
-                            fBuffer.putl("if (!(%s)) %s = null;", condition(seqnode),
-                                            resvar);
-                    }
+			if (cast != null) {
+				fBuffer.subIndentation();
+				fBuffer.putl("}");
+			}
+			return resvar;
+		}
 
-                    if (cast != null) {
-                            fBuffer.subIndentation();
-                            fBuffer.putl("}");
-                    }
-                    return resvar;
-            }
+		String retrieve(IFoldCodeFragment fragment, String var, String accvar,
+				boolean accseq) {
+			IType otype;
+			if (e instanceof CommonSelectorNode)
+				otype = ((CommonSelectorNode) e).getOriginalType();
+			else
+				otype = etype;
+			final String ovar = fBuffer.getTemporaryVariable();
 
-            String retrieve(IFoldCodeFragment fragment, String var, String accvar,
-                            boolean accseq) {
-                    IType otype;
-                    if (e instanceof CommonSelectorNode)
-                            otype = ((CommonSelectorNode) e).getOriginalType();
-                    else
-                            otype = etype;
-                    final String ovar = fBuffer.getTemporaryVariable();
+			if (e.isItemSequence()) {
+				if (accvar == null) {
+					accvar = fBuffer.getTemporaryVariable();
+					fBuffer.putl("%s %s = %s;", fTypeAdapter.get(etype),
+							accvar, fTypeAdapter.getInstance(etype));
+				}
 
-                    if (e.isItemSequence()) {
-                            if (accvar == null) {
-                                    accvar = fBuffer.getTemporaryVariable();
-                                    fBuffer.putl("%s %s = %s;", fTypeAdapter.get(etype),
-                                                    accvar, fTypeAdapter.getInstance(etype));
-                            }
+				fBuffer.putl("%s %s = %s;", fTypeAdapter.get(otype), ovar,
+						fragment.get(var));
+				fBuffer.putl("if(%s) {", checkNotNull(ovar, otype));
+				fBuffer.incIndentation();
 
-                            fBuffer.putl("%s %s = %s;", fTypeAdapter.get(otype), ovar,
-                                            fragment.get(var));
-                            fBuffer.putl("if(%s) {", checkNotNull(ovar, otype));
-                            fBuffer.incIndentation();
+				final String itemvar = fBuffer.getTemporaryVariable();
+				fBuffer.putl("for(%s %s : %s) {", fTypeAdapter
+						.getSingleReturn(otype), itemvar, ovar);
+				fBuffer.incIndentation();
 
-                            final String itemvar = fBuffer.getTemporaryVariable();
-                            fBuffer.putl("for(%s %s : %s) {", fTypeAdapter
-                                            .getSingleReturn(otype), itemvar, ovar);
-                            fBuffer.incIndentation();
+				final String selvar = select(itemvar);
+				fBuffer.putl("if(%s) %s.add(%s);", checkNotNull(selvar,
+						single(otype)), accvar, selvar);
 
-                            final String selvar = select(itemvar);
-                            fBuffer.putl("if(%s) %s.add(%s);", checkNotNull(selvar,
-                                            single(otype)), accvar, selvar);
+				fBuffer.subIndentation();
+				fBuffer.putl("}");
 
-                            fBuffer.subIndentation();
-                            fBuffer.putl("}");
+				fBuffer.subIndentation();
+				fBuffer.putl("}");
+				fBuffer.putl("%s = null;", ovar);
 
-                            fBuffer.subIndentation();
-                            fBuffer.putl("}");
-                            fBuffer.putl("%s = null;", ovar);
+				return accvar;
+			} else if (accvar == null) {
+				fBuffer.putl("%s %s = %s;", fTypeAdapter.getSingle(otype),
+						ovar, fragment.get(var));
+				return select(ovar);
+			} else {
+				fBuffer.putl("%s %s = %s;", fTypeAdapter.getSingle(otype),
+						ovar, fragment.get(var));
+				final String svar = select(ovar);
 
-                            return accvar;
-                    } else if (accvar == null) {
-                            fBuffer.putl("%s %s = %s;", fTypeAdapter.getSingle(otype),
-                                            ovar, fragment.get(var));
-                            return select(ovar);
-                    } else {
-                            fBuffer.putl("%s %s = %s;", fTypeAdapter.getSingle(otype),
-                                            ovar, fragment.get(var));
-                            final String svar = select(ovar);
+				// TODO: otype should be single
+				// if (otype.isNotNull())
+				// fBuffer.putl("%s.add(%s);", accvar, svar);
+				// else
+				if (etype.isSingleData())
+					fBuffer.putl("if(%s) %s.append(%s);", checkNotNull(svar,
+							single(otype).dup().unsetNotNull()), fBuffer
+							.getCurrentBuffer(), svar);
+				else if (accseq)
+					fBuffer.putl("if(%s) %s.add(%s);", checkNotNull(svar,
+							single(otype).dup().unsetNotNull()), accvar, svar);
+				else
+					fBuffer.putl("%s = %s;", accvar, svar);
+			}
+			return null;
+		}
 
-                            // TODO: otype should be single
-                            // if (otype.isNotNull())
-                            // fBuffer.putl("%s.add(%s);", accvar, svar);
-                            // else
-                            if (etype.isSingleData())
-                                    fBuffer.putl("if(%s) %s.append(%s);", checkNotNull(svar,
-                                                    single(otype).dup().unsetNotNull()), fBuffer
-                                                    .getCurrentBuffer(), svar);
-                            else if (accseq)
-                                    fBuffer.putl("if(%s) %s.add(%s);", checkNotNull(svar,
-                                                    single(otype).dup().unsetNotNull()), accvar, svar);
-                            else
-                                    fBuffer.putl("%s = %s;", accvar, svar);
-                    }
-                    return null;
-            }
+		void fold(IFoldCodeFragment fragment) {
+			if (basetype.isSequence()) {
+				final String basevar = exprapply(base);
 
-            void fold(IFoldCodeFragment fragment) {
-                    if (basetype.isSequence()) {
-                            final String basevar = exprapply(base);
-
-                            fBuffer.putExpression(e, fTypeAdapter.getInstance(etype));
-                            declareAlias(e);
-                            String evar = fBuffer.getReference(e);
-                            final String itemvar = fBuffer.getTemporaryVariable();
-                            final String itemjtype = fTypeAdapter.getSingle(basetype);
-                            fBuffer.putl("for(final %s %s : %s) {", itemjtype, itemvar,
-                                            basevar);
-                            fBuffer.incIndentation();
-                            retrieve(fragment, itemvar, evar, true);
-                            fBuffer.subIndentation();
-                            fBuffer.putl("}");
-                    } else {
-                            fBuffer.putl("// " + e);
-                            final String basevar = exprapply(base);
-                            if (etype.isSequence())
-                                    fBuffer.putExpression(e, fTypeAdapter.getInstance(etype));
-                            else
-                                    fBuffer.initExpression(e);
-                            final String accvar = fBuffer.getReference(e);
-                            declareAlias(e);
-                            if (!basetype.isNotNull()) {
-                                    fBuffer.putl("if (%s) {", checkNotNull(basevar, basetype));
-                                    fBuffer.incIndentation();
-                            }
-                            retrieve(fragment, basevar, accvar, etype.isSequence());
-                            if (!basetype.isNotNull()) {
-                                    fBuffer.subIndentation();
-                                    fBuffer.putl("}");
-                                    if (!etype.isSequence() && !etype.isSingleData()) {
-                                            fBuffer.putl("else {");
-                                            fBuffer.putl("\t%s = null;", accvar);
-                                            fBuffer.putl("}");
-                                    }
-                            }
-                            if (!etype.isSingleData())
-                                    fBuffer.putSafeExpression(e, accvar);
-                    }
-            }
-    }
+				fBuffer.putExpression(e, fTypeAdapter.getInstance(etype));
+				declareAlias(e);
+				String evar = fBuffer.getReference(e);
+				final String itemvar = fBuffer.getTemporaryVariable();
+				final String itemjtype = fTypeAdapter.getSingle(basetype);
+				fBuffer.putl("for(final %s %s : %s) {", itemjtype, itemvar,
+						basevar);
+				fBuffer.incIndentation();
+				retrieve(fragment, itemvar, evar, true);
+				fBuffer.subIndentation();
+				fBuffer.putl("}");
+			} else {
+				fBuffer.putl("// " + e);
+				final String basevar = exprapply(base);
+				if (etype.isSequence())
+					fBuffer.putExpression(e, fTypeAdapter.getInstance(etype));
+				else
+					fBuffer.initExpression(e);
+				final String accvar = fBuffer.getReference(e);
+				declareAlias(e);
+				if (!basetype.isNotNull()) {
+					fBuffer.putl("if (%s) {", checkNotNull(basevar, basetype));
+					fBuffer.incIndentation();
+				}
+				retrieve(fragment, basevar, accvar, etype.isSequence());
+				if (!basetype.isNotNull()) {
+					fBuffer.subIndentation();
+					fBuffer.putl("}");
+					if (!etype.isSequence() && !etype.isSingleData()) {
+						fBuffer.putl("else {");
+						fBuffer.putl("\t%s = null;", accvar);
+						fBuffer.putl("}");
+					}
+				}
+				if (!etype.isSingleData())
+					fBuffer.putSafeExpression(e, accvar);
+			}
+		}
+	}
 
 	protected interface IFoldCodeFragment {
 		public String get(String var);
