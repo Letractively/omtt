@@ -949,11 +949,13 @@ public class CodeGenerator extends AbstractTreeWalker {
 					TemplateDefinition def = (TemplateDefinition) node;
 					if (def.getSymbol().equals(s)) {
 						// reference is recursive
-						if (def.isFunction())
-							return "run";
-						else
+						if (!def.isFunction())
 							error(caller
 									+ ": calling variables recursively is not allowed");
+						else if (s.isGlobal())
+							return s.getName();
+						else
+							return "run";
 					}
 				}
 
