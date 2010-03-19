@@ -2,6 +2,7 @@ package pl.omtt.lang.code;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
@@ -1042,13 +1043,16 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 	private String getPropertyString(String base,
 			IPropertySelectExpression property) {
+		// this is some kind of shit, must be understood and rewritten
+		
 		final IType ptype = property.getExpressionType();
+		final boolean isReturnSingle = !(Collection.class
+				.isAssignableFrom(property.getPropertyMethod().getReturnType()));
 		StringBuffer buf = new StringBuffer();
-		boolean wrapType = property.isPropertyMethodNeedsTypeWrapping()
-				&& !ptype.isSequence();
-		if (wrapType) {
+		if (property.isPropertyMethodNeedsTypeWrapping()
+				&& isReturnSingle) {
 			if (property.getPropertyMethod().getReturnType().isPrimitive()) {
-				buf.append("new ").append(fTypeAdapter.get(ptype)).append("(");
+				buf.append("new ").append(fTypeAdapter.getSingle(ptype)).append("(");
 				buf.append(base).append(".").append(
 						property.getPropertyMethod().getName()).append("()");
 				buf.append(")");
@@ -1059,7 +1063,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 						property.getPropertyMethod().getName());
 				buf.append("(").append(tempvar)
 						.append(" == null ? null : new ").append(
-								fTypeAdapter.get(ptype)).append("(").append(
+								fTypeAdapter.getSingle(ptype)).append("(").append(
 								tempvar);
 				if (ptype.isNumeric()) {
 					if (((NumericType) ptype).isReal())
