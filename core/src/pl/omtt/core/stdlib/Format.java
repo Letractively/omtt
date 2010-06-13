@@ -3,6 +3,7 @@ package pl.omtt.core.stdlib;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import pl.omtt.core.annotations.OmttModule;
@@ -12,18 +13,16 @@ import pl.omtt.core.functions.Optional;
 @OmttModule
 public class Format {
 	public static String date (Date date, @Optional @Name("style") String strstyle) {
-		int style = DateFormat.MEDIUM;
-		if (strstyle == null)
-			;
-		else if ("long".equals(strstyle))
-			style = DateFormat.LONG;
+		if (date == null)
+			return null;
+		if ("long".equals(strstyle))
+			return DateFormat.getDateInstance(DateFormat.LONG).format(date);
 		else if ("full".equals(strstyle))
-			style = DateFormat.FULL;
-		else if ("medium".equals(strstyle))
-			style = DateFormat.MEDIUM;
+			return DateFormat.getDateInstance(DateFormat.FULL).format(date);
 		else if ("short".equals(strstyle))
-			style = DateFormat.SHORT;		
-		return DateFormat.getDateInstance(style).format(date);
+			return DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+		else
+			return new SimpleDateFormat("yyyy-MM-dd").format(date);
 	}
 
 	public static String real (Double r, @Name("format") String format) {

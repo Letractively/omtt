@@ -85,7 +85,7 @@ public class Sequences {
 	@SuppressWarnings("unchecked")
 	public static Object max(Collection<Comparable> seq,
 			@Optional @Name("lower") Function2<Boolean, Object, Object> lower) {
-		if (seq == null)
+		if (seq == null || seq.isEmpty())
 			return null;
 		else if (lower == null)
 			return Collections.max(seq);
@@ -97,7 +97,7 @@ public class Sequences {
 	@SuppressWarnings("unchecked")
 	public static Object min(Collection<Comparable> seq,
 			@Optional @Name("lower") Function2<Boolean, Object, Object> lower) {
-		if (seq == null)
+		if (seq == null || seq.isEmpty())
 			return null;
 		else if (lower == null)
 			return Collections.min(seq);
