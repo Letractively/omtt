@@ -11,17 +11,20 @@ import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.JavaModel;
 
 import pl.omtt.compiler.OmttCompilationTask;
 import pl.omtt.compiler.OmttCompiler;
@@ -31,6 +34,7 @@ import pl.omtt.lang.analyze.SymbolTable;
 import pl.omtt.lang.model.ast.Program;
 import pl.omtt.util.stream.IEnrichedStream;
 
+@SuppressWarnings("restriction")
 public class OmttProjectModel {
 	IProject fProject;
 
@@ -216,7 +220,7 @@ public class OmttProjectModel {
 	private void addClasspathEntry(IClasspathEntry cpentry,
 			List<URI> cpContainer, IJavaProject jproject) {
 		if (cpentry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
-			cpContainer.add(cpentry.getPath().toFile().toURI());
+			cpContainer.add(getAbsolutePath(cpentry).toFile().toURI());
 		} else if (cpentry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 			IClasspathContainer container;
 			try {
@@ -228,6 +232,18 @@ public class OmttProjectModel {
 			for (IClasspathEntry cpsubentry : container.getClasspathEntries())
 				addClasspathEntry(cpsubentry, cpContainer, jproject);
 		}
+	}
+
+	IPath getAbsolutePath(IClasspathEntry currentEntry) {
+		if (currentEntry.getEntryKind() != IClasspathEntry.CPE_LIBRARY)
+			return null;
+
+		IPath path = currentEntry.getPath();
+		Object target = JavaModel.getTarget(path, true);
+		if (target instanceof IFile)
+			return ((IFile) target).getLocation();
+		else
+			return path;
 	}
 
 	public void startRebuild() {

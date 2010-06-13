@@ -11,6 +11,7 @@ import java.util.Set;
 import org.antlr.runtime.tree.Tree;
 
 import pl.omtt.core.Constants;
+import pl.omtt.core.Debugging;
 import pl.omtt.core.OmttLoader;
 import pl.omtt.lang.analyze.BaseSymbolTable;
 import pl.omtt.lang.analyze.MultiSymbol;
@@ -286,6 +287,11 @@ public class CodeGenerator extends AbstractTreeWalker {
 	}
 
 	public void visit(Program program) {
+		if (Debugging.DEBUG > 5)
+			System.err.println("CodeGen visiting: "
+					+ program.getResourcePackage() + "."
+					+ program.getResourceName());
+
 		fBaseSymbolTable = program.getSymbolTable();
 		fPackageName = Constants.OMTT_TEMPLATE_PACKAGE + "."
 				+ program.getResourcePackage();
@@ -310,6 +316,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 				+ fModuleName.substring(1);
 
 		fBuffer.putl("@OmttModule");
+		fBuffer.putl("@SuppressWarnings(\"all\")");
 		fBuffer.putl("public class %s {", fModuleName);
 
 		fBuffer.incIndentation();
@@ -1044,15 +1051,15 @@ public class CodeGenerator extends AbstractTreeWalker {
 	private String getPropertyString(String base,
 			IPropertySelectExpression property) {
 		// this is some kind of shit, must be understood and rewritten
-		
+
 		final IType ptype = property.getExpressionType();
 		final boolean isReturnSingle = !(Collection.class
 				.isAssignableFrom(property.getPropertyMethod().getReturnType()));
 		StringBuffer buf = new StringBuffer();
-		if (property.isPropertyMethodNeedsTypeWrapping()
-				&& isReturnSingle) {
+		if (property.isPropertyMethodNeedsTypeWrapping() && isReturnSingle) {
 			if (property.getPropertyMethod().getReturnType().isPrimitive()) {
-				buf.append("new ").append(fTypeAdapter.getSingle(ptype)).append("(");
+				buf.append("new ").append(fTypeAdapter.getSingle(ptype))
+						.append("(");
 				buf.append(base).append(".").append(
 						property.getPropertyMethod().getName()).append("()");
 				buf.append(")");
@@ -1063,8 +1070,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 						property.getPropertyMethod().getName());
 				buf.append("(").append(tempvar)
 						.append(" == null ? null : new ").append(
-								fTypeAdapter.getSingle(ptype)).append("(").append(
-								tempvar);
+								fTypeAdapter.getSingle(ptype)).append("(")
+						.append(tempvar);
 				if (ptype.isNumeric()) {
 					if (((NumericType) ptype).isReal())
 						buf.append(".doubleValue()");
@@ -1104,6 +1111,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 			exprapply(ifNode);
 			fBuffer.assignExpression(expr, "%s;\n", cast(ifNode, expr
 					.getExpressionType()));
+		} else if (!ifNode.getExpressionType().isSingleData()) {
+			fBuffer.putData("%s", exprapply(ifNode));
 		} else {
 			apply(ifNode);
 		}
@@ -1111,10 +1120,14 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("}");
 		fBuffer.putl("else {");
 		fBuffer.incIndentation();
-		if (!data) {
+		if (elseNode == null) {
+			;
+		} else if (!data) {
 			exprapply(elseNode);
 			fBuffer.assignExpression(expr, "%s;\n", cast(elseNode, expr
 					.getExpressionType()));
+		} else if (!elseNode.getExpressionType().isSingleData()) {
+			fBuffer.putData("%s", exprapply(elseNode));
 		} else {
 			apply(elseNode);
 		}
