@@ -1050,7 +1050,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 	private String getPropertyString(String base,
 			IPropertySelectExpression property) {
-		// this is some kind of shit, must be understood and rewritten
+		// TODO: this is some kind of shit, must be understood and rewritten
 
 		final IType ptype = property.getExpressionType();
 		final boolean isReturnSingle = !(Collection.class
@@ -1080,7 +1080,26 @@ public class CodeGenerator extends AbstractTreeWalker {
 				}
 				buf.append("))");
 			}
+		} else if (!ptype.isSequence()
+				&& (ptype.getAssociatedClass().isAssignableFrom(Integer.class) || ptype
+						.getAssociatedClass().isAssignableFrom(Float.class))) {
+			// retrieved value may need type wrapping
+
+			final String tempvar = fBuffer.getTemporaryVariable();
+			fBuffer.putl("%s %s = %s.%s();", property.getPropertyMethod()
+					.getReturnType().getSimpleName(), tempvar, base, property
+					.getPropertyMethod().getName());
+
+			buf.append("(");
+			buf.append(tempvar).append(" instanceof Integer ? new Long((Integer)");
+			buf.append(tempvar).append(") : (").append(tempvar).append(
+					" instanceof Float ? new Double((Float)").append(tempvar).append(
+					") : ").append(tempvar);
+			buf.append("))");
 		} else {
+			buf.append("/* no need to type wrap, assoc. class is "
+					+ ptype.getAssociatedClass() + "*/");
+
 			buf.append(base).append(".").append(
 					property.getPropertyMethod().getName()).append("()");
 		}
@@ -1387,7 +1406,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 			if (seqnode != null) {
 				fSymbolLocalNames.put(snode.getItSymbol(), resvar);
-				apply(seqnode);
+				fBuffer.putl("// applying seqnode " + seqnode);
+				exprapply(seqnode);
 				fBuffer.putl("if (!(%s)) %s = null;", condition(seqnode),
 						resvar);
 			}
@@ -1401,6 +1421,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		String retrieve(IFoldCodeFragment fragment, String var, String accvar,
 				boolean accseq) {
+			fBuffer.putl("// retrieve " + fragment + ", var=" + var
+					+ ", accvar=" + accvar + ", accseq=" + accseq);
 			IType otype;
 			if (e instanceof CommonSelectorNode)
 				otype = ((CommonSelectorNode) e).getOriginalType();
@@ -1409,6 +1431,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 			final String ovar = fBuffer.getTemporaryVariable();
 
 			if (e.isItemSequence()) {
+				fBuffer.putl("// " + e + " is item sequence");
 				if (accvar == null) {
 					accvar = fBuffer.getTemporaryVariable();
 					fBuffer.putl("%s %s = %s;", fTypeAdapter.get(etype),
@@ -1438,13 +1461,17 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 				return accvar;
 			} else if (accvar == null) {
+				fBuffer.putl("// accvar is null");
 				fBuffer.putl("%s %s = %s;", fTypeAdapter.getSingle(otype),
 						ovar, fragment.get(var));
 				return select(ovar);
 			} else {
+				fBuffer.putl("// retrieve otherwise alternative");
 				fBuffer.putl("%s %s = %s;", fTypeAdapter.getSingle(otype),
 						ovar, fragment.get(var));
+				fBuffer.putl("// select...");
 				final String svar = select(ovar);
+				fBuffer.putl("// selected");
 
 				// TODO: otype should be single
 				// if (otype.isNotNull())
@@ -1485,12 +1512,15 @@ public class CodeGenerator extends AbstractTreeWalker {
 					fBuffer.putExpression(e, fTypeAdapter.getInstance(etype));
 				else
 					fBuffer.initExpression(e);
+				fBuffer.putl("// declare accvar");
 				final String accvar = fBuffer.getReference(e);
+				fBuffer.putl("// declare alias");
 				declareAlias(e);
 				if (!basetype.isNotNull()) {
 					fBuffer.putl("if (%s) {", checkNotNull(basevar, basetype));
 					fBuffer.incIndentation();
 				}
+				fBuffer.putl("// null checked, retrieve...");
 				retrieve(fragment, basevar, accvar, etype.isSequence());
 				if (!basetype.isNotNull()) {
 					fBuffer.subIndentation();
