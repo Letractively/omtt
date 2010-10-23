@@ -1,23 +1,23 @@
-#summary Review of text-generation language alternatives 
+#summary Subiektywny przegląd alternatywnych do OMTT rozwiązań w dziedzinie generowania tekstu
 
-==Template languages==
-  * [http://www.freemarker.org FreeMarker] - most popular template language for Java
-  * [http://velocity.apache.org Velocity] - simple syntax, dedicated for non-programmers
-  * [http://www.stringtemplate.org StringTemplate] - the only academic project in this review, designed by Terrence Parr - the author of ANTLR tool 
-  * [http://www.jamon.org Jamon] - not very popular, but fully compiled
+==Systemy szablonów==
+  * [http://www.freemarker.org FreeMarker] - najpopularniejszy system szablonów dla Javy
+  * [http://velocity.apache.org Velocity] - o nieskomplikowanej składni, dedykowany dla osób nietechnicznych
+  * [http://www.stringtemplate.org StringTemplate] - jedyny projekt akademicki, opracowany przez Terrence Parr'a - twórcę generatora parserów ANTLR, o prostej składni podszytej pozytywną ideologią (szablony nie mogą nie tylko modyfikować, ale również sprawdzać zawartości modelu)
+  * [http://www.jamon.org Jamon] - niezbyt popularny, ale jako jedyny obok JSP kompilowany
 
   * [http://www.smarty.net Smarty] - prawdopodobnie najpopularniejszy na świecie, przeznaczony dla PHP
   * [http://phptal.org PHP TAL] - wykorzystuje atrybuty HTML-owe i dzięki temu jest strawny dla graficznych edytorów HTML
   * [http://jinja.pocoo.org Jinja] - dla Pythona, posiada całkiem elegancką składnię
   * [http://www.invenzzia.org/en/projects/open-power-libraries/open-power-template Open Power Template] - stworzony przez polski zespół, o składni XML-owej, przeznaczony dla PHP
 
-==Declarative transformation languages (_m2t - model to text_)==
+==Deklaratywne języki przekształceń (_m2t - model to text_)==
   * [http://www.w3.org/Style/XSL/ XSLT]
   * XQuery
   * [http://www.openarchitectureware.org openArchitectureWare]
   * [http://wiki.eclipse.org/Acceleo Acceleo]
   * [http://www.eclipse.org/gmt/mofscript/ MOFScript]
 
-==Projects==
+==Projekty==
   * [http://www.eclipse.org/modeling/m2t/ Eclipse Model To Text]
   * [http://www.omg.org/mda/ OMG Model Driven Architecture]

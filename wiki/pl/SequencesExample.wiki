@@ -1,0 +1,49 @@
+#summary Przykłady użycia sekwencji
+#labels CodeExamples
+#sidebar TOCCodeExamplesBasics
+
+*sequences.omtt*:
+{{{
+/* Start (*) following type (e.g. Int) declares sequence.
+ * Colon at the end of def line means, that the body is expression, not textual data.
+ */
+% def doubleIntegers ints.Int*:
+  map ints as anint:
+    anint * 2
+% end
+
+/* Indicating concrete type is not necessary. When no type, compiler assumes it is Any.
+ * (Any is, following naming in Scala, equivalent of java's Object.)
+ */
+% def html_list items*
+  <ul>
+    % map items as item
+      <li>{item}</li>
+    % end
+  </ul>
+% end
+
+}}}
+
+<br>
+*sequences.java*:
+{{{
+import java.util.*;
+import pl.omtt.caller.OmttCaller;
+
+public class Launcher {
+  public static void main (String[] args) {
+    List<Integer> list = new ArrayList<Integer>();
+    list.add(1);
+    list.add(3);
+    list.add(6);
+    list.add(8);
+
+    // will print numbers as html list (i.e. "<ul>\n<li>1</li>\n<li>3</li>...</ul>")
+    OmttCaller.print("sequences.doubleIntegers", list);
+
+    // will print [2, 6, 12, 16]
+    OmttCaller.print("sequences.doubleIntegers", list);
+  }
+}
+}}}

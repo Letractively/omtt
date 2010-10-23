@@ -50,6 +50,7 @@ public class OmttCompilationTask {
 	final Map<URI, OmttJavaSource> fJavaSources = new HashMap<URI, OmttJavaSource>();
 
 	private Map<URI, IEnrichedStream> fSourceFileStreams;
+	private ICompilationProgressHandler fProgressHandler;
 
 	protected OmttCompilationTask(OmttCompiler compiler, List<URI> sources,
 			URI targetPath, List<URI> classPath) {
@@ -79,6 +80,10 @@ public class OmttCompilationTask {
 		fProblemCollector = problemCollector;
 	}
 
+	public void setCompilationProgressHandler(ICompilationProgressHandler handler) {
+		fProgressHandler = handler;
+	}
+	
 	public void setCollectLibraryReferences(boolean collectLibraryReferences) {
 		fCollectLibraryReferences = collectLibraryReferences;
 	}
@@ -123,8 +128,13 @@ public class OmttCompilationTask {
 			fProblemCollector = new PrintProblemCollector();
 
 		final CompilationQueue queue = new CompilationQueue();
+		if(fProgressHandler != null)
+			fProgressHandler.handleStage(ICompilationProgressHandler.PARSING);
 		for (URI source : fSources) {
 			try {
+				if(fProgressHandler != null)
+					if(!fProgressHandler.handleFile(source))
+						return false;
 				if (parse(source)) {
 					Program program = fTrees.get(source);
 					program.setSourceURI(source);
@@ -146,9 +156,14 @@ public class OmttCompilationTask {
 			return false;
 		}
 
+		if(fProgressHandler != null)
+			fProgressHandler.handleStage(ICompilationProgressHandler.ANALYSIS);
 		SymbolTableSupplier symbolTableSupplier = new SymbolTableSupplier(
 				fClassLoader);
 		for (URI source : queue) {
+			if(fProgressHandler != null)
+				if(!fProgressHandler.handleFile(source))
+					return false;
 			if (level > STATE_TREE)
 				if (!analyze(source, symbolTableSupplier))
 					continue;
@@ -159,6 +174,8 @@ public class OmttCompilationTask {
 
 		if (Debugging.DEBUG > 0)
 			System.err.println("compiling: " + fJavaSources.keySet());
+		if(fProgressHandler != null)
+			fProgressHandler.handleStage(ICompilationProgressHandler.COMPILATION);
 		if (level > STATE_JAVA_CODE) {
 			compileJava();
 			if (verifyState() > STATE_FINISH)

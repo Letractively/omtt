@@ -14,10 +14,9 @@ import pl.omtt.core.Constants;
 
 public class RebuildCollectVisitor implements IResourceVisitor,
 		IResourceDeltaVisitor {
-
-	List<IResource> fOmttAdded = new ArrayList<IResource>();
-	List<IResource> fOmttChanged = new ArrayList<IResource>();
-	List<IResource> fOmttRemoved = new ArrayList<IResource>();
+	final List<IResource> fOmttAdded = new ArrayList<IResource>();
+	final List<IResource> fOmttChanged = new ArrayList<IResource>();
+	final List<IResource> fOmttRemoved = new ArrayList<IResource>();
 
 	public boolean visit(IResourceDelta delta) throws CoreException {
 		if (isOmttSource(delta.getResource()))

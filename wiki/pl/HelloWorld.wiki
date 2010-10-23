@@ -1,0 +1,22 @@
+#summary Traditional Hello World template in OMTT
+#labels CodeExamples
+#sidebar TOCCodeExamplesBasics
+
+*sample.omtt*:
+{{{
+% def hello
+  Hello, world!
+% end
+}}}
+
+<br>
+*sample.java*:
+{{{
+import pl.omtt.caller.OmttCaller;
+
+public class Launcher {
+	public static void main (String[] args) {
+		OmttCaller.print("sample.hello");
+	}
+}
+}}}

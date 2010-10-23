@@ -1,0 +1,17 @@
+#summary Przykłady szablonów OMTT
+#labels Featured,Phase-Support,CodeExamples
+
+==Podstawy==
+  * [HelloWorld Hello world]
+  * [SimpleGapExample Prosty szablon z lukami]
+  * [SequencesExample Sekwencje]
+  * [TagExamples Tagi]
+  * [FilterExamples Filtry]
+  * [DeclarativeExample Szablony polimorficzne]
+  * [QueryExamples Zapytania]
+  * [DataManipulationExamples Manipulacja danymi]
+
+To przykłady użycia najważniejszych, choć nie wszystkich konstrukcji języka - w kolejce czekają jeszcze funkcje wyższych rzędów, rozszerzanie szablonów polimorficznych pochodzących z bibliotek, wykorzystywanie inferencji typów i tworzenie modułów w Javie. Ich zwięzły opis znaleźć można na stronie powitalnej.
+
+==Inne==
+  * [UnsophisticatedPrimeSearchExample Niezbyt wyrafinowane wyszukiwanie liczb pierwszych]
