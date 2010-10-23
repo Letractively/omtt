@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Currency;
 import java.util.Date;
 
 import pl.omtt.core.annotations.OmttModule;
@@ -12,7 +13,8 @@ import pl.omtt.core.functions.Optional;
 
 @OmttModule
 public class Format {
-	public static String date (Date date, @Optional @Name("style") String strstyle) {
+	public static String date(Date date,
+			@Optional @Name("style") String strstyle) {
 		if (date == null)
 			return null;
 		if ("long".equals(strstyle))
@@ -25,26 +27,36 @@ public class Format {
 			return new SimpleDateFormat("yyyy-MM-dd").format(date);
 	}
 
-	public static String real (Double r, @Name("format") String format) {
+	public static String real(Double r, @Name("format") String format) {
+		if (r == null || format == null)
+			return null;
 		return new DecimalFormat(format).format(r);
 	}
 
-	public static String currency (Double c) {
-		return NumberFormat.getCurrencyInstance().format(c);
+	public static String currency(Double c,
+			@Optional @Name("currencyCode") String currencyCode) {
+		if (c == null)
+			return null;
+		NumberFormat f = NumberFormat.getCurrencyInstance();
+		if (currencyCode != null)
+			f.setCurrency(Currency.getInstance(currencyCode));
+		return f.format(c);
 	}
 
-	public static String percent (Double p) {
+	public static String percent(Double p) {
+		if (p == null)
+			return null;
 		return NumberFormat.getPercentInstance().format(p);
 	}
-	
-	public static String lc (String s) {
+
+	public static String lc(String s) {
 		if (s == null)
 			return null;
 		else
 			return s.toLowerCase();
 	}
 
-	public static String lcfirst (String s) {
+	public static String lcfirst(String s) {
 		if (s == null)
 			return null;
 		else if (s.length() == 0)
@@ -53,14 +65,14 @@ public class Format {
 			return s.substring(0, 1).toLowerCase() + s.substring(1);
 	}
 
-	public static String uc (String s) {
+	public static String uc(String s) {
 		if (s == null)
 			return null;
 		else
 			return s.toLowerCase();
 	}
 
-	public static String ucfirst (String s) {
+	public static String ucfirst(String s) {
 		if (s == null)
 			return null;
 		else if (s.length() == 0)
