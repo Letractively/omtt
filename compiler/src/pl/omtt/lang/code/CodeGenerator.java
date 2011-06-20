@@ -783,6 +783,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 		final StringBuffer argbuf = new StringBuffer();
 		for (int i = iterate ? 1 : 0; i < call.getArgumentLength(); i++) {
+			fBuffer.putl("// argument %d: %s", i, call.getArgument(i));
 			apply(call.getArgument(i));
 			argbuf.append(callArgument(call, i));
 			if (i != call.getArgumentLength() - 1)
@@ -891,6 +892,7 @@ public class CodeGenerator extends AbstractTreeWalker {
 		if (farg == null)
 			return "null";
 		final IType neededType = call.getCallingType().getArgument(i).type;
+		fBuffer.putl("// casting %s", neededType.toDiagnosticString());
 		return cast(farg, neededType);
 	}
 
@@ -1091,10 +1093,11 @@ public class CodeGenerator extends AbstractTreeWalker {
 					.getPropertyMethod().getName());
 
 			buf.append("(");
-			buf.append(tempvar).append(" instanceof Integer ? new Long((Integer)");
+			buf.append(tempvar).append(
+					" instanceof Integer ? new Long((Integer)");
 			buf.append(tempvar).append(") : (").append(tempvar).append(
-					" instanceof Float ? new Double((Float)").append(tempvar).append(
-					") : ").append(tempvar);
+					" instanceof Float ? new Double((Float)").append(tempvar)
+					.append(") : ").append(tempvar);
 			buf.append("))");
 		} else {
 			buf.append("/* no need to type wrap, assoc. class is "
@@ -1186,9 +1189,12 @@ public class CodeGenerator extends AbstractTreeWalker {
 
 			// determine where to check for boolean values
 			final IType boolType = ScalarType.fromClass(Boolean.class);
-			final boolean checkBool = boolType.isSubtypeOf(btype);
-			final boolean leftCheckBool = boolType.isSubtypeOf(leftType);
-			final boolean rightCheckBool = boolType.isSubtypeOf(rightType);
+			final boolean checkBool = !btype.isSequence()
+					&& boolType.isSubtypeOf(btype);
+			final boolean leftCheckBool = !leftType.isSequence()
+					&& boolType.isSubtypeOf(leftType);
+			final boolean rightCheckBool = !rightType.isSequence()
+					&& boolType.isSubtypeOf(rightType);
 
 			switch (bexpr.getOperator()) {
 			case BooleanExpression.OP_AND:
@@ -1249,6 +1255,9 @@ public class CodeGenerator extends AbstractTreeWalker {
 					fBuffer.putl("if (%s) %s = %s;", checkNotNull(rightVar,
 							rightType), outvar, cast(rightNode, btype));
 				if (checkBool) {
+					fBuffer
+							.putl("// check bool %s", btype
+									.toDiagnosticString());
 					fBuffer.putl("else if (%s && %s) %s = null;", checkNull(
 							leftVar, leftType), checkNull(rightVar, rightType),
 							outvar);
