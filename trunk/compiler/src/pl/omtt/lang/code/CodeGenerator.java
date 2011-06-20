@@ -307,8 +307,8 @@ public class CodeGenerator extends AbstractTreeWalker {
 		fBuffer.putl("import pl.omtt.core.annotations.*;");
 		fBuffer.putl("import pl.omtt.core.stdlib.*;");
 		fBuffer.putl("import pl.omtt.core.functions.*;");
-		for (Class<?> clazz : fTypeAdapter.getUsedClasses())
-			fBuffer.putl("import %s;", clazz.getName());
+//		for (Class<?> clazz : fTypeAdapter.getUsedClasses())
+//			fBuffer.putl("import %s;", clazz.getName());
 
 		fBuffer.putnl();
 		fModuleName = program.getResourceName();

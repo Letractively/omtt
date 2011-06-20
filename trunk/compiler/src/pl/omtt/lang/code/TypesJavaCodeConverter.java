@@ -36,7 +36,7 @@ public class TypesJavaCodeConverter {
 				return "Object";
 			else {
 				fUsedClasses.add(cls);
-				return cls.getSimpleName();
+				return cls.getName();
 			}
 		}
 	}
