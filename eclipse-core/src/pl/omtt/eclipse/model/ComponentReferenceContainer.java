@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 
+import pl.omtt.core.Debugging;
 import pl.omtt.lang.analyze.Symbol;
 import pl.omtt.lang.analyze.SymbolTable;
 
@@ -115,11 +116,13 @@ class ComponentReferenceContainer {
 		synchronized (fReferences) {
 			for (String changed : getChangedSymbols(oldST, newST)) {
 				changed = id + "::" + changed;
-				// System.err.println("changed: " + changed);
+				if(Debugging.DEBUG > 0)
+					System.err.println("changed: " + changed);
 				if (fBackReferences.containsKey(changed))
 					affected.addAll(fBackReferences.get(changed));
 			}
-			// System.err.println("[bref] " + fBackReferences);
+			if(Debugging.DEBUG > 0)
+				System.err.println("[bref] " + fBackReferences);
 			if (fBackReferences.containsKey(id + "::_"))
 				affected.addAll(fBackReferences.get(id + "::_"));
 
@@ -130,7 +133,8 @@ class ComponentReferenceContainer {
 			if (fBackReferences.containsKey(id)
 					&& (newST == null || oldST == null))
 				affected.addAll(fBackReferences.get(id));
-			// System.err.println("affected ret: " + affected);
+			if(Debugging.DEBUG > 0)
+				System.err.println("affected ret: " + affected);
 		}
 		return affected;
 	}

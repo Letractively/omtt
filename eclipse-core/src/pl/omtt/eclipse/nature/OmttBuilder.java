@@ -92,7 +92,7 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 	private boolean rebuild(List<IResource> added, List<IResource> changed,
 			List<IResource> deleted, IProgressMonitor monitor) {
 		monitor.beginTask("OMTT project rebuild", IProgressMonitor.UNKNOWN);
-		
+
 		getProjectModel().startRebuild();
 		Set<IResource> compiled = null;
 		try {
@@ -120,7 +120,7 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 		return true;
 	}
 
-	private Set<IResource> compile(IProgressMonitor monitor) {		
+	private Set<IResource> compile(IProgressMonitor monitor) {
 		final OmttProjectModel model = getProjectModel();
 		if (Debugging.DEBUG > 0)
 			System.err.println("\n\nRunning compilation");
@@ -145,7 +145,8 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 			OmttCompilationTask task = model.getCompilationTask(uris);
 			task.setCollectLibraryReferences(true);
 			task.setProblemCollector(new ProblemMarkerCollector());
-			task.setCompilationProgressHandler(new CompilationProgressHandler(monitor));
+			task.setCompilationProgressHandler(new CompilationProgressHandler(
+					monitor));
 
 			try {
 				task.compile();
@@ -164,7 +165,7 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 				if (Debugging.DEBUG > 0)
 					System.err.println(resource + ": " + program);
 				Set<IResource> affected = model.update(resource, program,
-						monitor);
+						monitor, task.isBroken(uri));
 				if (affected != null)
 					fCompileQueue.addAll(affected);
 			}

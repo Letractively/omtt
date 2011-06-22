@@ -3,6 +3,7 @@ package pl.omtt.compiler;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -41,6 +42,16 @@ public class CompilationQueue implements Iterable<URI> {
 				references.add(uid);
 			}
 		fModuleReferences.put(id, references);
+	}
+
+	boolean references(String childResource, Collection<String> parentResources) {
+		assert fModuleReferences.containsKey(childResource);
+		final Set<String> references = fModuleReferences.get(childResource);
+		for (String parent : parentResources) {
+			if (references.contains(parent))
+				return true;
+		}
+		return false;
 	}
 
 	private void verifyFileName(URI source, Program program)
