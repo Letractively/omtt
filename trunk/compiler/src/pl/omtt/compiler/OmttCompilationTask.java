@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.tools.Diagnostic;
 import javax.tools.DiagnosticCollector;
@@ -48,6 +50,7 @@ public class OmttCompilationTask {
 
 	final Map<URI, Program> fTrees = new HashMap<URI, Program>();
 	final Map<URI, OmttJavaSource> fJavaSources = new HashMap<URI, OmttJavaSource>();
+	final Set<URI> fBrokenResources = new TreeSet<URI>();
 
 	private Map<URI, IEnrichedStream> fSourceFileStreams;
 	private ICompilationProgressHandler fProgressHandler;
@@ -55,6 +58,8 @@ public class OmttCompilationTask {
 	protected OmttCompilationTask(OmttCompiler compiler, List<URI> sources,
 			URI targetPath, List<URI> classPath) {
 		fCompiler = compiler;
+		if (Debugging.DEBUG > 0)
+			System.err.println("[OmttCompilationTask] sources: " + sources);
 		fSources = sources;
 		fTargetPath = targetPath;
 
@@ -80,10 +85,11 @@ public class OmttCompilationTask {
 		fProblemCollector = problemCollector;
 	}
 
-	public void setCompilationProgressHandler(ICompilationProgressHandler handler) {
+	public void setCompilationProgressHandler(
+			ICompilationProgressHandler handler) {
 		fProgressHandler = handler;
 	}
-	
+
 	public void setCollectLibraryReferences(boolean collectLibraryReferences) {
 		fCollectLibraryReferences = collectLibraryReferences;
 	}
@@ -123,17 +129,21 @@ public class OmttCompilationTask {
 		return fJavaSources.get(uri);
 	}
 
+	public boolean isBroken(URI uri) {
+		return fBrokenResources.contains(uri);
+	}
+
 	protected boolean compile(int level) {
 		if (fProblemCollector == null)
 			fProblemCollector = new PrintProblemCollector();
 
 		final CompilationQueue queue = new CompilationQueue();
-		if(fProgressHandler != null)
+		if (fProgressHandler != null)
 			fProgressHandler.handleStage(ICompilationProgressHandler.PARSING);
 		for (URI source : fSources) {
 			try {
-				if(fProgressHandler != null)
-					if(!fProgressHandler.handleFile(source))
+				if (fProgressHandler != null)
+					if (!fProgressHandler.handleFile(source))
 						return false;
 				if (parse(source)) {
 					Program program = fTrees.get(source);
@@ -156,26 +166,41 @@ public class OmttCompilationTask {
 			return false;
 		}
 
-		if(fProgressHandler != null)
+		if (fProgressHandler != null)
 			fProgressHandler.handleStage(ICompilationProgressHandler.ANALYSIS);
 		SymbolTableSupplier symbolTableSupplier = new SymbolTableSupplier(
 				fClassLoader);
+
+		Set<String> brokenResources = new TreeSet<String>();
 		for (URI source : queue) {
-			if(fProgressHandler != null)
-				if(!fProgressHandler.handleFile(source))
+			if (fProgressHandler != null)
+				if (!fProgressHandler.handleFile(source))
 					return false;
 			if (level > STATE_TREE)
-				if (!analyze(source, symbolTableSupplier))
+				if (!analyze(source, symbolTableSupplier)) {
+					brokenResources.add(getResourceId(source));
+					fBrokenResources.add(source);
 					continue;
+				}
+			if (queue.references(getResourceId(source), brokenResources)) {
+				brokenResources.add(getResourceId(source));
+				fBrokenResources.add(source);
+				fProblemCollector.reportError(source, "errors found in referenced modules");
+				continue;
+			}
 			if (level > STATE_ANALYZE)
-				if (!generateCode(source))
+				if (!generateCode(source)) {
+					brokenResources.add(getResourceId(source));
+					fBrokenResources.add(source);
 					continue;
+				}
 		}
 
-		if (Debugging.DEBUG > 0)
+		if (Debugging.DEBUG > 0 && !fJavaSources.keySet().isEmpty())
 			System.err.println("compiling: " + fJavaSources.keySet());
-		if(fProgressHandler != null)
-			fProgressHandler.handleStage(ICompilationProgressHandler.COMPILATION);
+		if (fProgressHandler != null)
+			fProgressHandler
+					.handleStage(ICompilationProgressHandler.COMPILATION);
 		if (level > STATE_JAVA_CODE) {
 			compileJava();
 			if (verifyState() > STATE_FINISH)
@@ -184,6 +209,10 @@ public class OmttCompilationTask {
 
 		fState = level;
 		return true;
+	}
+
+	String getResourceId(URI source) {
+		return fTrees.get(source).getResourceId();
 	}
 
 	private int verifyState() {
@@ -249,13 +278,13 @@ public class OmttCompilationTask {
 			return false;
 		}
 		fJavaSources.put(source, codeGenerator.getJavaSource());
-		
+
 		if (Debugging.DEBUG > 1) {
 			System.out.println("---" + source + ":");
 			System.out.println(codeGenerator.getJavaSource().getCode());
 			System.out.println();
 		}
-		
+
 		return true;
 	}
 

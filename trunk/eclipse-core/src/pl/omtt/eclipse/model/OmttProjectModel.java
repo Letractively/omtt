@@ -39,7 +39,7 @@ public class OmttProjectModel {
 	IProject fProject;
 
 	ComponentReferenceContainer fComponentReferences;
-	Map<IResource, SymbolTable> fSymbolTables = new HashMap<IResource, SymbolTable>();
+	private Map<IResource, SymbolTable> fSymbolTables = new HashMap<IResource, SymbolTable>();
 
 	ReadWriteLock fBuildLock = new ReentrantReadWriteLock();
 
@@ -102,17 +102,17 @@ public class OmttProjectModel {
 	}
 
 	public Set<IResource> add(IResource resource, Program program,
-			IProgressMonitor monitor) {
+			IProgressMonitor monitor, boolean broken) {
 		final BaseSymbolTable st = program.getSymbolTable();
 		final String id = program.getResourceId();
 
 		fComponentReferences.updateReferences(resource, references(st));
-		putModel(resource, program);
+		putModel(resource, program, broken);
 		return fComponentReferences.getAffected(id, null, st);
 	}
 
 	public Set<IResource> update(IResource resource, Program program,
-			IProgressMonitor monitor) {
+			IProgressMonitor monitor, boolean broken) {
 		final String oldId = getResourceId(resource);
 		final String newId = program.getResourceId();
 
@@ -121,11 +121,11 @@ public class OmttProjectModel {
 		else if (newId == null)
 			return remove(resource, monitor);
 		else if (oldId == null)
-			return add(resource, program, monitor);
+			return add(resource, program, monitor, broken);
 
 		final SymbolTable oldST = fSymbolTables.get(resource);
 		final BaseSymbolTable newST = program.getSymbolTable();
-		putModel(resource, program);
+		putModel(resource, program, broken);
 		Set<IResource> affected = null;
 		if (!oldId.equals(newId)) {
 			fComponentReferences.updateReferences(resource, null);
@@ -135,7 +135,7 @@ public class OmttProjectModel {
 					.getAffected(newId, null, newST));
 		} else {
 			fComponentReferences.updateReferences(resource, references(newST));
-			affected = fComponentReferences.getAffected(oldId, oldST, newST);
+			affected = fComponentReferences.getAffected(oldId, oldST, broken ? null : newST);
 		}
 		return affected;
 	}
@@ -157,9 +157,9 @@ public class OmttProjectModel {
 			return st.retrieveReferences();
 	}
 
-	private void putModel(IResource resource, Program program) {
+	private void putModel(IResource resource, Program program, boolean broken) {
 		final String id = program.getResourceId();
-		fSymbolTables.put(resource, program.getSymbolTable());
+		fSymbolTables.put(resource, broken ? null : program.getSymbolTable());
 		setResourceId(resource, id);
 	}
 

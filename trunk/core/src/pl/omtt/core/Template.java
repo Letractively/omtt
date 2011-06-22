@@ -49,7 +49,7 @@ public final class Template {
 			method.invoke(null, arglist.toArray());
 			return buf;
 		} else {
-			if (Debugging.DEBUG > 0)
+			if (Debugging.DEBUG > 1)
 				System.out.println("invokin" + method.getReturnType());
 			return method.invoke(null, args);
 		}

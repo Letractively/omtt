@@ -42,7 +42,7 @@ public class TypeUnifier {
 			throws TypeException {
 		if (typeA == null || typeB == null)
 			return;
-		if (Debugging.DEBUG > 0)
+		if (Debugging.DEBUG > 1)
 			System.out.println("[tu] " + typeA.toDiagnosticString()
 					+ (le ? " < " : " == ") + typeB.toDiagnosticString());
 
@@ -112,7 +112,7 @@ public class TypeUnifier {
 
 	private static void unifyFunctions(IType typeA, IType typeB, boolean le)
 			throws TypeException {
-		if (Debugging.DEBUG > 0)
+		if (Debugging.DEBUG > 1)
 			System.out.println("[fu] " + typeA + (le ? " < " : " = ") + typeB);
 		if (!typeA.isFunction() || !typeB.isFunction())
 			throw new TypeException("unimplemented [1]");
@@ -144,7 +144,7 @@ public class TypeUnifier {
 		}
 		unifyGently(funA.getReturnType(), funB.getReturnType(), le);
 
-		if (Debugging.DEBUG > 0)
+		if (Debugging.DEBUG > 1)
 			System.out.println("[fu] after: " + typeA + " ~ " + typeB);
 	}
 
