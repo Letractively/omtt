@@ -165,7 +165,7 @@ public class OmttDocumentModel implements IModelChangeListener {
 		if (fProblemAnnotationCollector != null)
 			fProblemAnnotationCollector.apply();
 
-		if (Debugging.DEBUG > 0) {
+		if (Debugging.DEBUG > 1) {
 			System.out.println("new tree: ");
 			new PrintTreeVisitor().run(fDocumentTree);
 		}
