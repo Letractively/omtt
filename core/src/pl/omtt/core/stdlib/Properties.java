@@ -23,12 +23,12 @@ public class Properties {
 		return retrieveProperty(object, property, false);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static Collection<Object> $seq(Object object, String property) {
 		return (Collection) retrieveProperty(object, property, true);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static List<String> $attrs(Object o) {
 		List<String> attrs = new ArrayList<String>();
 		if (o instanceof Map) {
@@ -56,7 +56,7 @@ public class Properties {
 		return attrs;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	private static Object retrieveProperty(Object o, String property,
 			boolean collection) {
 		if (o == null || property == null)

@@ -93,7 +93,7 @@ public class OmttProjectSetup {
 	 * @param jproject
 	 *            Java project having the exclusion added
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static void addPostfixResourceCopyExclusion(IJavaProject jproject) {
 		final String JDTPREF_EXCLUSIONFILTER = "org.eclipse.jdt.core.builder.resourceCopyExclusionFilter";
 

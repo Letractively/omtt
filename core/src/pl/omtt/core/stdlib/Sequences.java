@@ -71,7 +71,7 @@ public class Sequences {
 	}
 
 	@Type("(_[1]* -> _[1])")
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static Object head(Collection<Object> seq) {
 		if (seq == null || seq.isEmpty())
 			return null;
@@ -82,7 +82,7 @@ public class Sequences {
 	}
 
 	@Type("(_[1]* ?(_[1] _[1] -> Boolean) -> _[1])")
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static Object max(Collection<Comparable> seq,
 			@Optional @Name("lower") Function2<Boolean, Object, Object> lower) {
 		if (seq == null || seq.isEmpty())
@@ -94,7 +94,7 @@ public class Sequences {
 	}
 
 	@Type("(_[1]* ?(_[1] _[1] -> Boolean) -> _[1])")
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static Object min(Collection<Comparable> seq,
 			@Optional @Name("lower") Function2<Boolean, Object, Object> lower) {
 		if (seq == null || seq.isEmpty())
@@ -132,7 +132,7 @@ public class Sequences {
 	}
 
 	@Type("(_[1]* ?(_[1] _[1] -> Boolean) -> _[1]*)")
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static List<Object> sort(Collection<Object> c,
 			@Optional @Name("lower") Function2<Boolean, Object, Object> lower) {
 		List list = new ArrayList(c);
@@ -186,7 +186,7 @@ public class Sequences {
 	}
 
 	@Type("(_[1]* -> _[1]*)")
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static Collection<Object> tail(Collection<Object> seq) {
 		if (seq == null || seq.isEmpty())
 			return seq;

@@ -122,7 +122,7 @@ public class OmttEditor extends TextEditor {
 		return viewer;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class required) {
 		if (IContentOutlinePage.class.equals(required)) {
@@ -157,6 +157,9 @@ public class OmttEditor extends TextEditor {
 	@Override
 	public void dispose() {
 		fColorProvider.dispose();
+		fContentOutlinePage.dispose();
+		fFoldingManager.dispose();
+		fProjectionSupport.dispose();
 		super.dispose();
 	}
 

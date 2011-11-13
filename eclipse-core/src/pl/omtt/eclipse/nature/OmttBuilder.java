@@ -29,7 +29,7 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 	Set<IResource> fCompileQueue = new HashSet<IResource>();
 
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
 			throws CoreException {
 		boolean result;
@@ -54,6 +54,7 @@ public class OmttBuilder extends IncrementalProjectBuilder {
 
 		try {
 			getProjectModel().clear();
+			System.gc();
 		} catch (CoreException e) {
 			e.printStackTrace();
 			return false;
