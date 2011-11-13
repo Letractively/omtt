@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import org.antlr.runtime.tree.Tree;
+import org.eclipse.core.runtime.Assert;
 
 import pl.omtt.core.Constants;
 import pl.omtt.lang.analyze.SemanticException;
@@ -54,18 +55,16 @@ public class CompilationQueue implements Iterable<URI> {
 		return false;
 	}
 
-	private void verifyFileName(URI source, Program program)
-			throws SemanticException {
+	private void verifyFileName(URI source, Program program) throws SemanticException {
 		ModuleDeclaration md = program.getModuleDeclaration();
 		if (md == null)
 			return;
 		final String filename = new File(source).getName();
-		final String expected = md.getModuleName() + "."
-				+ Constants.OMTT_FILE_EXTENSION;
+		final String expected = md.getModuleName() + "." + Constants.OMTT_FILE_EXTENSION;
 
 		if (!filename.equals(expected))
-			throw new SemanticException(md, "module " + md.getModuleName()
-					+ " should be in file " + expected);
+			throw new SemanticException(md, "module " + md.getModuleName() + " should be in file "
+					+ expected);
 	}
 
 	void calculate() throws UseCycleException {
@@ -118,18 +117,28 @@ public class CompilationQueue implements Iterable<URI> {
 		return graph;
 	}
 
-	private void throwCycleException(Map<String, Node> graph)
-			throws UseCycleException {
+	private void throwCycleException(Map<String, Node> graph) throws UseCycleException {
 		Map<String, String> visits = new HashMap<String, String>();
 		Stack<String> stack = new Stack<String>();
 
-		final String start = graph.keySet().iterator().next();
-		stack.add(start);
+		Iterator<String> startItor = graph.keySet().iterator();
+		String start = null;
 
 		boolean found = false;
 		while (!found) {
-			String node = stack.pop();
+			if(stack.isEmpty()) {
+				Assert.isTrue(startItor.hasNext());
+				start = startItor.next();
+				stack.push(start);
+				visits.clear();
+			}
+			
+			final String node = stack.pop();
+			Assert.isTrue(fModuleReferences.containsKey(node), "Cannot find module references of "
+					+ node);
 			for (String nb : fModuleReferences.get(node)) {
+				if(!fModuleReferences.containsKey(nb))
+					continue;
 				if (!visits.containsKey(nb)) {
 					visits.put(nb, node);
 					stack.push(nb);
@@ -142,9 +151,10 @@ public class CompilationQueue implements Iterable<URI> {
 		}
 
 		StringBuffer buf = new StringBuffer();
-		buf.append("use cycle found: ").append(start);
+		buf.append("cycle found: ").append(start);
 		String cur = start;
 		do {
+			if(cur != null)
 			cur = visits.get(cur);
 			buf.append(" <- ").append(cur);
 		} while (!start.equals(cur));

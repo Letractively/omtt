@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -45,6 +46,10 @@ public class OmttProjectModel {
 
 	private Map<IResource, Set<IModelChangeListener>> fModelChangeListeners = new HashMap<IResource, Set<IModelChangeListener>>();
 
+	public boolean isEmpty() {
+		return fSymbolTables.isEmpty();
+	}
+
 	public OmttProjectModel(IProject project) {
 		fProject = project;
 		fComponentReferences = new ComponentReferenceContainer(fProject);
@@ -53,12 +58,13 @@ public class OmttProjectModel {
 	public void clear() throws CoreException {
 		deleteOmttMarkers(fProject);
 		fComponentReferences.clear();
+		fSymbolTables.clear();
 	}
 
 	public String getResourceId(IResource resource) {
 		try {
-			IMarker[] markers = resource.findMarkers(OMTT_COMPONENT_ID_MARKER,
-					false, IResource.DEPTH_INFINITE);
+			IMarker[] markers = resource.findMarkers(OMTT_COMPONENT_ID_MARKER, false,
+					IResource.DEPTH_INFINITE);
 			if (markers.length > 0) {
 				return (String) markers[0].getAttribute(IMarker.TEXT);
 			}
@@ -72,11 +78,9 @@ public class OmttProjectModel {
 	public void setResourceId(IResource resource, String newid) {
 		try {
 			if (newid == null)
-				resource.deleteMarkers(OMTT_COMPONENT_ID_MARKER, false,
-						IResource.DEPTH_INFINITE);
+				resource.deleteMarkers(OMTT_COMPONENT_ID_MARKER, false, IResource.DEPTH_INFINITE);
 			else {
-				IMarker[] markers = resource.findMarkers(
-						OMTT_COMPONENT_ID_MARKER, false,
+				IMarker[] markers = resource.findMarkers(OMTT_COMPONENT_ID_MARKER, false,
 						IResource.DEPTH_INFINITE);
 				IMarker marker;
 				if (markers.length > 0) {
@@ -94,15 +98,14 @@ public class OmttProjectModel {
 	private void deleteOmttMarkers(IResource resource) {
 		try {
 			ProblemMarkerCollector.deleteProblemMarkers(resource);
-			resource.deleteMarkers(OMTT_COMPONENT_ID_MARKER, true,
-					IResource.DEPTH_INFINITE);
+			resource.deleteMarkers(OMTT_COMPONENT_ID_MARKER, true, IResource.DEPTH_INFINITE);
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public Set<IResource> add(IResource resource, Program program,
-			IProgressMonitor monitor, boolean broken) {
+	public Set<IResource> add(IResource resource, Program program, IProgressMonitor monitor,
+			boolean broken) {
 		final BaseSymbolTable st = program.getSymbolTable();
 		final String id = program.getResourceId();
 
@@ -111,8 +114,8 @@ public class OmttProjectModel {
 		return fComponentReferences.getAffected(id, null, st);
 	}
 
-	public Set<IResource> update(IResource resource, Program program,
-			IProgressMonitor monitor, boolean broken) {
+	public Set<IResource> update(IResource resource, Program program, IProgressMonitor monitor,
+			boolean broken) {
 		final String oldId = getResourceId(resource);
 		final String newId = program.getResourceId();
 
@@ -131,8 +134,7 @@ public class OmttProjectModel {
 			fComponentReferences.updateReferences(resource, null);
 			affected = fComponentReferences.getAffected(oldId, oldST, null);
 			fComponentReferences.updateReferences(resource, references(newST));
-			affected.addAll(fComponentReferences
-					.getAffected(newId, null, newST));
+			affected.addAll(fComponentReferences.getAffected(newId, null, newST));
 		} else {
 			fComponentReferences.updateReferences(resource, references(newST));
 			affected = fComponentReferences.getAffected(oldId, oldST, broken ? null : newST);
@@ -159,6 +161,8 @@ public class OmttProjectModel {
 
 	private void putModel(IResource resource, Program program, boolean broken) {
 		final String id = program.getResourceId();
+		if (fSymbolTables.containsKey(resource))
+			fSymbolTables.remove(resource);
 		fSymbolTables.put(resource, broken ? null : program.getSymbolTable());
 		setResourceId(resource, id);
 	}
@@ -188,22 +192,21 @@ public class OmttProjectModel {
 	}
 
 	public OmttCompilationTask getCompilationTask(List<URI> sources) {
+		List<URI> classPath = new ArrayList<URI>();
+
 		IJavaProject jproject = getJavaProject();
 		if (jproject == null)
 			return null;
 
 		URI target;
-		List<URI> classPath = new ArrayList<URI>();
-		final String basePath = fProject.getWorkspace().getRoot()
-				.getLocationURI().toString();
+		final String basePath = fProject.getWorkspace().getRoot().getLocationURI().toString();
 		try {
-			String targetRelativeDir = jproject.getOutputLocation().toFile()
-					.toURI().getRawSchemeSpecificPart();
+			String targetRelativeDir = jproject.getOutputLocation().toFile().toURI()
+					.getRawSchemeSpecificPart();
 			if (!targetRelativeDir.endsWith("/"))
 				targetRelativeDir += "/";
 			target = new URI(basePath + targetRelativeDir);
-			for (IClasspathEntry cpentry : jproject.getRawClasspath())
-				addClasspathEntry(cpentry, classPath, jproject);
+			addClasspathEntry(jproject, classPath);
 		} catch (JavaModelException e) {
 			e.printStackTrace();
 			return null;
@@ -212,25 +215,37 @@ public class OmttProjectModel {
 			return null;
 		}
 
-		OmttCompiler c = OmttModelManager.getOmttModelManager()
-				.getOmttCompiler();
+		OmttCompiler c = OmttModelManager.getOmttModelManager().getOmttCompiler();
 		return c.getTask(sources, target, classPath);
 	}
 
-	private void addClasspathEntry(IClasspathEntry cpentry,
-			List<URI> cpContainer, IJavaProject jproject) {
+	private void addClasspathEntry(IJavaProject jproject, List<URI> classPath)
+			throws JavaModelException {
+		for (IClasspathEntry cpentry : jproject.getRawClasspath())
+			addClasspathEntry(cpentry, classPath, jproject);
+	}
+
+	private void addClasspathEntry(IClasspathEntry cpentry, List<URI> cpContainer,
+			IJavaProject jproject) throws JavaModelException {
 		if (cpentry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 			cpContainer.add(getAbsolutePath(cpentry).toFile().toURI());
 		} else if (cpentry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 			IClasspathContainer container;
 			try {
-				container = JavaCore.getClasspathContainer(cpentry.getPath(),
-						jproject);
+				container = JavaCore.getClasspathContainer(cpentry.getPath(), jproject);
 			} catch (JavaModelException e) {
 				return;
 			}
 			for (IClasspathEntry cpsubentry : container.getClasspathEntries())
 				addClasspathEntry(cpsubentry, cpContainer, jproject);
+		} else if (cpentry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
+			final IProject project = jproject.getProject().getWorkspace().getRoot()
+					.getProject(cpentry.getPath().lastSegment());
+			IJavaProject cpjproject = getJavaProject(project);
+			IFile outputDir = ResourcesPlugin.getWorkspace().getRoot().getFile(cpjproject.getOutputLocation());
+			if (cpjproject != null) {
+				cpContainer.add(outputDir.getRawLocation().toFile().toURI());
+			}
 		}
 	}
 
@@ -259,8 +274,7 @@ public class OmttProjectModel {
 			public void run(IProgressMonitor monitor) throws CoreException {
 				for (IResource resource : compiled) {
 					if (fModelChangeListeners.containsKey(resource)) {
-						Set<IModelChangeListener> listeners = fModelChangeListeners
-								.get(resource);
+						Set<IModelChangeListener> listeners = fModelChangeListeners.get(resource);
 						for (IModelChangeListener listener : listeners)
 							listener.notifyChange(resource);
 					}
@@ -274,16 +288,13 @@ public class OmttProjectModel {
 		}
 	}
 
-	public void addModelChangeListener(IModelChangeListener listener,
-			IResource resource) {
+	public void addModelChangeListener(IModelChangeListener listener, IResource resource) {
 		if (!fModelChangeListeners.containsKey(resource))
-			fModelChangeListeners.put(resource,
-					new HashSet<IModelChangeListener>());
+			fModelChangeListeners.put(resource, new HashSet<IModelChangeListener>());
 		fModelChangeListeners.get(resource).add(listener);
 	}
 
-	public void removeModelChangeListener(IModelChangeListener listener,
-			IResource resource) {
+	public void removeModelChangeListener(IModelChangeListener listener, IResource resource) {
 		fModelChangeListeners.get(resource).remove(listener);
 	}
 

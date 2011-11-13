@@ -11,7 +11,7 @@ public class TextBuffer {
 		return this;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public TextBuffer append(Collection col) {
 		if (col != null)
 			for (Object o : col)

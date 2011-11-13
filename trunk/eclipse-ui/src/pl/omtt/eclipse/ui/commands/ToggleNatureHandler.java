@@ -13,7 +13,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import pl.omtt.eclipse.nature.OmttProjectSetup;
 
 public class ToggleNatureHandler extends AbstractHandler {
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil
