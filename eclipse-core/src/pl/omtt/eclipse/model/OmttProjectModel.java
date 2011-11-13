@@ -239,10 +239,14 @@ public class OmttProjectModel {
 			for (IClasspathEntry cpsubentry : container.getClasspathEntries())
 				addClasspathEntry(cpsubentry, cpContainer, jproject);
 		} else if (cpentry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
+			System.err.println("*** CPE_PROJECT: " + cpentry);
 			final IProject project = jproject.getProject().getWorkspace().getRoot()
 					.getProject(cpentry.getPath().lastSegment());
 			IJavaProject cpjproject = getJavaProject(project);
+			System.err.println("  - " + cpjproject);
 			IFile outputDir = ResourcesPlugin.getWorkspace().getRoot().getFile(cpjproject.getOutputLocation());
+			System.err.println("  - " + outputDir.getRawLocation().toFile().getAbsolutePath());
+			System.err.println("  - " + outputDir.getRawLocation().toFile().toURI());
 			if (cpjproject != null) {
 				cpContainer.add(outputDir.getRawLocation().toFile().toURI());
 			}
